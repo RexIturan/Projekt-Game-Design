@@ -151,6 +151,41 @@ namespace DefaultNamespace {
             return final;
         }
 
-        
+        public List<Vector2Int> FindPath(int startX, int startY, int endX, int entY, HashSet<node> possibleNodes) {
+
+            List<Vector2Int> path = new List<Vector2Int>();
+
+            bool finished = true;
+            int searchID = coordToIndex(endX, entY);
+
+            foreach (var node in possibleNodes) {
+                if (node.id == searchID) {
+                    finished = false;
+                    break;
+                }
+            }
+            
+            while (!finished) {
+                foreach (var node in possibleNodes) {
+                    if (node.id == searchID) {
+                        path.Add(indexToCoord(node.id));
+                        
+                        searchID = node.parent;
+                        break;
+                    }
+                }
+
+                if (searchID == coordToIndex(startX, startY)) {
+                    finished = true;
+                    path.Reverse();
+                }
+            }
+
+            if (path.Count == 0) {
+                Debug.Log("no start found");
+            }
+            
+            return path;
+        }
     }
 }

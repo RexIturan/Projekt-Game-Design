@@ -1,5 +1,6 @@
 ﻿
 using System;
+using Input;
 using UnityEngine;
 using Util;
 
@@ -7,25 +8,31 @@ using Util;
 namespace DefaultNamespace.test {
     public class GridTesting : MonoBehaviour {
         
+        [SerializeField] private InputReader inputReader;
         [SerializeField] private int cellSize;
         [SerializeField] private Vector2Int gridSize;
         [SerializeField] private Vector3 origin;
         private GenericGrid<TestGridObject> genericGrid;
         
         private void Start() {
-            genericGrid = new GenericGrid<TestGridObject>(gridSize.x, gridSize.y, cellSize, origin, (GenericGrid<TestGridObject> grid, int x, int y) => new TestGridObject(grid, x, y));
+            genericGrid = new GenericGrid<TestGridObject>(gridSize.x, gridSize.y, cellSize, origin, (GenericGrid<TestGridObject> grid, int x, int y) => new TestGridObject(grid, x, y), true);
+            inputReader.leftClickEvent += HandleLeftClickEvent;
+            inputReader.rightClickEvent += HandleRightClickEvent;
         }
 
-        private void Update() {
-            if (Input.GetMouseButtonDown(0)) {
-                var pos = MousePosition.GetMouseWorldPosition();
-                var obj = genericGrid.GetGridObject(pos);
-                obj?.AddValue(5);
-            }
-            
-            if (Input.GetMouseButtonDown(1)) {
-                Debug.Log(genericGrid.GetGridObject(MousePosition.GetMouseWorldPosition()));
-            }
+        private void OnDestroy() {
+            inputReader.leftClickEvent -= HandleLeftClickEvent;
+            inputReader.rightClickEvent -= HandleRightClickEvent;
+        }
+
+        public void HandleLeftClickEvent() {
+            var pos = MousePosition.GetMouseWorldPosition();
+            var obj = genericGrid.GetGridObject(pos);
+            obj?.AddValue(5);
+        }
+        
+        public void HandleRightClickEvent() {
+            Debug.Log(genericGrid.GetGridObject(MousePosition.GetMouseWorldPosition()));
         }
     }
 

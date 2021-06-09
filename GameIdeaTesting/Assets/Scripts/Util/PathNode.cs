@@ -1,31 +1,45 @@
-﻿namespace Util {
+﻿using DefaultNamespace;
+
+namespace Util {
     public class PathNode {
 
-        private GenericGrid<PathNode> genericGrid;
-        private int x;
-        private int y;
-
-        public int X => x;
-        public int Y => y;
+        private GenericGrid<PathNode> grid;
+        public int x;
+        public int y;
 
         public int gCost;
         public int hCost;
         public int fCost;
 
+        public bool isWalkable;
         public PathNode parentNode;
         
-        public PathNode(GenericGrid<PathNode> genericGrid, int x, int y) {
-            this.genericGrid = genericGrid;
+        // todo remove this is just a hack
+        public GridUnit unit;
+        
+        public PathNode(GenericGrid<PathNode> grid, int x, int y) {
+            this.grid = grid;
             this.x = x;
             this.y = y;
-        }
-
-        public override string ToString() {
-            return x + "," + y;
+            isWalkable = true;
         }
 
         public void CalculateFCost() {
             fCost = gCost + hCost;
+        }
+
+        public void SetIsWalkable(bool value) {
+            isWalkable = value;
+            grid.TriggerGridObjectChanged(x, y);
+        }
+        
+        public override string ToString() {
+            if (isWalkable) {
+                return x + "," + y;    
+            }
+            else {
+                return "-";
+            }
         }
     }
 }
