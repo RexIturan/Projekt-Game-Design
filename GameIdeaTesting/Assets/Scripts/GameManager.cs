@@ -220,7 +220,7 @@ namespace DefaultNamespace {
             //move unit
             foreach (var pathNode in path) {
                 unit.transform.position = new Vector3(pathNode.x + cellCenter, 0, pathNode.y + cellCenter);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.1f);
             }
 
             //set ref in grid

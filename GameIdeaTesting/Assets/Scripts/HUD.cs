@@ -8,11 +8,15 @@ using UnityEngine.InputSystem;
 public class HUD : MonoBehaviour {
     public InputReader inputReader;
 
+    public GameInput gameInput;
+    
+    
     public void OnEnable() {
         inputReader.endTurnEvent += onEndTurn;
     }
 
     public void onEndTurn() {
         Debug.Log("end turn");
+        
     }
 }

@@ -13,6 +13,8 @@ namespace Input {
         public event UnityAction endTurnEvent = delegate { };
         public event UnityAction<Vector2> moveEvent = delegate { };
         public event UnityAction<Vector2, bool> cameraMoveEvent = delegate {  };
+        public event UnityAction<float> cameraRotateEvent = delegate {  };
+        public event UnityAction<float> cameraZoomEvent = delegate {  };
 
         public event UnityAction leftClickEvent = delegate { };
         public event UnityAction rightClickEvent = delegate { };
@@ -83,9 +85,17 @@ namespace Input {
         }
 
         public void OnMoveCamera(InputAction.CallbackContext context) {
+            // todo mouse input
+            var input = context.ReadValue<Vector2>();
+            cameraMoveEvent.Invoke(input, false);
         }
 
         public void OnRotateCamera(InputAction.CallbackContext context) {
+            cameraRotateEvent.Invoke(context.ReadValue<float>());
+        }
+
+        public void OnCameraZoom(InputAction.CallbackContext context) {
+            cameraZoomEvent.Invoke(context.ReadValue<float>());
         }
 
         public void OnConfirm(InputAction.CallbackContext context) {

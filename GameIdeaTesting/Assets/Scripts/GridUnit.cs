@@ -1,5 +1,7 @@
 ﻿using System;
+using ScriptableObjects;
 using UnityEngine;
+using Util.ScriptableObjects;
 
 namespace DefaultNamespace {
     public class GridUnit : MonoBehaviour {
@@ -10,6 +12,8 @@ namespace DefaultNamespace {
         public int currentHealth;
         public bool hasMoved = false;
         public bool hasAttacked = false;
+
+        public FloatReference viewDistance;
         
         public event Action<float> OnHealthPctChanged = delegate { };
         

@@ -127,6 +127,10 @@ MonoBehaviour:
   currentHealth: 0
   hasMoved: 0
   hasAttacked: 0
+  viewDistance:
+    UseConstant: 0
+    ConstantValue: 5
+    Variable: {fileID: 11400000, guid: 5f9ee7474a45c884ca87291b3a907227, type: 2}
 --- !u!1 &5750524651079435466
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +381,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3734dec0b3dd1e448a26628b4f67a78e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
