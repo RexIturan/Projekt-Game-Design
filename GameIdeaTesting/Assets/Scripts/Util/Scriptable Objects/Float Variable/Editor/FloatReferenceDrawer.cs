@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,7 +12,7 @@ namespace Util.ScriptableObjects.Editor {
         public override VisualElement CreatePropertyGUI(SerializedProperty property) {
             return base.CreatePropertyGUI(property);
         }
-
+        
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             
             EditorGUI.BeginProperty(position, label, property);
@@ -30,7 +31,7 @@ namespace Util.ScriptableObjects.Editor {
             position.xMin += 20;
             var textFieldRect = new Rect(position);
             var objectFieldRect = new Rect(position);
-
+        
             dropdownRect.xMin -= 1;
             dropdownRect.yMin -= 1.5f;
             
@@ -49,7 +50,7 @@ namespace Util.ScriptableObjects.Editor {
             }
             
             if (useConstant) {
-
+        
                 EditorGUI.PropertyField(textFieldRect, property.FindPropertyRelative("ConstantValue"), GUIContent.none);
                 // float value = property.FindPropertyRelative("ConstantValue").floatValue;
                 // string newValue = EditorGUI.TextField(textFieldRect, value.ToString());
@@ -59,15 +60,15 @@ namespace Util.ScriptableObjects.Editor {
             else {
                 EditorGUI.ObjectField(objectFieldRect, property.FindPropertyRelative("Variable"), GUIContent.none);
             }
-
+        
             EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();
         }
-
+        
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
             return base.GetPropertyHeight(property, label);
         }
-
+        
         private void SetProperty(SerializedProperty property, bool value) {
             var propRelative = property.FindPropertyRelative("UseConstant");
             propRelative.boolValue = value;
