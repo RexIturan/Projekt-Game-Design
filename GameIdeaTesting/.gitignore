@@ -9,6 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/UserSettings/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -21,6 +22,10 @@
 
 # Visual Studio cache directory
 .vs/
+.vscode/
+
+# Idea cache directory
+.idea/
 
 # Gradle cache directory
 .gradle/
@@ -58,3 +63,16 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Any image or video created by the Recorder package
+/Recordings/
+
+# Package related files that can be ignored or are better kept user-specific
+ProjectSettings/Packages/com.unity.probuilder/Settings.json
+ProjectSettings/Packages/com.unity.polybrush/Settings.json
+/ProjectSettings/Packages/com.unity.progrids/Settings.json
+Assets/Polybrush Data*
+Assets/PolybrushData*
+
+# Asset Bundles folder and .bin file
+/Assets/StreamingAssets
+*.bin
