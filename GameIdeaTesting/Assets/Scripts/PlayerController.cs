@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //GameEvents.current.onPlayerClicked += onPlayerClicked;
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
@@ -51,8 +52,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void onPlayerClicked()
+    {
+        Debug.Log(playerData.getNameID() + "wurde angeklickt. Durch das EventSystem");
+    }
+    
     private void OnMouseDown()
     {
-        Debug.Log(playerData.getNameID() + "wurde angeklickt.");
+        //Debug.Log(playerData.getNameID() + "wurde angeklickt.");
+        GameEvents.current.PlayerClicked();
     }
 }

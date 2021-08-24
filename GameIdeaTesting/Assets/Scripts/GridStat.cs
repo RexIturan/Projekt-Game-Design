@@ -12,4 +12,10 @@ public class GridStat : MonoBehaviour
 
     // 0 = Nichts, 1 = Rocks, 2 = Forest, 3 = Water
     public int attribut = 0; 
+    
+    private void OnMouseDown()
+    {
+        Debug.Log("Grid wurde angeklickt.");
+        GameEvents.current.GridClicked();
+    }
 }

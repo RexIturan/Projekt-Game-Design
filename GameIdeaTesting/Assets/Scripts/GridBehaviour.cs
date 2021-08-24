@@ -30,8 +30,7 @@ public class GridBehaviour : MonoBehaviour
 
 
     public List<GameObject> path = new List<GameObject>();
-    
-    // Start is called before the first frame update
+
     void Awake()
     {
         GridArr = new GameObject[fieldData.cols, fieldData.rows];
