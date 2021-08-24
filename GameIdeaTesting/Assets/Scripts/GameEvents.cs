@@ -14,14 +14,14 @@ public class GameEvents : MonoBehaviour
         current = this;
     }
 
-    public event Action onPlayerClicked;
+    public event Action<GameObject> onPlayerClicked;
     public event Action onGridClicked;
 
-    public void PlayerClicked()
+    public void PlayerClicked(GameObject obj)
     {
         if (onPlayerClicked != null)
         {
-            onPlayerClicked();
+            onPlayerClicked(obj);
         }
         
     }

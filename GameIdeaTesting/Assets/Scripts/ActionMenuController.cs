@@ -14,7 +14,7 @@ public class ActionMenuController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void showMenu()
+    private void showMenu(GameObject obj)
     {
         gameObject.transform.position = Input.mousePosition;
         gameObject.SetActive(true);

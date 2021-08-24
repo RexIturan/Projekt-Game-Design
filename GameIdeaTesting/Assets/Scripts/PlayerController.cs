@@ -60,6 +60,6 @@ public class PlayerController : MonoBehaviour
     private void OnMouseDown()
     {
         //Debug.Log(playerData.getNameID() + "wurde angeklickt.");
-        GameEvents.current.PlayerClicked();
+        GameEvents.current.PlayerClicked(this.gameObject);
     }
 }
