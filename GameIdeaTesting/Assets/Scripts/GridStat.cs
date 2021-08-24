@@ -9,15 +9,7 @@ public class GridStat : MonoBehaviour
     public int x = 0;
 
     public int y = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // 0 = Nichts, 1 = Rocks, 2 = Forest, 3 = Water
+    public int attribut = 0; 
 }

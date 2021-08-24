@@ -13,7 +13,14 @@ public class PlayerData : ScriptableObject
     private float JumpSpeed = 5.0f;
     [SerializeField]
     private float Gravity = 2.0f;
-    [SerializeField] private string NameID = "Default";
+    [SerializeField]
+    private string NameID = "Default";
+    [SerializeField]
+    private int Health = 100;
+    [SerializeField]
+    private int MaxHealth = 200;
+    [SerializeField]
+    private bool isActive = true;
 
 
     public float getMovementSpeed()
@@ -40,5 +47,14 @@ public class PlayerData : ScriptableObject
     {
         return NameID;
     }
+    
+    public int getHealth()
+    {
+        return Health;
+    }
+    
+    public int getMaxHealth()
+    {
+        return MaxHealth;
+    }
 }
-

@@ -1,24 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class GridBehaviour : MonoBehaviour
 {
-
+    [Header("Statische Daten")]
+    public FieldData fieldData;
+    
+    [Header("Dynamische Daten")]
     // Versuch den Algorihtmus Wavefront nachzubauen, um ein Charakter auf einem Grid hin und her zu bewegen.
     public bool findDistance = false;
-
-    public int rows = 10;
-
-    public int cols = 10;
-
-    public int scale = 1;
-
-    public GameObject gridPrefab;
-
-    public Vector3 leftBottomLocation = new Vector3(0, 0, 0);
-
+    
     public GameObject[,] GridArr;
+    
+    public GameObject gridPrefab;
 
     public int startX = 0;
 
@@ -26,13 +23,18 @@ public class GridBehaviour : MonoBehaviour
 
     public int endX = 0;
     public int endY = 0;
+    
+    // Test um zu schauen, ob begehbare Felder gefärbt werden können
+    private List<GameObject> fields = new List<GameObject>();
+
+
 
     public List<GameObject> path = new List<GameObject>();
     
     // Start is called before the first frame update
     void Awake()
     {
-        GridArr = new GameObject[cols, rows];
+        GridArr = new GameObject[fieldData.cols, fieldData.rows];
         if (gridPrefab)
         {
             GenerateGrid();
@@ -58,19 +60,76 @@ public class GridBehaviour : MonoBehaviour
 
     void GenerateGrid()
     {
-        for (int x = 0; x < cols; x++)
+        int numberOfRocks = fieldData.numberOfRockyFields;
+        int numberOfForests = fieldData.numberOfForestFields;
+        int numberOfWater = fieldData.numberOfWaterFields;
+        
+        for (int x = 0; x < fieldData.cols; x++)
         {
-            for (int y = 0; y < rows; y++)
+            for (int y = 0; y < fieldData.rows; y++)
             {
-                GameObject obj = Instantiate(gridPrefab, new Vector3(leftBottomLocation.x+scale*x,leftBottomLocation.y,leftBottomLocation.z+scale*y ), Quaternion.identity);
+                GameObject obj = Instantiate(gridPrefab, new Vector3(fieldData.leftBottomLocation.x+fieldData.scale*x,fieldData.leftBottomLocation.y,fieldData.leftBottomLocation.z+fieldData.scale*y ), Quaternion.identity);
                 obj.transform.SetParent(gameObject.transform);
                 obj.GetComponent<GridStat>().x = x;
                 obj.GetComponent<GridStat>().y = y;
+                obj.GetComponent<Renderer>().material = fieldData.defaultMaterial;
                 GridArr[x, y] = obj;
 
             }
         }
+
+        // Die Eigenschaften des Levels sollen geladen werden.
+        Random rnd = new Random();
+        int rndX = 0;
+        int rndY = 0;
+        int counter = 0;
+
+        // Initialisieren vom Wald
+        while (counter < numberOfForests)
+        {
+            rndX = rnd.Next(fieldData.cols);
+            rndY = rnd.Next(fieldData.rows);
+
+            if (GridArr[rndX, rndY].GetComponent<GridStat>().attribut == 0)
+            {
+                GridArr[rndX, rndY].GetComponent<GridStat>().attribut = 2;
+                GridArr[rndX, rndY].GetComponent<Renderer>().material = fieldData.forest;
+                counter++;
+            }
+            
+        }
+
+        // Initialisieren von Steinen
+        counter = 0;
+        while (counter < numberOfRocks)
+        {
+            rndX = rnd.Next(fieldData.cols);
+            rndY = rnd.Next(fieldData.rows);
+
+            if (GridArr[rndX, rndY].GetComponent<GridStat>().attribut == 0)
+            {
+                GridArr[rndX, rndY].GetComponent<GridStat>().attribut = 1;
+                GridArr[rndX, rndY].GetComponent<Renderer>().material = fieldData.rocks;
+                counter++;
+            }
+            
+        }
         
+        // Initialisieren von Wasserflächen
+        counter = 0;
+        while (counter < numberOfWater)
+        {
+            rndX = rnd.Next(fieldData.cols);
+            rndY = rnd.Next(fieldData.rows);
+
+            if (GridArr[rndX, rndY].GetComponent<GridStat>().attribut == 0)
+            {
+                GridArr[rndX, rndY].GetComponent<GridStat>().attribut = 3;
+                GridArr[rndX, rndY].GetComponent<Renderer>().material = fieldData.water;
+                counter++;
+            }
+            
+        }
     }
 
     void InitialSetUp()
@@ -145,13 +204,13 @@ public class GridBehaviour : MonoBehaviour
         switch (direction)
         {
             case 1:
-                if (y + 1 < rows && GridArr[x, y + 1] && GridArr[x, y + 1].GetComponent<GridStat>().visited == step)
+                if (y + 1 < fieldData.rows && GridArr[x, y + 1] && GridArr[x, y + 1].GetComponent<GridStat>().visited == step)
                 {
                     ret = true;
                 }
                 break;
             case 2:
-                if (x+1 < cols && GridArr[x+1, y] && GridArr[x+1, y].GetComponent<GridStat>().visited == step)
+                if (x+1 < fieldData.cols && GridArr[x+1, y] && GridArr[x+1, y].GetComponent<GridStat>().visited == step)
                 {
                     ret = true;
                 }
@@ -189,7 +248,7 @@ public class GridBehaviour : MonoBehaviour
         InitialSetUp();
         int x = startX;
         int y = startY;
-        int size = rows * cols;
+        int size = fieldData.rows * fieldData.cols;
         // Ist erstmal nur die größtmögliche Bewegungsfreiheit
         int[] testArray = new int[size];
 
@@ -233,7 +292,7 @@ public class GridBehaviour : MonoBehaviour
 
     GameObject FindClosest(Transform targetLocation, List<GameObject> list)
     {
-        float currentDistance = scale * rows * cols;
+        float currentDistance = fieldData.scale * fieldData.rows * fieldData.cols;
         int index = 0;
 
         for (int i = 0; i < list.Count; i++)

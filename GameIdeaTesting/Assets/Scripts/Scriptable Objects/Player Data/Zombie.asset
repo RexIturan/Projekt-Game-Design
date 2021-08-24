@@ -16,4 +16,7 @@ MonoBehaviour:
   RotationSpeed: 3
   JumpSpeed: 5
   Gravity: 2
-  NameID: Default
+  NameID: Zombie
+  Health: 60
+  MaxHealth: 120
+  isActive: 1
