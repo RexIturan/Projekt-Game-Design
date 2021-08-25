@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4069731bd4973d6478ef2175c84c48ae, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
-  MovementSpeed: 0.5
+  MovementSpeed: 5
   RotationSpeed: 3
   JumpSpeed: 5
   Gravity: 2

@@ -17,6 +17,8 @@ public class GameEvents : MonoBehaviour
     public event Action<GameObject> onPlayerClicked;
     public event Action onGridClicked;
 
+    public event Action<Transform> playerMoved;
+
     public void PlayerClicked(GameObject obj)
     {
         if (onPlayerClicked != null)
@@ -33,6 +35,14 @@ public class GameEvents : MonoBehaviour
             onGridClicked();
         }
         
+    }
+
+    public void PlayerMoved(Transform transform)
+    {
+        if (playerMoved != null)
+        {
+            playerMoved(transform);
+        }
     }
     
 }

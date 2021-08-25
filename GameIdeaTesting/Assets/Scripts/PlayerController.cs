@@ -9,9 +9,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Statische Daten")]
     public PlayerData playerData;
+    
+    public LayerMask playerMask;
 
-    private Vector3 movementDirection = Vector3.zero;
-    private bool playerGrounded;
     private static readonly int IsAttacking = Animator.StringToHash("isAttacking");
     private static readonly int IsWalking = Animator.StringToHash("isWalking");
 
@@ -22,39 +22,41 @@ public class PlayerController : MonoBehaviour
         //GameEvents.current.onPlayerClicked += onPlayerClicked;
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        GameEvents.current.PlayerMoved(gameObject.transform);
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerGrounded = characterController.isGrounded;
+        PlayerMove();
+        onPlayerClicked();
+    }
 
+    private void PlayerMove()
+    {
         //movement
-       /* Vector3 inputMovement = transform.forward * (playerData.getMovementSpeed() * Input.GetAxisRaw("Vertical"));
+        Vector3 inputMovement = transform.forward * (playerData.getMovementSpeed() * Input.GetAxisRaw("Vertical"));
         characterController.Move(inputMovement * Time.deltaTime);
 
         transform.Rotate(Vector3.up * (Input.GetAxisRaw("Horizontal") * playerData.getRotationSpeed()));
-
-*/
-        //jumping
-        if(Input.GetButton("Jump") && playerGrounded)
-        {
-            movementDirection.y = playerData.getJumpSpeed();
-        }
-        movementDirection.y -= playerData.getGravity() * Time.deltaTime;
-
-        characterController.Move(movementDirection * Time.deltaTime);
-
-
-        //animations
         animator.SetBool(IsWalking, Input.GetAxisRaw("Vertical") != 0);
-       // animator.SetBool(IsAttacking, !characterController.isGrounded);
-
+        GameEvents.current.PlayerMoved(gameObject.transform);
     }
 
     private void onPlayerClicked()
     {
-        Debug.Log(playerData.getNameID() + "wurde angeklickt. Durch das EventSystem");
+        // Did we hit the surface?
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, 1000, playerMask, QueryTriggerInteraction.Collide) && Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Der Spieler wurde getroffen");
+            GameEvents.current.PlayerClicked(this.gameObject);
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            GameEvents.current.GridClicked();   
+        }
     }
     
     private void OnMouseDown()
