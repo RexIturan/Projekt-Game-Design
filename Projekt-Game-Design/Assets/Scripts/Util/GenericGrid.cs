@@ -22,14 +22,20 @@ namespace Util {
         public int Width => width;
         public int Height => height;
         public float CellSize => cellSize;
+        
+        
+        //debug
+        public Transform debugTextParent;
+        
 
         public GenericGrid(int width, int height, float cellSize, Vector3 originPosition,
-            Func<GenericGrid<TGridObject>, int, int, TGridObject> createGridObject, bool showDebug) {
+            Func<GenericGrid<TGridObject>, int, int, TGridObject> createGridObject, bool showDebug, Transform debugTextParent = null) {
             this.showDebug = showDebug;
             this.width = width;
             this.height = height;
             this.cellSize = cellSize;
             this.originPosition = originPosition;
+            this.debugTextParent = debugTextParent;
 
             gridArray = new TGridObject[width, height];
 
@@ -53,7 +59,8 @@ namespace Util {
                 for (int y = 0; y < gridArray.GetLength(1); y++) {
                     debugTextArray[x, y] = Util.Text.CreateWorldText(
                         gridArray[x, y].ToString(),
-                        null, GetCellDimensions(),
+                        debugTextParent,
+                        GetCellDimensions(),
                         GetWorldPosition(x, y) + GetCellCenter(),
                         GetWorldRotation(),
                         4,
