@@ -39,12 +39,19 @@ namespace DefaultNamespace.Camera {
         }
 
         private void Update() {
-            transform.position += (transform.forward * inputVector.y + transform.right * inputVector.x) * (movementSpeed.Value * Time.deltaTime);
+
+            if (inputVector.y != 0 || inputVector.x != 0)
+            {
+                transform.position += (transform.forward * inputVector.y + transform.right * inputVector.x) * (movementSpeed.Value * Time.deltaTime);
+            }
+            else
+            {
+                // Für die Kamerabewegung durch den Bildschirmrand
+                HandleCameraBorder();
+            }
+            
             transform.rotation *= Quaternion.Euler(0, rotateInputVector * -1, 0);
-
-            // Für die Kamerabewegung durch den Bildschirmrand
-            HandleCameraBorder();
-
+            
             var pos = new Vector3(
                 
                 0,
