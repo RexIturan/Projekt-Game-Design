@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dcb608470fe4f02a63c88f30ff4e687, type: 3}
   m_Name: stone
   m_EditorClassIdentifier: 
-  flags: 3
+  flags: 1
   movementCost: 0
+  color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 0}

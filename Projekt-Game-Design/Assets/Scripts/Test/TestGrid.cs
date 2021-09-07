@@ -6,7 +6,7 @@ using UnityEngine;
 using Util;
 
 public class TestGrid : MonoBehaviour {
-    [SerializeField] private GridsSO tileGrids;
+    [SerializeField] private GridContainerSO gridContainer;
 
     [SerializeField] private int width;
     [SerializeField] private int height;
@@ -17,20 +17,20 @@ public class TestGrid : MonoBehaviour {
     public Transform TextDebug;
     
     private void Awake() {
-        if (tileGrids.grids.Count >= 1) {
-            tileGrids.grids[0].CreateDebugDisplay(); 
+        if (gridContainer.grids.Count >= 1) {
+            gridContainer.grids[0].CreateDebugDisplay(); 
         }
     }
 
     public void CreateGrid() {
-        GenericGrid<Tile> grid = new GenericGrid<Tile>(width, height, cellSize, originPosition,
+        TileGrid grid = new TileGrid(width, height, cellSize, originPosition,
             (GenericGrid<Tile> g, int x, int y) => new Tile(g, x, y), showDebug, TextDebug);
 
-        if (tileGrids.grids.Count >= 1) {
-            tileGrids.grids[0] = grid;    
+        if (gridContainer.grids.Count >= 1) {
+            gridContainer.grids[0] = grid;    
         }
         else {
-            tileGrids.grids.Add(grid); 
+            gridContainer.grids.Add(grid); 
         }
         
     }

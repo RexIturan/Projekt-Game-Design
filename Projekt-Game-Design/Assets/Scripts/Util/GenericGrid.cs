@@ -11,13 +11,13 @@ namespace Util {
             public int y;
         }
 
-        private bool showDebug { get; set; }
+        [SerializeField] private bool showDebug { get; set; }
         
-        private int width;
-        private int height;
-        private float cellSize;
-        private Vector3 originPosition;
-        private TGridObject[,] gridArray;
+        [SerializeField] private int width;
+        [SerializeField] private int height;
+        [SerializeField] private float cellSize;
+        [SerializeField] private Vector3 originPosition;
+        [SerializeField] private TGridObject[,] gridArray;
 
         public int Width => width;
         public int Height => height;
@@ -25,7 +25,7 @@ namespace Util {
         
         
         //debug
-        public Transform debugTextParent;
+        [SerializeField] private Transform debugTextParent;
         
 
         public GenericGrid(int width, int height, float cellSize, Vector3 originPosition,

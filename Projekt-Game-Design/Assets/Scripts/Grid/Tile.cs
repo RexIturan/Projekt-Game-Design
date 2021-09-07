@@ -3,7 +3,7 @@ using Util;
 
 namespace Grid {
     [System.Serializable]
-    public class Tile : MonoBehaviour {
+    public class Tile {
         
         private TileTypeSO type;
         
