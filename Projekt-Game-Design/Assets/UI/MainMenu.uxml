@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="Button_Layout.uss" />
+    <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center; background-image: url(&apos;/Assets/UI/Images/bg_menu.jpg&apos;);">
+        <ui:VisualElement style="background-color: rgba(255, 255, 255, 0.27); height: 550px; width: 388px; border-top-left-radius: 30px; border-bottom-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; justify-content: center; align-items: center; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+            <ui:Label text="Main Menu" display-tooltip-when-elided="true" style="font-size: 31px; -unity-font-style: bold; color: rgba(255, 255, 255, 255); position: absolute; top: 30px;" />
+            <ui:Button text="Start Game" display-tooltip-when-elided="true" name="startButton" class="Button_Layout" style="margin-top: 19px;" />
+            <ui:Button text="Load Level" display-tooltip-when-elided="true" name="loadLevelButton" class="Button_Layout" />
+            <ui:Button text="Settings" display-tooltip-when-elided="true" name="settingsButton" class="Button_Layout" />
+            <ui:Button text="Exit" display-tooltip-when-elided="true" name="exitButton" class="Button_Layout" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
