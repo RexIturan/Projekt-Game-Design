@@ -14,6 +14,8 @@ namespace DefaultNamespace.Camera {
         [SerializeField] private Vector3 newPosition;
         [SerializeField] private float panSpeed;
         [SerializeField] private int panBorderThickness;
+        [SerializeField] private int minZoom;
+        [SerializeField] private int maxZoom;
 
         public Transform cameraTransform;
         private Vector2 inputVector;
@@ -51,7 +53,8 @@ namespace DefaultNamespace.Camera {
             }
             
             transform.rotation *= Quaternion.Euler(0, rotateInputVector * -1, 0);
-            
+            //transform.rotation *= Quaternion.Euler(0, rotateInputVector * -45, 0);
+
             var pos = new Vector3(
                 
                 0,
@@ -59,7 +62,12 @@ namespace DefaultNamespace.Camera {
                 -zoomInput * Time.deltaTime * zoomSpeed.Value,
                 // zoomInput);
                 zoomInput * Time.deltaTime * zoomSpeed.Value);
-            cameraTransform.localPosition += pos;
+
+            // Test ob die Position außerhalb des zulässigen Bereiches ist
+            if (pos.y + cameraTransform.localPosition.y <= maxZoom && pos.y + cameraTransform.localPosition.y >= minZoom)
+            {
+                cameraTransform.localPosition += pos;
+            }
         }
 
         private void HandleCameraBorder()
