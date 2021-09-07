@@ -196,4 +196,6 @@ MonoBehaviour:
     ConstantValue: 1
     Variable: {fileID: 0}
   newPosition: {x: 0, y: 0, z: 0}
+  panSpeed: 20
+  panBorderThickness: 20
   cameraTransform: {fileID: 8446284169067511301}

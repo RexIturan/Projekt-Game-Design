@@ -1,6 +1,7 @@
 ﻿using System;
 using Input;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Util.ScriptableObjects;
 
 namespace DefaultNamespace.Camera {
@@ -11,6 +12,8 @@ namespace DefaultNamespace.Camera {
         [SerializeField] private FloatReference zoomSpeed;
         [SerializeField] private FloatReference movementTime;
         [SerializeField] private Vector3 newPosition;
+        [SerializeField] private float panSpeed;
+        [SerializeField] private int panBorderThickness;
 
         public Transform cameraTransform;
         private Vector2 inputVector;
@@ -39,6 +42,9 @@ namespace DefaultNamespace.Camera {
             transform.position += (transform.forward * inputVector.y + transform.right * inputVector.x) * (movementSpeed.Value * Time.deltaTime);
             transform.rotation *= Quaternion.Euler(0, rotateInputVector * -1, 0);
 
+            // Für die Kamerabewegung durch den Bildschirmrand
+            HandleCameraBorder();
+
             var pos = new Vector3(
                 
                 0,
@@ -47,6 +53,39 @@ namespace DefaultNamespace.Camera {
                 // zoomInput);
                 zoomInput * Time.deltaTime * zoomSpeed.Value);
             cameraTransform.localPosition += pos;
+        }
+
+        private void HandleCameraBorder()
+        {
+            Vector3 pos = transform.position;
+
+            Vector2 mousePos =Mouse.current.position.ReadValue();
+
+            if (mousePos.y >= Screen.height - panBorderThickness)
+            {
+                pos += transform.forward * (panSpeed * Time.deltaTime);
+            }
+
+            if (mousePos.x <= panBorderThickness)
+            {
+                pos -= transform.right * (panSpeed * Time.deltaTime);
+            }
+
+            if (mousePos.y <= panBorderThickness)
+            {
+                pos -= transform.forward * (panSpeed * Time.deltaTime);
+            }
+
+            if (mousePos.x >= Screen.width - panBorderThickness)
+            {
+                pos += transform.right * (panSpeed * Time.deltaTime);
+            }
+            
+            //TODO: World Bounds müssen definiert werden
+            //pos.x = Mathf.Clamp(pos.x, -xLimit, xLimit);
+            //pos.z = Mathf.Clamp(pos.z, -zLimit, zLimit);
+
+            transform.position = pos;
         }
 
         private void HandleCameraMoveEvent(Vector2 movement, bool useMouse) {
