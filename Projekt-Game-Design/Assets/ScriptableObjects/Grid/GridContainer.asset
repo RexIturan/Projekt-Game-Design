@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65c9230b8784354ac17e20ae906c1a3, type: 3}
   m_Name: GridContainer
   m_EditorClassIdentifier: 
-  grids:
-  - width: 5
-    height: 5
+  tileGrids:
+  - width: 11
+    height: 12
     cellSize: 1
     originPosition: {x: 0, y: 0, z: 0}
     debugTextParent: {fileID: 0}
-  - width: 5
-    height: 5
+  - width: 11
+    height: 12
     cellSize: 1
     originPosition: {x: 0, y: 0, z: 0}
     debugTextParent: {fileID: 0}

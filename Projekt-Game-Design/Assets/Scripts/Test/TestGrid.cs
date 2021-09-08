@@ -17,20 +17,19 @@ public class TestGrid : MonoBehaviour {
     public Transform TextDebug;
     
     private void Awake() {
-        if (gridContainer.grids.Count >= 1) {
-            gridContainer.grids[0].CreateDebugDisplay(); 
+        if (gridContainer.tileGrids.Count >= 1) {
+            gridContainer.tileGrids[0].CreateDebugDisplay(); 
         }
     }
 
     public void CreateGrid() {
-        TileGrid grid = new TileGrid(width, height, cellSize, originPosition,
-            (GenericGrid<Tile> g, int x, int y) => new Tile(g, x, y), showDebug, TextDebug);
+        TileGrid grid = new TileGrid(width, height, cellSize, originPosition, showDebug, TextDebug);
 
-        if (gridContainer.grids.Count >= 1) {
-            gridContainer.grids[0] = grid;    
+        if (gridContainer.tileGrids.Count >= 1) {
+            gridContainer.tileGrids[0] = grid;    
         }
         else {
-            gridContainer.grids.Add(grid); 
+            gridContainer.tileGrids.Add(grid); 
         }
         
     }

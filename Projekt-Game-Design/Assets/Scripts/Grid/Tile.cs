@@ -6,11 +6,18 @@ namespace Grid {
     public class Tile {
         
         private TileTypeSO type;
-        
+
+        public TileTypeSO Type => type;
+
         private GenericGrid<Tile> grid;
         public int x;
         public int y;
 
+        public void SetTileType(TileTypeSO tileType) {
+            type = tileType;
+            grid.TriggerGridObjectChanged(x, y);
+        }
+        
         public Tile(GenericGrid<Tile> grid, int x, int y) {
             this.grid = grid;
             this.x = x;
@@ -18,7 +25,7 @@ namespace Grid {
         }
         
         public override string ToString() {
-            return x + "," + y;    
+            return type.Name;    
         }
     }
 }
