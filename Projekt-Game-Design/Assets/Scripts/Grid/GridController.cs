@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Input;
 using UnityEngine;
 
 namespace Grid {
@@ -51,14 +52,52 @@ namespace Grid {
 
         
         
-        public void AddTileAt(int x, int y, int level, Tile tile) {
+        public void AddTileAt(int x, int y, int level, TileTypeSO tileType) {
             
+            if (!globalGridData.IsInBounds(x, y)) {
+                // calculate difference
+
+                Vector2Int from = new Vector2Int(
+                    Mathf.Min(x, (int) Mathf.Floor(globalGridData.OriginPosition.x)), 
+                    Mathf.Min(y,(int) Mathf.Floor(globalGridData.OriginPosition.y ))
+                );
+
+                Vector2Int to = new Vector2Int(
+                    Mathf.Max(x, globalGridData.Width), 
+                    Mathf.Max(y,globalGridData.Height)
+                );
+                
+                IncreaseGrid(from, to);
+            }
+            
+            gridContainer.tileGrids[level].GetGridObject(x,y).SetTileType(tileType);
+            
+            gridViewer.DrawGrid();
         }
 
         
         // from = -OO -> origin | to origin -> +OO
-        public void AddTilesAt(Vector3Int from, Vector3Int to, Tile[] tiles) {
+        public void AddMultipleTilesAt(Vector3Int start, Vector3Int end, TileTypeSO tileType) {
+            if (!globalGridData.IsInBounds(start.x, start.y) || !globalGridData.IsInBounds(end.x, end.y)) {
+
+                Vector2Int from = new Vector2Int(
+                    Mathf.Min(start.x, end.x, (int) Mathf.Floor(globalGridData.OriginPosition.x)),
+                    Mathf.Min(start.y, end.y, (int) Mathf.Floor(globalGridData.OriginPosition.y))
+                );
+
+                Vector2Int to = new Vector2Int(
+                    Mathf.Max(start.x, end.x, globalGridData.Width),
+                    Mathf.Max(start.y, end.y, globalGridData.Height)
+                );
                 
+                IncreaseGrid(from, to);
+            }
+
+            foreach (var tileGrid in gridContainer.tileGrids) {
+                FillGrid(tileGrid, tileType);
+            }
+            
+            gridViewer.DrawGrid();
         }
 
         public void FillGrid(TileGrid tileGrid, TileTypeSO tileType) {
@@ -69,6 +108,7 @@ namespace Grid {
                 }
             }
         }
+        
         
         // TODO wording
         // TODO maybe => from -> negChange && to -> positiveChange 

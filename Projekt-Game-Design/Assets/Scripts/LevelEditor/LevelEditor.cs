@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Grid;
+using UnityEngine;
 
 namespace LevelEditor {
     public class LevelEditor : MonoBehaviour {
@@ -10,6 +11,15 @@ namespace LevelEditor {
         // 
         // selection
         // [SerializeField] private ;
-        
+
+        [SerializeField] private GridController controller;
+
+        public void AddMultipleTilesAt(Vector3Int clickPos, Vector3Int dragPos) {
+            
+        }
+
+        public void AddTileAt(Vector3Int clickPos) {
+            
+        }
     }
 }

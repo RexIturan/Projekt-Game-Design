@@ -1,4 +1,5 @@
 ﻿using System;
+using Grid;
 using Input;
 using UnityEditor;
 using UnityEngine;
@@ -9,24 +10,33 @@ using Util;
 namespace LevelEditor {
     public class Cursor : MonoBehaviour {
 
-        enum ECursorMode {
-            single,
+        public enum ECursorMode {
+            select,
+            paint,
             box,
             fill,
         }
-        
         
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private TileBase cursorTile;
 
         [SerializeField] private InputReader inputReader;
-        [SerializeField] private ECursorMode mode = ECursorMode.single;
+        [SerializeField] private ECursorMode mode = ECursorMode.paint;
+
+        // TODO Hack
+        [SerializeField] private LevelEditor levelEditor;
+        
+        public ECursorMode Mode {
+            get => mode;
+            set => mode = value;
+        }
 
         // read data
         private Vector3Int clickPos;
         private Vector3Int dragPos;
         private bool clicked;
         private bool dragEnd;
+        private bool currentInput;
         
         private void Awake() {
             // subscribe to input reader
@@ -47,24 +57,42 @@ namespace LevelEditor {
             bool leftMousePressed = mouse.leftButton.isPressed;
             
             switch (mode) {
-                case ECursorMode.single:
+                case ECursorMode.paint:
                     DrawSingleCursor(tilePos);
 
-                    if (leftMouseWasReleased) {
+                    if (leftMousePressed) {
                         HandleMouseClick();
+                    }
+
+                    if (clicked) {
+                        //TODO
+                        levelEditor.AddTileAt(clickPos);
+                        clicked = false;
                     }
                     
                     break;
                 case ECursorMode.box:
-                    
-                    // drawBoxCursor
-
+                    Debug.Log("box");
                     if (leftMouseWasPressed) {
                         HandleMouseClick();                   
                     }
-                    
-                    
-                    
+                    if (leftMousePressed) {
+                        HandleMouseDrag();                        
+                    }
+                    else if (leftMouseWasReleased) {
+                        HandleMouseDragEnd();
+                    }
+
+                    if (dragEnd) {
+                        //TODO
+                        levelEditor.AddMultipleTilesAt(clickPos, dragPos);
+                        dragEnd = false;
+                        clickPos = Vector3Int.zero;
+                        dragPos = Vector3Int.zero;
+                    }
+
+                    DrawBoxCursor(clickPos, dragPos);
+                    Debug.Log($"{clickPos} {dragPos}");
                     break;
                 case ECursorMode.fill:
                     // break;
@@ -72,7 +100,25 @@ namespace LevelEditor {
                     break;
             }
             
-            DrawSingleCursor(tilePos);
+            // DrawSingleCursor(tilePos);
+        }
+
+        private void DrawBoxCursor(Vector3Int startPos, Vector3Int endPos) {
+            tilemap.ClearAllTiles();
+
+            if (!dragEnd) {
+                int xMin = Mathf.Min(startPos.x, endPos.x);
+                int yMin = Mathf.Min(startPos.y, endPos.y);
+                int xMax = Mathf.Max(startPos.x, endPos.x);
+                int yMax = Mathf.Max(startPos.y, endPos.y);
+            
+                for (int x = xMin; x <= xMax; x++) {
+                    for (int y = yMin; y <= yMax; y++) {
+                        Vector3Int tilePos = new Vector3Int(x, y, 0);
+                        tilemap.SetTile(tilePos, cursorTile);
+                    }
+                }    
+            }
         }
 
         public void DrawSingleCursor(Vector3Int tilePos) {
@@ -81,15 +127,21 @@ namespace LevelEditor {
         }
 
         public void HandleMouseClick() {
+            currentInput = true;
             clicked = true;
             clickPos = MousePosToTilemapPos();
-        }
-        
-        public void HandleMouseDrag() {
             
         }
         
+        public void HandleMouseDrag() {
+            dragPos = MousePosToTilemapPos();
+        }
+        
         public void HandleMouseDragEnd() {
+            dragEnd = true;
+            
+            // call level editor
+            // reset pos
             
         }
 
