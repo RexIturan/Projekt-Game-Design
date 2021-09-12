@@ -59,15 +59,17 @@ namespace LevelEditor {
             switch (mode) {
                 case ECursorMode.paint:
                     DrawSingleCursor(tilePos);
-
+                    
+                    //TODO
+                    if (clicked) {
+                        
+                        levelEditor.AddTileAt(clickPos);
+                        clickPos = Vector3Int.zero;
+                        clicked = false;
+                    }
+                    
                     if (leftMousePressed) {
                         HandleMouseClick();
-                    }
-
-                    if (clicked) {
-                        //TODO
-                        levelEditor.AddTileAt(clickPos);
-                        clicked = false;
                     }
                     
                     break;
@@ -86,6 +88,7 @@ namespace LevelEditor {
                     if (dragEnd) {
                         //TODO
                         levelEditor.AddMultipleTilesAt(clickPos, dragPos);
+                        clicked = false;
                         dragEnd = false;
                         clickPos = Vector3Int.zero;
                         dragPos = Vector3Int.zero;
@@ -127,10 +130,8 @@ namespace LevelEditor {
         }
 
         public void HandleMouseClick() {
-            currentInput = true;
             clicked = true;
             clickPos = MousePosToTilemapPos();
-            
         }
         
         public void HandleMouseDrag() {

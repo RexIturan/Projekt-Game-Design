@@ -10,7 +10,7 @@ namespace Grid {
         [SerializeField] private GridDataSO defaultGridData;
         [SerializeField] private GridDataSO globalGridData;
 
-        [SerializeField] private TileTypeSO[] tiles;
+        [SerializeField] private TileTypeContainerSO tileTypesContainer;
 
         [SerializeField] private GridViewer gridViewer;
         
@@ -21,11 +21,11 @@ namespace Grid {
             gridContainer.tileGrids = new List<TileGrid>();
             
             gridContainer.tileGrids.Add(CreateNewTileGrid());
-            gridContainer.tileGrids.Add(CreateNewTileGrid());
+            // gridContainer.tileGrids.Add(CreateNewTileGrid());
             
             foreach (var tileGrid in gridContainer.tileGrids) {
-                FillGrid(gridContainer.tileGrids[0], tiles[1]);
-                FillGrid(gridContainer.tileGrids[1], tiles[0]);
+                FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[1]);
+                // FillGrid(gridContainer.tileGrids[1], tileTypesContainer.tileTypes[0]);
                 Debug.Log(tileGrid.ToString());
                 gridViewer.DrawGrid();
             }
@@ -53,6 +53,8 @@ namespace Grid {
         
         
         public void AddTileAt(int x, int y, int level, TileTypeSO tileType) {
+
+            Vector2Int tileGridCoords = new Vector2Int(x, y);
             
             if (!globalGridData.IsInBounds(x, y)) {
                 // calculate difference
@@ -63,14 +65,19 @@ namespace Grid {
                 );
 
                 Vector2Int to = new Vector2Int(
-                    Mathf.Max(x, globalGridData.Width), 
-                    Mathf.Max(y,globalGridData.Height)
+                    Mathf.Max(x+1, globalGridData.Width), 
+                    Mathf.Max(y+1,globalGridData.Height)
                 );
                 
                 IncreaseGrid(from, to);
+
+                tileGridCoords.x = x + Mathf.Abs(from.x);
+                tileGridCoords.y = y + Mathf.Abs(from.y);
             }
             
-            gridContainer.tileGrids[level].GetGridObject(x,y).SetTileType(tileType);
+            Debug.Log(tileGridCoords);
+            
+            gridContainer.tileGrids[level].GetGridObject(tileGridCoords.x, tileGridCoords.y).SetTileType(tileType);
             
             gridViewer.DrawGrid();
         }
@@ -78,6 +85,10 @@ namespace Grid {
         
         // from = -OO -> origin | to origin -> +OO
         public void AddMultipleTilesAt(Vector3Int start, Vector3Int end, TileTypeSO tileType) {
+            
+            var minXY = new Vector2Int(Mathf.Min(start.x, end.x), Mathf.Min(start.y, end.y));
+            var maxXY = new Vector2Int(Mathf.Max(start.x, end.x), Mathf.Max(start.y, end.y));
+            
             if (!globalGridData.IsInBounds(start.x, start.y) || !globalGridData.IsInBounds(end.x, end.y)) {
 
                 Vector2Int from = new Vector2Int(
@@ -91,10 +102,20 @@ namespace Grid {
                 );
                 
                 IncreaseGrid(from, to);
+                
+                minXY.x += Math.Abs(from.x);
+                minXY.y += Math.Abs(from.y);
+                maxXY.x += Math.Abs(from.x);
+                maxXY.y += Math.Abs(from.y);
             }
-
+            
             foreach (var tileGrid in gridContainer.tileGrids) {
-                FillGrid(tileGrid, tileType);
+                
+                for (int x = minXY.x; x <= maxXY.x; x++) {
+                    for (int y = minXY.y; y <= maxXY.y; y++) {
+                        tileGrid.GetGridObject(x,y).SetTileType(tileType);
+                    }
+                }
             }
             
             gridViewer.DrawGrid();
@@ -120,13 +141,16 @@ namespace Grid {
             globalGridData.Width = to.x + (-from.x);
             globalGridData.Height = to.y + (-from.y);
 
+            
+            // Debug.Log($"increase with {from} {to}");
+            
 
             Vector2Int offset = from * -1;
             
             for (int i = 0; i < gridContainer.tileGrids.Count; i++) {
                 
                 TileGrid newTileGrid = CreateNewTileGrid();
-                FillGrid(newTileGrid, tiles[0]);
+                FillGrid(newTileGrid, tileTypesContainer.tileTypes[0]);
                 oldTileGrids[i].CopyTo(newTileGrid, offset);
                 gridContainer.tileGrids[i] = newTileGrid;
             }
