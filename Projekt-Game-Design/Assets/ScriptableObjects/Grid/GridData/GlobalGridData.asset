@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8868d3fe1ee459b95e854315217dbaa, type: 3}
   m_Name: GlobalGridData
   m_EditorClassIdentifier: 
-  width: 11
-  height: 12
+  width: 10246
+  height: 11271
   cellSize: 1
-  originPosition: {x: 0, y: 0, z: 0}
+  originPosition: {x: -10240, y: 0, z: -11264}

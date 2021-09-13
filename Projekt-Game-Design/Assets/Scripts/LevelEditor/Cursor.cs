@@ -140,10 +140,6 @@ namespace LevelEditor {
         
         public void HandleMouseDragEnd() {
             dragEnd = true;
-            
-            // call level editor
-            // reset pos
-            
         }
 
         public Vector3Int MousePosToTilemapPos() {

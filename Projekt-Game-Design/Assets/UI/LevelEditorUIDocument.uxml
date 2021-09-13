@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement style="flex-grow: 1;">
-        <ui:VisualElement style="right: 18px; left: 546px; width: 82px; position: relative; height: 781px; top: 0; align-items: center; justify-content: center;">
-            <ui:VisualElement name="Modus" style="position: absolute; background-color: rgb(128, 128, 128); background-image: none; height: 116px; width: 82px; top: 253px; left: 45px; align-items: stretch; justify-content: center;">
+        <ui:VisualElement style="right: 0; left: 80%; width: 20%; position: relative; height: 100%; top: 0; align-items: center; justify-content: center;">
+            <ui:VisualElement name="Modus" picking-mode="Ignore" style="position: absolute; background-color: rgb(128, 128, 128); background-image: none; height: 116px; width: 82px; top: 253px; left: 45px; align-items: stretch; justify-content: center;">
                 <ui:Button text="select" display-tooltip-when-elided="true" name="select" style="position: relative; top: auto; left: auto; width: auto; height: 19px;" />
                 <ui:Button text="paint" display-tooltip-when-elided="true" name="paint" style="position: relative; top: auto; left: auto; width: auto; height: 22px;" />
                 <ui:Button text="box" display-tooltip-when-elided="true" name="box" style="position: relative; top: auto; left: auto; width: auto; height: 23px;" />

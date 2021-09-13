@@ -21,11 +21,22 @@ namespace Grid {
         }
 
         public float CellSize => cellSize;
-        public Vector3 OriginPosition => originPosition;
-        
+
+        public Vector3 OriginPosition {
+            get => originPosition;
+            set => originPosition = value;
+        }
+
         // TODO refactor to util class
         public bool IsInBounds(int x, int y) {
-            return x >= 0 && y >= 0 && x < width && y < height;
+            return x >= originPosition.x && 
+                   y >= originPosition.z && 
+                   x < width + originPosition.x && 
+                   y < height + originPosition.z;
+        }
+        
+        public bool IsInBounds(Vector2Int pos) {
+            return IsInBounds(pos.x, pos.y);
         }
 
         public void InitValues(GridDataSO newData) {

@@ -12,6 +12,7 @@ namespace Visual {
         }
 
         [SerializeField] private GridContainerSO gridContainer;
+        [SerializeField] private GridDataSO globalGridData;
         
         [SerializeField] private Tilemap gridTilemap;
         [SerializeField] private Tilemap cursorTilemap;
@@ -32,13 +33,15 @@ namespace Visual {
         
         public void DrawGrid() {
             gridTilemap.ClearAllTiles();
+
+            var offset = new Vector2Int((int)globalGridData.OriginPosition.x, (int)globalGridData.OriginPosition.z); 
             
             for (int l = 0; l < gridContainer.tileGrids.Count; l++) {
                 var tileGrid = gridContainer.tileGrids[l];
                 for (int x = 0; x < tileGrid.Width; x++) {
                     for (int y = 0; y < tileGrid.Height; y++) {
                         gridTilemap.SetTile(
-                            new Vector3Int(x, y, l),
+                            new Vector3Int(x + offset.x, y + offset.y, l),
                             GetTileFromTileType(tileGrid.GetGridObject(x,y).Type));
                     }
                 }
@@ -46,11 +49,32 @@ namespace Visual {
         }
 
         public void DrawBoxCursorAt(Vector3 start, Vector3 end) {
+            cursorTilemap.ClearAllTiles();
+
+            var startPos = WorldPosToTileMapPos(start);
+            var endPos = WorldPosToTileMapPos(end);
             
+            int xMin = Mathf.Min(startPos.x, endPos.x);
+            int yMin = Mathf.Min(startPos.y, endPos.y);
+            int xMax = Mathf.Max(startPos.x, endPos.x);
+            int yMax = Mathf.Max(startPos.y, endPos.y);
+        
+            for (int x = xMin; x <= xMax; x++) {
+                for (int y = yMin; y <= yMax; y++) {
+                    Vector3Int tilePos = new Vector3Int(x, y, 0);
+                    cursorTilemap.SetTile(tilePos, cursor);
+                }
+            }    
         }
         
         public void DrawCursorAt(Vector3 pos) {
-            
+            cursorTilemap.ClearAllTiles();
+            cursorTilemap.SetTile(WorldPosToTileMapPos(pos), cursor);
+        }
+        
+        public Vector3Int WorldPosToTileMapPos(Vector3 pos) {
+            Vector3Int flooredPos = Vector3Int.FloorToInt(pos);
+            return new Vector3Int(flooredPos.x, flooredPos.z, 0);
         }
     }
 }

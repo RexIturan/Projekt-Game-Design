@@ -44,19 +44,19 @@ namespace UI {
         // }
 
         void HandleSelectModusButtonClicked() {
-            cursor.Mode = Cursor.ECursorMode.select;
+            levelEditor.Mode = LevelEditor.LevelEditor.ECursorMode.select;
         }
         
         void HandlePaintModusButtonClicked() {
-            cursor.Mode = Cursor.ECursorMode.paint;
+            levelEditor.Mode = LevelEditor.LevelEditor.ECursorMode.paint;
         }
         
         void HandleBoxModusButtonClicked() {
-            cursor.Mode = Cursor.ECursorMode.box;
+            levelEditor.Mode = LevelEditor.LevelEditor.ECursorMode.box;
         }
         
         void HandleFillModusButtonClicked() {
-            cursor.Mode = Cursor.ECursorMode.fill;
+            levelEditor.Mode = LevelEditor.LevelEditor.ECursorMode.fill;
         }
         
     }
