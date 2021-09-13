@@ -19,7 +19,7 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Holen des UMXL Trees, zum getten der einzelnen Komponenten
+        // Holen des UXML Trees, zum getten der einzelnen Komponenten
         var root = GetComponent<UIDocument>().rootVisualElement;
         
         // Holen der Buttons
