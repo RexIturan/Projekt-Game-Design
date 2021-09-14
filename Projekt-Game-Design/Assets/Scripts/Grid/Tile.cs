@@ -25,7 +25,7 @@ namespace Grid {
         }
         
         public override string ToString() {
-            return type.Name != null ? type.Name : "-";    
+            return type.Name;    
         }
     }
 }

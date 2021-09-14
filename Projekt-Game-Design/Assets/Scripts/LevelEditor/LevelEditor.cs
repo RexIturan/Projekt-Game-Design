@@ -106,11 +106,7 @@ namespace LevelEditor {
         }
 
         private void HandlePaint() {
-            try {AddTileAt(clickPos); }
-            catch (Exception e) {
-                Console.WriteLine(e);
-                throw;
-            }
+            AddTileAt(clickPos); 
             clickPos = Vector3Int.zero;
             clicked = false;
         }

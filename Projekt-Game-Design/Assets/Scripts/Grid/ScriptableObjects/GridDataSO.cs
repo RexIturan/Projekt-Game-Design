@@ -28,16 +28,16 @@ namespace Grid {
         }
 
         // TODO refactor to util class
-        public bool IsInBounds(int x, int y) {
-            return x >= originPosition.x && 
-                   y >= originPosition.z && 
-                   x < width + originPosition.x && 
-                   y < height + originPosition.z;
-        }
-        
-        public bool IsInBounds(Vector2Int pos) {
-            return IsInBounds(pos.x, pos.y);
-        }
+        // public bool IsInBounds(int x, int y) {
+        //     return x >= 0 && 
+        //            y >= 0 && 
+        //            x < width && 
+        //            y < height ;
+        // }
+        //
+        // public bool IsInBounds(Vector2Int pos) {
+        //     return IsInBounds(pos.x, pos.y);
+        // }
 
         public void InitValues(GridDataSO newData) {
             width = newData.Width;

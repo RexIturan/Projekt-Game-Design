@@ -35,7 +35,14 @@ namespace Grid {
 
             for (int y = Height - 1; y >= 0; y--) {
                 for (int x = 0; x < Width; x++) {
-                    str += GetGridObject(x, y).ToString() + " ";
+                    str += "[";
+                    if (GetGridObject(x, y).Type != null) {
+                        str += GetGridObject(x, y).ToString();                        
+                    }
+                    else {
+                        str += " ";
+                    }
+                    str += "] ";
                 }
 
                 str += "\n";

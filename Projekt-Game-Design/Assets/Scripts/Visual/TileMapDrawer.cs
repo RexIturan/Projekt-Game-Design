@@ -19,10 +19,10 @@ namespace Visual {
 
         [SerializeField] private tileTypePair[] tileTypeTileDict;
         [SerializeField] private TileBase cursor;
-        [SerializeField] private TileBase erroeTile;
+        [SerializeField] private TileBase errorTile;
 
         public TileBase GetTileFromTileType(TileTypeSO tileType) {
-            TileBase tile = erroeTile;
+            TileBase tile = errorTile;
             foreach (var pair in tileTypeTileDict) {
                 if (pair.tileType == tileType) {
                     tile = pair.tile;
@@ -40,9 +40,18 @@ namespace Visual {
                 var tileGrid = gridContainer.tileGrids[l];
                 for (int x = 0; x < tileGrid.Width; x++) {
                     for (int y = 0; y < tileGrid.Height; y++) {
-                        gridTilemap.SetTile(
-                            new Vector3Int(x + offset.x, y + offset.y, l),
-                            GetTileFromTileType(tileGrid.GetGridObject(x,y).Type));
+                        var tile = tileGrid.GetGridObject(x, y).Type;
+                        if (tile != null) {
+                            gridTilemap.SetTile(
+                                new Vector3Int(x + offset.x, y + offset.y, l),
+                                GetTileFromTileType(tileGrid.GetGridObject(x, y).Type));    
+                        }
+                        else {
+                            Debug.Log("error tile");
+                            gridTilemap.SetTile(
+                                new Vector3Int(x + offset.x, y + offset.y, l),
+                                errorTile);    
+                        }
                     }
                 }
             }
