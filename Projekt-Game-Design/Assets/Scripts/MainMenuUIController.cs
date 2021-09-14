@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 
-public class UIController : MonoBehaviour
+public class MainMenuUIController : MonoBehaviour
 {
-    public Button startButton;
-    public Button loadLevelButton;
-    public Button settingsButton;
-    public Button exitButton;
-    public Button backButton;
-    public VisualElement menuContainer;
-    public VisualElement settingsContainer;
-    
+    private Button startButton;
+    private Button loadLevelButton;
+    private Button settingsButton;
+    private Button exitButton;
+    private Button backButton;
+    private VisualElement menuContainer;
+    private VisualElement settingsContainer;
+    private VisualElement loadGame;
     
     // Start is called before the first frame update
     void Start()
@@ -30,13 +30,16 @@ public class UIController : MonoBehaviour
         backButton = root.Q<Button>("backButton");
         
         // Holen der Menü Container
-        menuContainer = root.Q<VisualElement>("menuContainer");
-        settingsContainer = root.Q<VisualElement>("settingsContainer");
+        menuContainer = root.Q<VisualElement>("MenuContainer");
+        settingsContainer = root.Q<VisualElement>("SettingsContainer");
+        loadGame = root.Q<VisualElement>("LoadScreen");
 
         startButton.clicked += StartButtonPressed;
         exitButton.clicked += QuitGame;
         backButton.clicked += BackButtonPressed;
         settingsButton.clicked += SettingsButtonPressed;
+        loadLevelButton.clicked += LoadLevelButtonPressed;
+        loadGame.Q<Button>("BackButton").clicked += BackButtonLoadGamePressed;
     }
     
     void SettingsButtonPressed()
@@ -46,11 +49,25 @@ public class UIController : MonoBehaviour
         settingsContainer.style.display = DisplayStyle.Flex;
     }
     
+    void LoadLevelButtonPressed()
+    {
+        // Menü ausblenden und Einstellungen zeigen
+        menuContainer.style.display = DisplayStyle.None;
+        loadGame.style.display = DisplayStyle.Flex;
+    }
+    
     void BackButtonPressed()
     {
         // Einstellungen ausblenden und Menü zeigen
         menuContainer.style.display = DisplayStyle.Flex;
         settingsContainer.style.display = DisplayStyle.None;
+    }
+    
+    void BackButtonLoadGamePressed()
+    {
+        // Einstellungen ausblenden und Menü zeigen
+        menuContainer.style.display = DisplayStyle.Flex;
+        loadGame.style.display = DisplayStyle.None;
     }
 
     void StartButtonPressed()

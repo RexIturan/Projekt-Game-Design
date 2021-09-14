@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 160448880}
   - component: {fileID: 160448879}
   - component: {fileID: 160448881}
+  - component: {fileID: 160448882}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -196,6 +197,18 @@ MonoBehaviour:
   m_ScrollWheelAction: {fileID: 6240969308177333660, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
   m_MiddleClickAction: {fileID: -2185481485913320682, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
   m_RightClickAction: {fileID: -4090225696740746782, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+--- !u!114 &160448882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160448878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20445f88bf8c6524b945ae9b716e278d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &364317467
 GameObject:
   m_ObjectHideFlags: 0

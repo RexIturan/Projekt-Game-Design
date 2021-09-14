@@ -1,0 +1,56 @@
+.SaveGameContainerTextTitel {
+    color: rgba(255, 255, 255, 255);
+    -unity-font-style: bold;
+    font-size: 22px;
+}
+
+.SaveGameContainerText {
+    color: rgba(255, 255, 255, 255);
+    font-size: 14px;
+    -unity-font-style: bold;
+}
+
+.BackButton {
+    width: 25%;
+    justify-content: flex-start;
+    background-color: rgba(0, 0, 0, 0.59);
+    -unity-font-style: bold;
+}
+
+.BackButton:hover {
+    width: 25%;
+    justify-content: flex-start;
+    background-color: rgba(255, 255, 255, 0.59);
+    -unity-font-style: bold;
+    color: rgba(0, 0, 0, 255);
+}
+
+.SaveGameContainer {
+    margin-top: 0;
+    background-color: rgba(0, 0, 0, 0.39);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    flex-direction: row;
+    max-height: none;
+    margin-bottom: 0;
+}
+
+.SaveGameContainer:hover {
+    margin-top: 0;
+    background-color: rgba(255, 255, 255, 0.39);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    flex-direction: row;
+    max-height: none;
+    margin-bottom: 0;
+}
