@@ -85,5 +85,9 @@ namespace Visual {
             Vector3Int flooredPos = Vector3Int.FloorToInt(pos);
             return new Vector3Int(flooredPos.x, flooredPos.z, 0);
         }
+
+        public void clearCursor() {
+            cursorTilemap.ClearAllTiles();
+        }
     }
 }

@@ -84,7 +84,9 @@ namespace LevelEditor {
                         HandleBox();
                     }
                     else {
-                        drawer.DrawBoxCursorAt(clickPos, dragPos);    
+                        if (clicked) {
+                            drawer.DrawBoxCursorAt(clickPos, dragPos);    
+                        }
                     }
                     
                     break;
@@ -103,6 +105,7 @@ namespace LevelEditor {
             dragEnd = false;
             clickPos = Vector3Int.zero;
             dragPos = Vector3Int.zero;
+            drawer.clearCursor();
         }
 
         private void HandlePaint() {

@@ -102,8 +102,6 @@ namespace Grid {
         
         public void AddTileAt(Vector2Int pos, int level, TileTypeSO tileType) {
 
-            // var tilePos = pos;
-
             var lowerBounds = GetLowerBounds(globalGridData.OriginPosition);
             var upperBounds = GetUpperBounds(
                 WorldPosToGridPos(globalGridData.OriginPosition), 
@@ -112,14 +110,6 @@ namespace Grid {
 
             Vector2Int newLowerBounds = lowerBounds;
             Vector2Int newUpperBounds = upperBounds;
-            
-            // Vector2Int tilePos = new Vector2Int(
-            //     pos.x + (int) Mathf.Abs(globalGridData.OriginPosition.x), 
-            //     pos.y + (int) Mathf.Abs(globalGridData.OriginPosition.z));
-            //
-            // Vector2Int gridPos = new Vector2Int(
-            //     pos.x + (int) globalGridData.OriginPosition.x, 
-            //     pos.y + (int) globalGridData.OriginPosition.z);
             
             if (!IsInBounds(pos.x, pos.y, lowerBounds, upperBounds)) {
                 
@@ -190,34 +180,11 @@ namespace Grid {
                 
                 IncreaseGrid(lowerBounds, newLowerBounds, newUpperBounds);
 
-                // TODO newPos?
-                
                 Debug.Log($"start:{start} end:{start}| lower{lowerBounds} upper{upperBounds}| newLower{newLowerBounds} newUpper{newUpperBounds}");
-                
             }
 
             minXY = TilePosToGridPos(minXY, newLowerBounds);
             maxXY = TilePosToGridPos(maxXY, newLowerBounds);
-            
-            // if (!globalGridData.IsInBounds(start.x, start.y) || !globalGridData.IsInBounds(end.x, end.y)) {
-            //
-            //     Vector2Int from = new Vector2Int(
-            //         Mathf.Min(start.x, end.x, (int) Mathf.Floor(globalGridData.OriginPosition.x)),
-            //         Mathf.Min(start.y, end.y, (int) Mathf.Floor(globalGridData.OriginPosition.y))
-            //     );
-            //
-            //     Vector2Int to = new Vector2Int(
-            //         Mathf.Max(start.x, end.x, globalGridData.Width),
-            //         Mathf.Max(start.y, end.y, globalGridData.Height)
-            //     );
-            //     
-            //     IncreaseGrid(from, to);
-            //     
-            //     minXY.x += Math.Abs(from.x);
-            //     minXY.y += Math.Abs(from.y);
-            //     maxXY.x += Math.Abs(from.x);
-            //     maxXY.y += Math.Abs(from.y);
-            // }
             
             foreach (var tileGrid in gridContainer.tileGrids) {
                 for (int x = minXY.x; x <= maxXY.x; x++) {
