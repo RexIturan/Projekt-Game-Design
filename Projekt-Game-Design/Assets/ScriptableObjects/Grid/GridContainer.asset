@@ -13,13 +13,8 @@ MonoBehaviour:
   m_Name: GridContainer
   m_EditorClassIdentifier: 
   tileGrids:
-  - width: 11
-    height: 12
+  - width: 117
+    height: 285
     cellSize: 1
-    originPosition: {x: 0, y: 0, z: 0}
-    debugTextParent: {fileID: 0}
-  - width: 11
-    height: 12
-    cellSize: 1
-    originPosition: {x: 0, y: 0, z: 0}
+    originPosition: {x: -18, y: 0, z: -4}
     debugTextParent: {fileID: 0}

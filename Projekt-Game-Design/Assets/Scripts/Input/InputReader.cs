@@ -1,4 +1,5 @@
 ﻿using System;
+using Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -8,7 +9,11 @@ namespace Input {
     public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions, GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions {
         
         [Header("Sending Events On")]
-        [SerializeField] private VoidEventChannelSO ToggleMenuChannel;
+        [SerializeField] private BoolEventChannelSO visibilityMenu;
+        
+        [Header("Receiving Events On")]
+        [SerializeField] private VoidEventChannelSO enableMenuInput;
+        [SerializeField] private VoidEventChannelSO enableGamplayInput;
         
         // Gameplay
         public event UnityAction inventoryEvent = delegate { };
@@ -31,6 +36,10 @@ namespace Input {
         private GameInput gameInput;
 
         private void OnEnable() {
+
+            enableMenuInput.OnEventRaised += EnableMenuInput;
+            enableGamplayInput.OnEventRaised += EnableGameplayInput;
+            
             if (gameInput == null) {
                 gameInput = new GameInput();
                 gameInput.Gameplay.SetCallbacks(this);
@@ -72,8 +81,8 @@ namespace Input {
         public void EnableMenuInput()
         {
             gameInput.Gameplay.Disable();
-            gameInput.PathfindingDebug.Disable();
             gameInput.Camera.Disable();
+            gameInput.PathfindingDebug.Disable();
             
             gameInput.Menu.Enable();
         }
@@ -95,8 +104,11 @@ namespace Input {
         }
 
         public void OnMenu(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed)
-                ToggleMenuChannel.RaiseEvent();
+
+            if (context.phase == InputActionPhase.Performed) {
+                Debug.Log("onMenu");
+                visibilityMenu.RaiseEvent(true);
+            }
         }
 
         public void OnInventory(InputAction.CallbackContext context) {
@@ -129,6 +141,11 @@ namespace Input {
         }
 
         public void OnCancel(InputAction.CallbackContext context) {
+            // TODO menuCancelEvent
+            if (context.phase == InputActionPhase.Performed) {
+                Debug.Log("onCancel");
+                visibilityMenu.RaiseEvent(false);
+            }
         }
 
         #endregion

@@ -26,7 +26,9 @@ namespace Util {
             this.debug = debug;
             this.diagonal = diagonal; 
             int cellSize = 1;
-            grid = new GenericGrid<PathNode>(width, height, cellSize, Vector3.zero, (GenericGrid<PathNode> g, int x, int y) => new PathNode(g, x, y, true), debug);
+            // TODO get grid from GraphContainer
+            // TODO remove
+            grid = new GenericGrid<PathNode>(width, height, cellSize, Vector3.zero, (GenericGrid<PathNode> g, int x, int y) => new PathNode(g, x, y), debug);
         }
 
         /*Calculate list of all reachable nodes from start node using dijkstra

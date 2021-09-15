@@ -35,15 +35,14 @@ namespace Util {
         public bool isWalkable;
         public PathNode parentNode;
         
-        public PathNode(GenericGrid<PathNode> grid, int x, int y, bool diagonal) {
+        public PathNode(GenericGrid<PathNode> grid, int x, int y) {
             this.grid = grid;
             this.x = x;
             this.y = y;
             isWalkable = true;
-            SetEdges(diagonal);
         }
 
-        private void SetEdges(bool diagonal)
+        public void SetEdges(bool diagonal)
         {
             Edges = new List<Edge>();
 

@@ -209,7 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20445f88bf8c6524b945ae9b716e278d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToggleMenuChannel: {fileID: 11400000, guid: c6f28497065e4cf40863c77ce3f690bd, type: 2}
+  VisibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
+  enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
 --- !u!1 &364317467
 GameObject:
   m_ObjectHideFlags: 0

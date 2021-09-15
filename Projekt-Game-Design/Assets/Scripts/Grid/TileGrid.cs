@@ -11,7 +11,7 @@ namespace Grid {
             int height,
             float cellSize,
             Vector3 originPosition,
-            bool showDebug,
+            bool showDebug = false,
             Transform debugTextParent = null) :
             base(
                 width,

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -11,10 +12,13 @@ public class OverlayUIController : MonoBehaviour
     private VisualElement overlayContainer;
     private VisualElement ingameMenuContainer;
 
-    private bool menuOpen;
     
     [Header("Receiving Events On")]
-    [SerializeField] private VoidEventChannelSO ToggleMenuChannel;
+    [SerializeField] private BoolEventChannelSO VisibilityMenuEventChannel;
+    
+    [Header("Sending Events On")]
+    [SerializeField] private VoidEventChannelSO enableMenuInput;
+    [SerializeField] private VoidEventChannelSO enableGamplayInput;
     
     // Start is called before the first frame update
     void Start()
@@ -33,7 +37,7 @@ public class OverlayUIController : MonoBehaviour
     }
 
     private void Awake() {
-        ToggleMenuChannel.OnEventRaised += ToggleMenu;
+        VisibilityMenuEventChannel.OnEventRaised += SetMenuVisibility;
     }
 
     void MainMenuButtonPressed()
@@ -43,27 +47,30 @@ public class OverlayUIController : MonoBehaviour
     }
 
     // TODO Refactor
-    void ToggleMenu() {
-        if (menuOpen) {
-            HideMenu();
+    void SetMenuVisibility(bool value) {
+        
+        Debug.Log(value);
+        
+        if (value) {
+            ShowMenu();
         }
         else {
-            ShowMenu();
+            HideMenu();
         }
     }
     
     void ShowMenu()
     {
+        enableMenuInput.RaiseEvent();
         // Einstellungen ausblenden und Menü zeigen
-        menuOpen = true;
         ingameMenuContainer.style.display = DisplayStyle.Flex;
         overlayContainer.style.display = DisplayStyle.None;
     }
     
     void HideMenu()
     {
+        enableGamplayInput.RaiseEvent();
         // Einstellungen ausblenden und Menü zeigen
-        menuOpen = false;
         overlayContainer.style.display = DisplayStyle.Flex;
         ingameMenuContainer.style.display = DisplayStyle.None;
     }

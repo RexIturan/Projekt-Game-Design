@@ -8,7 +8,7 @@ namespace Graph {
         
         public NodeGraph(
                 int width, int height, 
-                float cellSize, Vector3 originPosition, 
+                float cellSize, Vector3 originPosition,
                 bool showDebug = false, 
                 Transform debugTextParent = null) : 
             base(

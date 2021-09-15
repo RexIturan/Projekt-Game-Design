@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Input;
+using UnityEditor;
 using UnityEngine;
 using Visual;
 
@@ -15,7 +16,7 @@ namespace Grid {
 
         public void OnEnable() {
             globalGridData.InitValues(defaultGridData);
-
+            
             gridContainer.tileGrids = new List<TileGrid>();
             gridContainer.tileGrids.Add(CreateNewTileGrid());
             FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[0]);

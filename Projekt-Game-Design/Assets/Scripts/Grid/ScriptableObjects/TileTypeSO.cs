@@ -11,5 +11,8 @@ namespace Grid {
 
 
         public string Name => name;
+        public ETileFlags Flags => flags;
+        public int MovementCost => movementCost;
+        public Color Color => color;
     }
 }
