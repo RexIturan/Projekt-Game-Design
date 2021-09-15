@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using VisualDebug;
@@ -25,8 +26,72 @@ namespace Util {
             this.debug = debug;
             this.diagonal = diagonal; 
             int cellSize = 1;
-            grid = new GenericGrid<PathNode>(width, height, cellSize, Vector3.zero, (GenericGrid<PathNode> g, int x, int y) => new PathNode(g, x, y), debug);
+            grid = new GenericGrid<PathNode>(width, height, cellSize, Vector3.zero, (GenericGrid<PathNode> g, int x, int y) => new PathNode(g, x, y, true), debug);
         }
+
+        /*Calculate list of all reachable nodes from start node using dijkstra
+         maxDist is maximum movement distance
+         returns list of all reachable nodes*/
+        public List<PathNode> GetReachableNodes(int startX, int startY, int maxDist)
+        {
+            var startNode = grid.GetGridObject(startX, startY);
+
+            //used to compare nodes by their distance from start node
+            IComparer<PathNode> nodeComparer = new CompareNodeDist(); 
+            
+            List<PathNode> activeNodes = new List<PathNode>();
+            
+            List<PathNode> closedNodes = new List<PathNode>();
+
+            for (int x = 0; x < grid.Width; x++) {
+                for (int y = 0; y < grid.Height; y++) {
+                    PathNode pathNode = grid.GetGridObject(x, y);
+                    pathNode.dist = int.MaxValue;
+                    pathNode.parentNode = null;
+                }
+            }
+
+            startNode.dist = 0;
+            
+            activeNodes.Add(startNode);
+
+            while (activeNodes.Any())
+            {
+                //list of active nodes is sorted by distance -> always handle first list element next
+                var currentNode = activeNodes.First();
+                activeNodes.RemoveAt(0);
+                closedNodes.Add(currentNode);
+
+                foreach (var edge in currentNode.Edges)
+                {
+                    if (!closedNodes.Contains(edge.Target) && currentNode.dist + edge.Cost <= maxDist)
+                    {
+                        if (currentNode.dist + edge.Cost < edge.Target.dist)
+                        {
+                            edge.Target.dist = currentNode.dist + edge.Cost;
+                            edge.Target.parentNode = currentNode;
+                        }
+
+                        if (!activeNodes.Contains(edge.Target))
+                        {
+                            //get index for insertion
+                            var index = activeNodes.BinarySearch(edge.Target, nodeComparer);
+                            //if there is no exact match index is set to the binary complement of the index of the next element (invert to get index for insertion)
+                            if (index < 0) index = ~index; 
+                            activeNodes.Insert(index, edge.Target);
+                            
+                            //activeNodes.Add(edge.Target);
+                            //activeNodes = activeNodes.OrderBy(x => x.dist).ToList();
+                        }
+                        
+                    }
+                }
+            }
+
+            return closedNodes;
+
+        }
+        
 
         public List<PathNode> FindPath(int startX, int startY, int endX, int endY, bool ignoreIsWalkable = false) {
             var startNode = grid.GetGridObject(startX, startY);
@@ -68,22 +133,22 @@ namespace Util {
                 openList.Remove(currentNode);
                 closedList.Add(currentNode);
 
-                foreach (PathNode neighbourNode in GetNeighbourList(currentNode)) {
-                    if(closedList.Contains(neighbourNode)) continue;
-                    if (!neighbourNode.isWalkable && !ignoreIsWalkable) {
-                        closedList.Add(neighbourNode);
+                foreach (var edge in currentNode.Edges) {
+                    if(closedList.Contains(edge.Target)) continue;
+                    if (!edge.Target.isWalkable && !ignoreIsWalkable) {
+                        closedList.Add(edge.Target);
                         continue;
                     }
                     
-                    int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
-                    if (tentativeGCost < neighbourNode.gCost) {
-                        neighbourNode.parentNode = currentNode;
-                        neighbourNode.gCost = tentativeGCost;
-                        neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
-                        neighbourNode.CalculateFCost();
+                    int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, edge.Target);
+                    if (tentativeGCost < edge.Target.gCost) {
+                        edge.Target.parentNode = currentNode;
+                        edge.Target.gCost = tentativeGCost;
+                        edge.Target.hCost = CalculateDistanceCost(edge.Target, endNode);
+                        edge.Target.CalculateFCost();
 
-                        if (!openList.Contains(neighbourNode)) {
-                            openList.Add(neighbourNode);
+                        if (!openList.Contains(edge.Target)) {
+                            openList.Add(edge.Target);
                         }
                     }
 
@@ -97,39 +162,6 @@ namespace Util {
             return null;
         }
 
-        private List<PathNode> GetNeighbourList(PathNode currentNode) {
-            List<PathNode> neighbourList = new List<PathNode>();
-
-            if (currentNode.x - 1 >= 0) {
-                // Left
-                neighbourList.Add(grid.GetGridObject(currentNode.x -1, currentNode.y));
-                if (diagonal) {
-                    // Left Down
-                    if(currentNode.y - 1 >= 0) neighbourList.Add(grid.GetGridObject(currentNode.x -1, currentNode.y -1));
-                    // Left Up
-                    if(currentNode.y + 1 < grid.Height) neighbourList.Add(grid.GetGridObject(currentNode.x -1, currentNode.y +1));    
-                }
-            }
-
-            if (currentNode.x + 1 < grid.Width) {
-                // Right
-                neighbourList.Add(grid.GetGridObject(currentNode.x +1, currentNode.y));
-                if (diagonal) {
-                    // Right Down
-                    if(currentNode.y - 1 >= 0) neighbourList.Add(grid.GetGridObject(currentNode.x +1, currentNode.y -1));
-                    // Right Up
-                    if(currentNode.y + 1 < grid.Height) neighbourList.Add(grid.GetGridObject(currentNode.x +1, currentNode.y +1));    
-                }
-            }
-            
-            // Down
-            if(currentNode.y - 1 >= 0) neighbourList.Add(grid.GetGridObject(currentNode.x, currentNode.y -1));
-            // Up
-            if(currentNode.y + 1 < grid.Height) neighbourList.Add(grid.GetGridObject(currentNode.x, currentNode.y +1));
-
-            return neighbourList;
-        }
-        
         private List<PathNode> CalculatePath(PathNode endNode) {
             List<PathNode> path = new List<PathNode>();
             path.Add(endNode);
