@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20445f88bf8c6524b945ae9b716e278d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ToggleMenuChannel: {fileID: 11400000, guid: c6f28497065e4cf40863c77ce3f690bd, type: 2}
 --- !u!1 &364317467
 GameObject:
   m_ObjectHideFlags: 0

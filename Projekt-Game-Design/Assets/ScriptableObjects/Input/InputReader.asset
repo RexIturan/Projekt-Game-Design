@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a176189cfeaed4283280e44af42626, type: 3}
   m_Name: InputReader
   m_EditorClassIdentifier: 
+  ToggleMenuChannel: {fileID: 11400000, guid: c6f28497065e4cf40863c77ce3f690bd, type: 2}
