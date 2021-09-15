@@ -198,4 +198,6 @@ MonoBehaviour:
   newPosition: {x: 0, y: 0, z: 0}
   panSpeed: 20
   panBorderThickness: 20
+  minZoom: 5
+  maxZoom: 50
   cameraTransform: {fileID: 8446284169067511301}

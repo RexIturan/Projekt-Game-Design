@@ -19,22 +19,6 @@ public class @GameInput : IInputActionCollection, IDisposable
             ""id"": ""07f865f9-38b2-424c-bfe1-3394bfb08082"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""Button"",
-                    ""id"": ""f10882d4-285f-403b-b17d-3c3509f139a7"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Attack"",
-                    ""type"": ""Button"",
-                    ""id"": ""fe7a4f19-0a80-448f-b076-d7434c368937"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""EndTurn"",
                     ""type"": ""Button"",
                     ""id"": ""825ce0d1-114c-4564-9671-dc645969826f"",
@@ -43,26 +27,18 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""MoveCamera"",
-                    ""type"": ""Value"",
-                    ""id"": ""d649e314-c374-4af6-ae02-ffa371e3508a"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""48f4cc51-a887-4d95-91a7-06ac7e6ba9bf"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""RotateCamera"",
-                    ""type"": ""Value"",
-                    ""id"": ""13f8e005-acc6-40df-92b0-5321a495a27b"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""CameraZoom"",
-                    ""type"": ""Value"",
-                    ""id"": ""f50b918f-1c6a-4a38-a73d-2484b5c8388a"",
-                    ""expectedControlType"": ""Analog"",
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e4f0dcd-fe27-4e31-ad34-9499e7178129"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -71,7 +47,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3062a1a8-5206-4d4d-80dd-89ce71442b29"",
-                    ""path"": ""<Keyboard>/backspace"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -80,8 +56,89 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""32c76346-c7d3-4e62-b104-49cd90939443"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c04ae54-3679-4ff9-ac7e-5bbae7ec961a"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""LevelEditor"",
+            ""id"": ""77b5a28f-4e02-4f05-a574-7e0e70b9d0c3"",
+            ""actions"": [
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bb9c08c-2e56-4670-86d2-63c22c675bbc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e0138707-1d43-4983-b9a7-de2246f43e69"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""28e447a9-eb7b-4d6b-b247-61b5deb02770"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveCamera"",
+                    ""type"": ""Value"",
+                    ""id"": ""41b0a211-6820-488c-b449-34aa8052fc41"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RotateCamera"",
+                    ""type"": ""Value"",
+                    ""id"": ""1c373801-4d69-4ee0-9273-5a66f669673c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""CameraZoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""a08026b2-a359-4f99-bceb-a90f70c360d5"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
                     ""name"": ""WASD"",
-                    ""id"": ""464de67a-c898-49e4-a367-d65fc26b4869"",
+                    ""id"": ""273595d3-cd0d-408e-aeeb-8b4e1a2bdb4d"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -92,7 +149,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""c9733920-1094-4fef-8aa8-7ac73fd0e334"",
+                    ""id"": ""166bc457-7275-4b86-8f21-02c3cb0d42a7"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -103,7 +160,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""7b637a95-553c-49e0-bfeb-39a31b1b9bfa"",
+                    ""id"": ""8cebb3ed-a5ac-4311-933a-31a1bf4c2df8"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -114,7 +171,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""36333ee5-9a83-47cd-9bc4-2a4598bdc7d8"",
+                    ""id"": ""43d72826-51d5-4d3c-b349-f5ca49e82683"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -125,7 +182,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""c8e2d29e-19ef-4dbf-912a-91b21277fe89"",
+                    ""id"": ""eb2d000d-2991-4f6e-8d04-9e43a52d743a"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -136,7 +193,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Arrow Keys"",
-                    ""id"": ""713fd03d-05a4-4ef8-9c74-6f34e8e2326a"",
+                    ""id"": ""8e2bc341-e449-4cbc-9612-946dd70c7446"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -147,7 +204,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""d2a95479-cadd-466d-acdb-73bb97802b6a"",
+                    ""id"": ""1f241b5c-3c7a-4aa6-a7ae-f8f8213a9b53"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -158,7 +215,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""65477704-de9a-49ce-a587-7637997609d3"",
+                    ""id"": ""014e809a-3234-46e1-b3be-58862c0e91c3"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -169,7 +226,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""7cb38e78-3fd3-49e0-8533-c53f36aa1bc8"",
+                    ""id"": ""be1d2b16-ab70-412b-847f-747ad7db6980"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -180,7 +237,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""a5ac4e58-fdd1-4de7-b86a-7ff228dfd6d5"",
+                    ""id"": ""1593e5f5-ebf1-48b3-8c24-c1f7155d07ea"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -191,29 +248,18 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cd80770b-66e6-419e-864c-6e2a8f9e1c15"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""id"": ""5457a222-7899-42c5-9e5c-3d567827ee8e"",
+                    ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""76df6f2c-507a-45c5-9f11-ec94b132c7ae"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
+                    ""groups"": """",
+                    ""action"": ""CameraZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""Keyboard Rotate"",
-                    ""id"": ""3d446732-053a-4fe2-9f06-822fef6d233a"",
+                    ""id"": ""19a4f58b-0bbf-46da-b791-b8be0cc30415"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -224,7 +270,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""83397223-5317-40f8-8f6a-bed3b5d71a70"",
+                    ""id"": ""4ee5937f-cd9d-47be-b4f7-5f64e364ceb0"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -235,7 +281,7 @@ public class @GameInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""1eebf7d3-65b2-4214-9fe6-91430a086aa3"",
+                    ""id"": ""fcd119fe-0c94-458e-9cd2-ac77808352d2"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -243,22 +289,11 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""action"": ""RotateCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ec20c905-f35c-45f4-b78e-79aca8c3940b"",
-                    ""path"": ""<Mouse>/scroll/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CameraZoom"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""Menus"",
+            ""name"": ""Menu"",
             ""id"": ""ac6aa3a3-1db6-457f-9c28-628797d76e35"",
             ""actions"": [
                 {
@@ -286,6 +321,17 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42abd253-e46f-4a01-bb05-f88d193cc47c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -367,71 +413,6 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Testing"",
-            ""id"": ""56fee88f-6e6b-4d7f-b8b8-927e4b579c36"",
-            ""actions"": [
-                {
-                    ""name"": ""LeftMouseClick"",
-                    ""type"": ""Button"",
-                    ""id"": ""2c4c4374-2587-47a4-abe2-d915f6870ba3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""RightMouseClick"",
-                    ""type"": ""Button"",
-                    ""id"": ""e95b1959-5bcc-48ac-8e4f-d461afe7da8e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""MousePosition"",
-                    ""type"": ""Value"",
-                    ""id"": ""01071471-7770-452d-9bee-984edfd82d0f"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""c2781c1d-122b-4da7-a22f-07852dc86601"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MousePosition"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""57dd5027-aa3b-4e47-9292-f27a9d6b60a7"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LeftMouseClick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2ed9f208-da19-4dd8-9e6c-94a3dfb342ea"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RightMouseClick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -444,26 +425,26 @@ public class @GameInput : IInputActionCollection, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
-        m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_EndTurn = m_Gameplay.FindAction("EndTurn", throwIfNotFound: true);
-        m_Gameplay_MoveCamera = m_Gameplay.FindAction("MoveCamera", throwIfNotFound: true);
-        m_Gameplay_RotateCamera = m_Gameplay.FindAction("RotateCamera", throwIfNotFound: true);
-        m_Gameplay_CameraZoom = m_Gameplay.FindAction("CameraZoom", throwIfNotFound: true);
-        // Menus
-        m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
-        m_Menus_Confirm = m_Menus.FindAction("Confirm", throwIfNotFound: true);
-        m_Menus_Cancel = m_Menus.FindAction("Cancel", throwIfNotFound: true);
+        m_Gameplay_Menu = m_Gameplay.FindAction("Menu", throwIfNotFound: true);
+        m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
+        // LevelEditor
+        m_LevelEditor = asset.FindActionMap("LevelEditor", throwIfNotFound: true);
+        m_LevelEditor_Menu = m_LevelEditor.FindAction("Menu", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_MoveCamera = m_Camera.FindAction("MoveCamera", throwIfNotFound: true);
+        m_Camera_RotateCamera = m_Camera.FindAction("RotateCamera", throwIfNotFound: true);
+        m_Camera_CameraZoom = m_Camera.FindAction("CameraZoom", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Confirm = m_Menu.FindAction("Confirm", throwIfNotFound: true);
+        m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
         // Pathfinding Debug
         m_PathfindingDebug = asset.FindActionMap("Pathfinding Debug", throwIfNotFound: true);
         m_PathfindingDebug_Toggle = m_PathfindingDebug.FindAction("Toggle", throwIfNotFound: true);
         m_PathfindingDebug_Step = m_PathfindingDebug.FindAction("Step", throwIfNotFound: true);
         m_PathfindingDebug_ShowCompletePath = m_PathfindingDebug.FindAction("ShowCompletePath", throwIfNotFound: true);
-        // Testing
-        m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
-        m_Testing_LeftMouseClick = m_Testing.FindAction("LeftMouseClick", throwIfNotFound: true);
-        m_Testing_RightMouseClick = m_Testing.FindAction("RightMouseClick", throwIfNotFound: true);
-        m_Testing_MousePosition = m_Testing.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -513,22 +494,16 @@ public class @GameInput : IInputActionCollection, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
-    private readonly InputAction m_Gameplay_Move;
-    private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_EndTurn;
-    private readonly InputAction m_Gameplay_MoveCamera;
-    private readonly InputAction m_Gameplay_RotateCamera;
-    private readonly InputAction m_Gameplay_CameraZoom;
+    private readonly InputAction m_Gameplay_Menu;
+    private readonly InputAction m_Gameplay_Inventory;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
         public GameplayActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Gameplay_Move;
-        public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @EndTurn => m_Wrapper.m_Gameplay_EndTurn;
-        public InputAction @MoveCamera => m_Wrapper.m_Gameplay_MoveCamera;
-        public InputAction @RotateCamera => m_Wrapper.m_Gameplay_RotateCamera;
-        public InputAction @CameraZoom => m_Wrapper.m_Gameplay_CameraZoom;
+        public InputAction @Menu => m_Wrapper.m_Gameplay_Menu;
+        public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -538,37 +513,101 @@ public class @GameInput : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Attack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAttack;
                 @EndTurn.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEndTurn;
                 @EndTurn.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEndTurn;
                 @EndTurn.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEndTurn;
-                @MoveCamera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveCamera;
-                @MoveCamera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveCamera;
-                @MoveCamera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveCamera;
-                @RotateCamera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotateCamera;
-                @RotateCamera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotateCamera;
-                @RotateCamera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotateCamera;
-                @CameraZoom.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraZoom;
-                @CameraZoom.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraZoom;
-                @CameraZoom.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraZoom;
+                @Menu.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
+                @Inventory.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
                 @EndTurn.started += instance.OnEndTurn;
                 @EndTurn.performed += instance.OnEndTurn;
                 @EndTurn.canceled += instance.OnEndTurn;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+            }
+        }
+    }
+    public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // LevelEditor
+    private readonly InputActionMap m_LevelEditor;
+    private ILevelEditorActions m_LevelEditorActionsCallbackInterface;
+    private readonly InputAction m_LevelEditor_Menu;
+    public struct LevelEditorActions
+    {
+        private @GameInput m_Wrapper;
+        public LevelEditorActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Menu => m_Wrapper.m_LevelEditor_Menu;
+        public InputActionMap Get() { return m_Wrapper.m_LevelEditor; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LevelEditorActions set) { return set.Get(); }
+        public void SetCallbacks(ILevelEditorActions instance)
+        {
+            if (m_Wrapper.m_LevelEditorActionsCallbackInterface != null)
+            {
+                @Menu.started -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnMenu;
+            }
+            m_Wrapper.m_LevelEditorActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
+            }
+        }
+    }
+    public LevelEditorActions @LevelEditor => new LevelEditorActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private ICameraActions m_CameraActionsCallbackInterface;
+    private readonly InputAction m_Camera_MoveCamera;
+    private readonly InputAction m_Camera_RotateCamera;
+    private readonly InputAction m_Camera_CameraZoom;
+    public struct CameraActions
+    {
+        private @GameInput m_Wrapper;
+        public CameraActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveCamera => m_Wrapper.m_Camera_MoveCamera;
+        public InputAction @RotateCamera => m_Wrapper.m_Camera_RotateCamera;
+        public InputAction @CameraZoom => m_Wrapper.m_Camera_CameraZoom;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void SetCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
+            {
+                @MoveCamera.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveCamera;
+                @MoveCamera.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveCamera;
+                @MoveCamera.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveCamera;
+                @RotateCamera.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateCamera;
+                @RotateCamera.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateCamera;
+                @RotateCamera.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateCamera;
+                @CameraZoom.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraZoom;
+                @CameraZoom.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraZoom;
+                @CameraZoom.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraZoom;
+            }
+            m_Wrapper.m_CameraActionsCallbackInterface = instance;
+            if (instance != null)
+            {
                 @MoveCamera.started += instance.OnMoveCamera;
                 @MoveCamera.performed += instance.OnMoveCamera;
                 @MoveCamera.canceled += instance.OnMoveCamera;
@@ -581,36 +620,36 @@ public class @GameInput : IInputActionCollection, IDisposable
             }
         }
     }
-    public GameplayActions @Gameplay => new GameplayActions(this);
+    public CameraActions @Camera => new CameraActions(this);
 
-    // Menus
-    private readonly InputActionMap m_Menus;
-    private IMenusActions m_MenusActionsCallbackInterface;
-    private readonly InputAction m_Menus_Confirm;
-    private readonly InputAction m_Menus_Cancel;
-    public struct MenusActions
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_Confirm;
+    private readonly InputAction m_Menu_Cancel;
+    public struct MenuActions
     {
         private @GameInput m_Wrapper;
-        public MenusActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Confirm => m_Wrapper.m_Menus_Confirm;
-        public InputAction @Cancel => m_Wrapper.m_Menus_Cancel;
-        public InputActionMap Get() { return m_Wrapper.m_Menus; }
+        public MenuActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Confirm => m_Wrapper.m_Menu_Confirm;
+        public InputAction @Cancel => m_Wrapper.m_Menu_Cancel;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MenusActions set) { return set.Get(); }
-        public void SetCallbacks(IMenusActions instance)
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
         {
-            if (m_Wrapper.m_MenusActionsCallbackInterface != null)
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
             {
-                @Confirm.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnConfirm;
-                @Confirm.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnConfirm;
-                @Confirm.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnConfirm;
-                @Cancel.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnCancel;
-                @Cancel.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnCancel;
-                @Cancel.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnCancel;
+                @Confirm.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnConfirm;
+                @Cancel.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
             }
-            m_Wrapper.m_MenusActionsCallbackInterface = instance;
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Confirm.started += instance.OnConfirm;
@@ -622,7 +661,7 @@ public class @GameInput : IInputActionCollection, IDisposable
             }
         }
     }
-    public MenusActions @Menus => new MenusActions(this);
+    public MenuActions @Menu => new MenuActions(this);
 
     // Pathfinding Debug
     private readonly InputActionMap m_PathfindingDebug;
@@ -672,55 +711,6 @@ public class @GameInput : IInputActionCollection, IDisposable
         }
     }
     public PathfindingDebugActions @PathfindingDebug => new PathfindingDebugActions(this);
-
-    // Testing
-    private readonly InputActionMap m_Testing;
-    private ITestingActions m_TestingActionsCallbackInterface;
-    private readonly InputAction m_Testing_LeftMouseClick;
-    private readonly InputAction m_Testing_RightMouseClick;
-    private readonly InputAction m_Testing_MousePosition;
-    public struct TestingActions
-    {
-        private @GameInput m_Wrapper;
-        public TestingActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @LeftMouseClick => m_Wrapper.m_Testing_LeftMouseClick;
-        public InputAction @RightMouseClick => m_Wrapper.m_Testing_RightMouseClick;
-        public InputAction @MousePosition => m_Wrapper.m_Testing_MousePosition;
-        public InputActionMap Get() { return m_Wrapper.m_Testing; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(TestingActions set) { return set.Get(); }
-        public void SetCallbacks(ITestingActions instance)
-        {
-            if (m_Wrapper.m_TestingActionsCallbackInterface != null)
-            {
-                @LeftMouseClick.started -= m_Wrapper.m_TestingActionsCallbackInterface.OnLeftMouseClick;
-                @LeftMouseClick.performed -= m_Wrapper.m_TestingActionsCallbackInterface.OnLeftMouseClick;
-                @LeftMouseClick.canceled -= m_Wrapper.m_TestingActionsCallbackInterface.OnLeftMouseClick;
-                @RightMouseClick.started -= m_Wrapper.m_TestingActionsCallbackInterface.OnRightMouseClick;
-                @RightMouseClick.performed -= m_Wrapper.m_TestingActionsCallbackInterface.OnRightMouseClick;
-                @RightMouseClick.canceled -= m_Wrapper.m_TestingActionsCallbackInterface.OnRightMouseClick;
-                @MousePosition.started -= m_Wrapper.m_TestingActionsCallbackInterface.OnMousePosition;
-                @MousePosition.performed -= m_Wrapper.m_TestingActionsCallbackInterface.OnMousePosition;
-                @MousePosition.canceled -= m_Wrapper.m_TestingActionsCallbackInterface.OnMousePosition;
-            }
-            m_Wrapper.m_TestingActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @LeftMouseClick.started += instance.OnLeftMouseClick;
-                @LeftMouseClick.performed += instance.OnLeftMouseClick;
-                @LeftMouseClick.canceled += instance.OnLeftMouseClick;
-                @RightMouseClick.started += instance.OnRightMouseClick;
-                @RightMouseClick.performed += instance.OnRightMouseClick;
-                @RightMouseClick.canceled += instance.OnRightMouseClick;
-                @MousePosition.started += instance.OnMousePosition;
-                @MousePosition.performed += instance.OnMousePosition;
-                @MousePosition.canceled += instance.OnMousePosition;
-            }
-        }
-    }
-    public TestingActions @Testing => new TestingActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -732,14 +722,21 @@ public class @GameInput : IInputActionCollection, IDisposable
     }
     public interface IGameplayActions
     {
-        void OnMove(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
         void OnEndTurn(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+    }
+    public interface ILevelEditorActions
+    {
+        void OnMenu(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
         void OnMoveCamera(InputAction.CallbackContext context);
         void OnRotateCamera(InputAction.CallbackContext context);
         void OnCameraZoom(InputAction.CallbackContext context);
     }
-    public interface IMenusActions
+    public interface IMenuActions
     {
         void OnConfirm(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
@@ -749,11 +746,5 @@ public class @GameInput : IInputActionCollection, IDisposable
         void OnToggle(InputAction.CallbackContext context);
         void OnStep(InputAction.CallbackContext context);
         void OnShowCompletePath(InputAction.CallbackContext context);
-    }
-    public interface ITestingActions
-    {
-        void OnLeftMouseClick(InputAction.CallbackContext context);
-        void OnRightMouseClick(InputAction.CallbackContext context);
-        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

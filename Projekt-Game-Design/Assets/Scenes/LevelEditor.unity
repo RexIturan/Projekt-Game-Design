@@ -637,7 +637,7 @@ MonoBehaviour:
   - tileType: {fileID: 11400000, guid: 353c6e4f6e21d804da9b81d38eb3d86f, type: 2}
     tile: {fileID: 11400000, guid: 7be3b7d63c6cb09409d1d2cfd35d30aa, type: 2}
   cursor: {fileID: 11400000, guid: 5df0112f3270e7640928005d77d9db4e, type: 2}
-  erroeTile: {fileID: 11400000, guid: a207a9ddce05b9149be37688adec5bd3, type: 2}
+  errorTile: {fileID: 0}
 --- !u!1 &1470655165
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21c074d86024caca2a0034ce4f53f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 968252f25af29bd4eafbafffb881d804, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: e23928201c411004b837e5d6c951d062, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 4affee0ef5c5fb94185dabe62e02303b, type: 3}
   m_SortingOrder: 0

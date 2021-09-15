@@ -5,32 +5,38 @@ using UnityEngine.InputSystem;
 
 namespace Input {
     [CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader", order = 0)]
-    public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenusActions, GameInput.ITestingActions, GameInput.IPathfindingDebugActions {
+    public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions, GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions {
+        
+        [Header("Sending Events On")]
+        [SerializeField] private VoidEventChannelSO ToggleMenuChannel;
         
         // Gameplay
-        public event UnityAction attackEvent = delegate { };
-        public event UnityAction pauseEvent = delegate { };
+        public event UnityAction inventoryEvent = delegate { };
+        public event UnityAction menuEvent = delegate { };
         public event UnityAction endTurnEvent = delegate { };
-        public event UnityAction<Vector2> moveEvent = delegate { };
+        
+        //Camera 
         public event UnityAction<Vector2, bool> cameraMoveEvent = delegate {  };
         public event UnityAction<float> cameraRotateEvent = delegate {  };
         public event UnityAction<float> cameraZoomEvent = delegate {  };
 
+        // Mouse Testing
         public event UnityAction leftClickEvent = delegate { };
         public event UnityAction rightClickEvent = delegate { };
-        
+
+        //Pathfinding Debug
         public event UnityAction stepEvent = delegate { };
         public event UnityAction showFullPathEvent = delegate { };
         
-
         private GameInput gameInput;
 
         private void OnEnable() {
             if (gameInput == null) {
                 gameInput = new GameInput();
                 gameInput.Gameplay.SetCallbacks(this);
-                gameInput.Menus.SetCallbacks(this);
-                gameInput.Testing.SetCallbacks(this);
+                gameInput.Camera.SetCallbacks(this);
+                gameInput.Menu.SetCallbacks(this);
+                gameInput.LevelEditor.SetCallbacks(this);
                 gameInput.PathfindingDebug.SetCallbacks(this);
             }
             EnableGameplayInput();
@@ -40,14 +46,22 @@ namespace Input {
             DisableAllInput();
         }
         
+        public void EnableLevelEditorInput()
+        {
+            gameInput.Menu.Disable();
+            gameInput.PathfindingDebug.Enable();
+
+            gameInput.LevelEditor.Enable();
+            gameInput.Camera.Enable();
+        }
+        
         public void EnableGameplayInput()
         {
-            gameInput.Menus.Disable();
-            
+            gameInput.Menu.Disable();
             gameInput.PathfindingDebug.Enable();
-            gameInput.Testing.Enable();
 
             gameInput.Gameplay.Enable();
+            gameInput.Camera.Enable();
         }
         
         public void EnableDebugInput()
@@ -58,31 +72,40 @@ namespace Input {
         public void EnableMenuInput()
         {
             gameInput.Gameplay.Disable();
-            gameInput.Testing.Disable();
             gameInput.PathfindingDebug.Disable();
+            gameInput.Camera.Disable();
             
-            gameInput.Menus.Enable();
+            gameInput.Menu.Enable();
         }
         
         public void DisableAllInput()
         {
             gameInput.Gameplay.Disable();
-            gameInput.Menus.Disable();
-            gameInput.Testing.Disable();
+            gameInput.LevelEditor.Disable();
+            gameInput.Camera.Disable();
+            gameInput.Menu.Disable();
             gameInput.PathfindingDebug.Disable();
-            // gameInput.Gameplay.Disable();
         }
 
-        public void OnMove(InputAction.CallbackContext context) {
-        }
-
-        public void OnAttack(InputAction.CallbackContext context) {
-        }
-
+        #region Gameplay
+        
         public void OnEndTurn(InputAction.CallbackContext context) {
             if (context.phase == InputActionPhase.Performed)
                 endTurnEvent.Invoke();
         }
+
+        public void OnMenu(InputAction.CallbackContext context) {
+            if (context.phase == InputActionPhase.Performed)
+                ToggleMenuChannel.RaiseEvent();
+        }
+
+        public void OnInventory(InputAction.CallbackContext context) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Camera
 
         public void OnMoveCamera(InputAction.CallbackContext context) {
             // todo mouse input
@@ -98,24 +121,20 @@ namespace Input {
             cameraZoomEvent.Invoke(context.ReadValue<float>());
         }
 
+        #endregion
+
+        #region Menu
+
         public void OnConfirm(InputAction.CallbackContext context) {
         }
 
         public void OnCancel(InputAction.CallbackContext context) {
         }
 
-        public void OnLeftMouseClick(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed)
-                leftClickEvent.Invoke();
-        }
+        #endregion
 
-        public void OnRightMouseClick(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed)
-                rightClickEvent.Invoke();
-        }
+        #region Pathfinding
 
-        public void OnMousePosition(InputAction.CallbackContext context) {
-        }
 
         public void OnToggle(InputAction.CallbackContext context) {
         }
@@ -128,6 +147,22 @@ namespace Input {
         public void OnShowCompletePath(InputAction.CallbackContext context) {
             if (context.phase == InputActionPhase.Performed)
                 showFullPathEvent.Invoke();
+        }        
+
+        #endregion
+        
+        #region Mouse
+
+        public void OnLeftMouseClick(InputAction.CallbackContext context) {
+            if (context.phase == InputActionPhase.Performed)
+                leftClickEvent.Invoke();
         }
+
+        public void OnRightMouseClick(InputAction.CallbackContext context) {
+            if (context.phase == InputActionPhase.Performed)
+                rightClickEvent.Invoke();
+        }
+
+        #endregion
     }
 }
