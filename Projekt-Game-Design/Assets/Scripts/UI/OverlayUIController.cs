@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,11 @@ public class OverlayUIController : MonoBehaviour
     
     private VisualElement overlayContainer;
     private VisualElement ingameMenuContainer;
+
+    private bool menuOpen;
+    
+    [Header("Receiving Events On")]
+    [SerializeField] private VoidEventChannelSO ToggleMenuChannel;
     
     // Start is called before the first frame update
     void Start()
@@ -20,29 +26,44 @@ public class OverlayUIController : MonoBehaviour
         ingameMenuContainer = root.Q<VisualElement>("IngameMenu");
 
         ingameMenuContainer.Q<Button>("MainMenuButton").clicked += MainMenuButtonPressed;
-        overlayContainer.Q<Button>("IngameMenuButton").clicked += IngameMenuButtonPressed;
-        ingameMenuContainer.Q<Button>("ResumeButton").clicked += ResumeButtonPressed;
+        overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
+        ingameMenuContainer.Q<Button>("ResumeButton").clicked += HideMenu;
         ingameMenuContainer.Q<Button>("QuitButton").clicked += QuitGame;
 
     }
-    
-    
+
+    private void Awake() {
+        ToggleMenuChannel.OnEventRaised += ToggleMenu;
+    }
+
     void MainMenuButtonPressed()
     {
         // Szene laden
         SceneManager.LoadScene("MainMenu");
     }
+
+    // TODO Refactor
+    void ToggleMenu() {
+        if (menuOpen) {
+            HideMenu();
+        }
+        else {
+            ShowMenu();
+        }
+    }
     
-    void IngameMenuButtonPressed()
+    void ShowMenu()
     {
         // Einstellungen ausblenden und Menü zeigen
+        menuOpen = true;
         ingameMenuContainer.style.display = DisplayStyle.Flex;
         overlayContainer.style.display = DisplayStyle.None;
     }
     
-    void ResumeButtonPressed()
+    void HideMenu()
     {
         // Einstellungen ausblenden und Menü zeigen
+        menuOpen = false;
         overlayContainer.style.display = DisplayStyle.Flex;
         ingameMenuContainer.style.display = DisplayStyle.None;
     }

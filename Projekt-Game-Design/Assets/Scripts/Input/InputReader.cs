@@ -7,6 +7,9 @@ namespace Input {
     [CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader", order = 0)]
     public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions, GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions {
         
+        [Header("Sending Events On")]
+        [SerializeField] private VoidEventChannelSO ToggleMenuChannel;
+        
         // Gameplay
         public event UnityAction inventoryEvent = delegate { };
         public event UnityAction menuEvent = delegate { };
@@ -92,7 +95,8 @@ namespace Input {
         }
 
         public void OnMenu(InputAction.CallbackContext context) {
-            throw new NotImplementedException();
+            if (context.phase == InputActionPhase.Performed)
+                ToggleMenuChannel.RaiseEvent();
         }
 
         public void OnInventory(InputAction.CallbackContext context) {
