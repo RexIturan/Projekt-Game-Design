@@ -19,6 +19,12 @@ public class OverlayUIController : MonoBehaviour
     [Header("Sending Events On")]
     [SerializeField] private VoidEventChannelSO enableMenuInput;
     [SerializeField] private VoidEventChannelSO enableGamplayInput;
+
+
+    private enum screenContent
+    {
+        NONE,LOAD_SCREEN, SAVE_SCREEN, SETTINGS_SCREEN
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -33,6 +39,9 @@ public class OverlayUIController : MonoBehaviour
         overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
         ingameMenuContainer.Q<Button>("ResumeButton").clicked += HideMenu;
         ingameMenuContainer.Q<Button>("QuitButton").clicked += QuitGame;
+        ingameMenuContainer.Q<Button>("SaveButton").clicked += ShowSaveScreen;
+        ingameMenuContainer.Q<Button>("OptionsButton").clicked += ShowOptionsScreen;
+        ingameMenuContainer.Q<Button>("LoadButton").clicked += ShowLoadScreen;
 
     }
 
@@ -75,9 +84,54 @@ public class OverlayUIController : MonoBehaviour
         ingameMenuContainer.style.display = DisplayStyle.None;
     }
     
+    void ShowSaveScreen()
+    {
+        ScreenContentManager(screenContent.SAVE_SCREEN);
+    }
+    
+    void ShowLoadScreen()
+    {
+        ScreenContentManager(screenContent.LOAD_SCREEN);
+    }
+    
+    void ShowOptionsScreen()
+    {
+        ScreenContentManager(screenContent.SETTINGS_SCREEN);
+    }
+
     void QuitGame()
     {
         // Spiel beenden
         Application.Quit();
+    }
+
+    void ScreenContentManager(screenContent screen)
+    {
+        // Einzelne Screens getten
+        VisualElement saveScreen = ingameMenuContainer.Q<VisualElement>("SaveScreen");
+        VisualElement loadScreen = ingameMenuContainer.Q<VisualElement>("LoadScreen");
+        VisualElement settingsScreen = ingameMenuContainer.Q<VisualElement>("SettingsContainer");
+
+        switch (screen)
+        {
+            case screenContent.LOAD_SCREEN:
+                loadScreen.style.display = DisplayStyle.Flex;
+                // Ausblenden aller anderen Screens
+                settingsScreen.style.display = DisplayStyle.None;
+                saveScreen.style.display = DisplayStyle.None;
+                break;
+            case screenContent.SAVE_SCREEN:
+                saveScreen.style.display = DisplayStyle.Flex;
+                // Ausblenden aller anderen Screens
+                settingsScreen.style.display = DisplayStyle.None;
+                loadScreen.style.display = DisplayStyle.None;
+                break;
+            case screenContent.SETTINGS_SCREEN:
+                settingsScreen.style.display = DisplayStyle.Flex;
+                // Ausblenden aller anderen Screens
+                saveScreen.style.display = DisplayStyle.None;
+                loadScreen.style.display = DisplayStyle.None;
+                break;
+        }
     }
 }

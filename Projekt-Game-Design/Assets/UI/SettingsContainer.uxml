@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center; background-image: url(&apos;/Assets/UI/Images/bg_menu.jpg&apos;); width: auto; height: auto;">
-        <ui:VisualElement name="settingsContainer" style="background-color: rgba(255, 255, 255, 0.27); height: 80%; width: 30%; border-top-left-radius: 30px; border-bottom-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; justify-content: center; align-items: center; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); display: flex;">
+    <Style src="Styles/Button_Layout.uss" />
+    <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center; background-image: none; width: auto; height: auto; background-color: rgba(0, 0, 0, 0.43);">
+        <ui:VisualElement name="settingsContainer" style="height: 80%; width: 35%; border-top-left-radius: 30px; border-bottom-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; justify-content: center; align-items: center; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); display: flex;">
             <ui:Label text="Settings" display-tooltip-when-elided="true" style="font-size: 31px; -unity-font-style: bold; color: rgb(255, 255, 255); position: relative; top: auto;" />
             <ui:VisualElement name="SoundSettingsContainer">
                 <ui:Label text="Sound" display-tooltip-when-elided="true" style="align-items: stretch; justify-content: flex-start; font-size: 25px; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-align: upper-center;" />

@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="IngameMenu" src="IngameMenu.uxml" />
-    <Style src="UI_Classes.uss" />
+    <Style src="Styles/UI_Classes.uss" />
     <ui:VisualElement name="OverlayContainer" style="flex-grow: 1; display: flex;">
         <ui:VisualElement name="LeftSidebar" style="flex-grow: 0; width: 20%; height: 100%; position: absolute; margin-left: 1%;">
             <ui:VisualElement name="PartyContainer" style="top: auto; height: 40%; -unity-slice-top: 0; margin-top: 30%; margin-left: 0; margin-right: 0; padding-top: 4%; background-color: rgba(26, 26, 26, 0.43); padding-left: 4%; padding-right: 4%; padding-bottom: 0;">
