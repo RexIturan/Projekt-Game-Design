@@ -6,6 +6,9 @@ using Util;
 namespace Grid {
     [System.Serializable]
     public class TileGrid : GenericGrid<Tile> {
+
+        [SerializeField] private Tile[] testTiles;
+
         public TileGrid(
             int width,
             int height,
@@ -20,7 +23,10 @@ namespace Grid {
                 originPosition,
                 (GenericGrid<Tile> g, int x, int y) => new Tile(g, x, y),
                 showDebug,
-                debugTextParent) { }
+                debugTextParent) {
+
+            testTiles = new Tile[width * height];
+        }
 
         public void CopyTo(TileGrid tileGrid, Vector2Int offset) {
             for (int x = 0; x < Width; x++) {

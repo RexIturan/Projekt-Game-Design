@@ -5,7 +5,7 @@ namespace Grid {
     [System.Serializable]
     public class Tile {
         
-        private TileTypeSO type;
+        [SerializeField] private TileTypeSO type;
 
         public TileTypeSO Type => type;
 
