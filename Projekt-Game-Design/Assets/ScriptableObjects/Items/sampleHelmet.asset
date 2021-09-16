@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0060a96a91ff3fb41b85a129587606c5, type: 3}
-  m_Name: sampleWeapon
+  m_Name: sampleHelmet
   m_EditorClassIdentifier: 
-  goldValue: 20
-  rarity: 1
+  goldValue: 1
+  rarity: 3
   icon: {fileID: 0}
-  prefab: {fileID: 0}
-  type: 4
+  prefab: {fileID: 2181893431691929815, guid: d856944c5df2e684ab6bfd8fea736a52, type: 3}
+  type: 18
