@@ -8,32 +8,53 @@ using UnityEngine.UIElements;
 
 public class OverlayUIController : MonoBehaviour
 {
-    
+    // Für die UI Elemente
     private VisualElement overlayContainer;
+
+    // Für das Ingame Menü
     private VisualElement ingameMenuContainer;
 
-    
-    [Header("Receiving Events On")]
-    [SerializeField] private BoolEventChannelSO VisibilityMenuEventChannel;
-    
-    [Header("Sending Events On")]
-    [SerializeField] private VoidEventChannelSO enableMenuInput;
+    // Für das Inventar
+    private VisualElement inventoryContainer;
+
+    [Header("Receiving Events On")] [SerializeField]
+    private BoolEventChannelSO VisibilityMenuEventChannel;
+
+    [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
+
+    [Header("Sending Events On")] [SerializeField]
+    private VoidEventChannelSO enableMenuInput;
+
     [SerializeField] private VoidEventChannelSO enableGamplayInput;
 
 
-    private enum screenContent
+    // Zum bestimmen welcher Content im IngameMenu dargestellt werden soll
+    private enum menuScreenContent
     {
-        NONE,LOAD_SCREEN, SAVE_SCREEN, SETTINGS_SCREEN
+        NONE,
+        LOAD_SCREEN,
+        SAVE_SCREEN,
+        SETTINGS_SCREEN
     }
-    
+
+    //Zum bestimmen welches Overlay gerade aktiv sein soll
+    private enum screenOverlay
+    {
+        NONE,
+        GAME_UI_OVERLAY,
+        INGAME_MENU,
+        INVENTORY
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         // Holen des UXML Trees, zum getten der einzelnen Komponenten
         var root = GetComponent<UIDocument>().rootVisualElement;
-        
+
         overlayContainer = root.Q<VisualElement>("OverlayContainer");
         ingameMenuContainer = root.Q<VisualElement>("IngameMenu");
+        inventoryContainer = root.Q<VisualElement>("InventoryOverlay");
 
         ingameMenuContainer.Q<Button>("MainMenuButton").clicked += MainMenuButtonPressed;
         overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
@@ -42,11 +63,12 @@ public class OverlayUIController : MonoBehaviour
         ingameMenuContainer.Q<Button>("SaveButton").clicked += ShowSaveScreen;
         ingameMenuContainer.Q<Button>("OptionsButton").clicked += ShowOptionsScreen;
         ingameMenuContainer.Q<Button>("LoadButton").clicked += ShowLoadScreen;
-
     }
 
-    private void Awake() {
+    private void Awake()
+    {
         VisibilityMenuEventChannel.OnEventRaised += SetMenuVisibility;
+        VisibilityInventoryEventChannel.OnEventRaised += SetInventoryVisibility;
     }
 
     void MainMenuButtonPressed()
@@ -56,47 +78,73 @@ public class OverlayUIController : MonoBehaviour
     }
 
     // TODO Refactor
-    void SetMenuVisibility(bool value) {
-        
+    void SetMenuVisibility(bool value)
+    {
         Debug.Log(value);
-        
-        if (value) {
+
+        if (value)
+        {
             ShowMenu();
         }
-        else {
+        else
+        {
             HideMenu();
         }
     }
     
+    void SetInventoryVisibility(bool value)
+    {
+        Debug.Log(value);
+
+        if (value)
+        {
+            ShowInventory();
+        }
+        else
+        {
+            HideMenu();
+        }
+    }
+
     void ShowMenu()
     {
-        enableMenuInput.RaiseEvent();
+        //enableMenuInput.RaiseEvent();
         // Einstellungen ausblenden und Menü zeigen
-        ingameMenuContainer.style.display = DisplayStyle.Flex;
-        overlayContainer.style.display = DisplayStyle.None;
+        //ingameMenuContainer.style.display = DisplayStyle.Flex;
+        //overlayContainer.style.display = DisplayStyle.None;
+        OverlayManager(screenOverlay.INGAME_MENU);
+
     }
-    
+
     void HideMenu()
     {
-        enableGamplayInput.RaiseEvent();
+        //enableGamplayInput.RaiseEvent();
         // Einstellungen ausblenden und Menü zeigen
-        overlayContainer.style.display = DisplayStyle.Flex;
-        ingameMenuContainer.style.display = DisplayStyle.None;
+        //overlayContainer.style.display = DisplayStyle.Flex;
+        //ingameMenuContainer.style.display = DisplayStyle.None;
+
+        OverlayManager(screenOverlay.GAME_UI_OVERLAY);
+
     }
-    
+
     void ShowSaveScreen()
     {
-        ScreenContentManager(screenContent.SAVE_SCREEN);
+        MenuScreenContentManager(menuScreenContent.SAVE_SCREEN);
     }
-    
+
     void ShowLoadScreen()
     {
-        ScreenContentManager(screenContent.LOAD_SCREEN);
+        MenuScreenContentManager(menuScreenContent.LOAD_SCREEN);
     }
-    
+
     void ShowOptionsScreen()
     {
-        ScreenContentManager(screenContent.SETTINGS_SCREEN);
+        MenuScreenContentManager(menuScreenContent.SETTINGS_SCREEN);
+    }
+
+    void ShowInventory()
+    {
+        OverlayManager(screenOverlay.INVENTORY);
     }
 
     void QuitGame()
@@ -105,28 +153,57 @@ public class OverlayUIController : MonoBehaviour
         Application.Quit();
     }
 
-    void ScreenContentManager(screenContent screen)
+    void OverlayManager(screenOverlay screenOverlay)
+    {
+        switch (screenOverlay)
+        {
+            case screenOverlay.GAME_UI_OVERLAY:
+                enableGamplayInput.RaiseEvent();
+                overlayContainer.style.display = DisplayStyle.Flex;
+                // Ausblenden aller anderen Screens
+                ingameMenuContainer.style.display = DisplayStyle.None;
+                inventoryContainer.style.display = DisplayStyle.None;
+                break;
+            case screenOverlay.INGAME_MENU:
+                enableMenuInput.RaiseEvent();
+                ingameMenuContainer.style.display = DisplayStyle.Flex;
+                // Ausblenden aller anderen Screens
+                overlayContainer.style.display = DisplayStyle.None;
+                inventoryContainer.style.display = DisplayStyle.None;
+                break;
+            case screenOverlay.INVENTORY:
+                // TODO Channel muss noch erstellt werden
+                // enableInventoryInput.RaiseEvent();
+                inventoryContainer.style.display = DisplayStyle.Flex;
+                // Ausblenden aller anderen Screens
+                overlayContainer.style.display = DisplayStyle.None;
+                ingameMenuContainer.style.display = DisplayStyle.None;
+                break;
+        }
+    }
+
+    void MenuScreenContentManager(menuScreenContent menuScreen)
     {
         // Einzelne Screens getten
         VisualElement saveScreen = ingameMenuContainer.Q<VisualElement>("SaveScreen");
         VisualElement loadScreen = ingameMenuContainer.Q<VisualElement>("LoadScreen");
         VisualElement settingsScreen = ingameMenuContainer.Q<VisualElement>("SettingsContainer");
 
-        switch (screen)
+        switch (menuScreen)
         {
-            case screenContent.LOAD_SCREEN:
+            case menuScreenContent.LOAD_SCREEN:
                 loadScreen.style.display = DisplayStyle.Flex;
                 // Ausblenden aller anderen Screens
                 settingsScreen.style.display = DisplayStyle.None;
                 saveScreen.style.display = DisplayStyle.None;
                 break;
-            case screenContent.SAVE_SCREEN:
+            case menuScreenContent.SAVE_SCREEN:
                 saveScreen.style.display = DisplayStyle.Flex;
                 // Ausblenden aller anderen Screens
                 settingsScreen.style.display = DisplayStyle.None;
                 loadScreen.style.display = DisplayStyle.None;
                 break;
-            case screenContent.SETTINGS_SCREEN:
+            case menuScreenContent.SETTINGS_SCREEN:
                 settingsScreen.style.display = DisplayStyle.Flex;
                 // Ausblenden aller anderen Screens
                 saveScreen.style.display = DisplayStyle.None;
