@@ -126,7 +126,10 @@ namespace Input {
         }
 
         public void OnRotateCamera(InputAction.CallbackContext context) {
-            cameraRotateEvent.Invoke(context.ReadValue<float>());
+            if (context.phase == InputActionPhase.Performed)
+            {
+                cameraRotateEvent.Invoke(context.ReadValue<float>());
+            }
         }
 
         public void OnCameraZoom(InputAction.CallbackContext context) {

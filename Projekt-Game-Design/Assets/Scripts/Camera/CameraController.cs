@@ -52,7 +52,7 @@ namespace DefaultNamespace.Camera {
                 HandleCameraBorder();
             }
             
-            transform.rotation *= Quaternion.Euler(0, rotateInputVector * -1, 0);
+            //transform.rotation *= Quaternion.Euler(0, rotateInputVector * -1, 0);
             //transform.rotation *= Quaternion.Euler(0, rotateInputVector * -45, 0);
 
             var pos = new Vector3(
@@ -111,7 +111,9 @@ namespace DefaultNamespace.Camera {
         }
 
         private void HandleCameraRotateEvent(float rotate) {
-            rotateInputVector = rotate;
+            //rotateInputVector = rotate;
+            //transform.rotation *= Quaternion.Euler(0, rotateInputVector * -1, 0);
+            transform.rotation *= Quaternion.Euler(0, 45 * -rotate, 0);
         }
         
         private void HandleCameraZoomEvent(float zoom) {
