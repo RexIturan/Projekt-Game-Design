@@ -76,22 +76,25 @@ namespace DefaultNamespace.Camera {
 
             Vector2 mousePos =Mouse.current.position.ReadValue();
 
-            if (mousePos.y >= Screen.height - panBorderThickness)
+            bool outOfScreen = mousePos.y > Screen.height || mousePos.y < 0 || mousePos.x > Screen.width ||
+                               mousePos.x < 0;
+
+            if (mousePos.y >= Screen.height - panBorderThickness && !outOfScreen)
             {
                 pos += transform.forward * (panSpeed * Time.deltaTime);
             }
 
-            if (mousePos.x <= panBorderThickness)
+            if (mousePos.x <= panBorderThickness && !outOfScreen)
             {
                 pos -= transform.right * (panSpeed * Time.deltaTime);
             }
 
-            if (mousePos.y <= panBorderThickness)
+            if (mousePos.y <= panBorderThickness && !outOfScreen)
             {
                 pos -= transform.forward * (panSpeed * Time.deltaTime);
             }
 
-            if (mousePos.x >= Screen.width - panBorderThickness)
+            if (mousePos.x >= Screen.width - panBorderThickness && !outOfScreen)
             {
                 pos += transform.right * (panSpeed * Time.deltaTime);
             }
