@@ -6,14 +6,16 @@ using UnityEngine.InputSystem;
 
 namespace Input {
     [CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader", order = 0)]
-    public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions, GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions {
+    public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions, GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions, GameInput.IInventoryActions {
         
         [Header("Sending Events On")]
         [SerializeField] private BoolEventChannelSO visibilityMenu;
+        [SerializeField] private BoolEventChannelSO visibilityInventory;
         
         [Header("Receiving Events On")]
         [SerializeField] private VoidEventChannelSO enableMenuInput;
         [SerializeField] private VoidEventChannelSO enableGamplayInput;
+        [SerializeField] private VoidEventChannelSO enableInventoryInput;
         
         // Gameplay
         public event UnityAction inventoryEvent = delegate { };
@@ -39,6 +41,7 @@ namespace Input {
 
             enableMenuInput.OnEventRaised += EnableMenuInput;
             enableGamplayInput.OnEventRaised += EnableGameplayInput;
+            enableInventoryInput.OnEventRaised += EnableInventoryInput;
             
             if (gameInput == null) {
                 gameInput = new GameInput();
@@ -47,6 +50,7 @@ namespace Input {
                 gameInput.Menu.SetCallbacks(this);
                 gameInput.LevelEditor.SetCallbacks(this);
                 gameInput.PathfindingDebug.SetCallbacks(this);
+                gameInput.Inventory.SetCallbacks(this);
             }
             EnableGameplayInput();
         }
@@ -71,6 +75,15 @@ namespace Input {
 
             gameInput.Gameplay.Enable();
             gameInput.Camera.Enable();
+        }
+        // Für das Inventar
+        public void EnableInventoryInput()
+        {
+            gameInput.Menu.Disable();
+            gameInput.PathfindingDebug.Disable();
+            gameInput.Gameplay.Disable();
+            gameInput.Camera.Disable();
+            gameInput.Inventory.Enable();
         }
         
         public void EnableDebugInput()
@@ -112,7 +125,10 @@ namespace Input {
         }
 
         public void OnInventory(InputAction.CallbackContext context) {
-            throw new NotImplementedException();
+            if (context.phase == InputActionPhase.Performed) {
+                Debug.Log("onInventory");
+                visibilityInventory.RaiseEvent(true);
+            }
         }
 
         #endregion
@@ -148,6 +164,17 @@ namespace Input {
             if (context.phase == InputActionPhase.Performed) {
                 Debug.Log("onCancel");
                 visibilityMenu.RaiseEvent(false);
+            }
+        }
+
+        #endregion
+        
+        #region Inventory
+
+        public void OnCancelInventory(InputAction.CallbackContext context) {
+            if (context.phase == InputActionPhase.Performed) {
+                Debug.Log("onCancel");
+                visibilityInventory.RaiseEvent(false);
             }
         }
 

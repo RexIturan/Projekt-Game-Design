@@ -413,6 +413,44 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Inventory"",
+            ""id"": ""08413d11-c7a0-4765-9d70-d63dcb1217c5"",
+            ""actions"": [
+                {
+                    ""name"": ""CancelInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""6be97bc3-3d5e-40c1-babf-afbae0049aa3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6df524d9-a4e0-4479-bd8a-4438977ba4ba"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CancelInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""caa1823f-6396-4c95-97ad-9a46778dc290"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CancelInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -445,6 +483,9 @@ public class @GameInput : IInputActionCollection, IDisposable
         m_PathfindingDebug_Toggle = m_PathfindingDebug.FindAction("Toggle", throwIfNotFound: true);
         m_PathfindingDebug_Step = m_PathfindingDebug.FindAction("Step", throwIfNotFound: true);
         m_PathfindingDebug_ShowCompletePath = m_PathfindingDebug.FindAction("ShowCompletePath", throwIfNotFound: true);
+        // Inventory
+        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
+        m_Inventory_CancelInventory = m_Inventory.FindAction("CancelInventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -711,6 +752,39 @@ public class @GameInput : IInputActionCollection, IDisposable
         }
     }
     public PathfindingDebugActions @PathfindingDebug => new PathfindingDebugActions(this);
+
+    // Inventory
+    private readonly InputActionMap m_Inventory;
+    private IInventoryActions m_InventoryActionsCallbackInterface;
+    private readonly InputAction m_Inventory_CancelInventory;
+    public struct InventoryActions
+    {
+        private @GameInput m_Wrapper;
+        public InventoryActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CancelInventory => m_Wrapper.m_Inventory_CancelInventory;
+        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
+        public void SetCallbacks(IInventoryActions instance)
+        {
+            if (m_Wrapper.m_InventoryActionsCallbackInterface != null)
+            {
+                @CancelInventory.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCancelInventory;
+                @CancelInventory.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCancelInventory;
+                @CancelInventory.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCancelInventory;
+            }
+            m_Wrapper.m_InventoryActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @CancelInventory.started += instance.OnCancelInventory;
+                @CancelInventory.performed += instance.OnCancelInventory;
+                @CancelInventory.canceled += instance.OnCancelInventory;
+            }
+        }
+    }
+    public InventoryActions @Inventory => new InventoryActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -746,5 +820,9 @@ public class @GameInput : IInputActionCollection, IDisposable
         void OnToggle(InputAction.CallbackContext context);
         void OnStep(InputAction.CallbackContext context);
         void OnShowCompletePath(InputAction.CallbackContext context);
+    }
+    public interface IInventoryActions
+    {
+        void OnCancelInventory(InputAction.CallbackContext context);
     }
 }

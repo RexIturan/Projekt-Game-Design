@@ -22,10 +22,10 @@ public class OverlayUIController : MonoBehaviour
 
     [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
 
-    [Header("Sending Events On")] [SerializeField]
-    private VoidEventChannelSO enableMenuInput;
-
+    [Header("Sending Events On")]
+    [SerializeField] private VoidEventChannelSO enableMenuInput;
     [SerializeField] private VoidEventChannelSO enableGamplayInput;
+    [SerializeField] private VoidEventChannelSO enableInventoryInput;
 
 
     // Zum bestimmen welcher Content im IngameMenu dargestellt werden soll
@@ -173,7 +173,7 @@ public class OverlayUIController : MonoBehaviour
                 break;
             case screenOverlay.INVENTORY:
                 // TODO Channel muss noch erstellt werden
-                // enableInventoryInput.RaiseEvent();
+                enableInventoryInput.RaiseEvent();
                 inventoryContainer.style.display = DisplayStyle.Flex;
                 // Ausblenden aller anderen Screens
                 overlayContainer.style.display = DisplayStyle.None;
