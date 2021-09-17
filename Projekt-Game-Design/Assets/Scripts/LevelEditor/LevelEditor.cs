@@ -3,7 +3,7 @@ using Grid;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using Util;
+using GDP01.Util;
 using Visual;
 
 namespace LevelEditor {

@@ -1,8 +1,9 @@
 ﻿using System;
+using Grid;
 using UnityEditor;
 using UnityEngine;
 
-namespace Grid.Editor {
+namespace GDP01.Grid.Editor {
     [CustomEditor(typeof(GridContainerSO))]
     public class GridContainerSOEditor : UnityEditor.Editor {
 
@@ -13,8 +14,10 @@ namespace Grid.Editor {
             //propStuff = so.FindProperty("");
         }
 
+        
+        
         public override void OnInspectorGUI() {
-
+        
             so.Update();
             // EditorGUILayout.PropertyField( propStuff );
             if (so.ApplyModifiedProperties()) {
@@ -23,7 +26,7 @@ namespace Grid.Editor {
             
             
             DrawDefaultInspector();
-
+        
             var container = (GridContainerSO) target;
             
             // styling

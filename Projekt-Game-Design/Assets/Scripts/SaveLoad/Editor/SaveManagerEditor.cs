@@ -11,7 +11,8 @@ namespace SaveLoad.Editor {
             var saveManager = (SaveManager) target;
             
             if (GUILayout.Button("SaveGrid")) {  
-                saveManager.SaveGridContainer();  
+                saveManager.SaveGridContainer(); 
+                AssetDatabase.Refresh();
             }
         }
     }

@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GDP01.Util;
 using UnityEngine;
-using VisualDebug;
+using GDP01.Util.VisualDebug;
 
-namespace Util {
+namespace Pathfinding {
     public class Pathfinding {
 
         private const int MOVE_STRAIGHT_COST = 10;
@@ -15,12 +16,10 @@ namespace Util {
         private bool diagonal = true;
         private bool debug = false;
         
-        private GenericGrid<PathNode> grid;
+        private GenericGrid1D<PathNode> grid;
         private List<PathNode> openList;
         private List<PathNode> closedList;
 
-        public GenericGrid<PathNode> GetGrid => grid;
-        
         public Pathfinding(int width, int height, bool diagonal, bool debug = true) {
             Instance = this;
             this.debug = debug;
@@ -28,7 +27,7 @@ namespace Util {
             int cellSize = 1;
             // TODO get grid from GraphContainer
             // TODO remove
-            grid = new GenericGrid<PathNode>(width, height, cellSize, Vector3.zero, (GenericGrid<PathNode> g, int x, int y) => new PathNode(g, x, y), debug);
+            grid = new GenericGrid1D<PathNode>(width, height, cellSize, Vector3.zero, (GenericGrid1D<PathNode> g, int x, int y) => new PathNode(g, x, y), debug);
         }
 
         /*Calculate list of all reachable nodes from start node using dijkstra

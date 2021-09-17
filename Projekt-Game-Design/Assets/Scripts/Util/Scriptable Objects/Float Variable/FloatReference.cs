@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Util.ScriptableObjects {
+namespace GDP01.Util.ScriptableObjects {
     
     [Serializable]
     public class FloatReference {

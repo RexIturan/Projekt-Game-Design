@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
-using Util;
+using GDP01.Util;
 
 namespace Grid {
     [System.Serializable]
-    public class TileGrid : GenericGrid<Tile> {
-
-        [SerializeField] private Tile[] testTiles;
+    public class TileGrid : GenericGrid1D<Tile> {
 
         public TileGrid(
             int width,
@@ -21,32 +19,11 @@ namespace Grid {
                 height,
                 cellSize,
                 originPosition,
-                (GenericGrid<Tile> g, int x, int y) => new Tile(g, x, y),
+                (GenericGrid1D<Tile> g, int x, int y) => new Tile(g, x, y),
                 showDebug,
-                debugTextParent) {
+                debugTextParent) { }
 
-            testTiles = new Tile[width * height];
-            Debug.Log($"{width * height} {Coord2DToIndex(new Vector2Int(width-1, height-1), width, height)}");
-            
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    var index = Coord2DToIndex(new Vector2Int(x, y), width, height);
-                    Debug.Log(index);
-                    testTiles[index] = new Tile(null, x, y);
-                }
-            }
-        }
-
-        public int Coord2DToIndex(Vector2Int coord, int width, int height) {
-            return coord.x + coord.y * width;
-        }
-
-        public Vector2Int IndexToCoord2D(int index, int width, int height) {
-            Vector2Int coord = new Vector2Int(
-                x: index % width,
-                y: index / width);
-            return coord;
-        }
+        
         
         public void CopyTo(TileGrid tileGrid, Vector2Int offset) {
             for (int x = 0; x < Width; x++) {

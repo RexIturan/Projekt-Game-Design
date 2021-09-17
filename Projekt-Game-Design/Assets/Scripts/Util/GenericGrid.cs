@@ -1,9 +1,8 @@
 ﻿using System;
 using TMPro;
-using UnityEditorInternal;
 using UnityEngine;
 
-namespace Util {
+namespace GDP01.Util {
     public class GenericGrid<TGridObject> {
         public event EventHandler<OnGridObjectChangedEventArgs> OnGridObjectChanged;
         public class OnGridObjectChangedEventArgs {

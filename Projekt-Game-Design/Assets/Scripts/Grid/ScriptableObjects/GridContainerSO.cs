@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Graph;
 using UnityEngine;
-using Util;
+using GDP01.Util;
 
 namespace Grid {
     [CreateAssetMenu(fileName = "newGridContainer", menuName = "Grid/GridContainer", order = 0)]

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: +
   flags: 1
-  movementCost: 0
+  movementCost: 1
   color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 0}

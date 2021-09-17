@@ -1,6 +1,6 @@
 ﻿using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
-using Util;
+using GDP01.Util;
 
 namespace Grid {
     [System.Serializable]
@@ -16,7 +16,7 @@ namespace Grid {
             public string name;
         }
 
-        public testSO testScriptableObject = new testSO();
+        public testSO testScriptableObject;
         
         
         public TestStruct strcut = new TestStruct {
@@ -33,7 +33,7 @@ namespace Grid {
 
         public TileTypeSO Type => type;
 
-        private GenericGrid<Tile> grid;
+        private GenericGrid1D<Tile> grid;
         public int x;
         public int y;
 
@@ -43,8 +43,7 @@ namespace Grid {
             grid.TriggerGridObjectChanged(x, y);
         }
         
-        public Tile(GenericGrid<Tile> grid, int x, int y) {
-            testScriptableObject.name = "testSO";
+        public Tile(GenericGrid1D<Tile> grid, int x, int y) {
             this.grid = grid;
             this.x = x;
             this.y = y;

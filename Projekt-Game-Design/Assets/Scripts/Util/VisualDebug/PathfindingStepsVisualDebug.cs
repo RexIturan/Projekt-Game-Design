@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using Input;
 using TMPro;
 using UnityEngine;
-using Util;
 
-namespace VisualDebug {
+namespace GDP01.Util.VisualDebug {
     public class PathfindingStepsVisualDebug : MonoBehaviour {
         
         public static PathfindingStepsVisualDebug Instance { get; private set; }
@@ -86,7 +85,7 @@ namespace VisualDebug {
             }
         }
         
-        public void TakeSnapshot( GenericGrid<PathNode> grid, PathNode current, 
+        public void TakeSnapshot( GenericGrid1D<PathNode> grid, PathNode current, 
             List<PathNode> openList, List<PathNode> closedList) {
             
             GridSnapshotAction gridSnapshotAction = new GridSnapshotAction();
@@ -132,7 +131,7 @@ namespace VisualDebug {
             gridSnapshotActionList.Add(gridSnapshotAction);
         }
 
-        public void TakeSnapshotFinalPath(GenericGrid<PathNode> grid, List<PathNode> path) {
+        public void TakeSnapshotFinalPath(GenericGrid1D<PathNode> grid, List<PathNode> path) {
             GridSnapshotAction gridSnapshotAction = new GridSnapshotAction();
             gridSnapshotAction.AddAction(HideNodeVisuals);
 
