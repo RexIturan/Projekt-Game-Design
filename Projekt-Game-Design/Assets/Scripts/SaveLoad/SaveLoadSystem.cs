@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class SaveLoad : MonoBehaviour
+public class SaveLoadSystem : MonoBehaviour
 {
     [Serializable]
     private class MyTestClass

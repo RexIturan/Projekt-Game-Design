@@ -1,7 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using Graph;
 
-namespace Graph.Editor {
+namespace GDP01.Graph.Editor {
     [CustomEditor(typeof(GraphGenerator))]
     public class GraphGeneratorEditor : UnityEditor.Editor {
         public override void OnInspectorGUI() {

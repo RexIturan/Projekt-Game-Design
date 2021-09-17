@@ -1,10 +1,10 @@
 ﻿using System;
 using UnityEngine;
-using Util;
+using GDP01.Util;
 
 namespace Graph {
     [System.Serializable]
-    public class NodeGraph : GenericGrid<PathNode> {
+    public class NodeGraph : GenericGrid1D<PathNode> {
         
         public NodeGraph(
                 int width, int height, 
@@ -16,7 +16,7 @@ namespace Graph {
                 height, 
                 cellSize, 
                 originPosition, 
-                (GenericGrid<PathNode> g, int x, int y) => new PathNode(g, x, y), 
+                (GenericGrid1D<PathNode> g, int x, int y) => new PathNode(g, x, y), 
                 showDebug, 
                 debugTextParent) { }
     }

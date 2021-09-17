@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace Util {
+namespace GDP01.Util {
     public class PathNode {
         
         public struct Edge
@@ -15,7 +15,7 @@ namespace Util {
             public PathNode Target;
         }
 
-        private GenericGrid<PathNode> grid;
+        private GenericGrid1D<PathNode> grid;
         public int x;
         public int y;
 
@@ -35,7 +35,7 @@ namespace Util {
         public bool isWalkable;
         public PathNode parentNode;
         
-        public PathNode(GenericGrid<PathNode> grid, int x, int y) {
+        public PathNode(GenericGrid1D<PathNode> grid, int x, int y) {
             this.grid = grid;
             this.x = x;
             this.y = y;

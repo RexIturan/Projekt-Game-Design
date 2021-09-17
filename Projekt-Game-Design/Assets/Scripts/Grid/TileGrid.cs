@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
-using Util;
+using GDP01.Util;
 
 namespace Grid {
     [System.Serializable]
-    public class TileGrid : GenericGrid<Tile> {
-
-        [SerializeField] private Tile[] testTiles;
+    public class TileGrid : GenericGrid1D<Tile> {
 
         public TileGrid(
             int width,
@@ -21,13 +19,12 @@ namespace Grid {
                 height,
                 cellSize,
                 originPosition,
-                (GenericGrid<Tile> g, int x, int y) => new Tile(g, x, y),
+                (GenericGrid1D<Tile> g, int x, int y) => new Tile(g, x, y),
                 showDebug,
-                debugTextParent) {
+                debugTextParent) { }
 
-            testTiles = new Tile[width * height];
-        }
-
+        
+        
         public void CopyTo(TileGrid tileGrid, Vector2Int offset) {
             for (int x = 0; x < Width; x++) {
                 for (int y = 0; y < Height; y++) {
