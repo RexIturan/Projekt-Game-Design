@@ -11,7 +11,14 @@ namespace Grid {
             public string name;
             public ETileFlags flags;
         }
+        
+        public class testSO : ScriptableObject {
+            public string name;
+        }
 
+        public testSO testScriptableObject = new testSO();
+        
+        
         public TestStruct strcut = new TestStruct {
             name = "tile",
             flags = ETileFlags.destructible | ETileFlags.opaque
@@ -37,6 +44,7 @@ namespace Grid {
         }
         
         public Tile(GenericGrid<Tile> grid, int x, int y) {
+            testScriptableObject.name = "testSO";
             this.grid = grid;
             this.x = x;
             this.y = y;

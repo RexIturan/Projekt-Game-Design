@@ -6,9 +6,9 @@ namespace SaveLoad {
     public class SaveManager : MonoBehaviour {
         [SerializeField] private GridContainerSO gridContainer;
 
-        [SerializeField] private string pathBase = "Assets/Resources/";
+        [SerializeField] private string pathBase;
         [SerializeField] private string filename;
-        [SerializeField] private string fileSuffix = ".json";
+        [SerializeField] private string fileSuffix;
         
         //TODO return bool if successful
         public void SaveGridContainer() {
