@@ -1,11 +1,28 @@
-﻿using UnityEngine;
+﻿using Unity.IO.LowLevel.Unsafe;
+using UnityEngine;
 using Util;
 
 namespace Grid {
     [System.Serializable]
     public class Tile {
+
+        [System.Serializable]
+        public struct TestStruct {
+            public string name;
+            public ETileFlags flags;
+        }
+
+        public TestStruct strcut = new TestStruct {
+            name = "tile",
+            flags = ETileFlags.destructible | ETileFlags.opaque
+        };
+
+        public ETileFlags flags = ETileFlags.solid;
         
-        [SerializeField] private TileTypeSO type;
+        public int typeID;
+
+        
+        public TileTypeSO type;
 
         public TileTypeSO Type => type;
 
@@ -15,6 +32,7 @@ namespace Grid {
 
         public void SetTileType(TileTypeSO tileType) {
             type = tileType;
+            typeID = tileType.movementCost;
             grid.TriggerGridObjectChanged(x, y);
         }
         
@@ -25,7 +43,7 @@ namespace Grid {
         }
         
         public override string ToString() {
-            return type.Name;    
+            return Type.Name;    
         }
     }
 }
