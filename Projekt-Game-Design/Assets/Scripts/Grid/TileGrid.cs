@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
-using GDP01.Util;
+using Util;
 
 namespace Grid {
     [System.Serializable]
     public class TileGrid : GenericGrid1D<Tile> {
-
+        
         public TileGrid(
             int width,
             int height,
@@ -23,8 +23,6 @@ namespace Grid {
                 showDebug,
                 debugTextParent) { }
 
-        
-        
         public void CopyTo(TileGrid tileGrid, Vector2Int offset) {
             for (int x = 0; x < Width; x++) {
                 for (int y = 0; y < Height; y++) {

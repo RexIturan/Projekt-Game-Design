@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using GDP01.Util;
+using Util;
 
 namespace Graph {
     [System.Serializable]

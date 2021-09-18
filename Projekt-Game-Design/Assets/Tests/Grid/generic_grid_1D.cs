@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 
 
-namespace Tests {
+namespace Grid {
     public class generic_grid_1D {
         // A Test behaves as an ordinary method
         [Test]

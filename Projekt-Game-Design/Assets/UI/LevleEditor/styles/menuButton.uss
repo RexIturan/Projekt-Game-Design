@@ -1,0 +1,25 @@
+.menuButton {
+    justify-content: flex-start;
+    height: 90%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    visibility: visible;
+    width: 90%;
+}
+
+.menuButtonContainer {
+    position: relative;
+    width: auto;
+    height: 100%;
+    background-color: rgba(156, 156, 156, 255);
+    justify-content: space-around;
+    align-items: center;
+}

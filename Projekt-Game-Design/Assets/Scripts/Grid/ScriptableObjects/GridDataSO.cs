@@ -5,10 +5,10 @@ namespace Grid {
     [CreateAssetMenu(fileName = "newGridData", menuName = "Grid/GridData", order = 0)]
     public class GridDataSO : ScriptableObject {
 
-        [SerializeField] private int width;
-        [SerializeField] private int height;
-        [SerializeField] private float cellSize;
-        [SerializeField] private Vector3 originPosition;
+        public int width;
+        public int height;
+        public float cellSize;
+        public Vector3 originPosition;
         
         public int Width {
             get => width;

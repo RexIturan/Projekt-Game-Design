@@ -13,8 +13,99 @@ MonoBehaviour:
   m_Name: GridContainer
   m_EditorClassIdentifier: 
   tileGrids:
-  - width: 117
-    height: 285
+  - width: 3
+    height: 3
     cellSize: 1
-    originPosition: {x: -18, y: 0, z: -4}
-    debugTextParent: {fileID: 0}
+    originPosition: {x: -2, y: 0, z: -2}
+    grid1DArray:
+    - name: 'Tile 0:0 '
+      testScriptableObject: {fileID: 0}
+      strcut:
+        name: tile
+        flags: 6
+      flags: 16
+      typeID: 0
+      type: {fileID: 11400000, guid: 288a38f70a877334b95d9bf1dea25903, type: 2}
+      x: 0
+      y: 0
+    - name: 'Tile 1:0 '
+      testScriptableObject: {fileID: 0}
+      strcut:
+        name: tile
+        flags: 6
+      flags: 16
+      typeID: 0
+      type: {fileID: 11400000, guid: 288a38f70a877334b95d9bf1dea25903, type: 2}
+      x: 1
+      y: 0
+    - name: 'Tile 2:0 '
+      testScriptableObject: {fileID: 0}
+      strcut:
+        name: tile
+        flags: 6
+      flags: 16
+      typeID: 0
+      type: {fileID: 11400000, guid: 288a38f70a877334b95d9bf1dea25903, type: 2}
+      x: 2
+      y: 0
+    - name: 'Tile 0:1 '
+      testScriptableObject: {fileID: 0}
+      strcut:
+        name: tile
+        flags: 6
+      flags: 16
+      typeID: 0
+      type: {fileID: 11400000, guid: 288a38f70a877334b95d9bf1dea25903, type: 2}
+      x: 0
+      y: 1
+    - name: 'Tile 1:1 '
+      testScriptableObject: {fileID: 0}
+      strcut:
+        name: tile
+        flags: 6
+      flags: 16
+      typeID: 0
+      type: {fileID: 11400000, guid: 288a38f70a877334b95d9bf1dea25903, type: 2}
+      x: 1
+      y: 1
+    - name: 'Tile 2:1 '
+      testScriptableObject: {fileID: 0}
+      strcut:
+        name: tile
+        flags: 6
+      flags: 16
+      typeID: 0
+      type: {fileID: 11400000, guid: 288a38f70a877334b95d9bf1dea25903, type: 2}
+      x: 2
+      y: 1
+    - name: 'Tile 0:2 '
+      testScriptableObject: {fileID: 0}
+      strcut:
+        name: tile
+        flags: 6
+      flags: 16
+      typeID: 0
+      type: {fileID: 11400000, guid: 288a38f70a877334b95d9bf1dea25903, type: 2}
+      x: 0
+      y: 2
+    - name: 'Tile 1:2 '
+      testScriptableObject: {fileID: 0}
+      strcut:
+        name: tile
+        flags: 6
+      flags: 16
+      typeID: 0
+      type: {fileID: 11400000, guid: 288a38f70a877334b95d9bf1dea25903, type: 2}
+      x: 1
+      y: 2
+    - name: 'Tile 2:2 '
+      testScriptableObject: {fileID: 0}
+      strcut:
+        name: tile
+        flags: 6
+      flags: 16
+      typeID: 0
+      type: {fileID: 11400000, guid: 288a38f70a877334b95d9bf1dea25903, type: 2}
+      x: 2
+      y: 2
+    test: []

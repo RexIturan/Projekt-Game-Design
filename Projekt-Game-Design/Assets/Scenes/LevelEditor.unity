@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992c6cb5eaca4d568a6545da4b674c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadLevel: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
   drawer: {fileID: 1427959555}
   controller: {fileID: 1470655166}
   mode: 1
@@ -382,7 +383,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -547,7 +548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8446284170341045904, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9849287
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 8446284170341045904, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
       propertyPath: m_LocalRotation.x
@@ -555,7 +556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8446284170341045904, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.17296053
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 8446284170341045904, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
       propertyPath: m_LocalRotation.z
@@ -567,7 +568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8446284170341045904, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -19.92
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8446284170341045904, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -576,10 +577,6 @@ PrefabInstance:
     - target: {fileID: 8446284170341045907, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
       propertyPath: m_Name
       value: Camera Rig
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446284170341046639, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
-      propertyPath: rotateSpeed.UseConstant
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
@@ -817,7 +814,7 @@ GameObject:
   - component: {fileID: 1895492292}
   - component: {fileID: 1895492295}
   m_Layer: 5
-  m_Name: UIDocument
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -876,7 +873,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1895492295
 MonoBehaviour:
@@ -891,7 +888,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelEditor: {fileID: 9086378}
-  cursor: {fileID: 0}
+  VisibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
+  enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
+  saveLevel: {fileID: 11400000, guid: c1df204252a25354591f6fe993db585c, type: 2}
+  loadLevel: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
 --- !u!1001 &5073276215286624277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -901,7 +902,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -943,6 +944,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: loadLevel
+      value: 
+      objectReference: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: saveLevel
+      value: 
+      objectReference: {fileID: 11400000, guid: c1df204252a25354591f6fe993db585c, type: 2}
     - target: {fileID: 7187340983742418651, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
       propertyPath: m_Name
       value: SaveManager

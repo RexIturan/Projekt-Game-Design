@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Grid;
 using UnityEngine;
-using GDP01.Util;
+using Util;
 
 public class TestGrid : MonoBehaviour {
     [SerializeField] private GridContainerSO gridContainer;

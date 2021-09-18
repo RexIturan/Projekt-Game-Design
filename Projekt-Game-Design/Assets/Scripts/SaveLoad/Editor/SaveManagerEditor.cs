@@ -14,6 +14,11 @@ namespace SaveLoad.Editor {
                 saveManager.SaveGridContainer(); 
                 AssetDatabase.Refresh();
             }
+            
+            if (GUILayout.Button("LoadGrid")) {  
+                saveManager.LoadGridContainer(); 
+                AssetDatabase.Refresh();
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace GDP01.Util {
+namespace Util {
     public class MousePosition {
 
         public static Vector3 GetMouseWorldPosition() {

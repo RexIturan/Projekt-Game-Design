@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace GDP01.Util {
+namespace Util {
     public class PathNode {
         
         public struct Edge

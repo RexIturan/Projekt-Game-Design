@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
-using GDP01.Util;
+using Util;
 
 namespace LevelEditor {
     public class Cursor : MonoBehaviour {

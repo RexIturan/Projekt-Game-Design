@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace GDP01.Util {
+namespace Util {
     public class Text {
         public static TextMeshPro CreateWorldText(
             string text, 

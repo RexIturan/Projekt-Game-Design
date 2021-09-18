@@ -1,13 +1,17 @@
 ﻿using System;
 using Grid;
+using Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using GDP01.Util;
+using Util;
 using Visual;
 
 namespace LevelEditor {
     public class LevelEditor : MonoBehaviour {
+        
+        [Header("Receiving Events On")]
+        [SerializeField] private VoidEventChannelSO loadLevel;
         
         public enum ECursorMode {
             select,
@@ -20,6 +24,7 @@ namespace LevelEditor {
         //todo can not use IMapDrawer because unity doesnt use generics :(
         [SerializeField] private TileMapDrawer drawer;
         [SerializeField] private GridController controller;
+        [SerializeField] private InputReader inputReader;
         
         [Header("Settings")]
         [SerializeField] private ECursorMode mode = ECursorMode.paint;
@@ -42,10 +47,19 @@ namespace LevelEditor {
         
         public void Awake() {
             selectedTileType = tileTypesContainer.tileTypes[1];
+            loadLevel.OnEventRaised += RedrawLevel;
+        }
+
+        private void RedrawLevel() {
+            drawer.DrawGrid();
         }
         
         private void Update() {
 
+            if (!inputReader.GameInput.Gameplay.enabled) {
+                return;
+            }            
+            
             //todo getMousePosition at level 
             Vector3 mousePosition = MousePosition.GetMouseWorldPosition(Vector3.up);
 

@@ -2,15 +2,14 @@
 using TMPro;
 using UnityEngine;
 
-namespace GDP01.Util {
+namespace Util {
     public class GenericGrid1D<TGridObject> {
         
-        [SerializeField] private readonly int width;
-        [SerializeField] private readonly int height;
-        [SerializeField] private readonly float cellSize;
-        [SerializeField] private readonly Vector3 originPosition;
-        [SerializeField] private readonly TGridObject[] grid1DArray;
-        
+        [SerializeField] private int width;
+        [SerializeField] private int height;
+        [SerializeField] private float cellSize;
+        [SerializeField] private Vector3 originPosition;
+        [SerializeField] private TGridObject[] grid1DArray;
         
         //debug
         [SerializeField] private readonly Transform debugTextParent;
@@ -19,7 +18,8 @@ namespace GDP01.Util {
         public int Width => width;
         public int Height => height;
         public float CellSize => cellSize;
-
+        public Vector3 OriginPosition => originPosition;
+        
         public event EventHandler<OnGridObjectChangedGrid1DEventArgs> OnGridObjectChanged;
 
         public GenericGrid1D(int width, int height, float cellSize, Vector3 originPosition,
