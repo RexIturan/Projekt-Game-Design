@@ -2,7 +2,6 @@
 using UnityEngine;
 
 namespace Grid {
-    [System.Serializable]
     [CreateAssetMenu(fileName = "newTileType", menuName = "Grid/TileType", order = 0)]
     public class TileTypeSO : ScriptableObject {
         public string name;

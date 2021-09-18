@@ -199,5 +199,5 @@ MonoBehaviour:
   panSpeed: 20
   panBorderThickness: 20
   minZoom: 5
-  maxZoom: 50
+  maxZoom: 100
   cameraTransform: {fileID: 8446284169067511301}

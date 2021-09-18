@@ -35,6 +35,8 @@ namespace Input {
         
         private GameInput gameInput;
 
+        public GameInput GameInput => gameInput;
+
         private void OnEnable() {
 
             enableMenuInput.OnEventRaised += EnableMenuInput;

@@ -1,15 +1,27 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using Grid;
-using UnityEditor;
 using UnityEngine;
 
 namespace SaveLoad {
     public class SaveManager : MonoBehaviour {
         [SerializeField] private GridContainerSO gridContainer;
+        [SerializeField] private GridDataSO globalGridData;
 
+        [Header("Save/Load Settings")]
         [SerializeField] private string pathBase;
         [SerializeField] private string filename;
         [SerializeField] private string fileSuffix;
+
+        [Header("Receiving Events On")]
+        [SerializeField] private VoidEventChannelSO saveLevel;
+        [SerializeField] private VoidEventChannelSO loadLevel;
+
+        private void Awake() {
+            saveLevel.OnEventRaised += SaveGridContainer;
+            loadLevel.OnEventRaised += LoadGridContainer;
+        }
 
         //TODO return bool if successful
         public void SaveGridContainer() {
@@ -25,8 +37,29 @@ namespace SaveLoad {
                     writer.Write(json);
                 }
             }
+        }
 
-            // AssetDatabase.Refresh();
+        public void LoadGridContainer() {
+
+            string json;
+            
+            var path = pathBase + filename + fileSuffix;
+            
+            using (var fs = new FileStream(path, FileMode.Open)) {
+                using (var reader = new StreamReader(fs)) {
+                    json = reader.ReadToEnd();
+                }
+            }
+            
+            Debug.Log(json);
+
+            JsonUtility.FromJsonOverwrite(json, gridContainer);
+
+            globalGridData.Width = gridContainer.tileGrids[0].Width;
+            globalGridData.Height = gridContainer.tileGrids[0].Height;
+            globalGridData.cellSize = gridContainer.tileGrids[0].CellSize;
+            globalGridData.OriginPosition = gridContainer.tileGrids[0].OriginPosition;
+            // JsonUtility.FromJson<GridContainerSO>(json);
         }
     }
 }

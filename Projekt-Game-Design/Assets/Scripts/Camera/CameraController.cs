@@ -2,7 +2,7 @@
 using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using GDP01.Util.ScriptableObjects;
+using Util.ScriptableObjects;
 
 namespace DefaultNamespace.Camera {
     public class CameraController : MonoBehaviour {

@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace GDP01.Util {
+namespace Util {
     public class GenericGrid<TGridObject> {
         public event EventHandler<OnGridObjectChangedEventArgs> OnGridObjectChanged;
         public class OnGridObjectChangedEventArgs {

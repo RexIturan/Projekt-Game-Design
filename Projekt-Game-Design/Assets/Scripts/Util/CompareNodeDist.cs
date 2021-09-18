@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace GDP01.Util
+namespace Util
 {
     public class CompareNodeDist : IComparer<PathNode>
     {

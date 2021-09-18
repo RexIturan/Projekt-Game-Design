@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using GDP01.Util;
+using Util;
 using UnityEngine;
-using GDP01.Util.VisualDebug;
+using Util.VisualDebug;
 
 namespace Pathfinding {
     public class Pathfinding {

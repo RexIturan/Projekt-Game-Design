@@ -4,7 +4,7 @@ using Input;
 using TMPro;
 using UnityEngine;
 
-namespace GDP01.Util.VisualDebug {
+namespace Util.VisualDebug {
     public class PathfindingStepsVisualDebug : MonoBehaviour {
         
         public static PathfindingStepsVisualDebug Instance { get; private set; }
