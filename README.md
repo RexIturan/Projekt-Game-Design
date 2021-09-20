@@ -8,8 +8,9 @@ Unity Version 2020.3.17f1 LTS
 name == platzhalter
 
 
-type              | convention | example
----               | ---        | ---
-Scriptable Object | nameSO     | ObjectSO
-Enum              | Ename      | EWochentag
-Interface         | Iname      | ILinkedList
+type                | convention | example
+---                 | ---        | ---
+Scriptable Object   | nameSO     | ObjectSO
+Enum                | Ename      | EWochentag
+Interface           | Iname      | ILinkedList
+EventChannelInstance| nameEC   | SaveGameEC
