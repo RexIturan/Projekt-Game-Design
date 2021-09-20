@@ -44,11 +44,21 @@ namespace SaveLoad {
         }
 
         public void SaveGame(int value) {
-            SaveGridContainer(gameSavePathBase, gameSaveFilenames[value]);
+            if (value >= 0 && value < gameSaveFilenames.Length) {
+                SaveGridContainer(gameSavePathBase, gameSaveFilenames[value]);    
+            }
+            else {
+                //TODO Error
+            }
         }
 
         public void LoadGame(int value) {
-            LoadGridContainer(gameSavePathBase, gameSaveFilenames[value]);
+            if (value >= 0 && value < gameSaveFilenames.Length) {
+                LoadGridContainer(gameSavePathBase, gameSaveFilenames[value]);    
+            }
+            else {
+                //TODO Error
+            }
         }
 
         public void SaveGridContainer() {
