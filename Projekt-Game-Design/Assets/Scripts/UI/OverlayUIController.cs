@@ -22,8 +22,9 @@ public class OverlayUIController : MonoBehaviour
 
     [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
 
-    [Header("Sending Events On")]
-    [SerializeField] private VoidEventChannelSO enableMenuInput;
+    [Header("Sending Events On")] [SerializeField]
+    private VoidEventChannelSO enableMenuInput;
+
     [SerializeField] private VoidEventChannelSO enableGamplayInput;
     [SerializeField] private VoidEventChannelSO enableInventoryInput;
 
@@ -45,7 +46,7 @@ public class OverlayUIController : MonoBehaviour
         INGAME_MENU,
         INVENTORY
     }
-    
+
     //Für das Inventar
     private enum inventoryTab
     {
@@ -103,7 +104,7 @@ public class OverlayUIController : MonoBehaviour
             HideMenu();
         }
     }
-    
+
     void SetInventoryVisibility(bool value)
     {
         Debug.Log(value);
@@ -120,23 +121,12 @@ public class OverlayUIController : MonoBehaviour
 
     void ShowMenu()
     {
-        //enableMenuInput.RaiseEvent();
-        // Einstellungen ausblenden und Menü zeigen
-        //ingameMenuContainer.style.display = DisplayStyle.Flex;
-        //overlayContainer.style.display = DisplayStyle.None;
         OverlayManager(screenOverlay.INGAME_MENU);
-
     }
 
     void HideMenu()
     {
-        //enableGamplayInput.RaiseEvent();
-        // Einstellungen ausblenden und Menü zeigen
-        //overlayContainer.style.display = DisplayStyle.Flex;
-        //ingameMenuContainer.style.display = DisplayStyle.None;
-
         OverlayManager(screenOverlay.GAME_UI_OVERLAY);
-
     }
 
     void ShowSaveScreen()
@@ -167,17 +157,17 @@ public class OverlayUIController : MonoBehaviour
 
     void HandleItemTabPressed()
     {
-        InventoryManager(inventoryTab.ITEMS,inventoryContainer.Q<Button>("Tab1"));
+        InventoryManager(inventoryTab.ITEMS, inventoryContainer.Q<Button>("Tab1"));
     }
-    
+
     void HandleArmoryTabPressed()
     {
-        InventoryManager(inventoryTab.ARMORY,inventoryContainer.Q<Button>("Tab2"));
+        InventoryManager(inventoryTab.ARMORY, inventoryContainer.Q<Button>("Tab2"));
     }
-    
+
     void HandleWeaponsTabPressed()
     {
-        InventoryManager(inventoryTab.WEAPONS,inventoryContainer.Q<Button>("Tab3"));
+        InventoryManager(inventoryTab.WEAPONS, inventoryContainer.Q<Button>("Tab3"));
     }
 
     void OverlayManager(screenOverlay screenOverlay)
@@ -246,9 +236,8 @@ public class OverlayUIController : MonoBehaviour
         inventoryContainer.Q<Button>("Tab3").RemoveFromClassList("ClickedTab");
         inventoryContainer.Q<Button>("Tab4").RemoveFromClassList("ClickedTab");
         inventoryContainer.Q<Button>("Tab5").RemoveFromClassList("ClickedTab");
-        
-        
-        
+
+
         inventoryContainer.Q<Button>("Tab1").AddToClassList("UnclickedTab");
         inventoryContainer.Q<Button>("Tab2").AddToClassList("UnclickedTab");
         inventoryContainer.Q<Button>("Tab3").AddToClassList("UnclickedTab");
@@ -259,8 +248,9 @@ public class OverlayUIController : MonoBehaviour
     void InventoryManager(inventoryTab tab, Button button)
     {
         resetAllTabs();
+        button.RemoveFromClassList("UnclickedTab");
         button.AddToClassList("ClickedTab");
-        
+
         switch (tab)
         {
             case inventoryTab.ITEMS:
