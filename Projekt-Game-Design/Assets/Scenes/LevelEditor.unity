@@ -169,6 +169,7 @@ MonoBehaviour:
   loadLevel: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
   drawer: {fileID: 1427959555}
   controller: {fileID: 1470655166}
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   mode: 1
   selectedTileType: {fileID: 0}
   tileTypesContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}
