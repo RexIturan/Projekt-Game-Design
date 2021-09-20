@@ -1,16 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="Styles/Inventory.uss" />
     <ui:VisualElement style="flex-grow: 1;">
         <ui:VisualElement name="TabBar" style="width: 100%; height: 8%; flex-direction: row;">
             <ui:VisualElement name="LeftContainer" style="height: 100%; width: 50%; flex-direction: row;">
-                <ui:VisualElement name="Tab1" style="height: 100%; width: 20%; background-color: rgba(0, 0, 0, 0.43); border-top-left-radius: 15px; border-top-right-radius: 15px; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
-                <ui:VisualElement name="Tab2" style="height: 100%; width: 20%; background-color: rgba(0, 0, 0, 0.59); border-top-left-radius: 15px; border-top-right-radius: 15px; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
-                <ui:VisualElement name="Tab3" style="height: 100%; width: 20%; background-color: rgba(0, 0, 0, 0.59); border-top-left-radius: 15px; border-top-right-radius: 15px; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
+                <ui:Button text="Items" display-tooltip-when-elided="true" name="Tab1" class="ClickedTab" />
+                <ui:Button text="Armor" display-tooltip-when-elided="true" name="Tab2" class="UnclickedTab" />
+                <ui:Button text="Weapons" display-tooltip-when-elided="true" name="Tab3" class="UnclickedTab" />
             </ui:VisualElement>
             <ui:VisualElement name="RightContainer" style="height: 100%; width: 50%; flex-direction: row;">
-                <ui:VisualElement name="Tab4" style="height: 100%; width: 20%; background-color: rgba(0, 0, 0, 0.59); border-top-left-radius: 15px; border-top-right-radius: 15px; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
-                <ui:VisualElement name="Tab5" style="height: 100%; width: 20%; background-color: rgba(0, 0, 0, 0.59); border-top-left-radius: 15px; border-top-right-radius: 15px; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
+                <ui:Button text="Unsupported" display-tooltip-when-elided="true" name="Tab4" class="UnclickedTab" />
+                <ui:Button text="Unsupported" display-tooltip-when-elided="true" name="Tab5" class="UnclickedTab" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Content" style="width: 100%; height: 100%; padding-left: 5%; padding-right: 5%; padding-top: 5%; padding-bottom: 5%; background-color: rgba(0, 0, 0, 0.43);" />
+        <ui:VisualElement name="Content" style="width: 100%; height: 100%; padding-left: 5%; padding-right: 5%; padding-top: 5%; padding-bottom: 5%; background-color: rgba(0, 0, 0, 0.43); border-left-width: 2px; border-right-width: 0; border-bottom-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
     </ui:VisualElement>
 </ui:UXML>

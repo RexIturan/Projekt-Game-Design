@@ -45,6 +45,15 @@ public class OverlayUIController : MonoBehaviour
         INGAME_MENU,
         INVENTORY
     }
+    
+    //Für das Inventar
+    private enum inventoryTab
+    {
+        NONE,
+        ITEMS,
+        ARMORY,
+        WEAPONS
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +72,9 @@ public class OverlayUIController : MonoBehaviour
         ingameMenuContainer.Q<Button>("SaveButton").clicked += ShowSaveScreen;
         ingameMenuContainer.Q<Button>("OptionsButton").clicked += ShowOptionsScreen;
         ingameMenuContainer.Q<Button>("LoadButton").clicked += ShowLoadScreen;
+        inventoryContainer.Q<Button>("Tab1").clicked += HandleItemTabPressed;
+        inventoryContainer.Q<Button>("Tab2").clicked += HandleArmoryTabPressed;
+        inventoryContainer.Q<Button>("Tab3").clicked += HandleWeaponsTabPressed;
     }
 
     private void Awake()
@@ -153,6 +165,21 @@ public class OverlayUIController : MonoBehaviour
         Application.Quit();
     }
 
+    void HandleItemTabPressed()
+    {
+        InventoryManager(inventoryTab.ITEMS,inventoryContainer.Q<Button>("Tab1"));
+    }
+    
+    void HandleArmoryTabPressed()
+    {
+        InventoryManager(inventoryTab.ARMORY,inventoryContainer.Q<Button>("Tab2"));
+    }
+    
+    void HandleWeaponsTabPressed()
+    {
+        InventoryManager(inventoryTab.WEAPONS,inventoryContainer.Q<Button>("Tab3"));
+    }
+
     void OverlayManager(screenOverlay screenOverlay)
     {
         switch (screenOverlay)
@@ -208,6 +235,39 @@ public class OverlayUIController : MonoBehaviour
                 // Ausblenden aller anderen Screens
                 saveScreen.style.display = DisplayStyle.None;
                 loadScreen.style.display = DisplayStyle.None;
+                break;
+        }
+    }
+
+    void resetAllTabs()
+    {
+        inventoryContainer.Q<Button>("Tab1").RemoveFromClassList("ClickedTab");
+        inventoryContainer.Q<Button>("Tab2").RemoveFromClassList("ClickedTab");
+        inventoryContainer.Q<Button>("Tab3").RemoveFromClassList("ClickedTab");
+        inventoryContainer.Q<Button>("Tab4").RemoveFromClassList("ClickedTab");
+        inventoryContainer.Q<Button>("Tab5").RemoveFromClassList("ClickedTab");
+        
+        
+        
+        inventoryContainer.Q<Button>("Tab1").AddToClassList("UnclickedTab");
+        inventoryContainer.Q<Button>("Tab2").AddToClassList("UnclickedTab");
+        inventoryContainer.Q<Button>("Tab3").AddToClassList("UnclickedTab");
+        inventoryContainer.Q<Button>("Tab4").AddToClassList("UnclickedTab");
+        inventoryContainer.Q<Button>("Tab5").AddToClassList("UnclickedTab");
+    }
+
+    void InventoryManager(inventoryTab tab, Button button)
+    {
+        resetAllTabs();
+        button.AddToClassList("ClickedTab");
+        
+        switch (tab)
+        {
+            case inventoryTab.ITEMS:
+                break;
+            case inventoryTab.ARMORY:
+                break;
+            case inventoryTab.WEAPONS:
                 break;
         }
     }
