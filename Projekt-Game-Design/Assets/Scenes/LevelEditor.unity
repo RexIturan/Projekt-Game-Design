@@ -945,14 +945,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
-      propertyPath: loadLevel
-      value: 
-      objectReference: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
-    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
-      propertyPath: saveLevel
-      value: 
-      objectReference: {fileID: 11400000, guid: c1df204252a25354591f6fe993db585c, type: 2}
     - target: {fileID: 7187340983742418651, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
       propertyPath: m_Name
       value: SaveManager
