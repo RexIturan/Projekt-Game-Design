@@ -44,6 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridContainer: {fileID: 11400000, guid: cf77658e9fdf6c24193f76cce7d45bff, type: 2}
-  pathBase: Assets/Resources/
-  filename: grid_test
-  fileSuffix: .json
+  globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  pathBase: Assets/Resources/Maps/
+  filename: map_01
+  gameSavePathBase: Assets/Resources/GameSaves/
+  gameSaveFilenames:
+  - SaveSlot_0
+  - SaveSlot_1
+  - SaveSlot_2
+  saveGame: {fileID: 11400000, guid: 8b9215eb7abdda1449c4fcad7e8131d2, type: 2}
+  loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
+  saveMap: {fileID: 11400000, guid: c1df204252a25354591f6fe993db585c, type: 2}
+  loadMap: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}

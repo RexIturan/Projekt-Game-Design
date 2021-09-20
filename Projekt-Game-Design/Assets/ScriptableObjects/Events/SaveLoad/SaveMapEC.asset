@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16b7e99933e74061ad8512a02b468e22, type: 3}
-  m_Name: LoadGameEC
+  m_Name: SaveMapEC
   m_EditorClassIdentifier: 
   description: 
