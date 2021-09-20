@@ -11,6 +11,7 @@ namespace Input {
         [Header("Sending Events On")]
         [SerializeField] private BoolEventChannelSO visibilityMenu;
         [SerializeField] private BoolEventChannelSO visibilityInventory;
+        [SerializeField] private BoolEventChannelSO visibilityGameOverlay;
         
         [Header("Receiving Events On")]
         [SerializeField] private VoidEventChannelSO enableMenuInput;
@@ -163,7 +164,7 @@ namespace Input {
             // TODO menuCancelEvent
             if (context.phase == InputActionPhase.Performed) {
                 Debug.Log("onCancel");
-                visibilityMenu.RaiseEvent(false);
+                visibilityGameOverlay.RaiseEvent(true);
             }
         }
 
@@ -174,7 +175,7 @@ namespace Input {
         public void OnCancelInventory(InputAction.CallbackContext context) {
             if (context.phase == InputActionPhase.Performed) {
                 Debug.Log("onCancel");
-                visibilityInventory.RaiseEvent(false);
+                visibilityGameOverlay.RaiseEvent(true);
             }
         }
 
