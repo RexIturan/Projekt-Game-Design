@@ -4,7 +4,7 @@ using UnityEngine;
 
 // type of world object 
 //
-[CreateAssetMenu(fileName = "New WorldObject", menuName = "WorldObject")]
+[CreateAssetMenu(fileName = "New WorldObject", menuName = "WorldObject/WorldObjectType")]
 public class WorldObjectTypeSO : ScriptableObject
 {
     [SerializeField] public GameObject prefab;
