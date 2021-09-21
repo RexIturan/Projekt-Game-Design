@@ -400,6 +400,44 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Inventory",
+            "id": "08413d11-c7a0-4765-9d70-d63dcb1217c5",
+            "actions": [
+                {
+                    "name": "CancelInventory",
+                    "type": "Button",
+                    "id": "6be97bc3-3d5e-40c1-babf-afbae0049aa3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6df524d9-a4e0-4479-bd8a-4438977ba4ba",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CancelInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "caa1823f-6396-4c95-97ad-9a46778dc290",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CancelInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

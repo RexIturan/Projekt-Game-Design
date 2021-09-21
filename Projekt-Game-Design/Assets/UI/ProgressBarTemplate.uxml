@@ -1,5 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="ProgressBar" class="ProgressBar">
-        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarHealth" />
-    </ui:VisualElement>
-</ui:UXML>
