@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0060a96a91ff3fb41b85a129587606c5, type: 3}
-  m_Name: sampleWeapon
+  m_Script: {fileID: 11500000, guid: 8a50132708b11194385e9e178c69182c, type: 3}
+  m_Name: ItemList
   m_EditorClassIdentifier: 
-  id: 1
-  goldValue: 20
-  rarity: 1
-  icon: {fileID: 21300000, guid: f00a7c6ca656b0a48ae830aced181b5a, type: 3}
-  prefab: {fileID: 0}
-  type: 4
+  ItemList:
+  - {fileID: 11400000, guid: b74620afa12d4934fa16a57e68281a5b, type: 2}
+  - {fileID: 11400000, guid: 34707fdcee39c964488d7c7ba3503935, type: 2}

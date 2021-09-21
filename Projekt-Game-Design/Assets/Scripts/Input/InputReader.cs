@@ -129,7 +129,6 @@ namespace Input {
 
         public void OnInventory(InputAction.CallbackContext context) {
             if (context.phase == InputActionPhase.Performed) {
-                Debug.Log("onInventory");
                 visibilityInventory.RaiseEvent(true);
             }
         }

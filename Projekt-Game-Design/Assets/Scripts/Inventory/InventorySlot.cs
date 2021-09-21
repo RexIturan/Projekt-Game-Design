@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class InventorySlot : VisualElement
 {
     public Image Icon;
-    public string ItemGuid = "";
+    public int ItemGuid = -1;
     public InventorySlot()
     {
         //Create a new Image element and add it to the root
@@ -15,5 +15,17 @@ public class InventorySlot : VisualElement
         //Add USS style properties to the elements
         Icon.AddToClassList("square");
         AddToClassList("slotContainer");
+    }
+    
+    public void HoldItem(ItemSO item)
+    {
+        Icon.image = item.icon.texture;
+        ItemGuid = item.id;
+        Debug.Log("Test in HoldItem");
+    }
+    public void DropItem()
+    {
+        ItemGuid = -1;
+        Icon.image = null;
     }
 }
