@@ -27,7 +27,6 @@ public class OverlayUIController : MonoBehaviour
     {
         // Holen des UXML Trees, zum getten der einzelnen Komponenten
         var root = GetComponent<UIDocument>().rootVisualElement;
-
         overlayContainer = root.Q<VisualElement>("OverlayContainer");
         overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
     }
