@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: LifeStealAttack
   m_EditorClassIdentifier: 
   targets: 4
+  moveToTarget: 0
   range: 1
+  conditions: 0
   costs:
     lifePoints: 0
     manaPoints: 5
@@ -21,20 +23,22 @@ MonoBehaviour:
     energyPoints: 8
   targetedEffects:
   - effect:
+      type: 4
       baseDamage: 2
-      strengthBonus: 0.1
+      strengthBonus: 0
       dexterityBonus: 0
-      intelligenceBonus: 0
+      intelligenceBonus: 0.1
       statusEffects: []
       environmentalEffect: {fileID: 0}
     targets: 4
     targetIsCenter: 1
     area: 1
   - effect:
-      baseDamage: -1
+      type: 0
+      baseDamage: 1
       strengthBonus: 0
       dexterityBonus: 0
-      intelligenceBonus: -0.1
+      intelligenceBonus: 0.1
       statusEffects: []
       environmentalEffect: {fileID: 0}
     targets: 1

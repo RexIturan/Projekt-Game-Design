@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: SimpleMeleeAttack
   m_EditorClassIdentifier: 
   targets: 20
+  moveToTarget: 0
   range: 1
+  conditions: 0
   costs:
     lifePoints: 0
     manaPoints: 0
@@ -21,6 +23,7 @@ MonoBehaviour:
     energyPoints: 5
   targetedEffects:
   - effect:
+      type: 1
       baseDamage: 3
       strengthBonus: 0.2
       dexterityBonus: 0

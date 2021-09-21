@@ -10,26 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
-  m_Name: Heal
+  m_Name: SimpleMovement
   m_EditorClassIdentifier: 
-  targets: 3
-  moveToTarget: 0
-  range: 4
-  conditions: 1
+  targets: 24
+  moveToTarget: 1
+  range: 0
+  conditions: 2
   costs:
     lifePoints: 0
-    manaPoints: 5
+    manaPoints: 0
     movementPoints: 0
-    energyPoints: 6
-  targetedEffects:
-  - effect:
-      type: 0
-      baseDamage: 2
-      strengthBonus: 0
-      dexterityBonus: 0
-      intelligenceBonus: 0
-      statusEffects: []
-      environmentalEffect: {fileID: 0}
-    targets: 3
-    targetIsCenter: 1
-    area: 1
+    energyPoints: 0
+  targetedEffects: []
