@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Util;
 using Visual;
+using WorldObjects;
 
 namespace LevelEditor {
     public class LevelEditor : MonoBehaviour {
@@ -25,6 +26,10 @@ namespace LevelEditor {
         [SerializeField] private TileMapDrawer drawer;
         [SerializeField] private GridController controller;
         [SerializeField] private InputReader inputReader;
+
+        [SerializeField] private WorldObjectGridController objectController;
+        [SerializeField] private PrefabGridDrawer prefabDrawer;
+        [SerializeField] private WorldObjectContainerSO worldObjectContainer;
         
         [Header("Settings")]
         [SerializeField] private ECursorMode mode = ECursorMode.paint;
@@ -72,6 +77,7 @@ namespace LevelEditor {
                 case ECursorMode.paint:
 
                     drawer.DrawCursorAt(mousePosition);
+                    
                     
                     if (clicked) {
                         HandlePaint();
@@ -128,7 +134,6 @@ namespace LevelEditor {
             clicked = false;
         }
 
-
         public void HandleMouseClick(Vector3 pos) {
             clicked = true;
             clickPos = pos;
@@ -149,5 +154,9 @@ namespace LevelEditor {
         public void AddTileAt(Vector3 clickPos) {
             controller.AddTileAt(clickPos, selectedTileType);
         }
+
+        // public void AddObjectAt(Vector3 clickPos) {
+        //     objectController.AddTileAt(clickPos, worldObjectContainer.worldObjects[1]);
+        // }
     }
 }

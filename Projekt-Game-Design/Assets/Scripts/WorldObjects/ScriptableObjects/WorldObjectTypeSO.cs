@@ -5,12 +5,13 @@ using UnityEngine;
 // type of world object 
 //
 [CreateAssetMenu(fileName = "New WorldObject", menuName = "WorldObject/WorldObjectType")]
-public class WorldObjectTypeSO : ScriptableObject
-{
-    [SerializeField] public GameObject prefab;
-    [SerializeField] public EWorldObjectFlags initialProperties; // visiable, destructable, etc. 
-    [SerializeField] public int maxLifePoints;
+public class WorldObjectTypeSO : ScriptableObject {
+    public string name;
+    
+    public GameObject prefab;
+    public EWorldObjectFlags initialProperties; // visiable, destructable, etc. 
 
-    [SerializeField] public object[] actions; // not player actions;
-                                              // events with conditions and effect
+    public int maxLifePoints;
+    public object[] actions; // not player actions;
+                             // events with conditions and effect
 }

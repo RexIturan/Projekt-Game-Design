@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: AllTheObjects
   m_EditorClassIdentifier: 
   worldObjects:
-  - {fileID: 477475561137574740, guid: f1fd36ea81fe1af4c9c8f81381da9b68, type: 3}
-  - {fileID: 477475561137574740, guid: f1fd36ea81fe1af4c9c8f81381da9b68, type: 3}
+  - {fileID: 11400000, guid: 031a67f496470ad429c4a57b7dd14177, type: 2}
+  - {fileID: 11400000, guid: a5295f8fef1e2c04ea5106bf6e24d5c6, type: 2}
