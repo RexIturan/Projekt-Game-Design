@@ -10,6 +10,10 @@
     color: rgb(255, 255, 255);
     font-size: 19px;
     margin-top: 20px;
+    border-left-color: rgba(0, 0, 0, 255);
+    border-right-color: rgba(0, 0, 0, 255);
+    border-top-color: rgba(0, 0, 0, 255);
+    border-bottom-color: rgba(0, 0, 0, 255);
 }
 
 .Button_Layout:hover {
