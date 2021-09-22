@@ -13,7 +13,7 @@ public class InventorySlot : VisualElement
         Icon = new Image();
         Add(Icon);
         //Add USS style properties to the elements
-        Icon.AddToClassList("square");
+        Icon.AddToClassList("slotIcon");
         AddToClassList("slotContainer");
     }
     

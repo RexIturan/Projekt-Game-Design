@@ -232,8 +232,10 @@ MonoBehaviour:
   VisibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
   OnItemPickupEventChannel: {fileID: 11400000, guid: 923c7a859e7f1f744b297552276d93a8, type: 2}
   OnItemDropEventChannel: {fileID: 11400000, guid: a2d61755a24c4ac4f95ba6d812bdcf70, type: 2}
+  ChangeInventoryListEventChannel: {fileID: 11400000, guid: 93022818b29b1ce4da9ed669857028b9, type: 2}
   VisibilityGameOverlayEventChannel: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
   enableInventoryInput: {fileID: 11400000, guid: 6f2cf282820633f41a7bde9dc75b3af9, type: 2}
+  changeInventoryTab: {fileID: 11400000, guid: c0c391df13a8ed149a1fcb343bb20c4d, type: 2}
 --- !u!114 &160448884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +572,8 @@ MonoBehaviour:
   playerInventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
   OnItemPickupEventChannel: {fileID: 11400000, guid: 923c7a859e7f1f744b297552276d93a8, type: 2}
   OnItemDropEventChannel: {fileID: 11400000, guid: a2d61755a24c4ac4f95ba6d812bdcf70, type: 2}
+  ChangeInventoryListEventChannel: {fileID: 11400000, guid: 93022818b29b1ce4da9ed669857028b9, type: 2}
+  inventoryTabChanged: {fileID: 11400000, guid: c0c391df13a8ed149a1fcb343bb20c4d, type: 2}
 --- !u!4 &1924564047
 Transform:
   m_ObjectHideFlags: 0

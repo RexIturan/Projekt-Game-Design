@@ -22,6 +22,7 @@ public class InventoryUIController : MonoBehaviour
     [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
     [SerializeField] private IntEventChannelSO OnItemPickupEventChannel;
     [SerializeField] private IntEventChannelSO OnItemDropEventChannel;
+    [SerializeField] private IntListEventChannelSO ChangeInventoryListEventChannel;
 
     [Header("Sending and Receiving Events On")] [SerializeField]
     private BoolEventChannelSO VisibilityGameOverlayEventChannel;
@@ -30,22 +31,17 @@ public class InventoryUIController : MonoBehaviour
     // Inputchannel für das Inventar
     [SerializeField]
     private VoidEventChannelSO enableInventoryInput;
+    [SerializeField]
+    private InventoryTabEventChannelSO changeInventoryTab;
 
     //Für das Inventar
-    private enum inventoryTab
+    public enum inventoryTab
     {
         NONE,
         ITEMS,
         ARMORY,
         WEAPONS
     }
-
-    private enum InventoryChangeType
-    {
-        ADD,
-        REMOVE
-    }
-
 
     private void Start()
     {
@@ -80,8 +76,9 @@ public class InventoryUIController : MonoBehaviour
         VisibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
         VisibilityInventoryEventChannel.OnEventRaised += HandleInventoryOverlay;
         VisibilityGameOverlayEventChannel.OnEventRaised += HandleOtherScreensOpened;
-        OnItemPickupEventChannel.OnEventRaised += handleItemPickup;
-        OnItemDropEventChannel.OnEventRaised += handleItemDrop;
+        OnItemPickupEventChannel.OnEventRaised += HandleItemPickup;
+        OnItemDropEventChannel.OnEventRaised += HandleItemDrop;
+        ChangeInventoryListEventChannel.OnEventRaised += HandleTabChanged;
     }
 
     void resetAllTabs()
@@ -109,10 +106,13 @@ public class InventoryUIController : MonoBehaviour
         switch (tab)
         {
             case inventoryTab.ITEMS:
+                changeInventoryTab.RaiseEvent(inventoryTab.ITEMS);
                 break;
             case inventoryTab.ARMORY:
+                changeInventoryTab.RaiseEvent(inventoryTab.ARMORY);
                 break;
             case inventoryTab.WEAPONS:
+                changeInventoryTab.RaiseEvent(inventoryTab.WEAPONS);
                 break;
         }
     }
@@ -153,33 +153,24 @@ public class InventoryUIController : MonoBehaviour
         HandleInventoryOverlay(false);
     }
 
-    private void handleItemPickup(int itemGuid)
+    private void HandleItemPickup(int itemGuid)
     {
-        HandleInventoryChanged(itemGuid, InventoryChangeType.ADD);
+        AddItemToInventoryOverlay(itemGuid);
     }
     
-    private void handleItemDrop(int itemGuid)
+    private void HandleItemDrop(int itemGuid)
     {
-        HandleInventoryChanged(itemGuid, InventoryChangeType.REMOVE);
+        RemoveItemFromInventoryOverlay(itemGuid);
     }
-
-    private void HandleInventoryChanged(int itemGuid, InventoryChangeType change)
+    
+    private void HandleTabChanged(List<int> itemGuids)
     {
-
-        switch (change)
-        {
-            case InventoryChangeType.ADD:
-                AddItemToInventoryOverlay(itemGuid);
-                break;
-            case InventoryChangeType.REMOVE:
-                RemoveItemFromInventoryOverlay(itemGuid);
-                break;
-        }
+        AddItemListToInventoryOverlay(itemGuids);
     }
-
 
     private void AddItemToInventoryOverlay(int itemGuid)
     {
+        Debug.Log("TEstAddItemToInventoryOverlay");
         var emptySlot = InventoryItems.FirstOrDefault(x => x.ItemGuid.Equals(-1));
 
         if (emptySlot != null)
@@ -197,4 +188,25 @@ public class InventoryUIController : MonoBehaviour
             emptySlot.DropItem();
         }
     }
+
+    private void CleanAllItemSlots()
+    {
+        foreach (var itemSlot in InventoryItems)
+        {
+            if (itemSlot != null && itemSlot.ItemGuid != -1)
+            {
+                itemSlot.DropItem();
+            }
+        }
+    }
+
+    private void AddItemListToInventoryOverlay(List<int> list)
+    {
+        CleanAllItemSlots();
+        foreach (int itemId in list)
+        {
+            AddItemToInventoryOverlay(itemId);
+        }
+    }
+    
 }
