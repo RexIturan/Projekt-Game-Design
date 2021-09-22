@@ -227,10 +227,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aeaa86373cf5e54c89afc95fa2de18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemList: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
   VisibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
   VisibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
+  OnItemPickupEventChannel: {fileID: 11400000, guid: 923c7a859e7f1f744b297552276d93a8, type: 2}
+  OnItemDropEventChannel: {fileID: 11400000, guid: a2d61755a24c4ac4f95ba6d812bdcf70, type: 2}
+  ChangeInventoryListEventChannel: {fileID: 11400000, guid: 93022818b29b1ce4da9ed669857028b9, type: 2}
   VisibilityGameOverlayEventChannel: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
   enableInventoryInput: {fileID: 11400000, guid: 6f2cf282820633f41a7bde9dc75b3af9, type: 2}
+  changeInventoryTab: {fileID: 11400000, guid: c0c391df13a8ed149a1fcb343bb20c4d, type: 2}
 --- !u!114 &160448884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,4 +539,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1924564045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1924564047}
+  - component: {fileID: 1924564046}
+  m_Layer: 0
+  m_Name: TestObjectInventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1924564046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924564045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8392dfd75ca104a4497b102d99936a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
+  OnItemPickupEventChannel: {fileID: 11400000, guid: 923c7a859e7f1f744b297552276d93a8, type: 2}
+  OnItemDropEventChannel: {fileID: 11400000, guid: a2d61755a24c4ac4f95ba6d812bdcf70, type: 2}
+  ChangeInventoryListEventChannel: {fileID: 11400000, guid: 93022818b29b1ce4da9ed669857028b9, type: 2}
+  inventoryTabChanged: {fileID: 11400000, guid: c0c391df13a8ed149a1fcb343bb20c4d, type: 2}
+--- !u!4 &1924564047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924564045}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5052189, y: 0.41720527, z: -0.11161375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

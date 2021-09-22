@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,39 +9,47 @@ public class InventoryUIController : MonoBehaviour
 {
     public List<InventorySlot> InventoryItems = new List<InventorySlot>();
 
+    public ItemListSO ItemList;
+
     private VisualElement m_SlotContainer;
+
     // Für das Inventar
     private VisualElement inventoryContainer;
 
-    [Header("Receiving Events On")]
-    [SerializeField] private BoolEventChannelSO VisibilityMenuEventChannel;
+    [Header("Receiving Events On")] [SerializeField]
+    private BoolEventChannelSO VisibilityMenuEventChannel;
+
     [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
-    
-    [Header("Sending and Receiving Events On")]
-    [SerializeField] private BoolEventChannelSO VisibilityGameOverlayEventChannel;
-    
+    [SerializeField] private IntEventChannelSO OnItemPickupEventChannel;
+    [SerializeField] private IntEventChannelSO OnItemDropEventChannel;
+    [SerializeField] private IntListEventChannelSO ChangeInventoryListEventChannel;
+
+    [Header("Sending and Receiving Events On")] [SerializeField]
+    private BoolEventChannelSO VisibilityGameOverlayEventChannel;
+
     [Header("Sending Events On")]
     // Inputchannel für das Inventar
-    [SerializeField] private VoidEventChannelSO enableInventoryInput;
-    
+    [SerializeField]
+    private VoidEventChannelSO enableInventoryInput;
+    [SerializeField]
+    private InventoryTabEventChannelSO changeInventoryTab;
+
     //Für das Inventar
-    private enum inventoryTab
+    public enum inventoryTab
     {
         NONE,
         ITEMS,
         ARMORY,
         WEAPONS
     }
-    
-    
+
     private void Start()
     {
-        
         // Holen des UXML Trees, zum getten der einzelnen Komponenten
         var root = GetComponent<UIDocument>().rootVisualElement;
         //Store the root from the UI Document component
         root = GetComponent<UIDocument>().rootVisualElement;
-        
+
         inventoryContainer = root.Q<VisualElement>("InventoryOverlay");
 
         //Search the root for the SlotContainer Visual Element
@@ -55,23 +64,23 @@ public class InventoryUIController : MonoBehaviour
 
             m_SlotContainer.Add(item);
         }
-        
+
         inventoryContainer.Q<Button>("Tab1").clicked += HandleItemTabPressed;
         inventoryContainer.Q<Button>("Tab2").clicked += HandleArmoryTabPressed;
         inventoryContainer.Q<Button>("Tab3").clicked += HandleWeaponsTabPressed;
     }
-    
-    
+
+
     private void Awake()
     {
-        
-        //VisibilityMenuEventChannel.OnEventRaised += SetMenuVisibility;
-        //VisibilityInventoryEventChannel.OnEventRaised += SetInventoryVisibility;
         VisibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
         VisibilityInventoryEventChannel.OnEventRaised += HandleInventoryOverlay;
-        VisibilityGameOverlayEventChannel.OnEventRaised  += HandleOtherScreensOpened;
+        VisibilityGameOverlayEventChannel.OnEventRaised += HandleOtherScreensOpened;
+        OnItemPickupEventChannel.OnEventRaised += HandleItemPickup;
+        OnItemDropEventChannel.OnEventRaised += HandleItemDrop;
+        ChangeInventoryListEventChannel.OnEventRaised += HandleTabChanged;
     }
-    
+
     void resetAllTabs()
     {
         inventoryContainer.Q<Button>("Tab1").RemoveFromClassList("ClickedTab");
@@ -97,16 +106,18 @@ public class InventoryUIController : MonoBehaviour
         switch (tab)
         {
             case inventoryTab.ITEMS:
+                changeInventoryTab.RaiseEvent(inventoryTab.ITEMS);
                 break;
             case inventoryTab.ARMORY:
+                changeInventoryTab.RaiseEvent(inventoryTab.ARMORY);
                 break;
             case inventoryTab.WEAPONS:
+                changeInventoryTab.RaiseEvent(inventoryTab.WEAPONS);
                 break;
         }
     }
-    
-    
-    
+
+
     void HandleItemTabPressed()
     {
         InventoryManager(inventoryTab.ITEMS, inventoryContainer.Q<Button>("Tab1"));
@@ -134,12 +145,68 @@ public class InventoryUIController : MonoBehaviour
         else
         {
             inventoryContainer.style.display = DisplayStyle.None;
-            //VisibilityInventoryEventChannel.RaiseEvent(true);
         }
     }
-    
+
     void HandleOtherScreensOpened(bool value)
     {
         HandleInventoryOverlay(false);
     }
+
+    private void HandleItemPickup(int itemGuid)
+    {
+        AddItemToInventoryOverlay(itemGuid);
+    }
+    
+    private void HandleItemDrop(int itemGuid)
+    {
+        RemoveItemFromInventoryOverlay(itemGuid);
+    }
+    
+    private void HandleTabChanged(List<int> itemGuids)
+    {
+        AddItemListToInventoryOverlay(itemGuids);
+    }
+
+    private void AddItemToInventoryOverlay(int itemGuid)
+    {
+        Debug.Log("TEstAddItemToInventoryOverlay");
+        var emptySlot = InventoryItems.FirstOrDefault(x => x.ItemGuid.Equals(-1));
+
+        if (emptySlot != null)
+        {
+            emptySlot.HoldItem(ItemList.ItemList[itemGuid]);
+        }
+    }
+    
+    private void RemoveItemFromInventoryOverlay(int itemGuid)
+    {
+        var emptySlot = InventoryItems.FirstOrDefault(x => x.ItemGuid.Equals(itemGuid));
+
+        if (emptySlot != null)
+        {
+            emptySlot.DropItem();
+        }
+    }
+
+    private void CleanAllItemSlots()
+    {
+        foreach (var itemSlot in InventoryItems)
+        {
+            if (itemSlot != null && itemSlot.ItemGuid != -1)
+            {
+                itemSlot.DropItem();
+            }
+        }
+    }
+
+    private void AddItemListToInventoryOverlay(List<int> list)
+    {
+        CleanAllItemSlots();
+        foreach (int itemId in list)
+        {
+            AddItemToInventoryOverlay(itemId);
+        }
+    }
+    
 }
