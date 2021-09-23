@@ -71,7 +71,7 @@ namespace SaveLoad {
             var path = pathBase + filename + fileSuffix;
             
             // TODO Debug Macro
-            Debug.Log($"Save Test GridContainer to JSON at{path} \n{json}");
+            Debug.Log($"Save Test GridContainer to JSON at {path} \n{json}");
 
             using (var fs = new FileStream(path, FileMode.Create)) {
                 using (var writer = new StreamWriter(fs)) {

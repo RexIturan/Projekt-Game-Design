@@ -15,13 +15,13 @@ namespace Grid {
         [SerializeField] private TileMapDrawer drawer;
 
         public void OnEnable() {
-            globalGridData.InitValues(defaultGridData);
-            
-            gridContainer.tileGrids = new List<TileGrid>();
-            gridContainer.tileGrids.Add(CreateNewTileGrid());
-            FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[0]);
-            // IncreaseGrid(new Vector2Int(-3,-3), new Vector2Int(globalGridData.Width + 3, globalGridData.Height +3));
-            drawer.DrawGrid();
+            // globalGridData.InitValues(defaultGridData);
+            //
+            // gridContainer.tileGrids = new List<TileGrid>();
+            // gridContainer.tileGrids.Add(CreateNewTileGrid());
+            // FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[0]);
+            // // IncreaseGrid(new Vector2Int(-3,-3), new Vector2Int(globalGridData.Width + 3, globalGridData.Height +3));
+            // drawer.DrawGrid();
 
 
             //
@@ -224,6 +224,17 @@ namespace Grid {
                 x: newLowerBounds.x,
                 y: globalGridData.OriginPosition.y,
                 z: newLowerBounds.y);
+        }
+
+        public void ResetGrid() {
+            globalGridData.height = 1;
+            globalGridData.width = 1;
+            globalGridData.originPosition = new Vector3(0, 0, 0);
+            globalGridData.cellSize = 1;
+
+            gridContainer.tileGrids = new List<TileGrid>();
+            gridContainer.tileGrids.Add(CreateNewTileGrid());
+            FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[0]);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Graph {
                 graphContainer.basicMovementGraph.Add(graph);
             }
             
-            // graphDrawer.DrawGraph();
+            graphDrawer.DrawGraph();
         }
 
         public void GenerateGraph(TileGrid ground, NodeGraph graph) {
@@ -37,7 +37,7 @@ namespace Graph {
             for (int x = 0; x < ground.Width; x++) {
                 for (int y = 0; y < ground.Height; y++) {
                     var walkable = 
-                        ground.GetGridObject(x, y).Type.Flags.HasFlag(ETileFlags.walkable);// &&
+                        !ground.GetGridObject(x, y).Type.Flags.HasFlag(ETileFlags.solid);// &&
                     //     !current.GetGridObject(x, y).Type.Flags.HasFlag(ETileFlags.solid);
                     graph.GetGridObject(x, y).SetIsWalkable(walkable);
                 }

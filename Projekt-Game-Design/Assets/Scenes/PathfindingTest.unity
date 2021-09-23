@@ -166,9 +166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992c6cb5eaca4d568a6545da4b674c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadLevel: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
   drawer: {fileID: 1427959555}
   controller: {fileID: 1470655166}
-  mode: 1
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  mode: 0
   selectedTileType: {fileID: 0}
   tileTypesContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}
 --- !u!1 &258720369
@@ -289,6 +291,67 @@ Transform:
   m_Father: {fileID: 924431121}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &660559428
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284373040448921599, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: filename
+      value: pathfinding_test
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187340983742418651, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: m_Name
+      value: SaveManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
 --- !u!1 &671836852
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &671836853
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -570,6 +633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GraphContainer: {fileID: 11400000, guid: a579a7e16bbc7cb419001b3fed163a80, type: 2}
+  drawGraph: 0
 --- !u!4 &1086969259
 Transform:
   m_ObjectHideFlags: 0
@@ -699,7 +763,7 @@ MonoBehaviour:
   - tileType: {fileID: 11400000, guid: 353c6e4f6e21d804da9b81d38eb3d86f, type: 2}
     tile: {fileID: 11400000, guid: 7be3b7d63c6cb09409d1d2cfd35d30aa, type: 2}
   cursor: {fileID: 11400000, guid: 5df0112f3270e7640928005d77d9db4e, type: 2}
-  errorTile: {fileID: 0}
+  errorTile: {fileID: 11400000, guid: a207a9ddce05b9149be37688adec5bd3, type: 2}
 --- !u!1 &1470655165
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,4 +1017,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelEditor: {fileID: 9086378}
-  cursor: {fileID: 0}
+  VisibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
+  enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
+  saveLevel: {fileID: 11400000, guid: c1df204252a25354591f6fe993db585c, type: 2}
+  loadLevel: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
