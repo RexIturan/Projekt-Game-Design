@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0060a96a91ff3fb41b85a129587606c5, type: 3}
   m_Name: hammer
   m_EditorClassIdentifier: 
-  goldValue: 0
-  rarity: 0
+  goldValue: 20
+  rarity: 1
   icon: {fileID: 0}
   prefab: {fileID: 0}
-  type: 0
-  actions: []
+  type: 5
+  abilities:
+  - {fileID: 11400000, guid: 850b49124dde1a54298df4c3a4deebf6, type: 2}

@@ -17,3 +17,4 @@ MonoBehaviour:
   icon: {fileID: 0}
   prefab: {fileID: 2181893431691929815, guid: d856944c5df2e684ab6bfd8fea736a52, type: 3}
   type: 18
+  abilities: []

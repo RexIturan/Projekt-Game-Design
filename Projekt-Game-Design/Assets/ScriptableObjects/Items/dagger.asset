@@ -16,6 +16,6 @@ MonoBehaviour:
   rarity: 1
   icon: {fileID: 0}
   prefab: {fileID: 0}
-  type: 4
-  actions:
-  - {fileID: 0}
+  type: 5
+  abilities:
+  - {fileID: 11400000, guid: aa8fc6b0c08121f4eacb09b51893376e, type: 2}

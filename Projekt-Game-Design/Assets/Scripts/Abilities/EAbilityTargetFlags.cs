@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CharacterAction
+namespace Ability
 {
     // possible targets of a character action
     //
     [System.Serializable, System.Flags]
-    public enum EActionTargetFlags
+    public enum EAbilityTargetFlags
     {
         SELF = 1,
         ALLY = 2,

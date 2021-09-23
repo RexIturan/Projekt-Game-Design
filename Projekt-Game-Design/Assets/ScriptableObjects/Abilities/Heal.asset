@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
-  m_Name: SwiftMelee
+  m_Name: Heal
   m_EditorClassIdentifier: 
-  targets: 0
+  targets: 3
   moveToTarget: 0
-  range: 0
-  conditions: 0
-  costs:
-    lifePoints: 0
-    manaPoints: 0
-    movementPoints: 0
-    energyPoints: 0
-  targetedEffects: []
+  range: 4
+  conditions: 2
+  costs: 0
+  targetedEffects:
+  - effect:
+      type: 0
+      baseDamage: 2
+      strengthBonus: 0
+      dexterityBonus: 0
+      intelligenceBonus: 0
+    targets: 3
+    targetIsCenter: 1
+    area: 1

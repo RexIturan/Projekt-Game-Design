@@ -15,10 +15,6 @@ MonoBehaviour:
   targets: 24
   moveToTarget: 1
   range: 0
-  conditions: 2
-  costs:
-    lifePoints: 0
-    manaPoints: 0
-    movementPoints: 0
-    energyPoints: 0
+  conditions: 1
+  costs: 0
   targetedEffects: []

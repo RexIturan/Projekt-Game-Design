@@ -11,5 +11,5 @@ public class EnemyTypeSO : ScriptableObject
     [SerializeField] public ScriptableObject item; // standard equipped Item 
     [SerializeField] public CharacterStats stats;
     [SerializeField] public LootTable drops;
-    [SerializeField] public ActionSO[] basicActions; // actions at all time available
+    [SerializeField] public AbilitySO[] basicAbilities; // actions at all time available
 }
