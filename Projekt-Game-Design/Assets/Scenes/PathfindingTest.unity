@@ -889,7 +889,7 @@ MonoBehaviour:
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   graphContainer: {fileID: 11400000, guid: a579a7e16bbc7cb419001b3fed163a80, type: 2}
   drawer: {fileID: 2123519133}
-  dist: 2
+  dist: 50
 --- !u!4 &2123519135
 Transform:
   m_ObjectHideFlags: 0

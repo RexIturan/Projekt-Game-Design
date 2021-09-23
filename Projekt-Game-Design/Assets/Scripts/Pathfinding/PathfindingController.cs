@@ -18,24 +18,47 @@ namespace Pathfinding {
         [Header("Settings")]
         [SerializeField] private int dist;
 
+        private Vector2Int clickedPos;
+        private List<PathNode> reachableNodes;
+        
         private void Awake() {
             InitialisePathfinding();            
         }
 
         private void Update() {
+            
+            var pos = MousePosition.GetMouseWorldPosition();
+            
+            if (clickedPos != null && reachableNodes != null && reachableNodes.Count > 0) {
+                var gridPos = WorldPosToGridPos(pos);
+                bool reachable = false;
+                PathNode currentNode = null;
+                foreach (var node in reachableNodes) {
+                    if (node.x == gridPos.x && node.y == gridPos.y) {
+                        reachable = true;
+                        currentNode = node;
+                    }
+                }
+
+                if (reachable) {
+                    var path = pathfinding.CalculatePath(currentNode);
+                    drawer.DrawPreviewPath(path);
+                }
+            }
+            
             if (Mouse.current.leftButton.wasPressedThisFrame) {
-                var pos = MousePosition.GetMouseWorldPosition();
+                // var pos = MousePosition.GetMouseWorldPosition();
                 // Debug.Log($"{pos}");
                 
-                var reach = GetReachableNodes(pos, dist);
-                var nodeList = "";
-                foreach (var node in reach) {
-                    nodeList += $" {node.ToString()}";
-                }
+                reachableNodes = GetReachableNodes(pos, dist);
+                // var nodeList = "";
+                // foreach (var node in reachableNodes) {
+                //     nodeList += $" {node.ToString()}";
+                // }
                 
-                Debug.Log($"{pos} {nodeList}");
+                // Debug.Log($"{pos} {nodeList}");
                 
-                drawer.DrawPreview(reach);
+                drawer.DrawPreview(reachableNodes);
             }
         }
 
@@ -50,10 +73,12 @@ namespace Pathfinding {
         }
         
         public List<PathNode> GetReachableNodes(Vector2Int pos, int maxDist) {
+            InitialisePathfinding();
             return pathfinding.GetReachableNodes(pos.x, pos.y, maxDist);
         }
 
         public List<PathNode> GetPath(Vector3 start3d, Vector3 end3d, int maxDist) {
+            InitialisePathfinding();
             Vector2Int start = WorldPosToGridPos(start3d);
             Vector2Int end = WorldPosToGridPos(end3d);
             return pathfinding.FindPath(start.x, start.y, end.x, end.y);

@@ -26,10 +26,11 @@ namespace Pathfinding {
 
         public void DrawPreviewPath(List<PathNode> nodes) {
             ClearPreviewPathTilemap();
-            
-            foreach (var node in nodes) {
-                Vector2Int pos = GridPosToTilePos(node.x, node.y);
-                previewPathTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), previewPathTile);                
+            if (nodes != null) {
+                foreach (var node in nodes) {
+                    Vector2Int pos = GridPosToTilePos(node.x, node.y);
+                    previewPathTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), previewPathTile);                
+                }    
             }
         }
 

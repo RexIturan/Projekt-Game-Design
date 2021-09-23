@@ -12,4 +12,254 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39289872a46a417ba6191f75465b5b39, type: 3}
   m_Name: GraphContainer
   m_EditorClassIdentifier: 
-  basicMovementGraph: []
+  basicMovementGraph:
+  - width: 5
+    height: 7
+    cellSize: 1
+    originPosition: {x: -2, y: 0, z: -4}
+    grid1DArray:
+    - x: 0
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 1
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 2
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 3
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 4
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 0
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 1
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 0
+    - x: 2
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 3
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 4
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 0
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 1
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 0
+    - x: 2
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 0
+    - x: 3
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 0
+    - x: 4
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 0
+    - x: 0
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 1
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 0
+    - x: 2
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 3
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 4
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 0
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 1
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 2
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 4
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 0
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 1
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 2
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 0
+    - x: 3
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 0
+    - x: 4
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 0
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 1
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 2
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 3
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
+    - x: 4
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 2147483647
+      isWalkable: 1
