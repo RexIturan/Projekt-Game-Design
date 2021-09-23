@@ -2,6 +2,7 @@
 
 
 namespace Util {
+    [System.Serializable]
     public class PathNode {
         
         public struct Edge

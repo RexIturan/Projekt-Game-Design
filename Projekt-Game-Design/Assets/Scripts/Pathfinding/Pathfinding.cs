@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Graph;
 using Util;
 using UnityEngine;
 using Util.VisualDebug;
@@ -16,18 +17,14 @@ namespace Pathfinding {
         private bool diagonal = true;
         private bool debug = false;
         
-        private GenericGrid1D<PathNode> grid;
+        private NodeGraph graph;
         private List<PathNode> openList;
         private List<PathNode> closedList;
 
-        public Pathfinding(int width, int height, bool diagonal, bool debug = true) {
-            Instance = this;
-            this.debug = debug;
-            this.diagonal = diagonal; 
-            int cellSize = 1;
-            // TODO get grid from GraphContainer
-            // TODO remove
-            grid = new GenericGrid1D<PathNode>(width, height, cellSize, Vector3.zero, (GenericGrid1D<PathNode> g, int x, int y) => new PathNode(g, x, y), debug);
+        
+        
+        public Pathfinding(NodeGraph graph) {
+            this.graph = graph;
         }
 
         /*Calculate list of all reachable nodes from start node using dijkstra
@@ -35,7 +32,7 @@ namespace Pathfinding {
          returns list of all reachable nodes*/
         public List<PathNode> GetReachableNodes(int startX, int startY, int maxDist)
         {
-            var startNode = grid.GetGridObject(startX, startY);
+            var startNode = graph.GetGridObject(startX, startY);
 
             //used to compare nodes by their distance from start node
             IComparer<PathNode> nodeComparer = new CompareNodeDist(); 
@@ -44,9 +41,9 @@ namespace Pathfinding {
             
             List<PathNode> closedNodes = new List<PathNode>();
 
-            for (int x = 0; x < grid.Width; x++) {
-                for (int y = 0; y < grid.Height; y++) {
-                    PathNode pathNode = grid.GetGridObject(x, y);
+            for (int x = 0; x < graph.Width; x++) {
+                for (int y = 0; y < graph.Height; y++) {
+                    PathNode pathNode = graph.GetGridObject(x, y);
                     pathNode.dist = int.MaxValue;
                     pathNode.parentNode = null;
                 }
@@ -63,6 +60,10 @@ namespace Pathfinding {
                 activeNodes.RemoveAt(0);
                 closedNodes.Add(currentNode);
 
+                if (currentNode.Edges == null) {
+                    continue;    
+                }
+                
                 foreach (var edge in currentNode.Edges)
                 {
                     if (!closedNodes.Contains(edge.Target) && currentNode.dist + edge.Cost <= maxDist)
@@ -95,16 +96,16 @@ namespace Pathfinding {
         
 
         public List<PathNode> FindPath(int startX, int startY, int endX, int endY, bool ignoreIsWalkable = false) {
-            var startNode = grid.GetGridObject(startX, startY);
-            var endNode = grid.GetGridObject(endX, endY);
+            var startNode = graph.GetGridObject(startX, startY);
+            var endNode = graph.GetGridObject(endX, endY);
             if (endNode == null) return null;
             
             openList = new List<PathNode> { startNode };
             closedList = new List<PathNode>();
 
-            for (int x = 0; x < grid.Width; x++) {
-                for (int y = 0; y < grid.Height; y++) {
-                    PathNode pathNode = grid.GetGridObject(x, y);
+            for (int x = 0; x < graph.Width; x++) {
+                for (int y = 0; y < graph.Height; y++) {
+                    PathNode pathNode = graph.GetGridObject(x, y);
                     pathNode.gCost = int.MaxValue;
                     pathNode.CalculateFCost();
                     pathNode.parentNode = null;
@@ -117,7 +118,7 @@ namespace Pathfinding {
 
             if (debug) {
                 PathfindingStepsVisualDebug.Instance.ClearSnapshots();
-                PathfindingStepsVisualDebug.Instance.TakeSnapshot(grid, startNode, openList, closedList);    
+                PathfindingStepsVisualDebug.Instance.TakeSnapshot(graph, startNode, openList, closedList);    
             }
 
             while (openList.Count > 0) {
@@ -125,8 +126,8 @@ namespace Pathfinding {
                 if (currentNode == endNode) { 
                     // Reached Final Node
                     if (debug) {
-                        PathfindingStepsVisualDebug.Instance.TakeSnapshot(grid, currentNode, openList, closedList);
-                        PathfindingStepsVisualDebug.Instance.TakeSnapshotFinalPath(grid, CalculatePath(endNode));
+                        PathfindingStepsVisualDebug.Instance.TakeSnapshot(graph, currentNode, openList, closedList);
+                        PathfindingStepsVisualDebug.Instance.TakeSnapshotFinalPath(graph, CalculatePath(endNode));
                     }
                     return CalculatePath(endNode);
                 }
@@ -154,7 +155,7 @@ namespace Pathfinding {
                     }
 
                     if (debug) {
-                        PathfindingStepsVisualDebug.Instance.TakeSnapshot(grid, currentNode, openList, closedList);
+                        PathfindingStepsVisualDebug.Instance.TakeSnapshot(graph, currentNode, openList, closedList);
                     }
                 }
             }

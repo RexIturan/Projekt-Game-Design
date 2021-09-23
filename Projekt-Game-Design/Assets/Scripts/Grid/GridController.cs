@@ -72,7 +72,7 @@ namespace Grid {
         // pos in -/- direction
         // returns inclusive bound
         public Vector2Int GetLowerBounds() {
-            return WorldPosToGridPos(globalGridData.OriginPosition);
+            return WorldPosToTilePos(globalGridData.OriginPosition);
         }
 
         // pos in -/- direction
@@ -82,7 +82,7 @@ namespace Grid {
         }
 
         // y == layer
-        public Vector2Int WorldPosToGridPos(Vector3 worldPos) {
+        public Vector2Int WorldPosToTilePos(Vector3 worldPos) {
             var flooredPos = Vector3Int.FloorToInt(worldPos);
             return new Vector2Int(flooredPos.x, flooredPos.z);
         }
@@ -95,13 +95,13 @@ namespace Grid {
         }
 
         public void AddTileAt(Vector3 pos, TileTypeSO tileType) {
-            AddTileAt(WorldPosToGridPos(pos), 0, tileType);
+            AddTileAt(WorldPosToTilePos(pos), 0, tileType);
         }
 
         public void AddTileAt(Vector2Int pos, int level, TileTypeSO tileType) {
             var lowerBounds = GetLowerBounds();
             var upperBounds = GetUpperBounds(
-                WorldPosToGridPos(globalGridData.OriginPosition),
+                WorldPosToTilePos(globalGridData.OriginPosition),
                 globalGridData.Width,
                 globalGridData.Height);
 
@@ -142,7 +142,7 @@ namespace Grid {
         }
 
         public void AddMultipleTilesAt(Vector3 start, Vector3 end, TileTypeSO tileType) {
-            AddMultipleTilesAt(WorldPosToGridPos(start), WorldPosToGridPos(end), tileType);
+            AddMultipleTilesAt(WorldPosToTilePos(start), WorldPosToTilePos(end), tileType);
         }
 
         // from = -OO -> origin | to origin -> +OO
@@ -152,7 +152,7 @@ namespace Grid {
 
             var lowerBounds = GetLowerBounds();
             var upperBounds = GetUpperBounds(
-                WorldPosToGridPos(globalGridData.OriginPosition),
+                WorldPosToTilePos(globalGridData.OriginPosition),
                 globalGridData.Width,
                 globalGridData.Height);
 
