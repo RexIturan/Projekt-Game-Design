@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TestIdle
   m_EditorClassIdentifier: 
   _actions:
-  - {fileID: 11400000, guid: e8d63f962af54d740a4557d52c91dc3a, type: 2}
+  - {fileID: 11400000, guid: 3701105739a21094c9c9d83968e7f830, type: 2}

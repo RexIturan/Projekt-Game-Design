@@ -11,16 +11,16 @@ public class IsVarSetSO : StateConditionSO
 public class IsVarSet : Condition
 {
 	protected new IsVarSetSO OriginSO => (IsVarSetSO)base.OriginSO;
-	private TestStatemachine root;
+	private PlayerCharacterCO root;
 
 	public override void Awake(StateMachine stateMachine)
 	{
-		root = stateMachine.gameObject.GetComponent<TestStatemachine>();
+		root = stateMachine.gameObject.GetComponent<PlayerCharacterCO>();
 	}
 	
 	protected override bool Statement()
 	{
-		return root.stateSwitch;
+		return root.isSelected;
 	}
 	
 	public override void OnStateEnter()
