@@ -8,6 +8,7 @@ using UnityEngine;
 public class TurnContainerCO : MonoBehaviour
 {
     public InputReader input;
+    public GameObject selectedPlayer = null;
 
     public List<GameObject> PlayersSelected = new List<GameObject>();
 
@@ -16,11 +17,24 @@ public class TurnContainerCO : MonoBehaviour
     private bool isMoveActionPhase;
     
     [Header("Receiving Events On")]
-    [SerializeField] private GameObjEventChannelSO AddPlayerSelectedEventChannel;
+    [SerializeField] private GameObjEventChannelSO PlayerSelectedEvent;
+    [SerializeField] private GameObjEventChannelSO PlayerUnselectedEvent;
 
     private void Awake()
     {
-        AddPlayerSelectedEventChannel.OnEventRaised += AddPlayerSelected;
+        PlayerSelectedEvent.OnEventRaised += SelectPlayer;
+        PlayerUnselectedEvent.OnEventRaised += UnselectPlayer;
+    }
+
+    private void SelectPlayer(GameObject player)
+    {
+        selectedPlayer = player;
+    }
+
+    private void UnselectPlayer(GameObject player)
+    {
+        if(player.Equals(selectedPlayer))
+            selectedPlayer = null;
     }
 
     private void AddPlayerSelected(GameObject obj)
