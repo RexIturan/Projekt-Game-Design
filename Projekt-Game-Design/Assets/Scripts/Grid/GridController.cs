@@ -15,13 +15,13 @@ namespace Grid {
         [SerializeField] private TileMapDrawer drawer;
 
         public void OnEnable() {
-            // globalGridData.InitValues(defaultGridData);
-            //
-            // gridContainer.tileGrids = new List<TileGrid>();
-            // gridContainer.tileGrids.Add(CreateNewTileGrid());
-            // FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[0]);
-            // // IncreaseGrid(new Vector2Int(-3,-3), new Vector2Int(globalGridData.Width + 3, globalGridData.Height +3));
-            // drawer.DrawGrid();
+            globalGridData.InitValues(defaultGridData);
+            
+            gridContainer.tileGrids = new List<TileGrid>();
+            gridContainer.tileGrids.Add(CreateNewTileGrid());
+            FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[0]);
+            // IncreaseGrid(new Vector2Int(-3,-3), new Vector2Int(globalGridData.Width + 3, globalGridData.Height +3));
+            drawer.DrawGrid();
 
 
             //
@@ -72,7 +72,7 @@ namespace Grid {
         // pos in -/- direction
         // returns inclusive bound
         public Vector2Int GetLowerBounds() {
-            return WorldPosToTilePos(globalGridData.OriginPosition);
+            return WorldPosToGridPos(globalGridData.OriginPosition);
         }
 
         // pos in -/- direction
@@ -82,7 +82,7 @@ namespace Grid {
         }
 
         // y == layer
-        public Vector2Int WorldPosToTilePos(Vector3 worldPos) {
+        public Vector2Int WorldPosToGridPos(Vector3 worldPos) {
             var flooredPos = Vector3Int.FloorToInt(worldPos);
             return new Vector2Int(flooredPos.x, flooredPos.z);
         }
@@ -95,13 +95,13 @@ namespace Grid {
         }
 
         public void AddTileAt(Vector3 pos, TileTypeSO tileType) {
-            AddTileAt(WorldPosToTilePos(pos), 0, tileType);
+            AddTileAt(WorldPosToGridPos(pos), 0, tileType);
         }
 
         public void AddTileAt(Vector2Int pos, int level, TileTypeSO tileType) {
             var lowerBounds = GetLowerBounds();
             var upperBounds = GetUpperBounds(
-                WorldPosToTilePos(globalGridData.OriginPosition),
+                WorldPosToGridPos(globalGridData.OriginPosition),
                 globalGridData.Width,
                 globalGridData.Height);
 
@@ -142,7 +142,7 @@ namespace Grid {
         }
 
         public void AddMultipleTilesAt(Vector3 start, Vector3 end, TileTypeSO tileType) {
-            AddMultipleTilesAt(WorldPosToTilePos(start), WorldPosToTilePos(end), tileType);
+            AddMultipleTilesAt(WorldPosToGridPos(start), WorldPosToGridPos(end), tileType);
         }
 
         // from = -OO -> origin | to origin -> +OO
@@ -152,7 +152,7 @@ namespace Grid {
 
             var lowerBounds = GetLowerBounds();
             var upperBounds = GetUpperBounds(
-                WorldPosToTilePos(globalGridData.OriginPosition),
+                WorldPosToGridPos(globalGridData.OriginPosition),
                 globalGridData.Width,
                 globalGridData.Height);
 
@@ -224,17 +224,6 @@ namespace Grid {
                 x: newLowerBounds.x,
                 y: globalGridData.OriginPosition.y,
                 z: newLowerBounds.y);
-        }
-
-        public void ResetGrid() {
-            globalGridData.height = 1;
-            globalGridData.width = 1;
-            globalGridData.originPosition = new Vector3(0, 0, 0);
-            globalGridData.cellSize = 1;
-
-            gridContainer.tileGrids = new List<TileGrid>();
-            gridContainer.tileGrids.Add(CreateNewTileGrid());
-            FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[0]);
         }
     }
 }

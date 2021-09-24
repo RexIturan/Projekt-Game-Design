@@ -8,8 +8,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New EnemyType", menuName = "Enemy/EnemyType")]
 public class EnemyTypeSO : ScriptableObject
 {
-    [SerializeField] public ScriptableObject item; // standard equipped Item 
+    [SerializeField] public ScriptableObject item;
     [SerializeField] public CharacterStats stats;
     [SerializeField] public LootTable drops;
-    [SerializeField] public AbilitySO[] basicAbilities; // actions at all time available
 }

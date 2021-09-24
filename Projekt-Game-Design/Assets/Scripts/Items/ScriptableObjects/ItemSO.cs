@@ -16,6 +16,6 @@ public class ItemSO : ScriptableObject
 
     [SerializeField] public EItemType type; // Quest-item? Weapon? Etc. 
 
-    [SerializeField] public AbilitySO[] abilities; 
+    [SerializeField] public object[] actions; 
 
 }

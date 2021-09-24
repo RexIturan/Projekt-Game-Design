@@ -12,20 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6e6060dbd8c894dacdfa33bc774470, type: 3}
   m_Name: sampleEnemyType
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 34707fdcee39c964488d7c7ba3503935, type: 2}
+  item: {fileID: 0}
   stats:
-    maxLifePoints: 10
-    maxEnergy: 10
-    strength: 8
-    dexterity: 6
-    intelligence: 1
-    viewDistance: 300
+    maxLifePoints: 0
+    maxEnergy: 0
+    strength: 0
+    dexterity: 0
+    intelligence: 0
+    viewDistance: 0
   drops:
     maxGold: 200
     minGold: 160
     experience: 300
     itemDropList:
-    - item: {fileID: 11400000, guid: 34707fdcee39c964488d7c7ba3503935, type: 2}
+    - item: {fileID: 0}
       probability: 0.9
-  basicAbilities:
-  - {fileID: 11400000, guid: aa392b409b2e48e4b90d0f718e6e6085, type: 2}

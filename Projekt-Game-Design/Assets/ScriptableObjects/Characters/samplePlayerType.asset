@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b001412dba193ab4ba91ad496afc04ce, type: 3}
   m_Name: samplePlayerType
   m_EditorClassIdentifier: 
-  startWeapon: {fileID: 11400000, guid: 0d3fcb231578ee44ea9defe71f8472e5, type: 2}
+  startWeapon: {fileID: 0}
   stats:
     maxLifePoints: 200
     maxEnergy: 20
@@ -27,5 +27,3 @@ MonoBehaviour:
     dexterity: 3
     intelligence: 2
     viewDistance: 0
-  basicAbilities:
-  - {fileID: 11400000, guid: aa392b409b2e48e4b90d0f718e6e6085, type: 2}

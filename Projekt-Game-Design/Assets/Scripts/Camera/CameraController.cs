@@ -17,8 +17,6 @@ namespace DefaultNamespace.Camera {
         [SerializeField] private int minZoom;
         [SerializeField] private int maxZoom;
 
-        [SerializeField] private bool edgeScroll;
-        
         public Transform cameraTransform;
         private Vector2 inputVector;
         private float rotateInputVector;
@@ -51,9 +49,7 @@ namespace DefaultNamespace.Camera {
             else
             {
                 // Für die Kamerabewegung durch den Bildschirmrand
-                if (edgeScroll) {
-                    HandleCameraBorder();    
-                }
+                HandleCameraBorder();
             }
 
             var pos = new Vector3(
@@ -65,12 +61,10 @@ namespace DefaultNamespace.Camera {
                 zoomInput * Time.deltaTime * zoomSpeed.Value);
 
             // Test ob die Position außerhalb des zulässigen Bereiches ist
-            // if (edgeScroll) {
-                if (pos.y + cameraTransform.localPosition.y <= maxZoom && pos.y + cameraTransform.localPosition.y >= minZoom)
-                {
-                    cameraTransform.localPosition += pos;
-                }    
-            // }
+            if (pos.y + cameraTransform.localPosition.y <= maxZoom && pos.y + cameraTransform.localPosition.y >= minZoom)
+            {
+                cameraTransform.localPosition += pos;
+            }
         }
 
         private void HandleCameraBorder()

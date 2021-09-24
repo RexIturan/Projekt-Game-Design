@@ -2,7 +2,6 @@
 
 
 namespace Util {
-    [System.Serializable]
     public class PathNode {
         
         public struct Edge
@@ -45,10 +44,6 @@ namespace Util {
 
         public void SetEdges(bool diagonal)
         {
-            if (!isWalkable) {
-                return;
-            }
-            
             Edges = new List<Edge>();
 
                 if (this.x - 1 >= 0)
@@ -77,7 +72,9 @@ namespace Util {
                 // Down
                 if(this.y - 1 >= 0) AddEdge(this.x, this.y - 1, MOVE_STRAIGHT_COST);
                 // Up
-                if (this.y + 1 < grid.Height) AddEdge(this.x, this.y + 1, MOVE_STRAIGHT_COST);
+                if(this.y + 1 < grid.Height) AddEdge(this.x, this.y + 1, MOVE_STRAIGHT_COST);
+                
+            
         }
 
         private void AddEdge(int x, int y, int cost)
@@ -99,10 +96,10 @@ namespace Util {
         
         public override string ToString() {
             if (isWalkable) {
-                return x + "," + y + " +";    
+                return x + "," + y;    
             }
             else {
-                return x + "," + y + " -";
+                return "-";
             }
         }
     }
