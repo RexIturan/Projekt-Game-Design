@@ -54,5 +54,6 @@ MonoBehaviour:
   - SaveSlot_2
   saveGame: {fileID: 11400000, guid: 8b9215eb7abdda1449c4fcad7e8131d2, type: 2}
   loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
-  saveMap: {fileID: 11400000, guid: c1df204252a25354591f6fe993db585c, type: 2}
-  loadMap: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
+  saveLevel: {fileID: 11400000, guid: c1df204252a25354591f6fe993db585c, type: 2}
+  loadLevel: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
+  levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}

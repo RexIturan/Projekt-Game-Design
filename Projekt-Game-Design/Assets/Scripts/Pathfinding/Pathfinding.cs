@@ -14,7 +14,7 @@ namespace Pathfinding {
 
         public static Pathfinding Instance { get; private set; }
         
-        private bool diagonal = true;
+        // private bool diagonal = true;
         private bool debug = false;
         
         private NodeGraph graph;

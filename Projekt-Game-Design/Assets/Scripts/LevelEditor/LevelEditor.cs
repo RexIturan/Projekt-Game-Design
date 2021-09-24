@@ -12,7 +12,11 @@ namespace LevelEditor {
     public class LevelEditor : MonoBehaviour {
         
         [Header("Receiving Events On")]
+        [SerializeField] private VoidEventChannelSO levelLoaded;
+        
+        [Header("SendingEventsOn")]
         [SerializeField] private VoidEventChannelSO loadLevel;
+        [SerializeField] private VoidEventChannelSO updateMeshEC;
         
         public enum ECursorMode {
             select,
@@ -21,7 +25,7 @@ namespace LevelEditor {
             fill,
         }
         
-        [Header("Refferences")]
+        [Header("References")]
         //todo can not use IMapDrawer because unity doesnt use generics :(
         [SerializeField] private TileMapDrawer drawer;
         [SerializeField] private GridController controller;
@@ -38,7 +42,6 @@ namespace LevelEditor {
             set => mode = value;
         }
 
-        
         [SerializeField] private TileTypeSO selectedTileType;
         [SerializeField] private TileTypeContainerSO tileTypesContainer;
 
@@ -53,15 +56,19 @@ namespace LevelEditor {
         
         public void Awake() {
             selectedTileType = tileTypesContainer.tileTypes[1];
-            loadLevel.OnEventRaised += RedrawLevel;
+            levelLoaded.OnEventRaised += RedrawLevel;
+            // updateMeshEC.OnEventRaised += RedrawLevel;
         }
 
         public void Start() {
+            //??
             loadLevel.RaiseEvent();
         }
 
         private void RedrawLevel() {
-            drawer.DrawGrid();
+            Debug.Log("redraw");
+            // drawer.DrawGrid();
+            updateMeshEC.RaiseEvent();
         }
         
         private void Update() {
@@ -143,18 +150,21 @@ namespace LevelEditor {
             clickPos = Vector3Int.zero;
             dragPos = Vector3Int.zero;
             drawer.clearCursor();
+            RedrawLevel();
         }
 
         private void HandleRemove() {
             controller.AddTileAt(clickPos, tileTypesContainer.tileTypes[0]);
             clickPos = Vector3Int.zero;
             rightClicked = false;
+            RedrawLevel();
         }
         
         private void HandlePaint() {
             AddTileAt(clickPos); 
             clickPos = Vector3Int.zero;
             leftClicked = false;
+            RedrawLevel();
         }
 
         public void HandleMouseClick(Vector3 pos) {
@@ -177,11 +187,10 @@ namespace LevelEditor {
         public void AddTileAt(Vector3 clickPos) {
             controller.AddTileAt(clickPos, selectedTileType);
         }
-
-
+        
         public void ResetLevel() {
             controller.ResetGrid();
-            drawer.DrawGrid();
+            RedrawLevel();
         }
 
         // public void AddObjectAt(Vector3 clickPos) {

@@ -33,7 +33,7 @@ namespace MeshGenerator {
 
         private ETile[,,] tileData;
         
-        private void Start() {
+        private void Awake() {
             
             
             vertices = new List<Vector3>();
@@ -51,7 +51,7 @@ namespace MeshGenerator {
             // AddQuadAt(new Vector3(0, 0, 2), Vector3.up, new Vector2(1,0));
             // AddQuadAt(new Vector3(2, 0, 0), Vector3.up, new Vector2(0,0));
 
-            var posOffset = new Vector3(.5f, .5f, .5f);
+            // var posOffset = new Vector3(.5f, .5f, .5f);
             
             // AddQuadAt(new Vector3(0, 0, 0), posOffset, Vector3.one, EDirection.top, new Vector2(0,0));
             // AddQuadAt(new Vector3(0, 0, 1), posOffset, Vector3.one, EDirection.top, new Vector2(0,0));
@@ -64,13 +64,13 @@ namespace MeshGenerator {
             // AddQuadAt(new Vector3(0, 0, 0), posOffset, Vector3.one, EDirection.back, new Vector2(1,0));
             
             //todo mesh controller 
-            UpdateTileData();
-            GenerateMesh();
-            UpdateMesh();
+            // UpdateTileData();
+            // GenerateMesh();
+            // UpdateMesh();
         }
 
         // real world coords
-        private void UpdateTileData() {
+        public void UpdateTileData() {
            
             // setup 3d tile data representation
             int width = globalGridData.Width;
@@ -99,7 +99,7 @@ namespace MeshGenerator {
         }
 
         // todo max mesh vertices 65,535
-        private void GenerateMesh() {
+        public void GenerateMesh() {
             int width = tileData.GetLength(WIDTH);
             int height = tileData.GetLength(HEIGHT); 
             int depth = tileData.GetLength(DEPTH);
@@ -110,7 +110,12 @@ namespace MeshGenerator {
             GenerateMesh(lowerBounds, upperBounds);
         }
 
-        private void GenerateMesh(Vector3Int lowerBounds, Vector3Int upperBounds) {
+        public void GenerateMesh(Vector3Int lowerBounds, Vector3Int upperBounds) {
+            
+            vertices.Clear();
+            triagles.Clear();
+            this.uvs.Clear();
+            
             var posOffset = new Vector3(.5f, .5f, .5f);
             var cellDim = Vector3.one;
             var uvs = new Vector2(0, 0);
@@ -133,25 +138,21 @@ namespace MeshGenerator {
                             }
 
                             if (!TileInDirection(intPos, EDirection.right, lowerBounds, upperBounds)) {
-                                Debug.Log($"right y{y},z{z},x{x}");
                                 // draw right
                                 AddQuadAt(pos, posOffset, cellDim, EDirection.right, uvs);
                             }
                             
                             if (!TileInDirection(intPos, EDirection.left, lowerBounds, upperBounds)) {
-                                Debug.Log($"left y{y},z{z},x{x}");
                                 // draw left
                                 AddQuadAt(pos, posOffset, cellDim, EDirection.left, uvs);
                             }
 
                             if (!TileInDirection(intPos, EDirection.forward, lowerBounds, upperBounds)) {
-                                Debug.Log($"forward y{y},z{z},x{x}");
                                 // draw forward
                                 AddQuadAt(pos, posOffset, cellDim, EDirection.forward, uvs);
                             }
                             
                             if (!TileInDirection(intPos, EDirection.back, lowerBounds, upperBounds)) {
-                                Debug.Log($"back y{y},z{z},x{x}");
                                 // draw back
                                 AddQuadAt(pos, posOffset, cellDim, EDirection.back, uvs);
                             }
@@ -324,7 +325,7 @@ namespace MeshGenerator {
             });
         }
         
-        private void UpdateMesh() {
+        public void UpdateMesh() {
             mesh.Clear();
             
             mesh.SetVertices(vertices);

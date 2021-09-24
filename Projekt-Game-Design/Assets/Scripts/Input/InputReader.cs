@@ -122,7 +122,6 @@ namespace Input {
         public void OnMenu(InputAction.CallbackContext context) {
 
             if (context.phase == InputActionPhase.Performed) {
-                Debug.Log("onMenu");
                 visibilityMenu.RaiseEvent(true);
             }
         }
@@ -164,8 +163,8 @@ namespace Input {
         public void OnCancel(InputAction.CallbackContext context) {
             // TODO menuCancelEvent
             if (context.phase == InputActionPhase.Performed) {
-                Debug.Log("onCancel");
                 visibilityGameOverlay.RaiseEvent(true);
+                visibilityMenu.RaiseEvent(false);
             }
         }
 

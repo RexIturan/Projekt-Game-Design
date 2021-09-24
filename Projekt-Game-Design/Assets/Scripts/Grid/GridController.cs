@@ -12,7 +12,7 @@ namespace Grid {
         [SerializeField] private GridDataSO globalGridData;
 
         [SerializeField] private TileTypeContainerSO tileTypesContainer;
-        [SerializeField] private TileMapDrawer drawer;
+        // [SerializeField] private TileMapDrawer drawer;
 
         public void OnEnable() {
             // globalGridData.InitValues(defaultGridData);
@@ -138,7 +138,7 @@ namespace Grid {
 
             gridContainer.tileGrids[level].GetGridObject(newPos.x, newPos.y).SetTileType(tileType);
 
-            drawer.DrawGrid();
+            // drawer.DrawGrid();
         }
 
         public void AddMultipleTilesAt(Vector3 start, Vector3 end, TileTypeSO tileType) {
@@ -186,7 +186,7 @@ namespace Grid {
                 }
             }
 
-            drawer.DrawGrid();
+            // drawer.DrawGrid();
         }
 
         public void FillGrid(TileGrid tileGrid, TileTypeSO tileType) {

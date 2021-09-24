@@ -199,7 +199,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5188370193904817757}
-  - component: {fileID: 5886289741729334923}
   m_Layer: 0
   m_Name: heavyDoor
   m_TagString: Untagged
@@ -222,22 +221,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5886289741729334923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477475561137574740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531c132b86f995642a826f6730136156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: {fileID: 11400000, guid: 031a67f496470ad429c4a57b7dd14177, type: 2}
-  position: {x: 5, y: 5}
-  lifePoints: 300
-  currentProperties: 5
 --- !u!1 &5072285574912919792
 GameObject:
   m_ObjectHideFlags: 0
