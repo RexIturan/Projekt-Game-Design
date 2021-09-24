@@ -6,78 +6,62 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
+
 public class OverlayUIController : MonoBehaviour
 {
-    
+    // Für die UI Elemente
     private VisualElement overlayContainer;
-    private VisualElement ingameMenuContainer;
 
-    
     [Header("Receiving Events On")]
-    [SerializeField] private BoolEventChannelSO VisibilityMenuEventChannel;
-    
+    [SerializeField] private BoolEventChannelSO VisibilityGameOverlayEventChannel;
+    [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
+
     [Header("Sending Events On")]
-    [SerializeField] private VoidEventChannelSO enableMenuInput;
     [SerializeField] private VoidEventChannelSO enableGamplayInput;
     
+    [Header("Sending and Receiving Events On")]
+    [SerializeField] private BoolEventChannelSO VisibilityMenuEventChannel;
+
     // Start is called before the first frame update
     void Start()
     {
         // Holen des UXML Trees, zum getten der einzelnen Komponenten
         var root = GetComponent<UIDocument>().rootVisualElement;
-        
         overlayContainer = root.Q<VisualElement>("OverlayContainer");
-        ingameMenuContainer = root.Q<VisualElement>("IngameMenu");
-
-        ingameMenuContainer.Q<Button>("MainMenuButton").clicked += MainMenuButtonPressed;
         overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
-        ingameMenuContainer.Q<Button>("ResumeButton").clicked += HideMenu;
-        ingameMenuContainer.Q<Button>("QuitButton").clicked += QuitGame;
-
     }
 
-    private void Awake() {
-        VisibilityMenuEventChannel.OnEventRaised += SetMenuVisibility;
-    }
-
-    void MainMenuButtonPressed()
+    private void Awake()
     {
-        // Szene laden
-        SceneManager.LoadScene("MainMenu");
+        VisibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
+        VisibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
+        VisibilityGameOverlayEventChannel.OnEventRaised  += HandleGameOverlay;
     }
 
-    // TODO Refactor
-    void SetMenuVisibility(bool value) {
-        
-        Debug.Log(value);
-        
-        if (value) {
-            ShowMenu();
+    void HandleGameOverlay(bool value)
+    {
+        if (value)
+        {
+            enableGamplayInput.RaiseEvent();
+            overlayContainer.style.display = DisplayStyle.Flex;
         }
-        else {
-            HideMenu();
+        else
+        {
+            overlayContainer.style.display = DisplayStyle.None;
         }
+        
     }
-    
+
+    void HandleOtherScreensOpened(bool value)
+    {
+        HandleGameOverlay(false);
+    }
+
     void ShowMenu()
     {
-        enableMenuInput.RaiseEvent();
-        // Einstellungen ausblenden und Menü zeigen
-        ingameMenuContainer.style.display = DisplayStyle.Flex;
-        overlayContainer.style.display = DisplayStyle.None;
-    }
-    
-    void HideMenu()
-    {
-        enableGamplayInput.RaiseEvent();
-        // Einstellungen ausblenden und Menü zeigen
-        overlayContainer.style.display = DisplayStyle.Flex;
-        ingameMenuContainer.style.display = DisplayStyle.None;
-    }
-    
-    void QuitGame()
-    {
-        // Spiel beenden
-        Application.Quit();
+        //OverlayManager(screenOverlay.INGAME_MENU);
+        //enableGamplayInput.RaiseEvent();
+        //overlayContainer.style.display = DisplayStyle.Flex;
+        VisibilityMenuEventChannel.RaiseEvent(true);
     }
 }

@@ -5,9 +5,10 @@ using UnityEngine;
 // Item
 // contains info about use, type and stats, looks
 //
-[CreateAssetMenu(fileName = "New Item", menuName = "Item")]
+[CreateAssetMenu(fileName = "New Item", menuName = "Items/Item")]
 public class ItemSO : ScriptableObject
 {
+    [SerializeField] public int id;
     [SerializeField] public int goldValue;
     [SerializeField] public int rarity;
     [SerializeField] public Sprite icon;
@@ -15,6 +16,6 @@ public class ItemSO : ScriptableObject
 
     [SerializeField] public EItemType type; // Quest-item? Weapon? Etc. 
 
-    [SerializeField] public object[] actions; 
+    [SerializeField] public AbilitySO[] abilities; 
 
 }

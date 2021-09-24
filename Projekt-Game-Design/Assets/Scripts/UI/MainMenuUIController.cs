@@ -32,7 +32,7 @@ public class MainMenuUIController : MonoBehaviour
         backButton = root.Q<Button>("backButton");
         
         // Holen der Menü Container
-        menuContainer = root.Q<VisualElement>("MenuContainer");
+        menuContainer = root.Q<VisualElement>("menuContainer");
         settingsContainer = root.Q<VisualElement>("SettingsContainer");
         loadGame = root.Q<VisualElement>("LoadScreen");
 

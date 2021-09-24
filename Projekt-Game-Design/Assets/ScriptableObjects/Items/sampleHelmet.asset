@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0060a96a91ff3fb41b85a129587606c5, type: 3}
   m_Name: sampleHelmet
   m_EditorClassIdentifier: 
+  id: 0
   goldValue: 1
   rarity: 3
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: caa6ebd497184c044b2c06d7f69ccdce, type: 3}
   prefab: {fileID: 2181893431691929815, guid: d856944c5df2e684ab6bfd8fea736a52, type: 3}
   type: 18
+  abilities: []
