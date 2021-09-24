@@ -14,7 +14,7 @@ namespace Visual {
         [SerializeField] private GridContainerSO gridContainer;
         [SerializeField] private GridDataSO globalGridData;
         
-        [SerializeField] private Tilemap gridTilemap;
+        [SerializeField] private Tilemap[] gridTilemap;
         [SerializeField] private Tilemap cursorTilemap;
 
         [SerializeField] private tileTypePair[] tileTypeTileDict;
@@ -32,7 +32,9 @@ namespace Visual {
         }
         
         public void DrawGrid() {
-            gridTilemap.ClearAllTiles();
+            foreach (var tilemap in gridTilemap) {
+                tilemap.ClearAllTiles();    
+            }
 
             var offset = new Vector2Int((int)globalGridData.OriginPosition.x, (int)globalGridData.OriginPosition.z); 
             
@@ -42,13 +44,13 @@ namespace Visual {
                     for (int y = 0; y < tileGrid.Height; y++) {
                         var tile = tileGrid.GetGridObject(x, y).Type;
                         if (tile != null) {
-                            gridTilemap.SetTile(
+                            gridTilemap[l].SetTile(
                                 new Vector3Int(x + offset.x, y + offset.y, l),
                                 GetTileFromTileType(tileGrid.GetGridObject(x, y).Type));    
                         }
                         else {
                             Debug.Log("error tile");
-                            gridTilemap.SetTile(
+                            gridTilemap[l].SetTile(
                                 new Vector3Int(x + offset.x, y + offset.y, l),
                                 errorTile);    
                         }

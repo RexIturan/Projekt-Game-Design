@@ -62,7 +62,8 @@ namespace Pathfinding {
         }
 
         public void InitialisePathfinding() {
-            pathfinding = new Pathfinding(graphContainer.basicMovementGraph[0]);
+            // todo give the pathfinding all graphs
+            pathfinding = new Pathfinding(graphContainer.basicMovementGraph[1]);
         }
 
         public List<PathNode> GetReachableNodes(Vector3 pos3d, int maxDist) {

@@ -95,7 +95,7 @@ namespace Grid {
         }
 
         public void AddTileAt(Vector3 pos, TileTypeSO tileType) {
-            AddTileAt(WorldPosToTilePos(pos), 0, tileType);
+            AddTileAt(WorldPosToTilePos(pos), 1, tileType);
         }
 
         public void AddTileAt(Vector2Int pos, int level, TileTypeSO tileType) {
@@ -209,9 +209,15 @@ namespace Grid {
             ChangeBounds(newLowerBounds, newUpperBounds);
 
             for (int i = 0; i < gridContainer.tileGrids.Count; i++) {
+                
                 TileGrid newTileGrid = CreateNewTileGrid();
                 //TODO default fill
-                FillGrid(newTileGrid, tileTypesContainer.tileTypes[0]);
+                if (i == 0) {
+                    FillGrid(newTileGrid, tileTypesContainer.tileTypes[1]);    
+                }
+                else {
+                    FillGrid(newTileGrid, tileTypesContainer.tileTypes[0]);
+                }
                 oldTileGrids[i].CopyTo(newTileGrid, offset);
                 gridContainer.tileGrids[i] = newTileGrid;
             }
@@ -234,7 +240,9 @@ namespace Grid {
 
             gridContainer.tileGrids = new List<TileGrid>();
             gridContainer.tileGrids.Add(CreateNewTileGrid());
-            FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[0]);
+            gridContainer.tileGrids.Add(CreateNewTileGrid());
+            FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[1]);
+            FillGrid(gridContainer.tileGrids[1], tileTypesContainer.tileTypes[0]);
         }
     }
 }
