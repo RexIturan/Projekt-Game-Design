@@ -40,7 +40,8 @@ namespace LevelEditor {
         // runtime input data data
         private Vector3 clickPos;
         private Vector3 dragPos;
-        private bool clicked;
+        private bool leftClicked;
+        private bool rightClicked;
         private bool dragEnd;
         private bool currentInput;
 
@@ -48,6 +49,10 @@ namespace LevelEditor {
         public void Awake() {
             selectedTileType = tileTypesContainer.tileTypes[1];
             loadLevel.OnEventRaised += RedrawLevel;
+        }
+
+        public void Start() {
+            loadLevel.RaiseEvent();
         }
 
         private void RedrawLevel() {
@@ -67,13 +72,24 @@ namespace LevelEditor {
             bool leftMouseWasPressed = mouse.leftButton.wasPressedThisFrame;
             bool leftMouseWasReleased = mouse.leftButton.wasReleasedThisFrame;
             bool leftMousePressed = mouse.leftButton.isPressed;
+            bool rightMousePressed = mouse.rightButton.isPressed;
+
+            if (rightMousePressed) {
+                rightClicked = true;
+                clickPos = mousePosition;
+            }
             
             switch (mode) {
                 case ECursorMode.paint:
 
                     drawer.DrawCursorAt(mousePosition);
+
+                    if (rightClicked) {
+                        HandleRemove();
+                        break;
+                    }
                     
-                    if (clicked) {
+                    if (leftClicked) {
                         HandlePaint();
                     }
                     
@@ -98,7 +114,7 @@ namespace LevelEditor {
                         HandleBox();
                     }
                     else {
-                        if (clicked) {
+                        if (leftClicked) {
                             drawer.DrawBoxCursorAt(clickPos, dragPos);    
                         }
                     }
@@ -115,22 +131,28 @@ namespace LevelEditor {
 
         private void HandleBox() {
             AddMultipleTilesAt(clickPos, dragPos);
-            clicked = false;
+            leftClicked = false;
             dragEnd = false;
             clickPos = Vector3Int.zero;
             dragPos = Vector3Int.zero;
             drawer.clearCursor();
         }
 
+        private void HandleRemove() {
+            controller.AddTileAt(clickPos, tileTypesContainer.tileTypes[0]);
+            clickPos = Vector3Int.zero;
+            rightClicked = false;
+        }
+        
         private void HandlePaint() {
             AddTileAt(clickPos); 
             clickPos = Vector3Int.zero;
-            clicked = false;
+            leftClicked = false;
         }
 
 
         public void HandleMouseClick(Vector3 pos) {
-            clicked = true;
+            leftClicked = true;
             clickPos = pos;
         }
         
@@ -148,6 +170,11 @@ namespace LevelEditor {
 
         public void AddTileAt(Vector3 clickPos) {
             controller.AddTileAt(clickPos, selectedTileType);
+        }
+
+        public void ResetLevel() {
+            controller.ResetGrid();
+            drawer.DrawGrid();
         }
     }
 }

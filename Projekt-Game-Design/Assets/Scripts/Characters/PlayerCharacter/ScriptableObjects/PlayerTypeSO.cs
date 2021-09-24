@@ -11,5 +11,5 @@ public class PlayerTypeSO : ScriptableObject
     [SerializeField] public ScriptableObject startWeapon; // is not necessarily equipped weapon
     [SerializeField] public CharacterStats stats;
     [SerializeField] public CharacterStats gainPerLevel; // TODO: gain is Linear in this case
-
+    [SerializeField] public AbilitySO[] basicAbilities; // actions at all time available
 }
