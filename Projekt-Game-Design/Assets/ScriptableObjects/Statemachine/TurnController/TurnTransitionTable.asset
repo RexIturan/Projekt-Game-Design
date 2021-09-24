@@ -17,8 +17,11 @@ MonoBehaviour:
     ToState: {fileID: 11400000, guid: 3f3c4cdb2b0d46243b77a39a5a434577, type: 2}
     Conditions:
     - ExpectedResult: 0
-      Condition: {fileID: 11400000, guid: d70f46d16b471294196815878179931d, type: 2}
+      Condition: {fileID: 11400000, guid: 7883d220d5d65aa498782db373390b65, type: 2}
       Operator: 0
-    - ExpectedResult: 0
-      Condition: {fileID: 11400000, guid: b2ca902f4bad1024f9effbb7c6fe4b1c, type: 2}
+  - FromState: {fileID: 11400000, guid: 3f3c4cdb2b0d46243b77a39a5a434577, type: 2}
+    ToState: {fileID: 11400000, guid: 495049b48bed4dc4c846fa24330ab21e, type: 2}
+    Conditions:
+    - ExpectedResult: 1
+      Condition: {fileID: 11400000, guid: 7883d220d5d65aa498782db373390b65, type: 2}
       Operator: 0
