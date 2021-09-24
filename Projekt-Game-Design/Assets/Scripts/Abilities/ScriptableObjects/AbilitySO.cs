@@ -7,6 +7,9 @@ using Grid;
 [CreateAssetMenu(fileName = "New CharacterAction", menuName = "CharacterAction/CharacterAction")]
 public class AbilitySO : ScriptableObject
 {
+    public Sprite icon;
+    public string description;
+
     public EAbilityTargetFlags targets; // targetable objects: allies, enemies, etc. 
     public bool moveToTarget; // moves action taker to field of target
     public int range; 
