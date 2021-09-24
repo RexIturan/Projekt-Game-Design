@@ -20,16 +20,18 @@ namespace Pathfinding {
             
             foreach (var node in nodes) {
                 Vector2Int pos = GridPosToTilePos(node.x, node.y);
-                previewTilemap.SetTile(new Vector3Int(pos.x, 0, pos.y), previewTile);                
+                previewTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), previewTile);                
+
             }
         }
 
         public void DrawPreviewPath(List<PathNode> nodes) {
             ClearPreviewPathTilemap();
-            
-            foreach (var node in nodes) {
-                Vector2Int pos = GridPosToTilePos(node.x, node.y);
-                previewPathTilemap.SetTile(new Vector3Int(pos.x, 0, pos.y), previewPathTile);                
+            if (nodes != null) {
+                foreach (var node in nodes) {
+                    Vector2Int pos = GridPosToTilePos(node.x, node.y);
+                    previewPathTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), previewPathTile);                
+                }    
             }
         }
 

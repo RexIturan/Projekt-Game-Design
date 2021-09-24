@@ -164,7 +164,7 @@ namespace Pathfinding {
             return null;
         }
 
-        private List<PathNode> CalculatePath(PathNode endNode) {
+        public List<PathNode> CalculatePath(PathNode endNode) {
             List<PathNode> path = new List<PathNode>();
             path.Add(endNode);
             var currentNode = endNode;
