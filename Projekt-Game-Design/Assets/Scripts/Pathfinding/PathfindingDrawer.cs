@@ -21,6 +21,7 @@ namespace Pathfinding {
             foreach (var node in nodes) {
                 Vector2Int pos = GridPosToTilePos(node.x, node.y);
                 previewTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), previewTile);                
+
             }
         }
 

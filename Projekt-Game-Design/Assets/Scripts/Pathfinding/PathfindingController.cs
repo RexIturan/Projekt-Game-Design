@@ -20,13 +20,12 @@ namespace Pathfinding {
 
         private Vector2Int clickedPos;
         private List<PathNode> reachableNodes;
-        
+
         private void Awake() {
             InitialisePathfinding();            
         }
 
         private void Update() {
-            
             var pos = MousePosition.GetMouseWorldPosition();
             
             if (clickedPos != null && reachableNodes != null && reachableNodes.Count > 0) {
