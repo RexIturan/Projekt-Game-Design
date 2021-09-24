@@ -1,11 +1,11 @@
-﻿    using UnityEngine;
-    using UnityEngine.Events;
+﻿    using System;
+    using UnityEngine;
 
     namespace Events.ScriptableObjects {
         [CreateAssetMenu(menuName = "Events/InventoryTab Event Channel")]
         public class InventoryTabEventChannelSO : EventChannelBaseSO {
         
-            public UnityAction<InventoryUIController.inventoryTab> OnEventRaised;
+            public event Action<InventoryUIController.inventoryTab> OnEventRaised;
 
             public void RaiseEvent(InventoryUIController.inventoryTab value)
             {

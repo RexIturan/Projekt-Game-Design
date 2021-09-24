@@ -1,12 +1,12 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
+﻿using System;
+using UnityEngine;
 
 namespace Events.ScriptableObjects {
     [CreateAssetMenu(menuName = "Events/Bool Event Channel")]
     public class BoolEventChannelSO : EventChannelBaseSO {
         
-        public UnityAction<bool> OnEventRaised;
-
+        public event Action<bool> OnEventRaised;
+        
         public void RaiseEvent(bool value)
         {
             if (OnEventRaised != null)
