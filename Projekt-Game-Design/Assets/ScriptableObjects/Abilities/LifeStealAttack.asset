@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: LifeStealAttack
   m_EditorClassIdentifier: 
+  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  description: 'Does things and stuff. Idk, you know how it goes or something. '
   targets: 4
   moveToTarget: 0
   range: 1
   conditions: 0
-  costs:
-    lifePoints: 0
-    manaPoints: 5
-    movementPoints: 0
-    energyPoints: 8
+  costs: 0
   targetedEffects:
   - effect:
       type: 4
@@ -28,8 +26,6 @@ MonoBehaviour:
       strengthBonus: 0
       dexterityBonus: 0
       intelligenceBonus: 0.1
-      statusEffects: []
-      environmentalEffect: {fileID: 0}
     targets: 4
     targetIsCenter: 1
     area: 1
@@ -39,8 +35,6 @@ MonoBehaviour:
       strengthBonus: 0
       dexterityBonus: 0
       intelligenceBonus: 0.1
-      statusEffects: []
-      environmentalEffect: {fileID: 0}
     targets: 1
     targetIsCenter: 0
     area: 1
