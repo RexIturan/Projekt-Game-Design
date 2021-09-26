@@ -103,9 +103,7 @@ namespace LevelEditor {
                         break;
                     }
                     
-
                     if (leftClicked) {
-
                         HandlePaint();
                     }
                     
@@ -168,6 +166,7 @@ namespace LevelEditor {
             leftClicked = false;
             RedrawLevel();
         }
+
 
         public void HandleMouseClick(Vector3 pos) {
             leftClicked = true;

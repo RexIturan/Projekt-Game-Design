@@ -14,3 +14,4 @@ Scriptable Object   | nameSO     | ObjectSO
 Enum                | Ename      | EWochentag
 Interface           | Iname      | ILinkedList
 EventChannelInstance| nameEC   | SaveGameEC
+Container für Statemachine| nameCO   | PlayerCharacterCO
