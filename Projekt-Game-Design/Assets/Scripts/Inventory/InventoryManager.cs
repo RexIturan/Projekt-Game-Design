@@ -69,9 +69,8 @@ public class InventoryManager : MonoBehaviour
             //Debug.Log("Führe Initialisierung für Item Nummer: " + item.id);
             //OnItemPickupEventChannel.RaiseEvent(item.id);
         }
-
+        
         ChangeInventoryListEventChannel.RaiseEvent(list);
     }
-    
-    
+
 }
