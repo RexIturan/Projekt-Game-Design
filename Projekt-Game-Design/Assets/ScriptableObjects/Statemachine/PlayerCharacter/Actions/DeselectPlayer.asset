@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82566e1e0a19504889547cee1c0d057, type: 3}
   m_Name: DeselectPlayer
   m_EditorClassIdentifier: 
-  unselectEvent: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
+  deselectEvent: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
