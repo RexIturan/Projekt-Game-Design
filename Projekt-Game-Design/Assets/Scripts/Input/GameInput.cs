@@ -41,6 +41,14 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseClicked"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd8a1892-e7ef-4d4a-af93-5c8a039c5a57"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -74,6 +82,17 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""471352d6-97a4-42af-bed4-f7946ae6b611"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MouseClicked"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -466,6 +485,7 @@ public class @GameInput : IInputActionCollection, IDisposable
         m_Gameplay_EndTurn = m_Gameplay.FindAction("EndTurn", throwIfNotFound: true);
         m_Gameplay_Menu = m_Gameplay.FindAction("Menu", throwIfNotFound: true);
         m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
+        m_Gameplay_MouseClicked = m_Gameplay.FindAction("MouseClicked", throwIfNotFound: true);
         // LevelEditor
         m_LevelEditor = asset.FindActionMap("LevelEditor", throwIfNotFound: true);
         m_LevelEditor_Menu = m_LevelEditor.FindAction("Menu", throwIfNotFound: true);
@@ -538,6 +558,7 @@ public class @GameInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_EndTurn;
     private readonly InputAction m_Gameplay_Menu;
     private readonly InputAction m_Gameplay_Inventory;
+    private readonly InputAction m_Gameplay_MouseClicked;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -545,6 +566,7 @@ public class @GameInput : IInputActionCollection, IDisposable
         public InputAction @EndTurn => m_Wrapper.m_Gameplay_EndTurn;
         public InputAction @Menu => m_Wrapper.m_Gameplay_Menu;
         public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
+        public InputAction @MouseClicked => m_Wrapper.m_Gameplay_MouseClicked;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -563,6 +585,9 @@ public class @GameInput : IInputActionCollection, IDisposable
                 @Inventory.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
+                @MouseClicked.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseClicked;
+                @MouseClicked.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseClicked;
+                @MouseClicked.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseClicked;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -576,6 +601,9 @@ public class @GameInput : IInputActionCollection, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @MouseClicked.started += instance.OnMouseClicked;
+                @MouseClicked.performed += instance.OnMouseClicked;
+                @MouseClicked.canceled += instance.OnMouseClicked;
             }
         }
     }
@@ -799,6 +827,7 @@ public class @GameInput : IInputActionCollection, IDisposable
         void OnEndTurn(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnMouseClicked(InputAction.CallbackContext context);
     }
     public interface ILevelEditorActions
     {
