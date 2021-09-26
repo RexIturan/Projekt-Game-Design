@@ -18,6 +18,6 @@ public class AbilitySO : ScriptableObject
     public int costs; 
     public TargetedEffect [] targetedEffects;
 
-    public StateAction[] selectedActions;
-    public StateAction[] executingActions;
+    public List<StateAction> selectedActions;
+    public List<StateAction> executingActions;
 }

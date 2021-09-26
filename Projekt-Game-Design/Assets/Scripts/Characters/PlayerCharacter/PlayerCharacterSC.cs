@@ -46,13 +46,18 @@ public class PlayerCharacterSC : MonoBehaviour
     
     [Header("Abilities")] 
     [SerializeField] private int abilityID;
+    public int AbilityID => abilityID;
     [SerializeField] private AbilitySO[] abilitys; 
     
     
     [Header("State Machine")]
     [SerializeField] private bool isSelected = false;
-    
-    
+
+    public bool IsSelected {
+        get => isSelected;
+        set => isSelected = value;
+    }
+
     private void Awake()
     {
         input.mouseClicked += toggleIsSelected;
