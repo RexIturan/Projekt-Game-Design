@@ -521,7 +521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1329724686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,10 +534,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0180747071cd4155b7b069b79a1ad971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 1374547666}
-  globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
-  worldObjectGridContainer: {fileID: 11400000, guid: b0a08b990b4c49d458b5a1b630d2b345, type: 2}
-  worldObjectContainer: {fileID: 11400000, guid: e5cd24938e258334eb4aa7233d6680ec, type: 2}
+  parent: {fileID: 0}
+  globalGridData: {fileID: 0}
+  worldObjectGridContainer: {fileID: 0}
+  worldObjectContainer: {fileID: 0}
 --- !u!4 &1329724687
 Transform:
   m_ObjectHideFlags: 0
@@ -567,7 +567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1374547666
 Transform:
   m_ObjectHideFlags: 0
@@ -758,7 +758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2021906810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,10 +771,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2fe44d27634339b04a4412b4068993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldObjectGridContainer: {fileID: 11400000, guid: b0a08b990b4c49d458b5a1b630d2b345, type: 2}
-  globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
-  drawer: {fileID: 1329724686}
-  worldObjectContainer: {fileID: 11400000, guid: e5cd24938e258334eb4aa7233d6680ec, type: 2}
+  worldObjectGridContainer: {fileID: 0}
+  globalGridData: {fileID: 0}
+  drawer: {fileID: 0}
+  worldObjectContainer: {fileID: 0}
 --- !u!4 &2021906811
 Transform:
   m_ObjectHideFlags: 0
