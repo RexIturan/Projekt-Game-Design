@@ -6,14 +6,18 @@ using UnityEngine;
 namespace Graph {
     public class GraphGenerator : MonoBehaviour {
 
+        
+        
+        [Header("Scene References")]
         [SerializeField] private GraphDrawer graphDrawer;
         
-        [Header("Data")]
+        [Header("SO References")] 
+        [SerializeField] private TileTypeContainerSO tileTypeContainer;
         [SerializeField] private GraphContainerSO graphContainer;
         [SerializeField] private GridContainerSO gridContainer;
         [SerializeField] private GridDataSO globalGridData;
         
-        
+        [Header("Settings")]
         [SerializeField] private bool diagonal;
         
         public void GenerateGraphFromGrids() {
@@ -36,8 +40,8 @@ namespace Graph {
             // and then set the isWalkableFlag 
             for (int x = 0; x < ground.Width; x++) {
                 for (int y = 0; y < ground.Height; y++) {
-                    var walkable = 
-                        !ground.GetGridObject(x, y).Type.Flags.HasFlag(ETileFlags.solid);// &&
+                    var type = tileTypeContainer.tileTypes[ground.GetGridObject(x, y).tileTypeID];
+                    var walkable = !type.Flags.HasFlag(ETileFlags.solid);// &&
                     //     !current.GetGridObject(x, y).Type.Flags.HasFlag(ETileFlags.solid);
                     graph.GetGridObject(x, y).SetIsWalkable(walkable);
                 }

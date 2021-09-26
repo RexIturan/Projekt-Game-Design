@@ -52,6 +52,6 @@ MonoBehaviour:
   objectController: {fileID: 0}
   prefabDrawer: {fileID: 0}
   worldObjectContainer: {fileID: 11400000, guid: e5cd24938e258334eb4aa7233d6680ec, type: 2}
+  tileTypesContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}
   mode: 0
   selectedTileType: {fileID: 0}
-  tileTypesContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}

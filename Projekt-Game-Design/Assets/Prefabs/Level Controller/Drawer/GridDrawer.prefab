@@ -446,6 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridContainer: {fileID: 11400000, guid: cf77658e9fdf6c24193f76cce7d45bff, type: 2}
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  tileTypeContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}
   gridTilemap:
   - {fileID: 8515184455736061310}
   - {fileID: 5474828764857456271}

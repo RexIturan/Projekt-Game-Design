@@ -19,7 +19,8 @@ namespace MeshGenerator {
         [Header("References")] 
         [SerializeField] private GridDataSO globalGridData;
         [SerializeField] private GridContainerSO gridContainer;
-        
+        [SerializeField] private TileTypeContainerSO tileTypeContainer;
+
         private MeshFilter meshFilter;
         private MeshRenderer meshRenderer;
         
@@ -85,9 +86,10 @@ namespace MeshGenerator {
                 for (int z = 0; z < depth; z++) {
                     for (int x = 0; x < width; x++) {
                         Tile tile = grid.GetGridObject(x, z);
+                        var type = tileTypeContainer.tileTypes[tile.tileTypeID];
                         
                         // check if block
-                        if (tile.type.flags.HasFlag(ETileFlags.solid)) {
+                        if (type.flags.HasFlag(ETileFlags.solid)) {
                             tileData[y, z, x] = ETile.block;
                         }
                         else {

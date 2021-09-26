@@ -15,7 +15,7 @@ namespace MeshGenerator {
         }
 
         private void HandleUpdateMesh() {
-            Debug.Log("update Mesh");
+            // Debug.Log("update Mesh");
             meshGenerator.UpdateTileData();
             meshGenerator.GenerateMesh();
             meshGenerator.UpdateMesh();

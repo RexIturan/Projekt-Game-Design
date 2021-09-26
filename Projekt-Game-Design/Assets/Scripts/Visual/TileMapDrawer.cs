@@ -11,9 +11,12 @@ namespace Visual {
             public TileBase tile;
         }
 
+        [Header("References")]
         [SerializeField] private GridContainerSO gridContainer;
         [SerializeField] private GridDataSO globalGridData;
+        [SerializeField] private TileTypeContainerSO tileTypeContainer;
         
+        [Header("Visuals")]
         [SerializeField] private Tilemap[] gridTilemap;
         [SerializeField] private Tilemap cursorTilemap;
 
@@ -42,11 +45,12 @@ namespace Visual {
                 var tileGrid = gridContainer.tileGrids[l];
                 for (int x = 0; x < tileGrid.Width; x++) {
                     for (int y = 0; y < tileGrid.Height; y++) {
-                        var tile = tileGrid.GetGridObject(x, y).Type;
+                        var tile = tileGrid.GetGridObject(x, y);
+                        var type = tileTypeContainer.tileTypes[tile.tileTypeID];
                         if (tile != null) {
                             gridTilemap[l].SetTile(
                                 new Vector3Int(x + offset.x, y + offset.y, l),
-                                GetTileFromTileType(tileGrid.GetGridObject(x, y).Type));    
+                                GetTileFromTileType(type));    
                         }
                         else {
                             Debug.Log("error tile");
