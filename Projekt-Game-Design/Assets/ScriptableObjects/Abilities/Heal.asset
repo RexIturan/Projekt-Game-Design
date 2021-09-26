@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
+  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  description: 'Does things and stuff. Idk, you know how it goes or something. '
   targets: 3
   moveToTarget: 0
   range: 4
