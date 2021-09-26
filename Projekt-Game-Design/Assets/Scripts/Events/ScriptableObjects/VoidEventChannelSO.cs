@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
@@ -8,7 +9,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Events/Void Event Channel")]
 public class VoidEventChannelSO : EventChannelBaseSO
 {
-    public UnityAction OnEventRaised;
+    public event Action OnEventRaised;
 
     public void RaiseEvent()
     {

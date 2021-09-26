@@ -43,10 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992c6cb5eaca4d568a6545da4b674c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}
   loadLevel: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
+  updateMeshEC: {fileID: 11400000, guid: 9f8a7d3a00a8db44e8e9538720f9a6b4, type: 2}
   drawer: {fileID: 0}
   controller: {fileID: 0}
   inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  objectController: {fileID: 0}
+  prefabDrawer: {fileID: 0}
+  worldObjectContainer: {fileID: 11400000, guid: e5cd24938e258334eb4aa7233d6680ec, type: 2}
+  tileTypesContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}
   mode: 0
   selectedTileType: {fileID: 0}
-  tileTypesContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}

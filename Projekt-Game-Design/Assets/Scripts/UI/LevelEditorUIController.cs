@@ -103,9 +103,6 @@ namespace UI {
         // }
         
         void SetMenuVisibility(bool value) {
-        
-            Debug.Log(value);
-        
             if (value) {
                 ShowMenu();
             }
@@ -116,7 +113,6 @@ namespace UI {
     
         void ShowMenu()
         {
-            Debug.Log("show in game menu");
             enableMenuInput.RaiseEvent();
             // Einstellungen ausblenden und Menü zeigen
             ingameMenuContainer.style.display = DisplayStyle.Flex;

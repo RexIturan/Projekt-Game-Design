@@ -8,18 +8,26 @@ namespace Grid {
 
         [HideInInspector] public string name = "Tile";
 
-        public TileTypeSO type;
+        // public TileTypeSO type;
+        //
+        // public TileTypeSO Type => type;
 
-        public TileTypeSO Type => type;
-
+        public int tileTypeID;
+        
         public GenericGrid1D<Tile> grid;
         public int x;
         public int y;
 
-        public void SetTileType(TileTypeSO tileType) {
-            type = tileType;
+        // public void SetTileType(TileTypeSO tileType) {
+        //     type = tileType;
+        //     // grid.TriggerGridObjectChanged(x, y);
+        // }
+        
+        public void SetTileType(int id) {
+            tileTypeID = id;
             // grid.TriggerGridObjectChanged(x, y);
         }
+        
         
         public Tile(GenericGrid1D<Tile> grid, int x, int y) {
             this.grid = grid;
@@ -29,7 +37,7 @@ namespace Grid {
         }
         
         public override string ToString() {
-            return Type.Name;    
+            return tileTypeID.ToString();    
         }
     }
 }

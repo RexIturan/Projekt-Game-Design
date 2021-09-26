@@ -8,6 +8,16 @@ using UnityEngine;
 namespace SaveLoad {
     //todo make scriptable object??
     public class SaveManager : MonoBehaviour {
+        [Header("Receiving Events On")]
+        [SerializeField] private IntEventChannelSO saveGame;
+        [SerializeField] private IntEventChannelSO loadGame;
+        [SerializeField] private VoidEventChannelSO saveLevel;
+        [SerializeField] private VoidEventChannelSO loadLevel;
+        
+        [Header("Sending Events On")]
+        [SerializeField] private VoidEventChannelSO levelLoaded;
+        
+        [Header("Data References")]
         [SerializeField] private GridContainerSO gridContainer;
         [SerializeField] private GridDataSO globalGridData;
 
@@ -21,15 +31,11 @@ namespace SaveLoad {
         [SerializeField] private string gameSavePathBase;
         [SerializeField] private string[] gameSaveFilenames;
         
-        [Header("Receiving Events On")]
-        [SerializeField] private IntEventChannelSO saveGame;
-        [SerializeField] private IntEventChannelSO loadGame;
-        [SerializeField] private VoidEventChannelSO saveMap;
-        [SerializeField] private VoidEventChannelSO loadMap;
+        
         
         private void Awake() {
-            saveMap.OnEventRaised += SaveGridContainer;
-            loadMap.OnEventRaised += LoadGridContainer;
+            saveLevel.OnEventRaised += SaveGridContainer;
+            loadLevel.OnEventRaised += LoadGridContainer;
             saveGame.OnEventRaised += SaveGame;
             loadGame.OnEventRaised += LoadGame;
         }
@@ -96,7 +102,7 @@ namespace SaveLoad {
                 }
             }
             
-            Debug.Log(json);
+            Debug.Log($"Load JSON from {path} \n{json}");
 
             JsonUtility.FromJsonOverwrite(json, gridContainer);
 
@@ -105,6 +111,7 @@ namespace SaveLoad {
             globalGridData.cellSize = gridContainer.tileGrids[0].CellSize;
             globalGridData.OriginPosition = gridContainer.tileGrids[0].OriginPosition;
             // JsonUtility.FromJson<GridContainerSO>(json);
+            levelLoaded.RaiseEvent();
         }
     }
 }
