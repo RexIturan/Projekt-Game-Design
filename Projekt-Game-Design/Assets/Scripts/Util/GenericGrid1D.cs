@@ -79,7 +79,7 @@ namespace Util {
             y = Mathf.FloorToInt((worldPosition - originPosition).z / cellSize);
         }
 
-        private Vector3 GetCellCenter() {
+        public Vector3 GetCellCenter() {
             // todo use grid axis / rotation
             return new Vector3(0.5f, 0, 0.5f) * cellSize;
         }

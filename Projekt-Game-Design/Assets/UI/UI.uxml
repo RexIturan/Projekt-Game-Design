@@ -70,7 +70,7 @@
                 <ui:VisualElement name="PlayerPicture" class="PlayerPicture" style="height: 70px; position: absolute; right: 210px; width: 70px; top: -20px;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="ActionContainer" style="background-color: rgba(26, 26, 26, 0.43); height: 10%; width: 40%; left: 30%; bottom: 0; position: absolute; white-space: nowrap; flex-direction: row; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; display: none;">
+        <ui:VisualElement name="ActionContainer" style="background-color: rgba(26, 26, 26, 0.43); height: 10%; width: 40%; left: 30%; bottom: 0; position: absolute; white-space: nowrap; flex-direction: row; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
             <ui:VisualElement name="Action1" class="Actions" />
             <ui:VisualElement name="Action2" class="Actions" style="width: 17%; height: 100%;" />
             <ui:VisualElement name="Action3" class="Actions" style="width: 17%; height: 100%;" />
@@ -87,6 +87,6 @@
             <ui:Button text="Ingame Menu" display-tooltip-when-elided="true" name="IngameMenuButton" class="IngameMenuButton" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:Instance template="IngameMenu" name="IngameMenu" style="display: none; flex-grow: 1;" />
+    <ui:Instance template="IngameMenu" name="IngameMenu" style="flex-grow: 1; display: none;" />
     <ui:Instance template="InventoryOverlay" name="InventoryOverlay" style="flex-grow: 1; display: none;" />
 </ui:UXML>

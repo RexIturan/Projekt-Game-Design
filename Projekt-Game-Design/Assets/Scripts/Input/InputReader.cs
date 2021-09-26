@@ -23,8 +23,6 @@ namespace Input {
         public event UnityAction menuEvent = delegate { };
         public event UnityAction endTurnEvent = delegate { };
         
-        public event UnityAction mouseClicked = delegate { };
-        
         //Camera 
         public event UnityAction<Vector2, bool> cameraMoveEvent = delegate {  };
         public event UnityAction<float> cameraRotateEvent = delegate {  };
@@ -132,12 +130,6 @@ namespace Input {
             if (context.phase == InputActionPhase.Performed) {
                 visibilityInventory.RaiseEvent(true);
             }
-        }
-
-        public void OnMouseClicked(InputAction.CallbackContext context)
-        {
-            if (context.phase == InputActionPhase.Performed)
-                mouseClicked.Invoke();
         }
 
         #endregion

@@ -28,14 +28,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "MouseClicked",
-                    "type": "Button",
-                    "id": "dd8a1892-e7ef-4d4a-af93-5c8a039c5a57",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -69,17 +61,6 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Inventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "471352d6-97a4-42af-bed4-f7946ae6b611",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "MouseClicked",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
