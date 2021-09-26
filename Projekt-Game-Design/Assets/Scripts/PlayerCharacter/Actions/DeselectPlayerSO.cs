@@ -7,23 +7,23 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 
 // Sets Variable in GameObject to false and raises unselected Event
 //
-[CreateAssetMenu(fileName = "UnselectPlayer", menuName = "State Machines/Actions/Player/UnselectPlayer")]
-public class UnselectPlayerSO : StateActionSO
+[CreateAssetMenu(fileName = "DeselectPlayer", menuName = "State Machines/Actions/Player/DeselectPlayer")]
+public class DeselectPlayerSO : StateActionSO
 {
     [Header("Sending Events On")]
-    [SerializeField] private GameObjEventChannelSO unselectEvent;
+    [SerializeField] private GameObjEventChannelSO deselectEvent;
 
-    protected override StateAction CreateAction() => new UnselectPlayer(unselectEvent);
+    protected override StateAction CreateAction() => new DeselectPlayer(deselectEvent);
 }
 
-public class UnselectPlayer : StateAction
+public class DeselectPlayer : StateAction
 {
     private StateMachine stateMachine;
-    private GameObjEventChannelSO unselectEvent;
+    private GameObjEventChannelSO deselectEvent;
 
-    public UnselectPlayer(GameObjEventChannelSO unselectEvent)
+    public DeselectPlayer(GameObjEventChannelSO deselectEvent)
     {
-        this.unselectEvent = unselectEvent;
+        this.deselectEvent = deselectEvent;
     }
 
     public override void OnUpdate()
@@ -38,6 +38,6 @@ public class UnselectPlayer : StateAction
     public override void OnStateExit()
     {
         stateMachine.gameObject.GetComponent<PlayerCharacterCO>().isSelected = false;
-        unselectEvent.RaiseEvent(stateMachine.gameObject);
+        deselectEvent.RaiseEvent(stateMachine.gameObject);
     }
 }
