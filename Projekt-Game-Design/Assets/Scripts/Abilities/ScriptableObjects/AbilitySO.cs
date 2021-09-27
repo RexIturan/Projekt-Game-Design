@@ -17,6 +17,7 @@ public class AbilitySO : ScriptableObject
     public ETileFlags conditions; // restrictions for target in regards of the tiles between
     public int costs; 
     public TargetedEffect [] targetedEffects;
+    public int abilityID;
 
     public List<StateAction> selectedActions;
     public List<StateAction> executingActions;

@@ -53,6 +53,7 @@ public class PlayerCharacterSC : MonoBehaviour
     [SerializeField] private AbilitySO[] abilitys;
     [SerializeField] private int abilityID;
     public int AbilityID => abilityID;
+    public AbilitySO[] Abilitys => abilitys;
     
     [Header("State Machine")]
     public bool isSelected = false;

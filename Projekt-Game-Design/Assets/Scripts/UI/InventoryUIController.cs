@@ -170,7 +170,7 @@ public class InventoryUIController : MonoBehaviour
 
     private void AddItemToInventoryOverlay(int itemGuid)
     {
-        Debug.Log("TEstAddItemToInventoryOverlay");
+        Debug.Log("TestAddItemToInventoryOverlay");
         var emptySlot = InventoryItems.FirstOrDefault(x => x.ItemGuid.Equals(-1));
 
         if (emptySlot != null)
