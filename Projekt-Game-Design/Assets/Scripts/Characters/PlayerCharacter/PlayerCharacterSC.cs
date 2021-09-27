@@ -36,6 +36,11 @@ public class PlayerCharacterSC : MonoBehaviour
     [SerializeField] private int energy;
 
     [SerializeField] private Vector2Int position;
+
+    public int HitPoints {
+        get => hitPoints;
+        set => hitPoints = value;
+    }
     
     
     [Header("Equipment")]
@@ -45,18 +50,20 @@ public class PlayerCharacterSC : MonoBehaviour
 
     
     [Header("Abilities")] 
+    [SerializeField] private AbilitySO[] abilitys;
     [SerializeField] private int abilityID;
     public int AbilityID => abilityID;
-    [SerializeField] private AbilitySO[] abilitys; 
-    
     
     [Header("State Machine")]
-    [SerializeField] private bool isSelected = false;
-
-    public bool IsSelected {
-        get => isSelected;
-        set => isSelected = value;
-    }
+    public bool isSelected = false;
+    public bool abilitySelected;
+    public bool abilityConfirmed;
+    public bool abilityExecuted;
+    
+    // public bool IsSelected {
+    //     get => isSelected;
+    //     set => isSelected = value;
+    // }
 
     private void Awake()
     {

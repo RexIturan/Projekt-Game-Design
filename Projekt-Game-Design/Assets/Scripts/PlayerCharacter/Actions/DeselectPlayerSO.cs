@@ -37,7 +37,7 @@ public class DeselectPlayer : StateAction
 
     public override void OnStateExit()
     {
-        stateMachine.gameObject.GetComponent<PlayerCharacterSC>().IsSelected = false;
+        stateMachine.gameObject.GetComponent<PlayerCharacterSC>().isSelected = false;
         deselectEvent.RaiseEvent(stateMachine.gameObject);
     }
 }

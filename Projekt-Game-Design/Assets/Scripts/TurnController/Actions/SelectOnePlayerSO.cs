@@ -34,7 +34,7 @@ public class SelectOnePlayer : StateAction
 			render.material.color = Color.green;
 			turnController.PlayersSelected.Remove(list[i]);
 			Debug.Log("Ein Spieler wurde deselected");
-			list[i].GetComponent<PlayerCharacterSC>().IsSelected = false;
+			list[i].GetComponent<PlayerCharacterSC>().isSelected = false;
 
 		}
 		render = list[list.Count-1].GetComponent<MeshRenderer>();

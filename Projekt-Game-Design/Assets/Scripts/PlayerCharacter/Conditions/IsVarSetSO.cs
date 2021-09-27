@@ -20,7 +20,7 @@ public class IsVarSet : Condition
 	
 	protected override bool Statement()
 	{
-		return root.IsSelected;
+		return root.isSelected;
 	}
 	
 	public override void OnStateEnter()
