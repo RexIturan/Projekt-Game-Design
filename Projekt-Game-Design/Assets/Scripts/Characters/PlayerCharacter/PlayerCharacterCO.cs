@@ -5,6 +5,7 @@ using Events.ScriptableObjects;
 using UnityEngine;
 using Input;
 using UnityEngine.InputSystem;
+using Util;
 
 // script attached to each playable character 
 // contains relevant data such as stats
@@ -27,19 +28,21 @@ public class PlayerCharacterCO : MonoBehaviour
     // Current values, dynamic
     //
     [SerializeField] public int lifePoints;
-    // [SerializeField] public int movementPoints;
+    [SerializeField] public int movementPoints;
     // [SerializeField] public int manaPoints; // TODO: remove comment
     [SerializeField] public int energy;
 
-    [SerializeField] public Vector2Int position;
+    [SerializeField] public Vector3Int position;
 
     [SerializeField] public ScriptableObject item; // TODO: implement items, 
                                                     // the equipped item offers a list of actions to take
 
     [SerializeField] public List<ScriptableObject> statusEffects; // TODO: implement status effects
                                                                   // stat changing temporary effects
-                                                                  
+
     // Statemachine
+    public List<PathNode> reachableTiles;
+
     public bool isSelected = false;
     private void Awake()
     {

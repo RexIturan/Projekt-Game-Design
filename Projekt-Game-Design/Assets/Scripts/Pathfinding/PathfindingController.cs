@@ -5,6 +5,7 @@ using Grid;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Util;
+using Events.ScriptableObjects;
 
 namespace Pathfinding {
     public class PathfindingController : MonoBehaviour {
@@ -18,11 +19,15 @@ namespace Pathfinding {
         [Header("Settings")]
         [SerializeField] private int dist;
 
+        [Header("Receiving events on")]
+        [SerializeField] private PathfindingQueryEventChannelSO pathfindingQueryEventChannel;
+
         private Vector2Int clickedPos;
         private List<PathNode> reachableNodes;
 
         private void Awake() {
-            InitialisePathfinding();            
+            InitialisePathfinding();
+            pathfindingQueryEventChannel.OnEventRaised += handlePathfindingQueryEvent;
         }
 
         private void Update() {
@@ -98,6 +103,13 @@ namespace Pathfinding {
             return new Vector2Int(
                 x: flooredPos.x + Mathf.Abs(lowerBounds.x),
                 y: flooredPos.z + Mathf.Abs(lowerBounds.z));
+        }
+
+        // calculate all reachable nodes and call the given method
+        //
+        private void handlePathfindingQueryEvent(Vector3Int startNode, int distance, Action<List<PathNode>> callback)
+        {
+            callback(GetReachableNodes((Vector2Int) startNode, distance));
         }
     }
 }

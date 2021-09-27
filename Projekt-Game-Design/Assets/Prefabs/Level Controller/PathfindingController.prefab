@@ -167,6 +167,7 @@ MonoBehaviour:
   graphContainer: {fileID: 11400000, guid: a579a7e16bbc7cb419001b3fed163a80, type: 2}
   drawer: {fileID: 1112942784057711956}
   dist: 50
+  pathfindingQueryEventChannel: {fileID: 11400000, guid: ffe98f2118ac7d549ad4bfed89b6f94d, type: 2}
 --- !u!114 &1112942784057711956
 MonoBehaviour:
   m_ObjectHideFlags: 0
