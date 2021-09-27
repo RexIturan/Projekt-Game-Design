@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dcb608470fe4f02a63c88f30ff4e687, type: 3}
-  m_Name: stone
+  m_Script: {fileID: 11500000, guid: 1568b31cf9ebef046b872908f481ec76, type: 3}
+  m_Name: MoveToTarget
   m_EditorClassIdentifier: 
-  name: Stone
-  id: 1
-  flags: 19
-  movementCost: 1
-  color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 0}

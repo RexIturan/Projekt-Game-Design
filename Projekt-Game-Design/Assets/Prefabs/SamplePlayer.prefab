@@ -122,24 +122,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 4201453750377344852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0320324457e7c0242b2b53824a4ffa61, type: 3}
+  m_Script: {fileID: 11500000, guid: 61beff83ece1f2c41869fecfa859320d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   playerType: {fileID: 11400000, guid: b74bf689d067c784aa3e98c68eaf4e4d, type: 2}
   currentStats:
-    maxLifePoints: 200
-    maxEnergy: 25
-    strength: 30
-    dexterity: 30
-    intelligence: 30
-    viewDistance: 500
+    maxLifePoints: 0
+    maxEnergy: 0
+    strength: 0
+    dexterity: 0
+    intelligence: 0
+    viewDistance: 0
+  statusEffects: []
   experience: 0
-  level: 1
-  lifePoints: 200
-  energy: 15
+  level: 0
+  hitPoints: 0
+  energy: 0
   position: {x: 0, y: 0}
   item: {fileID: 0}
-  statusEffects: []
+  abilityID: 0
+  abilitys: []
+  isSelected: 0
 --- !u!1 &6920934587370789356
 GameObject:
   m_ObjectHideFlags: 0
