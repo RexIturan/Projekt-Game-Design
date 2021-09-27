@@ -11,7 +11,7 @@ public class IsNotSelectedSO : StateActionSO
 	[SerializeField] public BoolEventChannelSO setActionMenuVisibility;
 	
 	[SerializeField] public GameObjEventChannelSO addPlayerToSelection;
-	protected override StateAction CreateAction() => new IsNotSelected(setActionMenuVisibility, addPlayerToSelection);
+	public override StateAction CreateAction() => new IsNotSelected(setActionMenuVisibility, addPlayerToSelection);
 	
 
 }

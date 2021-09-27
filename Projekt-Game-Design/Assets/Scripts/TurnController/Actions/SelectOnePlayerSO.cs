@@ -6,7 +6,7 @@ using UOP1.StateMachine.ScriptableObjects;
 [CreateAssetMenu(fileName = "SelectOnePlayer", menuName = "State Machines/Actions/Select One Player")]
 public class SelectOnePlayerSO : StateActionSO
 {
-	protected override StateAction CreateAction() => new SelectOnePlayer();
+	public override StateAction CreateAction() => new SelectOnePlayer();
 }
 
 public class SelectOnePlayer : StateAction

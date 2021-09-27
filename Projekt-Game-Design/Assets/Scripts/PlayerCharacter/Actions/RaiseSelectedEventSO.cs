@@ -10,7 +10,7 @@ public class RaiseSelectedEventSO : StateActionSO
 {
     [Header("Sending Events On")]
     [SerializeField] public GameObjEventChannelSO selectNewPlayer;
-    protected override StateAction CreateAction() => new RaiseSelectedEvent(selectNewPlayer);
+    public override StateAction CreateAction() => new RaiseSelectedEvent(selectNewPlayer);
 }
 
 public class RaiseSelectedEvent : StateAction

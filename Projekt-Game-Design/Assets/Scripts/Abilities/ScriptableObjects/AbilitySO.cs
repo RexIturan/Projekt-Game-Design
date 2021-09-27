@@ -4,6 +4,7 @@ using UnityEngine;
 using Ability;
 using Grid;
 using UOP1.StateMachine;
+using UOP1.StateMachine.ScriptableObjects;
 
 [CreateAssetMenu(fileName = "NewAbility", menuName = "Ability/new Ability")]
 public class AbilitySO : ScriptableObject
@@ -18,6 +19,6 @@ public class AbilitySO : ScriptableObject
     public int costs; 
     public TargetedEffect [] targetedEffects;
 
-    public List<StateAction> selectedActions;
-    public List<StateAction> executingActions;
+    public List<StateActionSO> selectedActions;
+    public List<StateActionSO> executingActions;
 }

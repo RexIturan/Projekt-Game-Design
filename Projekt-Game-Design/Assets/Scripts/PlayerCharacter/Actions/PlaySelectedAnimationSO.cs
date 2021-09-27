@@ -8,7 +8,7 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 [CreateAssetMenu(fileName = "PlaySelectedAnimation", menuName = "State Machines/Actions/Player/PlaySelectedAnimation")]
 public class PlaySelectedAnimationSO : StateActionSO
 {
-    protected override StateAction CreateAction() => new PlaySelectedAnimation();
+    public override StateAction CreateAction() => new PlaySelectedAnimation();
 }
 
 public class PlaySelectedAnimation : StateAction

@@ -13,7 +13,7 @@ public class DeselectPlayerSO : StateActionSO
     [Header("Sending Events On")]
     [SerializeField] private GameObjEventChannelSO deselectEvent;
 
-    protected override StateAction CreateAction() => new DeselectPlayer(deselectEvent);
+    public override StateAction CreateAction() => new DeselectPlayer(deselectEvent);
 }
 
 public class DeselectPlayer : StateAction

@@ -8,7 +8,7 @@ using UOP1.StateMachine.ScriptableObjects;
 public class SuperActionSO : StateActionSO {
 	[SerializeField] private AbilityPhase abilityPhase;
 	[SerializeField] private AbilityContainerSO abilityContainer;
-	protected override StateAction CreateAction() => new SuperAction(abilityPhase, abilityContainer);
+	public override StateAction CreateAction() => new SuperAction(abilityPhase, abilityContainer);
 }
 
 public class SuperAction : StateAction
@@ -40,12 +40,18 @@ public class SuperAction : StateAction
 		// get Actions from Ability
 		abilityID = playerCharacterSC.AbilityID;
 		var ability = abilityContainer.abilities[abilityID];
-
+		StateActionSO[] actions;
+		
 		if (phase == AbilityPhase.selected) {
-			subActions = ability.selectedActions;
+			actions = ability.selectedActions.ToArray();
 		}
 		else {
-			subActions = ability.executingActions;
+			actions = ability.executingActions.ToArray();
+		}
+		
+		foreach (var actionSo in actions) {
+			var action = actionSo.CreateAction();
+			subActions.Add(action);
 		}
 
 		foreach (var action in subActions) {

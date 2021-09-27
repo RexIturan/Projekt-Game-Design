@@ -11,7 +11,7 @@ public class IsSelectedSO : StateActionSO
 	[Header("Sending Events On")]
 	[SerializeField] public BoolEventChannelSO setActionMenuVisibility;
 	[SerializeField] public GameObjEventChannelSO addPlayerToSelection;
-	protected override StateAction CreateAction() => new IsSelected(setActionMenuVisibility,addPlayerToSelection);
+	public override StateAction CreateAction() => new IsSelected(setActionMenuVisibility,addPlayerToSelection);
 }
 
 public class IsSelected : StateAction
