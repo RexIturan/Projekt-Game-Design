@@ -5,6 +5,7 @@ using Events.ScriptableObjects;
 using UnityEngine;
 using Input;
 using UnityEngine.InputSystem;
+using Grid;
 
 // script attached to each playable character 
 // contains relevant data such as stats
@@ -12,30 +13,31 @@ using UnityEngine.InputSystem;
 public class PlayerCharacterSC : MonoBehaviour
 {
     [Header("SO Reference")]
-    [SerializeField] private InputReader input;
-    
+    public InputReader input;
+    public GridDataSO globalGridData;
     
     [Header("Basic Stats")]
     // Base stats
-    [SerializeField] private PlayerTypeSO playerType;
+    public PlayerTypeSO playerType;
     
     
     [Header("Current Stats")]
     // Stats influenced by status effects
-    [SerializeField] private CharacterStats currentStats;
+    public CharacterStats currentStats;
     // TODO: implement status effects
     // stat changing temporary effects
-    [SerializeField] private List<ScriptableObject> statusEffects;
-    
-    // Leveling
-    [SerializeField] private int experience;
-    // TODO: maybe a more complex type later on
-    [SerializeField] private int level; 
-    // Current values, dynamic
-    [SerializeField] private int hitPoints;
-    [SerializeField] private int energy;
+    public List<ScriptableObject> statusEffects;
 
-    [SerializeField] private Vector2Int position;
+    // Leveling
+    public int experience;
+    // TODO: maybe a more complex type later on
+    public int level;
+    // Current values, dynamic
+    public int hitPoints;
+    public int energy;
+
+
+    public Vector3Int position; // within the grid
 
     public int HitPoints {
         get => hitPoints;
@@ -44,15 +46,17 @@ public class PlayerCharacterSC : MonoBehaviour
     
     
     [Header("Equipment")]
-    // TODO: implement items,
     // the equipped item offers a list of actions to take
-    [SerializeField] private ScriptableObject item;
+    public ScriptableObject item;
 
     
     [Header("Abilities")] 
     [SerializeField] private AbilitySO[] abilitys;
     [SerializeField] private int abilityID;
     public int AbilityID => abilityID;
+    // cached target (tile position)
+    public Vector3Int movementTarget; 
+    
     
     [Header("State Machine")]
     public bool isSelected = false;
@@ -64,6 +68,12 @@ public class PlayerCharacterSC : MonoBehaviour
     //     get => isSelected;
     //     set => isSelected = value;
     // }
+
+    // set Position of gameobject
+    public void Start()
+    {
+        transformToPosition();
+    }
 
     private void Awake()
     {
@@ -82,5 +92,14 @@ public class PlayerCharacterSC : MonoBehaviour
             }
         }
         
+    }
+
+    // transforms the gameobject to it's tile position
+    public void transformToPosition()
+    {
+        this.gameObject.transform.position = new Vector3(position.x * globalGridData.cellSize, 
+                                                         position.y * globalGridData.cellSize, 
+                                                         position.z * globalGridData.cellSize)
+                                             + globalGridData.OriginPosition;
     }
 }
