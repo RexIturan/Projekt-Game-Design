@@ -8,7 +8,7 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 [CreateAssetMenu(fileName = "MoveToTarget", menuName = "State Machines/Actions/Player/MoveToTarget")]
 public class MoveToTargetSO : StateActionSO
 {
-    protected override StateAction CreateAction() => new MoveToTarget();
+    public override StateAction CreateAction() => new MoveToTarget();
 }
 
 public class MoveToTarget : StateAction
