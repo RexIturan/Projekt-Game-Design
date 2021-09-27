@@ -36,7 +36,13 @@ public class PlayerCharacterSC : MonoBehaviour
     public int hitPoints;
     public int energy;
 
+
     public Vector3Int position; // within the grid
+
+    public int HitPoints {
+        get => hitPoints;
+        set => hitPoints = value;
+    }
     
     
     [Header("Equipment")]
@@ -45,20 +51,23 @@ public class PlayerCharacterSC : MonoBehaviour
 
     
     [Header("Abilities")] 
+    [SerializeField] private AbilitySO[] abilitys;
     [SerializeField] private int abilityID;
     public int AbilityID => abilityID;
-    [SerializeField] private AbilitySO[] abilitys;
     // cached target (tile position)
     public Vector3Int movementTarget; 
     
     
     [Header("State Machine")]
-    [SerializeField] private bool isSelected = false;
-
-    public bool IsSelected {
-        get => isSelected;
-        set => isSelected = value;
-    }
+    public bool isSelected = false;
+    public bool abilitySelected;
+    public bool abilityConfirmed;
+    public bool abilityExecuted;
+    
+    // public bool IsSelected {
+    //     get => isSelected;
+    //     set => isSelected = value;
+    // }
 
     // set Position of gameobject
     public void Start()

@@ -6,7 +6,7 @@ using UOP1.StateMachine.ScriptableObjects;
 [CreateAssetMenu(fileName = "SelectOnePlayer", menuName = "State Machines/Actions/Select One Player")]
 public class SelectOnePlayerSO : StateActionSO
 {
-	protected override StateAction CreateAction() => new SelectOnePlayer();
+	public override StateAction CreateAction() => new SelectOnePlayer();
 }
 
 public class SelectOnePlayer : StateAction
@@ -34,7 +34,7 @@ public class SelectOnePlayer : StateAction
 			render.material.color = Color.green;
 			turnController.PlayersSelected.Remove(list[i]);
 			Debug.Log("Ein Spieler wurde deselected");
-			list[i].GetComponent<PlayerCharacterSC>().IsSelected = false;
+			list[i].GetComponent<PlayerCharacterSC>().isSelected = false;
 
 		}
 		render = list[list.Count-1].GetComponent<MeshRenderer>();

@@ -12,13 +12,15 @@ public class AbilityConfirmed : Condition
 {
 	protected new AbilityConfirmedSO OriginSO => (AbilityConfirmedSO)base.OriginSO;
 
-	public override void Awake(StateMachine stateMachine)
-	{
+	private PlayerCharacterSC playerCharacterSc;
+	
+	public override void Awake(StateMachine stateMachine) {
+		playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
 	}
 	
 	protected override bool Statement()
 	{
-		return true;
+		return playerCharacterSc.abilityConfirmed;
 	}
 	
 	public override void OnStateEnter()

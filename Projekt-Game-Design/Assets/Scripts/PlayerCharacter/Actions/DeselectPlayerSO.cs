@@ -13,7 +13,7 @@ public class DeselectPlayerSO : StateActionSO
     [Header("Sending Events On")]
     [SerializeField] private GameObjEventChannelSO deselectEvent;
 
-    protected override StateAction CreateAction() => new DeselectPlayer(deselectEvent);
+    public override StateAction CreateAction() => new DeselectPlayer(deselectEvent);
 }
 
 public class DeselectPlayer : StateAction
@@ -37,7 +37,7 @@ public class DeselectPlayer : StateAction
 
     public override void OnStateExit()
     {
-        stateMachine.gameObject.GetComponent<PlayerCharacterSC>().IsSelected = false;
+        stateMachine.gameObject.GetComponent<PlayerCharacterSC>().isSelected = false;
         deselectEvent.RaiseEvent(stateMachine.gameObject);
     }
 }

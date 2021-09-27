@@ -11,7 +11,7 @@ public class SetAbilitiesVisibitySO : StateActionSO
     [SerializeField] private BoolEventChannelSO setActionMenuVisibility;
     [SerializeField] private bool visible;
 
-    protected override StateAction CreateAction() => new SetAbilitiesVisibity(setActionMenuVisibility, visible);
+    public override StateAction CreateAction() => new SetAbilitiesVisibity(setActionMenuVisibility, visible);
 }
 
 public class SetAbilitiesVisibity : StateAction

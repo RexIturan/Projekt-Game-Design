@@ -12,13 +12,15 @@ public class AbilitySelected : Condition
 {
 	protected new AbilitySelectedSO OriginSO => (AbilitySelectedSO)base.OriginSO;
 
-	public override void Awake(StateMachine stateMachine)
-	{
+	private PlayerCharacterSC playerCharacterSc;
+	
+	public override void Awake(StateMachine stateMachine) {
+		playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
 	}
 	
 	protected override bool Statement()
 	{
-		return true;
+		return playerCharacterSc.abilitySelected;
 	}
 	
 	public override void OnStateEnter()

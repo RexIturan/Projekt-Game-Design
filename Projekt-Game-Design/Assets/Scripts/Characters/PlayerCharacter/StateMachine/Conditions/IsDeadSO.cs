@@ -12,13 +12,14 @@ public class IsDead : Condition
 {
 	protected new IsDeadSO OriginSO => (IsDeadSO)base.OriginSO;
 
-	public override void Awake(StateMachine stateMachine)
-	{
+	private PlayerCharacterSC playerCharacterSc;
+	
+	public override void Awake(StateMachine stateMachine) {
+		playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
 	}
 	
-	protected override bool Statement()
-	{
-		return true;
+	protected override bool Statement() {
+		return playerCharacterSc.HitPoints <= 0;
 	}
 	
 	public override void OnStateEnter()

@@ -12,13 +12,15 @@ public class Deselected : Condition
 {
 	protected new DeselectedSO OriginSO => (DeselectedSO)base.OriginSO;
 
-	public override void Awake(StateMachine stateMachine)
-	{
+	private PlayerCharacterSC playerCharacterSc;
+	
+	public override void Awake(StateMachine stateMachine) {
+		playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
 	}
 	
 	protected override bool Statement()
 	{
-		return true;
+		return !playerCharacterSc.isSelected;
 	}
 	
 	public override void OnStateEnter()

@@ -19,11 +19,13 @@ namespace UOP1.StateMachine.ScriptableObjects
 			action.Awake(stateMachine);
 			return action;
 		}
-		protected abstract StateAction CreateAction();
+		// TODO revert public to protected
+		public abstract StateAction CreateAction();
 	}
 
 	public abstract class StateActionSO<T> : StateActionSO where T : StateAction, new()
 	{
-		protected override StateAction CreateAction() => new T();
+		// TODO revert public to protected
+		public override StateAction CreateAction() => new T();
 	}
 }
