@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 namespace Events.ScriptableObjects {
     [CreateAssetMenu(menuName = "Events/GameObject/Action Event Channel")]

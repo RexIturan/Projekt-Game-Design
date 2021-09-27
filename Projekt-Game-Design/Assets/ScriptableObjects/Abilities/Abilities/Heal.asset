@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: e6492eb0591c65c40a66ebb3177d67ba, type: 3}
   description: 'Does things and stuff. Idk, you know how it goes or something. '
   targets: 3
   moveToTarget: 0
@@ -29,3 +29,4 @@ MonoBehaviour:
     targets: 3
     targetIsCenter: 1
     area: 1
+  abilityID: 0

@@ -156,7 +156,7 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   selectedPlayer: {fileID: 0}
   PlayersSelected: []
-  PlayerSelectedEvent: {fileID: 11400000, guid: bc77f18ca69055e429c3c74f84f72122, type: 2}
+  PlayerSelectedEvent: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
   PlayerUnselectedEvent: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
 --- !u!4 &155348833
 Transform:
@@ -281,7 +281,7 @@ MonoBehaviour:
   VisibilityGameOverlayEventChannel: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
   VisibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
   VisibilityActionContainerEventChannel: {fileID: 11400000, guid: 77b911077445c83429c0d7a60572781d, type: 2}
-  ActionsFromPlayerEventChannel: {fileID: 11400000, guid: bc77f18ca69055e429c3c74f84f72122, type: 2}
+  ActionsFromPlayerEventChannel: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
   VisibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
 --- !u!114 &160448883

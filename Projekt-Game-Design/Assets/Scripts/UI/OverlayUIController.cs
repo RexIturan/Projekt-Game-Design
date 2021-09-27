@@ -24,13 +24,17 @@ public class OverlayUIController : MonoBehaviour
     [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
     // Für das ActionMenü
     [SerializeField] private BoolEventChannelSO VisibilityActionContainerEventChannel;
-    [SerializeField] private GameObjEventChannelSO ActionsFromPlayerEventChannel;
+    [SerializeField] private GameObjActionEventChannelSO ActionsFromPlayerEventChannel;
 
     [Header("Sending Events On")]
     [SerializeField] private VoidEventChannelSO enableGamplayInput;
     
     [Header("Sending and Receiving Events On")]
     [SerializeField] private BoolEventChannelSO VisibilityMenuEventChannel;
+    
+    
+    // Callbackfunktion für die Abilitys
+    private Action<int> CallBackAction;
 
     // Start is called before the first frame update
     void Start()
@@ -120,15 +124,23 @@ public class OverlayUIController : MonoBehaviour
         }
     }
 
-    void HandlePlayerSelected(GameObject obj)
+    void CallBackMouseDown(MouseDownEvent evt, int abilityID)
     {
+        CallBackAction(abilityID);
+    }
+
+    void HandlePlayerSelected(GameObject obj, Action<int> callBackAction)
+    {
+        CallBackAction = callBackAction;
         FlushAbilityListIcons();
         List<AbilitySO> abilities = new List<AbilitySO>(obj.GetComponent<PlayerCharacterSC>().Abilitys);
         int counter = 0;
         
         foreach (var ability in abilities)
         {
-            AbilityIconSlotList[counter++].HoldAbility(ability);
+            AbilityIconSlotList[counter].HoldAbility(ability);
+            AbilityIconSlotList[counter].RegisterCallback<MouseDownEvent, int>(CallBackMouseDown,AbilityIconSlotList[counter].AbilityID);
+            counter++;
         }
         
         //TODO: Hier die Stats einbauen, für den ausgewählten Spieler
