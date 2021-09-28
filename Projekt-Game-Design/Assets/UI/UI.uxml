@@ -1,43 +1,41 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="IngameMenu" src="IngameMenu.uxml" />
-    <ui:Template name="InventoryOverlay" src="InventoryOverlay.uxml" />
     <Style src="Styles/UI_Classes.uss" />
     <ui:VisualElement name="OverlayContainer" style="flex-grow: 1; display: flex;">
         <ui:VisualElement name="LeftSidebar" style="flex-grow: 0; width: 20%; height: 100%; position: absolute; margin-left: 1%;">
             <ui:VisualElement name="PartyContainer" style="top: auto; height: 40%; -unity-slice-top: 0; margin-top: 30%; margin-left: 0; margin-right: 0; padding-top: 4%; background-color: rgba(26, 26, 26, 0.43); padding-left: 4%; padding-right: 4%; padding-bottom: 0;">
                 <ui:VisualElement name="PlayerOne" class="PlayerPartySelection" style="display: flex;">
                     <ui:VisualElement name="PlayerPicture" class="PlayerPicture" />
-                    <ui:VisualElement name="ProgressBarAction" class="ProgressBar">
-                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarAction" />
+                    <ui:VisualElement name="ProgressBarHealth" class="ProgressBar">
+                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarHealth" />
                     </ui:VisualElement>
                     <ui:VisualElement name="ProgressBarMana" class="ProgressBar">
                         <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarMana" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="ProgressBarHealth" class="ProgressBar">
-                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarHealth" />
+                    <ui:VisualElement name="ProgressBarAction" class="ProgressBar">
+                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarAction" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="PlayerTwo" class="PlayerPartySelection" style="display: flex;">
-                    <ui:VisualElement name="ProgressBarAction" class="ProgressBar">
-                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarAction" />
+                    <ui:VisualElement name="ProgressBarHealth" class="ProgressBar">
+                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarHealth" />
                     </ui:VisualElement>
                     <ui:VisualElement name="ProgressBarMana" class="ProgressBar">
                         <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarMana" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="ProgressBarHealth" class="ProgressBar">
-                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarHealth" />
+                    <ui:VisualElement name="ProgressBarAction" class="ProgressBar">
+                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarAction" />
                     </ui:VisualElement>
                     <ui:VisualElement name="PlayerPicture" class="PlayerPicture" />
                 </ui:VisualElement>
                 <ui:VisualElement name="PlayerThree" class="PlayerPartySelection" style="display: flex;">
-                    <ui:VisualElement name="ProgressBarAction" class="ProgressBar">
-                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarAction" />
+                    <ui:VisualElement name="ProgressBarHealth" class="ProgressBar">
+                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarHealth" />
                     </ui:VisualElement>
                     <ui:VisualElement name="ProgressBarMana" class="ProgressBar">
                         <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarMana" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="ProgressBarHealth" class="ProgressBar">
-                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarHealth" />
+                    <ui:VisualElement name="ProgressBarAction" class="ProgressBar">
+                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarAction" />
                     </ui:VisualElement>
                     <ui:VisualElement name="PlayerPicture" class="PlayerPicture" />
                 </ui:VisualElement>
@@ -45,14 +43,14 @@
             <ui:VisualElement name="PlayerViewContainer" style="height: 40%; position: relative; -unity-slice-top: 20; margin-top: 10%; background-color: rgba(26, 26, 26, 0.43); border-left-color: rgb(214, 214, 214); border-right-color: rgb(214, 214, 214); border-top-color: rgb(214, 214, 214); border-bottom-color: rgb(214, 214, 214); padding-left: 0; padding-right: 5%; padding-top: 2%; padding-bottom: 2%;">
                 <ui:Label text="E. Jack Yulate" display-tooltip-when-elided="true" name="PlayerName" style="margin-left: 25%; color: rgb(255, 255, 255); font-size: 15%;" />
                 <ui:VisualElement name="ProgressBars" style="height: 40%; margin-left: 25%;">
-                    <ui:VisualElement name="ProgressBarMana" class="ProgressBar" style="width: 100%;">
-                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarMana" />
-                    </ui:VisualElement>
                     <ui:VisualElement name="ProgressBarHealth" class="ProgressBar" style="width: 100%;">
-                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarHealth" />
+                        <ui:VisualElement name="ProgressBarHealthOverlay" class="ProgressBarHealth" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="ProgressBarAction" class="ProgressBar" style="width: 100%;">
-                        <ui:VisualElement name="ProgressBarOverlay" class="ProgressBarAction" />
+                    <ui:VisualElement name="ProgressBarMana" class="ProgressBar" style="width: 100%;">
+                        <ui:VisualElement name="ProgressBarManaOverlay" class="ProgressBarMana" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="ProgressBarAbility" class="ProgressBar" style="width: 100%;">
+                        <ui:VisualElement name="ProgressBarAbilityOverlay" class="ProgressBarAction" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="Stats" style="flex-direction: row; height: 30%; margin-left: 5%;">
@@ -86,7 +84,6 @@
         <ui:VisualElement name="SettingsMenu" class="MenuButton" style="position: absolute; top: 0; right: 0; width: 10%; height: 5%;">
             <ui:Button text="Ingame Menu" display-tooltip-when-elided="true" name="IngameMenuButton" class="IngameMenuButton" />
         </ui:VisualElement>
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="AbilityDescription" style="position: absolute; top: 496px; left: 339px; height: 63px; width: 435px; color: rgb(255, 255, 255); -unity-text-outline-width: 0; font-size: 20px; background-color: rgba(255, 255, 255, 0.16); display: none; flex-wrap: wrap; white-space: normal;" />
     </ui:VisualElement>
-    <ui:Instance template="IngameMenu" name="IngameMenu" style="display: none; flex-grow: 1;" />
-    <ui:Instance template="InventoryOverlay" name="InventoryOverlay" style="flex-grow: 1; display: none;" />
 </ui:UXML>

@@ -391,6 +391,10 @@ PrefabInstance:
       propertyPath: abilitys.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: aa392b409b2e48e4b90d0f718e6e6085, type: 2}
+    - target: {fileID: 6922591229169883138, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: currentStats.maxLifePoints
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6922591229169883192, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: m_Name
       value: Cube (1)
@@ -449,6 +453,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 521218105}
     m_Modifications:
     - target: {fileID: 6922591229169883138, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: energy
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922591229169883138, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: abilitys.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -460,6 +468,14 @@ PrefabInstance:
       propertyPath: abilitys.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 31dd5954101721a48a79e9da2ff529ea, type: 2}
+    - target: {fileID: 6922591229169883138, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: currentStats.maxEnergy
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922591229169883138, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: currentStats.maxLifePoints
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 6922591229169883192, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: m_Name
       value: Cube
@@ -764,6 +780,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 521218105}
     m_Modifications:
     - target: {fileID: 6922591229169883138, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: energy
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922591229169883138, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: lifePoints
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922591229169883138, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: abilitys.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -771,6 +795,14 @@ PrefabInstance:
       propertyPath: abilitys.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 824e7e1ce55319646be3e32edf8023d2, type: 2}
+    - target: {fileID: 6922591229169883138, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: currentStats.maxEnergy
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922591229169883138, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: currentStats.maxLifePoints
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6922591229169883192, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: m_Name
       value: Cube

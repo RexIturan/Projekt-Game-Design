@@ -5,6 +5,7 @@ using Events.ScriptableObjects;
 using UnityEngine;
 using Input;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 // script attached to each playable character 
 // contains relevant data such as stats
@@ -23,6 +24,7 @@ public class PlayerCharacterSC : MonoBehaviour
     [Header("Current Stats")]
     // Stats influenced by status effects
     [SerializeField] private CharacterStats currentStats;
+    public CharacterStats CurrentStats => currentStats;
     // TODO: implement status effects
     // stat changing temporary effects
     [SerializeField] private List<ScriptableObject> statusEffects;
@@ -32,16 +34,20 @@ public class PlayerCharacterSC : MonoBehaviour
     // TODO: maybe a more complex type later on
     [SerializeField] private int level; 
     // Current values, dynamic
-    [SerializeField] private int hitPoints;
+    [SerializeField] private int lifePoints;
     [SerializeField] private int energy;
 
     [SerializeField] private Vector2Int position;
 
-    public int HitPoints {
-        get => hitPoints;
-        set => hitPoints = value;
+    public int LifePoints {
+        get => lifePoints;
+        set => lifePoints = value;
     }
     
+    public int EnergyPoints {
+        get => energy;
+        set => energy = value;
+    }
     
     [Header("Equipment")]
     // TODO: implement items,

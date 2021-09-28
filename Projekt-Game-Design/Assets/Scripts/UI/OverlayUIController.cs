@@ -15,6 +15,9 @@ public class OverlayUIController : MonoBehaviour
     // Action Container
     private VisualElement ActionContainer;
     
+    // PlayerView Container
+    private VisualElement PlayerViewContainer;
+    
     // Liste der Ability-Visual-Elements und Icons
     private List<VisualElement> AbilityList;
     private List<AbilitySlot> AbilityIconSlotList = new List<AbilitySlot>();
@@ -51,6 +54,7 @@ public class OverlayUIController : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         ActionContainer = root.Q<VisualElement>("ActionContainer");
         overlayContainer = root.Q<VisualElement>("OverlayContainer");
+        PlayerViewContainer = root.Q<VisualElement>("PlayerViewContainer");
         overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
         VisibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
         VisibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
@@ -124,9 +128,22 @@ public class OverlayUIController : MonoBehaviour
         }
     }
 
-    void CallBackMouseDown(MouseDownEvent evt, int abilityID)
+    void CallBackMouseDownAbility(MouseDownEvent evt, int abilityID)
     {
         CallBackAction(abilityID);
+    }
+    
+    void CallBackMouseEnterAbility(MouseEnterEvent evt, string description)
+    {
+        Label text = overlayContainer.Q<Label>("AbilityDescription");
+        text.style.display = DisplayStyle.Flex;
+        text.text = description;
+    }
+    
+    void CallBackMouseLeaveAbility(MouseLeaveEvent evt)
+    {
+        Label text = overlayContainer.Q<Label>("AbilityDescription");
+        text.style.display = DisplayStyle.None;
     }
 
     void HandlePlayerSelected(GameObject obj, Action<int> callBackAction)
@@ -139,11 +156,27 @@ public class OverlayUIController : MonoBehaviour
         foreach (var ability in abilities)
         {
             AbilityIconSlotList[counter].HoldAbility(ability);
-            AbilityIconSlotList[counter].RegisterCallback<MouseDownEvent, int>(CallBackMouseDown,AbilityIconSlotList[counter].AbilityID);
+            AbilityIconSlotList[counter].RegisterCallback<MouseDownEvent, int>(CallBackMouseDownAbility,AbilityIconSlotList[counter].AbilityID);
+            AbilityIconSlotList[counter].RegisterCallback<MouseEnterEvent, string>(CallBackMouseEnterAbility,ability.description);
+            AbilityIconSlotList[counter].RegisterCallback<MouseLeaveEvent>(CallBackMouseLeaveAbility);
             counter++;
         }
-        
+
+        RefreshStats(obj);
         //TODO: Hier die Stats einbauen, für den ausgewählten Spieler
+    }
+
+    void RefreshStats(GameObject obj)
+    {
+        VisualElement manaBar = PlayerViewContainer.Q<VisualElement>("ProgressBarManaOverlay");
+        VisualElement healthBar = PlayerViewContainer.Q<VisualElement>("ProgressBarHealthOverlay");
+        VisualElement abilityBar = PlayerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
+
+        PlayerCharacterSC playerSC = obj.GetComponent<PlayerCharacterSC>(); 
+        CharacterStats playerStats = obj.GetComponent<PlayerCharacterSC>().CurrentStats; 
+        
+        healthBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.LifePoints/playerStats.maxLifePoints)));
+        abilityBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
     }
 
     void ShowMenu()
