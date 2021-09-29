@@ -89,12 +89,15 @@ namespace field_of_view
             while (true)
             {
                 //TODO: Diese Abfrage vllt int fkt auslagern und die verschiedenen ebenen einbeziehen
+                
+                if (x0==x1 && y0==y1) return true;
+                
                 tileType = grid.tileGrids[1].GetGridObject(x0, y0).tileTypeID;
                 if (tileTypeContainer.tileTypes[tileType].Flags.HasFlag(ETileFlags.opaque))
                 {
                     return false;
                 }
-                if (x0==x1 && y0==y1) return true;
+                
                 e2 = 2*err;
                 if (e2 > dy) { err += dy; x0 += sx; } /* e_xy+e_x > 0 */
                 if (e2 < dx) { err += dx; y0 += sy; } /* e_xy+e_y < 0 */
