@@ -1,4 +1,5 @@
 ﻿using System;
+using Events.ScriptableObjects;
 using Grid;
 using UnityEngine;
 
@@ -14,11 +15,34 @@ namespace field_of_view
         [SerializeField] private bool debug = false;
         [SerializeField] private int visionRangeTest;
         [SerializeField] private Vector2Int startPosTest;
+        [SerializeField] private GridDataSO globalGridData;
 
-    
+        [SerializeField]
+        private FieldOfViewQueryEventChannelSO fieldOfViewQueryEventChannel;
+
+        public void Awake()
+        {
+            fieldOfViewQueryEventChannel.OnEventRaised += handleQueryEvent;
+        }
+
+        public Vector2Int WorldPosToGridPos(Vector3 worldPos)
+        {
+            var lowerBounds = Vector3Int.FloorToInt(globalGridData.OriginPosition);
+            var flooredPos = Vector3Int.FloorToInt(worldPos);
+            return new Vector2Int(
+                x: flooredPos.x + Mathf.Abs(lowerBounds.x),
+                y: flooredPos.z + Mathf.Abs(lowerBounds.z));
+        }
+
         public void generateVision()
         {
             GETVisibleTiles(visionRangeTest, startPosTest);
+        }
+
+        private void handleQueryEvent(Vector3Int startpos, int range, Action<bool[,]> callback)
+        {
+            var pos = WorldPosToGridPos(startpos);
+            callback(GETVisibleTiles(range, pos));
         }
 
         public bool[,] GETVisibleTiles(int visionRange, Vector2Int startTile)
