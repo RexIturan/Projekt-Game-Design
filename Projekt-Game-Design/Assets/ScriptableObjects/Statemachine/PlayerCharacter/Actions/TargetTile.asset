@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb91fd04f76ec8a44b36376392f3f8d5, type: 3}
-  m_Name: DrawReachableTiles
+  m_Script: {fileID: 11500000, guid: 21cb984f202409a438b3e4819c07a1af, type: 3}
+  m_Name: TargetTile
   m_EditorClassIdentifier: 
-  drawReachableTileEC: {fileID: 11400000, guid: 14a3e6c6cf47bf34ea1081e23ac7335e, type: 2}
+  targetTileEvent: {fileID: 11400000, guid: 06d375aa5b115fd4ba98c0967522e31a, type: 2}
+  globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}

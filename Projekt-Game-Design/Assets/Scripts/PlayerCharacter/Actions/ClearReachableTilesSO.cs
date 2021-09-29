@@ -34,7 +34,7 @@ public class ClearReachableTiles : StateAction
 
     public override void OnStateExit()
     {
-        Debug.Log("Clearing reachable tiles.");
+        // Debug.Log("Clearing reachable tiles.");
         clearReachableTilesEC.RaiseEvent();
     }
 }

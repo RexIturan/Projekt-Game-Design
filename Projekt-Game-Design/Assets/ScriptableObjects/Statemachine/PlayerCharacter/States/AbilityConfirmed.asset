@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb91fd04f76ec8a44b36376392f3f8d5, type: 3}
-  m_Name: DrawReachableTiles
+  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
+  m_Name: AbilityConfirmed
   m_EditorClassIdentifier: 
-  drawReachableTileEC: {fileID: 11400000, guid: 14a3e6c6cf47bf34ea1081e23ac7335e, type: 2}
+  _actions:
+  - {fileID: 11400000, guid: b1c73421dfe92d145b474b7f4948e424, type: 2}
+  - {fileID: 11400000, guid: c1cd15c16930b524caed22e165b022e0, type: 2}

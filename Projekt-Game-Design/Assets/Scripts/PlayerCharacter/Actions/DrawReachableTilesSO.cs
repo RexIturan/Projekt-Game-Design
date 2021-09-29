@@ -34,7 +34,7 @@ public class DrawReachableTiles : StateAction
     public override void OnStateEnter()
     {
         // pathfindingDrawer.ClearPreviewTilemap();
-        Debug.Log("Zeichne reachable tiles von Player aus");
+        // Debug.Log("Zeichne reachable tiles von Player aus");
         drawReachableTileEC.RaiseEvent(playerStateContainer.reachableTiles);
     }
 
