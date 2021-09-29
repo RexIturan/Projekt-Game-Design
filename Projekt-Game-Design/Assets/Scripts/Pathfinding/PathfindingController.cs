@@ -31,6 +31,7 @@ namespace Pathfinding {
         }
 
         private void Update() {
+            /*
             var pos = MousePosition.GetMouseWorldPosition();
             
             if (clickedPos != null && reachableNodes != null && reachableNodes.Count > 0) {
@@ -51,19 +52,26 @@ namespace Pathfinding {
             }
             
             if (Mouse.current.leftButton.wasPressedThisFrame) {
-                // var pos = MousePosition.GetMouseWorldPosition();
-                // Debug.Log($"{pos}");
-                
-                reachableNodes = GetReachableNodes(pos, dist);
-                // var nodeList = "";
-                // foreach (var node in reachableNodes) {
-                //     nodeList += $" {node.ToString()}";
-                // }
-                
-                // Debug.Log($"{pos} {nodeList}");
-                
-                drawer.DrawPreview(reachableNodes);
+                Vector2Int gridPos = WorldPosToGridPos(pos);
+                if (pathfinding.IsInBounds(gridPos.x, gridPos.y))
+                {
+                    // var pos = MousePosition.GetMouseWorldPosition();
+                    // Debug.Log($"{pos}");
+
+                    reachableNodes = GetReachableNodes(pos, dist);
+                    // var nodeList = "";
+                    // foreach (var node in reachableNodes) {
+                    //     nodeList += $" {node.ToString()}";
+                    // }
+
+                    // Debug.Log($"{pos} {nodeList}");
+
+                    drawer.DrawPreview(reachableNodes);
+                }
+                else
+                    Debug.LogWarning("Click Position is not inside the Graph");
             }
+            */
         }
 
         public void InitialisePathfinding() {

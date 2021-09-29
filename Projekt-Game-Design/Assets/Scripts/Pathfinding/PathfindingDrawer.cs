@@ -16,7 +16,7 @@ namespace Pathfinding {
         
         public void DrawPreview(List<PathNode> nodes) {
 
-            ClearPreviewTilemap();
+            // ClearPreviewTilemap();
             
             foreach (var node in nodes) {
                 Vector2Int pos = GridPosToTilePos(node.x, node.y);

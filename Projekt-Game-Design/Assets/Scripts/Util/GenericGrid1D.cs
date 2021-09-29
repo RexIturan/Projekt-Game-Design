@@ -116,9 +116,13 @@ namespace Util {
         }
 
         public TGridObject GetGridObject(int x, int y) {
-            if (IsInBounds(x, y)) return grid1DArray[Coord2DToIndex(x, y, width)];
-
-            return default;
+            if (IsInBounds(x, y))
+                return grid1DArray[Coord2DToIndex(x, y, width)];
+            else
+            {
+                Debug.LogWarning("Index of Grid object out of bounds! x: " + x + ", y: " + y);
+                return default;
+            }
         }
 
         public TGridObject GetGridObject(Vector3 worldPosition) {
