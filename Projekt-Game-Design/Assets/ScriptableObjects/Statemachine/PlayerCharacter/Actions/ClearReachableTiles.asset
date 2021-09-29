@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bfd6e3793906dc40bf5ac8f88c35528, type: 3}
   m_Name: ClearReachableTiles
   m_EditorClassIdentifier: 
-  pathfindingController: {fileID: 0}
+  pathfindingController: {fileID: 1112942784057711957, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
