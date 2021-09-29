@@ -1,0 +1,31 @@
+.PlayerContainer {
+    flex-direction: row;
+    background-image: url('/Assets/UI/Images/defaultFace.jpg');
+    width: 70px;
+    height: 70px;
+    border-top-left-radius: 34px;
+    border-bottom-left-radius: 34px;
+    border-top-right-radius: 34px;
+    border-bottom-right-radius: 34px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.PlayerContainer:hover {
+    flex-direction: row;
+    background-image: url('/Assets/UI/Images/defaultFace.jpg');
+    width: 70px;
+    height: 70px;
+    border-top-left-radius: 34px;
+    border-bottom-left-radius: 34px;
+    border-top-right-radius: 34px;
+    border-bottom-right-radius: 34px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    background-color: rgba(255, 255, 255, 0.24);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.45);
+}
