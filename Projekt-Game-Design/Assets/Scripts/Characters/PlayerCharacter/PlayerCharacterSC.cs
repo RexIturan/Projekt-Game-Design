@@ -7,6 +7,7 @@ using Input;
 using UnityEngine.InputSystem;
 using Grid;
 
+
 // script attached to each playable character 
 // contains relevant data such as stats
 //
@@ -21,29 +22,36 @@ public class PlayerCharacterSC : MonoBehaviour
     public PlayerTypeSO playerType;
     
     
-    [Header("Current Stats")]
+    [Header("Current Max Stats")]
     // Stats influenced by status effects
-    public CharacterStats currentStats;
+    [SerializeField] private CharacterStats currentStats;
+    public CharacterStats CurrentStats => currentStats;
     // TODO: implement status effects
     // stat changing temporary effects
-    public List<ScriptableObject> statusEffects;
-
+    [SerializeField] private List<ScriptableObject> statusEffects;
+    
+    [Header("Current Stats")]
     // Leveling
     public int experience;
     // TODO: maybe a more complex type later on
     public int level;
     // Current values, dynamic
-    public int hitPoints;
+    public int healthPoints;
     public int energy;
+
 
 
     public Vector3Int position; // within the grid
 
-    public int HitPoints {
-        get => hitPoints;
-        set => hitPoints = value;
+    public int HealthPoints {
+        get => healthPoints;
+        set => healthPoints = value;
     }
     
+    public int EnergyPoints {
+        get => energy;
+        set => energy = value;
+    }
     
     [Header("Equipment")]
     // the equipped item offers a list of actions to take
@@ -52,11 +60,14 @@ public class PlayerCharacterSC : MonoBehaviour
     
     [Header("Abilities")] 
     [SerializeField] private AbilitySO[] abilitys;
+    public AbilitySO[] Abilitys => abilitys;
     [SerializeField] private int abilityID;
     public int AbilityID => abilityID;
     // cached target (tile position)
     public Vector3Int movementTarget; 
     
+
+
     
     [Header("State Machine")]
     public bool isSelected = false;

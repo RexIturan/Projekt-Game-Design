@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e53e91bbbc8c5b142ad653b7fceac4cd, type: 3}
-  m_Name: IsSelected
+  m_Script: {fileID: 11500000, guid: 7993055ecf4a43238a96bb211711aa11, type: 3}
+  m_Name: PlayerSelected Event Channel
   m_EditorClassIdentifier: 
-  setActionMenuVisibility: {fileID: 11400000, guid: 77b911077445c83429c0d7a60572781d, type: 2}
-  addPlayerToSelection: {fileID: 11400000, guid: bc77f18ca69055e429c3c74f84f72122, type: 2}
+  description: 

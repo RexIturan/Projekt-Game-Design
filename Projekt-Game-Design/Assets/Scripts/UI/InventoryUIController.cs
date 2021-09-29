@@ -45,16 +45,6 @@ public class InventoryUIController : MonoBehaviour
 
     private void Start()
     {
-        // Holen des UXML Trees, zum getten der einzelnen Komponenten
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        //Store the root from the UI Document component
-        root = GetComponent<UIDocument>().rootVisualElement;
-
-        inventoryContainer = root.Q<VisualElement>("InventoryOverlay");
-
-        //Search the root for the SlotContainer Visual Element
-        m_SlotContainer = root.Q<VisualElement>("InventoryContent");
-
         //Create InventorySlots and add them as children to the SlotContainer
         for (int i = 0; i < 28; i++)
         {
@@ -73,6 +63,14 @@ public class InventoryUIController : MonoBehaviour
 
     private void Awake()
     {
+        // Holen des UXML Trees, zum getten der einzelnen Komponenten
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        //Store the root from the UI Document component
+        root = GetComponent<UIDocument>().rootVisualElement;
+        inventoryContainer = root.Q<VisualElement>("InventoryOverlay");
+
+        //Search the root for the SlotContainer Visual Element
+        m_SlotContainer = root.Q<VisualElement>("InventoryContent");
         VisibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
         VisibilityInventoryEventChannel.OnEventRaised += HandleInventoryOverlay;
         VisibilityGameOverlayEventChannel.OnEventRaised += HandleOtherScreensOpened;
@@ -170,7 +168,7 @@ public class InventoryUIController : MonoBehaviour
 
     private void AddItemToInventoryOverlay(int itemGuid)
     {
-        Debug.Log("TEstAddItemToInventoryOverlay");
+        Debug.Log("TestAddItemToInventoryOverlay");
         var emptySlot = InventoryItems.FirstOrDefault(x => x.ItemGuid.Equals(-1));
 
         if (emptySlot != null)

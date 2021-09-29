@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6e165c1aa15e41a27f7b575cb0cd7, type: 3}
   m_Name: NewPlayerSelected
   m_EditorClassIdentifier: 
-  NewPlayerSelectedEvent: {fileID: 11400000, guid: bc77f18ca69055e429c3c74f84f72122, type: 2}
+  NewPlayerSelectedEvent: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}

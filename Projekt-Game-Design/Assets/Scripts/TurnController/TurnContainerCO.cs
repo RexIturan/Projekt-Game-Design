@@ -17,7 +17,7 @@ public class TurnContainerCO : MonoBehaviour
     private bool isMoveActionPhase;
     
     [Header("Receiving Events On")]
-    [SerializeField] private GameObjEventChannelSO PlayerSelectedEvent;
+    [SerializeField] private GameObjActionEventChannelSO PlayerSelectedEvent;
     [SerializeField] private GameObjEventChannelSO PlayerUnselectedEvent;
 
     private void Awake()
@@ -26,7 +26,7 @@ public class TurnContainerCO : MonoBehaviour
         PlayerUnselectedEvent.OnEventRaised += UnselectPlayer;
     }
 
-    private void SelectPlayer(GameObject player)
+    private void SelectPlayer(GameObject player, Action<int> action)
     {
         selectedPlayer = player;
     }

@@ -20,3 +20,4 @@ MonoBehaviour:
   conditions: 1
   costs: 0
   targetedEffects: []
+  abilityID: 4

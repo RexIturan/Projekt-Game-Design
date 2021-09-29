@@ -19,7 +19,7 @@ public class IsDead : Condition
 	}
 	
 	protected override bool Statement() {
-		return playerCharacterSc.HitPoints <= 0;
+		return playerCharacterSc.LifePoints <= 0;
 	}
 	
 	public override void OnStateEnter()
