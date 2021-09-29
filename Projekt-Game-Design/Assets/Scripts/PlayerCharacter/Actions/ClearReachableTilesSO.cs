@@ -1,10 +1,6 @@
-using Events.ScriptableObjects;
-using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
-using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
 using Pathfinding;
 
@@ -12,12 +8,12 @@ using Pathfinding;
 public class ClearReachableTilesSO : StateActionSO
 {
     [SerializeField] private GameObject pathfindingController;
-    protected override StateAction CreateAction() => new ClearReachableTiles(pathfindingController);
+    public override StateAction CreateAction() => new ClearReachableTiles(pathfindingController);
 }
 
 public class ClearReachableTiles : StateAction
 {
-    private PlayerCharacterCO playerStateContainer;
+    private PlayerCharacterSC playerStateContainer;
     private PathfindingDrawer pathfindingDrawer;
 
     public ClearReachableTiles(GameObject pathfindingController)
@@ -32,7 +28,7 @@ public class ClearReachableTiles : StateAction
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterCO>();
+        playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
 
     public override void OnStateEnter()
