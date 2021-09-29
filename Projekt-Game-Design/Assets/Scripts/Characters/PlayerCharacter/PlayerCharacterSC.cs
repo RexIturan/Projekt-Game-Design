@@ -6,6 +6,7 @@ using UnityEngine;
 using Input;
 using UnityEngine.InputSystem;
 using Grid;
+using Util;
 
 
 // script attached to each playable character 
@@ -67,6 +68,8 @@ public class PlayerCharacterSC : MonoBehaviour
     public Vector3Int movementTarget; 
     
 
+    // Statemachine
+    public List<PathNode> reachableTiles;
 
     
     [Header("State Machine")]

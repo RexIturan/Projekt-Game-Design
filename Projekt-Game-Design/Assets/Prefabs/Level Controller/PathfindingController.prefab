@@ -166,7 +166,10 @@ MonoBehaviour:
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   graphContainer: {fileID: 11400000, guid: a579a7e16bbc7cb419001b3fed163a80, type: 2}
   drawer: {fileID: 1112942784057711956}
+  graphGenerator: {fileID: 0}
   dist: 50
+  test: 0
+  pathfindingQueryEventChannel: {fileID: 11400000, guid: ffe98f2118ac7d549ad4bfed89b6f94d, type: 2}
 --- !u!114 &1112942784057711956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112942784759588760}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1112942783390242944}
