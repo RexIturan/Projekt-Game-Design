@@ -11,7 +11,7 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 public class SaveReachableNodesSO : StateActionSO
 {
     [SerializeField] private PathfindingQueryEventChannelSO pathfindingQueryEvent;
-    protected override StateAction CreateAction() => new SaveReachableNodes(pathfindingQueryEvent);
+    public override StateAction CreateAction() => new SaveReachableNodes(pathfindingQueryEvent);
 }
 
 public class SaveReachableNodes : StateAction
@@ -36,7 +36,7 @@ public class SaveReachableNodes : StateAction
 
     public override void OnStateEnter()
     {
-        pathfindingQueryEvent.RaiseEvent(playerStateContainer.position, playerStateContainer.movementPoints, saveToStateContainer);
+        pathfindingQueryEvent.RaiseEvent(playerStateContainer.position, playerStateContainer.GetMaxMoveDistance(), saveToStateContainer);
     }
 
     public void saveToStateContainer(List<PathNode> reachableTiles)

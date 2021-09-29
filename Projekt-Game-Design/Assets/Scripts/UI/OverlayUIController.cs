@@ -175,7 +175,7 @@ public class OverlayUIController : MonoBehaviour
         PlayerCharacterSC playerSC = obj.GetComponent<PlayerCharacterSC>(); 
         CharacterStats playerStats = obj.GetComponent<PlayerCharacterSC>().CurrentStats; 
         
-        healthBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.LifePoints/playerStats.maxLifePoints)));
+        healthBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.HealthPoints/playerStats.maxHealthPoints)));
         abilityBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
     }
 

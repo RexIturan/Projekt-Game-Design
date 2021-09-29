@@ -33,14 +33,20 @@ public class PlayerCharacterSC : MonoBehaviour
     
     [Header("Current Stats")]
     // Leveling
-    public int experience;
     // TODO: maybe a more complex type later on
     public int level;
+    public int experience;
+    
+    
     // Current values, dynamic
     public int healthPoints;
     public int energy;
+    // TODO could be just energy???
+    public int movementPointsPerEnergy;
 
-
+    
+    
+    
 
     public Vector3Int position; // within the grid
 
@@ -61,13 +67,14 @@ public class PlayerCharacterSC : MonoBehaviour
     
     [Header("Abilities")] 
     [SerializeField] private AbilitySO[] abilitys;
-    public AbilitySO[] Abilitys => abilitys;
     [SerializeField] private int abilityID;
+    
+    public AbilitySO[] Abilitys => abilitys;
     public int AbilityID => abilityID;
+    
     // cached target (tile position)
     public Vector3Int movementTarget; 
     
-
     // Statemachine
     public List<PathNode> reachableTiles;
 
@@ -82,10 +89,14 @@ public class PlayerCharacterSC : MonoBehaviour
     //     get => isSelected;
     //     set => isSelected = value;
     // }
-
-    // set Position of gameobject
+    
+    public int GetMaxMoveDistance() {
+        return energy * movementPointsPerEnergy;
+    }
+    
     public void Start()
     {
+        // set Position of gameobject    
         transformToPosition();
     }
 
@@ -93,7 +104,7 @@ public class PlayerCharacterSC : MonoBehaviour
     {
         input.mouseClicked += toggleIsSelected;
     }
-    
+
     void toggleIsSelected()
     {
         Vector3 mousePos = Mouse.current.position.ReadValue();
@@ -105,13 +116,12 @@ public class PlayerCharacterSC : MonoBehaviour
                 isSelected = !isSelected;
             }
         }
-        
     }
-
+    
     // transforms the gameobject to it's tile position
     public void transformToPosition()
     {
-        this.gameObject.transform.position = new Vector3(position.x * globalGridData.cellSize, 
+        gameObject.transform.position = new Vector3(position.x * globalGridData.cellSize, 
                                                          position.y * globalGridData.cellSize, 
                                                          position.z * globalGridData.cellSize)
                                              + globalGridData.OriginPosition;
