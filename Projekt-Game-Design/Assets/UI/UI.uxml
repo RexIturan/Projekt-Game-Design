@@ -1,4 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="IngameMenu" src="IngameMenu.uxml" />
+    <ui:Template name="InventoryOverlay" src="InventoryOverlay.uxml" />
     <Style src="Styles/UI_Classes.uss" />
     <ui:VisualElement name="OverlayContainer" style="flex-grow: 1; display: flex;">
         <ui:VisualElement name="LeftSidebar" style="flex-grow: 0; width: 20%; height: 100%; position: absolute; margin-left: 1%;">
@@ -86,4 +88,6 @@
         </ui:VisualElement>
         <ui:Label text="Label" display-tooltip-when-elided="true" name="AbilityDescription" style="position: absolute; top: 496px; left: 339px; height: 63px; width: 435px; color: rgb(255, 255, 255); -unity-text-outline-width: 0; font-size: 20px; background-color: rgba(255, 255, 255, 0.16); display: none; flex-wrap: wrap; white-space: normal;" />
     </ui:VisualElement>
+    <ui:Instance template="IngameMenu" name="IngameMenu" style="flex-grow: 1; display: none;" />
+    <ui:Instance template="InventoryOverlay" name="InventoryOverlay" style="flex-grow: 1; display: none;" />
 </ui:UXML>

@@ -21,7 +21,7 @@ public class PlayerCharacterSC : MonoBehaviour
     [SerializeField] private PlayerTypeSO playerType;
     
     
-    [Header("Current Stats")]
+    [Header("Current Max Stats")]
     // Stats influenced by status effects
     [SerializeField] private CharacterStats currentStats;
     public CharacterStats CurrentStats => currentStats;
@@ -29,6 +29,7 @@ public class PlayerCharacterSC : MonoBehaviour
     // stat changing temporary effects
     [SerializeField] private List<ScriptableObject> statusEffects;
     
+    [Header("Current Stats")]
     // Leveling
     [SerializeField] private int experience;
     // TODO: maybe a more complex type later on
