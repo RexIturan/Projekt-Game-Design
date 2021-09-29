@@ -7,18 +7,16 @@ using Pathfinding;
 [CreateAssetMenu(fileName = "ClearReachableTiles", menuName = "State Machines/Actions/Player/ClearReachableTiles")]
 public class ClearReachableTilesSO : StateActionSO
 {
-    [SerializeField] private GameObject pathfindingController;
-    public override StateAction CreateAction() => new ClearReachableTiles(pathfindingController);
+    [SerializeField] private VoidEventChannelSO clearReachableTilesEC;
+    public override StateAction CreateAction() => new ClearReachableTiles(clearReachableTilesEC);
 }
 
 public class ClearReachableTiles : StateAction
 {
-    private PlayerCharacterSC playerStateContainer;
-    private PathfindingDrawer pathfindingDrawer;
-
-    public ClearReachableTiles(GameObject pathfindingController)
-    {
-        this.pathfindingDrawer = pathfindingController.GetComponent<PathfindingDrawer>();
+    private VoidEventChannelSO clearReachableTilesEC;
+    
+    public ClearReachableTiles(VoidEventChannelSO clearReachableTilesEC) {
+        this.clearReachableTilesEC = clearReachableTilesEC;
     }
 
     public override void OnUpdate()
@@ -28,7 +26,6 @@ public class ClearReachableTiles : StateAction
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
 
     public override void OnStateEnter()
@@ -38,6 +35,6 @@ public class ClearReachableTiles : StateAction
     public override void OnStateExit()
     {
         Debug.Log("Clearing reachable tiles.");
-        pathfindingDrawer.ClearPreviewTilemap();
+        clearReachableTilesEC.RaiseEvent();
     }
 }

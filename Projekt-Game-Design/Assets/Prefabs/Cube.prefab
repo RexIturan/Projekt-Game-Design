@@ -124,25 +124,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 3051770133120396190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0320324457e7c0242b2b53824a4ffa61, type: 3}
+  m_Script: {fileID: 11500000, guid: 61beff83ece1f2c41869fecfa859320d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   playerType: {fileID: 11400000, guid: b74bf689d067c784aa3e98c68eaf4e4d, type: 2}
   currentStats:
-    maxLifePoints: 0
-    maxEnergy: 0
+    maxHealthPoints: 50
+    maxEnergy: 10
     strength: 0
     dexterity: 0
     intelligence: 0
-    viewDistance: 0
-  experience: 0
+    viewDistance: 5
+  statusEffects: []
   level: 0
-  lifePoints: 0
-  movementPoints: 0
-  energy: 0
+  experience: 0
+  healthPoints: 50
+  energy: 5
+  movementPointsPerEnergy: 20
   position: {x: 0, y: 0, z: 0}
   item: {fileID: 0}
-  statusEffects: []
+  abilitys: []
+  abilityID: 0
+  movementTarget: {x: 0, y: 0, z: 0}
   reachableTiles: []
   isSelected: 0
+  abilitySelected: 0
+  abilityConfirmed: 0
+  abilityExecuted: 0

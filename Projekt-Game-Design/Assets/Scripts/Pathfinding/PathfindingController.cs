@@ -21,8 +21,8 @@ namespace Pathfinding {
         [SerializeField] private GraphGenerator graphGenerator;
 
         [Header("Settings")]
-        [SerializeField] private int dist;
-        [SerializeField] private bool test;
+        public int dist;
+        public bool test;
 
         [Header("Receiving events on")]
         [SerializeField] private PathfindingQueryEventChannelSO pathfindingQueryEventChannel;
@@ -66,6 +66,7 @@ namespace Pathfinding {
                     // Debug.Log($"{pos}");
             
                     reachableNodes = GetReachableNodes(pos, dist);
+                    drawer.DrawPreview(reachableNodes);
                     // var nodeList = "";
                     // foreach (var node in reachableNodes) {
                     //     nodeList += $" {node.ToString()}";

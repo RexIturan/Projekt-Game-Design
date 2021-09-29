@@ -202,6 +202,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1112942783390242945, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1112942784057711957, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
       propertyPath: m_Name
       value: PathfindingController
@@ -254,6 +258,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1112942784057711959, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
+      propertyPath: graphGenerator
+      value: 
+      objectReference: {fileID: 1246479144}
     - target: {fileID: 1112942784759588763, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
@@ -366,15 +374,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396186, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396186, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396186, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396186, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: m_LocalRotation.w
@@ -410,11 +418,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: position.x
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: position.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: movementPoints
@@ -422,6 +430,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+--- !u!114 &1246479144 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1912348391730053946, guid: c5d2b4d33bf133349b5cbbfd8a6b8c48, type: 3}
+  m_PrefabInstance: {fileID: 1570576427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4469285735d4363bc53cb19d95edaca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1269476085
 PrefabInstance:
   m_ObjectHideFlags: 0
