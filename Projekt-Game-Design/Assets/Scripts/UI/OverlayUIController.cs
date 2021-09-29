@@ -26,7 +26,7 @@ public class OverlayUIController : MonoBehaviour
     [SerializeField] private BoolEventChannelSO VisibilityGameOverlayEventChannel;
     [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
     // Für das ActionMenü
-    [SerializeField] private BoolEventChannelSO VisibilityActionContainerEventChannel;
+    [SerializeField] private GameObjEventChannelSO VisibilityActionContainerEventChannel;
     [SerializeField] private GameObjActionEventChannelSO ActionsFromPlayerEventChannel;
 
     [Header("Sending Events On")]
@@ -59,7 +59,7 @@ public class OverlayUIController : MonoBehaviour
         VisibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
         VisibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
         VisibilityGameOverlayEventChannel.OnEventRaised  += HandleGameOverlay;
-        VisibilityActionContainerEventChannel.OnEventRaised += HandleActionMenuVisibility;
+        //VisibilityActionContainerEventChannel.OnEventRaised += HideActionMenu;
 
         InitializeAbilityList();
         ActionsFromPlayerEventChannel.OnEventRaised += HandlePlayerSelected;
@@ -79,18 +79,6 @@ public class OverlayUIController : MonoBehaviour
         
     }
     
-    void HandleActionMenuVisibility(bool value)
-    {
-        if (value)
-        {
-            ShowActionMenu();
-        }
-        else
-        {
-            HideActionMenu();
-        }
-        
-    }
     void HandleOtherScreensOpened(bool value)
     {
         HandleGameOverlay(false);
@@ -148,6 +136,10 @@ public class OverlayUIController : MonoBehaviour
 
     void HandlePlayerSelected(GameObject obj, Action<int> callBackAction)
     {
+        // Anzeigen der notwendigen Komponenten
+        ShowActionMenu();
+        ShowPlayerViewContainer();
+        
         CallBackAction = callBackAction;
         FlushAbilityListIcons();
         List<AbilitySO> abilities = new List<AbilitySO>(obj.GetComponent<PlayerCharacterSC>().Abilitys);
@@ -175,7 +167,7 @@ public class OverlayUIController : MonoBehaviour
         PlayerCharacterSC playerSC = obj.GetComponent<PlayerCharacterSC>(); 
         CharacterStats playerStats = obj.GetComponent<PlayerCharacterSC>().CurrentStats; 
         
-        healthBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.LifePoints/playerStats.maxLifePoints)));
+        healthBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.HealthPoints/playerStats.maxLifePoints)));
         abilityBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
     }
 
@@ -184,11 +176,21 @@ public class OverlayUIController : MonoBehaviour
         VisibilityMenuEventChannel.RaiseEvent(true);
     }
 
-    void HideActionMenu()
+    void HideActionMenu(GameObject obj)
     {
         ActionContainer.style.display = DisplayStyle.None;
     }
 
+    void ShowPlayerViewContainer()
+    {
+        PlayerViewContainer.style.display = DisplayStyle.Flex;
+    }
+    
+    void HidePlayerViewContainer()
+    {
+        PlayerViewContainer.style.display = DisplayStyle.None;
+    }
+    
     void ShowActionMenu()
     {
         ActionContainer.style.display = DisplayStyle.Flex;

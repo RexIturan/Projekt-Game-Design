@@ -1,0 +1,45 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="PlayerViewContainer" style="height: auto; position: relative; -unity-slice-top: 20; margin-top: 0; background-color: rgba(26, 26, 26, 0.43); border-left-color: rgb(214, 214, 214); border-right-color: rgb(214, 214, 214); border-top-color: rgb(214, 214, 214); border-bottom-color: rgb(214, 214, 214); padding-left: 5%; padding-right: 5%; padding-top: 2%; padding-bottom: 2%; align-items: center; flex-grow: 1;">
+        <ui:VisualElement name="NameLevelContainer" style="flex-direction: row; margin-top: 10px;">
+            <ui:Label text="E.Jack Yulate" display-tooltip-when-elided="true" name="PlayerName" style="font-size: 15px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+            <ui:Label text="20" display-tooltip-when-elided="true" name="LevelLabel" style="color: rgb(255, 255, 255); font-size: 18px; -unity-font-style: bold; background-color: rgba(255, 255, 255, 0.38); border-top-left-radius: 59px; border-bottom-left-radius: 59px; border-top-right-radius: 59px; border-bottom-right-radius: 59px; border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); border-left-width: 7px; border-right-width: 7px; border-top-width: 7px; border-bottom-width: 7px; -unity-text-align: middle-center; align-items: center; justify-content: center; flex-grow: 1; flex-shrink: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="PlayerPicture" class="PlayerPicture" style="height: 100px; position: relative; right: auto; width: 80px; top: auto; align-items: center; justify-content: center; flex-grow: 0; margin-top: 10px; margin-bottom: 10px; margin-left: 20px; margin-right: 20px;" />
+        <ui:VisualElement name="ProgressBars" style="height: 50%; margin-left: 0; width: 100%;">
+            <ui:VisualElement name="ProgressBarHealth" class="ProgressBar" style="width: 100%;">
+                <ui:VisualElement name="ProgressBarHealthOverlay" class="ProgressBarHealth" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ProgressBarAbility" class="ProgressBar" style="width: 100%;">
+                <ui:VisualElement name="ProgressBarAbilityOverlay" class="ProgressBarAction" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ProgressBarMana" class="ProgressBar" style="width: 100%;">
+                <ui:VisualElement name="ProgressBarManaOverlay" class="ProgressBarMana" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ProgressBarExperience" class="ProgressBar" style="width: 100%;">
+                <ui:VisualElement name="ProgressBarExperienceOverlay" class="ProgressBarExperience" style="overflow: visible;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Stats" style="flex-direction: row; height: 30%; margin-left: 0;">
+            <ui:VisualElement name="StatStrength" style="height: 100%; width: 33%; justify-content: center; align-items: center;">
+                <ui:VisualElement name="StrengthContainer" class="StatContainer">
+                    <ui:Label text="500" display-tooltip-when-elided="true" name="StrengthLabel" class="StatsLabel" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="StatDexterity" style="height: 100%; width: 33%; align-items: center; justify-content: center;">
+                <ui:VisualElement name="DexterityContainer" class="StatContainer">
+                    <ui:Label text="42" display-tooltip-when-elided="true" name="DexterityLabel" class="StatsLabel" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="StatIntelligence" style="height: 100%; width: 33%; align-items: center; justify-content: center;">
+                <ui:VisualElement name="IntelligenceContainer" class="StatContainer">
+                    <ui:Label text="69" display-tooltip-when-elided="true" name="IntelligenceLabel" class="StatsLabel" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="StatMovement" style="height: 100%; width: 33%; align-items: center; justify-content: center;">
+                <ui:VisualElement name="MovementContainer" class="StatContainer">
+                    <ui:Label text="8" display-tooltip-when-elided="true" name="IntelligenceLabel" class="StatsLabel" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

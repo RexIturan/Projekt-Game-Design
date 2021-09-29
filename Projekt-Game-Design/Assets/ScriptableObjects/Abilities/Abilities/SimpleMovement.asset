@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: SimpleMovement
   m_EditorClassIdentifier: 
-  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  description: 'Does things and stuff. Idk, you know how it goes or something. '
+  icon: {fileID: 21300000, guid: 38ba4ce50e0e6754ca05614ef66f0b71, type: 3}
+  description: Simple movement around the dungeon. Its dangerous to go alone!
   targets: 24
   moveToTarget: 1
   range: 0
@@ -21,3 +21,5 @@ MonoBehaviour:
   costs: 0
   targetedEffects: []
   abilityID: 4
+  selectedActions: []
+  executingActions: []

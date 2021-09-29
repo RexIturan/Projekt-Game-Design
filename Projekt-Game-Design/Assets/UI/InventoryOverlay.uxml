@@ -1,7 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Inventory" src="Inventory.uxml" />
+    <ui:Template name="PlayerViewContainer" src="PlayerViewContainer.uxml" />
     <ui:VisualElement style="flex-grow: 1; flex-direction: row; border-left-color: rgba(0, 0, 0, 0.43); border-right-color: rgba(0, 0, 0, 0.43); border-top-color: rgba(0, 0, 0, 0.43); border-bottom-color: rgba(0, 0, 0, 0.43); background-color: rgba(0, 0, 0, 0.43);">
-        <ui:VisualElement name="Sidebar" style="width: 30%; height: 100%;" />
+        <ui:VisualElement name="Sidebar" style="width: 30%; height: 100%;">
+            <ui:Instance template="PlayerViewContainer" name="PlayerViewContainer" style="flex-grow: 1;" />
+        </ui:VisualElement>
         <ui:VisualElement name="Content" style="height: 100%; width: 100%; padding-left: 5%; padding-right: 5%; padding-top: 5%; padding-bottom: 5%;">
             <ui:Instance template="Inventory" name="Inventory" style="flex-grow: 1;" />
         </ui:VisualElement>
