@@ -10,7 +10,7 @@ using Util;
 // script attached to each playable character 
 // contains relevant data such as stats
 //
-public class PlayerCharacterCO : MonoBehaviour
+public class PlayerCharacterSC : MonoBehaviour
 {
     public InputReader input;
     

@@ -16,7 +16,7 @@ public class SaveReachableNodesSO : StateActionSO
 
 public class SaveReachableNodes : StateAction
 {
-    private PlayerCharacterCO playerStateContainer;
+    private PlayerCharacterSC playerStateContainer;
     private PathfindingQueryEventChannelSO pathfindingQueryEvent;
 
     public SaveReachableNodes(PathfindingQueryEventChannelSO pathfindingQueryEvent)
@@ -31,7 +31,7 @@ public class SaveReachableNodes : StateAction
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterCO>();
+        playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
 
     public override void OnStateEnter()
