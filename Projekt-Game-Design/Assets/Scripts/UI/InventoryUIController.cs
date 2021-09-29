@@ -8,13 +8,18 @@ using UnityEngine.UIElements;
 public class InventoryUIController : MonoBehaviour
 {
     public List<InventorySlot> InventoryItems = new List<InventorySlot>();
+    public List<InventorySlot> EquipmentInventoryItems = new List<InventorySlot>();
 
     public ItemListSO ItemList;
 
-    private VisualElement m_SlotContainer;
+    private VisualElement InventorySlotContainer;
+    [SerializeField] private int EquipmentInventoryItemQuantity = 1;
+    [SerializeField] private int InventoryItemQuantity = 28;
 
     // Für das Inventar
     private VisualElement inventoryContainer;
+    // Für das EquipmentInventar
+    private VisualElement EquipmentInventoryContainer;
 
     [Header("Receiving Events On")] [SerializeField]
     private BoolEventChannelSO VisibilityMenuEventChannel;
@@ -45,21 +50,14 @@ public class InventoryUIController : MonoBehaviour
 
     private void Start()
     {
-        //Create InventorySlots and add them as children to the SlotContainer
-        for (int i = 0; i < 28; i++)
-        {
-            InventorySlot item = new InventorySlot();
 
-            InventoryItems.Add(item);
-
-            m_SlotContainer.Add(item);
-        }
+        InitializeInventory();
+        //InitializeEquipmentInventory();
 
         inventoryContainer.Q<Button>("Tab1").clicked += HandleItemTabPressed;
         inventoryContainer.Q<Button>("Tab2").clicked += HandleArmoryTabPressed;
         inventoryContainer.Q<Button>("Tab3").clicked += HandleWeaponsTabPressed;
     }
-
 
     private void Awake()
     {
@@ -68,15 +66,40 @@ public class InventoryUIController : MonoBehaviour
         //Store the root from the UI Document component
         root = GetComponent<UIDocument>().rootVisualElement;
         inventoryContainer = root.Q<VisualElement>("InventoryOverlay");
+        EquipmentInventoryContainer = root.Q<VisualElement>("PlayerEquipmentInventory");
 
         //Search the root for the SlotContainer Visual Element
-        m_SlotContainer = root.Q<VisualElement>("InventoryContent");
+        InventorySlotContainer = root.Q<VisualElement>("InventoryContent");
         VisibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
         VisibilityInventoryEventChannel.OnEventRaised += HandleInventoryOverlay;
         VisibilityGameOverlayEventChannel.OnEventRaised += HandleOtherScreensOpened;
         OnItemPickupEventChannel.OnEventRaised += HandleItemPickup;
         OnItemDropEventChannel.OnEventRaised += HandleItemDrop;
         ChangeInventoryListEventChannel.OnEventRaised += HandleTabChanged;
+    }
+
+    private void InitializeEquipmentInventory()
+    {
+        for (int i = 0; i < EquipmentInventoryItemQuantity; i++)
+        {
+            InventorySlot item = new InventorySlot();
+
+            EquipmentInventoryItems.Add(item);
+            EquipmentInventoryContainer.Add(item);
+        }
+    }
+    
+    private void InitializeInventory()
+    {
+        //Create InventorySlots and add them as children to the SlotContainer
+        for (int i = 0; i < InventoryItemQuantity; i++)
+        {
+            InventorySlot item = new InventorySlot();
+
+            InventoryItems.Add(item);
+
+            InventorySlotContainer.Add(item);
+        }
     }
 
     void resetAllTabs()
