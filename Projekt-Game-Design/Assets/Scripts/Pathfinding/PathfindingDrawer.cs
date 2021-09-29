@@ -11,7 +11,9 @@ namespace Pathfinding {
         [Header("Recieving Events On")]
         [SerializeField] private NodeListEventChannelSO drawReachableTilesEC;
         [SerializeField] private VoidEventChannelSO clearReachableTilesEC;
-        
+        [SerializeField] private NodeListEventChannelSO drawPathEC;
+        [SerializeField] private VoidEventChannelSO clearPathEC;
+
         [Header("SO References")]
         [SerializeField] private GridDataSO globalGridData;
         
@@ -25,6 +27,8 @@ namespace Pathfinding {
         private void Awake() {
             drawReachableTilesEC.OnEventRaised += DrawPreview;
             clearReachableTilesEC.OnEventRaised += ClearPreviewTilemap;
+            drawPathEC.OnEventRaised += DrawPreviewPath;
+            clearPathEC.OnEventRaised += ClearPreviewPathTilemap;
         }
 
         public void DrawPreview(List<PathNode> nodes) {

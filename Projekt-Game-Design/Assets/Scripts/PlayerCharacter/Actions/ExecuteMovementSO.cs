@@ -17,16 +17,13 @@ public class ExecuteMovementSO : StateActionSO
 
 public class ExecuteMovement : StateAction
 {
-    private PlayerCharacterSC playerCharacterSC;
+    private const int STANDARD_Y_VALUE = 1;
 
-    public ExecuteMovement()
-    {
-
-    }
+    private PlayerCharacterSC playerCharacterSc;
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerCharacterSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+        playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
 
     public override void OnUpdate()
@@ -39,12 +36,10 @@ public class ExecuteMovement : StateAction
         // TODO: action "MoveToTarget" is useless here
         Debug.Log("Bewegung!");
 
-        playerCharacterSC.position = new Vector3Int(playerCharacterSC.movementTarget.x, 
-                                                       1, 
-                                                       playerCharacterSC.movementTarget.y);
-        
-        playerCharacterSC.transformToPosition();
-        playerCharacterSC.abilityExecuted = true;
+        playerCharacterSc.position = new Vector3Int(playerCharacterSc.movementTarget.x, 
+                                                       STANDARD_Y_VALUE, 
+                                                       playerCharacterSc.movementTarget.y);
+        playerCharacterSc.transformToPosition();
     }
 
     public override void OnStateExit()

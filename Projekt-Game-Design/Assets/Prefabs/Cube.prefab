@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3051770133120396190}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.098236166, y: -0.3360849, z: -0.1281732}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eeda163c70b3cb4ebb88ba92f608fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitionTableSO: {fileID: 11400000, guid: 2f4ebbb0ef65f384db2999e43b50929e, type: 2}
+  _transitionTableSO: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
   _debugger:
     debugTransitions: 0
     appendConditionsInfo: 1
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61beff83ece1f2c41869fecfa859320d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTileEvent: {fileID: 11400000, guid: 06d375aa5b115fd4ba98c0967522e31a, type: 2}
   input: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   playerType: {fileID: 11400000, guid: b74bf689d067c784aa3e98c68eaf4e4d, type: 2}
@@ -141,14 +142,17 @@ MonoBehaviour:
   level: 0
   experience: 0
   healthPoints: 50
-  energy: 5
+  energy: 10
   movementPointsPerEnergy: 20
-  position: {x: 0, y: 0, z: 0}
+  position: {x: 0, y: 2, z: 0}
   item: {fileID: 0}
   abilitys:
   - {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}
   abilityID: -1
-  timeSinceTransition: 0
+  isSelected: 0
+  abilitySelected: 0
+  abilityConfirmed: 0
+  abilityExecuted: 0
   reachableTiles: []
   movementTarget:
     x: 0
@@ -158,9 +162,4 @@ MonoBehaviour:
     fCost: 0
     dist: 0
     isWalkable: 0
-  distanceToTarget: 0
-  isSelected: 0
-  abilitySelected: 0
-  abilityConfirmed: 0
-  abilityExecuted: 0
-  targetTileEvent: {fileID: 0}
+  timeSinceTransition: 0
