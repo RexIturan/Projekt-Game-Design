@@ -33,7 +33,9 @@ public class MoveToTarget : StateAction
     {
         PlayerCharacterSC playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
 
-        playerStateContainer.position = playerStateContainer.movementTarget;
+        playerStateContainer.position = new Vector3Int(playerStateContainer.movementTarget.x,
+                                                       1,
+                                                       playerStateContainer.movementTarget.y);
         playerStateContainer.transformToPosition();
     }
 }

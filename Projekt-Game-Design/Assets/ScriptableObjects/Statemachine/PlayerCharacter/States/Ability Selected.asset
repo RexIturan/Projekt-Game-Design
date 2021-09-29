@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ability Selected
   m_EditorClassIdentifier: 
   _actions:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: b1c73421dfe92d145b474b7f4948e424, type: 2}

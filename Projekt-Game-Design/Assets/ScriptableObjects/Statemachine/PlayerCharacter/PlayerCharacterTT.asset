@@ -43,6 +43,12 @@ MonoBehaviour:
     - ExpectedResult: 0
       Condition: {fileID: 11400000, guid: c4e22fa2842fd864fa77c53ae8ea7da6, type: 2}
       Operator: 0
+  - FromState: {fileID: 11400000, guid: 75eaa13c2acf7874a933005f41c373bf, type: 2}
+    ToState: {fileID: 11400000, guid: fc6b3ab5babdb53498395cea355ab949, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: dec88b0c9189d10489a743e8a2908f77, type: 2}
+      Operator: 0
   - FromState: {fileID: 11400000, guid: fc6b3ab5babdb53498395cea355ab949, type: 2}
     ToState: {fileID: 11400000, guid: 6ebc58835e89fb849b354ba689fdef0f, type: 2}
     Conditions:
@@ -60,4 +66,10 @@ MonoBehaviour:
     Conditions:
     - ExpectedResult: 0
       Condition: {fileID: 11400000, guid: 45c57e07353fe804ca7947e373b9bc0e, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: 6ebc58835e89fb849b354ba689fdef0f, type: 2}
+    ToState: {fileID: 11400000, guid: 75eaa13c2acf7874a933005f41c373bf, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: dec88b0c9189d10489a743e8a2908f77, type: 2}
       Operator: 0

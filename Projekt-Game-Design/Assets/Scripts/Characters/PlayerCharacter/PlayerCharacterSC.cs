@@ -44,10 +44,6 @@ public class PlayerCharacterSC : MonoBehaviour
     // TODO could be just energy???
     public int movementPointsPerEnergy;
 
-    
-    
-    
-
     public Vector3Int position; // within the grid
 
     public int HealthPoints {
@@ -71,20 +67,27 @@ public class PlayerCharacterSC : MonoBehaviour
     
     public AbilitySO[] Abilitys => abilitys;
     public int AbilityID => abilityID;
-    
-    // cached target (tile position)
-    public Vector3Int movementTarget; 
-    
+
+
     // Statemachine
+    //
+    [Header("State Machine")]
+    public float timeSinceTransition = 0; 
+
     public List<PathNode> reachableTiles;
 
-    
-    [Header("State Machine")]
+    // cached target (tile position)
+    public PathNode movementTarget;
+    public int distanceToTarget;
+
     public bool isSelected = false;
-    public bool abilitySelected;
-    public bool abilityConfirmed;
+    public bool abilitySelected = false;
+    public bool abilityConfirmed = false;
     public bool abilityExecuted;
-    
+
+    [Header("Receiving events on")]
+    public PathNodeEventChannelSO targetTileEvent;
+
     // public bool IsSelected {
     //     get => isSelected;
     //     set => isSelected = value;
@@ -103,6 +106,13 @@ public class PlayerCharacterSC : MonoBehaviour
     private void Awake()
     {
         input.mouseClicked += toggleIsSelected;
+
+        targetTileEvent.OnEventRaised += TargetTile;
+    }
+
+    public void FixedUpdate()
+    {
+        timeSinceTransition += Time.fixedDeltaTime;
     }
 
     void toggleIsSelected()
@@ -119,11 +129,20 @@ public class PlayerCharacterSC : MonoBehaviour
     }
     
     // transforms the gameobject to it's tile position
+    //
     public void transformToPosition()
     {
         gameObject.transform.position = new Vector3(position.x * globalGridData.cellSize, 
-                                                         position.y * globalGridData.cellSize, 
-                                                         position.z * globalGridData.cellSize)
+                                                    position.y * globalGridData.cellSize, 
+                                                    position.z * globalGridData.cellSize)
                                              + globalGridData.OriginPosition;
+    }
+
+    // target Tile
+    //
+    public void TargetTile(PathNode target)
+    {
+        movementTarget = target;
+        abilityConfirmed = true;
     }
 }

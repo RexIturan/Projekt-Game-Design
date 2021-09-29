@@ -418,16 +418,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: position.x
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: position.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: position.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: vectorEvent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: movementPoints
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: targetTileEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 06d375aa5b115fd4ba98c0967522e31a, type: 2}
+    - target: {fileID: 3051770133120396197, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: _transitionTableSO
+      value: 
+      objectReference: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
 --- !u!114 &1246479144 stripped
@@ -846,6 +862,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3590098454151458846, guid: a2133eacc6c402545be76d899962b51e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380981176328400380, guid: a2133eacc6c402545be76d899962b51e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9012959171016414069, guid: a2133eacc6c402545be76d899962b51e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9012959172467064325, guid: a2133eacc6c402545be76d899962b51e, type: 3}
       propertyPath: m_Name
       value: GridDrawer

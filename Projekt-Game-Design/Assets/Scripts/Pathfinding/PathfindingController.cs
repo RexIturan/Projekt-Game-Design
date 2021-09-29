@@ -121,7 +121,7 @@ namespace Pathfinding {
         // calculate all reachable nodes and call the given method
         //
         private void handlePathfindingQueryEvent(Vector3Int startNode, int distance, Action<List<PathNode>> callback) {
-            var gridPos = WorldPosToGridPos(startNode);
+            Vector2Int gridPos = new Vector2Int(startNode.x, startNode.z); 
             callback(GetReachableNodes(gridPos, distance));
         }
     }
