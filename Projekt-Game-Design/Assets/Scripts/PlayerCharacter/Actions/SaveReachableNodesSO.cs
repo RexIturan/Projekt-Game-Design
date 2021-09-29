@@ -1,6 +1,5 @@
 using Events.ScriptableObjects;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
