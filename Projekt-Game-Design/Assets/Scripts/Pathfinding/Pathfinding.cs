@@ -192,5 +192,11 @@ namespace Pathfinding {
             return lowestFCostNode;
         }
         
+        // are coordinates part of the graph
+        //
+        public bool IsInBounds(int x, int y)
+        {
+            return graph.IsInBounds(x, y);
+        }
     }
 }

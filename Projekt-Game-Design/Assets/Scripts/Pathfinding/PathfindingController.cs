@@ -39,8 +39,10 @@ namespace Pathfinding {
         }
 
         private void Update() {
+
             if (test) {
                 var pos = MousePosition.GetMouseWorldPosition();
+
             
                 if (clickedPos != null && reachableNodes != null && reachableNodes.Count > 0) {
                     var gridPos = WorldPosToGridPos(pos);
@@ -62,17 +64,16 @@ namespace Pathfinding {
                 if (Mouse.current.leftButton.wasPressedThisFrame) {
                     // var pos = MousePosition.GetMouseWorldPosition();
                     // Debug.Log($"{pos}");
-                
+            
                     reachableNodes = GetReachableNodes(pos, dist);
                     // var nodeList = "";
                     // foreach (var node in reachableNodes) {
                     //     nodeList += $" {node.ToString()}";
                     // }
-                
-                    // Debug.Log($"{pos} {nodeList}");
-                
-                    drawer.DrawPreview(reachableNodes);
-                }    
+                }
+                // else{
+                //     Debug.LogWarning("Click Position is not inside the Graph");
+                // }
             }
         }
 
