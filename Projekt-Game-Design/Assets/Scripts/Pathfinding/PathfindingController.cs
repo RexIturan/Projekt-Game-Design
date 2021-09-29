@@ -25,13 +25,15 @@ namespace Pathfinding {
         public bool test;
 
         [Header("Receiving events on")]
-        [SerializeField] private PathfindingQueryEventChannelSO pathfindingQueryEventChannel;
+        [SerializeField] private PathfindingQueryEventChannelSO pathfindingAllNodesQueryEventChannel;
+        [SerializeField] private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
 
         private Vector2Int clickedPos;
         private List<PathNode> reachableNodes;
 
         private void Awake() {
-            pathfindingQueryEventChannel.OnEventRaised += handlePathfindingQueryEvent;
+            pathfindingAllNodesQueryEventChannel.OnEventRaised += handlePathfindingQueryEvent;
+            pathfindingPathQueryEventChannel.OnEventRaised += handlePathfindingPathQueryEvent;
         }
 
         private void Start() {
@@ -101,14 +103,20 @@ namespace Pathfinding {
             Vector2Int end = WorldPosToGridPos(end3d);
             return pathfinding.FindPath(start.x, start.y, end.x, end.y);
         }
-        
+
+        public List<PathNode> GetPath(Vector3Int start, Vector3Int end)
+        {
+            InitialisePathfinding();
+            return pathfinding.FindPath(start.x, start.y, end.x, end.y);
+        }
+
         // todo Umrechnung zentraler globalgrid data vlt??
         // private Vector2Int WorldToGridCoords(Vector3 pos3d) {
         //     var offset = new Vector2Int((int) globalGridData.OriginPosition.x, (int) globalGridData.OriginPosition.y);
         //     var pos = new Vector2Int((int) pos3d.x, (int) pos3d.z) + offset;
         //     return pos;
         // }
-        
+
         // todo Umrechnung zentraler globalgrid data vlt??
         public Vector2Int WorldPosToGridPos(Vector3 worldPos) {
             var lowerBounds = Vector3Int.FloorToInt(globalGridData.OriginPosition);
@@ -123,6 +131,13 @@ namespace Pathfinding {
         private void handlePathfindingQueryEvent(Vector3Int startNode, int distance, Action<List<PathNode>> callback) {
             Vector2Int gridPos = new Vector2Int(startNode.x, startNode.z); 
             callback(GetReachableNodes(gridPos, distance));
+        }
+
+        // calculate path nodes and call the given method
+        //
+        private void handlePathfindingPathQueryEvent(Vector3Int startNode, Vector3Int endNode, Action<List<PathNode>> callback)
+        {
+            callback(GetPath(startNode, endNode));
         }
     }
 }

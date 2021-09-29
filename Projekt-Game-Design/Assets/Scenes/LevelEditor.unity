@@ -206,6 +206,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1112942784057711956, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
+      propertyPath: drawPathEC
+      value: 
+      objectReference: {fileID: 11400000, guid: 24e76f8c903214540b6d8bd9b1bf3620, type: 2}
+    - target: {fileID: 1112942784057711956, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
+      propertyPath: clearPathEC
+      value: 
+      objectReference: {fileID: 11400000, guid: 2859153d6ff2e4a47b7bbc8f1de406c7, type: 2}
     - target: {fileID: 1112942784057711957, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
       propertyPath: m_Name
       value: PathfindingController
@@ -262,6 +270,14 @@ PrefabInstance:
       propertyPath: graphGenerator
       value: 
       objectReference: {fileID: 1246479144}
+    - target: {fileID: 1112942784057711959, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
+      propertyPath: pathfindingPathQueryEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}
+    - target: {fileID: 1112942784057711959, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
+      propertyPath: pathfindingAllNodesQueryEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: ffe98f2118ac7d549ad4bfed89b6f94d, type: 2}
     - target: {fileID: 1112942784759588763, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
@@ -415,6 +431,10 @@ PrefabInstance:
     - target: {fileID: 3051770133120396190, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: m_Name
       value: Cube (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
+      propertyPath: energy
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3051770133120396196, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
       propertyPath: position.x

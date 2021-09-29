@@ -17,6 +17,8 @@ public class ExecuteMovementSO : StateActionSO
 
 public class ExecuteMovement : StateAction
 {
+    private const int STANDARD_Y_VALUE = 1;
+
     private PlayerCharacterSC playerStateContainer;
 
     public ExecuteMovement()
@@ -40,7 +42,7 @@ public class ExecuteMovement : StateAction
         Debug.Log("Bewegung!");
 
         playerStateContainer.position = new Vector3Int(playerStateContainer.movementTarget.x, 
-                                                       1, 
+                                                       STANDARD_Y_VALUE, 
                                                        playerStateContainer.movementTarget.y);
         playerStateContainer.energy -= Mathf.CeilToInt((float) playerStateContainer.movementTarget.dist / playerStateContainer.movementPointsPerEnergy);
 
