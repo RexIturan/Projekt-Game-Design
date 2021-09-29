@@ -13,29 +13,25 @@ public class MoveToTargetSO : StateActionSO
 
 public class MoveToTarget : StateAction
 {
-    private StateMachine stateMachine;
+    protected new MoveToTargetSO OriginSO => (MoveToTargetSO)base.OriginSO;
+    
+    private PlayerCharacterSC playerCharacterSC;
 
-    public MoveToTarget()
+    public override void Awake(StateMachine stateMachine)
     {
-
+        playerCharacterSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
-
+    
     public override void OnUpdate()
     {
     }
 
-    public override void Awake(StateMachine stateMachine)
-    {
-        this.stateMachine = stateMachine;
-    }
-
     public override void OnStateEnter()
     {
-        PlayerCharacterSC playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
-
-        playerStateContainer.position = new Vector3Int(playerStateContainer.movementTarget.x,
+        playerCharacterSC.position = new Vector3Int(playerCharacterSC.movementTarget.x,
                                                        1,
-                                                       playerStateContainer.movementTarget.y);
-        playerStateContainer.transformToPosition();
+                                                       playerCharacterSC.movementTarget.y);
+        playerCharacterSC.transformToPosition();
+        playerCharacterSC.abilityExecuted = true;
     }
 }

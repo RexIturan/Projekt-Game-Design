@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: Ability Selected
+  m_Script: {fileID: 11500000, guid: 62e35cf085872c645bcd3242b8bc89df, type: 3}
+  m_Name: ExecutAbilitySuperAction
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: b1c73421dfe92d145b474b7f4948e424, type: 2}
-  - {fileID: 11400000, guid: ba3f18e91a00b4c4995b406627c26c82, type: 2}
+  abilityPhase: 1
+  abilityContainer: {fileID: 11400000, guid: 636fde585deb2974e93548838daccee6, type: 2}

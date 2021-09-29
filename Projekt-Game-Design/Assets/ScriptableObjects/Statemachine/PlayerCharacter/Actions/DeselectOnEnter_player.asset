@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: Ability Selected
+  m_Script: {fileID: 11500000, guid: e82566e1e0a19504889547cee1c0d057, type: 3}
+  m_Name: DeselectOnEnter_player
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: b1c73421dfe92d145b474b7f4948e424, type: 2}
-  - {fileID: 11400000, guid: ba3f18e91a00b4c4995b406627c26c82, type: 2}
+  deselectEvent: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}

@@ -145,11 +145,22 @@ MonoBehaviour:
   movementPointsPerEnergy: 20
   position: {x: 0, y: 0, z: 0}
   item: {fileID: 0}
-  abilitys: []
-  abilityID: 0
-  movementTarget: {x: 0, y: 0, z: 0}
+  abilitys:
+  - {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}
+  abilityID: -1
+  timeSinceTransition: 0
   reachableTiles: []
+  movementTarget:
+    x: 0
+    y: 0
+    gCost: 0
+    hCost: 0
+    fCost: 0
+    dist: 0
+    isWalkable: 0
+  distanceToTarget: 0
   isSelected: 0
   abilitySelected: 0
   abilityConfirmed: 0
   abilityExecuted: 0
+  targetTileEvent: {fileID: 0}

@@ -16,6 +16,7 @@ public class RaiseSelectedEventSO : StateActionSO
 public class RaiseSelectedEvent : StateAction
 {
     private GameObject gameObject;
+    private PlayerCharacterSC playerCharacterSc;
     private GameObjActionEventChannelSO selectNewPlayer;
 
     public RaiseSelectedEvent(GameObjActionEventChannelSO gameObjEventChannel)
@@ -31,17 +32,19 @@ public class RaiseSelectedEvent : StateAction
     public override void Awake(StateMachine stateMachine)
     {
         gameObject = stateMachine.gameObject;
+        playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
     
     //TODO: Muss geändert werden
-    public void irgendwas(int zahl)
-    {
-        Debug.Log("Es wurde die Action mit der ID: " + zahl + " gedrückt.");
+    private void AbilityCallback(int value) {
+        Debug.Log("Es wurde die Action mit der ID: " + value + " gedrückt.");
+        playerCharacterSc.abilitySelected = true;
+        playerCharacterSc.AbilityID = value; 
     }
 
     public override void OnStateEnter()
     {
         Debug.Log("Ich bin selected");
-        selectNewPlayer.RaiseEvent(gameObject,irgendwas);
+        selectNewPlayer.RaiseEvent(gameObject, AbilityCallback);
     }
 }

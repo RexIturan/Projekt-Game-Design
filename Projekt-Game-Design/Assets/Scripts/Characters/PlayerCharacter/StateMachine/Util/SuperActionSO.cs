@@ -33,15 +33,15 @@ public class SuperAction : StateAction
 	public override void Awake(StateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 		playerCharacterSC = stateMachine.GetComponent<PlayerCharacterSC>();
-
 	}
 	
 	public override void OnStateEnter() {
+		subActions = new List<StateAction>();
 		// get Actions from Ability
 		abilityID = playerCharacterSC.AbilityID;
 		var ability = abilityContainer.abilities[abilityID];
 		StateActionSO[] actions;
-		
+
 		if (phase == AbilityPhase.selected) {
 			actions = ability.selectedActions.ToArray();
 		}
@@ -62,8 +62,10 @@ public class SuperAction : StateAction
 	
 	public override void OnUpdate()
 	{
-		foreach (var action in subActions) {
-			action.OnUpdate();
+		if (subActions != null) {
+			foreach (var action in subActions) {
+				action.OnUpdate();
+			}	
 		}
 	}
 	

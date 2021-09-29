@@ -5,17 +5,17 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 using Pathfinding;
 
 [CreateAssetMenu(fileName = "ClearReachableTiles", menuName = "State Machines/Actions/Player/ClearReachableTiles")]
-public class ClearReachableTilesSO : StateActionSO
+public class ClearReachableTilesOnExitSO : StateActionSO
 {
     [SerializeField] private VoidEventChannelSO clearReachableTilesEC;
-    public override StateAction CreateAction() => new ClearReachableTiles(clearReachableTilesEC);
+    public override StateAction CreateAction() => new ClearReachableTilesOnExit(clearReachableTilesEC);
 }
 
-public class ClearReachableTiles : StateAction
+public class ClearReachableTilesOnExit : StateAction
 {
     private VoidEventChannelSO clearReachableTilesEC;
     
-    public ClearReachableTiles(VoidEventChannelSO clearReachableTilesEC) {
+    public ClearReachableTilesOnExit(VoidEventChannelSO clearReachableTilesEC) {
         this.clearReachableTilesEC = clearReachableTilesEC;
     }
 
