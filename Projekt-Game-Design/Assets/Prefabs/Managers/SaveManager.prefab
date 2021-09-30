@@ -43,6 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995418091c1f46a3b0ffe59f9c73bad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveGame: {fileID: 11400000, guid: 8b9215eb7abdda1449c4fcad7e8131d2, type: 2}
+  loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
+  saveLevel: {fileID: 11400000, guid: c1df204252a25354591f6fe993db585c, type: 2}
+  loadLevel: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
+  levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}
   gridContainer: {fileID: 11400000, guid: cf77658e9fdf6c24193f76cce7d45bff, type: 2}
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   pathBase: Assets/Resources/Maps/
@@ -52,8 +57,4 @@ MonoBehaviour:
   - SaveSlot_0
   - SaveSlot_1
   - SaveSlot_2
-  saveGame: {fileID: 11400000, guid: 8b9215eb7abdda1449c4fcad7e8131d2, type: 2}
-  loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
-  saveLevel: {fileID: 11400000, guid: c1df204252a25354591f6fe993db585c, type: 2}
-  loadLevel: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
-  levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}
+  showDebugMessage: 0
