@@ -16,20 +16,25 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private IntEventChannelSO OnItemPickupEventChannel;
     [SerializeField] private IntEventChannelSO OnItemDropEventChannel;
     [SerializeField] private IntListEventChannelSO ChangeInventoryListEventChannel;
+    [SerializeField] private IntListEventChannelSO ChangeEquipmentInventoryListEventChannel;
 
     [Header("Receiving Events On")] [SerializeField]
     private InventoryTabEventChannelSO inventoryTabChanged;
-
+    [SerializeField] private IntIntToEquipmentEventChannelSO toEquipmentEventChannel;
+    [SerializeField] private IntIntToInventoryEventChannelSO toInventoryEventChannel;
     private void Awake()
     {
         
         //TODO einfügen von Item Event Channels
         inventoryTabChanged.OnEventRaised += AddItemsToPlayerOverlay;
+        toEquipmentEventChannel.OnEventRaised += HandleItemTransaktionToEquipment;
+        toInventoryEventChannel.OnEventRaised += HandleItemTransaktionToInventory;
     }
 
     private void Start()
     {
         changeOverlayByItemType(EItemType.USABLE);
+        initializeEquipmentInventory();
     }
 
     private void AddItemToPlayerInventory(ItemSO item)
@@ -62,6 +67,20 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    private void HandleItemTransaktionToInventory(int itemId, int playerId)
+    {
+        ItemSO item = equipmentInventory.Inventorys[playerId].Inventory.Find(x => x.id.Equals(itemId));
+        equipmentInventory.Inventorys[playerId].Inventory.Remove(item);
+        playerInventory.Inventory.Add(item);
+    }
+    
+    private void HandleItemTransaktionToEquipment(int itemId, int playerId)
+    {
+        ItemSO item = playerInventory.Inventory.Find(x => x.id.Equals(itemId));
+        playerInventory.Inventory.Remove(item);
+        equipmentInventory.Inventorys[playerId].Inventory.Add(item);
+    }
+
     private void changeOverlayByItemType(EItemType itemType)
     {
         List<int> list = new List<int>();
@@ -77,7 +96,15 @@ public class InventoryManager : MonoBehaviour
 
     private void initializeEquipmentInventory()
     {
-        EquipmentInventoryContainerSO equipmentInventory;
+        List<int> list = new List<int>();
+        //TODO Für alle Spieler einbauen
+        foreach (var item in equipmentInventory.Inventorys[0].Inventory)
+        {
+            list.Add(item.id);
+            //Debug.Log("Führe Initialisierung für Item Nummer: " + item.id);
+            //OnItemPickupEventChannel.RaiseEvent(item.id);
+        }
+        ChangeEquipmentInventoryListEventChannel.RaiseEvent(list);
     }
 
 }
