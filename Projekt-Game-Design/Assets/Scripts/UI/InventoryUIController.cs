@@ -60,7 +60,7 @@ public class InventoryUIController : MonoBehaviour
     {
 
         InitializeInventory();
-        //InitializeEquipmentInventory();
+        InitializeEquipmentInventory();
 
         inventoryContainer.Q<Button>("Tab1").clicked += HandleItemTabPressed;
         inventoryContainer.Q<Button>("Tab2").clicked += HandleArmoryTabPressed;
@@ -105,6 +105,19 @@ public class InventoryUIController : MonoBehaviour
 
             InventorySlotContainer.Add(item);
         }
+    }
+    
+    private void InitializeEquipmentInventory()
+    {
+        // Hinzufügen der Item Slots für das Equipment Menü
+        // Muss nicht dynamisch generiert werden, wird nur der Liste hinzugefügt
+        EquipmentInventoryItems.Add(EquipmentInventoryContainer.Q<InventorySlot>("HelmetEquipment1"));
+        EquipmentInventoryItems.Add(EquipmentInventoryContainer.Q<InventorySlot>("HeadEquipment1"));
+        EquipmentInventoryItems.Add(EquipmentInventoryContainer.Q<InventorySlot>("BodyEquipment1"));
+        EquipmentInventoryItems.Add(EquipmentInventoryContainer.Q<InventorySlot>("BodyEquipment2"));
+        EquipmentInventoryItems.Add(EquipmentInventoryContainer.Q<InventorySlot>("BodyEquipment3"));
+        EquipmentInventoryItems.Add(EquipmentInventoryContainer.Q<InventorySlot>("LegEquipment1"));
+        EquipmentInventoryItems.Add(EquipmentInventoryContainer.Q<InventorySlot>("FeetEquipment1"));
     }
 
     void resetAllTabs()

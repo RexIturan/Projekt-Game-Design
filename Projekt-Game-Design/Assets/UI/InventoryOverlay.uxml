@@ -15,18 +15,18 @@
                     <InventorySlot name="HelmetEquipment1" class="ItemEquipmentContainer" />
                 </ui:VisualElement>
                 <ui:VisualElement name="HeadEquipment" class="EquipmentContainer" style="flex-direction: row; justify-content: center;">
-                    <ui:VisualElement name="HeadEquipment1" class="EquipmentContainer ItemEquipmentContainer" />
+                    <InventorySlot name="HeadEquipment1" class="ItemEquipmentContainer" />
                 </ui:VisualElement>
                 <ui:VisualElement name="BodyEquipment" class="EquipmentContainer" style="flex-direction: row; justify-content: center;">
-                    <ui:VisualElement name="BodyEquipment1" class="ItemEquipmentContainer" />
-                    <ui:VisualElement name="BodyEquipment2" class="ItemEquipmentContainer" />
-                    <ui:VisualElement name="BodyEquipment3" class="ItemEquipmentContainer" />
+                    <InventorySlot name="BodyEquipment1" class="ItemEquipmentContainer" />
+                    <InventorySlot name="BodyEquipment2" class="ItemEquipmentContainer" />
+                    <InventorySlot name="BodyEquipment3" class="ItemEquipmentContainer" />
                 </ui:VisualElement>
                 <ui:VisualElement name="LegEquipment" class="EquipmentContainer">
-                    <ui:VisualElement name="LegEquipment1" class="ItemEquipmentContainer" />
+                    <InventorySlot name="LegEquipment1" class="ItemEquipmentContainer" />
                 </ui:VisualElement>
                 <ui:VisualElement name="FeetEquipment" class="EquipmentContainer">
-                    <ui:VisualElement name="FeetEquipment1" class="ItemEquipmentContainer" style="flex-direction: column;" />
+                    <InventorySlot name="FeetEquipment1" class="ItemEquipmentContainer" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
