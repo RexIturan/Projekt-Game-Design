@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 public class InventorySlot : VisualElement
@@ -15,6 +16,7 @@ public class InventorySlot : VisualElement
         //Add USS style properties to the elements
         Icon.AddToClassList("slotIcon");
         AddToClassList("slotContainer");
+        RegisterCallback<PointerDownEvent>(OnPointerDown);
     }
     
     public void HoldItem(ItemSO item)
@@ -28,4 +30,25 @@ public class InventorySlot : VisualElement
         ItemGuid = -1;
         Icon.image = null;
     }
+    
+    private void OnPointerDown(PointerDownEvent evt)
+    {
+        //Not the left mouse button
+        if (evt.button != 0 || ItemGuid.Equals(""))
+        {
+            return;
+        }
+        //Clear the image
+        Icon.image = null;
+        //Start the drag
+        InventoryUIController.StartDrag(evt.position, this);
+    }
+    #region UXML
+    [Preserve]
+    public new class UxmlFactory : UxmlFactory<InventorySlot, UxmlTraits> { }
+    [Preserve]
+    public new class UxmlTraits : VisualElement.UxmlTraits { }
+    #endregion
 }
+
+

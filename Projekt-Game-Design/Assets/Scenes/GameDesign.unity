@@ -230,6 +230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemList: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
+  EquipmentInventoryItemQuantity: 1
+  InventoryItemQuantity: 28
   VisibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
   VisibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
   OnItemPickupEventChannel: {fileID: 11400000, guid: 923c7a859e7f1f744b297552276d93a8, type: 2}

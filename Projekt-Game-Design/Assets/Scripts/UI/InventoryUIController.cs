@@ -11,15 +11,23 @@ public class InventoryUIController : MonoBehaviour
     public List<InventorySlot> EquipmentInventoryItems = new List<InventorySlot>();
 
     public ItemListSO ItemList;
+    
+    private static ItemListSO staticItemList;
 
     private VisualElement InventorySlotContainer;
     [SerializeField] private int EquipmentInventoryItemQuantity = 1;
     [SerializeField] private int InventoryItemQuantity = 28;
-
     // Für das Inventar
     private VisualElement inventoryContainer;
     // Für das EquipmentInventar
     private VisualElement EquipmentInventoryContainer;
+    // Für das Ghost Icon
+    private static VisualElement GhostIcon;
+    
+    
+    // Zum Draggen der Icons
+    private static bool IsDragging;
+    private static InventorySlot OriginalSlot;
 
     [Header("Receiving Events On")] [SerializeField]
     private BoolEventChannelSO VisibilityMenuEventChannel;
@@ -67,6 +75,10 @@ public class InventoryUIController : MonoBehaviour
         root = GetComponent<UIDocument>().rootVisualElement;
         inventoryContainer = root.Q<VisualElement>("InventoryOverlay");
         EquipmentInventoryContainer = root.Q<VisualElement>("PlayerEquipmentInventory");
+        GhostIcon = root.Query<VisualElement>("GhostIcon");
+        
+        // Lifehack
+        staticItemList = ItemList;
 
         //Search the root for the SlotContainer Visual Element
         InventorySlotContainer = root.Q<VisualElement>("InventoryContent");
@@ -76,17 +88,10 @@ public class InventoryUIController : MonoBehaviour
         OnItemPickupEventChannel.OnEventRaised += HandleItemPickup;
         OnItemDropEventChannel.OnEventRaised += HandleItemDrop;
         ChangeInventoryListEventChannel.OnEventRaised += HandleTabChanged;
-    }
-
-    private void InitializeEquipmentInventory()
-    {
-        for (int i = 0; i < EquipmentInventoryItemQuantity; i++)
-        {
-            InventorySlot item = new InventorySlot();
-
-            EquipmentInventoryItems.Add(item);
-            EquipmentInventoryContainer.Add(item);
-        }
+        
+        // Callbacks fürs draggen
+        GhostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+        GhostIcon.RegisterCallback<PointerUpEvent>(OnPointerUp);
     }
     
     private void InitializeInventory()
@@ -229,5 +234,73 @@ public class InventoryUIController : MonoBehaviour
             AddItemToInventoryOverlay(itemId);
         }
     }
-    
+    public static void StartDrag(Vector2 position, InventorySlot originalSlot)
+    {
+        //Set tracking variables
+        IsDragging = true;
+        OriginalSlot = originalSlot;
+        //Set the new position
+        GhostIcon.style.top = position.y - GhostIcon.layout.height / 2;
+        GhostIcon.style.left = position.x - GhostIcon.layout.width / 2;
+        //Set the image
+        GhostIcon.style.backgroundImage = staticItemList.ItemList[originalSlot.ItemGuid].icon.texture;
+        //Flip the visibility on
+        GhostIcon.style.visibility = Visibility.Visible;
+    }
+    private void OnPointerMove(PointerMoveEvent evt)
+    {
+        //Only take action if the player is dragging an item around the screen
+        if (!IsDragging)
+        {
+            return;
+        }
+        //Set the new position
+        GhostIcon.style.top = evt.position.y - GhostIcon.layout.height / 2;
+        GhostIcon.style.left = evt.position.x - GhostIcon.layout.width / 2;
+    }
+    private void OnPointerUp(PointerUpEvent evt)
+    {
+        if (!IsDragging)
+        {
+            return;
+        }
+        //Check to see if they are dropping the ghost icon over any inventory slots.
+        IEnumerable<InventorySlot> slotsInventory = InventoryItems.Where(x => 
+            x.worldBound.Overlaps(GhostIcon.worldBound));
+        
+        IEnumerable<InventorySlot> slotsEquipment = EquipmentInventoryItems.Where(x => 
+            x.worldBound.Overlaps(GhostIcon.worldBound));
+        //Found at least one
+        if (slotsInventory.Count() != 0)
+        {
+            InventorySlot closestSlot = slotsInventory.OrderBy(x => Vector2.Distance
+                (x.worldBound.position, GhostIcon.worldBound.position)).First();
+        
+            //Set the new inventory slot with the data
+            closestSlot.HoldItem(ItemList.ItemList[OriginalSlot.ItemGuid]);
+        
+            //Clear the original slot
+            OriginalSlot.DropItem();
+        }
+        //Didn't find any (dragged off the window)
+        else if (slotsEquipment.Count() != 0)
+        {
+            InventorySlot closestSlot = slotsEquipment.OrderBy(x => Vector2.Distance
+                (x.worldBound.position, GhostIcon.worldBound.position)).First();
+        
+            //Set the new inventory slot with the data
+            closestSlot.HoldItem(ItemList.ItemList[OriginalSlot.ItemGuid]);
+        
+            //Clear the original slot
+            OriginalSlot.DropItem();
+        }
+        else
+        {
+            OriginalSlot.Icon.image = ItemList.ItemList[OriginalSlot.ItemGuid].icon.texture; 
+        }
+        //Clear dragging related visuals and data
+        IsDragging = false;
+        OriginalSlot = null;
+        GhostIcon.style.visibility = Visibility.Hidden;
+    }
 }

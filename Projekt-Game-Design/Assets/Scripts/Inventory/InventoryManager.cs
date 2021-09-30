@@ -9,6 +9,8 @@ using Debug = UnityEngine.Debug;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private InventorySO playerInventory;
+    
+    //[SerializeField] private EquipmentInventoryContainerSO equipmentInventory;
 
     [Header("Sending Events On")]
     [SerializeField] private IntEventChannelSO OnItemPickupEventChannel;
@@ -71,6 +73,11 @@ public class InventoryManager : MonoBehaviour
         }
         
         ChangeInventoryListEventChannel.RaiseEvent(list);
+    }
+
+    private void initializeEquipmentInventory()
+    {
+        EquipmentInventoryContainerSO equipmentInventory;
     }
 
 }
