@@ -30,7 +30,9 @@ namespace SaveLoad {
         [Header("GameSave Settings")]
         [SerializeField] private string gameSavePathBase;
         [SerializeField] private string[] gameSaveFilenames;
-        
+
+        [Header("Debug Settings")]
+        [SerializeField] private bool showDebugMessage;
         
         
         private void Awake() {
@@ -75,9 +77,12 @@ namespace SaveLoad {
         public void SaveGridContainer(string pathBase, string filename) {
             var json = JsonUtility.ToJson(gridContainer);
             var path = pathBase + filename + fileSuffix;
+
+            if (showDebugMessage) {
+                // TODO Debug Macro
+                Debug.Log($"Save Test GridContainer to JSON at {path} \n{json}");    
+            }
             
-            // TODO Debug Macro
-            Debug.Log($"Save Test GridContainer to JSON at {path} \n{json}");
 
             using (var fs = new FileStream(path, FileMode.Create)) {
                 using (var writer = new StreamWriter(fs)) {
@@ -101,8 +106,10 @@ namespace SaveLoad {
                     json = reader.ReadToEnd();
                 }
             }
-            
-            Debug.Log($"Load JSON from {path} \n{json}");
+
+            if (showDebugMessage) {
+                Debug.Log($"Load JSON from {path} \n{json}");
+            }
 
             JsonUtility.FromJsonOverwrite(json, gridContainer);
 

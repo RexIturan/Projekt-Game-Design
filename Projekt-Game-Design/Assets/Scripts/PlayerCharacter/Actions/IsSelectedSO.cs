@@ -13,7 +13,7 @@ public class IsSelectedSO : StateActionSO {
 }
 
 public class IsSelected : StateAction {
-    protected new IsSelectedSO OriginSO => (IsSelectedSO) base.OriginSO;
+    // protected new IsSelectedSO OriginSO => (IsSelectedSO) base.OriginSO;
     
     private GameObjEventChannelSO addPlayerToSelection;
     private BoolEventChannelSO setActionMenuVisibility;

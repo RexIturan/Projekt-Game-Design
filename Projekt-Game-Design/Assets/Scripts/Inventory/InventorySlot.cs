@@ -38,7 +38,7 @@ public class InventorySlot : VisualElement
     {
         Icon.image = item.icon.texture;
         ItemGuid = item.id;
-        Debug.Log("Test in HoldItem");
+        // Debug.Log("Test in HoldItem");
     }
     public void DropItem()
     {

@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Selected
   m_EditorClassIdentifier: 
   _actions:
-  - {fileID: 11400000, guid: 0cab5420914e01b439a4739a06418bab, type: 2}
-  - {fileID: 11400000, guid: 197a1da04e963014e8f852df28edb46f, type: 2}
-  - {fileID: 11400000, guid: a13ba761dc040f4419154c71d1085989, type: 2}
+  - {fileID: 11400000, guid: 96bac670e74977b45999d989f4146cd3, type: 2}
   - {fileID: 11400000, guid: b1c73421dfe92d145b474b7f4948e424, type: 2}
   - {fileID: 11400000, guid: 57fbf982260f9c34caee25f743b1dfc7, type: 2}
