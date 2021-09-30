@@ -283,7 +283,7 @@ public class InventoryUIController : MonoBehaviour
         
         IEnumerable<InventorySlot> slotsEquipment = EquipmentInventoryItems.Where(x => 
             x.worldBound.Overlaps(GhostIcon.worldBound));
-        //Found at least one
+        //Found at least one in Normal Inventory
         if (slotsInventory.Count() != 0)
         {
             InventorySlot closestSlot = slotsInventory.OrderBy(x => Vector2.Distance
@@ -291,11 +291,14 @@ public class InventoryUIController : MonoBehaviour
         
             //Set the new inventory slot with the data
             closestSlot.HoldItem(ItemList.ItemList[OriginalSlot.ItemGuid]);
-        
-            //Clear the original slot
-            OriginalSlot.DropItem();
+
+            if (!closestSlot.Equals(OriginalSlot))
+            {
+                //Clear the original slot
+                OriginalSlot.DropItem();
+            }
         }
-        //Didn't find any (dragged off the window)
+        // Found atleast one in Equipment Inventory
         else if (slotsEquipment.Count() != 0)
         {
             InventorySlot closestSlot = slotsEquipment.OrderBy(x => Vector2.Distance
@@ -303,10 +306,13 @@ public class InventoryUIController : MonoBehaviour
         
             //Set the new inventory slot with the data
             closestSlot.HoldItem(ItemList.ItemList[OriginalSlot.ItemGuid]);
-        
-            //Clear the original slot
-            OriginalSlot.DropItem();
+            if (!closestSlot.Equals(OriginalSlot))
+            {
+                //Clear the original slot
+                OriginalSlot.DropItem();
+            }
         }
+        //Didn't find any (dragged off the window)
         else
         {
             OriginalSlot.Icon.image = ItemList.ItemList[OriginalSlot.ItemGuid].icon.texture; 
