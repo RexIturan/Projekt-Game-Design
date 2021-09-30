@@ -110,6 +110,9 @@
     border-bottom-left-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+    justify-content: center;
+    margin-left: 7px;
+    margin-right: 7px;
 }
 
 .Actions {
@@ -225,7 +228,7 @@
     background-color: rgba(0, 0, 0, 0.31);
     -unity-font-style: bold;
     font-size: 20px;
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 .Button:hover {
@@ -249,5 +252,28 @@
     background-color: rgba(255, 255, 255, 0.43);
     flex-grow: 1;
     font-size: 15px;
+    color: rgb(255, 255, 255);
+}
+
+.ProgressBarExperience {
+    background-color: rgba(148, 0, 255, 255);
+    height: 100%;
+    width: 10%;
+}
+
+.StatsLabel {
+    -unity-text-align: middle-center;
+    white-space: normal;
+    -unity-font-style: bold;
     color: rgba(255, 255, 255, 255);
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }

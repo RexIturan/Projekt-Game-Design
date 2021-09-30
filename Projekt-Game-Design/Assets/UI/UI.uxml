@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="PlayerViewContainer" src="PlayerViewContainer.uxml" />
     <ui:Template name="IngameMenu" src="IngameMenu.uxml" />
     <ui:Template name="InventoryOverlay" src="InventoryOverlay.uxml" />
     <Style src="Styles/UI_Classes.uss" />
@@ -42,33 +43,7 @@
                     <ui:VisualElement name="PlayerPicture" class="PlayerPicture" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="PlayerViewContainer" style="height: 40%; position: relative; -unity-slice-top: 20; margin-top: 10%; background-color: rgba(26, 26, 26, 0.43); border-left-color: rgb(214, 214, 214); border-right-color: rgb(214, 214, 214); border-top-color: rgb(214, 214, 214); border-bottom-color: rgb(214, 214, 214); padding-left: 0; padding-right: 5%; padding-top: 2%; padding-bottom: 2%;">
-                <ui:Label text="E. Jack Yulate" display-tooltip-when-elided="true" name="PlayerName" style="margin-left: 25%; color: rgb(255, 255, 255); font-size: 15%;" />
-                <ui:VisualElement name="ProgressBars" style="height: 40%; margin-left: 25%;">
-                    <ui:VisualElement name="ProgressBarHealth" class="ProgressBar" style="width: 100%;">
-                        <ui:VisualElement name="ProgressBarHealthOverlay" class="ProgressBarHealth" />
-                    </ui:VisualElement>
-                    <ui:VisualElement name="ProgressBarMana" class="ProgressBar" style="width: 100%;">
-                        <ui:VisualElement name="ProgressBarManaOverlay" class="ProgressBarMana" />
-                    </ui:VisualElement>
-                    <ui:VisualElement name="ProgressBarAbility" class="ProgressBar" style="width: 100%;">
-                        <ui:VisualElement name="ProgressBarAbilityOverlay" class="ProgressBarAction" />
-                    </ui:VisualElement>
-                </ui:VisualElement>
-                <ui:VisualElement name="Stats" style="flex-direction: row; height: 30%; margin-left: 5%;">
-                    <ui:VisualElement name="StatStrength" style="height: 100%; width: 33%; justify-content: center; align-items: center;">
-                        <ui:VisualElement name="StrengthContainer" class="StatContainer" />
-                    </ui:VisualElement>
-                    <ui:VisualElement name="StatDexterity" style="height: 100%; width: 33%; align-items: center; justify-content: center;">
-                        <ui:VisualElement name="DexterityContainer" class="StatContainer" />
-                    </ui:VisualElement>
-                    <ui:VisualElement name="StatIntelligence" style="height: 100%; width: 33%; align-items: center; justify-content: center;">
-                        <ui:VisualElement name="IntelligenceContainer" class="StatContainer" />
-                    </ui:VisualElement>
-                </ui:VisualElement>
-                <ui:VisualElement name="Inventory" style="height: 100%; width: auto; background-color: rgba(255, 255, 255, 0.16); position: relative; bottom: auto; top: auto; left: auto; margin-left: 5%; align-items: center; -unity-slice-right: 5; margin-right: 0; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(180, 180, 180); border-right-color: rgb(180, 180, 180); border-top-color: rgb(180, 180, 180); border-bottom-color: rgb(180, 180, 180);" />
-                <ui:VisualElement name="PlayerPicture" class="PlayerPicture" style="height: 70px; position: absolute; right: 210px; width: 70px; top: -20px;" />
-            </ui:VisualElement>
+            <ui:Instance template="PlayerViewContainer" name="PlayerViewContainer" style="flex-grow: 1; display: none;" />
         </ui:VisualElement>
         <ui:VisualElement name="ActionContainer" style="background-color: rgba(26, 26, 26, 0.43); height: 10%; width: 40%; left: 30%; bottom: 0; position: absolute; white-space: nowrap; flex-direction: row; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; display: none;">
             <ui:VisualElement name="Action1" class="Actions" />
