@@ -21,22 +21,22 @@
         </ui:VisualElement>
         <ui:VisualElement name="Stats" style="flex-direction: row; height: 30%; margin-left: 0;">
             <ui:VisualElement name="StatStrength" style="height: 100%; width: 33%; justify-content: center; align-items: center;">
-                <ui:VisualElement name="StrengthContainer" class="StatContainer">
+                <ui:VisualElement name="StrengthContainer" class="StatContainer" style="background-image: url(&apos;/Assets/UI/Stats/strength.png&apos;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.2);">
                     <ui:Label text="500" display-tooltip-when-elided="true" name="StrengthLabel" class="StatsLabel" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="StatDexterity" style="height: 100%; width: 33%; align-items: center; justify-content: center;">
-                <ui:VisualElement name="DexterityContainer" class="StatContainer">
+                <ui:VisualElement name="DexterityContainer" class="StatContainer" style="background-image: url(&apos;/Assets/UI/Stats/dexterity.png&apos;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.2);">
                     <ui:Label text="42" display-tooltip-when-elided="true" name="DexterityLabel" class="StatsLabel" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="StatIntelligence" style="height: 100%; width: 33%; align-items: center; justify-content: center;">
-                <ui:VisualElement name="IntelligenceContainer" class="StatContainer">
+                <ui:VisualElement name="IntelligenceContainer" class="StatContainer" style="background-image: url(&apos;/Assets/UI/Stats/intelligence.png&apos;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.2);">
                     <ui:Label text="69" display-tooltip-when-elided="true" name="IntelligenceLabel" class="StatsLabel" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="StatMovement" style="height: 100%; width: 33%; align-items: center; justify-content: center;">
-                <ui:VisualElement name="MovementContainer" class="StatContainer">
+                <ui:VisualElement name="MovementContainer" class="StatContainer" style="background-image: url(&apos;/Assets/UI/Stats/movement.png&apos;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.2);">
                     <ui:Label text="8" display-tooltip-when-elided="true" name="MovementLabel" class="StatsLabel" />
                 </ui:VisualElement>
             </ui:VisualElement>
