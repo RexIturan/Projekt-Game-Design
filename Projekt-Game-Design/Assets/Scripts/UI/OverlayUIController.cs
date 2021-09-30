@@ -160,7 +160,7 @@ public class OverlayUIController : MonoBehaviour
 
     void RefreshStats(GameObject obj)
     {
-        VisualElement manaBar = PlayerViewContainer.Q<VisualElement>("ProgressBarManaOverlay");
+        //VisualElement manaBar = PlayerViewContainer.Q<VisualElement>("ProgressBarManaOverlay");
         VisualElement healthBar = PlayerViewContainer.Q<VisualElement>("ProgressBarHealthOverlay");
         VisualElement abilityBar = PlayerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
 
@@ -169,6 +169,13 @@ public class OverlayUIController : MonoBehaviour
         
         healthBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.HealthPoints/playerStats.maxLifePoints)));
         abilityBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
+        //manaBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
+        
+        // Labels für Stats
+        PlayerViewContainer.Q<Label>("StrengthLabel").text = playerStats.strength.ToString();
+        PlayerViewContainer.Q<Label>("DexterityLabel").text = playerStats.dexterity.ToString();
+        PlayerViewContainer.Q<Label>("IntelligenceLabel").text = playerStats.intelligence.ToString();
+        PlayerViewContainer.Q<Label>("MovementLabel").text = playerStats.viewDistance.ToString();
     }
 
     void ShowMenu()
@@ -195,11 +202,4 @@ public class OverlayUIController : MonoBehaviour
     {
         ActionContainer.style.display = DisplayStyle.Flex;
     }
-
-    void HandleClickOnAbility()
-    {
-        
-    }
-    
-    
 }

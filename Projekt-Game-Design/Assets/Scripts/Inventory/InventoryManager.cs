@@ -10,7 +10,7 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private InventorySO playerInventory;
     
-    //[SerializeField] private EquipmentInventoryContainerSO equipmentInventory;
+    [SerializeField] private EquipmentInventoryContainerSO equipmentInventory;
 
     [Header("Sending Events On")]
     [SerializeField] private IntEventChannelSO OnItemPickupEventChannel;

@@ -37,7 +37,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="StatMovement" style="height: 100%; width: 33%; align-items: center; justify-content: center;">
                 <ui:VisualElement name="MovementContainer" class="StatContainer">
-                    <ui:Label text="8" display-tooltip-when-elided="true" name="IntelligenceLabel" class="StatsLabel" />
+                    <ui:Label text="8" display-tooltip-when-elided="true" name="MovementLabel" class="StatsLabel" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
