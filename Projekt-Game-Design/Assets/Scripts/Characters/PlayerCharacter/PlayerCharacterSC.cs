@@ -123,9 +123,9 @@ public class PlayerCharacterSC : MonoBehaviour {
 
     // transforms the gameobject to it's tile position
     public void transformToPosition() {
-        gameObject.transform.position = new Vector3(position.x * globalGridData.cellSize,
-                                            position.y * globalGridData.cellSize,
-                                            position.z * globalGridData.cellSize)
+        gameObject.transform.position = new Vector3((0.5f + position.x) * globalGridData.cellSize,
+                                                    position.y * globalGridData.cellSize,
+                                                    (0.5f + position.z) * globalGridData.cellSize)
                                         + globalGridData.OriginPosition;
     }
 
