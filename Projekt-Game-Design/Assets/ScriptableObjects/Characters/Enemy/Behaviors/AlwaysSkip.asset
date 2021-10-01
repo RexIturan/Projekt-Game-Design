@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1e349974c99b6648b7b1f1df154ad1f, type: 3}
-  m_Name: TargetInRange
+  m_Script: {fileID: 11500000, guid: 29b3b05d297fc3a4d9ff241ab789fa1c, type: 3}
+  m_Name: AlwaysSkip
   m_EditorClassIdentifier: 
+  alwaysSkip: 1

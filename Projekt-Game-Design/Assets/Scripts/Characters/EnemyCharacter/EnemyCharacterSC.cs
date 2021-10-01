@@ -1,35 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
-// Script to attach to each enemy
+// Script to attached to each enemy
 // 
 public class EnemyCharacterSC : MonoBehaviour
 {
-    [SerializeField] public EnemyTypeSO enemyType;
+    public EnemyTypeSO enemyType;
+    public EnemyBehaviorSO behavior;
 
     // Stats influenced by temporary effects
     //
-    [SerializeField] public CharacterStats currentStats;
+    public CharacterStats currentStats;
 
     // Current values
     //
-    [SerializeField] public int healthPoints;
-    // [SerializeField] public int movementPoints; // TODO: remove comments
-    // [SerializeField] public int manaPoints;
-    [SerializeField] public int energy;
+    public int healthPoints;
+    // public int movementPoints; // TODO: remove comments
+    // public int manaPoints;
+    public int energy;
     
 
-    [SerializeField] public Vector3Int position;
+    public Vector3Int position;
 
-    [SerializeField] public List<ScriptableObject> statusEffects; // TODO: implement status effects
-                                                                  // stat changing temporary effects
-    public int attackRange;
-    public int preferredEngagementDistance;
-    public bool noActionPossible = false;
-    public bool moveFinished = false;
-    public bool attackFinished = false;
-    public bool targetInRange = false;
+    public List<ScriptableObject> statusEffects; // TODO: implement status effects
+                                                 // stat changing temporary effects
 
 
+
+    public bool isOnTurn; // it's Enemy's turn
+    public bool isDone; // this enemy in particular is done
+    public bool abilitySelected;
+    public bool abilityExecuted;
+
+    public PathNode movementTarget; 
 }

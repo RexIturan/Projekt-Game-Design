@@ -45,17 +45,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: {fileID: 11400000, guid: fb40f1f65427b4140bec338aa87aa1f1, type: 2}
+  behavior: {fileID: 11400000, guid: b060e7de99610f7439eda1403f17b1dd, type: 2}
   currentStats:
-    maxLifePoints: 100
+    maxHealthPoints: 0
     maxEnergy: 15
     strength: 14
     dexterity: 14
     intelligence: 14
     viewDistance: 300
-  lifePoints: 100
+  healthPoints: 0
   energy: 10
-  position: {x: 0, y: 0}
+  position: {x: 0, y: 0, z: 0}
   statusEffects: []
+  isOnTurn: 0
+  isDone: 0
+  abilitySelected: 0
+  abilityExecuted: 0
+  movementTarget:
+    x: 0
+    y: 0
+    gCost: 0
+    hCost: 0
+    fCost: 0
+    dist: 0
+    isWalkable: 0
 --- !u!1 &4537883929204444719
 GameObject:
   m_ObjectHideFlags: 0

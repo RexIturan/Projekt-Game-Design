@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb6ab0aa6cce384fa7d881cafa82338, type: 3}
-  m_Name: EnemyAttackFinished
+  m_Script: {fileID: 11500000, guid: 925b2c0e15db3414aba36d9dd33a701e, type: 3}
+  m_Name: IsDone_enemy
   m_EditorClassIdentifier: 

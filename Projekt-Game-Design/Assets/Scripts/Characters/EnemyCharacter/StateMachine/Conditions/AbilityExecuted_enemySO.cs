@@ -2,16 +2,15 @@
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "EnemyMoveFinished", menuName = "State Machines/Conditions/Enemy Move Finished")]
-public class EnemyMoveFinishedSO : StateConditionSO
+[CreateAssetMenu(fileName = "AbilityExecuted_enemy", menuName = "State Machines/Conditions/Enemy/Ability Executed")]
+public class AbilityExecuted_enemySO : StateConditionSO
 {
-	protected override Condition CreateCondition() => new EnemyMoveFinished();
+	protected override Condition CreateCondition() => new AbilityExecuted_enemy();
 }
 
-public class EnemyMoveFinished : Condition
+public class AbilityExecuted_enemy : Condition
 {
 	private EnemyCharacterSC enemyCharacterSc;
-	protected new EnemyMoveFinishedSO OriginSO => (EnemyMoveFinishedSO)base.OriginSO;
 
 	public override void Awake(StateMachine stateMachine)
 	{
@@ -20,7 +19,7 @@ public class EnemyMoveFinished : Condition
 	
 	protected override bool Statement()
 	{
-		return this.enemyCharacterSc.moveFinished;
+		return this.enemyCharacterSc.abilityExecuted;
 	}
 	
 	public override void OnStateEnter()

@@ -2,16 +2,15 @@
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "EnemyCanAct", menuName = "State Machines/Conditions/Enemy Can Act")]
-public class EnemyCanActSO : StateConditionSO
+[CreateAssetMenu(fileName = "IsDead_enemy", menuName = "State Machines/Conditions/Enemy/Is Dead")]
+public class IsDead_enemySO : StateConditionSO
 {
-	protected override Condition CreateCondition() => new EnemyCanAct();
+	protected override Condition CreateCondition() => new IsDead_enemy();
 }
 
-public class EnemyCanAct : Condition
+public class IsDead_enemy : Condition
 {
 	private EnemyCharacterSC enemyCharacterSc;
-	protected new EnemyCanActSO OriginSO => (EnemyCanActSO)base.OriginSO;
 
 	public override void Awake(StateMachine stateMachine)
 	{
@@ -20,7 +19,7 @@ public class EnemyCanAct : Condition
 	
 	protected override bool Statement()
 	{
-		return this.enemyCharacterSc.energy > 0 && !this.enemyCharacterSc.noActionPossible;
+		return this.enemyCharacterSc.healthPoints <= 0;
 	}
 	
 	public override void OnStateEnter()
@@ -29,5 +28,6 @@ public class EnemyCanAct : Condition
 	
 	public override void OnStateExit()
 	{
+
 	}
 }
