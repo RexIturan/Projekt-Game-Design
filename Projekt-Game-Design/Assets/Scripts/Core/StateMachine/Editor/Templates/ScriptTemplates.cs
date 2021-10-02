@@ -6,7 +6,8 @@ using UnityEditor.ProjectWindowCallback;
 
 internal class ScriptTemplates
 {
-	private static readonly string _path = "Assets/Scripts/StateMachine/Editor/Templates";
+	//todo ref link
+	private static readonly string _path = "Assets/Scripts/Core/StateMachine/Editor/Templates";
 
 	[MenuItem("Assets/Create/State Machines/Action Script", false, 0)]
 	public static void CreateActionScript() =>

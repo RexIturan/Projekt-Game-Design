@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Events.ScriptableObjects;
+using Events.ScriptableObjects.GameState;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -10,7 +11,7 @@ using UnityEngine.UIElements;
 public class OverlayUIController : MonoBehaviour
 {
     // Für die UI Elemente
-    private VisualElement overlayContainer;
+    private VisualElement OverlayContainer;
     
     // Action Container
     private VisualElement ActionContainer;
@@ -31,6 +32,7 @@ public class OverlayUIController : MonoBehaviour
 
     [Header("Sending Events On")]
     [SerializeField] private VoidEventChannelSO enableGamplayInput;
+    [SerializeField] private TurnIndicatorEventChannelSO endTurnEC;
     
     [Header("Sending and Receiving Events On")]
     [SerializeField] private BoolEventChannelSO VisibilityMenuEventChannel;
@@ -53,9 +55,10 @@ public class OverlayUIController : MonoBehaviour
         // Holen des UXML Trees, zum getten der einzelnen Komponenten
         var root = GetComponent<UIDocument>().rootVisualElement;
         ActionContainer = root.Q<VisualElement>("ActionContainer");
-        overlayContainer = root.Q<VisualElement>("OverlayContainer");
+        OverlayContainer = root.Q<VisualElement>("OverlayContainer");
         PlayerViewContainer = root.Q<VisualElement>("PlayerViewContainer");
-        overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
+        OverlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
+        OverlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
         VisibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
         VisibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
         VisibilityGameOverlayEventChannel.OnEventRaised  += HandleGameOverlay;
@@ -65,16 +68,21 @@ public class OverlayUIController : MonoBehaviour
         ActionsFromPlayerEventChannel.OnEventRaised += HandlePlayerSelected;
     }
 
+    private void HandleEndTurnUI() {
+        // Debug.Log("end turn ui");
+        endTurnEC.RaiseEvent(ETurnIndicator.player);
+    }
+
     void HandleGameOverlay(bool value)
     {
         if (value)
         {
             enableGamplayInput.RaiseEvent();
-            overlayContainer.style.display = DisplayStyle.Flex;
+            OverlayContainer.style.display = DisplayStyle.Flex;
         }
         else
         {
-            overlayContainer.style.display = DisplayStyle.None;
+            OverlayContainer.style.display = DisplayStyle.None;
         }
         
     }
@@ -123,14 +131,14 @@ public class OverlayUIController : MonoBehaviour
     
     void CallBackMouseEnterAbility(MouseEnterEvent evt, string description)
     {
-        Label text = overlayContainer.Q<Label>("AbilityDescription");
+        Label text = OverlayContainer.Q<Label>("AbilityDescription");
         text.style.display = DisplayStyle.Flex;
         text.text = description;
     }
     
     void CallBackMouseLeaveAbility(MouseLeaveEvent evt)
     {
-        Label text = overlayContainer.Q<Label>("AbilityDescription");
+        Label text = OverlayContainer.Q<Label>("AbilityDescription");
         text.style.display = DisplayStyle.None;
     }
 
