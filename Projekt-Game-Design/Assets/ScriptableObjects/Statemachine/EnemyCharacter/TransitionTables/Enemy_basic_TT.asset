@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 872cbaa965d1f6e4e98365d74e2060df, type: 3}
+  m_Name: Enemy_basic_TT
+  m_EditorClassIdentifier: 
+  _transitions:
+  - FromState: {fileID: 11400000, guid: b9ea642b7762ddf4ab49d66d6aa1f452, type: 2}
+    ToState: {fileID: 11400000, guid: 598287ba6815ab645a66ba7b0b6f9bdd, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: a001cb519f1001d47a91d2389eb0611c, type: 2}
+      Operator: 0
+    - ExpectedResult: 1
+      Condition: {fileID: 11400000, guid: d18cbb21aac451546990d65c367b1a28, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: b9ea642b7762ddf4ab49d66d6aa1f452, type: 2}
+    ToState: {fileID: 11400000, guid: 31a297b9138a6494e82a162697dd6bec, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: a030a39b133720247b7f102a47b66db4, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: 598287ba6815ab645a66ba7b0b6f9bdd, type: 2}
+    ToState: {fileID: 11400000, guid: df95b2ddb9353284b945ec0ed7f9eebd, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: 5605c333e25aa7e4da70be5c3c940732, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: df95b2ddb9353284b945ec0ed7f9eebd, type: 2}
+    ToState: {fileID: 11400000, guid: 598287ba6815ab645a66ba7b0b6f9bdd, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: 2d2aa748be39a254f95f4c7974031fba, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: 598287ba6815ab645a66ba7b0b6f9bdd, type: 2}
+    ToState: {fileID: 11400000, guid: b9ea642b7762ddf4ab49d66d6aa1f452, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: d18cbb21aac451546990d65c367b1a28, type: 2}
+      Operator: 0
