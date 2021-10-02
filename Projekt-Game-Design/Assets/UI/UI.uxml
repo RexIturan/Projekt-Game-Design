@@ -54,10 +54,10 @@
             <ui:VisualElement name="Action6" class="Actions" style="width: 17%; height: 100%;" />
             <ui:VisualElement name="Action7" class="Actions" style="width: 17%; height: 100%;" />
         </ui:VisualElement>
-        <ui:VisualElement name="EndTurnButton" class="EndturnButton">
-            <ui:Label text="END TURN" display-tooltip-when-elided="true" enable-rich-text="false" style="font-size: 20%; margin-right: 15%; color: rgb(255, 255, 255); -unity-font-style: bold; height: 33px; width: 118px;" />
-            <ui:Label text="#Turn 42" display-tooltip-when-elided="true" name="TurnIndicator" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 14%;" />
-        </ui:VisualElement>
+        <ui:Button text="Hallllooooo" display-tooltip-when-elided="true" name="EndTurnButton" class="EndturnButton" style="right: -1px; bottom: -1px;">
+            <ui:Label text="END TURN" display-tooltip-when-elided="true" enable-rich-text="false" style="font-size: 20%; margin-right: 15%; color: rgb(255, 255, 255); -unity-font-style: bold; height: 33px; width: 118px; display: none;" />
+            <ui:Label text="#Turn 42" display-tooltip-when-elided="true" name="TurnIndicator" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 14%; display: none;" />
+        </ui:Button>
         <ui:VisualElement name="SettingsMenu" class="MenuButton" style="position: absolute; top: 0; right: 0; width: 10%; height: 5%;">
             <ui:Button text="Ingame Menu" display-tooltip-when-elided="true" name="IngameMenuButton" class="IngameMenuButton" />
         </ui:VisualElement>
