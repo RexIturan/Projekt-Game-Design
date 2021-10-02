@@ -27,6 +27,7 @@ namespace UOP1.StateMachine.Editor
 			// todo rework
 			// when overlapping/ width too small, offset
 			if (rect.width < 223) {
+				// offset from top
 				rect.y += singleLineHeight;
 			}
 			else {
@@ -37,7 +38,12 @@ namespace UOP1.StateMachine.Editor
 			
 			// Reserve space
 			{
-				rect.height = singleLineHeight + 10 + listHeight;
+				if (rect.width < 223) {
+					rect.height = singleLineHeight*2 + 10 + listHeight;	
+				}
+				else {
+					rect.height = singleLineHeight + 10 + listHeight;
+				}
 				GUILayoutUtility.GetRect(rect.width, rect.height);
 				position.y += rect.height + 5;
 			}
@@ -52,11 +58,26 @@ namespace UOP1.StateMachine.Editor
 
 			// Transition Header
 			{
+				var style = EditorStyles.label;
+				var nameStyle = EditorStyles.boldLabel;
+				
+				if (rect.width < 223) {
+					style.alignment = TextAnchor.UpperLeft;
+					nameStyle.alignment = TextAnchor.UpperLeft;
+				}
+				else {
+					style.alignment = TextAnchor.MiddleLeft;
+					nameStyle.alignment = TextAnchor.MiddleLeft;
+				}
+				
 				rect.x += 3;
-				LabelField(rect, "To");
+				LabelField(rect, "To", style);
 
 				rect.x += 20;
 				LabelField(rect, SerializedTransition.ToState.objectReferenceValue.name, EditorStyles.boldLabel);
+				// if (rect.width < 223) {
+				// 	rect.y += singleLineHeight;	
+				// }
 			}
 
 
@@ -65,7 +86,12 @@ namespace UOP1.StateMachine.Editor
 				bool Button(Rect pos, string icon) => GUI.Button(pos, EditorGUIUtility.IconContent(icon));
 
 				var buttonRect = new Rect(x: rect.width - 25, y: rect.y + 5, width: 30, height: 18);
-
+				
+				// todo when width to small move buttons down
+				if (rect.width < 223) {
+					buttonRect.y += singleLineHeight;	
+				}
+				
 				int i, l;
 				{
 					var transitions = _editor.GetStateTransitions(SerializedTransition.FromState.objectReferenceValue);

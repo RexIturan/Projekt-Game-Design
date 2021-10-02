@@ -107,7 +107,7 @@ namespace UOP1.StateMachine.Editor
 					if (i == 0)
 						label += " (Initial State)";
 
-					if (label.Length > 6 && EditorGUIUtility.currentViewWidth < 450) {
+					if (EditorGUIUtility.currentViewWidth < 450) {
 						headerRect.height = EditorGUIUtility.singleLineHeight * 2;	
 					}
 					else {
