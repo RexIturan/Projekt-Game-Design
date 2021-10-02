@@ -1,10 +1,11 @@
 {
   "dependencies": {
     "com.mischief.markdownviewer": {
-      "version": "file:UnityMarkdownViewer",
+      "version": "https://github.com/gwaredd/UnityMarkdownViewer.git",
       "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "ba4203635b555e30b76dd24438271843d5e78e83"
     },
     "com.unity.2d.tilemap": {
       "version": "1.0.0",
