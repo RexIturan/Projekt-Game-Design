@@ -5,9 +5,9 @@ namespace Events.ScriptableObjects.GameState {
     [CreateAssetMenu(menuName = "Events/TurnIndicator Event Channel")]
     public class TurnIndicatorEventChannelSO : EventChannelBaseSO {
         
-        public event Action<ETurnIndicator> OnEventRaised;
+        public event Action<EFaction> OnEventRaised;
         
-        public void RaiseEvent(ETurnIndicator value) {
+        public void RaiseEvent(EFaction value) {
             OnEventRaised?.Invoke(value);
         }
     }

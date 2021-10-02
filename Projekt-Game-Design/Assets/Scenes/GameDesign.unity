@@ -428,10 +428,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube
       objectReference: {fileID: 0}
-    - target: {fileID: 3051770133120396197, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
-      propertyPath: _debugger.debugTransitions
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 559fadb34f2cace4797315aafbf81402, type: 3}
 --- !u!1001 &593518544
@@ -789,6 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
+  setTurnIndicatorVisibilityEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
   tacticsData: {fileID: 11400000, guid: 5d053a97eac47be4d8da941f3a2772c7, type: 2}
 --- !u!114 &1328309893
 MonoBehaviour:
@@ -1413,6 +1410,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7814138535658991264, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
+      propertyPath: SetActionContainerVisibilityEC
+      value: 
+      objectReference: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
     - target: {fileID: 7814138535658991266, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
       propertyPath: m_RootOrder
       value: 3

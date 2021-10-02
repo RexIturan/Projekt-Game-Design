@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New_TacticsGameData", menuName = "GameManager/New TacticsGameData")]
 public class TacticsGameDataSO : ScriptableObject {
     // turn indicator and order
-    public ETurnIndicator currentPlayer;
+    public EFaction currentPlayer;
     public int currentPlayerIndex;
-    public List<ETurnIndicator> turnOrder;
+    public List<EFaction> turnOrder;
     
     // turn data
     public int turnNum = 0;
@@ -18,9 +18,9 @@ public class TacticsGameDataSO : ScriptableObject {
         currentPlayer = turnOrder[currentPlayerIndex];
     }
 
-    public void SetStartingPlayer(ETurnIndicator indicator) {
-        currentPlayerIndex = turnOrder.IndexOf(indicator);
-        currentPlayer = indicator;
+    public void SetStartingPlayer(EFaction faction) {
+        currentPlayerIndex = turnOrder.IndexOf(faction);
+        currentPlayer = faction;
     }
 
     public void Reset() {
@@ -28,7 +28,7 @@ public class TacticsGameDataSO : ScriptableObject {
     }
 }
 
-public enum ETurnIndicator {
+public enum EFaction {
     player,
     enemy
 }

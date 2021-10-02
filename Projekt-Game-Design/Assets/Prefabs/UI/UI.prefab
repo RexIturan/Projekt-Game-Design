@@ -88,7 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20445f88bf8c6524b945ae9b716e278d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VisibilityGameOverlayEventChannel: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  ShowGameOverlayEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  ShowTurnIndicatorEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
   VisibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
   VisibilityActionContainerEventChannel: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
   ActionsFromPlayerEventChannel: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}

@@ -121,7 +121,7 @@ namespace Input {
         public void OnEndTurn(InputAction.CallbackContext context) {
             if (context.phase == InputActionPhase.Performed) {
                 endTurnEvent.Invoke();
-                endTurnEC.RaiseEvent(ETurnIndicator.player);
+                endTurnEC.RaiseEvent(EFaction.player);
             }
         }
 
