@@ -17,3 +17,7 @@ State Machine Assets are devided into __Player__, __Enemy__, __GameState__
 |          | __ON Enter__ | __ON Upadate__ | __On Exit__ |
 |---       |---           |---             |---          |
 |__suffix__| name_OnEnter | name_OnUpdate  | name_OnExit |
+
+## State Machine Script Naming Convention
+
+Transition Table => name_TT

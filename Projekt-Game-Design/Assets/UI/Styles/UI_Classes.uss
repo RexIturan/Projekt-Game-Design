@@ -215,10 +215,10 @@
     width: 200px;
     height: 200px;
     background-color: rgba(0, 0, 0, 0.16);
-    border-top-left-radius: 105px;
-    border-bottom-left-radius: 105px;
-    border-top-right-radius: 105px;
-    border-bottom-right-radius: 105px;
+    border-top-left-radius: 125px;
+    border-bottom-left-radius: 125px;
+    border-top-right-radius: 125px;
+    border-bottom-right-radius: 125px;
     justify-content: center;
     align-items: center;
 }
@@ -256,7 +256,7 @@
 }
 
 .ProgressBarExperience {
-    background-color: rgba(148, 0, 255, 255);
+    background-color: rgb(148, 0, 255);
     height: 100%;
     width: 10%;
 }
@@ -265,7 +265,7 @@
     -unity-text-align: middle-center;
     white-space: normal;
     -unity-font-style: bold;
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     align-items: center;
     justify-content: center;
     padding-left: 0;

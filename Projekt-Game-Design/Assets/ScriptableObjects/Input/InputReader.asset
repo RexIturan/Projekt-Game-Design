@@ -15,6 +15,7 @@ MonoBehaviour:
   visibilityMenu: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
   visibilityInventory: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
   visibilityGameOverlay: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
   enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
   enableInventoryInput: {fileID: 11400000, guid: 6f2cf282820633f41a7bde9dc75b3af9, type: 2}

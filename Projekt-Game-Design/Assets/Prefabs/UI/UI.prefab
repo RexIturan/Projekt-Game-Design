@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7814138535658991292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7814138535658991266}
+  - component: {fileID: 7814138535658991293}
+  - component: {fileID: 7814138535658991267}
+  - component: {fileID: 7814138535658991264}
+  - component: {fileID: 7814138535658991265}
+  - component: {fileID: 7814138535658991270}
+  m_Layer: 5
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7814138535658991266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814138535658991292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7814138535658991293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814138535658991292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21c074d86024caca2a0034ce4f53f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: e23928201c411004b837e5d6c951d062, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 64ab7daf4a83bdb429be7a57dbf1d64e, type: 3}
+  m_SortingOrder: 0
+--- !u!114 &7814138535658991267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814138535658991292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe6c4600f907e64ca01409d01326a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RepeatDelay: 0.5
+  m_RepeatRate: 0.05
+  m_FallbackOnIMGUIKeyboardEvents: 0
+  m_InputActionAsset: {fileID: -944628639613478452, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+  m_NavigateAction: {fileID: -8784545083839296357, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+  m_TabAction: {fileID: 8583089105167418208, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+  m_ClickAction: {fileID: 3001919216989983466, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
+--- !u!114 &7814138535658991264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814138535658991292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20445f88bf8c6524b945ae9b716e278d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowGameOverlayEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  ShowTurnIndicatorEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
+  VisibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
+  VisibilityActionContainerEventChannel: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
+  ActionsFromPlayerEventChannel: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
+  enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
+  endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
+  VisibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+--- !u!114 &7814138535658991265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814138535658991292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aeaa86373cf5e54c89afc95fa2de18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemList: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
+  InventoryItemQuantity: 28
+  VisibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  VisibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
+  OnItemPickupEventChannel: {fileID: 11400000, guid: 923c7a859e7f1f744b297552276d93a8, type: 2}
+  OnItemDropEventChannel: {fileID: 11400000, guid: a2d61755a24c4ac4f95ba6d812bdcf70, type: 2}
+  ChangeInventoryListEventChannel: {fileID: 11400000, guid: 93022818b29b1ce4da9ed669857028b9, type: 2}
+  ChangeEquipmentListEventChannel: {fileID: 11400000, guid: 93022818b29b1ce4da9ed669857028b9, type: 2}
+  VisibilityGameOverlayEventChannel: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  enableInventoryInput: {fileID: 11400000, guid: 6f2cf282820633f41a7bde9dc75b3af9, type: 2}
+  changeInventoryTab: {fileID: 11400000, guid: c0c391df13a8ed149a1fcb343bb20c4d, type: 2}
+  toEquipmentEventChannel: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
+  toInventoryEventChannel: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
+--- !u!114 &7814138535658991270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814138535658991292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fe446a5bcbd7848a1985a8b484332f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VisibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  VisibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
+  enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
+  VisibilityGameOverlayEventChannel: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}

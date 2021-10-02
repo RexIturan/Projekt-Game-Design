@@ -1,5 +1,6 @@
 ﻿using System;
 using Events.ScriptableObjects;
+using Events.ScriptableObjects.GameState;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -12,6 +13,7 @@ namespace Input {
         [SerializeField] private BoolEventChannelSO visibilityMenu;
         [SerializeField] private BoolEventChannelSO visibilityInventory;
         [SerializeField] private BoolEventChannelSO visibilityGameOverlay;
+        [SerializeField] private TurnIndicatorEventChannelSO endTurnEC;
         
         [Header("Receiving Events On")]
         [SerializeField] private VoidEventChannelSO enableMenuInput;
@@ -117,8 +119,10 @@ namespace Input {
         #region Gameplay
         
         public void OnEndTurn(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed)
+            if (context.phase == InputActionPhase.Performed) {
                 endTurnEvent.Invoke();
+                endTurnEC.RaiseEvent(EFaction.player);
+            }
         }
 
         public void OnMenu(InputAction.CallbackContext context) {

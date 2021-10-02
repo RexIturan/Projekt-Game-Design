@@ -48,7 +48,7 @@ namespace UOP1.StateMachine.Editor
 
 			rootVisualElement.styleSheets.Add(styleSheet);
 
-			minSize = new Vector2(480, 360);
+			minSize = new Vector2(360, 260);
 
 			EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
 		}

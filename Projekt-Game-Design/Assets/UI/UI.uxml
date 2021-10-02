@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="PlayerViewContainer" src="PlayerViewContainer.uxml" />
+    <ui:Template name="TurnIndicator" src="GameState/TurnIndicator.uxml" />
     <ui:Template name="IngameMenu" src="IngameMenu.uxml" />
     <ui:Template name="InventoryOverlay" src="InventoryOverlay.uxml" />
     <Style src="Styles/UI_Classes.uss" />
@@ -54,15 +55,16 @@
             <ui:VisualElement name="Action6" class="Actions" style="width: 17%; height: 100%;" />
             <ui:VisualElement name="Action7" class="Actions" style="width: 17%; height: 100%;" />
         </ui:VisualElement>
-        <ui:VisualElement name="EndTurnButton" class="EndturnButton">
-            <ui:Label text="END TURN" display-tooltip-when-elided="true" enable-rich-text="false" style="font-size: 20%; margin-right: 15%; color: rgb(255, 255, 255); -unity-font-style: bold; height: 33px; width: 118px;" />
-            <ui:Label text="#Turn 42" display-tooltip-when-elided="true" name="TurnIndicator" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 14%;" />
-        </ui:VisualElement>
+        <ui:Button display-tooltip-when-elided="true" name="EndTurnButton" class="EndturnButton" style="right: -1px; bottom: -1px;">
+            <ui:Label text="END TURN" display-tooltip-when-elided="true" enable-rich-text="false" style="font-size: 20%; margin-right: 0; color: rgb(255, 255, 255); -unity-font-style: bold; height: 33px; width: 118px; display: flex;" />
+            <ui:Label text="#Turn 42" display-tooltip-when-elided="true" name="TurnIndicator" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 14%; display: flex;" />
+        </ui:Button>
         <ui:VisualElement name="SettingsMenu" class="MenuButton" style="position: absolute; top: 0; right: 0; width: 10%; height: 5%;">
             <ui:Button text="Ingame Menu" display-tooltip-when-elided="true" name="IngameMenuButton" class="IngameMenuButton" />
         </ui:VisualElement>
         <ui:Label text="Label" display-tooltip-when-elided="true" name="AbilityDescription" style="position: absolute; top: 496px; left: 339px; height: 63px; width: 435px; color: rgb(255, 255, 255); -unity-text-outline-width: 0; font-size: 20px; background-color: rgba(255, 255, 255, 0.16); display: none; flex-wrap: wrap; white-space: normal;" />
     </ui:VisualElement>
-    <ui:Instance template="IngameMenu" name="IngameMenu" style="flex-grow: 1; display: none;" />
-    <ui:Instance template="InventoryOverlay" name="InventoryOverlay" style="flex-grow: 1; display: none;" />
+    <ui:Instance template="TurnIndicator" name="TurnIndicator" picking-mode="Ignore" style="display: none; position: absolute; width: 100%; height: 100%;" />
+    <ui:Instance template="IngameMenu" name="IngameMenu" style="flex-grow: 1; display: none; position: absolute; width: 100%; height: 100%;" />
+    <ui:Instance template="InventoryOverlay" name="InventoryOverlay" style="flex-grow: 1; display: none; position: absolute; width: 100%; height: 100%;" />
 </ui:UXML>
