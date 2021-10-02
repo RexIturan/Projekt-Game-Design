@@ -67,6 +67,7 @@ public class e_MakeMoveOnEnter : StateAction
             if (canMove)
             {
                 enemyContainer.movementTarget = closesTileToPlayer;
+                enemyContainer.abilityID = 0;
                 enemyContainer.abilitySelected = true;
             }
             else
