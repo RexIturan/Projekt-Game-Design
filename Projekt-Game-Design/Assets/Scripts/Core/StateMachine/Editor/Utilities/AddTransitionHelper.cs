@@ -121,7 +121,9 @@ namespace UOP1.StateMachine.Editor
 
 		private static void SetupConditionsList(ReorderableList reorderableList)
 		{
+			Debug.Log("setup conditions");
 			reorderableList.elementHeight *= 2.3f;
+			// reorderableList.elementHeight += EditorGUIUtility.singleLineHeight;
 			reorderableList.drawHeaderCallback += rect => GUI.Label(rect, "Conditions");
 			reorderableList.onAddCallback += list =>
 			{
@@ -136,7 +138,7 @@ namespace UOP1.StateMachine.Editor
 			reorderableList.drawElementCallback += (Rect rect, int index, bool isActive, bool isFocused) =>
 			{
 				var prop = reorderableList.serializedProperty.GetArrayElementAtIndex(index);
-				rect = new Rect(rect.x, rect.y + 2.5f, rect.width, EditorGUIUtility.singleLineHeight);
+				rect = new Rect(rect.x, rect.y + 2.5f , rect.width, EditorGUIUtility.singleLineHeight);
 				var condition = prop.FindPropertyRelative("Condition");
 				if (condition.objectReferenceValue != null)
 				{

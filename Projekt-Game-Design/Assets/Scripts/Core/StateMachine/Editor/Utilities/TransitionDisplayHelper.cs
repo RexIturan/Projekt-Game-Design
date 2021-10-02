@@ -21,10 +21,20 @@ namespace UOP1.StateMachine.Editor
 
 		internal bool Display(ref Rect position)
 		{
-			var rect = position;
-			float listHeight = _reorderableList.GetHeight();
 			float singleLineHeight = EditorGUIUtility.singleLineHeight;
+			var rect = position;
 
+			// todo rework
+			// when overlapping/ width too small, offset
+			if (rect.width < 223) {
+				rect.y += singleLineHeight;
+			}
+			else {
+				_reorderableList.elementHeight -= singleLineHeight;
+			}
+			
+			float listHeight = _reorderableList.GetHeight();
+			
 			// Reserve space
 			{
 				rect.height = singleLineHeight + 10 + listHeight;
@@ -114,6 +124,8 @@ namespace UOP1.StateMachine.Editor
 
 		private static void SetupConditionsList(ReorderableList reorderableList)
 		{
+			var singleLineHeight = EditorGUIUtility.singleLineHeight;
+			
 			reorderableList.elementHeight *= 2.3f;
 			reorderableList.headerHeight = 1f;
 			reorderableList.onAddCallback += list =>
@@ -125,24 +137,36 @@ namespace UOP1.StateMachine.Editor
 				prop.FindPropertyRelative("ExpectedResult").enumValueIndex = 0;
 				prop.FindPropertyRelative("Operator").enumValueIndex = 0;
 			};
-
-			reorderableList.drawElementCallback += (Rect rect, int index, bool isActive, bool isFocused) =>
-			{
+			
+			var originHeight = reorderableList.elementHeight;
+			reorderableList.drawElementCallback += (Rect rect, int index, bool isActive, bool isFocused) => {
+				
+				var offset = singleLineHeight;
+				if (rect.width >= 185) {
+					offset = 0;
+				}
+				else {
+					offset = singleLineHeight;
+					reorderableList.elementHeight = originHeight + offset; 
+				}
+				
 				var prop = reorderableList.serializedProperty.GetArrayElementAtIndex(index);
-				rect = new Rect(rect.x, rect.y + 2.5f, rect.width, EditorGUIUtility.singleLineHeight);
+				rect = new Rect(rect.x, rect.y + 2.5f, rect.width, singleLineHeight);
+				var lowerRect = new Rect(rect.x, rect.y + 2.5f + offset, rect.width, singleLineHeight);
 				var condition = prop.FindPropertyRelative("Condition");
 
 				// Draw the picker for the Condition SO
 				if (condition.objectReferenceValue != null)
 				{
 					string label = condition.objectReferenceValue.name;
-					GUI.Label(rect, "If");
 					var r = rect;
+					r.x -= 15;
+					GUI.Label(r, "If");
 					r.x += 20;
 					r.width = 35;
 					EditorGUI.PropertyField(r, condition, GUIContent.none);
 					r.x += 40;
-					r.width = rect.width - 120;
+					r.width = rect.width;
 					GUI.Label(r, label, EditorStyles.boldLabel);
 				}
 				else
@@ -151,12 +175,13 @@ namespace UOP1.StateMachine.Editor
 				}
 
 				// Draw the boolean value expected by the condition (i.e. "Is True", "Is False")
-				EditorGUI.LabelField(new Rect(rect.x + rect.width - 80, rect.y, 20, rect.height), "Is");
-				EditorGUI.PropertyField(new Rect(rect.x + rect.width - 60, rect.y, 60, rect.height), prop.FindPropertyRelative("ExpectedResult"), GUIContent.none);
+				EditorGUI.LabelField(new Rect(rect.x + rect.width - 80, lowerRect.y, 20, lowerRect.height), "Is");
+				EditorGUI.PropertyField(new Rect(rect.x + rect.width - 60, lowerRect.y, 60, lowerRect.height), prop.FindPropertyRelative("ExpectedResult"), GUIContent.none);
 
 				// Only display the logic condition if there's another one after this
-				if (index < reorderableList.count - 1)
-					EditorGUI.PropertyField(new Rect(rect.x + 20, rect.y + EditorGUIUtility.singleLineHeight + 5, 60, rect.height), prop.FindPropertyRelative("Operator"), GUIContent.none);
+				if (index < reorderableList.count - 1) {
+					EditorGUI.PropertyField(new Rect(rect.x + 20, rect.y + EditorGUIUtility.singleLineHeight + offset + 5, 60, rect.height), prop.FindPropertyRelative("Operator"), GUIContent.none);
+				}
 			};
 
 			reorderableList.onChangedCallback += list => list.serializedProperty.serializedObject.ApplyModifiedProperties();

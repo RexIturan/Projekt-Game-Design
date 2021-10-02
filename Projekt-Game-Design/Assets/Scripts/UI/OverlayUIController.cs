@@ -74,13 +74,10 @@ public class OverlayUIController : MonoBehaviour {
     }
 
     private void HandleEndTurnUI() {
-        // Debug.Log("end turn ui");
         endTurnEC.RaiseEvent(EFaction.player);
     }
 
     void SetTurnIndicatorVisibility(bool show) {
-        Debug.Log($"{show} {TurnIndicator.style.display}");
-        // TurnIndicator.style.display = DisplayStyle.Flex;
         TurnIndicator.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
     }
 

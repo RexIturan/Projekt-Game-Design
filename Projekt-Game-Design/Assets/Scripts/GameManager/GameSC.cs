@@ -23,7 +23,6 @@ namespace GameManager {
 
         private void HandleEndTurn(EFaction faction) {
             // todo needs update if we introduce more factions
-            Debug.Log($"{faction} {faction == EFaction.player}");
             setTurnIndicatorVisibilityEC.RaiseEvent(faction == EFaction.player);
 
             if (tacticsData.currentPlayer == faction) {

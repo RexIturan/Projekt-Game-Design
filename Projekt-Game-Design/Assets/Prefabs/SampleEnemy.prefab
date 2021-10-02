@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4760418123047489360}
+  - component: {fileID: -8896454640248032025}
   - component: {fileID: 8826923906440417867}
   m_Layer: 0
   m_Name: SampleEnemy
@@ -32,6 +33,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8896454640248032025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498592685408855684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eeda163c70b3cb4ebb88ba92f608fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transitionTableSO: {fileID: 11400000, guid: fa52c0831eb4db044966deb26827a7b1, type: 2}
+  _debugger:
+    debugTransitions: 0
+    appendConditionsInfo: 1
+    appendActionsInfo: 1
+    currentState: 
 --- !u!114 &8826923906440417867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,6 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161ac52233c1ee542b3a61adf7262ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalGridData: {fileID: 0}
   enemyType: {fileID: 11400000, guid: fb40f1f65427b4140bec338aa87aa1f1, type: 2}
   behavior: {fileID: 11400000, guid: b060e7de99610f7439eda1403f17b1dd, type: 2}
   currentStats:
@@ -53,10 +73,12 @@ MonoBehaviour:
     dexterity: 14
     intelligence: 14
     viewDistance: 300
-  healthPoints: 0
-  energy: 10
-  position: {x: 0, y: 0, z: 0}
+  healthPoints: 10
+  energy: 5
+  movementPointsPerEnergy: 20
+  position: {x: 5, y: 1, z: 5}
   statusEffects: []
+  characterList: {fileID: 0}
   isOnTurn: 0
   isDone: 0
   abilitySelected: 0
