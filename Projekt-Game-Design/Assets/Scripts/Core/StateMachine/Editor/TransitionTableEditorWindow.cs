@@ -9,13 +9,15 @@ namespace UOP1.StateMachine.Editor
 	internal class TransitionTableEditorWindow : EditorWindow
 	{
 		private static TransitionTableEditorWindow _window;
-		private static readonly string _uxmlPath = "Assets/Scripts/StateMachine/Editor/TransitionTableEditorWindow.uxml";
-		private static readonly string _ussPath = "Assets/Scripts/StateMachine/Editor/TransitionTableEditorWindow.uss";
+		// private static readonly string _uxmlPath = "Assets/Scripts/StateMachine/Editor/TransitionTableEditorWindow.uxml";
+		// private static readonly string _ussPath = "Assets/Scripts/StateMachine/Editor/TransitionTableEditorWindow.uss";
+		private static readonly string _ussFilter = "TransitionTableEditorWindow t:StyleSheet";
+		private static readonly string _uxmlFilter = "TransitionTableEditorWindow t:VisualTreeAsset";
 		private bool _doRefresh;
 
 		private UnityEditor.Editor _transitionTableEditor;
 
-		[MenuItem("Transition Table Editor", menuItem = "ChopChop/Transition Table Editor")]
+		[MenuItem("Transition Table Editor", menuItem = "Tools/Transition Table Editor")]
 		internal static void Display()
 		{
 			if (_window == null)
@@ -24,11 +26,21 @@ namespace UOP1.StateMachine.Editor
 			_window.Show();
 		}
 
-		private void OnEnable()
-		{
-			var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(_uxmlPath);
-			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(_ussPath);
+		private void OnEnable() {
+			var ussGUID = AssetDatabase.FindAssets(_ussFilter);
+			var uxmlGUID = AssetDatabase.FindAssets(_uxmlFilter);
 
+			var uxmlPath = AssetDatabase.GUIDToAssetPath(uxmlGUID.Length > 0 ? uxmlGUID[0] : "");
+			var ussPath = AssetDatabase.GUIDToAssetPath(ussGUID.Length > 0 ? ussGUID[0] : "");
+			
+			var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(uxmlPath);
+			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(ussPath);
+
+			if (visualTree is null || styleSheet is null) {
+				Debug.LogError("Transition Table Editopr cant find umxl file or uss file");
+				return;
+			}
+			
 			rootVisualElement.Add(visualTree.CloneTree());
 
 			string labelClass = $"label-{(EditorGUIUtility.isProSkin ? "pro" : "personal")}";
@@ -69,8 +81,7 @@ namespace UOP1.StateMachine.Editor
 			listView.onSelectionChanged -= OnListSelectionChanged;
 		}
 
-		private void Update()
-		{
+		private void Update() {
 			if (!_doRefresh)
 				return;
 
