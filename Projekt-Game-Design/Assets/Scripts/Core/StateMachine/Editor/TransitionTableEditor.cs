@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UOP1.StateMachine.ScriptableObjects;
 using static UnityEditor.EditorGUILayout;
@@ -106,7 +107,16 @@ namespace UOP1.StateMachine.Editor
 					if (i == 0)
 						label += " (Initial State)";
 
-					headerRect.height = EditorGUIUtility.singleLineHeight;
+					// if (width < 300) {
+					// 	// *2
+					// }
+					if (label.Length > 6 && EditorGUIUtility.currentViewWidth < 450) {
+						Debug.Log(EditorGUIUtility.currentViewWidth);
+						headerRect.height = EditorGUIUtility.singleLineHeight * 2;	
+					}
+					else {
+						headerRect.height = EditorGUIUtility.singleLineHeight;
+					}
 					GUILayoutUtility.GetRect(headerRect.width, headerRect.height);
 					headerRect.x += 5;
 
@@ -114,8 +124,10 @@ namespace UOP1.StateMachine.Editor
 					{
 						var toggleRect = headerRect;
 						toggleRect.width -= 140;
-						_toggledIndex =
-							EditorGUI.BeginFoldoutHeaderGroup(toggleRect, _toggledIndex == i, label, ContentStyle.StateListStyle) ?
+						var customStyle = ContentStyle.StateListStyle;
+						customStyle.alignment = TextAnchor.LowerLeft;
+						_toggledIndex = 
+							EditorGUI.BeginFoldoutHeaderGroup(toggleRect, _toggledIndex == i, label, customStyle) ?
 							i : _toggledIndex == i ? -1 : _toggledIndex;
 					}
 
