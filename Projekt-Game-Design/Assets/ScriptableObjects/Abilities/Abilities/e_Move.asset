@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
+  m_Name: e_Move
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  description: 
+  targets: 24
+  moveToTarget: 1
+  range: 0
+  conditions: 1
+  costs: 0
+  targetedEffects: []
+  abilityID: 0
+  selectedActions: []
+  executingActions:
+  - {fileID: 11400000, guid: a2c72345e7e006245ad33b14f31fb0fc, type: 2}
+  - {fileID: 11400000, guid: bebaface0c8bd0b4b8bcbe58af1ac62f, type: 2}

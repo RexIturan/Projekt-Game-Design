@@ -34,16 +34,27 @@ public class EnemyCharacterSC : MonoBehaviour
 
     public CharacterList characterList; // reference to CharacterList
 
+    // Statemachine
+    //
     public bool isOnTurn; // it's Enemy's turn
     public bool isDone; // this enemy in particular is done
     public bool abilitySelected;
     public bool abilityExecuted;
+
+    public int abilityID;
 
     public PathNode movementTarget;
 
     public void Start()
     {
         transformToPosition();
+    }
+
+    // TODO: don't just copy from playerCharacterSC
+    //       avoid code that's written twice
+    public int GetEnergyUseUpFromMovement()
+    {
+        return Mathf.CeilToInt((float)movementTarget.gCost / movementPointsPerEnergy);
     }
 
     // TODO: avoid repetitive code (copied from PlayerCharacter)
