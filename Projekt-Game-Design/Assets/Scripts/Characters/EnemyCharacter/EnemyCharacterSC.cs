@@ -1,6 +1,7 @@
 using Grid;
 using System.Collections;
 using System.Collections.Generic;
+using Characters.ScriptableObjects;
 using UnityEngine;
 using Util;
 
@@ -32,7 +33,7 @@ public class EnemyCharacterSC : MonoBehaviour
     public List<ScriptableObject> statusEffects; // TODO: implement status effects
                                                  // stat changing temporary effects
 
-    public CharacterList characterList; // reference to CharacterList
+    public CharacterContainerSO characterContainer; // reference to CharacterList
 
     // Statemachine
     //

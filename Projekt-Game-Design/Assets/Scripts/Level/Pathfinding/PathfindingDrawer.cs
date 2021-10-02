@@ -56,7 +56,7 @@ namespace Pathfinding {
         }
 
         public void ClearPreviewTilemap() {
-            Debug.Log("Clear Preview Tilemap, inside drawer");
+            // Debug.Log("Clear Preview Tilemap, inside drawer");
             previewTilemap.ClearAllTiles();
         }
         

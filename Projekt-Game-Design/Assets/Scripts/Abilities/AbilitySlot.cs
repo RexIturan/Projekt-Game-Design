@@ -20,7 +20,7 @@ public class AbilitySlot : VisualElement
     {
         Icon.image = ability.icon.texture;
         AbilityID = ability.abilityID;
-        Debug.Log("Test in HoldItem");
+        // Debug.Log("Test in HoldItem");
     }
     public void DropAbility()
     {

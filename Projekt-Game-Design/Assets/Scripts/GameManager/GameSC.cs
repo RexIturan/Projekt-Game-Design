@@ -1,4 +1,5 @@
 using System;
+using Characters.ScriptableObjects;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
 using UnityEngine;
@@ -14,11 +15,19 @@ namespace GameManager {
 
         [Header("SO References")]
         [SerializeField] private TacticsGameDataSO tacticsData;
-
+        [SerializeField] private CharacterContainerSO characterContainer;
+        
+        [Header("StateMachine")] 
+        public bool evaluated;
+        
         private void Awake() {
             endTurnEC.OnEventRaised += HandleEndTurn;
             tacticsData.Reset();
             tacticsData.SetStartingPlayer(EFaction.player);
+        }
+
+        private void Start() {
+            characterContainer.FillContainer();
         }
 
         private void HandleEndTurn(EFaction faction) {
@@ -30,7 +39,7 @@ namespace GameManager {
                 Debug.Log($"{tacticsData.currentPlayer}, turn:{tacticsData.turnNum}");    
             }
             else {
-                Debug.Log("You can only end the Turn, when its your Turn ");
+                Debug.Log("You can only end the Turn, when its your Turn");
             }
         }
     }

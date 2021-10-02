@@ -13,7 +13,7 @@ public class CharacterList : MonoBehaviour
     {
         foreach(GameObject enemy in enemyCharacters)
         {
-            enemy.GetComponent<EnemyCharacterSC>().characterList = this;
+            // enemy.GetComponent<EnemyCharacterSC>().characterContainer = this;
         }
 
     }

@@ -17,7 +17,7 @@ public class e_MakeMoveOnEnterSO : StateActionSO
 
 public class e_MakeMoveOnEnter : StateAction
 {
-    private EnemyCharacterSC enemyContainer;
+    private EnemyCharacterSC enemySC;
     private EnemyBehaviorSO behavior;
 
     private GameObject targetPlayer;
@@ -39,8 +39,8 @@ public class e_MakeMoveOnEnter : StateAction
 
     public override void Awake(StateMachine stateMachine)
     {
-        enemyContainer = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
-        behavior = enemyContainer.behavior;
+        enemySC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
+        behavior = enemySC.behavior;
     }
 
     public override void OnStateEnter()
@@ -52,11 +52,11 @@ public class e_MakeMoveOnEnter : StateAction
             canMove = true;
 
             // TODO: find nearest player instead
-            targetPlayer = enemyContainer.characterList.playerCharacters[0];
+            targetPlayer = enemySC.characterContainer.playerContainer[0].gameObject;
             PlayerCharacterSC targetContainer = targetPlayer.GetComponent<PlayerCharacterSC>();
 
-            Vector3Int startNode = new Vector3Int(enemyContainer.position.x,
-                                                  enemyContainer.position.z,
+            Vector3Int startNode = new Vector3Int(enemySC.position.x,
+                                                  enemySC.position.z,
                                                   0);
             Vector3Int endNode = new Vector3Int(targetContainer.position.x,
                                                 targetContainer.position.z,
@@ -66,9 +66,9 @@ public class e_MakeMoveOnEnter : StateAction
 
             if (canMove)
             {
-                enemyContainer.movementTarget = closesTileToPlayer;
-                enemyContainer.abilityID = 0;
-                enemyContainer.abilitySelected = true;
+                enemySC.movementTarget = closesTileToPlayer;
+                enemySC.abilityID = 0;
+                enemySC.abilitySelected = true;
             }
             else
                 Skip();
@@ -77,7 +77,7 @@ public class e_MakeMoveOnEnter : StateAction
 
     private void Skip()
     {
-        enemyContainer.isDone = true;
+        enemySC.isDone = true;
     }
 
     private void SaveClosestToPlayer(List<PathNode> path)
@@ -86,7 +86,7 @@ public class e_MakeMoveOnEnter : StateAction
         for(int i = 1; i < path.Count; i++)
         {
             // TODO: distance instead of GCost? 
-            if (path[i].gCost <= enemyContainer.movementPointsPerEnergy * enemyContainer.energy)
+            if (path[i].gCost <= enemySC.movementPointsPerEnergy * enemySC.energy)
                 index = i;
             else
                 break;

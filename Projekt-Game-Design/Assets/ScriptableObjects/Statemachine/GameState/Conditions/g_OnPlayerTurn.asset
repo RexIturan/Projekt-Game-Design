@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: g_PlayerTurn
+  m_Script: {fileID: 11500000, guid: cc923948592522d43bac72e142b3b581, type: 3}
+  m_Name: g_OnPlayerTurn
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: de6080dfaac32fd4bbc6da7834af0d0c, type: 2}
+  tacticsGameData: {fileID: 11400000, guid: 5d053a97eac47be4d8da941f3a2772c7, type: 2}
+  faction: 0

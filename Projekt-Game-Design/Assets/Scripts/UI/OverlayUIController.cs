@@ -69,8 +69,6 @@ public class OverlayUIController : MonoBehaviour {
 
         InitializeAbilityList();
         ActionsFromPlayerEventChannel.OnEventRaised += HandlePlayerSelected;
-        
-        Debug.Log(TurnIndicator);
     }
 
     private void HandleEndTurnUI() {
