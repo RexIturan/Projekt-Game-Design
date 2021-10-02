@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: e_Move
+  m_Script: {fileID: 11500000, guid: 5310fd55a4a5ddd4983d52c88c85bcfc, type: 3}
+  m_Name: e_MakeMoveOnEnter
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: a5f05c8a09e002d498695556c98cac1d, type: 2}
+  pathfindingPathQueryEventChannel: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}

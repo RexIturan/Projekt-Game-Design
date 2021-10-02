@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
   m_Name: e_Search
   m_EditorClassIdentifier: 
-  _actions: []
+  _actions:
+  - {fileID: 11400000, guid: 58d4ea7daccdc924fa13e20acda0f48d, type: 2}
+  - {fileID: 11400000, guid: 9c171d3a551d4c9448765bc2717c13fd, type: 2}
