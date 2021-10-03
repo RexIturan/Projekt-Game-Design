@@ -62,6 +62,17 @@ namespace Grid {
                 x: gridPos3D.x,
                 y: gridPos3D.z);
         }
+
+        public Vector3 getCellCenter() {
+            return new Vector3(cellSize, 0, cellSize) * 0.5f;
+        }
+
+        public bool IsInGridBounds(Vector2Int pos) {
+            return IsInGridBounds(pos.x, pos.y);
+        }
         
+        public bool IsInGridBounds(int x, int y) {
+            return x >= 0 && y >= 0 && x < width && y < height;
+        }
     }
 }

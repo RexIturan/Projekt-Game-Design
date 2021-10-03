@@ -36,7 +36,7 @@ namespace GameManager {
 
             if (tacticsData.currentPlayer == faction) {
                 tacticsData.GoToNextTurn();
-                Debug.Log($"{tacticsData.currentPlayer}, turn:{tacticsData.turnNum}");    
+                // Debug.Log($"{tacticsData.currentPlayer}, turn:{tacticsData.turnNum}");    
             }
             else {
                 Debug.Log("You can only end the Turn, when its your Turn");

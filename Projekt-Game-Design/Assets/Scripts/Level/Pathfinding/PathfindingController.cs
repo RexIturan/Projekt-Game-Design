@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Util;
 using Events.ScriptableObjects;
+using Events.ScriptableObjects.Pathfinding;
 using Graph;
 
 namespace Pathfinding {
@@ -27,14 +28,18 @@ namespace Pathfinding {
         [Header("Receiving events on")]
         [SerializeField] private PathfindingQueryEventChannelSO pathfindingAllNodesQueryEventChannel;
         [SerializeField] private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
-
+        [SerializeField] private FindPathBatch_EventChannel_SO findPathBatchEC;
+        
         private Vector2Int clickedPos;
         private List<PathNode> reachableNodes;
 
         private void Awake() {
             pathfindingAllNodesQueryEventChannel.OnEventRaised += handlePathfindingQueryEvent;
             pathfindingPathQueryEventChannel.OnEventRaised += handlePathfindingPathQueryEvent;
+            findPathBatchEC.OnEventRaised += HandleFindPathBatch;
         }
+
+        
 
         private void Start() {
             InitialisePathfinding();
@@ -140,8 +145,15 @@ namespace Pathfinding {
         //
         private void handlePathfindingPathQueryEvent(Vector3Int startNode, Vector3Int endNode, Action<List<PathNode>> callback)
         {
-            Debug.Log($"{GetPath(startNode, endNode)}, start; {startNode.ToString()}, end: {endNode.ToString()}");
             callback(GetPath(startNode, endNode));
+        }
+        
+        private void HandleFindPathBatch(List<Tuple<Vector3Int, Vector3Int>> input, Action<List<List<PathNode>>> callback) {
+            List<List<PathNode>> foundPaths = new List<List<PathNode>>();
+            foreach (var startEnd in input) {
+                foundPaths.Add(GetPath(startEnd.Item1, startEnd.Item2));
+            }
+            callback(foundPaths);
         }
     }
 }

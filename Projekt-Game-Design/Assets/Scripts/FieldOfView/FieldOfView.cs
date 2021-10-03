@@ -3,49 +3,30 @@ using Events.ScriptableObjects;
 using Grid;
 using UnityEngine;
 
-namespace field_of_view
+namespace FieldOfView
 {
     
-    public class FieldOfView : MonoBehaviour
+    public class FieldOfView
     {
+        private readonly GridContainerSO grid;
+        private readonly TileTypeContainerSO tileTypeContainer;
+
+        // debug
+        private readonly bool debug = false;
+        private readonly int visionRangeTest;
+        private readonly Vector2Int startPosTest;
+
+        public FieldOfView(GridContainerSO grid, TileTypeContainerSO tileTypeContainer, bool debug = false, int visionRangeTest = 0, Vector2Int startPosTest = default) {
+            this.grid = grid;
+            this.tileTypeContainer = tileTypeContainer;
+            
+            //debug
+            this.debug = debug;
+            this.visionRangeTest = visionRangeTest;
+            this.startPosTest = startPosTest;
+        }
         
-        
-        [SerializeField] private GridContainerSO grid;
-        [SerializeField] private TileTypeContainerSO tileTypeContainer;
-        [SerializeField] private bool debug = false;
-        [SerializeField] private int visionRangeTest;
-        [SerializeField] private Vector2Int startPosTest;
-        [SerializeField] private GridDataSO globalGridData;
-
-        [SerializeField]
-        private FieldOfViewQueryEventChannelSO fieldOfViewQueryEventChannel;
-
-        public void Awake()
-        {
-            fieldOfViewQueryEventChannel.OnEventRaised += handleQueryEvent;
-        }
-
-        public Vector2Int WorldPosToGridPos(Vector3 worldPos)
-        {
-            var lowerBounds = Vector3Int.FloorToInt(globalGridData.OriginPosition);
-            var flooredPos = Vector3Int.FloorToInt(worldPos);
-            return new Vector2Int(
-                x: flooredPos.x + Mathf.Abs(lowerBounds.x),
-                y: flooredPos.z + Mathf.Abs(lowerBounds.z));
-        }
-
-        public void generateVision()
-        {
-            GETVisibleTiles(visionRangeTest, startPosTest);
-        }
-
-        private void handleQueryEvent(Vector3Int startpos, int range, Action<bool[,]> callback)
-        {
-            var pos = WorldPosToGridPos(startpos);
-            callback(GETVisibleTiles(range, pos));
-        }
-
-        public bool[,] GETVisibleTiles(int visionRange, Vector2Int startTile)
+        public bool[,] GetVisibleTiles(int visionRange, Vector2Int startTile, ETileFlags blocking)
         {
             bool[,] visibleTiles = new bool[2*visionRange+1, 2*visionRange+1];
             
@@ -57,14 +38,14 @@ namespace field_of_view
             int lowerY = Mathf.Max(0, startTile[1] - visionRange);
             int upperY = Mathf.Min(maxheight, startTile[1] + visionRange);
 
-            int offsetX = Mathf.Max(-(startTile[0] - visionRange), 0);
-            int offsetY = Mathf.Max(-(startTile[1] - visionRange), 0);
+            int offsetX = Mathf.Min(-(startTile[0] - visionRange), 0);
+            int offsetY = Mathf.Min(-(startTile[1] - visionRange), 0);
 
             for (int i = lowerX; i < upperX; i++)
             {
                 for (int j = lowerY; j < upperY; j++)
                 {
-                    visibleTiles[i + offsetX, j + offsetY] = CheckTile(i, j, startTile);
+                    visibleTiles[i + offsetX, j + offsetY] = CheckTile(i, j, startTile, blocking);
                 }
             }
 
@@ -76,7 +57,7 @@ namespace field_of_view
                     for (int j = lowerY; j < upperY; j++)
                     {
                         int tileType = grid.tileGrids[1].GetGridObject(i, j).tileTypeID;
-                        if (tileTypeContainer.tileTypes[tileType].Flags.HasFlag(ETileFlags.opaque))
+                        if (tileTypeContainer.tileTypes[tileType].Flags.HasFlag(blocking))
                         {
                             str += "|b";
                         }
@@ -100,14 +81,13 @@ namespace field_of_view
             return visibleTiles;
         }
 
-        private bool CheckTile(int x1, int y1, Vector2Int startTile)
+        private bool CheckTile(int x1, int y1, Vector2Int startTile, ETileFlags blocking)
         {
             int x0 = startTile[0];
             int y0 = startTile[1];
-            int tileType;
-            
-            int dx =  Mathf.Abs(x1-x0), sx = x0<x1 ? 1 : -1;
-            int dy = -Mathf.Abs(y1-y0), sy = y0<y1 ? 1 : -1;
+
+            int dx =  Mathf.Abs(x1-x0), sx = x0 < x1 ? 1 : -1;
+            int dy = -Mathf.Abs(y1-y0), sy = y0 < y1 ? 1 : -1;
             int err = dx+dy, e2; /* error value e_xy */
 
             while (true)
@@ -116,8 +96,8 @@ namespace field_of_view
                 
                 if (x0==x1 && y0==y1) return true;
                 
-                tileType = grid.tileGrids[1].GetGridObject(x0, y0).tileTypeID;
-                if (tileTypeContainer.tileTypes[tileType].Flags.HasFlag(ETileFlags.opaque))
+                var tileType = grid.tileGrids[1].GetGridObject(x0, y0).tileTypeID;
+                if (tileTypeContainer.tileTypes[tileType].Flags.HasFlag(blocking))
                 {
                     return false;
                 }

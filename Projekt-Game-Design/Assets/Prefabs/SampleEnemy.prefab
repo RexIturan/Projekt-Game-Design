@@ -43,7 +43,7 @@ BoxCollider:
   m_GameObject: {fileID: 498592685408855684}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -82,17 +82,17 @@ MonoBehaviour:
   behavior: {fileID: 11400000, guid: 1f2adb223990b1f458c58b0569d99fbf, type: 2}
   currentStats:
     maxHealthPoints: 0
-    maxEnergy: 15
+    maxEnergy: 2
     strength: 14
     dexterity: 14
     intelligence: 14
     viewDistance: 300
   healthPoints: 10
-  energy: 5
-  movementPointsPerEnergy: 20
-  position: {x: 5, y: 1, z: 5}
+  energy: 2
+  movementPointsPerEnergy: 10
+  gridPosition: {x: 6, y: 1, z: 5}
   statusEffects: []
-  characterContainer: {fileID: 0}
+  characterContainer: {fileID: 11400000, guid: fdb6506e2806b5d448ee3e966f4f70bf, type: 2}
   isOnTurn: 0
   isDone: 0
   abilitySelected: 0
@@ -225,7 +225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6891059946942647145}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.58, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 262260370032275807}

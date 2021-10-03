@@ -100,8 +100,6 @@ namespace Util.VisualDebug {
         public void TakeSnapshot( GenericGrid1D<PathNode> grid, PathNode current, 
             List<PathNode> openList, List<PathNode> closedList) {
             
-            Debug.Log("screenshot");
-            
             GridSnapshotAction gridSnapshotAction = new GridSnapshotAction();
             gridSnapshotAction.AddAction(HideNodeVisuals);
 

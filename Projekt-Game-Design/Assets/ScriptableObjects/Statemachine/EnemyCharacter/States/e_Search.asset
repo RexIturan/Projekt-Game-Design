@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: e_Search
   m_EditorClassIdentifier: 
   _actions:
+  - {fileID: 11400000, guid: 05e0e9830b478ca4d8d105b6d8358833, type: 2}
   - {fileID: 11400000, guid: 9c171d3a551d4c9448765bc2717c13fd, type: 2}
   - {fileID: 11400000, guid: 1221c831e2dece549a3e1eb34240dfa2, type: 2}
