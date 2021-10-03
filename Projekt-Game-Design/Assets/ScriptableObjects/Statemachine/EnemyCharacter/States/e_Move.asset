@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: e_Move
   m_EditorClassIdentifier: 
   _actions:
-  - {fileID: 11400000, guid: 1e5f6fde0839f954d990889744558335, type: 2}
+  - {fileID: 11400000, guid: 0cf418d216a6e8a47b4dfbc74d45401d, type: 2}
   - {fileID: 11400000, guid: aae92089bebd1ce4c91958fa1370f91c, type: 2}
-  - {fileID: 11400000, guid: 11cd577539b0c1442a8697a9c1355b8c, type: 2}

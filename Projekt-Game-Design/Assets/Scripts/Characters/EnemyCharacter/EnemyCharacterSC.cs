@@ -35,6 +35,7 @@ public class EnemyCharacterSC : MonoBehaviour
 
     [Header("Combat")] 
     public float attackRange;
+    public int attackDamage;
     public List<Vector3Int> tileInRangeOfTarget;
 
     [Header("Movement")]
@@ -77,5 +78,9 @@ public class EnemyCharacterSC : MonoBehaviour
         energy = currentStats.maxEnergy;
         isDone = false;
         isOnTurn = false;
+    }
+
+    public int GetMaxMoveDistance() {
+        return energy * movementPointsPerEnergy;
     }
 }

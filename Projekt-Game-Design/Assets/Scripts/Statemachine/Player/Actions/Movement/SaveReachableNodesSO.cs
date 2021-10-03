@@ -35,7 +35,7 @@ public class SaveReachableNodes : StateAction
 
     public override void OnStateEnter()
     {
-        Debug.Log("Calculate new reachable tiles... max distance = " + playerStateContainer.GetMaxMoveDistance());
+        // Debug.Log("Calculate new reachable tiles... max distance = " + playerStateContainer.GetMaxMoveDistance());
         pathfindingQueryEvent.RaiseEvent(playerStateContainer.gridPosition, playerStateContainer.GetMaxMoveDistance(), saveToStateContainer);
     }
 

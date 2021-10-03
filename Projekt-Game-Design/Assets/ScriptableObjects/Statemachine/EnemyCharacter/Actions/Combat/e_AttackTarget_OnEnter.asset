@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: e_Idle
+  m_Script: {fileID: 11500000, guid: d1875690de1b0db42b10dfef7c649d74, type: 3}
+  m_Name: e_AttackTarget_OnEnter
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: 05e0e9830b478ca4d8d105b6d8358833, type: 2}

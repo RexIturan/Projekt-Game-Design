@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ce42de6aff33a48a89439dc7dd0746, type: 3}
   m_Name: e_GetTilesWithinRange_OnEnter
   m_EditorClassIdentifier: 
-  fieldOfViewQueryEC: {fileID: 0}
+  fieldOfViewQueryEC: {fileID: 11400000, guid: 2cb6040b7464d3848896ee665224095f, type: 2}
