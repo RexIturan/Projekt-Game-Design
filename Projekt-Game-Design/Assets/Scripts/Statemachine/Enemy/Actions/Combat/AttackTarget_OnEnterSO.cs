@@ -25,6 +25,7 @@ namespace Statemachine.Enemy.Actions.Combat {
 		public override void OnStateEnter() {
 			var attackEnergyCost = 1;
 			if (enemyCharacterSC.energy >= attackEnergyCost) {
+				Debug.Log($"enemy attacked player for {enemyCharacterSC.attackDamage} damage");
 				enemyCharacterSC.target.healthPoints -= enemyCharacterSC.attackDamage;
 				// todo move somewhere else
 				enemyCharacterSC.energy -= attackEnergyCost;

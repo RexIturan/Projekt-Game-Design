@@ -50,6 +50,8 @@ public class EnemyCharacterSC : MonoBehaviour
     public bool isDone; // this enemy in particular is done
     public bool abilitySelected;
     public bool abilityExecuted;
+    public bool noTargetFound;
+    public bool rangeChecked;
 
     public void Start()
     {

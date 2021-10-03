@@ -16,6 +16,14 @@ internal class ScriptTemplates
 			"NewActionSO.cs",
 			(Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image,
 			$"{_path}/StateAction.txt");
+	
+	[MenuItem("Assets/Create/State Machines/Variable Action Script", false, 0)]
+	public static void CreateVariableActionScript() =>
+		ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0,
+			ScriptableObject.CreateInstance<DoCreateStateMachineScriptAsset>(),
+			"NewActionSO.cs",
+			(Texture2D)EditorGUIUtility.IconContent("cs Script Icon").image,
+			$"{_path}/VariableStateAction.txt");
 
 	[MenuItem("Assets/Create/State Machines/Condition Script", false, 0)]
 	public static void CreateConditionScript() =>

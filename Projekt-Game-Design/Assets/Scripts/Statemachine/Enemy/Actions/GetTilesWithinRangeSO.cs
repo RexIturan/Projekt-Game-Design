@@ -9,18 +9,21 @@ using Util;
 namespace Statemachine.Enemy.Actions {
     [CreateAssetMenu(fileName = "e_GetTilesWithinRange",
         menuName = "State Machines/Actions/Enemy/Get Tiles Within Range")]
-    public class GetTilesWithinRange_OnEnterSO : StateActionSO {
+    public class GetTilesWithinRangeSO : StateActionSO {
+        [SerializeField] private StateAction.SpecificMoment phase;
         [SerializeField] private FieldOfViewQueryEventChannelSO fieldOfViewQueryEC;
-        public override StateAction CreateAction() => new GetTilesWithinRange_OnEnter(fieldOfViewQueryEC);
+        public override StateAction CreateAction() => new GetTilesWithinRange(phase,fieldOfViewQueryEC);
     }
 
-    public class GetTilesWithinRange_OnEnter : StateAction {
-        protected new GetTilesWithinRange_OnEnterSO originOnEnterSo => (GetTilesWithinRange_OnEnterSO) base.OriginSO;
+    public class GetTilesWithinRange : StateAction {
+        protected new GetTilesWithinRangeSO originSo => (GetTilesWithinRangeSO) base.OriginSO;
 
+        private StateAction.SpecificMoment phase;
         private FieldOfViewQueryEventChannelSO fieldOfViewQueryEC;
         private EnemyCharacterSC enemyCharacterSC;
 
-        public GetTilesWithinRange_OnEnter(FieldOfViewQueryEventChannelSO fieldOfViewQueryEc) {
+        public GetTilesWithinRange(StateAction.SpecificMoment phase, FieldOfViewQueryEventChannelSO fieldOfViewQueryEc) {
+            this.phase = phase;
             fieldOfViewQueryEC = fieldOfViewQueryEc;
         }
 
@@ -44,13 +47,18 @@ namespace Statemachine.Enemy.Actions {
                     }
                 }
             }
+            
+            Debug.Log("got tiles within range");
+            
             enemyCharacterSC.tileInRangeOfTarget.Clear();
             enemyCharacterSC.tileInRangeOfTarget = inRange;
+            enemyCharacterSC.rangeChecked = true;
         }
 
-        public override void OnUpdate() { }
-
-        public override void OnStateEnter() {
+        private void RaiseGetTargetInRangeTiles() {
+            
+            Debug.Log("get tiles within range");
+            
             // get target
             var target = enemyCharacterSC.target;
             var range = (int) enemyCharacterSC.attackRange;
@@ -58,7 +66,29 @@ namespace Statemachine.Enemy.Actions {
 
             fieldOfViewQueryEC.RaiseEvent(target.gridPosition, range, blocking, setTilesWithinRange);
         }
+        
+        public override void OnUpdate() {
+            if (phase == SpecificMoment.OnUpdate) {
+                // if (enemyCharacterSC.target != null) {
+                    RaiseGetTargetInRangeTiles();    
+                // }
+            }
+        }
 
-        public override void OnStateExit() { }
+        public override void OnStateEnter() {
+            if (phase == SpecificMoment.OnStateEnter) {
+                // if (enemyCharacterSC.target != null) {
+                    RaiseGetTargetInRangeTiles();    
+                // }
+            }
+        }
+
+        public override void OnStateExit() {
+            if (phase == SpecificMoment.OnStateExit) {
+                // if (enemyCharacterSC.target != null) {
+                    RaiseGetTargetInRangeTiles();    
+                // }
+            }
+        }
     }
 }

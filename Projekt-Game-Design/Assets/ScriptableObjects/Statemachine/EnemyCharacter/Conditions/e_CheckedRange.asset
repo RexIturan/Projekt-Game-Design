@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0ce42de6aff33a48a89439dc7dd0746, type: 3}
-  m_Name: e_GetTilesWithinRange_OnEnter
+  m_Script: {fileID: 11500000, guid: 7a1db54efdf0ca44d9e8b024499d2a3c, type: 3}
+  m_Name: e_CheckedRange
   m_EditorClassIdentifier: 
-  phase: 0
-  fieldOfViewQueryEC: {fileID: 0}

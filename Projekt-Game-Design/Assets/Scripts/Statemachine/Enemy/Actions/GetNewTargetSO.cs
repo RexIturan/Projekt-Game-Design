@@ -9,23 +9,26 @@ using UOP1.StateMachine.ScriptableObjects;
 using Util;
 
 namespace Statemachine.Enemy.Actions {
-    [CreateAssetMenu(fileName = "e_GetNewTarget_OnExit",
-        menuName = "State Machines/Actions/Enemy/Get New Target OnExit")]
-    public class GetNewTarget_OnExitSO : StateActionSO {
+    [CreateAssetMenu(fileName = "e_GetNewTarget",
+        menuName = "State Machines/Actions/Enemy/Get New Target")]
+    public class GetNewTargetSO : StateActionSO {
+        [SerializeField] private StateAction.SpecificMoment phase;
         [SerializeField] private CharacterContainerSO characterContainerSo;
         [SerializeField] private FindPathBatch_EventChannel_SO findPathBatchEC;
-        public override StateAction CreateAction() => new GetNewTarget_OnExit(characterContainerSo, findPathBatchEC);
+        public override StateAction CreateAction() => new GetNewTarget(phase, characterContainerSo, findPathBatchEC);
     }
 
-    public class GetNewTarget_OnExit : StateAction {
-        protected new GetNewTarget_OnExitSO OriginSO => (GetNewTarget_OnExitSO) base.OriginSO;
+    public class GetNewTarget : StateAction {
+        protected new GetNewTargetSO OriginSO => (GetNewTargetSO) base.OriginSO;
 
         private EnemyCharacterSC enemyCharacterSC;
         private CharacterContainerSO characterContainerSo;
         private FindPathBatch_EventChannel_SO findPathBatchEC;
+        private StateAction.SpecificMoment phase;
 
-        public GetNewTarget_OnExit(CharacterContainerSO characterContainerSo,
+        public GetNewTarget(StateAction.SpecificMoment phase, CharacterContainerSO characterContainerSo,
             FindPathBatch_EventChannel_SO findPathBatchEc) {
+            this.phase = phase;
             this.characterContainerSo = characterContainerSo;
             findPathBatchEC = findPathBatchEc;
         }
@@ -33,6 +36,8 @@ namespace Statemachine.Enemy.Actions {
         private void Callback(List<List<PathNode>> paths) {
             // the character with the shortest path gets set to be the nem target
 
+            Debug.Log("target??");
+            
             List<PathNode> shortest = paths[0];
             foreach (var path in paths) {
                 if (path.Count == 0) {
@@ -57,6 +62,7 @@ namespace Statemachine.Enemy.Actions {
                     var playerPos = new Vector2Int(player.gridPosition.x, player.gridPosition.z);
                     if (playerPos == pos) {
                         enemyCharacterSC.target = player;
+                        Debug.Log("target found");
                     }
                 }
                 else {
@@ -71,11 +77,25 @@ namespace Statemachine.Enemy.Actions {
             enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
         }
 
-        public override void OnUpdate() { }
+        public override void OnUpdate() {
+            if (phase == SpecificMoment.OnUpdate) {
+                RaiseFindPathBatchEvent();    
+            }
+        }
 
-        public override void OnStateEnter() { }
+        public override void OnStateEnter() {
+            if (phase == SpecificMoment.OnUpdate) {
+                RaiseFindPathBatchEvent();    
+            }
+        }
 
         public override void OnStateExit() {
+            if (phase == SpecificMoment.OnStateExit) {
+                RaiseFindPathBatchEvent();    
+            }
+        }
+
+        private void RaiseFindPathBatchEvent() {
             List<Tuple<Vector3Int, Vector3Int>> coords = new List<Tuple<Vector3Int, Vector3Int>>();
             // for each character get path to them
             foreach (var player in characterContainerSo.playerContainer) {
