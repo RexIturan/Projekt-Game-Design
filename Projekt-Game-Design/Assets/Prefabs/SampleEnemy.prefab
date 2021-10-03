@@ -89,15 +89,8 @@ MonoBehaviour:
     viewDistance: 300
   healthPoints: 10
   energy: 2
-  movementPointsPerEnergy: 10
   gridPosition: {x: 6, y: 1, z: 5}
-  statusEffects: []
   characterContainer: {fileID: 11400000, guid: fdb6506e2806b5d448ee3e966f4f70bf, type: 2}
-  isOnTurn: 0
-  isDone: 0
-  abilitySelected: 0
-  abilityExecuted: 0
-  abilityID: 0
   movementTarget:
     x: 0
     y: 0
@@ -106,6 +99,19 @@ MonoBehaviour:
     fCost: 0
     dist: 0
     isWalkable: 0
+  target: {fileID: 0}
+  attackRange: 2
+  attackDamage: 1
+  tileInRangeOfTarget: []
+  movementPointsPerEnergy: 10
+  reachableNodes: []
+  abilityID: 0
+  isOnTurn: 0
+  isDone: 0
+  abilitySelected: 0
+  abilityExecuted: 0
+  noTargetFound: 0
+  rangeChecked: 0
 --- !u!1 &4537883929204444719
 GameObject:
   m_ObjectHideFlags: 0

@@ -84,7 +84,7 @@ namespace Statemachine.Enemy.Actions {
         }
 
         public override void OnStateEnter() {
-            if (phase == SpecificMoment.OnUpdate) {
+            if (phase == SpecificMoment.OnStateEnter) {
                 RaiseFindPathBatchEvent();    
             }
         }

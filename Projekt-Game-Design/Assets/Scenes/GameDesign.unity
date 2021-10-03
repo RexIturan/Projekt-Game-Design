@@ -1199,10 +1199,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 521218105}
     m_Modifications:
-    - target: {fileID: -8896454640248032025, guid: 5c8e089f4fca80b4680632dc908fafb6, type: 3}
-      propertyPath: _debugger.debugTransitions
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 498592685408855684, guid: 5c8e089f4fca80b4680632dc908fafb6, type: 3}
       propertyPath: m_Name
       value: SampleEnemy
@@ -1250,14 +1246,6 @@ PrefabInstance:
     - target: {fileID: 4760418123047489360, guid: 5c8e089f4fca80b4680632dc908fafb6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8826923906440417867, guid: 5c8e089f4fca80b4680632dc908fafb6, type: 3}
-      propertyPath: attackRange
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8826923906440417867, guid: 5c8e089f4fca80b4680632dc908fafb6, type: 3}
-      propertyPath: attackDamage
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c8e089f4fca80b4680632dc908fafb6, type: 3}

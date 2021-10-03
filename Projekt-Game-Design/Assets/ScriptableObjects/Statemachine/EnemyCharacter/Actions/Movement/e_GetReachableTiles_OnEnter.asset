@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: e_GetReachableTiles_OnEnter
   m_EditorClassIdentifier: 
   phase: 0
-  pathfindingQueryEvent: {fileID: 0}
+  pathfindingQueryEvent: {fileID: 11400000, guid: ffe98f2118ac7d549ad4bfed89b6f94d, type: 2}
