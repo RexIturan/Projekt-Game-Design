@@ -8,7 +8,7 @@ namespace GameManager {
     public class GameSC : MonoBehaviour {
 
         [Header("Recieving Events On")] 
-        [SerializeField] private TurnIndicatorEventChannelSO endTurnEC;
+        [SerializeField] private EFactionEventChannelSO endTurnEC;
 
         [Header("Sending Events On")] 
         [SerializeField] private BoolEventChannelSO setTurnIndicatorVisibilityEC;

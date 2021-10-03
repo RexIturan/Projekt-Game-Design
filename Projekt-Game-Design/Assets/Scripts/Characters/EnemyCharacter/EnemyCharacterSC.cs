@@ -67,4 +67,11 @@ public class EnemyCharacterSC : MonoBehaviour
                                                     (0.5f + position.z) * globalGridData.cellSize)
                                         + globalGridData.OriginPosition;
     }
+
+    public void Refill() {
+        // refill energy etc.
+        energy = currentStats.maxEnergy;
+        isDone = false;
+        isOnTurn = false;
+    }
 }

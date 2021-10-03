@@ -142,4 +142,9 @@ public class PlayerCharacterSC : MonoBehaviour {
     public int GetMaxMoveDistance() {
         return energy * movementPointsPerEnergy;
     }
+    
+    public void Refill() {
+        // refill energy etc.
+        energy = currentStats.maxEnergy;
+    }
 }

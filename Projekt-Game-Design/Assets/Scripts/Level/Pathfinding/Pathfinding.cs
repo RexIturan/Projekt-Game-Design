@@ -107,6 +107,7 @@ namespace Pathfinding {
                 for (int y = 0; y < graph.Height; y++) {
                     PathNode pathNode = graph.GetGridObject(x, y);
                     pathNode.gCost = int.MaxValue;
+                    pathNode.hCost = int.MaxValue;
                     pathNode.CalculateFCost();
                     pathNode.parentNode = null;
                 }

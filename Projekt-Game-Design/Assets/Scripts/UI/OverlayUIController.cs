@@ -37,7 +37,7 @@ public class OverlayUIController : MonoBehaviour {
     [Header("Sending Events On")] [SerializeField]
     private VoidEventChannelSO enableGamplayInput;
 
-    [SerializeField] private TurnIndicatorEventChannelSO endTurnEC;
+    [SerializeField] private EFactionEventChannelSO endTurnEC;
 
     [Header("Sending and Receiving Events On")] [SerializeField]
     private BoolEventChannelSO VisibilityMenuEventChannel;

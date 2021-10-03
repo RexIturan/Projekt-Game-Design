@@ -13,7 +13,7 @@ namespace Input {
         [SerializeField] private BoolEventChannelSO visibilityMenu;
         [SerializeField] private BoolEventChannelSO visibilityInventory;
         [SerializeField] private BoolEventChannelSO visibilityGameOverlay;
-        [SerializeField] private TurnIndicatorEventChannelSO endTurnEC;
+        [SerializeField] private EFactionEventChannelSO endTurnEC;
         
         [Header("Receiving Events On")]
         [SerializeField] private VoidEventChannelSO enableMenuInput;
