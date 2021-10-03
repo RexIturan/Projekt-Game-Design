@@ -80,7 +80,7 @@ namespace LevelEditor {
             }            
             
             //todo getMousePosition at level 
-            Vector3 mousePosition = MousePosition.GetMouseWorldPosition(Vector3.up);
+            Vector3 mousePosition = MousePosition.GetMouseWorldPosition(Vector3.up, 1);
 
             var mouse = Mouse.current;
             bool leftMouseWasPressed = mouse.leftButton.wasPressedThisFrame;

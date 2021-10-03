@@ -45,8 +45,13 @@ public class TargetTile : StateAction
         {
             bool isReachable = false;
             List<PathNode> tiles = playerStateContainer.reachableTiles;
-            Vector2Int mousePos = WorldPosToGridPos(MousePosition.GetMouseWorldPosition());
+            // todo fix this !!!
+            var pos = MousePosition.GetMouseWorldPosition(Vector3.up, 1f);
+            Vector2Int mousePos = WorldPosToGridPos(pos);
 
+            // Debug.DrawLine(pos + Vector3.forward, pos + Vector3.back, Color.green, 100);
+            // Debug.DrawLine(pos + Vector3.left, pos + Vector3.right, Color.green, 100);
+            
             for (int i = 0; i < tiles.Count && !isReachable; i++)
             {
                 if (tiles[i].x == mousePos.x &&

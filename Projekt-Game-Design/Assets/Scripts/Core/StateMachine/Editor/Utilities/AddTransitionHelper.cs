@@ -121,9 +121,7 @@ namespace UOP1.StateMachine.Editor
 
 		private static void SetupConditionsList(ReorderableList reorderableList)
 		{
-			Debug.Log("setup conditions");
 			reorderableList.elementHeight *= 2.3f;
-			// reorderableList.elementHeight += EditorGUIUtility.singleLineHeight;
 			reorderableList.drawHeaderCallback += rect => GUI.Label(rect, "Conditions");
 			reorderableList.onAddCallback += list =>
 			{

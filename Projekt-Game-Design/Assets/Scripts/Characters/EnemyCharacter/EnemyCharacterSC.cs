@@ -28,7 +28,7 @@ public class EnemyCharacterSC : MonoBehaviour
     public int energy;
     public int movementPointsPerEnergy;
 
-    public Vector3Int position;
+    public Vector3Int gridPosition;
 
     public List<ScriptableObject> statusEffects; // TODO: implement status effects
                                                  // stat changing temporary effects
@@ -62,9 +62,9 @@ public class EnemyCharacterSC : MonoBehaviour
     // transforms the gameobject to it's tile position
     public void transformToPosition()
     {
-        gameObject.transform.position = new Vector3((0.5f + position.x) * globalGridData.cellSize,
-                                                    position.y * globalGridData.cellSize,
-                                                    (0.5f + position.z) * globalGridData.cellSize)
+        gameObject.transform.position = new Vector3((0.5f + gridPosition.x) * globalGridData.cellSize,
+                                                    gridPosition.y * globalGridData.cellSize,
+                                                    (0.5f + gridPosition.z) * globalGridData.cellSize)
                                         + globalGridData.OriginPosition;
     }
 

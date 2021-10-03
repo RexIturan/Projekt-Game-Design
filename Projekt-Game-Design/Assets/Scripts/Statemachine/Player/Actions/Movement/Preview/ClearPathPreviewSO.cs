@@ -13,7 +13,7 @@ public class ClearPathPreviewSO : StateActionSO
 
 public class ClearPathPreview : StateAction
 {
-    private VoidEventChannelSO clearPathPreviewEvent;
+    private readonly VoidEventChannelSO clearPathPreviewEvent;
 
     public ClearPathPreview(VoidEventChannelSO clearPathPreviewEvent)
     {

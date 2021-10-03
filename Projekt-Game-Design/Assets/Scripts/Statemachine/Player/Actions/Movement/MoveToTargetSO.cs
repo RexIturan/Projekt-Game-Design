@@ -28,7 +28,7 @@ public class MoveToTarget : StateAction
 
     public override void OnStateEnter()
     {
-        playerCharacterSC.position = new Vector3Int(playerCharacterSC.movementTarget.x,
+        playerCharacterSC.gridPosition = new Vector3Int(playerCharacterSC.movementTarget.x,
                                                        1,
                                                        playerCharacterSC.movementTarget.y);
         playerCharacterSC.transformToPosition();

@@ -28,7 +28,7 @@ public class e_MoveToTarget_OnEnter : StateAction
 
     public override void OnStateEnter()
     {
-        enemyCharacterSC.position = new Vector3Int(enemyCharacterSC.movementTarget.x,
+        enemyCharacterSC.gridPosition = new Vector3Int(enemyCharacterSC.movementTarget.x,
                                                        1,
                                                        enemyCharacterSC.movementTarget.y);
         enemyCharacterSC.transformToPosition();

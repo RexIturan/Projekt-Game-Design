@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69e27015a8d57944a15a2fa8defe4e1, type: 3}
   m_Name: g_ActivateEnemies_OnEnter
   m_EditorClassIdentifier: 
-  characterContainer: {fileID: 0}
+  characterContainer: {fileID: 11400000, guid: fdb6506e2806b5d448ee3e966f4f70bf, type: 2}

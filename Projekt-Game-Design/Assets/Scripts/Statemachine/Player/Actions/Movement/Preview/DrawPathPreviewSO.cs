@@ -27,10 +27,10 @@ public class DrawPathPreview : StateAction
 {
     private const int STANDARD_Y_VALUE = 1;
 
-    private NodeListEventChannelSO drawPathEvent;
-    private VoidEventChannelSO clearPathEvent;
-    private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
-    private GridDataSO globalGridData;
+    private readonly NodeListEventChannelSO drawPathEvent;
+    private readonly VoidEventChannelSO clearPathEvent;
+    private readonly PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
+    private readonly GridDataSO globalGridData;
     private PlayerCharacterSC playerStateContainer;
 
     public DrawPathPreview(NodeListEventChannelSO drawPathEvent, VoidEventChannelSO clearPathEvent, 
@@ -51,7 +51,8 @@ public class DrawPathPreview : StateAction
     {
         bool isReachable = false;
         List<PathNode> tiles = playerStateContainer.reachableTiles;
-        Vector2Int mousePos = WorldPosToGridPos(MousePosition.GetMouseWorldPosition());
+        // todo move to central pos
+        Vector2Int mousePos = WorldPosToGridPos(MousePosition.GetMouseWorldPosition(Vector3.up, 1));
 
         for (int i = 0; i < tiles.Count && !isReachable; i++)
         {
@@ -60,8 +61,8 @@ public class DrawPathPreview : StateAction
             {
                 isReachable = true;
 
-                Vector3Int startNode = new Vector3Int(playerStateContainer.position.x,
-                                                    playerStateContainer.position.z, 
+                Vector3Int startNode = new Vector3Int(playerStateContainer.gridPosition.x,
+                                                    playerStateContainer.gridPosition.z, 
                                                     0);
                 Vector3Int endNode = new Vector3Int(tiles[i].x,
                                                     tiles[i].y,

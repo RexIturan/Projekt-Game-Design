@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Characters.ScriptableObjects;
 using Graph.ScriptableObjects;
 using Grid;
 using UnityEngine;
@@ -10,8 +11,9 @@ namespace Graph {
         
         [Header("Scene References")]
         [SerializeField] private GraphDrawer graphDrawer;
-        
+
         [Header("SO References")] 
+        [SerializeField] private CharacterContainerSO characterContainer;
         [SerializeField] private TileTypeContainerSO tileTypeContainer;
         [SerializeField] private GraphContainerSO graphContainer;
         [SerializeField] private GridContainerSO gridContainer;
@@ -21,6 +23,8 @@ namespace Graph {
         [SerializeField] private bool diagonal;
         
         public void GenerateGraphFromGrids() {
+            characterContainer.FillContainer();
+            
             graphContainer.basicMovementGraph = new List<NodeGraph>();
             
             foreach (var grid in gridContainer.tileGrids) {
@@ -46,6 +50,18 @@ namespace Graph {
                     graph.GetGridObject(x, y).SetIsWalkable(walkable);
                 }
             }
+            
+            // todo refactor
+            // sets the player and enemy pos to not walkable
+            // foreach (var player in characterContainer.playerContainer) {
+            //     var pos = globalGridData.GridPos3DToGridPos2D(player.gridPosition);
+            //     graph.GetGridObject(pos).SetIsWalkable(false);
+            // }
+            
+            foreach (var enemy in characterContainer.enemyContainer) {
+                var pos = globalGridData.GridPos3DToGridPos2D(enemy.gridPosition);
+                graph.GetGridObject(pos).SetIsWalkable(false);
+            }    
             
             for (int x = 0; x < graph.Width; x++) {
                 for (int y = 0; y < graph.Height; y++) {

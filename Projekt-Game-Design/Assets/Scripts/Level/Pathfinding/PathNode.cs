@@ -12,8 +12,8 @@ namespace Util {
                 this.Cost = cost;
                 this.Target = target;
             }
-            public int Cost;
-            public PathNode Target;
+            public readonly int Cost;
+            public readonly PathNode Target;
         }
 
         private GenericGrid1D<PathNode> grid;
@@ -45,9 +45,9 @@ namespace Util {
 
         public void SetEdges(bool diagonal)
         {
-            if (!isWalkable) {
-                return;
-            }
+            // if (!isWalkable) {
+            //     return;
+            // }
             
             Edges = new List<Edge>();
 

@@ -107,7 +107,9 @@ namespace Pathfinding {
         public List<PathNode> GetPath(Vector3Int start, Vector3Int end)
         {
             InitialisePathfinding();
-            return pathfinding.FindPath(start.x, start.y, end.x, end.y);
+            var path = pathfinding.FindPath(start.x, start.y, end.x, end.y);
+            if(path is null) Debug.Log("no path found");
+            return path;
         }
 
         // todo Umrechnung zentraler globalgrid data vlt??
@@ -129,7 +131,8 @@ namespace Pathfinding {
         // calculate all reachable nodes and call the given method
         //
         private void handlePathfindingQueryEvent(Vector3Int startNode, int distance, Action<List<PathNode>> callback) {
-            Vector2Int gridPos = new Vector2Int(startNode.x, startNode.z); 
+            Vector2Int gridPos = new Vector2Int(startNode.x, startNode.z);
+            
             callback(GetReachableNodes(gridPos, distance));
         }
 
@@ -137,6 +140,7 @@ namespace Pathfinding {
         //
         private void handlePathfindingPathQueryEvent(Vector3Int startNode, Vector3Int endNode, Action<List<PathNode>> callback)
         {
+            Debug.Log($"{GetPath(startNode, endNode)}, start; {startNode.ToString()}, end: {endNode.ToString()}");
             callback(GetPath(startNode, endNode));
         }
     }

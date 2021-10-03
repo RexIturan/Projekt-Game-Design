@@ -125,6 +125,10 @@ namespace Util {
             }
         }
 
+        public TGridObject GetGridObject(Vector2Int gridPos2D) {
+            return GetGridObject(gridPos2D.x, gridPos2D.y);
+        }
+        
         public TGridObject GetGridObject(Vector3 worldPosition) {
             int x, y;
             GetXY(worldPosition, out x, out y);

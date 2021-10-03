@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bebb323449b9c94bbf4eec0a91e8380, type: 3}
   m_Name: g_Refill_OnEnter
   m_EditorClassIdentifier: 
+  characterContainer: {fileID: 11400000, guid: fdb6506e2806b5d448ee3e966f4f70bf, type: 2}
   tacticsGameData: {fileID: 11400000, guid: 5d053a97eac47be4d8da941f3a2772c7, type: 2}

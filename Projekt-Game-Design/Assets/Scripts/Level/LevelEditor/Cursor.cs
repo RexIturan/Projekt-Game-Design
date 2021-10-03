@@ -143,7 +143,7 @@ namespace LevelEditor {
         }
 
         public Vector3Int MousePosToTilemapPos() {
-            Vector3Int mousePosition = Vector3Int.FloorToInt(MousePosition.GetMouseWorldPosition(Vector3.up));
+            Vector3Int mousePosition = Vector3Int.FloorToInt(MousePosition.GetMouseWorldPosition(Vector3.up, 1));
             return new Vector3Int(mousePosition.x, mousePosition.z, 0);
         }
     }
