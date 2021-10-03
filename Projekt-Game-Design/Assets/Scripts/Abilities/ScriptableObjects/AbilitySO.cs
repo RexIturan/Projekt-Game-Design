@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ability;
 using Grid;
+using UOP1.StateMachine;
+using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "New CharacterAction", menuName = "CharacterAction/CharacterAction")]
+[CreateAssetMenu(fileName = "NewAbility", menuName = "Ability/new Ability")]
 public class AbilitySO : ScriptableObject
 {
     public Sprite icon;
@@ -16,4 +18,8 @@ public class AbilitySO : ScriptableObject
     public ETileFlags conditions; // restrictions for target in regards of the tiles between
     public int costs; 
     public TargetedEffect [] targetedEffects;
+    public int abilityID;
+
+    public List<StateActionSO> selectedActions;
+    public List<StateActionSO> executingActions;
 }

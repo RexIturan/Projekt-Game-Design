@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
+  m_Name: SimpleMeleeAttack
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: caa6ebd497184c044b2c06d7f69ccdce, type: 3}
+  description: 'Does things and stuff. Idk, you know how it goes or something. '
+  targets: 20
+  moveToTarget: 0
+  range: 1
+  conditions: 0
+  costs: 0
+  targetedEffects:
+  - effect:
+      type: 1
+      baseDamage: 3
+      strengthBonus: 0.2
+      dexterityBonus: 0
+      intelligenceBonus: 0
+    targets: 20
+    targetIsCenter: 1
+    area: 1
+  abilityID: 3

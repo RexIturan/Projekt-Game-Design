@@ -1,0 +1,34 @@
+using UnityEngine;
+using UOP1.StateMachine;
+using UOP1.StateMachine.ScriptableObjects;
+
+[CreateAssetMenu(fileName = "#RUNTIMENAME#", menuName = "State Machines/Actions/#RUNTIMENAME_WITH_SPACES#")]
+public class #SCRIPTNAME# : StateActionSO
+{
+    [SerializeField] private StateAction.SpecificMoment phase;
+	public override StateAction CreateAction() => new #RUNTIMENAME#(phase);
+}
+
+public class #RUNTIMENAME# : StateAction
+{
+	protected new #SCRIPTNAME# OriginSO => (#SCRIPTNAME#)base.OriginSO;
+	private StateAction.SpecificMoment phase;
+
+    public #RUNTIMENAME#(StateAction.SpecificMoment phase){
+        this.phase = phase;
+    }
+
+	public override void Awake(StateMachine stateMachine) {}
+	
+	public override void OnUpdate() {
+        if(phase == SpecificMoment.OnUpdate) {}
+	}
+	
+	public override void OnStateEnter() {
+       if(phase == SpecificMoment.OnStateEnter) {}
+    }
+    
+    public override void OnStateExit() {
+        if(phase == SpecificMoment.OnStateExit) {}
+    }
+}

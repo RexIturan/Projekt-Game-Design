@@ -5,7 +5,7 @@ using UnityEngine;
 // player type containing constant initial data 
 // for individual types of players (e.g. warrior, mage)
 //
-[CreateAssetMenu(fileName = "New PlayerType", menuName = "Player/PlayerType")]
+[CreateAssetMenu(fileName = "New PlayerType", menuName = "Character/PlayerType")]
 public class PlayerTypeSO : ScriptableObject
 {
     [SerializeField] public ScriptableObject startWeapon; // is not necessarily equipped weapon

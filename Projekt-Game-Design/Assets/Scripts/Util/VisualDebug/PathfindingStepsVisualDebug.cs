@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Graph.ScriptableObjects;
+using Grid;
 using Input;
 using TMPro;
 using UnityEngine;
@@ -15,15 +17,18 @@ namespace Util.VisualDebug {
         public Color inOpenListColor = new Color32(0, 154, 255, 255);
         public Color inClosedListColor = Color.red;
         public Color defaultBackgroundColor = new Color32(99, 99, 99, 255);
-            
-        [Header("Settings")]
+
+        [Header("Settings")] 
+        [SerializeField] private GraphContainerSO graphContainer;
+        [SerializeField] private GridDataSO globalGridData;
         [SerializeField] private InputReader inputReader;
-        private bool active;
-        private bool autoShowSnapshots;
-        private float autoShowSnapshotsTimer;
         [SerializeField] private Transform parent;
         [SerializeField] private Transform prefab;
 
+        private bool active;
+        private bool autoShowSnapshots;
+        private float autoShowSnapshotsTimer;
+        
         private List<GridSnapshotAction> gridSnapshotActionList;
         private PathfindingDebugTileData[,] visualNodes;
 
@@ -36,17 +41,24 @@ namespace Util.VisualDebug {
             inputReader.showFullPathEvent += HandleOnShowFullPathEvent;
         }
 
+        private void Start() {
+            Setup(graphContainer.basicMovementGraph[1]);
+        }
+
         private void OnDestroy() {
             inputReader.stepEvent -= HandleOnStepEvent;
             inputReader.showFullPathEvent -= HandleOnShowFullPathEvent;
         }
 
-        public void Setup(GenericGrid<PathNode> grid) {
+        public void Setup(GenericGrid1D<PathNode> grid) {
             visualNodes = new PathfindingDebugTileData[grid.Width, grid.Height];
 
             for (int x = 0; x < grid.Width; x++) {
                 for (int y = 0; y < grid.Height; y++) {
-                    Vector3 gridPosition = new Vector3(x, 0.01f, y) * grid.CellSize + new Vector3(0.5f, 0, 0.5f) * grid.CellSize;// + Vector3.one * grid.CellSize * .5f;
+                    Vector3 gridPosition = new Vector3(x, 0.01f, y) * grid.CellSize;// + new Vector3(0.5f, 0, 0.5f) * grid.CellSize;// + Vector3.one * grid.CellSize * .5f;
+                    gridPosition += new Vector3(0.5f, 0, 0.5f) * grid.CellSize;
+                    gridPosition += globalGridData.OriginPosition;
+                    gridPosition += Vector3.up;
                     Transform visualNode = CreateVisualNode(gridPosition);
                     visualNodes[x, y] = visualNode.GetComponent<PathfindingDebugTileData>();
                     // visualNodeArray[x, y] = visualNode;

@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public struct CharacterStats
 {
-    [SerializeField] public int maxLifePoints;
+    [SerializeField] public int maxHealthPoints;
     // [SerializeField] public int maxMovementPoints;
     // [SerializeField] public int maxManaPoints;
     [SerializeField] public int maxEnergy; // resource for taking an action 

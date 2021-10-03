@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a3831a43cbf864994a60a327b360df, type: 3}
+  m_Name: p_DrawPathPreview
+  m_EditorClassIdentifier: 
+  drawPathEvent: {fileID: 11400000, guid: 24e76f8c903214540b6d8bd9b1bf3620, type: 2}
+  clearPathEvent: {fileID: 11400000, guid: 2859153d6ff2e4a47b7bbc8f1de406c7, type: 2}
+  pathfindingPathQueryEventChannel: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}
+  globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
