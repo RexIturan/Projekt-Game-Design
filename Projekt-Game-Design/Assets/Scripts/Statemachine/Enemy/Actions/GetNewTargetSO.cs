@@ -36,7 +36,7 @@ namespace Statemachine.Enemy.Actions {
         private void Callback(List<List<PathNode>> paths) {
             // the character with the shortest path gets set to be the nem target
 
-            Debug.Log("target??");
+            // Debug.Log("target??");
             
             List<PathNode> shortest = paths[0];
             foreach (var path in paths) {
@@ -62,11 +62,12 @@ namespace Statemachine.Enemy.Actions {
                     var playerPos = new Vector2Int(player.gridPosition.x, player.gridPosition.z);
                     if (playerPos == pos) {
                         enemyCharacterSC.target = player;
-                        Debug.Log("target found");
+                        // Debug.Log("target found");
                     }
                 }
                 else {
                     Debug.Log("no Player found");
+                    //enemyCharacterSC.noTargetFound = true;
                 }
             }
 
