@@ -2,6 +2,7 @@ using System;
 using Characters.ScriptableObjects;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using SaveLoad.ScriptableObjects;
 using UnityEngine;
 
 namespace GameManager {
@@ -19,6 +20,17 @@ namespace GameManager {
         
         [Header("StateMachine")] 
         public bool evaluated;
+        // structure
+        public bool shouldExit;
+        public bool exited;
+        public bool initializedGame;
+        public bool initializedTactics;
+        // todo refactor to enum
+        public bool isInTacticsMode;
+        // public bool isInMacroMode;
+        
+        [Header("SaveManagerData")] 
+        public SaveManagerDataSO saveManagerData;
         
         private void Awake() {
             endTurnEC.OnEventRaised += HandleEndTurn;
