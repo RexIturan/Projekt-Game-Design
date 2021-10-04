@@ -31,5 +31,7 @@ public class ClearCache_player : StateAction
 		playerCharacterSC.abilitySelected = false;
 		playerCharacterSC.abilityConfirmed = false;
 		playerCharacterSC.movementTarget = default;
+        playerCharacterSC.playerTarget = null;
+        playerCharacterSC.enemyTarget = null;
 	}
 }

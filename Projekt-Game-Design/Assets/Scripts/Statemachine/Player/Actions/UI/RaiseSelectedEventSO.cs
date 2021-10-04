@@ -38,8 +38,16 @@ public class RaiseSelectedEvent : StateAction
     //TODO: Muss geändert werden
     private void AbilityCallback(int value) {
         Debug.Log("Es wurde die Ability mit der ID: " + value + " gedrückt.");
-        playerCharacterSc.abilitySelected = true;
-        playerCharacterSc.AbilityID = value; 
+        if (!playerCharacterSc.abilitySelected)
+        {
+            playerCharacterSc.abilitySelected = true;
+            playerCharacterSc.AbilityID = value;
+        }
+        else
+        {
+            playerCharacterSc.abilitySelected = false;
+            playerCharacterSc.AbilityID = -1;
+        }
     }
 
     public override void OnStateEnter()

@@ -13,9 +13,11 @@ using Util;
 // contains relevant data such as stats
 //
 public class PlayerCharacterSC : MonoBehaviour {
-    [Header("Receiving events on")] public PathNodeEventChannelSO targetTileEvent;
+    [Header("Receiving events on")]
+    public PathNodeEventChannelSO targetTileEvent;
 
-    [Header("SO Reference")] public InputReader input;
+    [Header("SO Reference")]
+    public InputReader input;
     public GridDataSO globalGridData;
 
     [Header("Basic Stats")]
@@ -62,7 +64,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 
     [Header("Equipment")]
     // the equipped item offers a list of actions to take
-    public ScriptableObject item;
+    public ItemSO item;
 
 
     [Header("Abilities")] [SerializeField] private AbilitySO[] abilitys;
@@ -83,12 +85,19 @@ public class PlayerCharacterSC : MonoBehaviour {
     public bool abilitySelected = false;
     public bool abilityConfirmed = false;
     public bool abilityExecuted;
-    public List<PathNode> reachableTiles;
 
     [Header("Movement Chache")]
     // cached target (tile position)
     public PathNode movementTarget;
-    
+    public List<PathNode> reachableTiles;
+
+    [Header("Combat Chache")]
+    // cached target (player or enemy)
+    public PlayerCharacterSC playerTarget;
+    public EnemyCharacterSC enemyTarget;
+    public List<PathNode> tilesInRange;
+
+
     [Header("Timer")]
     public float timeSinceTransition = 0;
     
@@ -111,12 +120,17 @@ public class PlayerCharacterSC : MonoBehaviour {
     }
 
     void toggleIsSelected() {
-        Vector3 mousePos = Mouse.current.position.ReadValue();
-        Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        RaycastHit rayHit;
-        if (Physics.Raycast(ray, out rayHit, 100.0f)) {
-            if (rayHit.collider.gameObject == gameObject) {
-                isSelected = !isSelected;
+        if (!abilitySelected && !abilityConfirmed)
+        {
+            Vector3 mousePos = Mouse.current.position.ReadValue();
+            Ray ray = Camera.main.ScreenPointToRay(mousePos);
+            RaycastHit rayHit;
+            if (Physics.Raycast(ray, out rayHit, 100.0f))
+            {
+                if (rayHit.collider.gameObject == gameObject)
+                {
+                    isSelected = !isSelected;
+                }
             }
         }
     }
@@ -146,5 +160,13 @@ public class PlayerCharacterSC : MonoBehaviour {
     public void Refill() {
         // refill energy etc.
         energy = currentStats.maxEnergy;
+    }
+
+    public void RefreshAbilities()
+    {
+        List<AbilitySO> currentAbilities = new List<AbilitySO>(playerType.basicAbilities);
+        currentAbilities.AddRange(item.abilities);
+
+        abilitys = currentAbilities.ToArray();
     }
 }

@@ -30,7 +30,10 @@ public class ClearFullCacheOnEnter_player : StateAction
 		playerCharacterSC.abilitySelected = false;
 		playerCharacterSC.reachableTiles.Clear();
 		playerCharacterSC.movementTarget = null;
-	}
+        playerCharacterSC.playerTarget = null;
+        playerCharacterSC.enemyTarget = null;
+        playerCharacterSC.tilesInRange.Clear();
+}
 	
 	public override void OnStateExit()
 	{
