@@ -28,6 +28,7 @@ namespace GameManager {
         // todo refactor to enum
         public bool isInTacticsMode;
         // public bool isInMacroMode;
+        public bool gameOver;
         
         [Header("SaveManagerData")] 
         public SaveManagerDataSO saveManagerData;
