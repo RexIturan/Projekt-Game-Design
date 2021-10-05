@@ -1,5 +1,89 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1078084377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1078084378}
+  m_Layer: 0
+  m_Name: parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1078084378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078084377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1248991684}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1248991682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248991684}
+  - component: {fileID: 1248991683}
+  m_Layer: 0
+  m_Name: Pathfinding Debug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1248991684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248991682}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1078084378}
+  m_Father: {fileID: 1112942784057711958}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1248991683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248991682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dbd2047f467495daa975b2695cb3280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inPathColor: {r: 0, g: 1, b: 0, a: 0.19607843}
+  currentColor: {r: 1, g: 0.8845355, b: 0, a: 0.19607843}
+  inOpenListColor: {r: 0, g: 0.6039216, b: 1, a: 0.19607843}
+  inClosedListColor: {r: 1, g: 0, b: 0, a: 0.19607843}
+  defaultBackgroundColor: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 0.19607843}
+  graphContainer: {fileID: 11400000, guid: a579a7e16bbc7cb419001b3fed163a80, type: 2}
+  globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  parent: {fileID: 1078084378}
+  prefab: {fileID: 5556783876820974039, guid: db10b284605b6104684403fe9bc7a57a, type: 3}
 --- !u!1 &1112942783390242945
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +256,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1112942784759588763}
+  - {fileID: 1248991684}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -195,6 +280,7 @@ MonoBehaviour:
   test: 0
   pathfindingAllNodesQueryEventChannel: {fileID: 11400000, guid: ffe98f2118ac7d549ad4bfed89b6f94d, type: 2}
   pathfindingPathQueryEventChannel: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}
+  findPathBatchEC: {fileID: 11400000, guid: a50da880a8b515c46bf39705e6db6065, type: 2}
 --- !u!114 &1112942784057711956
 MonoBehaviour:
   m_ObjectHideFlags: 0

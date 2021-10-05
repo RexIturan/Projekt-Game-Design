@@ -31,6 +31,6 @@ public class MoveToTarget : StateAction
         playerCharacterSC.gridPosition = new Vector3Int(playerCharacterSC.movementTarget.x,
                                                        1,
                                                        playerCharacterSC.movementTarget.y);
-        playerCharacterSC.transformToPosition();
+        playerCharacterSC.TransformToPosition();
     }
 }

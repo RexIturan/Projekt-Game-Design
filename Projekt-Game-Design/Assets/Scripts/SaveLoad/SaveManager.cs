@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Events.ScriptableObjects;
 using Grid;
+using SaveLoad.ScriptableObjects;
 using UnityEngine;
 
 namespace SaveLoad {
@@ -20,7 +21,8 @@ namespace SaveLoad {
         [Header("Data References")]
         [SerializeField] private GridContainerSO gridContainer;
         [SerializeField] private GridDataSO globalGridData;
-
+        [SerializeField] private SaveManagerDataSO saveManagerData;
+        
         [Header("Save/Load Settings")]
         [SerializeField] private string pathBase;
         [SerializeField] private string filename;
@@ -30,7 +32,7 @@ namespace SaveLoad {
         [Header("GameSave Settings")]
         [SerializeField] private string gameSavePathBase;
         [SerializeField] private string[] gameSaveFilenames;
-
+        
         [Header("Debug Settings")]
         [SerializeField] private bool showDebugMessage;
         
@@ -40,6 +42,7 @@ namespace SaveLoad {
             loadLevel.OnEventRaised += LoadGridContainer;
             saveGame.OnEventRaised += SaveGame;
             loadGame.OnEventRaised += LoadGame;
+            saveManagerData.Reset();
         }
 
         private void Start() {
@@ -89,6 +92,8 @@ namespace SaveLoad {
                     writer.Write(json);
                 }
             }
+            
+            saveManagerData.saved = true;
         }
 
         public void LoadGridContainer() {
@@ -119,6 +124,8 @@ namespace SaveLoad {
             globalGridData.OriginPosition = gridContainer.tileGrids[0].OriginPosition;
             // JsonUtility.FromJson<GridContainerSO>(json);
             levelLoaded.RaiseEvent();
+            
+            saveManagerData.loaded = true;
         }
     }
 }

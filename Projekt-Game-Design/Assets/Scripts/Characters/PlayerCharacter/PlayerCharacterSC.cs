@@ -40,7 +40,6 @@ public class PlayerCharacterSC : MonoBehaviour {
     // Leveling
     // TODO: maybe a more complex type later on
     public int level;
-
     public int experience;
 
 
@@ -66,7 +65,6 @@ public class PlayerCharacterSC : MonoBehaviour {
     // the equipped item offers a list of actions to take
     public ItemSO item;
 
-
     [Header("Abilities")] [SerializeField] private AbilitySO[] abilitys;
     [SerializeField] private int abilityID;
 
@@ -76,7 +74,6 @@ public class PlayerCharacterSC : MonoBehaviour {
         get => abilityID;
         set => abilityID = value;
     }
-
 
     // Statemachine
     //
@@ -97,29 +94,24 @@ public class PlayerCharacterSC : MonoBehaviour {
     public EnemyCharacterSC enemyTarget;
     public List<PathNode> tilesInRange;
 
-
     [Header("Timer")]
     public float timeSinceTransition = 0;
-    
-    
-
 
     private void Awake() {
-        input.mouseClicked += toggleIsSelected;
-
+        input.mouseClicked += ToggleIsSelected;
         targetTileEvent.OnEventRaised += TargetTile;
     }
 
     public void Start() {
         // set Position of gameobject    
-        transformToPosition();
+        TransformToPosition();
     }
 
     public void FixedUpdate() {
         timeSinceTransition += Time.fixedDeltaTime;
     }
 
-    void toggleIsSelected() {
+    void ToggleIsSelected() {
         if (!abilitySelected && !abilityConfirmed)
         {
             Vector3 mousePos = Mouse.current.position.ReadValue();
@@ -136,11 +128,12 @@ public class PlayerCharacterSC : MonoBehaviour {
     }
 
     // transforms the gameobject to it's tile position
-    public void transformToPosition() {
-        gameObject.transform.position = new Vector3((0.5f + gridPosition.x) * globalGridData.cellSize,
-                                                    gridPosition.y * globalGridData.cellSize,
-                                                    (0.5f + gridPosition.z) * globalGridData.cellSize)
-                                        + globalGridData.OriginPosition;
+    public void TransformToPosition() {
+        var pos = gridPosition + globalGridData.getCellCenter();
+        pos *= globalGridData.CellSize;
+        pos += globalGridData.OriginPosition;
+
+        gameObject.transform.position = pos;
     }
 
     // target Tile
@@ -165,7 +158,9 @@ public class PlayerCharacterSC : MonoBehaviour {
     public void RefreshAbilities()
     {
         List<AbilitySO> currentAbilities = new List<AbilitySO>(playerType.basicAbilities);
-        currentAbilities.AddRange(item.abilities);
+        if (item is { }) {
+            currentAbilities.AddRange(item.abilities);    
+        }
 
         abilitys = currentAbilities.ToArray();
     }

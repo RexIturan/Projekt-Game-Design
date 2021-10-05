@@ -8,5 +8,13 @@ namespace SaveLoad.ScriptableObjects {
         public bool inputNewGame;
         public bool loaded;
         public bool saved;
+
+        public void Reset() {
+            inputLoad = false;
+            inputSave = false;
+            inputNewGame = false;
+            loaded = false;
+            saved = false;
+        }
     }
 }
