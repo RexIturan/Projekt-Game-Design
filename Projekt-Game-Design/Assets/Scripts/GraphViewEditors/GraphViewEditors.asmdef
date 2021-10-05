@@ -2,15 +2,21 @@
     "name": "GraphViewEditor",
     "rootNamespace": "",
     "references": [
-        "GUID:4b5b950ea3b0b68479cd44593596cf7f",
-        "GUID:18b4fb767b8f81047b7c24fdec94709e"
+        "Unity.GraphTools.Foundation.Overdrive",
+        "Unity.GraphTools.Foundation.Overdrive.Model",
+        "Unity.GraphTools.Foundation.Overdrive.Editor",
+        "Unity.GraphToolsFoundation.Searcher.Editor",
+        "Unity.GraphTools.Foundation.Overdrive.CommandStateObserver",
+        "UnityEditor.UIBuilderModule"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

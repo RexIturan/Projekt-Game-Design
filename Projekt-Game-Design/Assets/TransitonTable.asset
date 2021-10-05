@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3ce8ca256c4e9e823d37601f5becfd, type: 3}
+  m_Name: TransitonTable
+  m_EditorClassIdentifier: 
+  m_GraphModel:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: TransitionTableGraphModel, ns: GraphViewEditors.StateMachine.TransitionTable.Editor, asm: GraphViewEditor}
+      data:
+        m_AssetModel: {fileID: 11400000}
+        m_GraphNodeModels:
+        - id: 1
+        - id: 2
+        m_EdgeModels: []
+        m_BadgeModels: []
+        m_GraphEdgeModels: []
+        m_PolymorphicEdgeModels: []
+        m_StickyNoteModels: []
+        m_GraphStickyNoteModels: []
+        m_PlacematModels: []
+        m_GraphPlacematModels: []
+        m_GraphVariableModels: []
+        m_GraphPortalModels: []
+        m_Name: 
+        m_StencilTypeName: GraphViewEditors.StateMachine.TransitionTable.Editor.TransitionTableStencil,
+          GraphViewEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    00000001:
+      type: {class: StateNodeModel, ns: GraphViewEditors.StateMachine.TransitionTable.Editor.Nodes, asm: GraphViewEditor}
+      data:
+        m_Guid:
+          m_Value0: 8963871715002307619
+          m_Value1: 9055385354968231952
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 193.99998, y: 130.5}
+        m_Title: State
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+    00000002:
+      type: {class: TransitionNodeModel, ns: GraphViewEditors.StateMachine.TransitionTable.Editor.Nodes, asm: GraphViewEditor}
+      data:
+        m_Guid:
+          m_Value0: 7202125949449278326
+          m_Value1: 3819803669561674800
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 181.99998, y: 306.5}
+        m_Title: Transition
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        conditions: 
+        number: 0
