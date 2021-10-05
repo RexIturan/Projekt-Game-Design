@@ -740,6 +740,13 @@ MonoBehaviour:
   tacticsData: {fileID: 11400000, guid: 5d053a97eac47be4d8da941f3a2772c7, type: 2}
   characterContainer: {fileID: 11400000, guid: fdb6506e2806b5d448ee3e966f4f70bf, type: 2}
   evaluated: 1
+  shouldExit: 0
+  exited: 0
+  initializedGame: 0
+  initializedTactics: 0
+  isInTacticsMode: 0
+  gameOver: 0
+  saveManagerData: {fileID: 0}
 --- !u!114 &1328309893
 MonoBehaviour:
   m_ObjectHideFlags: 0
