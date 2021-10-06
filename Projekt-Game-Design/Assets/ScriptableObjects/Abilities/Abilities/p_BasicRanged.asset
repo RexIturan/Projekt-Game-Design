@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: p_BasicRanged
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 42f2715c74a15e443b5fcc0dd6225bc5, type: 3}
-  description: A ranged attack with much range (10)
+  description: 'A ranged attack with much range (8). Costs: 2'
   targets: 4
   moveToTarget: 0
   range: 8

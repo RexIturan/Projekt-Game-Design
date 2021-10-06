@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: p_BasicHeal
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 8772c9273357d7f4c96401850891fb39, type: 3}
-  description: Heals a dude or yourself
+  description: 'Heals a dude or yourself. Costs: 1'
   targets: 3
   moveToTarget: 0
   range: 4

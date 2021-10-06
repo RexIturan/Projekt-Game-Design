@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Characters.ScriptableObjects;
 using Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,6 +22,8 @@ public class InventoryUIController : MonoBehaviour
     private VisualElement inventoryContainer;
     // Für das EquipmentInventar
     private VisualElement EquipmentInventoryContainer;
+    // Fuer den PlayerView Container
+    private VisualElement PlayerViewContainer;
     // Für das Ghost Icon
     private static VisualElement GhostIcon;
     
@@ -27,8 +31,11 @@ public class InventoryUIController : MonoBehaviour
     // Zum Draggen der Icons
     private static bool IsDragging;
     private static InventorySlot OriginalSlot;
-    
+
     // Der aktuell ausgewählte Spieler im Inventar
+    private PlayerCharacterSC selectedPlayer;
+    [SerializeField] private CharacterContainerSO characterContainer;
+
     private static int CurrentPlayerSelected = 0;
 
     [Header("Receiving Events On")] [SerializeField]
@@ -39,6 +46,9 @@ public class InventoryUIController : MonoBehaviour
     [SerializeField] private IntEventChannelSO OnItemDropEventChannel;
     [SerializeField] private IntListEventChannelSO ChangeInventoryListEventChannel;
     [SerializeField] private IntListEventChannelSO ChangeEquipmentListEventChannel;
+    // Selected events
+    [SerializeField] private GameObjEventChannelSO PlayerUnselectedEC;
+    [SerializeField] private GameObjActionEventChannelSO PlayerSelectedEC;
 
     [Header("Sending and Receiving Events On")] [SerializeField]
     private BoolEventChannelSO VisibilityGameOverlayEventChannel;
@@ -74,7 +84,13 @@ public class InventoryUIController : MonoBehaviour
         inventoryContainer.Q<Button>("Tab1").clicked += HandleItemTabPressed;
         inventoryContainer.Q<Button>("Tab2").clicked += HandleArmoryTabPressed;
         inventoryContainer.Q<Button>("Tab3").clicked += HandleWeaponsTabPressed;
-    }
+
+        // initially select first player
+        selectedPlayer = characterContainer.playerContainer[0];
+
+        PlayerUnselectedEC.OnEventRaised += HandlePlayerDeselected;
+        PlayerSelectedEC.OnEventRaised += HandlePlayerSelected;
+}
 
     private void Awake()
     {
@@ -85,7 +101,8 @@ public class InventoryUIController : MonoBehaviour
         inventoryContainer = root.Q<VisualElement>("InventoryOverlay");
         EquipmentInventoryContainer = root.Q<VisualElement>("PlayerEquipmentInventory");
         GhostIcon = root.Query<VisualElement>("GhostIcon");
-        
+        PlayerViewContainer = inventoryContainer.Q<VisualElement>("PlayerViewContainer");
+
         // Lifehack
         staticItemList = ItemList;
 
@@ -165,7 +182,55 @@ public class InventoryUIController : MonoBehaviour
                 break;
         }
     }
+    
+    // Sets to selected player or first in container if none selected
+    // TODO: copied from OverlayUIController
+    //
+    private void RefreshPlayerViewContainer()
+    {
+        //VisualElement manaBar = PlayerViewContainer.Q<VisualElement>("ProgressBarManaOverlay");
+        VisualElement healthBar = PlayerViewContainer.Q<VisualElement>("ProgressBarHealthOverlay");
+        VisualElement abilityBar = PlayerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
+        
+        CharacterStats playerStats = selectedPlayer.CurrentStats;
 
+        healthBar.style.width =
+            new StyleLength(Length.Percent((100 * (float)selectedPlayer.HealthPoints / playerStats.maxHealthPoints)));
+        abilityBar.style.width =
+            new StyleLength(Length.Percent((100 * (float)selectedPlayer.EnergyPoints / playerStats.maxEnergy)));
+        //manaBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
+
+        // Labels für Stats
+        PlayerViewContainer.Q<Label>("StrengthLabel").text = playerStats.strength.ToString();
+        PlayerViewContainer.Q<Label>("DexterityLabel").text = playerStats.dexterity.ToString();
+        PlayerViewContainer.Q<Label>("IntelligenceLabel").text = playerStats.intelligence.ToString();
+        PlayerViewContainer.Q<Label>("MovementLabel").text = playerStats.viewDistance.ToString();
+
+        // Image
+        VisualElement image = PlayerViewContainer.Q<VisualElement>("PlayerPicture");
+        image.Clear();
+        Image newProfile = new Image();
+        image.Add(newProfile);
+        newProfile.image = selectedPlayer.playerType.profilePicture.texture;
+
+        // Name and Level
+        PlayerViewContainer.Q<Label>("PlayerName").text = selectedPlayer.playerName;
+        PlayerViewContainer.Q<Label>("LevelLabel").text = selectedPlayer.level.ToString();
+    }
+
+    // refresh menu and select
+    private void HandlePlayerSelected(GameObject player, Action<int> callback)
+    {
+        selectedPlayer = player.GetComponent<PlayerCharacterSC>();
+        RefreshPlayerViewContainer();
+    }
+
+    // refresh menu and select first in container
+    private void HandlePlayerDeselected(GameObject player)
+    {
+        selectedPlayer = characterContainer.playerContainer[0];
+        RefreshPlayerViewContainer();
+    }
 
     void HandleItemTabPressed()
     {

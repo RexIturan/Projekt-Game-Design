@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: e_Dead
+  m_Script: {fileID: 11500000, guid: f083a399cddc82a42b9cea22dbe3da2c, type: 3}
+  m_Name: g_RedrawLevel_OnEnter
   m_EditorClassIdentifier: 
-  _actions: []
+  levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}

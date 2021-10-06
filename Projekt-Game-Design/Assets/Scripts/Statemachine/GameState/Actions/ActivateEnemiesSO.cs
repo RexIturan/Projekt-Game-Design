@@ -22,6 +22,7 @@ public class ActivateEnemies_OnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void OnStateEnter() {
+        Debug.Log("Activating Enemies. ");
         foreach (var enemy in characterContainer.enemyContainer) {
             enemy.isOnTurn = true;
         }

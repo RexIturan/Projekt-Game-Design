@@ -1,3 +1,4 @@
+using Characters.ScriptableObjects;
 using Events.ScriptableObjects;
 using System.Collections.Generic;
 // using UnityEditorInternal;
@@ -10,9 +11,10 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 [CreateAssetMenu(fileName = "e_MoveToTarget_OnUpdate", menuName = "State Machines/Actions/Enemy/Move To Target On Update")]
 public class e_MoveToTarget_OnUpdateSO : StateActionSO
 {
+    [SerializeField] private CharacterContainerSO characterContainer;
     [SerializeField] private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
 
-    public override StateAction CreateAction() => new e_MoveToTarget_OnUpdate(pathfindingPathQueryEventChannel);
+    public override StateAction CreateAction() => new e_MoveToTarget_OnUpdate(characterContainer, pathfindingPathQueryEventChannel);
 }
 
 public class e_MoveToTarget_OnUpdate : StateAction
@@ -25,11 +27,13 @@ public class e_MoveToTarget_OnUpdate : StateAction
     private float timeSinceLastStep = 0;
     private List<PathNode> path;
     private int currentStep;
+    [SerializeField] private CharacterContainerSO characterContainer;
     private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
 
-    public e_MoveToTarget_OnUpdate(PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel)
+    public e_MoveToTarget_OnUpdate(CharacterContainerSO characterContainer, PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel)
     {
         this.pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
+        this.characterContainer = characterContainer;
     }
 
     public override void Awake(StateMachine stateMachine)
@@ -39,10 +43,14 @@ public class e_MoveToTarget_OnUpdate : StateAction
 
     public override void OnUpdate()
     {
-        if (currentStep >= path.Count)
+        if (currentStep >= path.Count || playerOnField())
+        {
             enemyCharacterSC.movementDone = true;
+            enemyCharacterSC.abilityExecuted = true;
+            enemyCharacterSC.isDone = true;
+        }
 
-        if (!enemyCharacterSC.movementDone)
+            if (!enemyCharacterSC.movementDone)
         {
             timeSinceLastStep += Time.deltaTime;
             if (timeSinceLastStep >= TIME_PER_STEP)
@@ -79,5 +87,21 @@ public class e_MoveToTarget_OnUpdate : StateAction
     private void savePath(List<PathNode> path)
     {
         this.path = path;
+    }
+
+    private bool playerOnField()
+    {
+        bool fieldOccupied = false;
+            
+        Vector3Int stepPosition = new Vector3Int(path[currentStep].x,
+                                                 1,
+                                                 path[currentStep].y);
+        foreach (PlayerCharacterSC player in characterContainer.playerContainer)
+        {
+            if (player.gridPosition.Equals(stepPosition))
+                fieldOccupied = true;
+        }
+
+        return fieldOccupied;
     }
 }

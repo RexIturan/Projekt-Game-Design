@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc5b4761ffb19240a3e05eafda45ad3, type: 3}
   m_Name: e_MoveToTarget_OnUpdate
   m_EditorClassIdentifier: 
+  characterContainer: {fileID: 11400000, guid: fdb6506e2806b5d448ee3e966f4f70bf, type: 2}
   pathfindingPathQueryEventChannel: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}
