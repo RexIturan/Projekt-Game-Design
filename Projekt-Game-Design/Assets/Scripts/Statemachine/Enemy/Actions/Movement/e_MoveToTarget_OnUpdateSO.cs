@@ -7,53 +7,53 @@ using UOP1.StateMachine.ScriptableObjects;
 using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
 
-[CreateAssetMenu(fileName = "MoveToTarget", menuName = "State Machines/Actions/Player/MoveToTarget")]
-public class MoveToTargetSO : StateActionSO
+[CreateAssetMenu(fileName = "e_MoveToTarget_OnUpdate", menuName = "State Machines/Actions/Enemy/Move To Target On Update")]
+public class e_MoveToTarget_OnUpdateSO : StateActionSO
 {
     [SerializeField] private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
 
-    public override StateAction CreateAction() => new MoveToTarget(pathfindingPathQueryEventChannel);
+    public override StateAction CreateAction() => new e_MoveToTarget_OnUpdate(pathfindingPathQueryEventChannel);
 }
 
-public class MoveToTarget : StateAction
+public class e_MoveToTarget_OnUpdate : StateAction
 {
     private const float TIME_PER_STEP = 0.2f;
 
     protected new MoveToTargetSO OriginSO => (MoveToTargetSO)base.OriginSO;
-    
-    private PlayerCharacterSC playerCharacterSC;
+
+    private EnemyCharacterSC enemyCharacterSC;
     private float timeSinceLastStep = 0;
     private List<PathNode> path;
     private int currentStep;
     private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
 
-    public MoveToTarget(PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel)
+    public e_MoveToTarget_OnUpdate(PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel)
     {
-        this.pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel; 
+        this.pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
     }
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerCharacterSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+        enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
     }
-    
+
     public override void OnUpdate()
     {
-        if(currentStep >= path.Count)
-            playerCharacterSC.movementDone = true;
+        if (currentStep >= path.Count)
+            enemyCharacterSC.movementDone = true;
 
-        if (!playerCharacterSC.movementDone)
+        if (!enemyCharacterSC.movementDone)
         {
             timeSinceLastStep += Time.deltaTime;
             if (timeSinceLastStep >= TIME_PER_STEP)
             {
                 timeSinceLastStep -= TIME_PER_STEP;
 
-                playerCharacterSC.gridPosition = new Vector3Int(path[currentStep].x,
+                enemyCharacterSC.gridPosition = new Vector3Int(path[currentStep].x,
                                                        1,
                                                        path[currentStep].y);
-                playerCharacterSC.TransformToPosition();
-                
+                enemyCharacterSC.transformToPosition();
+
                 currentStep++;
             }
         }
@@ -62,18 +62,18 @@ public class MoveToTarget : StateAction
     public override void OnStateEnter()
     {
 
-        Vector3Int startNode = new Vector3Int(playerCharacterSC.gridPosition.x,
-                                            playerCharacterSC.gridPosition.z,
+        Vector3Int startNode = new Vector3Int(enemyCharacterSC.gridPosition.x,
+                                            enemyCharacterSC.gridPosition.z,
                                             0);
-        Vector3Int endNode = new Vector3Int(playerCharacterSC.movementTarget.x,
-                                            playerCharacterSC.movementTarget.y,
+        Vector3Int endNode = new Vector3Int(enemyCharacterSC.movementTarget.x,
+                                            enemyCharacterSC.movementTarget.y,
                                             0);
 
         pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, savePath);
 
         timeSinceLastStep = 0;
         currentStep = 1;
-        playerCharacterSC.movementDone = false;
+        enemyCharacterSC.movementDone = false;
     }
 
     private void savePath(List<PathNode> path)

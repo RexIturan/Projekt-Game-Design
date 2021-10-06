@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1568b31cf9ebef046b872908f481ec76, type: 3}
-  m_Name: p_MoveToTarget
+  m_Script: {fileID: 11500000, guid: e028298355e3ba04ba1d640fd47ebbca, type: 3}
+  m_Name: p_MovementDone
   m_EditorClassIdentifier: 
-  pathfindingPathQueryEventChannel: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}

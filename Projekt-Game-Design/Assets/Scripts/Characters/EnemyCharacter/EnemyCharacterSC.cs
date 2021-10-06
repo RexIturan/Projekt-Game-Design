@@ -41,6 +41,7 @@ public class EnemyCharacterSC : MonoBehaviour
     [Header("Movement")]
     public int movementPointsPerEnergy;
     public List<PathNode> reachableNodes;
+    public bool movementDone = true;
     
     [Header("Abilities")]
     public int abilityID;
