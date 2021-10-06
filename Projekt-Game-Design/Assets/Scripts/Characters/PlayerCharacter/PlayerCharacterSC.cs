@@ -87,6 +87,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     // cached target (tile position)
     public PathNode movementTarget;
     public List<PathNode> reachableTiles;
+    public bool movementDone = true;
 
     [Header("Combat Chache")]
     // cached target (player or enemy)
