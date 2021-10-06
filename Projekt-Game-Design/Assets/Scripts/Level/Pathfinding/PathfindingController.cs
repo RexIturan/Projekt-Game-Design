@@ -41,9 +41,9 @@ namespace Pathfinding {
 
         
 
-        private void Start() {
-            InitialisePathfinding();
-        }
+        // private void Start() {
+        //     // InitialisePathfinding();
+        // }
 
         private void Update() {
 
@@ -111,6 +111,7 @@ namespace Pathfinding {
 
         public List<PathNode> GetPath(Vector3Int start, Vector3Int end)
         {
+            // Debug.Log($"PathfindingC: get Path from {start} to {end}");
             InitialisePathfinding();
             var path = pathfinding.FindPath(start.x, start.y, end.x, end.y);
             if(path is null) Debug.Log("no path found");
@@ -150,6 +151,7 @@ namespace Pathfinding {
         
         private void HandleFindPathBatch(List<Tuple<Vector3Int, Vector3Int>> input, Action<List<List<PathNode>>> callback) {
             List<List<PathNode>> foundPaths = new List<List<PathNode>>();
+            
             foreach (var startEnd in input) {
                 foundPaths.Add(GetPath(startEnd.Item1, startEnd.Item2));
             }

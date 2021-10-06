@@ -2,7 +2,9 @@ using System;
 using Characters.ScriptableObjects;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using SaveLoad;
 using SaveLoad.ScriptableObjects;
+using SceneManagement.ScriptableObjects;
 using UnityEngine;
 
 namespace GameManager {
@@ -16,7 +18,6 @@ namespace GameManager {
 
         [Header("SO References")]
         [SerializeField] private TacticsGameDataSO tacticsData;
-        [SerializeField] private CharacterContainerSO characterContainer;
         
         [Header("StateMachine")] 
         public bool evaluated;
@@ -32,15 +33,27 @@ namespace GameManager {
         
         [Header("SaveManagerData")] 
         public SaveManagerDataSO saveManagerData;
+        [SerializeField] private StringEventChannelSO loadGameFromPath;
+        [SerializeField] private VoidEventChannelSO levelLoaded;
+        
+        [Header("sceneloading stuff")]
+        [SerializeField] private VoidEventChannelSO onSceneReady;
+        [SerializeField] private LoadEventChannelSO loadLocationEC;
+        public GameSceneSO[] locationsToLoad;
+        public bool showLoadScreen;
         
         private void Awake() {
             endTurnEC.OnEventRaised += HandleEndTurn;
+            onSceneReady.OnEventRaised += LoadGameFromPath;
+            levelLoaded.OnEventRaised += TriggerRedraw;
             tacticsData.Reset();
             tacticsData.SetStartingPlayer(EFaction.player);
         }
 
-        private void Start() {
-            characterContainer.FillContainer();
+        private void OnDisable() {
+            endTurnEC.OnEventRaised -= HandleEndTurn;
+            onSceneReady.OnEventRaised -= LoadGameFromPath;
+            levelLoaded.OnEventRaised -= TriggerRedraw;
         }
 
         private void HandleEndTurn(EFaction faction) {
@@ -54,6 +67,37 @@ namespace GameManager {
             else {
                 Debug.Log("You can only end the Turn, when its your Turn");
             }
+        }
+        
+        
+        public SaveManager saveSystem;
+        private bool _hasSaveData;
+        
+        public void LoadLocationLevel() {
+            _hasSaveData = saveSystem.LoadSaveDataFromDisk(saveSystem.saveManagerData.path);
+            
+            if (_hasSaveData)
+            {
+                Debug.Log("GameSC: files read");
+
+                Debug.Log("GameSC: load scene");
+                loadLocationEC.RaiseEvent(locationsToLoad, showLoadScreen);
+            }
+        }
+
+        public void LoadGameFromPath() {
+            Debug.Log("GameSC: scene loaded");
+            if (_hasSaveData) {
+                Debug.Log("GameSC: load save data");
+                saveSystem.LoadLevel();
+                initializedGame = true;
+                isInTacticsMode = true;
+                initializedTactics = true;
+            }
+        }
+
+        public void TriggerRedraw() {
+            
         }
     }
 }

@@ -44,7 +44,7 @@ public class e_MakeMoveOnEnter : StateAction {
             canMove = true;
 
             // TODO: find nearest player instead
-            targetPlayer = enemySC.characterContainer.playerContainer[0].gameObject;
+            targetPlayer = enemySC.characterList.playerContainer[0].gameObject;
             PlayerCharacterSC targetContainer = targetPlayer.GetComponent<PlayerCharacterSC>();
 
             Vector3Int startNode = new Vector3Int(enemySC.gridPosition.x,

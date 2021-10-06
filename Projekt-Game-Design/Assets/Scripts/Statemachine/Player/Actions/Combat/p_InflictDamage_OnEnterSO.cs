@@ -32,7 +32,7 @@ public class p_InflictDamage_OnEnter : StateAction
     {
         // TODO: check conditions for targeted effects and don't 
         //       just inflict damage on target
-        AbilitySO ability = playerCharacterSC.Abilitys[playerCharacterSC.AbilityID];
+        AbilitySO ability = playerCharacterSC.Abilities[playerCharacterSC.AbilityID];
         int damage = 0;
         foreach(TargetedEffect targetedEffect in ability.targetedEffects)
         {

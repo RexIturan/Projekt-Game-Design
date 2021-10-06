@@ -31,6 +31,13 @@ namespace Pathfinding {
             clearPathEC.OnEventRaised += ClearPreviewPathTilemap;
         }
 
+        private void OnDisable() {
+            drawReachableTilesEC.OnEventRaised -= DrawPreview;
+            clearReachableTilesEC.OnEventRaised -= ClearPreviewTilemap;
+            drawPathEC.OnEventRaised -= DrawPreviewPath;
+            clearPathEC.OnEventRaised -= ClearPreviewPathTilemap;
+        }
+
         public void DrawPreview(List<PathNode> nodes) {
             ClearPreviewTilemap();
             

@@ -5,7 +5,9 @@
         "Unity.InputSystem",
         "Unity.TextMeshPro",
         "UnityEngine.UIElementsModule",
-        "UOP1.StateMachine"
+        "UOP1.StateMachine",
+        "Unity.Addressables",
+        "Unity.ResourceManager"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

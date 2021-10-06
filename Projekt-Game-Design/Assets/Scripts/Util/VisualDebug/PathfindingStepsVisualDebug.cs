@@ -25,7 +25,6 @@ namespace Util.VisualDebug {
         [SerializeField] private Transform parent;
         [SerializeField] private Transform prefab;
 
-        private bool active;
         private bool autoShowSnapshots;
         private float autoShowSnapshotsTimer;
         
@@ -42,7 +41,7 @@ namespace Util.VisualDebug {
         }
 
         private void Start() {
-            Setup(graphContainer.basicMovementGraph[1]);
+            // Setup(graphContainer.basicMovementGraph[1]);
         }
 
         private void OnDestroy() {

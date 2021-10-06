@@ -2,18 +2,16 @@
 using Characters.ScriptableObjects;
 using Graph.ScriptableObjects;
 using Grid;
+using Level.Grid;
 using UnityEngine;
 
 namespace Graph {
     public class GraphGenerator : MonoBehaviour {
-
-        
-        
         [Header("Scene References")]
         [SerializeField] private GraphDrawer graphDrawer;
 
         [Header("SO References")] 
-        [SerializeField] private CharacterContainerSO characterContainer;
+        public CharacterList characterList;
         [SerializeField] private TileTypeContainerSO tileTypeContainer;
         [SerializeField] private GraphContainerSO graphContainer;
         [SerializeField] private GridContainerSO gridContainer;
@@ -23,7 +21,8 @@ namespace Graph {
         [SerializeField] private bool diagonal;
         
         public void GenerateGraphFromGrids() {
-            characterContainer.FillContainer();
+            characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
+            // characterContainer.FillContainer();
             
             graphContainer.basicMovementGraph = new List<NodeGraph>();
             
@@ -58,8 +57,8 @@ namespace Graph {
             //     graph.GetGridObject(pos).SetIsWalkable(false);
             // }
             
-            foreach (var enemy in characterContainer.enemyContainer) {
-                var pos = globalGridData.GridPos3DToGridPos2D(enemy.gridPosition);
+            foreach (var enemy in characterList.enemyContainer) {
+                var pos = globalGridData.GridPos3DToGridPos2D(enemy.GetComponent<EnemyCharacterSC>().gridPosition);
                 graph.GetGridObject(pos).SetIsWalkable(false);
             }    
             

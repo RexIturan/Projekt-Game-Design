@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a33ecb3bbe0417298efee45c1dfd209, type: 3}
   m_Name: SaveManagerData
   m_EditorClassIdentifier: 
-  inputLoad: 1
+  inputLoad: 0
   inputSave: 0
   inputNewGame: 0
-  loaded: 1
+  loaded: 0
   saved: 0
+  path: Assets/Resources/TestLevel/pathfinding_test.json

@@ -32,7 +32,7 @@ public class ModeSelected : Condition
 				break;
 			case EMode.macro:
 				throw new ArgumentOutOfRangeException();
-				break;
+				// break;
 			default:
 				throw new ArgumentOutOfRangeException();
 		}

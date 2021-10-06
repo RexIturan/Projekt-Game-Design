@@ -142,7 +142,7 @@ public class OverlayUIController : MonoBehaviour {
 
         CallBackAction = callBackAction;
         FlushAbilityListIcons();
-        List<AbilitySO> abilities = new List<AbilitySO>(obj.GetComponent<PlayerCharacterSC>().Abilitys);
+        List<AbilitySO> abilities = new List<AbilitySO>(obj.GetComponent<PlayerCharacterSC>().Abilities);
         int counter = 0;
 
         foreach (var ability in abilities) {

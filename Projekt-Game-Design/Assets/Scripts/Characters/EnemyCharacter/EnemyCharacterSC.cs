@@ -1,6 +1,7 @@
 using Grid;
 using System.Collections;
 using System.Collections.Generic;
+using Characters.EnemyCharacter.ScriptableObjects;
 using Characters.ScriptableObjects;
 using UnityEngine;
 using Util;
@@ -13,6 +14,7 @@ public class EnemyCharacterSC : MonoBehaviour
     [Header("SO Reference")] 
     public GridDataSO globalGridData;
     public EnemyTypeSO enemyType;
+    public EnemySpawnDataSO enemySpawnData;
     public EnemyBehaviorSO behavior;
 
     [Header("max stats")]
@@ -29,7 +31,7 @@ public class EnemyCharacterSC : MonoBehaviour
     // public List<ScriptableObject> statusEffects; 
 
     [Header("Target")]
-    public CharacterContainerSO characterContainer; // reference to CharacterList
+    public CharacterList characterList;
     public PathNode movementTarget;
     public PlayerCharacterSC target;
 
@@ -56,6 +58,7 @@ public class EnemyCharacterSC : MonoBehaviour
     public void Start()
     {
         transformToPosition();
+        characterList = characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
     }
 
     // TODO: don't just copy from playerCharacterSC
@@ -84,5 +87,13 @@ public class EnemyCharacterSC : MonoBehaviour
 
     public int GetMaxMoveDistance() {
         return energy * movementPointsPerEnergy;
+    }
+
+    public void Initialize() {
+        healthPoints = enemyType.stats.maxHealthPoints;
+        energy = enemyType.stats.maxEnergy; 
+        attackRange = enemySpawnData.range;
+        attackDamage = enemySpawnData.attack;
+        movementPointsPerEnergy = enemySpawnData.movementpointsPerEnergy;
     }
 }

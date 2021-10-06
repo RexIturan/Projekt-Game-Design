@@ -1,6 +1,7 @@
 using Ability.ScriptableObjects;
 using Events.ScriptableObjects;
 using System.Collections.Generic;
+using Events.ScriptableObjects.Pathfinding;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;

@@ -10,9 +10,9 @@ public class InventoryUIController : MonoBehaviour
     public List<InventorySlot> InventoryItems = new List<InventorySlot>();
     public List<InventorySlot> EquipmentInventoryItems = new List<InventorySlot>();
 
-    public ItemListSO ItemList;
+    public ItemContainerSO itemContainer;
     
-    private static ItemListSO staticItemList;
+    private static ItemContainerSO staticItemContainer;
 
     private VisualElement InventorySlotContainer;
     [SerializeField] private int InventoryItemQuantity = 28;
@@ -87,7 +87,7 @@ public class InventoryUIController : MonoBehaviour
         GhostIcon = root.Query<VisualElement>("GhostIcon");
         
         // Lifehack
-        staticItemList = ItemList;
+        staticItemContainer = itemContainer;
 
         //Search the root for the SlotContainer Visual Element
         InventorySlotContainer = root.Q<VisualElement>("InventoryContent");
@@ -184,8 +184,6 @@ public class InventoryUIController : MonoBehaviour
 
     void HandleInventoryOverlay(bool value)
     {
-        Debug.Log(value);
-
         if (value)
         {
             enableInventoryInput.RaiseEvent();
@@ -224,7 +222,7 @@ public class InventoryUIController : MonoBehaviour
 
         if (emptySlot != null)
         {
-            emptySlot.HoldItem(ItemList.ItemList[itemGuid]);
+            emptySlot.HoldItem(itemContainer.ItemList[itemGuid]);
         }
     }
     
@@ -268,7 +266,7 @@ public class InventoryUIController : MonoBehaviour
         GhostIcon.style.top = position.y - GhostIcon.layout.height / 2;
         GhostIcon.style.left = position.x - GhostIcon.layout.width / 2;
         //Set the image
-        GhostIcon.style.backgroundImage = staticItemList.ItemList[originalSlot.ItemGuid].icon.texture;
+        GhostIcon.style.backgroundImage = staticItemContainer.ItemList[originalSlot.ItemGuid].icon.texture;
         //Flip the visibility on
         GhostIcon.style.visibility = Visibility.Visible;
     }
@@ -304,7 +302,7 @@ public class InventoryUIController : MonoBehaviour
             
             //Set the new inventory slot with the data
             // TODO Wenn Slot bereits belegt, dann tausche closestSlot mit OriginalSlot
-            closestSlot.HoldItem(ItemList.ItemList[OriginalSlot.ItemGuid]);
+            closestSlot.HoldItem(itemContainer.ItemList[OriginalSlot.ItemGuid]);
 
             // Zum Verschieben von einem Gegenstand zum normalen Inventory
             if (OriginalSlot.SlotType == InventorySlot.inventorySlotType.EQUIPMENT_INVENTORY)
@@ -327,7 +325,7 @@ public class InventoryUIController : MonoBehaviour
         
             //Set the new inventory slot with the data
             // TODO Wenn Slot bereits belegt, dann tausche closestSlot mit OriginalSlot
-            closestSlot.HoldItem(ItemList.ItemList[OriginalSlot.ItemGuid]);
+            closestSlot.HoldItem(itemContainer.ItemList[OriginalSlot.ItemGuid]);
 
             // Zum Verschieben von einem Gegenstand zum Equipment Inventory
             if (OriginalSlot.SlotType == InventorySlot.inventorySlotType.NORMAL_INVENTORY)
@@ -346,7 +344,7 @@ public class InventoryUIController : MonoBehaviour
         //Didn't find any (dragged off the window)
         else
         {
-            OriginalSlot.Icon.image = ItemList.ItemList[OriginalSlot.ItemGuid].icon.texture; 
+            OriginalSlot.Icon.image = itemContainer.ItemList[OriginalSlot.ItemGuid].icon.texture; 
         }
         //Clear dragging related visuals and data
         IsDragging = false;
@@ -373,7 +371,7 @@ public class InventoryUIController : MonoBehaviour
 
         if (emptySlot != null)
         {
-            emptySlot.HoldItem(ItemList.ItemList[itemId]);
+            emptySlot.HoldItem(itemContainer.ItemList[itemId]);
         }
     }
     

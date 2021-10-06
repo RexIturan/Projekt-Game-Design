@@ -14,6 +14,10 @@ namespace MeshGenerator {
             updateMeshEC.OnEventRaised += HandleUpdateMesh;
         }
 
+        private void OnDisable() {
+            updateMeshEC.OnEventRaised -= HandleUpdateMesh;
+        }
+
         private void HandleUpdateMesh() {
             // Debug.Log("update Mesh");
             meshGenerator.UpdateTileData();

@@ -16,7 +16,8 @@ public class MainMenuUIController : MonoBehaviour
     private VisualElement menuContainer;
     private VisualElement settingsContainer;
     private VisualElement loadGame;
-    
+    // todo remove from here
+    private TemplateContainer LoadTestLevelScreen;
     
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,20 @@ public class MainMenuUIController : MonoBehaviour
         menuContainer = root.Q<VisualElement>("menuContainer");
         settingsContainer = root.Q<VisualElement>("SettingsContainer");
         loadGame = root.Q<VisualElement>("LoadScreen");
-
+        
+        // TODO move to injection point
+        // load testlevel stuff
+        LoadTestLevelScreen = root.Q<TemplateContainer>("LoadTestLevelScreen");
+        root.Q<Button>("loadTestLevelButton").clicked += () => {
+            LoadTestLevelScreen.visible = true;
+            menuContainer.visible = false;
+        };
+        LoadTestLevelScreen.Q<Button>("BackButton").clicked += () => {
+            LoadTestLevelScreen.visible = false;
+            menuContainer.visible = true;
+        };
+        
+        
         startButton.clicked += StartButtonPressed;
         exitButton.clicked += QuitGame;
         backButton.clicked += BackButtonPressed;
@@ -75,13 +89,14 @@ public class MainMenuUIController : MonoBehaviour
     void StartButtonPressed()
     {
         // Szene laden
-        SceneManager.LoadScene("GameDesign");
+        // SceneManager.LoadScene("GameDesign");
     }
     
     void QuitGame()
     {
         // Spiel beenden
         Application.Quit();
+        // TODO before 
     }
 
 }

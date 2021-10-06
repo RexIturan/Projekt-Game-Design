@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4284373040448921599}
   - component: {fileID: 4474951415148567956}
+  - component: {fileID: 1363089168}
   m_Layer: 0
   m_Name: SaveManager
   m_TagString: Untagged
@@ -51,12 +52,34 @@ MonoBehaviour:
   levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}
   gridContainer: {fileID: 11400000, guid: cf77658e9fdf6c24193f76cce7d45bff, type: 2}
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  characterContainerSo: {fileID: 11400000, guid: fdb6506e2806b5d448ee3e966f4f70bf, type: 2}
   saveManagerData: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
   pathBase: Assets/Resources/Maps/
-  filename: map_01
+  filename: map_02
   gameSavePathBase: Assets/Resources/GameSaves/
   gameSaveFilenames:
   - SaveSlot_0
   - SaveSlot_1
   - SaveSlot_2
-  showDebugMessage: 0
+  itemContainerSo: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
+  equipmentInventoryContainerSo: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
+  inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
+  characterInitialiser: {fileID: 1363089168}
+  showDebugMessage: 1
+--- !u!114 &1363089168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187340983742418651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a93b10ae8614cfb8c2aaa5e68f2eeda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterContainerSo: {fileID: 11400000, guid: fdb6506e2806b5d448ee3e966f4f70bf, type: 2}
+  playerParent: {fileID: 0}
+  enemyParent: {fileID: 0}
+  enemyDataContianerSo: {fileID: 11400000, guid: 193267e50774c3a4aa842d7941f463d9, type: 2}
+  playerDataContainerSo: {fileID: 11400000, guid: c9dd19647e8a08443a455a408c7818f1, type: 2}

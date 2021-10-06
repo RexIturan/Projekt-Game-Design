@@ -11,16 +11,16 @@ using System.Collections.Generic;
 using Characters.ScriptableObjects;
 using Ability;
 using Ability.ScriptableObjects;
+using Level.Grid;
 
 [CreateAssetMenu(fileName = "p_TargetCharacter_OnUpdate", menuName = "State Machines/Actions/Player/Target Character On Update")]
 public class p_TargetCharacter_OnUpdateSO : StateActionSO
 {
-    [Header("Sending Events On")]
+    [Header("SO Data")]
     [SerializeField] private GridDataSO globalGridData;
-    [SerializeField] private CharacterContainerSO characterContainer;
     [SerializeField] private AbilityContainerSO abilityContainer;
 
-    public override StateAction CreateAction() => new p_TargetCharacter_OnUpdate(globalGridData, characterContainer, abilityContainer);
+    public override StateAction CreateAction() => new p_TargetCharacter_OnUpdate(globalGridData, abilityContainer);
 }
 
 public class p_TargetCharacter_OnUpdate : StateAction
@@ -31,7 +31,6 @@ public class p_TargetCharacter_OnUpdate : StateAction
     private PlayerCharacterSC playerStateContainer;
 
     private GridDataSO globalGridData;
-    private CharacterContainerSO characterContainer;
     private AbilityContainerSO abilityContainer;
 
     private EAbilityTargetFlags targets;
@@ -39,11 +38,9 @@ public class p_TargetCharacter_OnUpdate : StateAction
     private int range;
 
     public p_TargetCharacter_OnUpdate(GridDataSO globalGridData,
-                                      CharacterContainerSO characterContainer,
                                       AbilityContainerSO abilityContainer)
     {
         this.globalGridData = globalGridData;
-        this.characterContainer = characterContainer;
         this.abilityContainer = abilityContainer;
     }
 
@@ -58,6 +55,7 @@ public class p_TargetCharacter_OnUpdate : StateAction
 
     public override void OnUpdate()
     {
+        var characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
         if (playerStateContainer.timeSinceTransition > TIME_BEFORE_ACCEPTING_INPUT && Mouse.current.leftButton.wasPressedThisFrame)
         {
             var pos = MousePosition.GetMouseWorldPosition(Vector3.up, 1f);
@@ -69,17 +67,18 @@ public class p_TargetCharacter_OnUpdate : StateAction
             // 
             if ((targets & EAbilityTargetFlags.ALLY) != 0)
             {
-                foreach(PlayerCharacterSC player in characterContainer.playerContainer)
-                {
+                foreach(var player in characterList.playerContainer) {
                     // Debug.Log("Player position: " + player.gridPosition.x + ", " + player.gridPosition.y + ", " + player.gridPosition.z);
 
-                    if (!player.Equals(playerStateContainer) &&
-                        player.gridPosition.x == mousePos.x && player.gridPosition.z == mousePos.y && 
-                        range >= calcDistance(playerStateContainer.gridPosition, player.gridPosition, DIAGONAL))
+
+                    var playerCharacterSc = player.GetComponent<PlayerCharacterSC>();
+                    if (!playerCharacterSc.Equals(playerStateContainer) &&
+                        playerCharacterSc.gridPosition.x == mousePos.x && playerCharacterSc.gridPosition.z == mousePos.y && 
+                        range >= calcDistance(playerStateContainer.gridPosition, playerCharacterSc.gridPosition, DIAGONAL))
                     {
                         Debug.Log("Ally targeted. ");
                         // Confirm ability and set target
-                        playerStateContainer.playerTarget = player;
+                        playerStateContainer.playerTarget = playerCharacterSc;
                         playerStateContainer.abilityConfirmed = true; 
                     }
                 }
@@ -89,16 +88,16 @@ public class p_TargetCharacter_OnUpdate : StateAction
             //
             if ((targets & EAbilityTargetFlags.ENEMY) != 0)
             {
-                foreach (EnemyCharacterSC enemy in characterContainer.enemyContainer)
-                {
+                foreach (var enemy in characterList.enemyContainer) {
                     // Debug.Log("Enemy position: " + enemy.gridPosition.x + ", " + enemy.gridPosition.y + ", " + enemy.gridPosition.z);
 
-                    if (enemy.gridPosition.x == mousePos.x && enemy.gridPosition.z == mousePos.y &&
-                        range >= calcDistance(playerStateContainer.gridPosition, enemy.gridPosition, DIAGONAL))
+                    var enemyCharacterSc = enemy.GetComponent<EnemyCharacterSC>();
+                    if (enemyCharacterSc.gridPosition.x == mousePos.x && enemyCharacterSc.gridPosition.z == mousePos.y &&
+                        range >= calcDistance(playerStateContainer.gridPosition, enemyCharacterSc.gridPosition, DIAGONAL))
                     {
                         Debug.Log("Enemy targeted. ");
                         // Confirm ability and set target
-                        playerStateContainer.enemyTarget = enemy;
+                        playerStateContainer.enemyTarget = enemyCharacterSc;
                         playerStateContainer.abilityConfirmed = true;
                     }
                 }

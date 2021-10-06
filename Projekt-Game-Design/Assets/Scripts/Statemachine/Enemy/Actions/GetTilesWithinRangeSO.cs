@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Events.ScriptableObjects.FieldOfView;
 using Grid;
+using Level.Grid;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -11,18 +12,18 @@ namespace Statemachine.Enemy.Actions {
         menuName = "State Machines/Actions/Enemy/Get Tiles Within Range")]
     public class GetTilesWithinRangeSO : StateActionSO {
         [SerializeField] private StateAction.SpecificMoment phase;
-        [SerializeField] private FieldOfViewQueryEventChannelSO fieldOfViewQueryEC;
+        [SerializeField] private FOV_Query_EventChannelSO fieldOfViewQueryEC;
         public override StateAction CreateAction() => new GetTilesWithinRange(phase,fieldOfViewQueryEC);
     }
 
     public class GetTilesWithinRange : StateAction {
-        protected new GetTilesWithinRangeSO originSo => (GetTilesWithinRangeSO) base.OriginSO;
+        // protected new GetTilesWithinRangeSO originSo => (GetTilesWithinRangeSO) base.OriginSO;
 
         private StateAction.SpecificMoment phase;
-        private FieldOfViewQueryEventChannelSO fieldOfViewQueryEC;
+        private FOV_Query_EventChannelSO fieldOfViewQueryEC;
         private EnemyCharacterSC enemyCharacterSC;
 
-        public GetTilesWithinRange(StateAction.SpecificMoment phase, FieldOfViewQueryEventChannelSO fieldOfViewQueryEc) {
+        public GetTilesWithinRange(StateAction.SpecificMoment phase, FOV_Query_EventChannelSO fieldOfViewQueryEc) {
             this.phase = phase;
             fieldOfViewQueryEC = fieldOfViewQueryEc;
         }

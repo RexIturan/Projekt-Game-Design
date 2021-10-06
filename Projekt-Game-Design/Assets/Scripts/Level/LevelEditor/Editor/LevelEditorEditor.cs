@@ -14,6 +14,12 @@ namespace LevelEditor.Editor {
                 // call on button click
                 levelEditor.ResetLevel();  
             }
+            
+            if (GUILayout.Button("Redraw Level")) {  
+                // call on button click
+                levelEditor.RedrawLevel();  
+            }
+            
         }
     }
 }

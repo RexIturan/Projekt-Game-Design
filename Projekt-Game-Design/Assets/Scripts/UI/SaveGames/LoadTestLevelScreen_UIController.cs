@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using Events.ScriptableObjects;
+using SaveLoad.ScriptableObjects;
+using SceneManagement.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -28,7 +30,8 @@ namespace UI.SaveGames {
             fileFilter = $"*{fileEnding}";
             
             var tree = visualTree.CloneTree("LoadTestLevelScreen");
-            // tree.visible = false;
+            tree.name = "LoadTestLevelScreen";
+            tree.visible = false;
             
             tree.style.height = new StyleLength(Length.Percent(100)); 
             uiDocument.rootVisualElement.Add(tree);
@@ -45,24 +48,42 @@ namespace UI.SaveGames {
         // event channel LoadLevelAt <path>
         // string path
         // VisualElement Scroll View
-        [SerializeField] private StringEventChannelSO loadGameFromPath;
+        
+        
+        
+        // [SerializeField] private StringEventChannelSO loadGameFromPath;
+        [SerializeField] private SaveManagerDataSO saveManagerDataSo;
         
         // [Header("IO settings")]
-        private static string path = "Assets/Resources/TestLevel";
+        private static string path = "TestLevel";
         private static string fileEnding = ".json";
         private string fileFilter;
         
         // todo could be moved to savemanager
         public void GetAllTestSaveFiles() {
+            path = $"{Application.dataPath}/StreamingAssets/{path}";
+// #if UNITY_EDITOR
+//             path = $"Assets/Resources/TestLevel";
+// #endif
+            // path = $"Assets/Resources/TestLevel";
             var info = new DirectoryInfo(path);
+            Debug.Log($"{path}");
+            var filenames = Resources.LoadAll("TestLevel", typeof(TextAsset));
             var fileInfos = info.GetFiles(fileFilter);
+            foreach (var filename in filenames) {
+                Debug.Log("filename: " + filename.name);
+            }
             foreach (var fileInfo in fileInfos) {
+                
                 var filename = Path.GetFileNameWithoutExtension(fileInfo.Name);
-                Debug.Log(fileInfo.Name);
+                // Debug.Log(fileInfo.Name);
                 var saveSlot = saveSlotTemplateContainer.CloneTree();
+                // 
                 saveSlot.Q<Button>("SaveSlotButton").clicked += () => {
-                    Debug.Log($"clicked{filename}");
-                    loadGameFromPath.RaiseEvent($"{path}/{filename}{fileEnding}");
+                    saveManagerDataSo.inputLoad = true;
+                    saveManagerDataSo.path = $"{path}/{filename}{fileEnding}";
+                    
+                    //loadGameFromPath.RaiseEvent($"{path}/{filename}{fileEnding}");
                 };
                 var saveSlotLabel = saveSlot.Q<Label>("SaveSlotLabel");
                 saveSlotLabel.text = filename;

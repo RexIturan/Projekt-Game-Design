@@ -91,7 +91,7 @@ MonoBehaviour:
   ShowGameOverlayEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
   ShowTurnIndicatorEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
   VisibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
-  VisibilityActionContainerEventChannel: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
+  SetActionContainerVisibilityEC: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
   ActionsFromPlayerEventChannel: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aeaa86373cf5e54c89afc95fa2de18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemList: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
+  itemContainer: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
   InventoryItemQuantity: 28
   VisibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
   VisibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}

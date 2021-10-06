@@ -68,7 +68,7 @@ namespace LevelEditor {
             // loadLevel.RaiseEvent();
         }
 
-        private void RedrawLevel() {
+        public void RedrawLevel() {
             drawer.DrawGrid();
             updateMeshEC.RaiseEvent();
         }
@@ -102,7 +102,6 @@ namespace LevelEditor {
                         HandleRemove();
                         break;
                     }
-                    
 
                     if (leftClicked) {
 
