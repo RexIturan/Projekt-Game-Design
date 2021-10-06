@@ -18,7 +18,7 @@ public class p_SaveTilesInRange_OnEnterSO : StateActionSO
 
 public class p_SaveTilesInRange_OnEnter : StateAction
 {
-    private const int COSTS_PER_TILE = 10;
+    private const int COSTS_PER_TILE = 20;
 
     private PlayerCharacterSC playerStateContainer;
 
@@ -44,7 +44,7 @@ public class p_SaveTilesInRange_OnEnter : StateAction
     public override void OnStateEnter()
     {
         pathfindingQueryEvent.RaiseEvent(playerStateContainer.gridPosition, 
-                                         (abilityContainer.abilities[playerStateContainer.AbilityID].range + 1) * COSTS_PER_TILE, 
+                                         (abilityContainer.abilities[playerStateContainer.AbilityID].range) * COSTS_PER_TILE, 
                                          saveToStateContainer);
     }
 
