@@ -14,6 +14,7 @@ namespace SaveLoad {
         [SerializeField] private IntEventChannelSO loadGame;
         [SerializeField] private VoidEventChannelSO saveLevel;
         [SerializeField] private VoidEventChannelSO loadLevel;
+        [SerializeField] private StringEventChannelSO loadGameFromPath;
         
         [Header("Sending Events On")]
         [SerializeField] private VoidEventChannelSO levelLoaded;
@@ -42,6 +43,7 @@ namespace SaveLoad {
             loadLevel.OnEventRaised += LoadGridContainer;
             saveGame.OnEventRaised += SaveGame;
             loadGame.OnEventRaised += LoadGame;
+            loadGameFromPath.OnEventRaised += LoadGridContainer; 
             saveManagerData.Reset();
         }
 
@@ -97,15 +99,19 @@ namespace SaveLoad {
         }
 
         public void LoadGridContainer() {
-            LoadGridContainer(pathBase, filename);
+            var path = pathBase + filename + fileSuffix;
+            LoadGridContainer(path);
         }
         
         public void LoadGridContainer(string pathBase, string filename) {
+            var path = pathBase + filename + fileSuffix;
+            LoadGridContainer(path);
+        }
+        
+        public void LoadGridContainer(string path) {
 
             string json;
-            
-            var path = pathBase + filename + fileSuffix;
-            
+
             using (var fs = new FileStream(path, FileMode.Open)) {
                 using (var reader = new StreamReader(fs)) {
                     json = reader.ReadToEnd();

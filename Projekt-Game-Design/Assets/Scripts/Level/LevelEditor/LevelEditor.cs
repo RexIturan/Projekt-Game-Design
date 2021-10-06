@@ -65,7 +65,7 @@ namespace LevelEditor {
 
         public void Start() {
             //todo move to scene manager or so??
-            loadLevel.RaiseEvent();
+            // loadLevel.RaiseEvent();
         }
 
         private void RedrawLevel() {

@@ -47,9 +47,11 @@ MonoBehaviour:
   loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
   saveLevel: {fileID: 11400000, guid: c1df204252a25354591f6fe993db585c, type: 2}
   loadLevel: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
+  loadGameFromPath: {fileID: 11400000, guid: 6732e004d1f990b4381b9ebd3cffdcba, type: 2}
   levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}
   gridContainer: {fileID: 11400000, guid: cf77658e9fdf6c24193f76cce7d45bff, type: 2}
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  saveManagerData: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
   pathBase: Assets/Resources/Maps/
   filename: map_01
   gameSavePathBase: Assets/Resources/GameSaves/
