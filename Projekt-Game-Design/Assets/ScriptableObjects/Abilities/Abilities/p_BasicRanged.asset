@@ -16,7 +16,7 @@ MonoBehaviour:
   description: A ranged attack with much range (10)
   targets: 4
   moveToTarget: 0
-  range: 4
+  range: 8
   conditions: 0
   costs: 2
   targetedEffects:
