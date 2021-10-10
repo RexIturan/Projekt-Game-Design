@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 using Events.ScriptableObjects;
+using SaveLoad;
 using SaveLoad.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
@@ -24,9 +27,12 @@ namespace UI.SaveGames {
         // todo load with assetdatabase
         [SerializeField] private VisualTreeAsset saveSlotTemplateContainer;
         private ScrollView saveSlotContainer;
-        
+
+        private SaveManager saveSystem;
         
         private void Awake() {
+            saveSystem = GameObject.FindObjectOfType<SaveManager>();
+            
             fileFilter = $"*{fileEnding}";
             
             var tree = visualTree.CloneTree("LoadTestLevelScreen");
@@ -48,9 +54,7 @@ namespace UI.SaveGames {
         // event channel LoadLevelAt <path>
         // string path
         // VisualElement Scroll View
-        
-        
-        
+
         // [SerializeField] private StringEventChannelSO loadGameFromPath;
         [SerializeField] private SaveManagerDataSO saveManagerDataSo;
         
@@ -60,41 +64,24 @@ namespace UI.SaveGames {
         private string fileFilter;
         
         // todo could be moved to savemanager
-        public void GetAllTestSaveFiles() {
-            path = $"{Application.dataPath}/StreamingAssets/{path}";
-// #if UNITY_EDITOR
-//             path = $"Assets/Resources/TestLevel";
-// #endif
-            // path = $"Assets/Resources/TestLevel";
-            var info = new DirectoryInfo(path);
-            Debug.Log($"{path}");
-            var filenames = Resources.LoadAll("TestLevel", typeof(TextAsset));
-            var fileInfos = info.GetFiles(fileFilter);
+        public async Task GetAllTestSaveFiles() {
+            StringBuilder str = new StringBuilder("ui:\n");
+            var filenames = await saveSystem.GetAllTestSaveNames();
+
             foreach (var filename in filenames) {
-                Debug.Log("filename: " + filename.name);
-            }
-            foreach (var fileInfo in fileInfos) {
                 
-                var filename = Path.GetFileNameWithoutExtension(fileInfo.Name);
-                // Debug.Log(fileInfo.Name);
                 var saveSlot = saveSlotTemplateContainer.CloneTree();
-                // 
                 saveSlot.Q<Button>("SaveSlotButton").clicked += () => {
                     saveManagerDataSo.inputLoad = true;
                     saveManagerDataSo.path = $"{path}/{filename}{fileEnding}";
                     
                     //loadGameFromPath.RaiseEvent($"{path}/{filename}{fileEnding}");
                 };
+
                 var saveSlotLabel = saveSlot.Q<Label>("SaveSlotLabel");
                 saveSlotLabel.text = filename;
-                // new TemplateContainer(saveSlotTemplateContainer);
                 saveSlotContainer.Add(saveSlot);
             }
         }
-        
-        
-        // get all save files from folder (resources/testlevel)
-        // add ui elements, for each, to scrollview
-        // add callbacks for loading the specific level
     }
 }

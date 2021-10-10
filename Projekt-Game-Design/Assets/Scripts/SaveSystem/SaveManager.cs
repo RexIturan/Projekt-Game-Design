@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Characters;
 using Characters.EnemyCharacter.ScriptableObjects;
 using Characters.PlayerCharacter.ScriptableObjects;
@@ -12,6 +15,8 @@ using SaveLoad.ScriptableObjects;
 using SaveSystem;
 using SaveSystem.SaveForamts;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace SaveLoad {
     //todo make scriptable object??
@@ -50,7 +55,13 @@ namespace SaveLoad {
         public InventorySO inventory;
 
         public CharacterInitialiser characterInitialiser;
-        
+
+        [Header("Test Level Data")] 
+        [SerializeField] private List<AssetReference> testLevel;
+
+        private Dictionary<AssetReference, AsyncOperationHandle> operationHandles =
+            new Dictionary<AssetReference, AsyncOperationHandle>();
+
         [Header("Debug Settings")]
         [SerializeField] private bool showDebugMessage;
 
@@ -266,6 +277,30 @@ namespace SaveLoad {
             
             saveManagerData.loaded = true;
             levelLoaded.RaiseEvent();
+        }
+
+        public IEnumerable<AsyncOperationHandle<TextAsset>> LoadTestLevel() {
+            foreach (var level in testLevel) {
+                if (level.RuntimeKeyIsValid()) {
+                    var handle = level.LoadAssetAsync<TextAsset>();
+                    handle.Completed += operationHandle => {
+                        operationHandles.Add(level, operationHandle);
+                    };
+                    yield return handle;
+                }
+            }
+        }
+
+        public async Task<List<string>> GetAllTestSaveNames() {
+            List<string> filenames = new List<string>();
+
+            foreach (AsyncOperationHandle<TextAsset> operationHandle in LoadTestLevel()) {
+                await Task.WhenAll(operationHandle.Task);
+                Debug.Log(operationHandle.Result.name);
+                filenames.Add(operationHandle.Result.name);
+            }
+            
+            return filenames;
         }
     }
 }
