@@ -21,8 +21,8 @@ namespace Input {
         [SerializeField] private VoidEventChannelSO enableInventoryInput;
         
         // Gameplay
-        public event UnityAction inventoryEvent = delegate { };
-        public event UnityAction menuEvent = delegate { };
+        // public event UnityAction inventoryEvent = delegate { };
+        // public event UnityAction menuEvent = delegate { };
         public event UnityAction endTurnEvent = delegate { };
         
         public event UnityAction mouseClicked = delegate { };
@@ -170,6 +170,7 @@ namespace Input {
         #region Menu
 
         public void OnConfirm(InputAction.CallbackContext context) {
+            // TODO Implement
         }
 
         public void OnCancel(InputAction.CallbackContext context) {
@@ -197,6 +198,7 @@ namespace Input {
 
 
         public void OnToggle(InputAction.CallbackContext context) {
+            // TODO Implement should toggle pathfinding preview
         }
 
         public void OnStep(InputAction.CallbackContext context) {

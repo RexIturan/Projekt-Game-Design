@@ -9,39 +9,41 @@ using UnityEngine;
 
 namespace GameManager {
     public class GameSC : MonoBehaviour {
+        [Header("Recieving Events On")] [SerializeField]
+        private EFactionEventChannelSO endTurnEC;
 
-        [Header("Recieving Events On")] 
-        [SerializeField] private EFactionEventChannelSO endTurnEC;
+        [Header("Sending Events On")] [SerializeField]
+        private BoolEventChannelSO setTurnIndicatorVisibilityEC;
 
-        [Header("Sending Events On")] 
-        [SerializeField] private BoolEventChannelSO setTurnIndicatorVisibilityEC;
+        [Header("SO References")] [SerializeField]
+        private TacticsGameDataSO tacticsData;
 
-        [Header("SO References")]
-        [SerializeField] private TacticsGameDataSO tacticsData;
-        
-        [Header("StateMachine")] 
-        public bool evaluated;
+        [Header("StateMachine")] public bool evaluated;
+
         // structure
         public bool shouldExit;
         public bool exited;
         public bool initializedGame;
+
         public bool initializedTactics;
+
         // todo refactor to enum
         public bool isInTacticsMode;
+
         // public bool isInMacroMode;
         public bool gameOver;
-        
-        [Header("SaveManagerData")] 
-        public SaveManagerDataSO saveManagerData;
+
+        [Header("SaveManagerData")] public SaveManagerDataSO saveManagerData;
         [SerializeField] private StringEventChannelSO loadGameFromPath;
         [SerializeField] private VoidEventChannelSO levelLoaded;
-        
-        [Header("sceneloading stuff")]
-        [SerializeField] private VoidEventChannelSO onSceneReady;
+
+        [Header("sceneloading stuff")] [SerializeField]
+        private VoidEventChannelSO onSceneReady;
+
         [SerializeField] private LoadEventChannelSO loadLocationEC;
         public GameSceneSO[] locationsToLoad;
         public bool showLoadScreen;
-        
+
         private void Awake() {
             endTurnEC.OnEventRaised += HandleEndTurn;
             onSceneReady.OnEventRaised += LoadGameFromPath;
@@ -68,16 +70,15 @@ namespace GameManager {
                 Debug.Log("You can only end the Turn, when its your Turn");
             }
         }
-        
-        
+
+
         public SaveManager saveSystem;
         private bool _hasSaveData;
-        
+
         public void LoadLocationLevel() {
             _hasSaveData = saveSystem.LoadSaveDataFromDisk(saveSystem.saveManagerData.path);
-            
-            if (_hasSaveData)
-            {
+
+            if (_hasSaveData) {
                 Debug.Log("GameSC: files read");
 
                 Debug.Log("GameSC: load scene");
@@ -97,7 +98,7 @@ namespace GameManager {
         }
 
         public void TriggerRedraw() {
-            
+            // todo could trigger event, but doesnt currently
         }
     }
 }
