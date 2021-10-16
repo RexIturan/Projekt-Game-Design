@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Background" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; background-color: rgb(46, 31, 87);">
+        <ui:Label text="Loading Screen" display-tooltip-when-elided="true" name="LoadingScreenLabel" style="-unity-text-align: upper-center; font-size: 80%; margin-top: 10%; color: rgb(255, 255, 255);" />
+        <ui:Label text="Press Any Key To Continue" display-tooltip-when-elided="true" name="LoadingSceenPrompt" style="-unity-text-align: upper-center; bottom: 7%; top: auto; position: absolute; width: 100%; font-size: 50%; color: rgb(255, 255, 255);" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -47,7 +47,9 @@ namespace GameManager {
         private void Awake() {
             endTurnEC.OnEventRaised += HandleEndTurn;
             onSceneReady.OnEventRaised += LoadGameFromPath;
-            levelLoaded.OnEventRaised += TriggerRedraw;
+            levelLoaded.OnEventRaised += HandlelocationLoaded;
+            
+            saveManagerData.Reset();
             tacticsData.Reset();
             tacticsData.SetStartingPlayer(EFaction.player);
         }
@@ -55,7 +57,8 @@ namespace GameManager {
         private void OnDisable() {
             endTurnEC.OnEventRaised -= HandleEndTurn;
             onSceneReady.OnEventRaised -= LoadGameFromPath;
-            levelLoaded.OnEventRaised -= TriggerRedraw;
+            levelLoaded.OnEventRaised -= HandlelocationLoaded;
+            saveManagerData.Reset();
         }
 
         private void HandleEndTurn(EFaction faction) {
@@ -76,13 +79,13 @@ namespace GameManager {
         private bool _hasSaveData;
 
         public void LoadLocationLevel() {
-            _hasSaveData = saveSystem.LoadSaveDataFromDisk(saveSystem.saveManagerData.path);
+            // _hasSaveData = saveSystem.LoadSaveDataFromDisk(saveSystem.saveManagerData.path);
 
             if (_hasSaveData) {
                 Debug.Log("GameSC: files read");
 
                 Debug.Log("GameSC: load scene");
-                loadLocationEC.RaiseEvent(locationsToLoad, showLoadScreen);
+                // loadLocationEC.RaiseEvent(locationsToLoad, showLoadScreen);
             }
         }
 
@@ -90,13 +93,19 @@ namespace GameManager {
             Debug.Log("GameSC: scene loaded");
             if (_hasSaveData) {
                 Debug.Log("GameSC: load save data");
-                saveSystem.LoadLevel();
+                // saveSystem.InitializeLevel();
                 initializedGame = true;
                 isInTacticsMode = true;
                 initializedTactics = true;
             }
         }
 
+        void HandlelocationLoaded() {
+            initializedGame = true;
+            isInTacticsMode = true;
+            initializedTactics = true;
+        }
+        
         public void TriggerRedraw() {
             // todo could trigger event, but doesnt currently
         }

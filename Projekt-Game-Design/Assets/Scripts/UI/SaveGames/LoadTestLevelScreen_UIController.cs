@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +9,7 @@ using SaveLoad;
 using SaveLoad.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 
 namespace UI.SaveGames {
@@ -28,12 +31,16 @@ namespace UI.SaveGames {
         [SerializeField] private VisualTreeAsset saveSlotTemplateContainer;
         private ScrollView saveSlotContainer;
 
+        [Header("Sending Events On")]
+        [SerializeField] private LoadEventChannelSO _loadLocation = default;
+
+        [Header("Location Scene To Load")]
+        [SerializeField] private GameSceneSO[] _locationsToLoad;  
+        
         private SaveManager saveSystem;
         
         private void Awake() {
             saveSystem = GameObject.FindObjectOfType<SaveManager>();
-            
-            fileFilter = $"*{fileEnding}";
             
             var tree = visualTree.CloneTree("LoadTestLevelScreen");
             tree.name = "LoadTestLevelScreen";
@@ -58,30 +65,39 @@ namespace UI.SaveGames {
         // [SerializeField] private StringEventChannelSO loadGameFromPath;
         [SerializeField] private SaveManagerDataSO saveManagerDataSo;
         
-        // [Header("IO settings")]
-        private static string path = "TestLevel";
-        private static string fileEnding = ".json";
-        private string fileFilter;
         
-        // todo could be moved to savemanager
-        public async Task GetAllTestSaveFiles() {
-            StringBuilder str = new StringBuilder("ui:\n");
-            var filenames = await saveSystem.GetAllTestSaveNames();
-
-            foreach (var filename in filenames) {
-                
+        public void GetAllTestSaveFiles() {
+            
+            // get all savefile names
+            // -> create placeholder with names
+            var placeholderFilenames = saveSystem.GetAllTestLevelNames();
+            List<Action<string, bool, int>> callbacks = new List<Action<string, bool, int>>();
+            foreach (var placeholder in placeholderFilenames) {
                 var saveSlot = saveSlotTemplateContainer.CloneTree();
-                saveSlot.Q<Button>("SaveSlotButton").clicked += () => {
-                    saveManagerDataSo.inputLoad = true;
-                    saveManagerDataSo.path = $"{path}/{filename}{fileEnding}";
-                    
-                    //loadGameFromPath.RaiseEvent($"{path}/{filename}{fileEnding}");
-                };
-
+                var saveSlotButton = saveSlot.Q<Button>("SaveSlotButton");
+                saveSlotButton.SetEnabled(false);
                 var saveSlotLabel = saveSlot.Q<Label>("SaveSlotLabel");
-                saveSlotLabel.text = filename;
+                saveSlotLabel.text = placeholder;
                 saveSlotContainer.Add(saveSlot);
+                
+                callbacks.Add((filename, valid, index) => {
+                    if (valid) {
+                        saveSlotLabel.text = filename;
+                        saveSlotButton.SetEnabled(true);
+                        saveSlotButton.clicked += () => {
+                            Debug.Log($"Load {filename}" );
+                            saveSystem.SetCurrentSaveTo(index);
+                            _loadLocation.RaiseEvent(_locationsToLoad, true, false);
+                            saveSystem.saveManagerData.inputLoad = true;
+                            saveSystem.saveManagerData.loaded = true;
+                        };
+                    }
+                    else {
+                        saveSlotContainer.Remove(saveSlot);
+                    }
+                });                
             }
+            saveSystem.LoadTextAssetsAsSaves(callbacks, saveSystem.testLevel);
         }
     }
 }

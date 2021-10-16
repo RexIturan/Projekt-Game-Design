@@ -27,10 +27,9 @@ public class OverlayUIController : MonoBehaviour {
     [Header("Receiving Events On")] 
     [SerializeField] private BoolEventChannelSO ShowGameOverlayEC;
     [SerializeField] private BoolEventChannelSO ShowTurnIndicatorEC;
-
     [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
 
-    // Für das ActionMenü
+    // Action Menu
     [SerializeField] private GameObjEventChannelSO SetActionContainerVisibilityEC;
     [SerializeField] private GameObjActionEventChannelSO ActionsFromPlayerEventChannel;
 

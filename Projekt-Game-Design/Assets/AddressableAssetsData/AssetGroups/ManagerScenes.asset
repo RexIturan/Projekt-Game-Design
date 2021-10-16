@@ -16,7 +16,19 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: f8b0f0ca73823c04482f6d8eb0547e51
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 2371a6091d7db3b4fad323cce6e17a46
+    m_Address: Assets/Scenes/Managers/PersistentManagers.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3c22e5fbe2b9ce64f89368739c3b309e
+    m_Address: Assets/Scenes/Locations/Tactics.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3da8262aef490a44197055a111874c57
+    m_Address: Assets/Scenes/Managers/Gameplay.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
   m_SchemaSet:

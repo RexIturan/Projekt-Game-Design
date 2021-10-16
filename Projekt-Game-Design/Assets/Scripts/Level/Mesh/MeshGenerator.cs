@@ -48,7 +48,6 @@ namespace MeshGenerator {
             meshFilter = GetComponent<MeshFilter>();
             meshRenderer = GetComponent<MeshRenderer>();
             
-            Debug.Log($"tilemesh start {this.GetInstanceID()}");
                 
             // AddQuadAt(new Vector3(0, 0, 0), Vector3.up,  new Vector2(0,1));
             // AddQuadAt(new Vector3(0, 0, 1), Vector3.up, new Vector2(0.5f,0));
@@ -74,7 +73,6 @@ namespace MeshGenerator {
         }
 
         private void OnDestroy() {
-            Debug.Log($"tilemesh destroy {this.GetInstanceID()}");
         }
 
         // real world coords

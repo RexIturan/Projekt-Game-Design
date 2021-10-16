@@ -43,7 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f909e3d576a4d62860e01dcf9325a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thisSceneSO: {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
+  _thisSceneSO: {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
+  _startSceneSO: {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
   _persistentManagersSO: {fileID: 11400000, guid: 941453c757a325a48bd0724d01d8dea8, type: 2}
   _loadSceneEventChannel:
     m_AssetGUID: d4f619ca60109054faab02a134bbbf02

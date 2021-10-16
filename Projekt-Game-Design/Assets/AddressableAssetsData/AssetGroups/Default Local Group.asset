@@ -81,26 +81,6 @@ MonoBehaviour:
     m_Address: Assets/Art/Material/TileMesh_mat.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 3da8262aef490a44197055a111874c57
-    m_Address: Assets/Scenes/Managers/Gameplay.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 3c22e5fbe2b9ce64f89368739c3b309e
-    m_Address: Assets/Scenes/Locations/Tactics.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 2371a6091d7db3b4fad323cce6e17a46
-    m_Address: Assets/Scenes/Managers/PersistentManagers.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 562340f017c56a241a510a91bec48ea1
-    m_Address: Assets/Scenes/Locations/Level.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 03c9727a73f94f84289946b706c44cf2
-    m_Address: Assets/Scenes/Menus/MainMenu.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 4c738b82dfe095844b75e6bf35a4fd57
     m_Address: Assets/Art/Material/Enemy_mat.mat
     m_ReadOnly: 0

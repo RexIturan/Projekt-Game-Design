@@ -21,7 +21,7 @@ namespace SaveLoad.Editor {
             }
             
             if (GUILayout.Button("LoadLevel")) {  
-                saveManager.LoadLevel(); 
+                saveManager.InitializeLevel(); 
                 AssetDatabase.Refresh();
             }
         }

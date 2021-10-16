@@ -15,6 +15,7 @@ namespace SceneManagement {
     {
 #if UNITY_EDITOR
         [SerializeField] private GameSceneSO _thisSceneSO = default;
+        [SerializeField] private GameSceneSO _startSceneSO = default;
         [SerializeField] private GameSceneSO _persistentManagersSO = default;
         [SerializeField] private AssetReference _loadSceneEventChannel = default;
 
@@ -41,7 +42,7 @@ namespace SceneManagement {
         {
             Debug.Log("cold startup: loadEC loaded, reload scene??");
             LoadEventChannelSO loadEventChannelSO = (LoadEventChannelSO)_loadSceneEventChannel.Asset;
-            loadEventChannelSO.RaiseEvent(new GameSceneSO[] { _thisSceneSO });
+            loadEventChannelSO.RaiseEvent(new GameSceneSO[] { _startSceneSO });
 
             SceneManager.UnloadSceneAsync(_thisSceneSO.sceneReference.editorAsset.name).completed += operation => {
                 Debug.Log("cold startup: unloading of original scene complete");

@@ -470,6 +470,55 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""LoadingScreen"",
+            ""id"": ""a3cc2e69-42f1-4589-8213-6954aa98a723"",
+            ""actions"": [
+                {
+                    ""name"": ""Continue"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""dec1c71d-f870-48c0-b436-b1fe6b5fe934"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9e56c3d9-adc6-410a-bb1c-0a29457f982d"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35968cbf-c29f-4944-a512-2e965e6a970e"",
+                    ""path"": ""*/Button"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f12239b-87e5-4543-b3b0-a921f63665fc"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -506,6 +555,9 @@ public class @GameInput : IInputActionCollection, IDisposable
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_CancelInventory = m_Inventory.FindAction("CancelInventory", throwIfNotFound: true);
+        // LoadingScreen
+        m_LoadingScreen = asset.FindActionMap("LoadingScreen", throwIfNotFound: true);
+        m_LoadingScreen_Continue = m_LoadingScreen.FindAction("Continue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -813,6 +865,39 @@ public class @GameInput : IInputActionCollection, IDisposable
         }
     }
     public InventoryActions @Inventory => new InventoryActions(this);
+
+    // LoadingScreen
+    private readonly InputActionMap m_LoadingScreen;
+    private ILoadingScreenActions m_LoadingScreenActionsCallbackInterface;
+    private readonly InputAction m_LoadingScreen_Continue;
+    public struct LoadingScreenActions
+    {
+        private @GameInput m_Wrapper;
+        public LoadingScreenActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Continue => m_Wrapper.m_LoadingScreen_Continue;
+        public InputActionMap Get() { return m_Wrapper.m_LoadingScreen; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LoadingScreenActions set) { return set.Get(); }
+        public void SetCallbacks(ILoadingScreenActions instance)
+        {
+            if (m_Wrapper.m_LoadingScreenActionsCallbackInterface != null)
+            {
+                @Continue.started -= m_Wrapper.m_LoadingScreenActionsCallbackInterface.OnContinue;
+                @Continue.performed -= m_Wrapper.m_LoadingScreenActionsCallbackInterface.OnContinue;
+                @Continue.canceled -= m_Wrapper.m_LoadingScreenActionsCallbackInterface.OnContinue;
+            }
+            m_Wrapper.m_LoadingScreenActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Continue.started += instance.OnContinue;
+                @Continue.performed += instance.OnContinue;
+                @Continue.canceled += instance.OnContinue;
+            }
+        }
+    }
+    public LoadingScreenActions @LoadingScreen => new LoadingScreenActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -853,5 +938,9 @@ public class @GameInput : IInputActionCollection, IDisposable
     public interface IInventoryActions
     {
         void OnCancelInventory(InputAction.CallbackContext context);
+    }
+    public interface ILoadingScreenActions
+    {
+        void OnContinue(InputAction.CallbackContext context);
     }
 }

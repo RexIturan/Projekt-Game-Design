@@ -2,13 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Characters;
-using Characters.EnemyCharacter.ScriptableObjects;
-using Characters.PlayerCharacter.ScriptableObjects;
-using Characters.ScriptableObjects;
 using Events.ScriptableObjects;
 using Grid;
 using SaveLoad.ScriptableObjects;
@@ -16,6 +11,7 @@ using SaveSystem;
 using SaveSystem.SaveForamts;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Assertions;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace SaveLoad {
@@ -57,10 +53,11 @@ namespace SaveLoad {
         public CharacterInitialiser characterInitialiser;
 
         [Header("Test Level Data")] 
-        [SerializeField] private List<AssetReference> testLevel;
+        public List<AssetReference> testLevel;
 
         private Dictionary<AssetReference, AsyncOperationHandle> operationHandles =
             new Dictionary<AssetReference, AsyncOperationHandle>();
+        List<Save> saveObjects = new List<Save>();
 
         [Header("Debug Settings")]
         [SerializeField] private bool showDebugMessage;
@@ -244,7 +241,7 @@ namespace SaveLoad {
             // saveManagerData.loaded = true;
         }
 
-        public void LoadLevel() {
+        public void InitializeLevel() {
             
             // globalGridData.Width = gridContainer.tileGrids[0].Width;
             // globalGridData.Height = gridContainer.tileGrids[0].Height;
@@ -279,28 +276,90 @@ namespace SaveLoad {
             levelLoaded.RaiseEvent();
         }
 
-        public IEnumerable<AsyncOperationHandle<TextAsset>> LoadTestLevel() {
-            foreach (var level in testLevel) {
-                if (level.RuntimeKeyIsValid()) {
-                    var handle = level.LoadAssetAsync<TextAsset>();
-                    handle.Completed += operationHandle => {
-                        operationHandles.Add(level, operationHandle);
-                    };
-                    yield return handle;
+        public void LoadTextAssetsAsSaves(List<Action<string, bool, int>> callbacks, List<AssetReference> assetReferences) {
+            // start loading procedure
+            Assert.AreEqual(assetReferences.Count, callbacks.Count, "there should be 1 callback for each testlevel");
+
+            saveObjects.Clear();
+            
+            for (int i = 0; i < assetReferences.Count; i++) {
+                var assetReference = assetReferences[i];
+                if (assetReference.RuntimeKeyIsValid()) {
+                    var operationHandle = assetReference.LoadAssetAsync<TextAsset>();
+                    var index = i;
+                    operationHandle.Completed += handle => {
+                        var save = new Save();
+                        save.LoadFromJson(handle.Result.text);
+                        saveObjects.Add(save);
+                        index = saveObjects.Count-1;
+                        if (handle.IsDone) {
+                            callbacks[index](handle.Result.name, true, index);    
+                        }
+                        else {
+                            callbacks[index]("Could Not Load Save", false, index);
+                        }
+                        Addressables.Release(handle);
+                    };    
+                }
+                else {
+                    callbacks[i]("Could Not Load Save", false, i);
                 }
             }
         }
+        
+        // public async Task<bool> LoadLevelFromAssetReferenc(AssetReference assetReference) {
+        //     bool result = false;
+        //     if (assetReference.RuntimeKeyIsValid()) {
+        //         var handle = assetReference.LoadAssetAsync<TextAsset>();
+        //         await Task.WhenAll(handle.Task);
+        //         handle.Completed += operationHandle => {
+        //             operationHandles.Add(assetReference, operationHandle);
+        //         };
+        //         if (handle.IsDone) {
+        //             result = true;
+        //         }
+        //     }
+        //
+        //     return result;
+        // }
+        
+        // public IEnumerable<AsyncOperationHandle<TextAsset>> LoadTestLevel() {
+        //     foreach (var level in testLevel) {
+        //         if (level.RuntimeKeyIsValid()) {
+        //             var handle = level.LoadAssetAsync<TextAsset>();
+        //             handle.Completed += operationHandle => {
+        //                 operationHandles.Add(level, operationHandle);
+        //             };
+        //             yield return handle;
+        //         }
+        //     }
+        // }
 
-        public async Task<List<string>> GetAllTestSaveNames() {
+        // public async Task<List<string>> GetAllTestSaveNames() {
+        //     List<string> filenames = new List<string>();
+        //
+        //     foreach (AsyncOperationHandle<TextAsset> operationHandle in LoadTestLevel()) {
+        //         await Task.WhenAll(operationHandle.Task);
+        //         Debug.Log(operationHandle.Result.name);
+        //         filenames.Add(operationHandle.Result.name);
+        //     }
+        //     
+        //     return filenames;
+        // }
+
+        public List<string> GetAllTestLevelNames() {
             List<string> filenames = new List<string>();
-
-            foreach (AsyncOperationHandle<TextAsset> operationHandle in LoadTestLevel()) {
-                await Task.WhenAll(operationHandle.Task);
-                Debug.Log(operationHandle.Result.name);
-                filenames.Add(operationHandle.Result.name);
+            foreach (var asset in testLevel) {
+                filenames.Add(asset.SubObjectName);
             }
-            
             return filenames;
+        }
+
+        public void SetCurrentSaveTo(int index) {
+            saveData = saveObjects[index];
+            
+            // todo clear saveObjects here?
+            saveObjects.Clear();
         }
     }
 }

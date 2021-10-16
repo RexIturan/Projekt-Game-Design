@@ -10,24 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: MenuScenes
+  m_Name: FogOfWar
   m_EditorClassIdentifier: 
-  m_GroupName: MenuScenes
+  m_GroupName: FogOfWar
   m_Data:
     m_SerializedData: []
-  m_GUID: 67e976f1747060744b7e99735f7d06f6
+  m_GUID: 329163b6c05f63540919c46d78109382
   m_SerializeEntries:
-  - m_GUID: bf5a85af1b3cdc64ba522fa2e5cbaa2e
-    m_Address: Assets/Scenes/Menus/LoadingScreen.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 03c9727a73f94f84289946b706c44cf2
-    m_Address: Assets/Scenes/Menus/MainMenu.unity
+  - m_GUID: 02f9db482f7898043ad7b80096d90a67
+    m_Address: Assets/Scripts/FogOfWar
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: f2474780a2060c24bb9e9da382075620, type: 2}
-    - {fileID: 11400000, guid: 6d26e64c323e48047b8640ddb3dfa286, type: 2}
+    - {fileID: 11400000, guid: 29c5cffd53aa343488fc0211e3b07ee0, type: 2}
+    - {fileID: 11400000, guid: a32a6933a969ae141b762ae125c8cf67, type: 2}

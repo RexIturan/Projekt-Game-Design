@@ -304,8 +304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e48013ad1659464d8368b09e3a41beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharacters: []
-  enemyCharacters: []
+  playerContainer: []
+  enemyContainer: []
 --- !u!1001 &697331453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -538,6 +538,50 @@ Transform:
   m_Father: {fileID: 521218105}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1136793705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1136793706}
+  - component: {fileID: 1136793707}
+  m_Layer: 0
+  m_Name: Location Initialiser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1136793706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136793705}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1136793707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136793705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dd9a2a6648498b83555a3e12f64ea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableLoadingScreenInput_EC: {fileID: 11400000, guid: 390c6cfe22017ee4ebc6233afb443b42, type: 2}
 --- !u!1 &1214789241
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +621,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8678411914411512484, guid: e60a11f52d47ed44cadd44ffe24b8f9b, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8678411914411512484, guid: e60a11f52d47ed44cadd44ffe24b8f9b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -733,13 +777,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1585765482496538119, guid: 6a43a43ba4cf90f4c8fb5dd969523e94, type: 3}
-      propertyPath: _thisSceneSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
     - target: {fileID: 3413179617940674565, guid: 6a43a43ba4cf90f4c8fb5dd969523e94, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3413179617940674565, guid: 6a43a43ba4cf90f4c8fb5dd969523e94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -920,21 +960,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fog Of War
       objectReference: {fileID: 0}
+    - target: {fileID: 3672561659905499288, guid: aef65687e09683447a757e0d0244f77f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3672561659905499289, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3672561659905499289, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2619662
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3672561659905499289, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4316573
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3672561659905499289, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.45753407
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3672561659905499289, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_LocalRotation.w
