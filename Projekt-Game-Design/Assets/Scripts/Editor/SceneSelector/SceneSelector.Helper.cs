@@ -40,12 +40,12 @@ namespace SceneSelectorInternal
 
 		private static readonly Dictionary<Type, Color> kDefaultMarkerColors = new Dictionary<Type, Color>()
 		{
-			{ typeof(PersistentManagersSO), Color.magenta },
+			{ typeof(PersistentManagersSO), Color.white },
 			{ typeof(GameplaySO), Color.magenta },
 			{ typeof(LocationSO), Color.green },
 			{ typeof(MenuSO), Color.cyan },
 		};
-
+        
 		public static void RepaintOnMouseMove(EditorWindow window)
 		{
 			if (Event.current.type == EventType.MouseMove)

@@ -21,7 +21,7 @@ public partial class SceneSelector : EditorWindow, IHasCustomMenu
 	private List<Item> items => _storage.items;
 	private Dictionary<string, Item> itemsMap => _storage.itemsMap;
 
-	[MenuItem("ChopChop/Scene Selector")]
+	[MenuItem("Tools/Scene Selector")]
 	private static void Open()
 	{
 		GetWindow<SceneSelector>();
@@ -68,13 +68,32 @@ public partial class SceneSelector : EditorWindow, IHasCustomMenu
 		}
 	}
 
-	private void DrawItems()
-	{
-		foreach (var item in items)
-		{
-			DrawItem(item);
-		}
-	}
+	private void DrawItems() {
+        SceneType[] typeOrder = new[] {
+            SceneType.Initialisation,
+            SceneType.PersistentManagers,
+            SceneType.Gameplay,
+            SceneType.Menu,
+            SceneType.Location,
+            SceneType.Art,            
+        };
+
+        // draws items
+        // orders items by type
+        foreach (var type in typeOrder) {
+            foreach (var item in items)
+            {
+                if (item.gameSceneSO.sceneType == type) {
+                    DrawItem(item);    
+                }
+            }
+        }
+
+        // foreach (var item in items)
+		// {
+		// 	DrawItem(item);
+		// }
+    }
 
 	private void DrawItem(Item item)
 	{
