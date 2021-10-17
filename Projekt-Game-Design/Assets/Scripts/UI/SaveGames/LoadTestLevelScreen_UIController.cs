@@ -71,33 +71,65 @@ namespace UI.SaveGames {
             // get all savefile names
             // -> create placeholder with names
             var placeholderFilenames = saveSystem.GetAllTestLevelNames();
-            List<Action<string, bool, int>> callbacks = new List<Action<string, bool, int>>();
+            // List<Action<string, bool, int>> callbacks = new List<Action<string, bool, int>>();
+            List<Button> saveSlotButtons = new List<Button>(); 
+            List<Label> saveSlotLabels = new List<Label>();
+            List<TemplateContainer> saveSlots = new List<TemplateContainer>();
             foreach (var placeholder in placeholderFilenames) {
+                Debug.Log(placeholder);
                 var saveSlot = saveSlotTemplateContainer.CloneTree();
-                var saveSlotButton = saveSlot.Q<Button>("SaveSlotButton");
-                saveSlotButton.SetEnabled(false);
-                var saveSlotLabel = saveSlot.Q<Label>("SaveSlotLabel");
-                saveSlotLabel.text = placeholder;
+                saveSlots.Add(saveSlot);
                 saveSlotContainer.Add(saveSlot);
                 
-                callbacks.Add((filename, valid, index) => {
-                    if (valid) {
-                        saveSlotLabel.text = filename;
-                        saveSlotButton.SetEnabled(true);
-                        saveSlotButton.clicked += () => {
-                            Debug.Log($"Load {filename}" );
-                            saveSystem.SetCurrentSaveTo(index);
-                            _loadLocation.RaiseEvent(_locationsToLoad, true, false);
-                            saveSystem.saveManagerData.inputLoad = true;
-                            saveSystem.saveManagerData.loaded = true;
-                        };
-                    }
-                    else {
-                        saveSlotContainer.Remove(saveSlot);
-                    }
-                });                
+                var saveSlotButton = saveSlot.Q<Button>("SaveSlotButton");
+                saveSlotButtons.Add(saveSlotButton);
+                saveSlotButton.SetEnabled(false);
+                
+                var saveSlotLabel = saveSlot.Q<Label>("SaveSlotLabel");
+                saveSlotLabels.Add(saveSlotLabel);
+                saveSlotLabel.text = placeholder;
+                
+                
+                // callbacks.Add((filename, valid, index) => {
+                //     if (valid) {
+                //         Debug.Log($"Load {index} {filename}" );
+                //
+                //         saveSlotLabels[index].text = filename;
+                //         var button = saveSlotButtons[index];
+                //         button.SetEnabled(true);
+                //         button.clicked += () => {
+                //             Debug.Log($"Load {filename}" );
+                //             saveSystem.SetCurrentSaveTo(index);
+                //             _loadLocation.RaiseEvent(_locationsToLoad, true, false);
+                //             saveSystem.saveManagerData.inputLoad = true;
+                //             saveSystem.saveManagerData.loaded = true;
+                //         };
+                //     }
+                //     else {
+                //         saveSlotContainer.Remove(saveSlots[index]);
+                //     }
+                // });                
             }
-            saveSystem.LoadTextAssetsAsSaves(callbacks, saveSystem.testLevel);
+            
+            saveSystem.LoadTextAssetsAsSaves((filename, valid, index) => {
+                if (valid) {
+                    Debug.Log($"Load {index} {filename}" );
+
+                    saveSlotLabels[index].text = filename;
+                    var button = saveSlotButtons[index];
+                    button.SetEnabled(true);
+                    button.clicked += () => {
+                        Debug.Log($"Load {filename}" );
+                        saveSystem.SetCurrentSaveTo(index);
+                        _loadLocation.RaiseEvent(_locationsToLoad, true, false);
+                        saveSystem.saveManagerData.inputLoad = true;
+                        saveSystem.saveManagerData.loaded = true;
+                    };
+                }
+                else {
+                    saveSlotContainer.Remove(saveSlots[index]);
+                }
+            }, saveSystem.GetValidTestLevel());
         }
     }
 }

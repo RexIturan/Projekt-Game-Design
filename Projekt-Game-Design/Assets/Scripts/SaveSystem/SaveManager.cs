@@ -276,35 +276,57 @@ namespace SaveLoad {
             levelLoaded.RaiseEvent();
         }
 
-        public void LoadTextAssetsAsSaves(List<Action<string, bool, int>> callbacks, List<AssetReference> assetReferences) {
+        public void LoadTextAssetsAsSaves(Action<string, bool, int> callback, List<AssetReference> assetReferences) {
             // start loading procedure
-            Assert.AreEqual(assetReferences.Count, callbacks.Count, "there should be 1 callback for each testlevel");
+            // Assert.AreEqual(assetReferences.Count, callbacks.Count, "there should be 1 callback for each testlevel");
+
+            Dictionary<AsyncOperationHandle<TextAsset>, int> indexDict =
+                new Dictionary<AsyncOperationHandle<TextAsset>, int>();
 
             saveObjects.Clear();
-            
             for (int i = 0; i < assetReferences.Count; i++) {
+                
                 var assetReference = assetReferences[i];
                 if (assetReference.RuntimeKeyIsValid()) {
+                    Debug.Log($"before {i} {assetReference.AssetGUID}");
                     var operationHandle = assetReference.LoadAssetAsync<TextAsset>();
-                    var index = i;
-                    operationHandle.Completed += handle => {
-                        var save = new Save();
-                        save.LoadFromJson(handle.Result.text);
-                        saveObjects.Add(save);
-                        index = saveObjects.Count-1;
-                        if (handle.IsDone) {
-                            callbacks[index](handle.Result.name, true, index);    
-                        }
-                        else {
-                            callbacks[index]("Could Not Load Save", false, index);
-                        }
-                        Addressables.Release(handle);
-                    };    
+                    indexDict.Add(operationHandle, i);
+                    operationHandle.Completed += //(handle) => HandleTextAssetLoaded(handle, index, callbacks);
+                        handle => {
+                            var index = indexDict[handle];
+                            Debug.Log($"completed {index} {handle.Result.name}");
+                            var save = new Save();
+                            save.LoadFromJson(handle.Result.text);
+                            saveObjects.Add(save);
+                            if (handle.IsDone) {
+                                callback(handle.Result.name, true, index);    
+                            }
+                            else {
+                                callback("Could Not Load Save", false, index);
+                            }
+                            Addressables.Release(handle);
+                        };    
                 }
                 else {
-                    callbacks[i]("Could Not Load Save", false, i);
+                    callback("Could Not Load Save", false, i);
                 }
             }
+        }
+
+        void HandleTextAssetLoaded(AsyncOperationHandle<TextAsset> handle, int index, List<Action<string, bool, int>> callbacks) {
+            
+            Debug.Log($"loadTextAsset  {index}");
+            var save = new Save();
+            save.LoadFromJson(handle.Result.text);
+            saveObjects.Add(save);
+            index = saveObjects.Count-1;
+            if (handle.IsDone) {
+                callbacks[index](handle.Result.name, true, index);    
+            }
+            else {
+                callbacks[index]("Could Not Load Save", false, index);
+            }
+            Addressables.Release(handle);
         }
         
         // public async Task<bool> LoadLevelFromAssetReferenc(AssetReference assetReference) {
@@ -350,7 +372,9 @@ namespace SaveLoad {
         public List<string> GetAllTestLevelNames() {
             List<string> filenames = new List<string>();
             foreach (var asset in testLevel) {
-                filenames.Add(asset.SubObjectName);
+                if (asset.RuntimeKeyIsValid()) {
+                    filenames.Add(asset.AssetGUID);    
+                }
             }
             return filenames;
         }
@@ -360,6 +384,16 @@ namespace SaveLoad {
             
             // todo clear saveObjects here?
             saveObjects.Clear();
+        }
+
+        public List<AssetReference> GetValidTestLevel() {
+            List<AssetReference> validTestLevel = new List<AssetReference>();
+            foreach (var asset in testLevel) {
+                if (asset.RuntimeKeyIsValid()) {
+                    validTestLevel.Add(asset);    
+                }
+            }
+            return validTestLevel;
         }
     }
 }
