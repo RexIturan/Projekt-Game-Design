@@ -120,6 +120,7 @@ public class OverlayUIController : MonoBehaviour {
     }
 
     void CallBackMouseDownAbility(MouseDownEvent evt, int abilityID) {
+        Debug.Log(evt.target);
         CallBackAction(abilityID);
     }
 
@@ -145,10 +146,11 @@ public class OverlayUIController : MonoBehaviour {
         int counter = 0;
 
         foreach (var ability in abilities) {
+            Debug.Log(ability.abilityID);
             AbilityIconSlotList[counter].HoldAbility(ability);
             AbilityIconSlotList[counter]
                 .RegisterCallback<MouseDownEvent, int>(CallBackMouseDownAbility,
-                    AbilityIconSlotList[counter].AbilityID);
+                    AbilityIconSlotList[counter].AbilityID, TrickleDown.NoTrickleDown);
             AbilityIconSlotList[counter]
                 .RegisterCallback<MouseEnterEvent, string>(CallBackMouseEnterAbility, ability.description);
             AbilityIconSlotList[counter].RegisterCallback<MouseLeaveEvent>(CallBackMouseLeaveAbility);

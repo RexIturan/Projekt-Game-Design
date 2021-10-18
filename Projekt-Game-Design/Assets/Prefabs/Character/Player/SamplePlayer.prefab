@@ -224,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitionTableSO: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
   _debugger:
-    debugTransitions: 0
+    debugTransitions: 1
     appendConditionsInfo: 1
     appendActionsInfo: 1
     currentState: 
@@ -260,8 +260,7 @@ MonoBehaviour:
   movementPointsPerEnergy: 20
   gridPosition: {x: 1, y: 1, z: 1}
   item: {fileID: 0}
-  abilitys:
-  - {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}
+  abilities: []
   abilityID: 0
   isSelected: 0
   abilitySelected: 0

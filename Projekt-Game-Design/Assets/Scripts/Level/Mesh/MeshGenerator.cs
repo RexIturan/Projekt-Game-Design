@@ -34,10 +34,8 @@ namespace MeshGenerator {
         private Texture2D texture;
 
         private ETile[,,] tileData;
-        
-        private void Start() {
-            
-            
+
+        private void Awake() {
             vertices = new List<Vector3>();
             triagles = new List<int>();
             uvs = new List<Vector2>();
@@ -47,8 +45,9 @@ namespace MeshGenerator {
 
             meshFilter = GetComponent<MeshFilter>();
             meshRenderer = GetComponent<MeshRenderer>();
-            
-                
+        }
+
+        private void Start() {
             // AddQuadAt(new Vector3(0, 0, 0), Vector3.up,  new Vector2(0,1));
             // AddQuadAt(new Vector3(0, 0, 1), Vector3.up, new Vector2(0.5f,0));
             // AddQuadAt(new Vector3(0, 0, 2), Vector3.up, new Vector2(1,0));

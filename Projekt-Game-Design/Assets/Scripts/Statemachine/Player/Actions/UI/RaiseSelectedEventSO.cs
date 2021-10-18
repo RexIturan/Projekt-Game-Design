@@ -32,12 +32,14 @@ public class RaiseSelectedEvent : StateAction
     public override void Awake(StateMachine stateMachine)
     {
         gameObject = stateMachine.gameObject;
+        Debug.Log($"Awake raiseSelectedEvent {this}");
         playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
     
     //TODO: Muss geändert werden
     private void AbilityCallback(int value) {
         Debug.Log("Es wurde die Ability mit der ID: " + value + " gedrückt.");
+        Debug.Log(this.gameObject.GetInstanceID());
         if (!playerCharacterSc.abilitySelected)
         {
             playerCharacterSc.abilitySelected = true;

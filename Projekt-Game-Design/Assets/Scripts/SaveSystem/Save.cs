@@ -55,7 +55,7 @@ namespace SaveSystem {
         public void LoadFromJson(string json) {
             // JsonUtility.FromJson(json);
             JsonUtility.FromJsonOverwrite(json, this);
-            Debug.Log($"LoadFromJson: json{json}");   
+            // Debug.Log($"LoadFromJson: json{json}");   
             // var cutted = json..Split(',');
             // foreach (var cut in cutted) {
                 // Debug.Log($"cut{cut}");    

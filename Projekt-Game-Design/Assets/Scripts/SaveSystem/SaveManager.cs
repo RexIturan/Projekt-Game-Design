@@ -190,7 +190,7 @@ namespace SaveLoad {
         
         public bool LoadSaveDataFromDisk(string path) {
 
-            Debug.Log($"Hi {path}");
+            // Debug.Log($"Hi {path}");
 
             var json = "";
             // json = jsonTextFile.text;
@@ -288,13 +288,13 @@ namespace SaveLoad {
                 
                 var assetReference = assetReferences[i];
                 if (assetReference.RuntimeKeyIsValid()) {
-                    Debug.Log($"before {i} {assetReference.AssetGUID}");
+                    // Debug.Log($"before {i} {assetReference.AssetGUID}");
                     var operationHandle = assetReference.LoadAssetAsync<TextAsset>();
                     indexDict.Add(operationHandle, i);
                     operationHandle.Completed += //(handle) => HandleTextAssetLoaded(handle, index, callbacks);
                         handle => {
                             var index = indexDict[handle];
-                            Debug.Log($"completed {index} {handle.Result.name}");
+                            // Debug.Log($"completed {index} {handle.Result.name}");
                             var save = new Save();
                             save.LoadFromJson(handle.Result.text);
                             saveObjects.Add(save);
@@ -315,7 +315,7 @@ namespace SaveLoad {
 
         void HandleTextAssetLoaded(AsyncOperationHandle<TextAsset> handle, int index, List<Action<string, bool, int>> callbacks) {
             
-            Debug.Log($"loadTextAsset  {index}");
+            // Debug.Log($"loadTextAsset  {index}");
             var save = new Save();
             save.LoadFromJson(handle.Result.text);
             saveObjects.Add(save);

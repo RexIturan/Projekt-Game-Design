@@ -96,7 +96,7 @@ public class MainMenuUIController : MonoBehaviour
     {
         // Spiel beenden
         Application.Quit();
-        // TODO before 
+        // TODO dont do it here, but with a quit game event channel
     }
 
 }

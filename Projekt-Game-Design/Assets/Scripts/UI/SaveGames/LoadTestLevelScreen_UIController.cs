@@ -76,7 +76,7 @@ namespace UI.SaveGames {
             List<Label> saveSlotLabels = new List<Label>();
             List<TemplateContainer> saveSlots = new List<TemplateContainer>();
             foreach (var placeholder in placeholderFilenames) {
-                Debug.Log(placeholder);
+                // Debug.Log(placeholder);
                 var saveSlot = saveSlotTemplateContainer.CloneTree();
                 saveSlots.Add(saveSlot);
                 saveSlotContainer.Add(saveSlot);
@@ -113,13 +113,13 @@ namespace UI.SaveGames {
             
             saveSystem.LoadTextAssetsAsSaves((filename, valid, index) => {
                 if (valid) {
-                    Debug.Log($"Load {index} {filename}" );
+                    // Debug.Log($"Load {index} {filename}" );
 
                     saveSlotLabels[index].text = filename;
                     var button = saveSlotButtons[index];
                     button.SetEnabled(true);
                     button.clicked += () => {
-                        Debug.Log($"Load {filename}" );
+                        // Debug.Log($"Load {filename}" );
                         saveSystem.SetCurrentSaveTo(index);
                         _loadLocation.RaiseEvent(_locationsToLoad, true, false);
                         saveSystem.saveManagerData.inputLoad = true;
