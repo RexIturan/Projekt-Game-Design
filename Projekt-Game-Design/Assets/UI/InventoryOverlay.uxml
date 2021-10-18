@@ -1,10 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="Inventory" src="Inventory.uxml" />
     <ui:Template name="PlayerViewContainer" src="PlayerViewContainer.uxml" />
+    <ui:Template name="Inventory" src="Inventory.uxml" />
     <Style src="Inventory/styles/inventory.uss" />
     <ui:VisualElement style="flex-grow: 1; flex-direction: row; border-left-color: rgba(0, 0, 0, 0.43); border-right-color: rgba(0, 0, 0, 0.43); border-top-color: rgba(0, 0, 0, 0.43); border-bottom-color: rgba(0, 0, 0, 0.43); background-color: rgba(0, 0, 0, 0.43);">
         <ui:VisualElement name="Sidebar" style="width: 30%; height: 100%;">
-            <ui:VisualElement name="PlayerContainer" style="flex-grow: 0; width: 100%; align-items: center; justify-content: center; flex-direction: row; height: auto; background-color: rgba(26, 26, 26, 0.43);">
+            <ui:VisualElement name="PlayerContainer" style="flex-grow: 0; width: 100%; align-items: center; justify-content: center; flex-direction: row; height: auto; background-color: rgba(26, 26, 26, 0.43); visibility: hidden;">
                 <ui:VisualElement name="Player1" class="PlayerContainer" />
                 <ui:VisualElement name="Player2" class="PlayerContainer" style="flex-direction: row;" />
                 <ui:VisualElement name="Player3" class="PlayerContainer" style="flex-direction: row;" />
@@ -18,9 +18,9 @@
                     <InventorySlot name="HeadEquipment1" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/balaclava.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159);" />
                 </ui:VisualElement>
                 <ui:VisualElement name="BodyEquipment" class="EquipmentContainer" style="flex-direction: row; justify-content: center;">
-                    <InventorySlot name="BodyEquipment1" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/two-handed-sword.png&apos;); -unity-background-image-tint-color: rgba(159, 159, 159, 255);" />
+                    <InventorySlot name="BodyEquipment1" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/two-handed-sword.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159);" />
                     <InventorySlot name="BodyEquipment2" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/lamellar.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159);" />
-                    <InventorySlot name="BodyEquipment3" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/two-handed-sword.png&apos;); -unity-background-image-tint-color: rgba(159, 159, 159, 255);" />
+                    <InventorySlot name="BodyEquipment3" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/two-handed-sword.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159);" />
                 </ui:VisualElement>
                 <ui:VisualElement name="LegEquipment" class="EquipmentContainer">
                     <InventorySlot name="LegEquipment1" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/trousers.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159);" />

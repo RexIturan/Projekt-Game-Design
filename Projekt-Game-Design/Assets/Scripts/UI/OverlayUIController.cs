@@ -30,8 +30,8 @@ public class OverlayUIController : MonoBehaviour {
     [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
 
     // Action Menu
-    [SerializeField] private GameObjEventChannelSO SetActionContainerVisibilityEC;
-    [SerializeField] private GameObjActionEventChannelSO ActionsFromPlayerEventChannel;
+    [SerializeField] private GameObjEventChannelSO PlayerDeselectedEC;
+    [SerializeField] private GameObjActionEventChannelSO PlayerSelectedEC;
 
     [Header("Sending Events On")] [SerializeField]
     private VoidEventChannelSO enableGamplayInput;
@@ -64,10 +64,10 @@ public class OverlayUIController : MonoBehaviour {
         VisibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
         ShowGameOverlayEC.OnEventRaised += SetGameOverlayVisibility;
         ShowTurnIndicatorEC.OnEventRaised += SetTurnIndicatorVisibility;
-        SetActionContainerVisibilityEC.OnEventRaised += HideActionMenu;
+        PlayerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
 
         InitializeAbilityList();
-        ActionsFromPlayerEventChannel.OnEventRaised += HandlePlayerSelected;
+        PlayerSelectedEC.OnEventRaised += HandlePlayerSelected;
     }
 
     private void HandleEndTurnUI() {
@@ -180,14 +180,26 @@ public class OverlayUIController : MonoBehaviour {
         PlayerViewContainer.Q<Label>("DexterityLabel").text = playerStats.dexterity.ToString();
         PlayerViewContainer.Q<Label>("IntelligenceLabel").text = playerStats.intelligence.ToString();
         PlayerViewContainer.Q<Label>("MovementLabel").text = playerStats.viewDistance.ToString();
+
+        // Image
+        VisualElement image = PlayerViewContainer.Q<VisualElement>("PlayerPicture");
+        image.Clear();
+        Image newProfile = new Image();
+        image.Add(newProfile);
+        newProfile.image = playerSC.playerType.profilePicture.texture;
+
+        // Name and Level
+        PlayerViewContainer.Q<Label>("PlayerName").text = playerSC.playerName;
+        PlayerViewContainer.Q<Label>("LevelLabel").text = playerSC.level.ToString();
     }
 
     void ShowMenu() {
         VisibilityMenuEventChannel.RaiseEvent(true);
     }
 
-    void HideActionMenu(GameObject obj) {
+    void HandlePlayerDeselected(GameObject obj) {
         ActionContainer.style.display = DisplayStyle.None;
+        PlayerViewContainer.style.display = DisplayStyle.None;
     }
 
     void ShowPlayerViewContainer() {

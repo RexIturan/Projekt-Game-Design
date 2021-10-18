@@ -29,6 +29,8 @@ public class DeselectOnEnter_player : StateAction {
 
     public override void OnStateEnter() {
         stateMachine.gameObject.GetComponent<PlayerCharacterSC>().isSelected = false;
+        stateMachine.gameObject.GetComponent<PlayerCharacterSC>().abilityConfirmed = false;
+        stateMachine.gameObject.GetComponent<PlayerCharacterSC>().abilitySelected = false;
         deselectEvent.RaiseEvent(stateMachine.gameObject);
     }
 }

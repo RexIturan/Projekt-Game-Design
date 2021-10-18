@@ -12,25 +12,20 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "TargetTile", menuName = "State Machines/Actions/Player/TargetTile")]
 public class TargetTileSO : StateActionSO
 {
-    [Header("Sending Events On")]
-    [SerializeField] private PathNodeEventChannelSO targetTileEvent;
-
     [SerializeField] private GridDataSO globalGridData;
 
-    public override StateAction CreateAction() => new TargetTile(targetTileEvent, globalGridData);
+    public override StateAction CreateAction() => new TargetTile(globalGridData);
 }
 
 public class TargetTile : StateAction
 {
     private const float TIME_BEFORE_ACCEPTING_INPUT = 0.5f;
-
-    private PathNodeEventChannelSO targetTileEvent;
+    
     private GridDataSO globalGridData;
     private PlayerCharacterSC playerStateContainer;
 
-    public TargetTile(PathNodeEventChannelSO targetTileEvent, GridDataSO globalGridData)
+    public TargetTile(GridDataSO globalGridData)
     {
-        this.targetTileEvent = targetTileEvent;
         this.globalGridData = globalGridData;
     }
 
@@ -58,7 +53,8 @@ public class TargetTile : StateAction
                     tiles[i].y == mousePos.y)
                 {
                     isReachable = true;
-                    targetTileEvent.RaiseEvent(tiles[i]); 
+                    playerStateContainer.movementTarget = tiles[i];
+                    playerStateContainer.abilityConfirmed = true;
                 }
             }
 

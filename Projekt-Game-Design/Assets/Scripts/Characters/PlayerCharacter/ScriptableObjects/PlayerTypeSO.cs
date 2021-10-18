@@ -10,8 +10,9 @@ public class PlayerTypeSO : ScriptableObject
 {
     public int id;
     public GameObject prefab;
-    [SerializeField] public CharacterStats stats;
-    [SerializeField] public CharacterStats gainPerLevel; // TODO: gain is Linear in this case
-    [SerializeField] public ScriptableObject startWeapon; // is not necessarily equipped weapon
-    [SerializeField] public AbilitySO[] basicAbilities; // actions at all time available
+    public Sprite profilePicture;
+    public CharacterStats stats;
+    public CharacterStats gainPerLevel; // TODO: gain is Linear in this case
+    public ScriptableObject startWeapon; // is not necessarily equipped weapon
+    public AbilitySO[] basicAbilities; // actions at all time available
 }

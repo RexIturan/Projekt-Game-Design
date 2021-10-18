@@ -38,6 +38,8 @@ public class PlayerCharacterSC : MonoBehaviour {
     // stat changing temporary effects
     [SerializeField] private List<ScriptableObject> statusEffects;
 
+    public string playerName; 
+
     [Header("Current Stats")]
     // Leveling
     // TODO: maybe a more complex type later on
@@ -89,6 +91,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     // cached target (tile position)
     public PathNode movementTarget;
     public List<PathNode> reachableTiles;
+    public bool movementDone = true;
 
     [Header("Combat Chache")]
     // cached target (player or enemy)
@@ -145,8 +148,6 @@ public class PlayerCharacterSC : MonoBehaviour {
 
     // target Tile
     public void TargetTile(PathNode target) {
-        movementTarget = target;
-        abilityConfirmed = true;
     }
 
     public int GetEnergyUseUpFromMovement() {
@@ -166,7 +167,9 @@ public class PlayerCharacterSC : MonoBehaviour {
     {
         List<AbilitySO> currentAbilities = new List<AbilitySO>(playerType.basicAbilities);
         if (item is { }) {
-            currentAbilities.AddRange(item.abilities);    
+            foreach(AbilitySO ability in item.abilities)
+                if(!currentAbilities.Contains(ability))
+                    currentAbilities.Add(ability);    
         }
 
         abilities = currentAbilities.ToArray();
