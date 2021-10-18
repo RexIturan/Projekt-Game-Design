@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Characters.PlayerCharacter.ScriptableObjects;
 using Events.ScriptableObjects;
 using UnityEngine;
 using Input;
@@ -12,6 +13,7 @@ using Util;
 // script attached to each playable character 
 // contains relevant data such as stats
 //
+[System.Serializable]
 public class PlayerCharacterSC : MonoBehaviour {
     [Header("Receiving events on")]
     public PathNodeEventChannelSO targetTileEvent;
@@ -23,7 +25,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     [Header("Basic Stats")]
     // Base stats
     public PlayerTypeSO playerType;
-
+    public PlayerSpawnDataSO playerSpawnData;
 
     [Header("Current Max Stats")]
     // Stats influenced by status effects
@@ -35,6 +37,8 @@ public class PlayerCharacterSC : MonoBehaviour {
     // TODO: implement status effects
     // stat changing temporary effects
     [SerializeField] private List<ScriptableObject> statusEffects;
+
+    public string playerName; 
 
     [Header("Current Stats")]
     // Leveling
@@ -65,10 +69,10 @@ public class PlayerCharacterSC : MonoBehaviour {
     // the equipped item offers a list of actions to take
     public ItemSO item;
 
-    [Header("Abilities")] [SerializeField] private AbilitySO[] abilitys;
+    [Header("Abilities")] [SerializeField] private AbilitySO[] abilities;
     [SerializeField] private int abilityID;
 
-    public AbilitySO[] Abilitys => abilitys;
+    public AbilitySO[] Abilities => abilities;
 
     public int AbilityID {
         get => abilityID;
@@ -87,6 +91,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     // cached target (tile position)
     public PathNode movementTarget;
     public List<PathNode> reachableTiles;
+    public bool movementDone = true;
 
     [Header("Combat Chache")]
     // cached target (player or enemy)
@@ -100,6 +105,11 @@ public class PlayerCharacterSC : MonoBehaviour {
     private void Awake() {
         input.mouseClicked += ToggleIsSelected;
         targetTileEvent.OnEventRaised += TargetTile;
+    }
+
+    private void OnDisable() {
+        input.mouseClicked -= ToggleIsSelected;
+        targetTileEvent.OnEventRaised -= TargetTile;
     }
 
     public void Start() {
@@ -138,8 +148,6 @@ public class PlayerCharacterSC : MonoBehaviour {
 
     // target Tile
     public void TargetTile(PathNode target) {
-        movementTarget = target;
-        abilityConfirmed = true;
     }
 
     public int GetEnergyUseUpFromMovement() {
@@ -159,9 +167,27 @@ public class PlayerCharacterSC : MonoBehaviour {
     {
         List<AbilitySO> currentAbilities = new List<AbilitySO>(playerType.basicAbilities);
         if (item is { }) {
-            currentAbilities.AddRange(item.abilities);    
+            foreach(AbilitySO ability in item.abilities)
+                if(!currentAbilities.Contains(ability))
+                    currentAbilities.Add(ability);    
         }
 
-        abilitys = currentAbilities.ToArray();
+        abilities = currentAbilities.ToArray();
+    }
+
+    public void Initialize() {
+        level = playerSpawnData.level;
+        experience = playerSpawnData.experience;
+        healthPoints = playerType.stats.maxHealthPoints;
+        energy = playerType.stats.maxEnergy;
+        movementPointsPerEnergy = playerSpawnData.movementpointsPerEnergy;
+        currentStats = playerType.stats;
+
+        RefreshAbilities();
+        RefreshEquipment();
+    }
+
+    private void RefreshEquipment() {
+        Debug.Log("!!!!!!!!!!!!!! Implement ME !!!!!!!!!!!!!!!!!");
     }
 }

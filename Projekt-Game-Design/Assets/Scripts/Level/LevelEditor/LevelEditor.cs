@@ -65,10 +65,10 @@ namespace LevelEditor {
 
         public void Start() {
             //todo move to scene manager or so??
-            loadLevel.RaiseEvent();
+            // loadLevel.RaiseEvent();
         }
 
-        private void RedrawLevel() {
+        public void RedrawLevel() {
             drawer.DrawGrid();
             updateMeshEC.RaiseEvent();
         }
@@ -102,7 +102,6 @@ namespace LevelEditor {
                         HandleRemove();
                         break;
                     }
-                    
 
                     if (leftClicked) {
 

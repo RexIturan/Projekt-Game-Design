@@ -1,6 +1,7 @@
 ﻿using System;
 using Events.ScriptableObjects;
 using Grid;
+using Level.Grid;
 using UnityEngine;
 
 namespace FieldOfView

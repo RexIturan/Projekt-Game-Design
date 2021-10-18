@@ -2,7 +2,8 @@
     "name": "GDP01.Editor",
     "rootNamespace": "",
     "references": [
-        "GDP01"
+        "GDP01",
+        "Unity.Addressables"
     ],
     "includePlatforms": [
         "Editor"

@@ -1,4 +1,4 @@
-﻿namespace Grid {
+﻿namespace Level.Grid {
     [System.Serializable, System.Flags]
     public enum ETileFlags {
         walkable = 0x1,

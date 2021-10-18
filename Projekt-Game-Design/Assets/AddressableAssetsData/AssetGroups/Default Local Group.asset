@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 3f77664488fffe24b8349ec20b4f0cd1
+  m_SerializeEntries:
+  - m_GUID: a70609dcf4896694083cbfc5f01c76e4
+    m_Address: Assets/ScriptableObjects/Items
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c6e5837f55dd5a248b0b32c70d00f3e8
+    m_Address: Assets/ScriptableObjects/Grid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 44364d8d006037c448cf97f219d86bb2
+    m_Address: Assets/ScriptableObjects/Graph
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ea12c03a3f050fd4c920df98d855f24e
+    m_Address: Assets/ScriptableObjects/GameManager
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 47265b47dc9fda84bbd16fb64078367e
+    m_Address: Assets/ScriptableObjects/Abilities
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 848df0028fededa4ea678a87c3e40ce2
+    m_Address: Assets/ScriptableObjects/Characters
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a4a15136519cb2d4b90fb41bc730c871
+    m_Address: Assets/ScriptableObjects/WorldObjects
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8ef0f95470e0d2a438ba4d84f5ef60bb
+    m_Address: Assets/ScriptableObjects/Inventory
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: db877d20d0978924eb47b450dfdc4a1e
+    m_Address: Assets/UI/Styles/LoadGame_SaveGame.uss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6ddf6212474c2a84ca2664a443a93551
+    m_Address: Assets/UI/Styles/Button_Layout.uss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fa7e517b8c5f3044db3f0818d98150ff
+    m_Address: Assets/UI/LoadScreen.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cf06c9ce71c32d344ba1647f37220971
+    m_Address: Assets/UI/SettingsContainer.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b5821c0c90e6f8044a2f1ed32296f05e
+    m_Address: Assets/Art/Material/Player_mat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 572e879cdd5e13043b2c0c7ac4198acf
+    m_Address: Assets/Art/Material/FOV_mat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bc9f5c3fce407d040934535c1eeaadc2
+    m_Address: Assets/Art/Material/TileMesh_mat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4c738b82dfe095844b75e6bf35a4fd57
+    m_Address: Assets/Art/Material/Enemy_mat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ae69a7d0c3b73f94b9c60a5365548121
+    m_Address: Assets/Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 06ceaee4d4776d84e80156cdc02ff21f, type: 2}
+    - {fileID: 11400000, guid: 62fd38efb299e734297d05213cdeaee2, type: 2}

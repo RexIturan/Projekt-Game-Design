@@ -7,8 +7,9 @@ using UnityEngine.InputSystem;
 
 namespace Input {
     [CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader", order = 0)]
-    public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions, GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions, GameInput.IInventoryActions {
+    public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions, GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions, GameInput.IInventoryActions, GameInput.ILoadingScreenActions {
         
+        // todo rework event channels: move and rename them 
         [Header("Sending Events On")]
         [SerializeField] private BoolEventChannelSO visibilityMenu;
         [SerializeField] private BoolEventChannelSO visibilityInventory;
@@ -19,10 +20,11 @@ namespace Input {
         [SerializeField] private VoidEventChannelSO enableMenuInput;
         [SerializeField] private VoidEventChannelSO enableGamplayInput;
         [SerializeField] private VoidEventChannelSO enableInventoryInput;
+        [SerializeField] private VoidEventChannelSO enableLoadingScreenInput;
         
         // Gameplay
-        public event UnityAction inventoryEvent = delegate { };
-        public event UnityAction menuEvent = delegate { };
+        // public event UnityAction inventoryEvent = delegate { };
+        // public event UnityAction menuEvent = delegate { };
         public event UnityAction endTurnEvent = delegate { };
         
         public event UnityAction mouseClicked = delegate { };
@@ -40,6 +42,9 @@ namespace Input {
         public event UnityAction stepEvent = delegate { };
         public event UnityAction showFullPathEvent = delegate { };
         
+        //Loadingscreen Input
+        public event Action anyKeyEvent = delegate { };
+        
         private GameInput gameInput;
 
         public GameInput GameInput => gameInput;
@@ -49,6 +54,7 @@ namespace Input {
             enableMenuInput.OnEventRaised += EnableMenuInput;
             enableGamplayInput.OnEventRaised += EnableGameplayInput;
             enableInventoryInput.OnEventRaised += EnableInventoryInput;
+            enableLoadingScreenInput.OnEventRaised += EnableLoadingScreenInput;
             
             if (gameInput == null) {
                 gameInput = new GameInput();
@@ -58,31 +64,40 @@ namespace Input {
                 gameInput.LevelEditor.SetCallbacks(this);
                 gameInput.PathfindingDebug.SetCallbacks(this);
                 gameInput.Inventory.SetCallbacks(this);
+                gameInput.LoadingScreen.SetCallbacks(this);
             }
-            EnableGameplayInput();
+            // EnableGameplayInput();
         }
 
         private void OnDisable() {
+            enableMenuInput.OnEventRaised -= EnableMenuInput;
+            enableGamplayInput.OnEventRaised -= EnableGameplayInput;
+            enableInventoryInput.OnEventRaised -= EnableInventoryInput;
+            enableLoadingScreenInput.OnEventRaised -= EnableLoadingScreenInput;
+            
             DisableAllInput();
         }
         
         public void EnableLevelEditorInput()
         {
             gameInput.Menu.Disable();
-            gameInput.PathfindingDebug.Enable();
 
+            gameInput.PathfindingDebug.Enable();
             gameInput.LevelEditor.Enable();
             gameInput.Camera.Enable();
         }
         
         public void EnableGameplayInput()
         {
+            // Debug.Log("enable Gameplay Input");
+            gameInput.LoadingScreen.Disable();
             gameInput.Menu.Disable();
-            gameInput.PathfindingDebug.Enable();
 
+            gameInput.PathfindingDebug.Enable();
             gameInput.Gameplay.Enable();
             gameInput.Camera.Enable();
         }
+        
         // Für das Inventar
         public void EnableInventoryInput()
         {
@@ -90,6 +105,8 @@ namespace Input {
             gameInput.PathfindingDebug.Disable();
             gameInput.Gameplay.Disable();
             gameInput.Camera.Disable();
+            gameInput.LoadingScreen.Disable();
+            
             gameInput.Inventory.Enable();
         }
         
@@ -103,8 +120,18 @@ namespace Input {
             gameInput.Gameplay.Disable();
             gameInput.Camera.Disable();
             gameInput.PathfindingDebug.Disable();
+            gameInput.LoadingScreen.Disable();
             
             gameInput.Menu.Enable();
+        }
+        
+        public void EnableLoadingScreenInput()
+        {
+            gameInput.Gameplay.Disable();
+            gameInput.Camera.Disable();
+            gameInput.PathfindingDebug.Disable();
+            
+            gameInput.LoadingScreen.Enable();
         }
         
         public void DisableAllInput()
@@ -114,6 +141,7 @@ namespace Input {
             gameInput.Camera.Disable();
             gameInput.Menu.Disable();
             gameInput.PathfindingDebug.Disable();
+            gameInput.LoadingScreen.Disable();
         }
 
         #region Gameplay
@@ -170,6 +198,7 @@ namespace Input {
         #region Menu
 
         public void OnConfirm(InputAction.CallbackContext context) {
+            // TODO Implement
         }
 
         public void OnCancel(InputAction.CallbackContext context) {
@@ -197,6 +226,7 @@ namespace Input {
 
 
         public void OnToggle(InputAction.CallbackContext context) {
+            // TODO Implement should toggle pathfinding preview
         }
 
         public void OnStep(InputAction.CallbackContext context) {
@@ -221,6 +251,17 @@ namespace Input {
         public void OnRightMouseClick(InputAction.CallbackContext context) {
             if (context.phase == InputActionPhase.Performed)
                 rightClickEvent.Invoke();
+        }
+
+        #endregion
+
+        #region LoadingScreen Input
+
+        public void OnContinue(InputAction.CallbackContext context) {
+            if (context.phase == InputActionPhase.Performed) {
+                anyKeyEvent.Invoke();
+                Debug.Log("Any Key");
+            }
         }
 
         #endregion

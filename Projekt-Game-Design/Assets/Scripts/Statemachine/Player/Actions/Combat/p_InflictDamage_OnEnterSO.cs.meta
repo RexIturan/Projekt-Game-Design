@@ -3,7 +3,9 @@ guid: ceb0edb5ad5c2e947820023226716cf4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - createTextEC: {instanceID: 0}
+  - abilityContainer: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

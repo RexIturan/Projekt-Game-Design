@@ -27,12 +27,11 @@ public class OverlayUIController : MonoBehaviour {
     [Header("Receiving Events On")] 
     [SerializeField] private BoolEventChannelSO ShowGameOverlayEC;
     [SerializeField] private BoolEventChannelSO ShowTurnIndicatorEC;
-
     [SerializeField] private BoolEventChannelSO VisibilityInventoryEventChannel;
 
-    // Für das ActionMenü
-    [SerializeField] private GameObjEventChannelSO SetActionContainerVisibilityEC;
-    [SerializeField] private GameObjActionEventChannelSO ActionsFromPlayerEventChannel;
+    // Action Menu
+    [SerializeField] private GameObjEventChannelSO PlayerDeselectedEC;
+    [SerializeField] private GameObjActionEventChannelSO PlayerSelectedEC;
 
     [Header("Sending Events On")] [SerializeField]
     private VoidEventChannelSO enableGamplayInput;
@@ -65,10 +64,10 @@ public class OverlayUIController : MonoBehaviour {
         VisibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
         ShowGameOverlayEC.OnEventRaised += SetGameOverlayVisibility;
         ShowTurnIndicatorEC.OnEventRaised += SetTurnIndicatorVisibility;
-        SetActionContainerVisibilityEC.OnEventRaised += HideActionMenu;
+        PlayerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
 
         InitializeAbilityList();
-        ActionsFromPlayerEventChannel.OnEventRaised += HandlePlayerSelected;
+        PlayerSelectedEC.OnEventRaised += HandlePlayerSelected;
     }
 
     private void HandleEndTurnUI() {
@@ -121,6 +120,7 @@ public class OverlayUIController : MonoBehaviour {
     }
 
     void CallBackMouseDownAbility(MouseDownEvent evt, int abilityID) {
+        Debug.Log(evt.target);
         CallBackAction(abilityID);
     }
 
@@ -142,14 +142,15 @@ public class OverlayUIController : MonoBehaviour {
 
         CallBackAction = callBackAction;
         FlushAbilityListIcons();
-        List<AbilitySO> abilities = new List<AbilitySO>(obj.GetComponent<PlayerCharacterSC>().Abilitys);
+        List<AbilitySO> abilities = new List<AbilitySO>(obj.GetComponent<PlayerCharacterSC>().Abilities);
         int counter = 0;
 
         foreach (var ability in abilities) {
+            Debug.Log(ability.abilityID);
             AbilityIconSlotList[counter].HoldAbility(ability);
             AbilityIconSlotList[counter]
                 .RegisterCallback<MouseDownEvent, int>(CallBackMouseDownAbility,
-                    AbilityIconSlotList[counter].AbilityID);
+                    AbilityIconSlotList[counter].AbilityID, TrickleDown.NoTrickleDown);
             AbilityIconSlotList[counter]
                 .RegisterCallback<MouseEnterEvent, string>(CallBackMouseEnterAbility, ability.description);
             AbilityIconSlotList[counter].RegisterCallback<MouseLeaveEvent>(CallBackMouseLeaveAbility);
@@ -179,14 +180,26 @@ public class OverlayUIController : MonoBehaviour {
         PlayerViewContainer.Q<Label>("DexterityLabel").text = playerStats.dexterity.ToString();
         PlayerViewContainer.Q<Label>("IntelligenceLabel").text = playerStats.intelligence.ToString();
         PlayerViewContainer.Q<Label>("MovementLabel").text = playerStats.viewDistance.ToString();
+
+        // Image
+        VisualElement image = PlayerViewContainer.Q<VisualElement>("PlayerPicture");
+        image.Clear();
+        Image newProfile = new Image();
+        image.Add(newProfile);
+        newProfile.image = playerSC.playerType.profilePicture.texture;
+
+        // Name and Level
+        PlayerViewContainer.Q<Label>("PlayerName").text = playerSC.playerName;
+        PlayerViewContainer.Q<Label>("LevelLabel").text = playerSC.level.ToString();
     }
 
     void ShowMenu() {
         VisibilityMenuEventChannel.RaiseEvent(true);
     }
 
-    void HideActionMenu(GameObject obj) {
+    void HandlePlayerDeselected(GameObject obj) {
         ActionContainer.style.display = DisplayStyle.None;
+        PlayerViewContainer.style.display = DisplayStyle.None;
     }
 
     void ShowPlayerViewContainer() {

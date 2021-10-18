@@ -52,12 +52,16 @@ namespace FieldOfView {
             public bool Less(int y, int x) {
                 return Y * x < X * y;
             } // this < y/x
-            public bool LessOrEqual(int y, int x) { return Y*x <= X*y; } // this <= y/x
+
+            public bool LessOrEqual(int y, int x) {
+                return Y * x <= X * y;
+            } // this <= y/x
 
             public readonly int X, Y;
         }
 
-        void Compute(int octant, Vector2Int origin, int rangeLimit, int x, Slope top, Slope bottom) {
+        void Compute(int octant, Vector2Int origin, int rangeLimit, int x, Slope top,
+            Slope bottom) {
             // throughout this function there are references to various parts of tiles. a tile's coordinates refer to its
             // center, and the following diagram shows the parts of the tile and the vectors from the origin that pass through
             // those parts. given a part of a tile with vector u, a vector v passes above it if v > u and below it if v < u
@@ -71,7 +75,9 @@ namespace FieldOfView {
             // |  \/  |   g top center:    (y*2+1) / (x*2)     e-h are the corners of the inner (wall) diamond
             // c------d   h bottom center: (y*2-1) / (x*2)     i-m are the corners of the inner square (1/2 tile width)
             //    h
-            for (; x <= (int) rangeLimit; x++) // (x <= (int)rangeLimit) == (rangeLimit < 0 || x <= rangeLimit)
+            for (;
+                x <= (int)rangeLimit;
+                x++) // (x <= (int)rangeLimit) == (rangeLimit < 0 || x <= rangeLimit)
             {
                 // compute the Y coordinates of the top and bottom of the sector. we maintain that top > bottom
                 int topY;
@@ -91,7 +97,8 @@ namespace FieldOfView {
                            (top.X * 2); // the Y coordinate of the tile entered from the left
                     // now it's possible that the vector passes from the left side of the tile up into the tile above before
                     // exiting from the right side of this column. so we may need to increment topY
-                    if (BlocksLight(x, topY, octant, origin)) // if the tile blocks light (i.e. is a wall)...
+                    if (BlocksLight(x, topY, octant,
+                        origin)) // if the tile blocks light (i.e. is a wall)...
                     {
                         // if the tile entered from the left blocks light, whether it passes into the tile above depends on the shape
                         // of the wall tile as well as the angle of the vector. if the tile has does not have a beveled top-left
@@ -146,13 +153,15 @@ namespace FieldOfView {
                 else // bottom > 0
                 {
                     bottomY = ((x * 2 - 1) * bottom.Y + bottom.X) /
-                              (bottom.X * 2); // the tile that the bottom vector enters from the left
+                              (bottom.X *
+                               2); // the tile that the bottom vector enters from the left
                     // code below assumes that if a tile is a wall then it's visible, so if the tile contains a wall we have to
                     // ensure that the bottom vector actually hits the wall shape. it misses the wall shape if the top-left corner
                     // is beveled and bottom >= (bottomY*2+1)/(x*2). finally, the top-left corner is beveled if the tiles to the
                     // left and above are clear. we can assume the tile to the left is clear because otherwise the bottom vector
                     // would be greater, so we only have to check above
-                    if (bottom.GreaterOrEqual(bottomY * 2 + 1, x * 2) && BlocksLight(x, bottomY, octant, origin) &&
+                    if (bottom.GreaterOrEqual(bottomY * 2 + 1, x * 2) &&
+                        BlocksLight(x, bottomY, octant, origin) &&
                         !BlocksLight(x, bottomY + 1, octant, origin)) {
                         bottomY++;
                     }
@@ -161,10 +170,12 @@ namespace FieldOfView {
                 // go through the tiles in the column now that we know which ones could possibly be visible
                 int wasOpaque = -1; // 0:false, 1:true, -1:not applicable
                 for (int y = topY;
-                    (int) y >= (int) bottomY;
+                    (int)y >= (int)bottomY;
                     y--) // use a signed comparison because y can wrap around when decremented
                 {
-                    if (rangeLimit < 0 || GetDistance(x, y) <= rangeLimit) // skip the tile if it's out of visual range
+                    if (rangeLimit < 0 ||
+                        GetDistance(x, y) <=
+                        rangeLimit) // skip the tile if it's out of visual range
                     {
                         bool isOpaque = BlocksLight(x, y, octant, origin);
                         // every tile where topY > y > bottomY is guaranteed to be visible. also, the code that initializes topY and
@@ -180,11 +191,13 @@ namespace FieldOfView {
                         // only if there's an unobstructed line to its center. if you want it to be fully symmetrical, also remove
                         // the "isOpaque ||" part and see NOTE comments further down
                         // bool isVisible = isOpaque || ((y != topY || top.GreaterOrEqual(y, x)) && (y != bottomY || bottom.LessOrEqual(y, x)));
-                        bool isVisible = ((y != topY || top.GreaterOrEqual(y, x)) && (y != bottomY || bottom.LessOrEqual(y, x)));
+                        bool isVisible = ((y != topY || top.GreaterOrEqual(y, x)) &&
+                                          (y != bottomY || bottom.LessOrEqual(y, x)));
                         if (isVisible) SetVisible(x, y, octant, origin);
 
                         // if we found a transition from clear to opaque or vice versa, adjust the top and bottom vectors
-                        if (x != rangeLimit) // but don't bother adjusting them if this is the last column anyway
+                        if (
+                            x != rangeLimit) // but don't bother adjusting them if this is the last column anyway
                         {
                             if (isOpaque) {
                                 if (wasOpaque == 0
@@ -198,7 +211,7 @@ namespace FieldOfView {
                                     int nx = x * 2, ny = y * 2 + 1; // top center by default
                                     // NOTE: if you're using full symmetry and want more expansive walls (recommended), comment out the next line
                                     // if (BlocksLight(x, y + 1, octant, origin))
-                                        // nx--; // top left if the corner is not beveled
+                                    // nx--; // top left if the corner is not beveled
                                     if (top.Greater(ny, nx))
                                         // we have to maintain the invariant that top > bottom, so the new sector
                                     {
@@ -209,7 +222,9 @@ namespace FieldOfView {
                                             bottom = new Slope(ny, nx);
                                             break;
                                         } // don't recurse unless necessary
-                                        else Compute(octant, origin, rangeLimit, x + 1, top, new Slope(ny, nx));
+                                        else
+                                            Compute(octant, origin, rangeLimit, x + 1, top,
+                                                new Slope(ny, nx));
                                     }
                                     else // the new bottom is greater than or equal to the top, so the new sector is empty and we'll ignore
                                     {
@@ -233,7 +248,7 @@ namespace FieldOfView {
                                              1; // the bottom of the opaque tile (oy*2-1) equals the top of this tile (y*2+1)
                                     // NOTE: if you're using full symmetry and want more expansive walls (recommended), comment out the next line
                                     // if (BlocksLight(x + 1, y + 1, octant, origin))
-                                        // nx++; // check the right of the opaque tile (y+1), not this one
+                                    // nx++; // check the right of the opaque tile (y+1), not this one
                                     // we have to maintain the invariant that top > bottom. if not, the sector is empty and we're done
                                     if (bottom.GreaterOrEqual(ny, nx)) return;
                                     top = new Slope(ny, nx);
@@ -293,7 +308,7 @@ namespace FieldOfView {
                     break;
             }
 
-            return _blocksLight((int) nx, (int) ny);
+            return _blocksLight((int)nx, (int)ny);
         }
 
         void SetVisible(int x, int y, int octant, Vector2Int origin) {

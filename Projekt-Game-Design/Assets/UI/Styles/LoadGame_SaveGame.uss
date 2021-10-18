@@ -1,11 +1,11 @@
 .SaveGameContainerTextTitel {
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     -unity-font-style: bold;
     font-size: 22px;
 }
 
 .SaveGameContainerText {
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     font-size: 14px;
     -unity-font-style: bold;
 }
@@ -15,6 +15,7 @@
     justify-content: flex-start;
     background-color: rgba(0, 0, 0, 0.59);
     -unity-font-style: bold;
+    color: rgba(255, 255, 255, 255);
 }
 
 .BackButton:hover {
@@ -22,7 +23,7 @@
     justify-content: flex-start;
     background-color: rgba(255, 255, 255, 0.59);
     -unity-font-style: bold;
-    color: rgba(0, 0, 0, 255);
+    color: rgb(0, 0, 0);
 }
 
 .SaveGameContainer {

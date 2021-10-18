@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="SaveSlot.uss" />
+    <ui:VisualElement name="SaveSlotContainer" class="save-slot-container" style="flex-grow: 1; height: 141px;">
+        <ui:Button display-tooltip-when-elided="true" name="SaveSlotButton" style="flex-shrink: 1; flex-grow: 0; padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%; height: 100%; width: 100%;">
+            <ui:Label text="Game Save " display-tooltip-when-elided="true" name="SaveSlotLabel" class="save-slot-label" />
+        </ui:Button>
+    </ui:VisualElement>
+</ui:UXML>

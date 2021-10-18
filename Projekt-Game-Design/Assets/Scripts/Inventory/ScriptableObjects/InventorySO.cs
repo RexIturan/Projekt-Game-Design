@@ -8,5 +8,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventorySO : ScriptableObject
 {
-    [SerializeField] public List<ItemSO> Inventory = new List<ItemSO>();
+    public List<ItemSO> Inventory = new List<ItemSO>();
 }

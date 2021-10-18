@@ -6,7 +6,7 @@ using UnityEngine;
 //
 [CreateAssetMenu(fileName = "New WorldObject", menuName = "WorldObject/WorldObjectType")]
 public class WorldObjectTypeSO : ScriptableObject {
-    public string name;
+    // public string name;
     
     public GameObject prefab;
     public EWorldObjectFlags initialProperties; // visiable, destructable, etc. 

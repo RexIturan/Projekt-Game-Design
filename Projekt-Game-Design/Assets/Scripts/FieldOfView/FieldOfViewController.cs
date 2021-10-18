@@ -2,6 +2,7 @@
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.FieldOfView;
 using Grid;
+using Level.Grid;
 using UnityEngine;
 
 namespace FieldOfView {
@@ -13,7 +14,7 @@ namespace FieldOfView {
         [SerializeField] private Vector2Int startPosTest;
         [SerializeField] private GridDataSO globalGridData;
 
-        [SerializeField] private FieldOfViewQueryEventChannelSO fieldOfViewQueryEventChannel;
+        [SerializeField] private FOV_Query_EventChannelSO fieldOfViewQueryEventChannel;
 
         // algorythm
         private FieldOfView_Adam fieldOfViewAdam;

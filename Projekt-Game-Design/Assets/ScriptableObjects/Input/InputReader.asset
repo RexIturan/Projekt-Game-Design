@@ -19,3 +19,4 @@ MonoBehaviour:
   enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
   enableInventoryInput: {fileID: 11400000, guid: 6f2cf282820633f41a7bde9dc75b3af9, type: 2}
+  enableLoadingScreenInput: {fileID: 11400000, guid: 390c6cfe22017ee4ebc6233afb443b42, type: 2}

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
-public class EventChannelBaseSO : ScriptableObject
-{
-    [TextArea] public string description;
+namespace Events.ScriptableObjects.Core {
+    public class EventChannelBaseSO : ScriptableObject
+    {
+        [TextArea] public string description;
+    }
 }

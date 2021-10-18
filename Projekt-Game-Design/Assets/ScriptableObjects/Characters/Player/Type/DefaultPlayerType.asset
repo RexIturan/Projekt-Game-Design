@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b001412dba193ab4ba91ad496afc04ce, type: 3}
+  m_Name: DefaultPlayerType
+  m_EditorClassIdentifier: 
+  id: 0
+  prefab: {fileID: 4201453750377344852, guid: b6f5dc55e03a1d944b7361058c91e19c, type: 3}
+  stats:
+    maxHealthPoints: 20
+    maxEnergy: 5
+    strength: 2
+    dexterity: 2
+    intelligence: 2
+    viewDistance: 5
+  gainPerLevel:
+    maxHealthPoints: 1
+    maxEnergy: 1
+    strength: 1
+    dexterity: 1
+    intelligence: 1
+    viewDistance: 1
+  startWeapon: {fileID: 0}
+  basicAbilities:
+  - {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}

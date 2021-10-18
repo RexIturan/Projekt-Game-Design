@@ -6,15 +6,6 @@ using UnityEngine;
 // 
 public class CharacterList : MonoBehaviour
 {
-    [SerializeField] public List<GameObject> playerCharacters;
-    [SerializeField] public List<GameObject> enemyCharacters;
-
-    public void Start()
-    {
-        foreach(GameObject enemy in enemyCharacters)
-        {
-            // enemy.GetComponent<EnemyCharacterSC>().characterContainer = this;
-        }
-
-    }
+    [SerializeField] public List<GameObject> playerContainer;
+    [SerializeField] public List<GameObject> enemyContainer;
 }

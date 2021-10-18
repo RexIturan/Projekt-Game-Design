@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb0edb5ad5c2e947820023226716cf4, type: 3}
   m_Name: p_InflictDamage_OnEnter
   m_EditorClassIdentifier: 
+  createTextEC: {fileID: 11400000, guid: 8e396545472a5c74d8cc707f516a0f48, type: 2}
+  abilityContainer: {fileID: 11400000, guid: 636fde585deb2974e93548838daccee6, type: 2}

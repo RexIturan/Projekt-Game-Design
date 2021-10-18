@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ability;
 using Grid;
+using Level.Grid;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 

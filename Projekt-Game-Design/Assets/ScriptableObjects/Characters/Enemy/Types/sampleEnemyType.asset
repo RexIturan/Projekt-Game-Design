@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6e6060dbd8c894dacdfa33bc774470, type: 3}
   m_Name: sampleEnemyType
   m_EditorClassIdentifier: 
+  id: 1
+  prefab: {fileID: 498592685408855684, guid: 5c8e089f4fca80b4680632dc908fafb6, type: 3}
   item: {fileID: 11400000, guid: 34707fdcee39c964488d7c7ba3503935, type: 2}
   stats:
-    maxLifePoints: 10
+    maxHealthPoints: 30
     maxEnergy: 10
     strength: 8
     dexterity: 6

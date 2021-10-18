@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Events.ScriptableObjects.Core;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Events.ScriptableObjects {
