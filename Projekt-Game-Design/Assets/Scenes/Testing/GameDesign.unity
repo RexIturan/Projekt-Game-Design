@@ -598,11 +598,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< HEAD:Projekt-Game-Design/Assets/Scenes/Testing/GameDesign.unity
   m_RootOrder: 16
-=======
-  m_RootOrder: 20
->>>>>>> main2:Projekt-Game-Design/Assets/Scenes/main2/GameDesign.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &710400016 stripped
 GameObject:
@@ -890,8 +886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4469285735d4363bc53cb19d95edaca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Projekt-Game-Design/Assets/Scenes/Testing/GameDesign.unity
-=======
 --- !u!1 &1078084377
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +926,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4877561785222076825, guid: 49d5e345cb0025348934f6e75155b456, type: 3}
   m_PrefabInstance: {fileID: 6261765552084808826}
   m_PrefabAsset: {fileID: 0}
->>>>>>> main2:Projekt-Game-Design/Assets/Scenes/main2/GameDesign.unity
 --- !u!1 &1172239666 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4201453750377344852, guid: b6f5dc55e03a1d944b7361058c91e19c, type: 3}
@@ -943,8 +936,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6360642603463238225, guid: b6f5dc55e03a1d944b7361058c91e19c, type: 3}
   m_PrefabInstance: {fileID: 1798133157}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Projekt-Game-Design/Assets/Scenes/Testing/GameDesign.unity
-=======
 --- !u!1001 &1214689158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1056,7 +1047,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> main2:Projekt-Game-Design/Assets/Scenes/main2/GameDesign.unity
 --- !u!1 &1273867134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,8 +1107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1002ea915020c4aacb650c9ec997c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD:Projekt-Game-Design/Assets/Scenes/Testing/GameDesign.unity
-=======
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
   setTurnIndicatorVisibilityEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
   tacticsData: {fileID: 11400000, guid: 5d053a97eac47be4d8da941f3a2772c7, type: 2}
@@ -1163,7 +1151,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> main2:Projekt-Game-Design/Assets/Scenes/main2/GameDesign.unity
 --- !u!114 &1338342326 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9012959172467064327, guid: a2133eacc6c402545be76d899962b51e, type: 3}
@@ -1785,16 +1772,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 748e901d969761546819191eac2990f0, type: 3}
-<<<<<<< HEAD:Projekt-Game-Design/Assets/Scenes/Testing/GameDesign.unity
 --- !u!1001 &6182407918983365816
-=======
---- !u!1001 &6261765552084808826
->>>>>>> main2:Projekt-Game-Design/Assets/Scenes/main2/GameDesign.unity
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-<<<<<<< HEAD:Projekt-Game-Design/Assets/Scenes/Testing/GameDesign.unity
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6182407919942541883, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
@@ -1858,7 +1840,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6182407919942541886, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
-=======
     m_TransformParent: {fileID: 521218105}
     m_Modifications:
     - target: {fileID: 2430696722745496732, guid: 49d5e345cb0025348934f6e75155b456, type: 3}
@@ -1910,16 +1891,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4877561785222076825, guid: 49d5e345cb0025348934f6e75155b456, type: 3}
->>>>>>> main2:Projekt-Game-Design/Assets/Scenes/main2/GameDesign.unity
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-<<<<<<< HEAD:Projekt-Game-Design/Assets/Scenes/Testing/GameDesign.unity
   m_SourcePrefab: {fileID: 100100000, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
-=======
-  m_SourcePrefab: {fileID: 100100000, guid: 49d5e345cb0025348934f6e75155b456, type: 3}
->>>>>>> main2:Projekt-Game-Design/Assets/Scenes/main2/GameDesign.unity
 --- !u!1001 &7814138535500672978
 PrefabInstance:
   m_ObjectHideFlags: 0

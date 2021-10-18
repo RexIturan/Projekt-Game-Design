@@ -22,7 +22,7 @@ public class Refill_OnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void OnStateEnter() {
-        var characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
+        var characterList = GameObject.FindObjectOfType<CharacterList>();
         switch (tacticsGameData.currentPlayer) { 
             case EFaction.player:
                 foreach (var player in characterList.playerContainer) {

@@ -13,12 +13,6 @@ MonoBehaviour:
   m_Name: GameState_TT
   m_EditorClassIdentifier: 
   _transitions:
-  - FromState: {fileID: 11400000, guid: dda56c001685d8345b3ecaacfa9e8098, type: 2}
-    ToState: {fileID: 11400000, guid: 40bcad6a272ee144fbec6563cd0f9ce0, type: 2}
-    Conditions:
-    - ExpectedResult: 0
-      Condition: {fileID: 11400000, guid: 2c4b8c14bca36b24c9ceba1b2b8e9557, type: 2}
-      Operator: 0
   - FromState: {fileID: 11400000, guid: 86ef88931f72fba4d9005221a9a64876, type: 2}
     ToState: {fileID: 11400000, guid: 5741a359d8ad6c74295a068a2979d8c0, type: 2}
     Conditions:
@@ -87,6 +81,12 @@ MonoBehaviour:
       Operator: 0
     - ExpectedResult: 0
       Condition: {fileID: 11400000, guid: 778622fb14ced444a8999409efcb8a99, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: dda56c001685d8345b3ecaacfa9e8098, type: 2}
+    ToState: {fileID: 11400000, guid: 40bcad6a272ee144fbec6563cd0f9ce0, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: 2c4b8c14bca36b24c9ceba1b2b8e9557, type: 2}
       Operator: 0
   - FromState: {fileID: 11400000, guid: 83b15294e5acde849aa041a083883e91, type: 2}
     ToState: {fileID: 11400000, guid: 40bcad6a272ee144fbec6563cd0f9ce0, type: 2}
