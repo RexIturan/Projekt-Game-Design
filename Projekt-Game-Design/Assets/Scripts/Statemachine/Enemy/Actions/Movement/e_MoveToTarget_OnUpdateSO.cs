@@ -18,7 +18,7 @@ public class e_MoveToTarget_OnUpdateSO : StateActionSO
 
 public class e_MoveToTarget_OnUpdate : StateAction
 {
-    private const float TIME_PER_STEP = 0.2f;
+    private const float TIME_PER_STEP = 0.5f;
 
     protected new MoveToTargetSO OriginSO => (MoveToTargetSO)base.OriginSO;
 

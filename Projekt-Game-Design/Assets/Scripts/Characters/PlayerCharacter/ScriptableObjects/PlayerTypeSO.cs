@@ -10,9 +10,12 @@ public class PlayerTypeSO : ScriptableObject
 {
     public int id;
     public GameObject prefab;
-    public Sprite profilePicture;
     public CharacterStats stats;
     public CharacterStats gainPerLevel; // TODO: gain is Linear in this case
     public ScriptableObject startWeapon; // is not necessarily equipped weapon
     public AbilitySO[] basicAbilities; // actions at all time available
+
+    [Header("Visuals")]
+    public Sprite profilePicture;
+    public float TIME_OF_ATTACK_ANIMATION;
 }

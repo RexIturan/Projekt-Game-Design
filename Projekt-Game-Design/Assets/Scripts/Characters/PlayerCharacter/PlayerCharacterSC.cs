@@ -98,6 +98,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     public PlayerCharacterSC playerTarget;
     public EnemyCharacterSC enemyTarget;
     public List<PathNode> tilesInRange;
+    public bool waitForAttackToFinish = false;
 
     [Header("Timer")]
     public float timeSinceTransition = 0;

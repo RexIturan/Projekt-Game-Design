@@ -10,7 +10,6 @@ using Util;
 // 
 public class EnemyCharacterSC : MonoBehaviour
 {
-
     [Header("SO Reference")] 
     public GridDataSO globalGridData;
     public EnemyTypeSO enemyType;
@@ -39,6 +38,7 @@ public class EnemyCharacterSC : MonoBehaviour
     public float attackRange;
     public int attackDamage;
     public List<Vector3Int> tileInRangeOfTarget;
+    public bool waitForAttackToFinish = false;
 
     [Header("Movement")]
     public int movementPointsPerEnergy;
@@ -55,11 +55,18 @@ public class EnemyCharacterSC : MonoBehaviour
     public bool abilityExecuted;
     public bool noTargetFound;
     public bool rangeChecked;
+    
+    [Header("Timer")]
+    public float timeSinceTransition = 0;
 
     public void Start()
     {
         transformToPosition();
         characterList = characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
+    }
+
+    public void FixedUpdate() {
+        timeSinceTransition += Time.fixedDeltaTime;
     }
 
     // TODO: don't just copy from playerCharacterSC

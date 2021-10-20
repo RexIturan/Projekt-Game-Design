@@ -18,3 +18,4 @@ MonoBehaviour:
   abilityExecuted: 1
   abilityID: 0
   movementTarget: 0
+  waitForAttack: 0

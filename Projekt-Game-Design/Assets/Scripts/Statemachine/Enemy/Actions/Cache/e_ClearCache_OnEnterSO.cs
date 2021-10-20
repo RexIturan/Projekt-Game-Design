@@ -15,9 +15,11 @@ namespace Characters.PlayerCharacter.StateMachine.Actions
         [SerializeField] private bool abilityExecuted;
         [SerializeField] private bool abilityID;
         [SerializeField] private bool movementTarget;
+        [SerializeField] private bool waitForAttack;
 
         public override StateAction CreateAction() => new e_ClearCache_OnEnter(isOnTurn, isDone, abilitySelected,
-                                                                              abilityExecuted, abilityID, movementTarget);
+                                                                              abilityExecuted, abilityID, movementTarget,
+                                                                              waitForAttack);
     }
 
     public class e_ClearCache_OnEnter : StateAction
@@ -30,9 +32,11 @@ namespace Characters.PlayerCharacter.StateMachine.Actions
         private bool abilityExecuted;
         private bool abilityID;
         private bool movementTarget;
+        private bool waitForAttack;
 
         public e_ClearCache_OnEnter(bool isOnTurn, bool isDone, bool abilitySelected,
-                                   bool abilityExecuted, bool abilityID, bool movementTarget)
+                                   bool abilityExecuted, bool abilityID, bool movementTarget,
+                                   bool waitForAttack)
         {
             this.isOnTurn = isOnTurn;
             this.isDone = isDone;
@@ -40,6 +44,7 @@ namespace Characters.PlayerCharacter.StateMachine.Actions
             this.abilityExecuted = abilityExecuted;
             this.abilityID = abilityID;
             this.movementTarget = movementTarget;
+            this.waitForAttack = waitForAttack;
         }
 
         public override void Awake(UOP1.StateMachine.StateMachine stateMachine)
@@ -71,6 +76,9 @@ namespace Characters.PlayerCharacter.StateMachine.Actions
 
             if (movementTarget)
                 enemyCharacterSC.movementTarget = null;
+
+            if(waitForAttack)
+                enemyCharacterSC.waitForAttackToFinish = false;
         }
 
         public override void OnStateExit()

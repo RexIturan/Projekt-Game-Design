@@ -13,4 +13,7 @@ public class EnemyTypeSO : ScriptableObject {
     [SerializeField] public CharacterStats stats;
     [SerializeField] public LootTable drops;
     [SerializeField] public AbilitySO[] basicAbilities; // actions at all time available
+
+    [Header("Visuals")]
+    public float TIME_OF_ATTACK_ANIMATION;
 }

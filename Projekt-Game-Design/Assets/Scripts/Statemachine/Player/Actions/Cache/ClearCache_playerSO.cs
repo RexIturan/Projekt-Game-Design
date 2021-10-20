@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
@@ -33,5 +33,6 @@ public class ClearCache_player : StateAction
 		playerCharacterSC.movementTarget = default;
         playerCharacterSC.playerTarget = null;
         playerCharacterSC.enemyTarget = null;
-	}
+        playerCharacterSC.waitForAttackToFinish = false;
+    }
 }

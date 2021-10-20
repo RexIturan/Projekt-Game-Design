@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
@@ -33,7 +33,8 @@ public class ClearFullCacheOnEnter_player : StateAction
         playerCharacterSC.playerTarget = null;
         playerCharacterSC.enemyTarget = null;
         playerCharacterSC.tilesInRange.Clear();
-}
+        playerCharacterSC.waitForAttackToFinish = false;
+    }
 	
 	public override void OnStateExit()
 	{
