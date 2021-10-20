@@ -1,69 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 public class InventorySlot : VisualElement
 {
-    public Image Icon;
-    public int ItemGuid = -1;
-    public inventorySlotType SlotType; 
+    public readonly Image icon;
+    public readonly InventorySlotType slotType;
+    public int itemGuid = -1;
     
     public InventorySlot()
     {
         //Create a new Image element and add it to the root
-        Icon = new Image();
-        Add(Icon);
+        icon = new Image();
+        Add(icon);
         //Add USS style properties to the elements
-        Icon.AddToClassList("slotIcon");
+        icon.AddToClassList("slotIcon");
         AddToClassList("slotContainer");
         RegisterCallback<PointerDownEvent>(OnPointerDown);
-        SlotType = inventorySlotType.EQUIPMENT_INVENTORY;
+        slotType = InventorySlotType.EquipmentInventory;
     }
     
-    public InventorySlot(inventorySlotType type)
+    public InventorySlot(InventorySlotType type)
     {
         //Create a new Image element and add it to the root
-        Icon = new Image();
-        Add(Icon);
+        icon = new Image();
+        Add(icon);
         //Add USS style properties to the elements
-        Icon.AddToClassList("slotIcon");
+        icon.AddToClassList("slotIcon");
         AddToClassList("slotContainer");
         RegisterCallback<PointerDownEvent>(OnPointerDown);
-        SlotType = type;
+        slotType = type;
     }
     
     public void HoldItem(ItemSO item)
     {
-        Icon.image = item.icon.texture;
-        ItemGuid = item.id;
+        icon.image = item.icon.texture;
+        itemGuid = item.id;
         // Debug.Log("Test in HoldItem");
     }
     public void DropItem()
     {
-        ItemGuid = -1;
-        Icon.image = null;
+        itemGuid = -1;
+        icon.image = null;
     }
     
     private void OnPointerDown(PointerDownEvent evt)
     {
         //Not the left mouse button
-        if (ItemGuid == -1 || evt.button != 0 || ItemGuid.Equals(""))
+        if (itemGuid == -1 || evt.button != 0)
         {
             return;
         }
         //Clear the image
-        Icon.image = null;
+        icon.image = null;
         //Start the drag
         InventoryUIController.StartDrag(evt.position, this);
     }
-    public enum inventorySlotType
+    public enum InventorySlotType
     {
-        NONE,
-        NORMAL_INVENTORY,
-        EQUIPMENT_INVENTORY,
-        TRASHCAN
+        None,
+        NormalInventory,
+        EquipmentInventory,
+        Trashcan
     }
     
     #region UXML

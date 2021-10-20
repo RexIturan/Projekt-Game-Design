@@ -6,264 +6,258 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Input {
-    [CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader", order = 0)]
-    public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions, GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions, GameInput.IInventoryActions, GameInput.ILoadingScreenActions {
-        
-        // todo rework event channels: move and rename them 
-        [Header("Sending Events On")]
-        [SerializeField] private BoolEventChannelSO visibilityMenu;
-        [SerializeField] private BoolEventChannelSO visibilityInventory;
-        [SerializeField] private BoolEventChannelSO visibilityGameOverlay;
-        [SerializeField] private EFactionEventChannelSO endTurnEC;
-        
-        [Header("Receiving Events On")]
-        [SerializeField] private VoidEventChannelSO enableMenuInput;
-        [SerializeField] private VoidEventChannelSO enableGamplayInput;
-        [SerializeField] private VoidEventChannelSO enableInventoryInput;
-        [SerializeField] private VoidEventChannelSO enableLoadingScreenInput;
-        
-        // Gameplay
-        // public event UnityAction inventoryEvent = delegate { };
-        // public event UnityAction menuEvent = delegate { };
-        public event UnityAction endTurnEvent = delegate { };
-        
-        public event UnityAction mouseClicked = delegate { };
-        
-        //Camera 
-        public event UnityAction<Vector2, bool> cameraMoveEvent = delegate {  };
-        public event UnityAction<float> cameraRotateEvent = delegate {  };
-        public event UnityAction<float> cameraZoomEvent = delegate {  };
+	[CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader", order = 0)]
+	public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions,
+		GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions,
+		GameInput.IInventoryActions, GameInput.ILoadingScreenActions {
+		// todo rework event channels: move and rename them 
+		[Header("Sending Events On")] [SerializeField]
+		private BoolEventChannelSO visibilityMenu;
 
-        // Mouse Testing
-        public event UnityAction leftClickEvent = delegate { };
-        public event UnityAction rightClickEvent = delegate { };
+		[SerializeField] private BoolEventChannelSO visibilityInventory;
+		[SerializeField] private BoolEventChannelSO visibilityGameOverlay;
+		[SerializeField] private EFactionEventChannelSO endTurnEC;
 
-        //Pathfinding Debug
-        public event UnityAction stepEvent = delegate { };
-        public event UnityAction showFullPathEvent = delegate { };
-        
-        //Loadingscreen Input
-        public event Action anyKeyEvent = delegate { };
-        
-        private GameInput gameInput;
+		[Header("Receiving Events On")] [SerializeField]
+		private VoidEventChannelSO enableMenuInput;
 
-        public GameInput GameInput => gameInput;
+		[SerializeField] private VoidEventChannelSO enableGameplayInput;
+		[SerializeField] private VoidEventChannelSO enableInventoryInput;
+		[SerializeField] private VoidEventChannelSO enableLoadingScreenInput;
 
-        private void OnEnable() {
+		// Gameplay
+		// public event UnityAction inventoryEvent = delegate { };
+		// public event UnityAction menuEvent = delegate { };
+		public event UnityAction EndTurnEvent = delegate { };
 
-            enableMenuInput.OnEventRaised += EnableMenuInput;
-            enableGamplayInput.OnEventRaised += EnableGameplayInput;
-            enableInventoryInput.OnEventRaised += EnableInventoryInput;
-            enableLoadingScreenInput.OnEventRaised += EnableLoadingScreenInput;
-            
-            if (gameInput == null) {
-                gameInput = new GameInput();
-                gameInput.Gameplay.SetCallbacks(this);
-                gameInput.Camera.SetCallbacks(this);
-                gameInput.Menu.SetCallbacks(this);
-                gameInput.LevelEditor.SetCallbacks(this);
-                gameInput.PathfindingDebug.SetCallbacks(this);
-                gameInput.Inventory.SetCallbacks(this);
-                gameInput.LoadingScreen.SetCallbacks(this);
-            }
-            // EnableGameplayInput();
-        }
+		public event UnityAction MouseClicked = delegate { };
 
-        private void OnDisable() {
-            enableMenuInput.OnEventRaised -= EnableMenuInput;
-            enableGamplayInput.OnEventRaised -= EnableGameplayInput;
-            enableInventoryInput.OnEventRaised -= EnableInventoryInput;
-            enableLoadingScreenInput.OnEventRaised -= EnableLoadingScreenInput;
-            
-            DisableAllInput();
-        }
-        
-        public void EnableLevelEditorInput()
-        {
-            gameInput.Menu.Disable();
+		//Camera 
+		public event UnityAction<Vector2, bool> CameraMoveEvent = delegate { };
+		public event UnityAction<float> CameraRotateEvent = delegate { };
+		public event UnityAction<float> CameraZoomEvent = delegate { };
 
-            gameInput.PathfindingDebug.Enable();
-            gameInput.LevelEditor.Enable();
-            gameInput.Camera.Enable();
-        }
-        
-        public void EnableGameplayInput()
-        {
-            // Debug.Log("enable Gameplay Input");
-            gameInput.LoadingScreen.Disable();
-            gameInput.Menu.Disable();
+		// Mouse Testing
+		public event UnityAction LeftClickEvent = delegate { };
+		public event UnityAction RightClickEvent = delegate { };
 
-            gameInput.PathfindingDebug.Enable();
-            gameInput.Gameplay.Enable();
-            gameInput.Camera.Enable();
-        }
-        
-        // Für das Inventar
-        public void EnableInventoryInput()
-        {
-            gameInput.Menu.Disable();
-            gameInput.PathfindingDebug.Disable();
-            gameInput.Gameplay.Disable();
-            gameInput.Camera.Disable();
-            gameInput.LoadingScreen.Disable();
-            
-            gameInput.Inventory.Enable();
-        }
-        
-        public void EnableDebugInput()
-        {
-            gameInput.PathfindingDebug.Enable();
-        }
-        
-        public void EnableMenuInput()
-        {
-            gameInput.Gameplay.Disable();
-            gameInput.Camera.Disable();
-            gameInput.PathfindingDebug.Disable();
-            gameInput.LoadingScreen.Disable();
-            
-            gameInput.Menu.Enable();
-        }
-        
-        public void EnableLoadingScreenInput()
-        {
-            gameInput.Gameplay.Disable();
-            gameInput.Camera.Disable();
-            gameInput.PathfindingDebug.Disable();
-            
-            gameInput.LoadingScreen.Enable();
-        }
-        
-        public void DisableAllInput()
-        {
-            gameInput.Gameplay.Disable();
-            gameInput.LevelEditor.Disable();
-            gameInput.Camera.Disable();
-            gameInput.Menu.Disable();
-            gameInput.PathfindingDebug.Disable();
-            gameInput.LoadingScreen.Disable();
-        }
+		//Pathfinding Debug
+		public event UnityAction StepEvent = delegate { };
+		public event UnityAction ShowFullPathEvent = delegate { };
 
-        #region Gameplay
-        
-        public void OnEndTurn(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed) {
-                endTurnEvent.Invoke();
-                endTurnEC.RaiseEvent(EFaction.player);
-            }
-        }
+		//LoadingScreen Input
+		public event Action AnyKeyEvent = delegate { };
 
-        public void OnMenu(InputAction.CallbackContext context) {
+		private GameInput _gameInput;
 
-            if (context.phase == InputActionPhase.Performed) {
-                visibilityMenu.RaiseEvent(true);
-            }
-        }
+		// todo idk if we should expose _gameInput 
+		public GameInput GameInput => _gameInput;
 
-        public void OnInventory(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed) {
-                visibilityInventory.RaiseEvent(true);
-            }
-        }
+		private void OnEnable() {
+			enableMenuInput.OnEventRaised += EnableMenuInput;
+			enableGameplayInput.OnEventRaised += EnableGameplayInput;
+			enableInventoryInput.OnEventRaised += EnableInventoryInput;
+			enableLoadingScreenInput.OnEventRaised += EnableLoadingScreenInput;
 
-        public void OnMouseClicked(InputAction.CallbackContext context)
-        {
-            if (context.phase == InputActionPhase.Performed)
-                mouseClicked.Invoke();
-        }
+			if ( _gameInput == null ) {
+				_gameInput = new GameInput();
+				_gameInput.Gameplay.SetCallbacks(this);
+				_gameInput.Camera.SetCallbacks(this);
+				_gameInput.Menu.SetCallbacks(this);
+				_gameInput.LevelEditor.SetCallbacks(this);
+				_gameInput.PathfindingDebug.SetCallbacks(this);
+				_gameInput.Inventory.SetCallbacks(this);
+				_gameInput.LoadingScreen.SetCallbacks(this);
+			}
 
-        #endregion
+			// todo idk what the default input should be
+			// EnableGameplayInput();
+		}
 
-        #region Camera
+		private void OnDisable() {
+			enableMenuInput.OnEventRaised -= EnableMenuInput;
+			enableGameplayInput.OnEventRaised -= EnableGameplayInput;
+			enableInventoryInput.OnEventRaised -= EnableInventoryInput;
+			enableLoadingScreenInput.OnEventRaised -= EnableLoadingScreenInput;
 
-        public void OnMoveCamera(InputAction.CallbackContext context) {
-            // todo mouse input
-            var input = context.ReadValue<Vector2>();
-            cameraMoveEvent.Invoke(input, false);
-        }
+			DisableAllInput();
+		}
 
-        public void OnRotateCamera(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed)
-            {
-                cameraRotateEvent.Invoke(context.ReadValue<float>());
-            }
-        }
+		public void EnableLevelEditorInput() {
+			_gameInput.Menu.Disable();
 
-        public void OnCameraZoom(InputAction.CallbackContext context) {
-            cameraZoomEvent.Invoke(context.ReadValue<float>());
-        }
+			_gameInput.PathfindingDebug.Enable();
+			_gameInput.LevelEditor.Enable();
+			_gameInput.Camera.Enable();
+		}
 
-        #endregion
+		public void EnableGameplayInput() {
+			// Debug.Log("enable Gameplay Input");
+			_gameInput.LoadingScreen.Disable();
+			_gameInput.Menu.Disable();
 
-        #region Menu
+			_gameInput.PathfindingDebug.Enable();
+			_gameInput.Gameplay.Enable();
+			_gameInput.Camera.Enable();
+		}
 
-        public void OnConfirm(InputAction.CallbackContext context) {
-            // TODO Implement
-        }
+		// Für das Inventar
+		public void EnableInventoryInput() {
+			_gameInput.Menu.Disable();
+			_gameInput.PathfindingDebug.Disable();
+			_gameInput.Gameplay.Disable();
+			_gameInput.Camera.Disable();
+			_gameInput.LoadingScreen.Disable();
 
-        public void OnCancel(InputAction.CallbackContext context) {
-            // TODO menuCancelEvent
-            if (context.phase == InputActionPhase.Performed) {
-                visibilityGameOverlay.RaiseEvent(true);
-                visibilityMenu.RaiseEvent(false);
-            }
-        }
+			_gameInput.Inventory.Enable();
+		}
 
-        #endregion
-        
-        #region Inventory
+		public void EnableDebugInput() {
+			_gameInput.PathfindingDebug.Enable();
+		}
 
-        public void OnCancelInventory(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed) {
-                Debug.Log("onCancel");
-                visibilityGameOverlay.RaiseEvent(true);
-            }
-        }
+		public void EnableMenuInput() {
+			_gameInput.Gameplay.Disable();
+			_gameInput.Camera.Disable();
+			_gameInput.PathfindingDebug.Disable();
+			_gameInput.LoadingScreen.Disable();
 
-        #endregion
+			_gameInput.Menu.Enable();
+		}
 
-        #region Pathfinding
+		public void EnableLoadingScreenInput() {
+			_gameInput.Gameplay.Disable();
+			_gameInput.Camera.Disable();
+			_gameInput.PathfindingDebug.Disable();
 
+			_gameInput.LoadingScreen.Enable();
+		}
 
-        public void OnToggle(InputAction.CallbackContext context) {
-            // TODO Implement should toggle pathfinding preview
-        }
+		public void DisableAllInput() {
+			_gameInput.Gameplay.Disable();
+			_gameInput.LevelEditor.Disable();
+			_gameInput.Camera.Disable();
+			_gameInput.Menu.Disable();
+			_gameInput.PathfindingDebug.Disable();
+			_gameInput.LoadingScreen.Disable();
+		}
 
-        public void OnStep(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed)
-                stepEvent.Invoke();
-        }
+		#region Gameplay
 
-        public void OnShowCompletePath(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed)
-                showFullPathEvent.Invoke();
-        }        
+		public void OnEndTurn(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed ) {
+				EndTurnEvent.Invoke();
+				endTurnEC.RaiseEvent(Faction.Player);
+			}
+		}
 
-        #endregion
-        
-        #region Mouse
+		public void OnMenu(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed ) {
+				visibilityMenu.RaiseEvent(true);
+			}
+		}
 
-        public void OnLeftMouseClick(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed)
-                leftClickEvent.Invoke();
-        }
+		public void OnInventory(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed ) {
+				visibilityInventory.RaiseEvent(true);
+			}
+		}
 
-        public void OnRightMouseClick(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed)
-                rightClickEvent.Invoke();
-        }
+		public void OnMouseClicked(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed )
+				MouseClicked.Invoke();
+		}
 
-        #endregion
+		#endregion
 
-        #region LoadingScreen Input
+		#region Camera
 
-        public void OnContinue(InputAction.CallbackContext context) {
-            if (context.phase == InputActionPhase.Performed) {
-                anyKeyEvent.Invoke();
-                Debug.Log("Any Key");
-            }
-        }
+		public void OnMoveCamera(InputAction.CallbackContext context) {
+			// todo mouse input
+			var input = context.ReadValue<Vector2>();
+			CameraMoveEvent.Invoke(input, false);
+		}
 
-        #endregion
-    }
+		public void OnRotateCamera(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed ) {
+				CameraRotateEvent.Invoke(context.ReadValue<float>());
+			}
+		}
+
+		public void OnCameraZoom(InputAction.CallbackContext context) {
+			CameraZoomEvent.Invoke(context.ReadValue<float>());
+		}
+
+		#endregion
+
+		#region Menu
+
+		public void OnConfirm(InputAction.CallbackContext context) {
+			// TODO Implement
+		}
+
+		public void OnCancel(InputAction.CallbackContext context) {
+			// TODO menuCancelEvent
+			if ( context.phase == InputActionPhase.Performed ) {
+				visibilityGameOverlay.RaiseEvent(true);
+				visibilityMenu.RaiseEvent(false);
+			}
+		}
+
+		#endregion
+
+		#region Inventory
+
+		public void OnCancelInventory(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed ) {
+				Debug.Log("onCancel");
+				visibilityGameOverlay.RaiseEvent(true);
+			}
+		}
+
+		#endregion
+
+		#region Pathfinding
+
+		public void OnToggle(InputAction.CallbackContext context) {
+			// TODO Implement should toggle pathfinding preview
+		}
+
+		public void OnStep(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed )
+				StepEvent.Invoke();
+		}
+
+		public void OnShowCompletePath(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed )
+				ShowFullPathEvent.Invoke();
+		}
+
+		#endregion
+
+		#region Mouse
+
+		public void OnLeftMouseClick(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed )
+				LeftClickEvent.Invoke();
+		}
+
+		public void OnRightMouseClick(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed )
+				RightClickEvent.Invoke();
+		}
+
+		#endregion
+
+		#region LoadingScreen Input
+
+		public void OnContinue(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed ) {
+				AnyKeyEvent.Invoke();
+				Debug.Log("Any Key");
+			}
+		}
+
+		#endregion
+	}
 }

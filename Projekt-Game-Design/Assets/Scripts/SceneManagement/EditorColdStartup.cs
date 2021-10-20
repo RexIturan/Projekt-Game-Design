@@ -1,4 +1,5 @@
-﻿using Events.ScriptableObjects;
+﻿// ReSharper disable RedundantUsingDirective
+using Events.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -7,7 +8,7 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 namespace SceneManagement {
-
+	
     /// <summary>
     /// Allows a "cold start" in the editor, when pressing Play and not passing from the Initialisation scene.
     /// </summary> 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SaveSystem.SaveForamts {
+namespace SaveSystem.SaveFormats {
     [Serializable]
     public class Inventory_Save {
         public int size;

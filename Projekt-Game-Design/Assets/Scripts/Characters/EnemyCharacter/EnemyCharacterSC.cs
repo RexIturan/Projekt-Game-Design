@@ -1,13 +1,10 @@
 using Grid;
-using System.Collections;
 using System.Collections.Generic;
 using Characters.EnemyCharacter.ScriptableObjects;
-using Characters.ScriptableObjects;
 using UnityEngine;
 using Util;
 
-// Script to attached to each enemy
-// 
+/// <summary><c>Enemy State Container</c> Script to attached to each enemy</summary>
 public class EnemyCharacterSC : MonoBehaviour
 {
 
@@ -58,7 +55,7 @@ public class EnemyCharacterSC : MonoBehaviour
 
     public void Start()
     {
-        transformToPosition();
+        MoveToGridPosition();
         characterList = characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
     }
 
@@ -71,8 +68,8 @@ public class EnemyCharacterSC : MonoBehaviour
 
     // TODO: avoid repetitive code (copied from PlayerCharacter)
     // transforms the gameobject to it's tile position
-    public void transformToPosition() {
-        var pos = gridPosition + globalGridData.getCellCenter();
+    public void MoveToGridPosition() {
+        var pos = gridPosition + globalGridData.GetCellCenter();
         pos *= globalGridData.CellSize;
         pos += globalGridData.OriginPosition;
 
@@ -95,6 +92,6 @@ public class EnemyCharacterSC : MonoBehaviour
         energy = enemyType.stats.maxEnergy; 
         attackRange = enemySpawnData.range;
         attackDamage = enemySpawnData.attack;
-        movementPointsPerEnergy = enemySpawnData.movementpointsPerEnergy;
+        movementPointsPerEnergy = enemySpawnData.movementPointsPerEnergy;
     }
 }

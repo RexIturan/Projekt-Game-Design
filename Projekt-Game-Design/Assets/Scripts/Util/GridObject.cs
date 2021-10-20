@@ -1,5 +1,4 @@
-﻿using Grid;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Util {
     public abstract class GridObject {

@@ -16,33 +16,33 @@ public class SuperAction : StateAction
 	protected new SuperActionSO OriginSO => (SuperActionSO)base.OriginSO;
 
 	// input for each
-	private AbilityContainerSO abilityContainer;
-	private AbilityPhase phase;
+	private AbilityContainerSO _abilityContainer;
+	private AbilityPhase _phase;
 	
 	// 
-	private StateMachine stateMachine;
-	private List<StateAction> subActions;
-	private int abilityID;
-	private PlayerCharacterSC playerCharacterSC;
+	private StateMachine _stateMachine;
+	private List<StateAction> _subActions;
+	private int _abilityID;
+	private PlayerCharacterSC _playerCharacterSC;
 
 	public SuperAction(AbilityPhase phase, AbilityContainerSO abilityContainer) {
-		this.phase = phase;
-		this.abilityContainer = abilityContainer;
+		this._phase = phase;
+		this._abilityContainer = abilityContainer;
 	}
 	
 	public override void Awake(StateMachine stateMachine) {
-		this.stateMachine = stateMachine;
-		playerCharacterSC = stateMachine.GetComponent<PlayerCharacterSC>();
+		this._stateMachine = stateMachine;
+		_playerCharacterSC = stateMachine.GetComponent<PlayerCharacterSC>();
 	}
 	
 	public override void OnStateEnter() {
-		subActions = new List<StateAction>();
+		_subActions = new List<StateAction>();
 		// get Actions from Ability
-		abilityID = playerCharacterSC.AbilityID;
-		var ability = abilityContainer.abilities[abilityID];
+		_abilityID = _playerCharacterSC.AbilityID;
+		var ability = _abilityContainer.abilities[_abilityID];
 		StateActionSO[] actions;
 
-		if (phase == AbilityPhase.selected) {
+		if (_phase == AbilityPhase.Selected) {
 			actions = ability.selectedActions.ToArray();
 		}
 		else {
@@ -51,19 +51,19 @@ public class SuperAction : StateAction
 		
 		foreach (var actionSo in actions) {
 			var action = actionSo.CreateAction();
-			subActions.Add(action);
+			_subActions.Add(action);
 		}
 
-		foreach (var action in subActions) {
-			action.Awake(stateMachine);
+		foreach (var action in _subActions) {
+			action.Awake(_stateMachine);
 			action.OnStateEnter();
 		}
 	}
 	
 	public override void OnUpdate()
 	{
-		if (subActions != null) {
-			foreach (var action in subActions) {
+		if (_subActions != null) {
+			foreach (var action in _subActions) {
 				action.OnUpdate();
 			}	
 		}
@@ -71,7 +71,7 @@ public class SuperAction : StateAction
 	
 	public override void OnStateExit()
 	{
-		foreach (var action in subActions) {
+		foreach (var action in _subActions) {
 			action.OnStateExit();
 		}
 	}
@@ -83,6 +83,6 @@ public class SuperAction : StateAction
 }
 
 public enum AbilityPhase {
-	selected,
-	executing
+	Selected,
+	Executing
 }

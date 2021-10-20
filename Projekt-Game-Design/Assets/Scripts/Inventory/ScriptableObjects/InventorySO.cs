@@ -1,12 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Inventar
-// Enthält die Liste der Items, die dem Spieler zur Verfügung stehen
-//
+/// <summary>
+/// InventorySO
+/// Has a List of Items
+/// </summary>
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventorySO : ScriptableObject
 {
-    public List<ItemSO> Inventory = new List<ItemSO>();
+    public List<ItemSO> inventory = new List<ItemSO>();
 }

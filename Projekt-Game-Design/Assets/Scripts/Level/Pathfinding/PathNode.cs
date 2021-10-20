@@ -9,14 +9,14 @@ namespace Util {
         {
             public Edge(int cost, PathNode target)
             {
-                this.Cost = cost;
-                this.Target = target;
+                this.cost = cost;
+                this.target = target;
             }
-            public readonly int Cost;
-            public readonly PathNode Target;
+            public readonly int cost;
+            public readonly PathNode target;
         }
 
-        private GenericGrid1D<PathNode> grid;
+        private GenericGrid1D<PathNode> _grid;
         public int x;
         public int y;
 
@@ -24,12 +24,12 @@ namespace Util {
         public int hCost;
         public int fCost;
         
-        private const int MOVE_STRAIGHT_COST = 10;
-        private const int MOVE_DIAGONAL_COST = 14;
+        private const int MoveStraightCost = 10;
+        private const int MoveDiagonalCost = 14;
 
-        private int CostFactor = 2;
+        private int _costFactor = 2;
 
-        public List<Edge> Edges;
+        public List<Edge> edges;
 
         public int dist;
 
@@ -37,7 +37,7 @@ namespace Util {
         public PathNode parentNode;
         
         public PathNode(GenericGrid1D<PathNode> grid, int x, int y) {
-            this.grid = grid;
+            this._grid = grid;
             this.x = x;
             this.y = y;
             isWalkable = true;
@@ -49,42 +49,42 @@ namespace Util {
             //     return;
             // }
             
-            Edges = new List<Edge>();
+            edges = new List<Edge>();
 
                 if (this.x - 1 >= 0)
                 {
                     // Left
-                    AddEdge(x - 1, y, MOVE_STRAIGHT_COST);
+                    AddEdge(x - 1, y, MoveStraightCost);
                     if (diagonal) {
                         // Left Down
-                        if (this.y - 1 >= 0)  AddEdge(this.x - 1, this.y - 1, MOVE_DIAGONAL_COST);
+                        if (this.y - 1 >= 0)  AddEdge(this.x - 1, this.y - 1, MoveDiagonalCost);
                         // Left Up
-                        if(this.y + 1 < grid.Height) AddEdge(this.x - 1, this.y + 1, MOVE_DIAGONAL_COST);  
+                        if(this.y + 1 < _grid.Height) AddEdge(this.x - 1, this.y + 1, MoveDiagonalCost);  
                     }
                 }
 
-                if (this.x + 1 < grid.Width) {
+                if (this.x + 1 < _grid.Width) {
                     // Right
-                    AddEdge(x + 1, y, MOVE_STRAIGHT_COST);
+                    AddEdge(x + 1, y, MoveStraightCost);
                     if (diagonal) {
                         // Right Down
-                        if (this.y - 1 >= 0)  AddEdge(this.x + 1, this.y - 1, MOVE_DIAGONAL_COST);
+                        if (this.y - 1 >= 0)  AddEdge(this.x + 1, this.y - 1, MoveDiagonalCost);
                         // Right Up
-                        if(this.y + 1 < grid.Height) AddEdge(this.x + 1, this.y + 1, MOVE_DIAGONAL_COST);      
+                        if(this.y + 1 < _grid.Height) AddEdge(this.x + 1, this.y + 1, MoveDiagonalCost);      
                     }
                 }
             
                 // Down
-                if(this.y - 1 >= 0) AddEdge(this.x, this.y - 1, MOVE_STRAIGHT_COST);
+                if(this.y - 1 >= 0) AddEdge(this.x, this.y - 1, MoveStraightCost);
                 // Up
-                if (this.y + 1 < grid.Height) AddEdge(this.x, this.y + 1, MOVE_STRAIGHT_COST);
+                if (this.y + 1 < _grid.Height) AddEdge(this.x, this.y + 1, MoveStraightCost);
         }
 
-        private void AddEdge(int x, int y, int cost)
+        private void AddEdge(int posX, int posY, int cost)
         {
-            if (grid.GetGridObject(x, y).isWalkable)
+            if (_grid.GetGridObject(posX, posY).isWalkable)
             {
-                Edges.Add(new Edge(cost * CostFactor, grid.GetGridObject(x, y)));
+                edges.Add(new Edge(cost * _costFactor, _grid.GetGridObject(posX, posY)));
             }
         }
 
@@ -94,7 +94,7 @@ namespace Util {
 
         public void SetIsWalkable(bool value) {
             isWalkable = value;
-            grid.TriggerGridObjectChanged(x, y);
+            _grid.TriggerGridObjectChanged(x, y);
         }
         
         public override string ToString() {

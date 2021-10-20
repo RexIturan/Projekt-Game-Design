@@ -1,7 +1,6 @@
-﻿using System;
-using Events.ScriptableObjects;
+﻿using Events.ScriptableObjects;
 using GameManager;
-using SaveLoad.ScriptableObjects;
+using SaveSystem.ScriptableObjects;
 using UnityEngine;
 
 namespace DebugTest.DebugSceneSetup {
@@ -17,18 +16,23 @@ namespace DebugTest.DebugSceneSetup {
             loadGame.OnEventRaised += HandleLoadLevel;
         }
 
+        private void Start() {
+	        gameSc.initializedGame = true;
+	        gameSc.initializedTactics = true;
+	        gameSc.isInTacticsMode = true;
+        }
+        
+        private void OnDestroy() {
+	        loadLevel.OnEventRaised -= HandleLoadLevel;
+	        loadGame.OnEventRaised -= HandleLoadLevel;
+        }
+
         private void HandleLoadLevel() {
             saveManagerData.inputLoad = true;
         }
         
         private void HandleLoadLevel(int value) {
             HandleLoadLevel();
-        }
-
-        private void Start() {
-            gameSc.initializedGame = true;
-            gameSc.initializedTactics = true;
-            gameSc.isInTacticsMode = true;
         }
     }
 }

@@ -12,14 +12,14 @@ public class InitializedTacticsModeSO : StateConditionSO
 public class InitializedTacticsMode : Condition
 {
 	protected new InitializedTacticsModeSO OriginSO => (InitializedTacticsModeSO)base.OriginSO;
-	private GameSC gameSc;
+	private GameSC _gameSc;
 
 	public override void Awake(StateMachine stateMachine) {
-		gameSc = stateMachine.gameObject.GetComponent<GameSC>();
+		_gameSc = stateMachine.gameObject.GetComponent<GameSC>();
 	}
 
 	protected override bool Statement() {
-		return gameSc.initializedTactics;
+		return _gameSc.initializedTactics;
 	}
 	
 	public override void OnStateEnter()

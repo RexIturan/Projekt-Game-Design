@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MeshGenerator {
     public class MeshController : MonoBehaviour {

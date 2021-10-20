@@ -1,5 +1,4 @@
-﻿using System;
-using Grid;
+﻿using Grid;
 using UnityEngine;
 using WorldObjects.ScriptableObjects;
 
@@ -10,19 +9,18 @@ namespace Visual {
 
         [SerializeField] private GridDataSO globalGridData;
         [SerializeField] private WorldObjectGridContainerSO worldObjectGridContainer;
-        [SerializeField] private WorldObjectContainerSO worldObjectContainer;
 
-        private GameObject[,] prefabObjects;
+        private GameObject[,] _prefabObjects;
 
         //todo fix pls
         private void Start() {
             ClearPrefabParentChildren();
-            prefabObjects = new GameObject[100, 100];
+            _prefabObjects = new GameObject[100, 100];
         }
 
         public void DrawGrid() {
             
-            // for each instansiate prefab
+            // for each instantiate prefab
             var offset = new Vector2Int((int)globalGridData.OriginPosition.x, (int)globalGridData.OriginPosition.z); 
             
             for (int l = 0; l < worldObjectGridContainer.worldObjectGrids.Count; l++) {
@@ -33,13 +31,13 @@ namespace Visual {
                         
                         if (tile != null) {
 
-                            if (prefabObjects[x, y] == null) {
-                                prefabObjects[x,y] = GameObject.Instantiate(
+                            if (_prefabObjects[x, y] == null) {
+                                _prefabObjects[x,y] = Instantiate(
                                     worldObjectGrid.GetGridObject(x, y).type.prefab, 
                                     new Vector3(x + offset.x, l, y + offset.y), 
                                     Quaternion.identity);
                             
-                                prefabObjects[x,y].transform.SetParent(parent);    
+                                _prefabObjects[x,y].transform.SetParent(parent);    
                             }
                             
                             
@@ -67,7 +65,7 @@ namespace Visual {
             }
         }
 
-        public void clearCursor() {
+        public void ClearCursor() {
             throw new System.NotImplementedException();
         }
 

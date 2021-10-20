@@ -1,110 +1,111 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Events.ScriptableObjects;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
-public class InventoryManager : MonoBehaviour
-{
-    [SerializeField] private InventorySO playerInventory;
-    
-    [SerializeField] private EquipmentInventoryContainerSO equipmentInventory;
+public class InventoryManager : MonoBehaviour {
+	[SerializeField] private InventorySO playerInventory;
 
-    [Header("Sending Events On")]
-    [SerializeField] private IntEventChannelSO OnItemPickupEventChannel;
-    [SerializeField] private IntEventChannelSO OnItemDropEventChannel;
-    [SerializeField] private IntListEventChannelSO ChangeInventoryListEventChannel;
-    [SerializeField] private IntListEventChannelSO ChangeEquipmentInventoryListEventChannel;
+	[SerializeField] private EquipmentInventoryContainerSO equipmentInventory;
 
-    [Header("Receiving Events On")] [SerializeField]
-    private InventoryTabEventChannelSO inventoryTabChanged;
-    [SerializeField] private IntIntToEquipmentEventChannelSO toEquipmentEventChannel;
-    [SerializeField] private IntIntToInventoryEventChannelSO toInventoryEventChannel;
-    private void Awake()
-    {
-        
-        //TODO einfügen von Item Event Channels
-        inventoryTabChanged.OnEventRaised += AddItemsToPlayerOverlay;
-        toEquipmentEventChannel.OnEventRaised += HandleItemTransaktionToEquipment;
-        toInventoryEventChannel.OnEventRaised += HandleItemTransaktionToInventory;
-    }
+	[Header("Sending Events On")] [SerializeField]
+	private IntEventChannelSO onItemPickupEventChannel;
 
-    private void Start()
-    {
-        changeOverlayByItemType(EItemType.USABLE);
-        initializeEquipmentInventory();
-    }
+	[SerializeField] private IntEventChannelSO onItemDropEventChannel;
+	[SerializeField] private IntListEventChannelSO inventoryChanged_EC;
+	[SerializeField] private IntListEventChannelSO equipmentChanged_EC;
 
-    private void AddItemToPlayerInventory(ItemSO item)
-    {
-        playerInventory.Inventory.Add(item);
-        OnItemPickupEventChannel.RaiseEvent(item.id);
-    }
-    
-    private void DeleteItemInPlayerInventory(ItemSO item)
-    {
-        playerInventory.Inventory.Remove(item);
-        OnItemDropEventChannel.RaiseEvent(item.id);
-    }
+	[Header("Receiving Events On")] [SerializeField]
+	private InventoryTabEventChannelSO inventoryTabChanged;
 
-    private void AddItemsToPlayerOverlay(InventoryUIController.inventoryTab tab)
-    {
-        switch (tab)
-        {
-            case InventoryUIController.inventoryTab.NONE:
-            case InventoryUIController.inventoryTab.ITEMS:
-                changeOverlayByItemType(EItemType.USABLE);
-                break;
-            case InventoryUIController.inventoryTab.ARMORY:
-                changeOverlayByItemType(EItemType.ARMOR);
-                break;
-            case InventoryUIController.inventoryTab.WEAPONS:
-                changeOverlayByItemType(EItemType.WEAPON);
-                break;
-            
-        }
-    }
+	[SerializeField] private IntIntToEquipmentEventChannelSO toEquipmentEventChannel;
+	[SerializeField] private IntIntToInventoryEventChannelSO toInventoryEventChannel;
 
-    private void HandleItemTransaktionToInventory(int itemId, int playerId)
-    {
-        ItemSO item = equipmentInventory.Inventorys[playerId].Inventory.Find(x => x.id.Equals(itemId));
-        equipmentInventory.Inventorys[playerId].Inventory.Remove(item);
-        playerInventory.Inventory.Add(item);
-    }
-    
-    private void HandleItemTransaktionToEquipment(int itemId, int playerId)
-    {
-        ItemSO item = playerInventory.Inventory.Find(x => x.id.Equals(itemId));
-        playerInventory.Inventory.Remove(item);
-        equipmentInventory.Inventorys[playerId].Inventory.Add(item);
-    }
+	private void Awake() {
+		inventoryTabChanged.OnEventRaised += AddItemsToPlayerOverlay;
+		toEquipmentEventChannel.OnEventRaised += HandleItemTransaktionToEquipment;
+		toInventoryEventChannel.OnEventRaised += HandleItemTransactionToInventory;
+	}
 
-    private void changeOverlayByItemType(EItemType itemType)
-    {
-        List<int> list = new List<int>();
-        foreach (var item in playerInventory.Inventory.FindAll(x => (x.type & itemType) != 0))
-        {
-            list.Add(item.id);
-            //Debug.Log("Führe Initialisierung für Item Nummer: " + item.id);
-            //OnItemPickupEventChannel.RaiseEvent(item.id);
-        }
-        
-        ChangeInventoryListEventChannel.RaiseEvent(list);
-    }
+	private void OnDestroy() {
+		inventoryTabChanged.OnEventRaised -= AddItemsToPlayerOverlay;
+		toEquipmentEventChannel.OnEventRaised -= HandleItemTransaktionToEquipment;
+		toInventoryEventChannel.OnEventRaised -= HandleItemTransactionToInventory;
+	}
 
-    private void initializeEquipmentInventory()
-    {
-        List<int> list = new List<int>();
-        //TODO Für alle Spieler einbauen
-        foreach (var item in equipmentInventory.Inventorys[0].Inventory)
-        {
-            list.Add(item.id);
-            //Debug.Log("Führe Initialisierung für Item Nummer: " + item.id);
-            //OnItemPickupEventChannel.RaiseEvent(item.id);
-        }
-        ChangeEquipmentInventoryListEventChannel.RaiseEvent(list);
-    }
+	private void Start() {
+		ChangeOverlayByItemType(ItemType.Usable);
+		InitializeEquipmentInventory();
+	}
 
+	#region Implement ME Inventory Add / Remove
+
+	// TODO needs event channels that add, remove items from a inventory
+	
+	// todo Add item to Inventory(ItemSO item, InventorySO inventory)
+	private void AddItemToPlayerInventory(ItemSO item) {
+		playerInventory.inventory.Add(item);
+		onItemPickupEventChannel.RaiseEvent(item.id);
+	}
+
+	// todo rename -> remove item from Player inventory
+	private void DeleteItemInPlayerInventory(ItemSO item) {
+		playerInventory.inventory.Remove(item);
+		onItemDropEventChannel.RaiseEvent(item.id);
+	}
+
+	#endregion
+
+	private void AddItemsToPlayerOverlay(InventoryUIController.InventoryTab tab) {
+		switch ( tab ) {
+			case InventoryUIController.InventoryTab.None:
+			case InventoryUIController.InventoryTab.Items:
+				ChangeOverlayByItemType(ItemType.Usable);
+				break;
+			case InventoryUIController.InventoryTab.Armory:
+				ChangeOverlayByItemType(ItemType.Armor);
+				break;
+			case InventoryUIController.InventoryTab.Weapons:
+				ChangeOverlayByItemType(ItemType.Weapon);
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(tab), tab, "AddItemsToPlayerOverlay");
+		}
+	}
+
+	private void HandleItemTransactionToInventory(int itemId, int playerId) {
+		ItemSO item = equipmentInventory.inventories[playerId].inventory
+			.Find(x => x.id.Equals(itemId));
+		equipmentInventory.inventories[playerId].inventory.Remove(item);
+		playerInventory.inventory.Add(item);
+	}
+
+	private void HandleItemTransaktionToEquipment(int itemId, int playerId) {
+		ItemSO item = playerInventory.inventory.Find(x => x.id.Equals(itemId));
+		playerInventory.inventory.Remove(item);
+		equipmentInventory.inventories[playerId].inventory.Add(item);
+	}
+
+	private void ChangeOverlayByItemType(ItemType itemType) {
+		List<int> list = new List<int>();
+		foreach ( var item in playerInventory.inventory.FindAll(x => ( x.type & itemType ) != 0) ) {
+			list.Add(item.id);
+			//Debug.Log("Führe Initialisierung für Item Nummer: " + item.id);
+			//OnItemPickupEventChannel.RaiseEvent(item.id);
+		}
+
+		inventoryChanged_EC.RaiseEvent(list);
+	}
+
+	private void InitializeEquipmentInventory() {
+		List<int> list = new List<int>();
+		//TODO Für alle Spieler einbauen
+		foreach ( var item in equipmentInventory.inventories[0].inventory ) {
+			list.Add(item.id);
+			//Debug.Log("Führe Initialisierung für Item Nummer: " + item.id);
+			//OnItemPickupEventChannel.RaiseEvent(item.id);
+		}
+
+		equipmentChanged_EC.RaiseEvent(list);
+	}
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Events.ScriptableObjects;
 using Events.ScriptableObjects.Pathfinding;
 using UnityEngine;
 using UOP1.StateMachine;
@@ -17,22 +16,22 @@ namespace Statemachine.Enemy.Actions.Movement {
 
     public class GetReachableTiles : StateAction {
         protected new GetReachableTilesSO OriginSO => (GetReachableTilesSO) base.OriginSO;
-        private StateAction.SpecificMoment phase;
+        private readonly SpecificMoment _phase;
         
-        private EnemyCharacterSC enemyCharacterSC;
-        private PathfindingQueryEventChannelSO pathfindingQueryEvent;
+        private EnemyCharacterSC _enemyCharacterSC;
+        private readonly PathfindingQueryEventChannelSO _pathfindingQueryEvent;
 
-        public GetReachableTiles(StateAction.SpecificMoment phase, PathfindingQueryEventChannelSO pathfindingQueryEvent) {
-            this.phase = phase;
-            this.pathfindingQueryEvent = pathfindingQueryEvent;
+        public GetReachableTiles(SpecificMoment phase, PathfindingQueryEventChannelSO pathfindingQueryEvent) {
+            _phase = phase;
+            _pathfindingQueryEvent = pathfindingQueryEvent;
         }
 
         public override void Awake(StateMachine stateMachine) {
-            enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
+            _enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
         }
 
         public override void OnUpdate() {
-            if (phase == SpecificMoment.OnUpdate) {
+            if (_phase == SpecificMoment.OnUpdate) {
                 // if (enemyCharacterSC.target != null) {
                     RaisePathfindingQuery();    
                 // }
@@ -40,7 +39,7 @@ namespace Statemachine.Enemy.Actions.Movement {
         }
 
         public override void OnStateEnter() {
-            if (phase == SpecificMoment.OnStateEnter) {
+            if (_phase == SpecificMoment.OnStateEnter) {
                 // if (enemyCharacterSC.target != null) {
                     RaisePathfindingQuery();    
                 // }           
@@ -48,7 +47,7 @@ namespace Statemachine.Enemy.Actions.Movement {
         }
 
         public override void OnStateExit() {
-            if (phase == SpecificMoment.OnStateExit) {
+            if (_phase == SpecificMoment.OnStateExit) {
                 // if (enemyCharacterSC.target != null) {
                     RaisePathfindingQuery();
                 // }
@@ -57,12 +56,12 @@ namespace Statemachine.Enemy.Actions.Movement {
         
         private void RaisePathfindingQuery() {
             // Debug.Log("Calculate new reachable tiles... max distance = " + enemyCharacterSC.GetMaxMoveDistance());
-            pathfindingQueryEvent.RaiseEvent(enemyCharacterSC.gridPosition, enemyCharacterSC.GetMaxMoveDistance(),
-                saveToStateContainer);
+            _pathfindingQueryEvent.RaiseEvent(_enemyCharacterSC.gridPosition, _enemyCharacterSC.GetMaxMoveDistance(),
+                SaveToStateContainer);
         }
 
-        public void saveToStateContainer(List<PathNode> reachableTiles) {
-            enemyCharacterSC.reachableNodes = reachableTiles;
+        public void SaveToStateContainer(List<PathNode> reachableTiles) {
+            _enemyCharacterSC.reachableNodes = reachableTiles;
         }
     }
 }

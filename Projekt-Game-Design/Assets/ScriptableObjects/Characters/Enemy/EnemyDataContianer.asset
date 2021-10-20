@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9d118329c14ef18ab5e8b1a4106e7a, type: 3}
   m_Name: EnemyDataContianer
   m_EditorClassIdentifier: 
-  EnemyTypes:
+  enemyTypes:
   - {fileID: 11400000, guid: c491683a0b68f934db35972bd4517070, type: 2}
   - {fileID: 11400000, guid: fb40f1f65427b4140bec338aa87aa1f1, type: 2}
-  EnemySpawnData:
+  enemySpawnData:
   - {fileID: 11400000, guid: 0a3085fa653bccb409fbc03f1bc7e103, type: 2}

@@ -1,6 +1,5 @@
 using Events.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
@@ -15,13 +14,13 @@ public class RaiseSelectedEventSO : StateActionSO
 
 public class RaiseSelectedEvent : StateAction
 {
-    private GameObject gameObject;
-    private PlayerCharacterSC playerCharacterSc;
-    private GameObjActionEventChannelSO selectNewPlayer;
+    private GameObject _gameObject;
+    private PlayerCharacterSC _playerCharacterSc;
+    private GameObjActionEventChannelSO _selectNewPlayer;
 
     public RaiseSelectedEvent(GameObjActionEventChannelSO gameObjEventChannel)
     {
-        selectNewPlayer = gameObjEventChannel;
+        _selectNewPlayer = gameObjEventChannel;
     }
 
     public override void OnUpdate()
@@ -31,30 +30,30 @@ public class RaiseSelectedEvent : StateAction
 
     public override void Awake(StateMachine stateMachine)
     {
-        gameObject = stateMachine.gameObject;
+        _gameObject = stateMachine.gameObject;
         Debug.Log($"Awake raiseSelectedEvent {this}");
-        playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+        _playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
     
     //TODO: Muss geändert werden
     private void AbilityCallback(int value) {
         Debug.Log("Es wurde die Ability mit der ID: " + value + " gedrückt.");
-        Debug.Log(this.gameObject.GetInstanceID());
-        if (!playerCharacterSc.abilitySelected)
+        Debug.Log(this._gameObject.GetInstanceID());
+        if (!_playerCharacterSc.abilitySelected)
         {
-            playerCharacterSc.abilitySelected = true;
-            playerCharacterSc.AbilityID = value;
+            _playerCharacterSc.abilitySelected = true;
+            _playerCharacterSc.AbilityID = value;
         }
         else
         {
-            playerCharacterSc.abilitySelected = false;
-            playerCharacterSc.AbilityID = -1;
+            _playerCharacterSc.abilitySelected = false;
+            _playerCharacterSc.AbilityID = -1;
         }
     }
 
     public override void OnStateEnter()
     {
         Debug.Log("Ich bin selected");
-        selectNewPlayer.RaiseEvent(gameObject, AbilityCallback);
+        _selectNewPlayer.RaiseEvent(_gameObject, AbilityCallback);
     }
 }

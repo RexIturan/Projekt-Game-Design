@@ -24,7 +24,7 @@ namespace FieldOfView {
         public FieldOfView_Adam(Func<int, int, bool> blocksLight, Action<int, int> setVisible,
             Func<int, int, int> getDistance) {
             _blocksLight = blocksLight;
-            GetDistance = getDistance;
+            _getDistance = getDistance;
             _setVisible = setVisible;
         }
 
@@ -36,28 +36,29 @@ namespace FieldOfView {
 
         struct Slope // represents the slope Y/X as a rational number
         {
-            public Slope(int y, int x) {
-                Y = y;
-                X = x;
+	        public readonly int posX, posY;
+	        
+	        public Slope(int y, int x) {
+                posY = y;
+                posX = x;
             }
 
             public bool Greater(int y, int x) {
-                return Y * x > X * y;
+                return posY * x > posX * y;
             } // this > y/x
 
             public bool GreaterOrEqual(int y, int x) {
-                return Y * x >= X * y;
+                return posY * x >= posX * y;
             } // this >= y/x
 
+            // ReSharper disable once UnusedMember.Local
             public bool Less(int y, int x) {
-                return Y * x < X * y;
+                return posY * x < posX * y;
             } // this < y/x
 
             public bool LessOrEqual(int y, int x) {
-                return Y * x <= X * y;
+                return posY * x <= posX * y;
             } // this <= y/x
-
-            public readonly int X, Y;
         }
 
         void Compute(int octant, Vector2Int origin, int rangeLimit, int x, Slope top,
@@ -76,12 +77,12 @@ namespace FieldOfView {
             // c------d   h bottom center: (y*2-1) / (x*2)     i-m are the corners of the inner square (1/2 tile width)
             //    h
             for (;
-                x <= (int)rangeLimit;
+                x <= rangeLimit;
                 x++) // (x <= (int)rangeLimit) == (rangeLimit < 0 || x <= rangeLimit)
             {
                 // compute the Y coordinates of the top and bottom of the sector. we maintain that top > bottom
                 int topY;
-                if (top.X == 1
+                if (top.posX == 1
                 ) // if top == ?/1 then it must be 1/1 because 0/1 < top <= 1/1. this is special-cased because top
                 {
                     // starts at 1/1 and remains 1/1 as long as it doesn't hit anything, so it's a common case
@@ -93,8 +94,8 @@ namespace FieldOfView {
                     // tile, this is (x-0.5)*top+0.5, which can be computed as (x-0.5)*top+0.5 = (2(x+0.5)*top+1)/2 =
                     // ((2x+1)*top+1)/2. since top == a/b, this is ((2x+1)*a+b)/2b. if it enters a tile at one of the left
                     // corners, it will round up, so it'll enter from the bottom-left and never the top-left
-                    topY = ((x * 2 - 1) * top.Y + top.X) /
-                           (top.X * 2); // the Y coordinate of the tile entered from the left
+                    topY = ((x * 2 - 1) * top.posY + top.posX) /
+                           (top.posX * 2); // the Y coordinate of the tile entered from the left
                     // now it's possible that the vector passes from the left side of the tile up into the tile above before
                     // exiting from the right side of this column. so we may need to increment topY
                     if (BlocksLight(x, topY, octant,
@@ -144,7 +145,7 @@ namespace FieldOfView {
                 }
 
                 int bottomY;
-                if (bottom.Y == 0
+                if (bottom.posY == 0
                 ) // if bottom == 0/?, then it's hitting the tile at Y=0 dead center. this is special-cased because
                 {
                     // bottom.Y starts at zero and remains zero as long as it doesn't hit anything, so it's common
@@ -152,8 +153,8 @@ namespace FieldOfView {
                 }
                 else // bottom > 0
                 {
-                    bottomY = ((x * 2 - 1) * bottom.Y + bottom.X) /
-                              (bottom.X *
+                    bottomY = ((x * 2 - 1) * bottom.posY + bottom.posX) /
+                              (bottom.posX *
                                2); // the tile that the bottom vector enters from the left
                     // code below assumes that if a tile is a wall then it's visible, so if the tile contains a wall we have to
                     // ensure that the bottom vector actually hits the wall shape. it misses the wall shape if the top-left corner
@@ -170,11 +171,11 @@ namespace FieldOfView {
                 // go through the tiles in the column now that we know which ones could possibly be visible
                 int wasOpaque = -1; // 0:false, 1:true, -1:not applicable
                 for (int y = topY;
-                    (int)y >= (int)bottomY;
+                    y >= bottomY;
                     y--) // use a signed comparison because y can wrap around when decremented
                 {
                     if (rangeLimit < 0 ||
-                        GetDistance(x, y) <=
+                        _getDistance(x, y) <=
                         rangeLimit) // skip the tile if it's out of visual range
                     {
                         bool isOpaque = BlocksLight(x, y, octant, origin);
@@ -308,7 +309,7 @@ namespace FieldOfView {
                     break;
             }
 
-            return _blocksLight((int)nx, (int)ny);
+            return _blocksLight(nx, ny);
         }
 
         void SetVisible(int x, int y, int octant, Vector2Int origin) {
@@ -351,8 +352,8 @@ namespace FieldOfView {
             _setVisible(nx, ny);
         }
 
-        readonly Func<int, int, bool> _blocksLight;
-        readonly Func<int, int, int> GetDistance;
-        readonly Action<int, int> _setVisible;
+        private readonly Func<int, int, bool> _blocksLight;
+        private readonly Func<int, int, int> _getDistance;
+        private readonly Action<int, int> _setVisible;
     }
 }

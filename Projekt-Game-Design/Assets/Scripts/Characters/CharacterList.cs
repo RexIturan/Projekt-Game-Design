@@ -1,9 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// stores two lists of game objects, players and enemies
-// 
+/// <summary>
+/// Class <c>CharacterList</c>
+/// Is intended as a Component of a GameObject in a Location Scene 
+/// stores two lists of GameObjects, players and enemies
+/// </summary>
 public class CharacterList : MonoBehaviour
 {
     [SerializeField] public List<GameObject> playerContainer;

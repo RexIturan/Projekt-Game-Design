@@ -11,7 +11,8 @@ name == platzhalter
 type                | convention | example
 ---                 | ---        | ---
 Scriptable Object   | nameSO     | ObjectSO
-Enum                | Ename      | EWochentag
+Enum                | Name       | Wochentag
+EnumFlags           | Name       | Wochentag
 Interface           | Iname      | ILinkedList
 EventChannelInstance| nameEC   | SaveGameEC
 Container für Statemachine| nameSC   | PlayerCharacterSC

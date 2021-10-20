@@ -1,38 +1,35 @@
-﻿using System;
-using Events.ScriptableObjects;
-using Grid;
+﻿using Grid;
 using Level.Grid;
 using UnityEngine;
 
 namespace FieldOfView
 {
-    
     public class FieldOfView
     {
-        private readonly GridContainerSO grid;
-        private readonly TileTypeContainerSO tileTypeContainer;
+        private readonly GridContainerSO _grid;
+        private readonly TileTypeContainerSO _tileTypeContainer;
 
         // debug
-        private readonly bool debug = false;
-        private readonly int visionRangeTest;
-        private readonly Vector2Int startPosTest;
+        private readonly bool _debug;
+        private readonly int _visionRangeTest;
+        private readonly Vector2Int _startPosTest;
 
         public FieldOfView(GridContainerSO grid, TileTypeContainerSO tileTypeContainer, bool debug = false, int visionRangeTest = 0, Vector2Int startPosTest = default) {
-            this.grid = grid;
-            this.tileTypeContainer = tileTypeContainer;
+            this._grid = grid;
+            this._tileTypeContainer = tileTypeContainer;
             
             //debug
-            this.debug = debug;
-            this.visionRangeTest = visionRangeTest;
-            this.startPosTest = startPosTest;
+            this._debug = debug;
+            this._visionRangeTest = visionRangeTest;
+            this._startPosTest = startPosTest;
         }
         
-        public bool[,] GetVisibleTiles(int visionRange, Vector2Int startTile, ETileFlags blocking)
+        public bool[,] GetVisibleTiles(int visionRange, Vector2Int startTile, TileProperties blocking)
         {
             bool[,] visibleTiles = new bool[2*visionRange+1, 2*visionRange+1];
             
-            int maxwidth = grid.tileGrids[1].Width;
-            int maxheight = grid.tileGrids[1].Height;
+            int maxwidth = _grid.tileGrids[1].Width;
+            int maxheight = _grid.tileGrids[1].Height;
 
             int lowerX = Mathf.Max(0, startTile[0] - visionRange);
             int upperX = Mathf.Min(maxwidth, startTile[0] + visionRange);
@@ -50,15 +47,15 @@ namespace FieldOfView
                 }
             }
 
-            if (debug)
+            if (_debug)
             {
                 string str = "\n";
                 for (int i = lowerX; i < upperX; i++)
                 {
                     for (int j = lowerY; j < upperY; j++)
                     {
-                        int tileType = grid.tileGrids[1].GetGridObject(i, j).tileTypeID;
-                        if (tileTypeContainer.tileTypes[tileType].Flags.HasFlag(blocking))
+                        int tileType = _grid.tileGrids[1].GetGridObject(i, j).tileTypeID;
+                        if (_tileTypeContainer.tileTypes[tileType].Properties.HasFlag(blocking))
                         {
                             str += "|b";
                         }
@@ -82,7 +79,7 @@ namespace FieldOfView
             return visibleTiles;
         }
 
-        private bool CheckTile(int x1, int y1, Vector2Int startTile, ETileFlags blocking)
+        private bool CheckTile(int x1, int y1, Vector2Int startTile, TileProperties blocking)
         {
             int x0 = startTile[0];
             int y0 = startTile[1];
@@ -97,8 +94,8 @@ namespace FieldOfView
                 
                 if (x0==x1 && y0==y1) return true;
                 
-                var tileType = grid.tileGrids[1].GetGridObject(x0, y0).tileTypeID;
-                if (tileTypeContainer.tileTypes[tileType].Flags.HasFlag(blocking))
+                var tileType = _grid.tileGrids[1].GetGridObject(x0, y0).tileTypeID;
+                if (_tileTypeContainer.tileTypes[tileType].Properties.HasFlag(blocking))
                 {
                     return false;
                 }

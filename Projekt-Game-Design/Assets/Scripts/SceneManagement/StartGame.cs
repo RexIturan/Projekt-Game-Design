@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using Events.ScriptableObjects;
-using SaveLoad;
+using SaveSystem;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace SceneManagement {
     public class StartGame : MonoBehaviour {
@@ -18,8 +16,8 @@ namespace SceneManagement {
 
         private void Start()
         {
-            // try loading savefile
-            Debug.Log("StartGame: try loading savefile");
+            // try loading save file
+            Debug.Log("StartGame: try loading save file");
             _hasSaveData = saveSystem.LoadSaveDataFromDisk(saveSystem.saveManagerData.path);
             
             if (_hasSaveData)

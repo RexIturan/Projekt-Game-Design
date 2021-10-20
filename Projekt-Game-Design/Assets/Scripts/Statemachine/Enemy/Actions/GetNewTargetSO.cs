@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Characters.ScriptableObjects;
-using Events.ScriptableObjects;
 using Events.ScriptableObjects.Pathfinding;
 using UnityEngine;
 using UOP1.StateMachine;
@@ -13,21 +11,21 @@ namespace Statemachine.Enemy.Actions {
         menuName = "State Machines/Actions/Enemy/Get New Target")]
     public class GetNewTargetSO : StateActionSO {
         [SerializeField] private StateAction.SpecificMoment phase;
-        [SerializeField] private FindPathBatch_EventChannel_SO findPathBatchEC;
+        [SerializeField] private FindPathBatchEventChannelSO findPathBatchEC;
         public override StateAction CreateAction() => new GetNewTarget(phase, findPathBatchEC);
     }
 
     public class GetNewTarget : StateAction {
         protected new GetNewTargetSO OriginSO => (GetNewTargetSO) base.OriginSO;
 
-        private EnemyCharacterSC enemyCharacterSC;
-        private CharacterList characterList;
-        private FindPathBatch_EventChannel_SO findPathBatchEC;
-        private StateAction.SpecificMoment phase;
+        private EnemyCharacterSC _enemyCharacterSC;
+        private CharacterList _characterList;
+        private readonly FindPathBatchEventChannelSO _findPathBatchEC;
+        private readonly SpecificMoment _phase;
 
-        public GetNewTarget(StateAction.SpecificMoment phase, FindPathBatch_EventChannel_SO findPathBatchEc) {
-            this.phase = phase;
-            findPathBatchEC = findPathBatchEc;
+        public GetNewTarget(SpecificMoment phase, FindPathBatchEventChannelSO findPathBatchEc) {
+            _phase = phase;
+            _findPathBatchEC = findPathBatchEc;
         }
 
         private void Callback(List<List<PathNode>> paths) {
@@ -51,7 +49,7 @@ namespace Statemachine.Enemy.Actions {
                 }
             }
 
-            foreach (var player in characterList.playerContainer) {
+            foreach (var player in _characterList.playerContainer) {
                 if (shortest.Count > 0) {
                     var node = shortest[shortest.Count - 1];
                     var pos = new Vector2Int(node.x, node.y);
@@ -59,13 +57,13 @@ namespace Statemachine.Enemy.Actions {
                     var playerCharacterSc = player.GetComponent<PlayerCharacterSC>();
                     var playerPos = new Vector2Int(playerCharacterSc.gridPosition.x, playerCharacterSc.gridPosition.z);
                     if (playerPos == pos) {
-                        enemyCharacterSC.target = playerCharacterSc;
+                        _enemyCharacterSC.target = playerCharacterSc;
                         Debug.Log("target found");
                     }
                 }
                 else {
                     Debug.Log("no Player found");
-                    enemyCharacterSC.isDone = true;
+                    _enemyCharacterSC.isDone = true;
                 }
             }
 
@@ -73,37 +71,37 @@ namespace Statemachine.Enemy.Actions {
         }
 
         public override void Awake(StateMachine stateMachine) {
-            enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
+            _enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
         }
 
         public override void OnUpdate() {
-            if (phase == SpecificMoment.OnUpdate) {
+            if (_phase == SpecificMoment.OnUpdate) {
                 RaiseFindPathBatchEvent();    
             }
         }
 
         public override void OnStateEnter() {
-            Debug.Log($"new target on enter {phase}");
-            if (phase == SpecificMoment.OnStateEnter) {
+            Debug.Log($"new target on enter {_phase}");
+            if (_phase == SpecificMoment.OnStateEnter) {
                 RaiseFindPathBatchEvent();    
             }
         }
 
         public override void OnStateExit() {
-            if (phase == SpecificMoment.OnStateExit) {
+            if (_phase == SpecificMoment.OnStateExit) {
                 RaiseFindPathBatchEvent();    
             }
         }
 
         private void RaiseFindPathBatchEvent() {
-            characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
+            _characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
             List<Tuple<Vector3Int, Vector3Int>> coords = new List<Tuple<Vector3Int, Vector3Int>>();
             // for each character get path to them
-            foreach (var player in characterList.playerContainer) {
-                coords.Add(new Tuple<Vector3Int, Vector3Int>(enemyCharacterSC.gridPosition, player.GetComponent<PlayerCharacterSC>().gridPosition));
+            foreach (var player in _characterList.playerContainer) {
+                coords.Add(new Tuple<Vector3Int, Vector3Int>(_enemyCharacterSC.gridPosition, player.GetComponent<PlayerCharacterSC>().gridPosition));
             }
 
-            findPathBatchEC.RaiseEvent(coords, Callback);
+            _findPathBatchEC.RaiseEvent(coords, Callback);
         }
     }
 }

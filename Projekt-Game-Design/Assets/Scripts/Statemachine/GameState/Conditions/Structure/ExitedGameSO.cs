@@ -12,14 +12,14 @@ public class ExitedGameSO : StateConditionSO
 public class ExitedGame : Condition
 {
 	protected new ExitedGameSO OriginSO => (ExitedGameSO)base.OriginSO;
-	private GameSC gameSc;
+	private GameSC _gameSc;
 
 	public override void Awake(StateMachine stateMachine) {
-		gameSc = stateMachine.gameObject.GetComponent<GameSC>();
+		_gameSc = stateMachine.gameObject.GetComponent<GameSC>();
 	}
 
 	protected override bool Statement() {
-		return gameSc.exited;
+		return _gameSc.exited;
 	}
 	
 	public override void OnStateEnter()

@@ -1,5 +1,4 @@
-﻿using Characters.ScriptableObjects;
-using UnityEngine;
+﻿using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
@@ -11,8 +10,6 @@ public class ActivateEnemiesSO : StateActionSO {
 
 public class ActivateEnemies_OnEnter : StateAction {
     protected new ActivateEnemiesSO OriginSO => (ActivateEnemiesSO)base.OriginSO;
-
-    public ActivateEnemies_OnEnter() { }
 
     public override void Awake(StateMachine stateMachine) { }
 

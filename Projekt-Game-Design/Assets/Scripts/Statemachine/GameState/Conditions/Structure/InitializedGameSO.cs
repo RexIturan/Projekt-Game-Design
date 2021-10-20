@@ -12,14 +12,14 @@ public class InitializedGameSO : StateConditionSO
 public class InitializedGame : Condition
 {
 	protected new InitializedGameSO OriginSO => (InitializedGameSO)base.OriginSO;
-	private GameSC gameSc;
+	private GameSC _gameSc;
 
 	public override void Awake(StateMachine stateMachine) {
-		gameSc = stateMachine.gameObject.GetComponent<GameSC>();
+		_gameSc = stateMachine.gameObject.GetComponent<GameSC>();
 	}
 
 	protected override bool Statement() {
-		return gameSc.initializedGame;
+		return _gameSc.initializedGame;
 	}
 	
 	public override void OnStateEnter()

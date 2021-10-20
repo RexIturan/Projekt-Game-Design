@@ -9,10 +9,8 @@ namespace Events.ScriptableObjects {
         
         public event Action<List<int>> OnEventRaised;
 
-        public void RaiseEvent(List<int> value)
-        {
-            if (OnEventRaised != null)
-                OnEventRaised.Invoke(value);
+        public void RaiseEvent(List<int> value) {
+	        OnEventRaised?.Invoke(value);
         }
     }
 }

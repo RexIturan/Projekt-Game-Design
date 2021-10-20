@@ -4,11 +4,12 @@ using Events.ScriptableObjects.Core;
 using UnityEngine;
 using Util;
 
-// event calls Pathfinder. Pathfinder calculates Pathnodes and calls 
-// callback method with Path as an argument
-//
 namespace Events.ScriptableObjects.Pathfinding
 {
+	/// <summary>
+	///	event calls Pathfinder. Pathfinder calculates Pathnodes and calls
+	///	callback method with Path as an argument
+	/// </summary>
     [CreateAssetMenu(menuName = "Events/PathfindingQueryEventChannel")]
     public class PathfindingQueryEventChannelSO : EventChannelBaseSO
     {

@@ -2,7 +2,6 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
-using Pathfinding;
 
 [CreateAssetMenu(fileName = "ClearReachableTiles", menuName = "State Machines/Actions/Player/ClearReachableTiles")]
 public class ClearReachableTilesOnExitSO : StateActionSO
@@ -13,10 +12,10 @@ public class ClearReachableTilesOnExitSO : StateActionSO
 
 public class ClearReachableTilesOnExit : StateAction
 {
-    private VoidEventChannelSO clearReachableTilesEC;
+    private VoidEventChannelSO _clearReachableTilesEC;
     
     public ClearReachableTilesOnExit(VoidEventChannelSO clearReachableTilesEC) {
-        this.clearReachableTilesEC = clearReachableTilesEC;
+        this._clearReachableTilesEC = clearReachableTilesEC;
     }
 
     public override void OnUpdate()
@@ -35,6 +34,6 @@ public class ClearReachableTilesOnExit : StateAction
     public override void OnStateExit()
     {
         // Debug.Log("Clearing reachable tiles.");
-        clearReachableTilesEC.RaiseEvent();
+        _clearReachableTilesEC.RaiseEvent();
     }
 }

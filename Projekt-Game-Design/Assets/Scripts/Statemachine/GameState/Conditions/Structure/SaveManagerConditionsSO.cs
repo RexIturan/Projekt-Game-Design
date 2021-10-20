@@ -2,53 +2,51 @@
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
-using static ESaveManagerAction;
-using static ESaveManagerTiming;
+using static SaveManagerAction;
+using static SaveManagerTiming;
 
 [CreateAssetMenu(fileName = "SaveManagerConditions", menuName = "State Machines/Conditions/GameState/Save Manager Conditions")]
 public class SaveManagerConditionsSO : StateConditionSO {
-	[SerializeField] private ESaveManagerTiming timing;
-	[SerializeField] private ESaveManagerAction action;
+	[SerializeField] private SaveManagerTiming timing;
+	[SerializeField] private SaveManagerAction action;
 	protected override Condition CreateCondition() => new SaveManagerConditions(timing, action);
 }
 
 public class SaveManagerConditions : Condition
 {
 	protected new SaveManagerConditionsSO OriginSO => (SaveManagerConditionsSO)base.OriginSO;
-	private readonly ESaveManagerTiming timing;
-	private readonly ESaveManagerAction action;
-	private GameSC gameSc;
+	private readonly SaveManagerTiming _timing;
+	private readonly SaveManagerAction _action;
+	private GameSC _gameSc;
 	
-	public SaveManagerConditions(ESaveManagerTiming timing, ESaveManagerAction action) {
-		this.timing = timing;
-		this.action = action;
+	public SaveManagerConditions(SaveManagerTiming timing, SaveManagerAction action) {
+		this._timing = timing;
+		this._action = action;
 	}
 
 	public override void Awake(StateMachine stateMachine) {
-		gameSc = stateMachine.gameObject.GetComponent<GameSC>();
+		_gameSc = stateMachine.gameObject.GetComponent<GameSC>();
 	}
 	
 	protected override bool Statement() {
 		bool statement = false;
 		
-		switch (timing, action) {
-			case (input, load):
-				statement = gameSc.saveManagerData.inputLoad;
+		switch (timing: _timing, action: _action) {
+			case (SaveManagerTiming.Input, Load):
+				statement = _gameSc.saveManagerData.inputLoad;
 				break;
-			case (input, newGame):
-				statement = gameSc.saveManagerData.inputNewGame;
+			case (SaveManagerTiming.Input, NewGame):
+				statement = _gameSc.saveManagerData.inputNewGame;
 				break;
-			case (input, save):
-				statement = gameSc.saveManagerData.inputSave;
+			case (SaveManagerTiming.Input, Save):
+				statement = _gameSc.saveManagerData.inputSave;
 				break;
-			case (finished, save):
-				statement = gameSc.saveManagerData.saved;
+			case (Finished, Save):
+				statement = _gameSc.saveManagerData.saved;
 				break;
-			case (finished, load):
-			case (finished, newGame):
-				statement = gameSc.saveManagerData.loaded;
-				break;
-			default:
+			case (Finished, Load):
+			case (Finished, NewGame):
+				statement = _gameSc.saveManagerData.loaded;
 				break;
 		}
 		return statement;
@@ -63,13 +61,13 @@ public class SaveManagerConditions : Condition
 	}
 }
 
-public enum ESaveManagerTiming {
-	input,
-	finished
+public enum SaveManagerTiming {
+	Input,
+	Finished
 }
 
-public enum ESaveManagerAction {
-	load,
-	save,
-	newGame
+public enum SaveManagerAction {
+	Load,
+	Save,
+	NewGame
 }

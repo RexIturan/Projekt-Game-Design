@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-// Inventar
-// Enthält die Liste der Equipment Items, die einem Charakter zur Verfügung stehen
-//
+/// <summary>
+/// Equipment Inventory SO
+/// Has a List of Item, with certain constraints
+/// An Equipment Inventory represents all items that are equipped by a Character 
+/// </summary>
 [CreateAssetMenu(fileName = "New EquipmentInventory", menuName = "Inventory/EquipmentInventory")]
-public class EquipmentInventorySO : ScriptableObject
-{
-    public List<ItemSO> Inventory = new List<ItemSO>(7);
+public class EquipmentInventorySO : ScriptableObject {
+	private const int MaxEquipmentInventorySize = 7;
+	// todo add item constraints
+    public List<ItemSO> inventory = new List<ItemSO>(MaxEquipmentInventorySize);
 }

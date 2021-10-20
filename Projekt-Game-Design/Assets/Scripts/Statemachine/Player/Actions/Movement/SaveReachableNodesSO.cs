@@ -1,4 +1,3 @@
-using Events.ScriptableObjects;
 using System.Collections.Generic;
 using Events.ScriptableObjects.Pathfinding;
 using UnityEngine;
@@ -16,12 +15,12 @@ public class SaveReachableNodesSO : StateActionSO
 
 public class SaveReachableNodes : StateAction
 {
-    private PlayerCharacterSC playerStateContainer;
-    private PathfindingQueryEventChannelSO pathfindingQueryEvent;
+    private PlayerCharacterSC _playerStateContainer;
+    private PathfindingQueryEventChannelSO _pathfindingQueryEvent;
 
     public SaveReachableNodes(PathfindingQueryEventChannelSO pathfindingQueryEvent)
     {
-        this.pathfindingQueryEvent = pathfindingQueryEvent;
+        this._pathfindingQueryEvent = pathfindingQueryEvent;
     }
 
     public override void OnUpdate()
@@ -31,17 +30,17 @@ public class SaveReachableNodes : StateAction
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+        _playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
 
     public override void OnStateEnter()
     {
         // Debug.Log("Calculate new reachable tiles... max distance = " + playerStateContainer.GetMaxMoveDistance());
-        pathfindingQueryEvent.RaiseEvent(playerStateContainer.gridPosition, playerStateContainer.GetMaxMoveDistance(), saveToStateContainer);
+        _pathfindingQueryEvent.RaiseEvent(_playerStateContainer.gridPosition, _playerStateContainer.GetMaxMoveDistance(), SaveToStateContainer);
     }
 
-    public void saveToStateContainer(List<PathNode> reachableTiles)
+    public void SaveToStateContainer(List<PathNode> reachableTiles)
     {
-        playerStateContainer.reachableTiles = reachableTiles;
+        _playerStateContainer.reachableTiles = reachableTiles;
     }
 }

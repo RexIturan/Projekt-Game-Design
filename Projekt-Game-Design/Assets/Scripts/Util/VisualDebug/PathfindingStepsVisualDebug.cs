@@ -25,19 +25,19 @@ namespace Util.VisualDebug {
         [SerializeField] private Transform parent;
         [SerializeField] private Transform prefab;
 
-        private bool autoShowSnapshots;
-        private float autoShowSnapshotsTimer;
+        private bool _autoShowSnapshots;
+        private float _autoShowSnapshotsTimer;
         
-        private List<GridSnapshotAction> gridSnapshotActionList;
-        private PathfindingDebugTileData[,] visualNodes;
+        private List<GridSnapshotAction> _gridSnapshotActionList;
+        private PathfindingDebugTileData[,] _visualNodes;
 
 
         private void Awake() {
             Instance = this;
             // visualNodeList = new List<Transform>();
-            gridSnapshotActionList = new List<GridSnapshotAction>();
-            inputReader.stepEvent += HandleOnStepEvent;
-            inputReader.showFullPathEvent += HandleOnShowFullPathEvent;
+            _gridSnapshotActionList = new List<GridSnapshotAction>();
+            inputReader.StepEvent += HandleOnStepEvent;
+            inputReader.ShowFullPathEvent += HandleOnShowFullPathEvent;
         }
 
         private void Start() {
@@ -45,12 +45,12 @@ namespace Util.VisualDebug {
         }
 
         private void OnDestroy() {
-            inputReader.stepEvent -= HandleOnStepEvent;
-            inputReader.showFullPathEvent -= HandleOnShowFullPathEvent;
+            inputReader.StepEvent -= HandleOnStepEvent;
+            inputReader.ShowFullPathEvent -= HandleOnShowFullPathEvent;
         }
 
         public void Setup(GenericGrid1D<PathNode> grid) {
-            visualNodes = new PathfindingDebugTileData[grid.Width, grid.Height];
+            _visualNodes = new PathfindingDebugTileData[grid.Width, grid.Height];
 
             for (int x = 0; x < grid.Width; x++) {
                 for (int y = 0; y < grid.Height; y++) {
@@ -59,7 +59,7 @@ namespace Util.VisualDebug {
                     gridPosition += globalGridData.OriginPosition;
                     gridPosition += Vector3.up;
                     Transform visualNode = CreateVisualNode(gridPosition);
-                    visualNodes[x, y] = visualNode.GetComponent<PathfindingDebugTileData>();
+                    _visualNodes[x, y] = visualNode.GetComponent<PathfindingDebugTileData>();
                     // visualNodeArray[x, y] = visualNode;
                 }
             }
@@ -67,14 +67,14 @@ namespace Util.VisualDebug {
         }
         
         private void Update() {
-            if (autoShowSnapshots) {
+            if (_autoShowSnapshots) {
                 float autoShowSnapshotsTimerMax = .05f;
-                autoShowSnapshotsTimer -= Time.deltaTime;
-                if (autoShowSnapshotsTimer <= 0f) {
-                    autoShowSnapshotsTimer += autoShowSnapshotsTimerMax;
+                _autoShowSnapshotsTimer -= Time.deltaTime;
+                if (_autoShowSnapshotsTimer <= 0f) {
+                    _autoShowSnapshotsTimer += autoShowSnapshotsTimerMax;
                     ShowNextSnapshot();
-                    if (gridSnapshotActionList.Count == 0) {
-                        autoShowSnapshots = false;
+                    if (_gridSnapshotActionList.Count == 0) {
+                        _autoShowSnapshots = false;
                     }
                 }
             }
@@ -85,13 +85,13 @@ namespace Util.VisualDebug {
         }
         
         private void HandleOnShowFullPathEvent() {
-            autoShowSnapshots = true;
+            _autoShowSnapshots = true;
         }
         
         private void ShowNextSnapshot() {
-            if (gridSnapshotActionList.Count > 0) {
-                GridSnapshotAction gridSnapshotAction = gridSnapshotActionList[0];
-                gridSnapshotActionList.RemoveAt(0);
+            if (_gridSnapshotActionList.Count > 0) {
+                GridSnapshotAction gridSnapshotAction = _gridSnapshotActionList[0];
+                _gridSnapshotActionList.RemoveAt(0);
                 gridSnapshotAction.TriggerAction();
             }
         }
@@ -117,7 +117,7 @@ namespace Util.VisualDebug {
                     int tmpY = y;
 
                     gridSnapshotAction.AddAction(() => {
-                        var visualNode = visualNodes[tmpX, tmpY];
+                        var visualNode = _visualNodes[tmpX, tmpY];
                         SetupVisualNode(visualNode, gCost, hCost, fCost);
 
                         Color backgroundColor = defaultBackgroundColor;
@@ -139,7 +139,7 @@ namespace Util.VisualDebug {
                 }
             }
 
-            gridSnapshotActionList.Add(gridSnapshotAction);
+            _gridSnapshotActionList.Add(gridSnapshotAction);
         }
 
         public void TakeSnapshotFinalPath(GenericGrid1D<PathNode> grid, List<PathNode> path) {
@@ -159,7 +159,7 @@ namespace Util.VisualDebug {
                     int tmpY = y;
 
                     gridSnapshotAction.AddAction(() => {
-                        var visualNode = visualNodes[tmpX, tmpY];
+                        var visualNode = _visualNodes[tmpX, tmpY];
                         SetupVisualNode(visualNode, gCost, hCost, fCost);
 
                         Color backgroundColor;
@@ -176,11 +176,11 @@ namespace Util.VisualDebug {
                 }
             }
 
-            gridSnapshotActionList.Add(gridSnapshotAction);
+            _gridSnapshotActionList.Add(gridSnapshotAction);
         }
         
         private void HideNodeVisuals() {
-            foreach (var node in visualNodes) {
+            foreach (var node in _visualNodes) {
                 ResetVisualNode(node);
             }
         }
@@ -203,7 +203,7 @@ namespace Util.VisualDebug {
         }
 
         public void ClearSnapshots() {
-            gridSnapshotActionList.Clear();
+            _gridSnapshotActionList.Clear();
         }
         
         private struct DebugTile {
@@ -214,18 +214,18 @@ namespace Util.VisualDebug {
         }
 
         private class GridSnapshotAction {
-            private Action action;
+            private Action _action;
 
             public GridSnapshotAction() {
-                action = () => { };
+                _action = () => { };
             }
 
             public void AddAction(Action action) {
-                this.action += action;
+                this._action += action;
             }
 
             public void TriggerAction() {
-                action();
+                _action();
             }
         }
     }

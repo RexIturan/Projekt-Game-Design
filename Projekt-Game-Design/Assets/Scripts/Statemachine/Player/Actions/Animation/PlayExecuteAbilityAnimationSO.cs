@@ -1,4 +1,3 @@
-using Events.ScriptableObjects;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -12,12 +11,7 @@ public class PlayExecuteAbilityAnimationSO : StateActionSO
 
 public class PlayExecuteAbilityAnimation : StateAction
 {
-    private StateMachine stateMachine;
-
-    public PlayExecuteAbilityAnimation()
-    {
-
-    }
+    private StateMachine _stateMachine;
 
     public override void OnUpdate()
     {
@@ -25,13 +19,13 @@ public class PlayExecuteAbilityAnimation : StateAction
 
     public override void Awake(StateMachine stateMachine)
     {
-        this.stateMachine = stateMachine;
+        this._stateMachine = stateMachine;
     }
 
     public override void OnStateEnter()
     {
         Debug.Log("Ich faerbe mich jetzt rot (execution)");
-        MeshRenderer rend = stateMachine.GetComponent<MeshRenderer>();
+        MeshRenderer rend = _stateMachine.GetComponent<MeshRenderer>();
         rend.material.color = Color.red;
     }
 }

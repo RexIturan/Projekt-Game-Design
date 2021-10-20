@@ -17,44 +17,44 @@ public class MoveToTargetSO : StateActionSO
 
 public class MoveToTarget : StateAction
 {
-    private const float TIME_PER_STEP = 0.2f;
+    private const float TimePerStep = 0.2f;
 
     protected new MoveToTargetSO OriginSO => (MoveToTargetSO)base.OriginSO;
     
-    private PlayerCharacterSC playerCharacterSC;
-    private float timeSinceLastStep = 0;
-    private List<PathNode> path;
-    private int currentStep;
-    private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
+    private PlayerCharacterSC _playerCharacterSC;
+    private float _timeSinceLastStep;
+    private List<PathNode> _path;
+    private int _currentStep;
+    private PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;
 
     public MoveToTarget(PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel)
     {
-        this.pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel; 
+        this._pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel; 
     }
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerCharacterSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+        _playerCharacterSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
     
     public override void OnUpdate()
     {
-        if(currentStep >= path.Count)
-            playerCharacterSC.movementDone = true;
+        if(_currentStep >= _path.Count)
+            _playerCharacterSC.movementDone = true;
 
-        if (!playerCharacterSC.movementDone)
+        if (!_playerCharacterSC.movementDone)
         {
-            timeSinceLastStep += Time.deltaTime;
-            if (timeSinceLastStep >= TIME_PER_STEP)
+            _timeSinceLastStep += Time.deltaTime;
+            if (_timeSinceLastStep >= TimePerStep)
             {
-                timeSinceLastStep -= TIME_PER_STEP;
+                _timeSinceLastStep -= TimePerStep;
 
-                playerCharacterSC.gridPosition = new Vector3Int(path[currentStep].x,
+                _playerCharacterSC.gridPosition = new Vector3Int(_path[_currentStep].x,
                                                        1,
-                                                       path[currentStep].y);
-                playerCharacterSC.TransformToPosition();
+                                                       _path[_currentStep].y);
+                _playerCharacterSC.TransformToPosition();
                 
-                currentStep++;
+                _currentStep++;
             }
         }
     }
@@ -62,22 +62,22 @@ public class MoveToTarget : StateAction
     public override void OnStateEnter()
     {
 
-        Vector3Int startNode = new Vector3Int(playerCharacterSC.gridPosition.x,
-                                            playerCharacterSC.gridPosition.z,
+        Vector3Int startNode = new Vector3Int(_playerCharacterSC.gridPosition.x,
+                                            _playerCharacterSC.gridPosition.z,
                                             0);
-        Vector3Int endNode = new Vector3Int(playerCharacterSC.movementTarget.x,
-                                            playerCharacterSC.movementTarget.y,
+        Vector3Int endNode = new Vector3Int(_playerCharacterSC.movementTarget.x,
+                                            _playerCharacterSC.movementTarget.y,
                                             0);
 
-        pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, savePath);
+        _pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, SavePath);
 
-        timeSinceLastStep = 0;
-        currentStep = 1;
-        playerCharacterSC.movementDone = false;
+        _timeSinceLastStep = 0;
+        _currentStep = 1;
+        _playerCharacterSC.movementDone = false;
     }
 
-    private void savePath(List<PathNode> path)
+    private void SavePath(List<PathNode> path)
     {
-        this.path = path;
+        this._path = path;
     }
 }

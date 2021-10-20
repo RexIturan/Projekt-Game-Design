@@ -1,5 +1,4 @@
-﻿using System;
-using Level.Grid;
+﻿using Level.Grid;
 using UnityEngine;
 
 namespace Grid {
@@ -7,13 +6,13 @@ namespace Grid {
     public class TileTypeSO : ScriptableObject {
         public new string name;
         public int id;
-        public ETileFlags flags;
+        public TileProperties properties;
         public int movementCost;
         public Color color;
 
 
         public string Name => name;
-        public ETileFlags Flags => flags;
+        public TileProperties Properties => properties;
         public int MovementCost => movementCost;
         public Color Color => color;
     }

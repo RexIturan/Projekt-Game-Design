@@ -11,7 +11,7 @@ using Graph;
 
 namespace Pathfinding {
     public class PathfindingController : MonoBehaviour {
-        private Pathfinding pathfinding;
+        private Pathfinding _pathfinding;
         
         [Header("SO References")]
         [SerializeField] private GridDataSO globalGridData;
@@ -28,34 +28,26 @@ namespace Pathfinding {
         [Header("Receiving events on")]
         [SerializeField] private PathfindingQueryEventChannelSO pathfindingAllNodesQueryEventChannel;
         [SerializeField] private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
-        [SerializeField] private FindPathBatch_EventChannel_SO findPathBatchEC;
+        [SerializeField] private FindPathBatchEventChannelSO findPathBatchEC;
         
-        private Vector2Int clickedPos;
-        private List<PathNode> reachableNodes;
+        private Vector2Int _clickedPos = Vector2Int.zero;
+        private List<PathNode> _reachableNodes;
 
         private void Awake() {
-            pathfindingAllNodesQueryEventChannel.OnEventRaised += handlePathfindingQueryEvent;
-            pathfindingPathQueryEventChannel.OnEventRaised += handlePathfindingPathQueryEvent;
+            pathfindingAllNodesQueryEventChannel.OnEventRaised += HandlePathfindingQueryEvent;
+            pathfindingPathQueryEventChannel.OnEventRaised += HandlePathfindingPathQueryEvent;
             findPathBatchEC.OnEventRaised += HandleFindPathBatch;
         }
 
-        
-
-        // private void Start() {
-        //     // InitialisePathfinding();
-        // }
-
         private void Update() {
-
             if (test) {
                 var pos = MousePosition.GetMouseWorldPosition();
-
             
-                if (clickedPos != null && reachableNodes != null && reachableNodes.Count > 0) {
+                if (_clickedPos != null && _reachableNodes != null && _reachableNodes.Count > 0) {
                     var gridPos = WorldPosToGridPos(pos);
                     bool reachable = false;
                     PathNode currentNode = null;
-                    foreach (var node in reachableNodes) {
+                    foreach (var node in _reachableNodes) {
                         if (node.x == gridPos.x && node.y == gridPos.y) {
                             reachable = true;
                             currentNode = node;
@@ -63,7 +55,7 @@ namespace Pathfinding {
                     }
 
                     if (reachable) {
-                        var path = pathfinding.CalculatePath(currentNode);
+                        var path = _pathfinding.CalculatePath(currentNode);
                         drawer.DrawPreviewPath(path);
                     }
                 }
@@ -72,8 +64,8 @@ namespace Pathfinding {
                     // var pos = MousePosition.GetMouseWorldPosition();
                     // Debug.Log($"{pos}");
             
-                    reachableNodes = GetReachableNodes(pos, dist);
-                    drawer.DrawPreview(reachableNodes);
+                    _reachableNodes = GetReachableNodes(pos, dist);
+                    drawer.DrawPreview(_reachableNodes);
                     // var nodeList = "";
                     // foreach (var node in reachableNodes) {
                     //     nodeList += $" {node.ToString()}";
@@ -88,7 +80,7 @@ namespace Pathfinding {
         public void InitialisePathfinding() {
             // todo give the pathfinding all graphs
             graphGenerator.GenerateGraphFromGrids();
-            pathfinding = new Pathfinding(graphContainer.basicMovementGraph[1]);
+            _pathfinding = new Pathfinding(graphContainer.basicMovementGraph[1]);
         }
 
         public List<PathNode> GetReachableNodes(Vector3 pos3d, int maxDist) {
@@ -99,21 +91,21 @@ namespace Pathfinding {
         
         public List<PathNode> GetReachableNodes(Vector2Int pos, int maxDist) {
             InitialisePathfinding();
-            return pathfinding.GetReachableNodes(pos.x, pos.y, maxDist);
+            return _pathfinding.GetReachableNodes(pos.x, pos.y, maxDist);
         }
 
         public List<PathNode> GetPath(Vector3 start3d, Vector3 end3d, int maxDist) {
             InitialisePathfinding();
             Vector2Int start = WorldPosToGridPos(start3d);
             Vector2Int end = WorldPosToGridPos(end3d);
-            return pathfinding.FindPath(start.x, start.y, end.x, end.y);
+            return _pathfinding.FindPath(start.x, start.y, end.x, end.y);
         }
 
         public List<PathNode> GetPath(Vector3Int start, Vector3Int end)
         {
             // Debug.Log($"PathfindingC: get Path from {start} to {end}");
             InitialisePathfinding();
-            var path = pathfinding.FindPath(start.x, start.y, end.x, end.y);
+            var path = _pathfinding.FindPath(start.x, start.y, end.x, end.y);
             if(path is null) Debug.Log("no path found");
             return path;
         }
@@ -136,7 +128,7 @@ namespace Pathfinding {
 
         // calculate all reachable nodes and call the given method
         //
-        private void handlePathfindingQueryEvent(Vector3Int startNode, int distance, Action<List<PathNode>> callback) {
+        private void HandlePathfindingQueryEvent(Vector3Int startNode, int distance, Action<List<PathNode>> callback) {
             Vector2Int gridPos = new Vector2Int(startNode.x, startNode.z);
             
             callback(GetReachableNodes(gridPos, distance));
@@ -144,7 +136,7 @@ namespace Pathfinding {
 
         // calculate path nodes and call the given method
         //
-        private void handlePathfindingPathQueryEvent(Vector3Int startNode, Vector3Int endNode, Action<List<PathNode>> callback)
+        private void HandlePathfindingPathQueryEvent(Vector3Int startNode, Vector3Int endNode, Action<List<PathNode>> callback)
         {
             callback(GetPath(startNode, endNode));
         }

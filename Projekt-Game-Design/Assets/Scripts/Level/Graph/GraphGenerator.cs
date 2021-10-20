@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Characters.ScriptableObjects;
 using Graph.ScriptableObjects;
 using Grid;
 using Level.Grid;
@@ -44,7 +43,7 @@ namespace Graph {
             for (int x = 0; x < ground.Width; x++) {
                 for (int y = 0; y < ground.Height; y++) {
                     var type = tileTypeContainer.tileTypes[ground.GetGridObject(x, y).tileTypeID];
-                    var walkable = !type.Flags.HasFlag(ETileFlags.solid);// &&
+                    var walkable = !type.Properties.HasFlag(TileProperties.Solid);// &&
                     //     !current.GetGridObject(x, y).Type.Flags.HasFlag(ETileFlags.solid);
                     graph.GetGridObject(x, y).SetIsWalkable(walkable);
                 }

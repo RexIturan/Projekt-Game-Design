@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8292d7884394bf592e0bd2a1f4b973d, type: 3}
   m_Name: EquipmentInventory
   m_EditorClassIdentifier: 
-  Inventorys:
+  inventories:
   - {fileID: 11400000, guid: c2c8a0f47bbc3064c9cee3a4dd860113, type: 2}
   - {fileID: 11400000, guid: 12faf93ccb8de1a41b2c8cfc76040af6, type: 2}
   - {fileID: 11400000, guid: d76913f8e2dc0b44f8c5d00472f43176, type: 2}

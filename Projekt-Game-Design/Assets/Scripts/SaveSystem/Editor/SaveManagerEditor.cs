@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace SaveLoad.Editor {
+namespace SaveSystem.Editor {
     [CustomEditor(typeof(SaveManager))]
     public class SaveManagerEditor : UnityEditor.Editor {
         public override void OnInspectorGUI() {

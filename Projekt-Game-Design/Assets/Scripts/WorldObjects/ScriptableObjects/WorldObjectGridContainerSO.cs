@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Grid;
 using UnityEngine;
 
 namespace WorldObjects.ScriptableObjects {

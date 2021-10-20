@@ -1,18 +1,15 @@
-﻿using Events.ScriptableObjects.Core;
+﻿using System;
+using Events.ScriptableObjects.Core;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Events.ScriptableObjects {
     [CreateAssetMenu(menuName = "Events/GameObject/Gameobject Event Channel")]
     public class GameObjEventChannelSO : EventChannelBaseSO {
         
-        public UnityAction<GameObject> OnEventRaised;
+        public event Action<GameObject> OnEventRaised;
 
-        public void RaiseEvent(GameObject value)
-        {
-            if (OnEventRaised != null)
-                OnEventRaised.Invoke(value);
+        public void RaiseEvent(GameObject value) {
+	        OnEventRaised?.Invoke(value);
         }
-        
     }
 }

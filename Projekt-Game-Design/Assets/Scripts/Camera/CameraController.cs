@@ -1,5 +1,4 @@
-﻿using System;
-using Input;
+﻿using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Util.ScriptableObjects;
@@ -8,10 +7,7 @@ namespace DefaultNamespace.Camera {
     public class CameraController : MonoBehaviour {
         [SerializeField] private InputReader inputReader;
         [SerializeField] private FloatReference movementSpeed;
-        [SerializeField] private FloatReference rotateSpeed;
         [SerializeField] private FloatReference zoomSpeed;
-        [SerializeField] private FloatReference movementTime;
-        [SerializeField] private Vector3 newPosition;
         [SerializeField] private float panSpeed;
         [SerializeField] private int panBorderThickness;
         [SerializeField] private int minZoom;
@@ -20,33 +16,29 @@ namespace DefaultNamespace.Camera {
         [SerializeField] private bool edgeScroll;
         
         public Transform cameraTransform;
-        private Vector2 inputVector;
-        private float rotateInputVector;
-        private float zoomInput;
-        
-        private void Start() {
-            newPosition = transform.position;
-        }
+        private Vector2 _inputVector;
+        private float _zoomInput;
+      
 
         private void OnEnable() {
             // bind events
-            inputReader.cameraMoveEvent += HandleCameraMoveEvent;
-            inputReader.cameraRotateEvent += HandleCameraRotateEvent;
-            inputReader.cameraZoomEvent += HandleCameraZoomEvent;
+            inputReader.CameraMoveEvent += HandleCameraMoveEvent;
+            inputReader.CameraRotateEvent += HandleCameraRotateEvent;
+            inputReader.CameraZoomEvent += HandleCameraZoomEvent;
         }
 
         private void OnDisable() {
             // unbind events
-            inputReader.cameraMoveEvent -= HandleCameraMoveEvent;
-            inputReader.cameraRotateEvent -= HandleCameraRotateEvent;
-            inputReader.cameraZoomEvent -= HandleCameraZoomEvent;
+            inputReader.CameraMoveEvent -= HandleCameraMoveEvent;
+            inputReader.CameraRotateEvent -= HandleCameraRotateEvent;
+            inputReader.CameraZoomEvent -= HandleCameraZoomEvent;
         }
 
         private void Update() {
 
-            if (inputVector.y != 0 || inputVector.x != 0)
-            {
-                transform.position += (transform.forward * inputVector.y + transform.right * inputVector.x) * (movementSpeed.Value * Time.deltaTime);
+            if (_inputVector.y != 0 || _inputVector.x != 0) {
+	            var camTransform = transform; 
+	            camTransform.position += (camTransform.forward * _inputVector.y + camTransform.right * _inputVector.x) * (movementSpeed.Value * Time.deltaTime);
             }
             else
             {
@@ -60,9 +52,9 @@ namespace DefaultNamespace.Camera {
                 
                 0,
                 // 0,
-                -zoomInput * Time.deltaTime * zoomSpeed.Value,
+                -_zoomInput * Time.deltaTime * zoomSpeed.Value,
                 // zoomInput);
-                zoomInput * Time.deltaTime * zoomSpeed.Value);
+                _zoomInput * Time.deltaTime * zoomSpeed.Value);
 
             // Test ob die Position außerhalb des zulässigen Bereiches ist
             // if (edgeScroll) {
@@ -110,7 +102,7 @@ namespace DefaultNamespace.Camera {
         }
 
         private void HandleCameraMoveEvent(Vector2 movement, bool useMouse) {
-            inputVector = movement;
+            _inputVector = movement;
         }
 
         private void HandleCameraRotateEvent(float rotate) {
@@ -118,7 +110,7 @@ namespace DefaultNamespace.Camera {
         }
         
         private void HandleCameraZoomEvent(float zoom) {
-            zoomInput = zoom;
+            _zoomInput = zoom;
         }
     }
 }

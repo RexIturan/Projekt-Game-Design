@@ -253,6 +253,7 @@ MonoBehaviour:
     intelligence: 5
     viewDistance: 5
   statusEffects: []
+  playerName: 
   level: 1
   experience: 0
   healthPoints: 10
@@ -275,6 +276,7 @@ MonoBehaviour:
     dist: 0
     isWalkable: 0
   reachableTiles: []
+  movementDone: 1
   playerTarget: {fileID: 0}
   enemyTarget: {fileID: 0}
   tilesInRange: []

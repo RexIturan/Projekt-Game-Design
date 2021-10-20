@@ -14,15 +14,15 @@ namespace Statemachine.GameState.Conditions {
 	{
 		protected new EvaluationCompleteSO OriginSO => (EvaluationCompleteSO)base.OriginSO;
 
-		private GameSC gameSC;
+		private GameSC _gameSC;
 	
 		public override void Awake(StateMachine stateMachine) {
-			gameSC = stateMachine.gameObject.GetComponent<GameSC>();
+			_gameSC = stateMachine.gameObject.GetComponent<GameSC>();
 		}
 	
 		protected override bool Statement()
 		{
-			return gameSC.evaluated;
+			return _gameSC.evaluated;
 		}
 	
 		public override void OnStateEnter()

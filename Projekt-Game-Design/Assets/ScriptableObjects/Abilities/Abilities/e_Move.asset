@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: e_Move
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: de45a39375145424abac34c58282d7a7, type: 3}
   description: 
   targets: 24
   moveToTarget: 1

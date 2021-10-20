@@ -12,15 +12,15 @@ public class IsTargetInRange : Condition
 {
 	protected new IsTargetInRangeSO OriginSO => (IsTargetInRangeSO)base.OriginSO;
 
-	private EnemyCharacterSC enemyCharacterSC;
+	private EnemyCharacterSC _enemyCharacterSC;
 
 	public override void Awake(StateMachine stateMachine) {
-		enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
+		_enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
 	}
 	
 	protected override bool Statement() {
-		var inRangeTiles = enemyCharacterSC.tileInRangeOfTarget;
-		var pos = enemyCharacterSC.gridPosition;
+		var inRangeTiles = _enemyCharacterSC.tileInRangeOfTarget;
+		var pos = _enemyCharacterSC.gridPosition;
 		
 		if (inRangeTiles is null) return false;
 

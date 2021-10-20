@@ -1,13 +1,13 @@
 using System;
-using System.Collections.Generic;
 using Events.ScriptableObjects.Core;
 using UnityEngine;
-using Util;
 
-// makes floating text spawner spawn a floating text message
-//
+
 namespace Events.ScriptableObjects
 {
+	/// <summary>
+	/// makes floating text spawner spawn a floating text message
+	/// </summary>
     // TODO rename
     [CreateAssetMenu(menuName = "Events/CreateFloatingTextEventChannel")]
     public class CreateFloatingTextEventChannelSO : EventChannelBaseSO

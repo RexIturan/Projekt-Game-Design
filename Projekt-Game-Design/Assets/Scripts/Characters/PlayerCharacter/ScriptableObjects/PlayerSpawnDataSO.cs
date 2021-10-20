@@ -6,7 +6,7 @@ namespace Characters.PlayerCharacter.ScriptableObjects {
         public int id;
         public int level;
         public int experience;
-        public int movementpointsPerEnergy;
+        public int movementPointsPerEnergy;
         public Vector3Int gridPos;
         public int equipmentID;
     }
