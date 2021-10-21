@@ -1,18 +1,15 @@
-﻿using System;
-using Graph.ScriptableObjects;
-using UnityEditor;
+﻿using Graph.ScriptableObjects;
 using UnityEngine;
 
 namespace Graph {
     public class GraphDrawer : MonoBehaviour {
-        [SerializeField] private GraphContainerSO GraphContainer;
+        [SerializeField] private GraphContainerSO graphContainer;
 
 
         public bool drawGraph;
         
         public void DrawGraph() {
             drawGraph = true;
-            //
             // foreach (var graph in GraphContainer.basicMovementGraph)
             // for (var x = 0; x < graph.Width; x++)
             // for (var y = 0; y < graph.Height; y++)
@@ -28,16 +25,16 @@ namespace Graph {
 
         private void OnDrawGizmos() {
             if (drawGraph) {
-                foreach (var graph in GraphContainer.basicMovementGraph)
+                foreach (var graph in graphContainer.basicMovementGraph)
                     for (var x = 0; x < graph.Width; x++)
                     for (var y = 0; y < graph.Height; y++) {
-                        if (graph.GetGridObject(x, y).Edges != null) {
-                            foreach (var edge in graph.GetGridObject(x, y).Edges) {
+                        if (graph.GetGridObject(x, y).edges != null) {
+                            foreach (var edge in graph.GetGridObject(x, y).edges) {
                                 var cellOffset = graph.GetCellCenter();
                                 var originOffset = graph.OriginPosition;
                                 var offset = originOffset + cellOffset;
                                 var nodePos = new Vector3(x, 1, y) + offset;
-                                var tartgetPos = new Vector3(edge.Target.x, 1, edge.Target.y) + offset;
+                                var tartgetPos = new Vector3(edge.target.x, 1, edge.target.y) + offset;
                                 // Handles.DrawLine(nodePos, tartgetPos, 2f);
                                 Debug.DrawLine(nodePos, tartgetPos, Color.red);
                             }    

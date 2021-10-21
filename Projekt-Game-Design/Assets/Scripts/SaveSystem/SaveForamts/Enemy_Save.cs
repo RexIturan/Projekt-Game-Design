@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SaveSystem.SaveForamts {
+namespace SaveSystem.SaveFormats {
     [Serializable]
     public class Enemy_Save {
         public int enemyTypeId;

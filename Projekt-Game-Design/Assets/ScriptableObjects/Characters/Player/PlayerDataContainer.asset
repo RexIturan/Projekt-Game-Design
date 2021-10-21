@@ -15,5 +15,5 @@ MonoBehaviour:
   playerTypes:
   - {fileID: 11400000, guid: 5d339fb430d10f341bd2896617aec0a2, type: 2}
   - {fileID: 11400000, guid: b74bf689d067c784aa3e98c68eaf4e4d, type: 2}
-  playerpSpawnData:
+  playerSpawnData:
   - {fileID: 11400000, guid: 101bf8e4924253e4eae939d90884588d, type: 2}

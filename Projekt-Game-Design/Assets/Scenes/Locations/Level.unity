@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2dd9a2a6648498b83555a3e12f64ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableLoadingScreenInput_EC: {fileID: 11400000, guid: 390c6cfe22017ee4ebc6233afb443b42, type: 2}
+  enableLoadingScreenInputEC: {fileID: 11400000, guid: 390c6cfe22017ee4ebc6233afb443b42, type: 2}
 --- !u!1 &1214789241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,15 +1129,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249263230387100161, guid: fc8468785089d404997c3806015ef3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5052189
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8249263230387100161, guid: fc8468785089d404997c3806015ef3c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.41720527
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8249263230387100161, guid: fc8468785089d404997c3806015ef3c3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.11161375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8249263230387100161, guid: fc8468785089d404997c3806015ef3c3, type: 3}
       propertyPath: m_LocalRotation.w

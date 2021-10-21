@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-// Item
-// contains info about use, type and stats, looks
-//
+/// <summary>
+/// Item SO
+/// contains info about use, type, stats and looks of a Item 
+/// </summary>
 [CreateAssetMenu(fileName = "New Item", menuName = "Items/Item")]
 public class ItemSO : ScriptableObject
 {
     [SerializeField] public int id;
-    [SerializeField] public int goldValue;
-    [SerializeField] public int rarity;
+
+    // art
     [SerializeField] public Sprite icon;
     [SerializeField] public GameObject prefab;
 
-    [SerializeField] public EItemType type; // Quest-item? Weapon? Etc. 
+    // data
+    [SerializeField] public int goldValue;
+    [SerializeField] public int rarity;
+    [SerializeField] public ItemType type; // Quest-item? Weapon? Etc. 
 
     [SerializeField] public AbilitySO[] abilities; 
-
 }

@@ -63,7 +63,7 @@ namespace Grid {
                 y: gridPos3D.z);
         }
 
-        public Vector3 getCellCenter() {
+        public Vector3 GetCellCenter() {
             return new Vector3(cellSize, 0, cellSize) * 0.5f;
         }
 

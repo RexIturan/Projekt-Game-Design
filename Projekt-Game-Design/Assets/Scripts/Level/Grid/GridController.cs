@@ -1,58 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using Input;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Visual;
 
 namespace Grid {
     public class GridController : MonoBehaviour {
         [SerializeField] private GridContainerSO gridContainer;
-        [SerializeField] private GridDataSO defaultGridData;
         [SerializeField] private GridDataSO globalGridData;
 
         [SerializeField] private TileTypeContainerSO tileTypesContainer;
-        // [SerializeField] private TileMapDrawer drawer;
-
-        public void OnEnable() {
-            // globalGridData.InitValues(defaultGridData);
-            //
-            // gridContainer.tileGrids = new List<TileGrid>();
-            // gridContainer.tileGrids.Add(CreateNewTileGrid());
-            // FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[0]);
-            // // IncreaseGrid(new Vector2Int(-3,-3), new Vector2Int(globalGridData.Width + 3, globalGridData.Height +3));
-            // drawer.DrawGrid();
-
-
-            //
-            // gridContainer.tileGrids = new List<TileGrid>();
-            //
-            // gridContainer.tileGrids.Add(CreateNewTileGrid());
-            // // gridContainer.tileGrids.Add(CreateNewTileGrid());
-            //
-            // foreach (var tileGrid in gridContainer.tileGrids) {
-            //     FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[1]);
-            //     // FillGrid(gridContainer.tileGrids[1], tileTypesContainer.tileTypes[0]);
-            //     Debug.Log(tileGrid.ToString());
-            //     drawer.DrawGrid();
-            // }
-            //
-            // IncreaseGrid(new Vector2Int(-3,-3), new Vector2Int(globalGridData.Width +3, globalGridData.Height +4));
-            //
-            // foreach (var tileGrid in gridContainer.tileGrids) {
-            //     Debug.Log(tileGrid.ToString());
-            //     drawer.DrawGrid();
-            // }
-        }
-
+        
         // int level 0 - 1 
         public TileGrid CreateNewTileGrid() {
             return new TileGrid(
                 globalGridData.Width,
                 globalGridData.Height,
                 globalGridData.CellSize,
-                globalGridData.OriginPosition,
-                false
+                globalGridData.OriginPosition
             );
         }
 

@@ -3,7 +3,6 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
-using Pathfinding;
 using System.Collections.Generic;
 using Util;
 using Grid;
@@ -25,32 +24,30 @@ public class DrawPathPreviewSO : StateActionSO
 
 public class DrawPathPreview : StateAction
 {
-    private const int STANDARD_Y_VALUE = 1;
-
-    private readonly NodeListEventChannelSO drawPathEvent;
-    private readonly VoidEventChannelSO clearPathEvent;
-    private readonly PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
-    private readonly GridDataSO globalGridData;
-    private PlayerCharacterSC playerStateContainer;
+    private readonly NodeListEventChannelSO _drawPathEvent;
+    private readonly VoidEventChannelSO _clearPathEvent;
+    private readonly PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;
+    private readonly GridDataSO _globalGridData;
+    private PlayerCharacterSC _playerStateContainer;
 
     public DrawPathPreview(NodeListEventChannelSO drawPathEvent, VoidEventChannelSO clearPathEvent, 
                            PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel, GridDataSO globalGridData)
     {
-        this.drawPathEvent = drawPathEvent;
-        this.clearPathEvent = clearPathEvent;
-        this.pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
-        this.globalGridData = globalGridData;
+        this._drawPathEvent = drawPathEvent;
+        this._clearPathEvent = clearPathEvent;
+        this._pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
+        this._globalGridData = globalGridData;
     }
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+        _playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
 
     public override void OnUpdate()
     {
         bool isReachable = false;
-        List<PathNode> tiles = playerStateContainer.reachableTiles;
+        List<PathNode> tiles = _playerStateContainer.reachableTiles;
         // todo move to central pos
         Vector2Int mousePos = WorldPosToGridPos(MousePosition.GetMouseWorldPosition(Vector3.up, 1));
 
@@ -61,18 +58,18 @@ public class DrawPathPreview : StateAction
             {
                 isReachable = true;
 
-                Vector3Int startNode = new Vector3Int(playerStateContainer.gridPosition.x,
-                                                    playerStateContainer.gridPosition.z, 
+                Vector3Int startNode = new Vector3Int(_playerStateContainer.gridPosition.x,
+                                                    _playerStateContainer.gridPosition.z, 
                                                     0);
                 Vector3Int endNode = new Vector3Int(tiles[i].x,
                                                     tiles[i].y,
                                                     0);
 
-                pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, drawPath);
+                _pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, DrawPath);
             }
         }
         if (!isReachable)
-            clearPathEvent.RaiseEvent();
+            _clearPathEvent.RaiseEvent();
     }
 
     public override void OnStateEnter()
@@ -85,15 +82,15 @@ public class DrawPathPreview : StateAction
 
     }
 
-    public void drawPath(List<PathNode> nodes)
+    public void DrawPath(List<PathNode> nodes)
     {
-        drawPathEvent.RaiseEvent(nodes);
+        _drawPathEvent.RaiseEvent(nodes);
     }
 
     // TODO: Codeverdopplung vermeiden (copy paste aus PathfindingController) 
     public Vector2Int WorldPosToGridPos(Vector3 worldPos)
     {
-        var lowerBounds = Vector3Int.FloorToInt(globalGridData.OriginPosition);
+        var lowerBounds = Vector3Int.FloorToInt(_globalGridData.OriginPosition);
         var flooredPos = Vector3Int.FloorToInt(worldPos);
         return new Vector2Int(
             x: flooredPos.x + Mathf.Abs(lowerBounds.x),

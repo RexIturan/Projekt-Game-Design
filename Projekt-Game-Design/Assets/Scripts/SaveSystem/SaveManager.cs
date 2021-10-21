@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using Characters;
 using Events.ScriptableObjects;
 using Grid;
-using SaveLoad.ScriptableObjects;
-using SaveSystem;
-using SaveSystem.SaveForamts;
+using SaveSystem.SaveFormats;
+using SaveSystem.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Assertions;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace SaveLoad {
-    //todo make scriptable object??
+namespace SaveSystem {
     public class SaveManager : MonoBehaviour {
         [Header("Receiving Events On")]
         [SerializeField] private IntEventChannelSO saveGame;
@@ -35,9 +30,9 @@ namespace SaveLoad {
         
         [Header("Save/Load Settings")]
         [SerializeField] private string pathBase;
-        [SerializeField] private string filename;
-        [HideInInspector] private string fileSuffix = ".json";
-        
+        [SerializeField] private string defaultFilename;
+        private const string FileSuffix = ".json";
+
         //todo make scriptable object
         [Header("GameSave Settings")]
         [SerializeField] private string gameSavePathBase;
@@ -45,19 +40,17 @@ namespace SaveLoad {
 
         [Header("Data Container")] 
         // public PlayerDataContainerSO PlayerDataContainerSo;
-        // public EnemyDataContianerSO EnemyDataContianerSo;
+        // public EnemyDataContainerSO EnemyDataContainerSo;
         public ItemContainerSO itemContainerSo;
         public EquipmentInventoryContainerSO equipmentInventoryContainerSo;
         public InventorySO inventory;
 
-        public CharacterInitialiser characterInitialiser;
+        public CharacterInitialiser characterInitializer;
 
         [Header("Test Level Data")] 
         public List<AssetReference> testLevel;
 
-        private Dictionary<AssetReference, AsyncOperationHandle> operationHandles =
-            new Dictionary<AssetReference, AsyncOperationHandle>();
-        List<Save> saveObjects = new List<Save>();
+        private readonly List<Save> _saveObjects = new List<Save>();
 
         [Header("Debug Settings")]
         [SerializeField] private bool showDebugMessage;
@@ -101,15 +94,15 @@ namespace SaveLoad {
         }
 
         public void SaveGridContainer() {
-            SaveGridContainer(pathBase, filename);
+            SaveGridContainer(pathBase, defaultFilename);
         }
         
         //TODO return bool if successful
-        public void SaveGridContainer(string pathBase, string filename) {
+        public void SaveGridContainer(string directoryPath, string filename) {
             characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
             
             // var json = JsonUtility.ToJson(gridContainer);
-            var path = pathBase + filename + fileSuffix;
+            var path = $"{directoryPath}{filename}{FileSuffix}";
 
             //fill saveData
 
@@ -128,31 +121,31 @@ namespace SaveLoad {
             }
             foreach (var enemy in characterList.enemyContainer) {
                 var enemySC = enemy.GetComponent<EnemyCharacterSC>();
-                saveData.enemys.Add(new Enemy_Save() {
+                saveData.enemies.Add(new Enemy_Save() {
                     enemyTypeId = enemySC.enemyType.id,
                     enemySpawnDataId = enemySC.enemySpawnData.id,
                     pos = enemySC.gridPosition
                 });                 
             }
             foreach (var grids in gridContainer.tileGrids) {
-                saveData.grid_Save.Add(grids);
+                saveData.gridSave.Add(grids);
             }
-            saveData.GridDataSave.SetValues(globalGridData);
+            saveData.gridDataSave.SetValues(globalGridData);
 
-            saveData.inventory.size = inventory.Inventory.Capacity;
-            foreach (var item in inventory.Inventory) {
+            saveData.inventory.size = inventory.inventory.Capacity;
+            foreach (var item in inventory.inventory) {
                 saveData.inventory.itemIds.Add(item.id);    
             }
 
-            foreach (var equipment in equipmentInventoryContainerSo.Inventorys) {
+            foreach (var equipment in equipmentInventoryContainerSo.inventories) {
 
                 var equiped = new List<int>();
-                foreach (var item in equipment.Inventory) {
+                foreach (var item in equipment.inventory) {
                     equiped.Add(item.id);
                 }
                 
-                saveData.EquipmentInventory.Add(new Inventory_Save() {
-                    size = equipment.Inventory.Capacity,
+                saveData.equipmentInventory.Add(new Inventory_Save() {
+                    size = equipment.inventory.Capacity,
                     itemIds = equiped
                 });    
             }
@@ -175,7 +168,7 @@ namespace SaveLoad {
         }
 
         public void LoadGridContainer() {
-            var path = pathBase + filename + fileSuffix;
+            var path = pathBase + defaultFilename + FileSuffix;
             LoadSaveDataFromDisk(path);
         }
 
@@ -183,62 +176,20 @@ namespace SaveLoad {
             LoadSaveDataFromDisk(path);
         }
         
-        public bool LoadGridContainer(string pathBase, string filename) {
-            var path = pathBase + filename + fileSuffix;
+        public bool LoadGridContainer(string directoryPath, string filename) {
+            var path = $"{directoryPath}{filename}{FileSuffix}";
             return LoadSaveDataFromDisk(path);
         }
         
         public bool LoadSaveDataFromDisk(string path) {
-
-            // Debug.Log($"Hi {path}");
-
-            var json = "";
-            // json = jsonTextFile.text;
-            
-            // json = File.ReadAllText(path);
-            // saveData.LoadFromJson(json);
-            
-            using (var fs = new FileStream(path, FileMode.Open)) {
+	        using (var fs = new FileStream(path, FileMode.Open)) {
                 using (var reader = new StreamReader(fs)) {
-                    json = reader.ReadToEnd();
+                    var json = reader.ReadToEnd();
                     saveData.LoadFromJson(json);
                     Debug.Log($"Load JSON from {path} \n{json}");
                     return true;
                 }
             }
-            return true;
-            // if (FileManager.LoadFromFile(path, out var json))
-            // {
-            //     saveData.LoadFromJson(json);
-            //     if (showDebugMessage) {
-            //         Debug.Log($"Load JSON from {path} \n{json}");
-            //     }
-            //     saveManagerData.loaded = true;
-            //     return true;
-            // }
-
-            // return false;
-            //
-            // using (var fs = new FileStream(path, FileMode.Open)) {
-            //     using (var reader = new StreamReader(fs)) {
-            //         json = reader.ReadToEnd();
-            //     }
-            // }
-            //
-            // if (showDebugMessage) {
-            //     Debug.Log($"Load JSON from {path} \n{json}");
-            // }
-            //
-            // JsonUtility.FromJsonOverwrite(json, gridContainer);
-            //
-            // globalGridData.Width = gridContainer.tileGrids[0].Width;
-            // globalGridData.Height = gridContainer.tileGrids[0].Height;
-            // globalGridData.cellSize = gridContainer.tileGrids[0].CellSize;
-            // globalGridData.OriginPosition = gridContainer.tileGrids[0].OriginPosition;
-            // // JsonUtility.FromJson<GridContainerSO>(json);
-            // levelLoaded.RaiseEvent();
-            //
-            // saveManagerData.loaded = true;
         }
 
         public void InitializeLevel() {
@@ -250,26 +201,26 @@ namespace SaveLoad {
             // // JsonUtility.FromJson<GridContainerSO>(json);
 
             gridContainer.tileGrids = new List<TileGrid>();
-            gridContainer.tileGrids.AddRange(saveData.grid_Save);
+            gridContainer.tileGrids.AddRange(saveData.gridSave);
             
-            saveData.GridDataSave.GetValues(globalGridData);
+            saveData.gridDataSave.GetValues(globalGridData);
 
-            characterInitialiser.Initialise(saveData.players, saveData.enemys);
+            characterInitializer.Initialise(saveData.players, saveData.enemies);
 
-            inventory.Inventory.Clear();
+            inventory.inventory.Clear();
             foreach (var ids in saveData.inventory.itemIds) {
-                inventory.Inventory.Add(itemContainerSo.ItemList[ids]);    
+                inventory.inventory.Add(itemContainerSo.itemList[ids]);    
             }
             
-            foreach (var equipmentInventory in saveData.EquipmentInventory) {
+            foreach (var equipmentInventory in saveData.equipmentInventory) {
                 var equip = new List<ItemSO>();
                 foreach (var ids in equipmentInventory.itemIds) {
-                    equip.Add(itemContainerSo.ItemList[ids]);
+                    equip.Add(itemContainerSo.itemList[ids]);
                 }
 
                 var eInventory = ScriptableObject.CreateInstance<EquipmentInventorySO>();
-                eInventory.Inventory = equip;
-                equipmentInventoryContainerSo.Inventorys.Add(eInventory);
+                eInventory.inventory = equip;
+                equipmentInventoryContainerSo.inventories.Add(eInventory);
             }
             
             saveManagerData.loaded = true;
@@ -283,7 +234,7 @@ namespace SaveLoad {
             Dictionary<AsyncOperationHandle<TextAsset>, int> indexDict =
                 new Dictionary<AsyncOperationHandle<TextAsset>, int>();
 
-            saveObjects.Clear();
+            _saveObjects.Clear();
             for (int i = 0; i < assetReferences.Count; i++) {
                 
                 var assetReference = assetReferences[i];
@@ -297,7 +248,7 @@ namespace SaveLoad {
                             // Debug.Log($"completed {index} {handle.Result.name}");
                             var save = new Save();
                             save.LoadFromJson(handle.Result.text);
-                            saveObjects.Add(save);
+                            _saveObjects.Add(save);
                             if (handle.IsDone) {
                                 callback(handle.Result.name, true, index);    
                             }
@@ -313,21 +264,21 @@ namespace SaveLoad {
             }
         }
 
-        void HandleTextAssetLoaded(AsyncOperationHandle<TextAsset> handle, int index, List<Action<string, bool, int>> callbacks) {
-            
-            // Debug.Log($"loadTextAsset  {index}");
-            var save = new Save();
-            save.LoadFromJson(handle.Result.text);
-            saveObjects.Add(save);
-            index = saveObjects.Count-1;
-            if (handle.IsDone) {
-                callbacks[index](handle.Result.name, true, index);    
-            }
-            else {
-                callbacks[index]("Could Not Load Save", false, index);
-            }
-            Addressables.Release(handle);
-        }
+        // void HandleTextAssetLoaded(AsyncOperationHandle<TextAsset> handle, int index, List<Action<string, bool, int>> callbacks) {
+        //     
+        //     // Debug.Log($"loadTextAsset  {index}");
+        //     var save = new Save();
+        //     save.LoadFromJson(handle.Result.text);
+        //     _saveObjects.Add(save);
+        //     index = _saveObjects.Count-1;
+        //     if (handle.IsDone) {
+        //         callbacks[index](handle.Result.name, true, index);    
+        //     }
+        //     else {
+        //         callbacks[index]("Could Not Load Save", false, index);
+        //     }
+        //     Addressables.Release(handle);
+        // }
         
         // public async Task<bool> LoadLevelFromAssetReferenc(AssetReference assetReference) {
         //     bool result = false;
@@ -380,10 +331,10 @@ namespace SaveLoad {
         }
 
         public void SetCurrentSaveTo(int index) {
-            saveData = saveObjects[index];
+            saveData = _saveObjects[index];
             
             // todo clear saveObjects here?
-            saveObjects.Clear();
+            _saveObjects.Clear();
         }
 
         public List<AssetReference> GetValidTestLevel() {

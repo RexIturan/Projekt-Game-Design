@@ -6,7 +6,7 @@ using UnityEditor;
 
 namespace SaveSystem {
     public class SerializableScriptableObject : ScriptableObject {
-        [SerializeField, HideInInspector] private string _guid;
+        private string _guid;
         public string Guid => _guid;
 
 #if UNITY_EDITOR

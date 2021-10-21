@@ -1,40 +1,38 @@
 ﻿using System.Collections.Generic;
 using Events.ScriptableObjects.FieldOfView;
-using Grid;
 using Level.Grid;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
-using Util;
 
 namespace Statemachine.Enemy.Actions {
     [CreateAssetMenu(fileName = "e_GetTilesWithinRange",
         menuName = "State Machines/Actions/Enemy/Get Tiles Within Range")]
     public class GetTilesWithinRangeSO : StateActionSO {
         [SerializeField] private StateAction.SpecificMoment phase;
-        [SerializeField] private FOV_Query_EventChannelSO fieldOfViewQueryEC;
+        [SerializeField] private FOVQueryEventChannelSO fieldOfViewQueryEC;
         public override StateAction CreateAction() => new GetTilesWithinRange(phase,fieldOfViewQueryEC);
     }
 
     public class GetTilesWithinRange : StateAction {
         // protected new GetTilesWithinRangeSO originSo => (GetTilesWithinRangeSO) base.OriginSO;
 
-        private StateAction.SpecificMoment phase;
-        private FOV_Query_EventChannelSO fieldOfViewQueryEC;
-        private EnemyCharacterSC enemyCharacterSC;
+        private readonly SpecificMoment _phase;
+        private readonly FOVQueryEventChannelSO _fieldOfViewQueryEC;
+        private EnemyCharacterSC _enemyCharacterSC;
 
-        public GetTilesWithinRange(StateAction.SpecificMoment phase, FOV_Query_EventChannelSO fieldOfViewQueryEc) {
-            this.phase = phase;
-            fieldOfViewQueryEC = fieldOfViewQueryEc;
+        public GetTilesWithinRange(SpecificMoment phase, FOVQueryEventChannelSO fieldOfViewQueryEc) {
+            _phase = phase;
+            _fieldOfViewQueryEC = fieldOfViewQueryEc;
         }
 
         public override void Awake(StateMachine stateMachine) {
-            enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
+            _enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
         }
 
-        public void setTilesWithinRange(bool[,] visible) {
-            var level = enemyCharacterSC.gridPosition.y;
-            var pos = enemyCharacterSC.target.gridPosition;
+        public void SetTilesWithinRange(bool[,] visible) {
+            var level = _enemyCharacterSC.gridPosition.y;
+            var pos = _enemyCharacterSC.target.gridPosition;
 
             var inRange = new List<Vector3Int>();
 
@@ -51,9 +49,9 @@ namespace Statemachine.Enemy.Actions {
             
             Debug.Log("got tiles within range");
             
-            enemyCharacterSC.tileInRangeOfTarget.Clear();
-            enemyCharacterSC.tileInRangeOfTarget = inRange;
-            enemyCharacterSC.rangeChecked = true;
+            _enemyCharacterSC.tileInRangeOfTarget.Clear();
+            _enemyCharacterSC.tileInRangeOfTarget = inRange;
+            _enemyCharacterSC.rangeChecked = true;
         }
 
         private void RaiseGetTargetInRangeTiles() {
@@ -61,15 +59,15 @@ namespace Statemachine.Enemy.Actions {
             Debug.Log("get tiles within range");
             
             // get target
-            var target = enemyCharacterSC.target;
-            var range = (int) enemyCharacterSC.attackRange;
-            var blocking = ETileFlags.solid;
+            var target = _enemyCharacterSC.target;
+            var range = (int) _enemyCharacterSC.attackRange;
+            var blocking = TileProperties.Solid;
 
-            fieldOfViewQueryEC.RaiseEvent(target.gridPosition, range, blocking, setTilesWithinRange);
+            _fieldOfViewQueryEC.RaiseEvent(target.gridPosition, range, blocking, SetTilesWithinRange);
         }
         
         public override void OnUpdate() {
-            if (phase == SpecificMoment.OnUpdate) {
+            if (_phase == SpecificMoment.OnUpdate) {
                 // if (enemyCharacterSC.target != null) {
                     RaiseGetTargetInRangeTiles();    
                 // }
@@ -77,7 +75,7 @@ namespace Statemachine.Enemy.Actions {
         }
 
         public override void OnStateEnter() {
-            if (phase == SpecificMoment.OnStateEnter) {
+            if (_phase == SpecificMoment.OnStateEnter) {
                 // if (enemyCharacterSC.target != null) {
                     RaiseGetTargetInRangeTiles();    
                 // }
@@ -85,7 +83,7 @@ namespace Statemachine.Enemy.Actions {
         }
 
         public override void OnStateExit() {
-            if (phase == SpecificMoment.OnStateExit) {
+            if (_phase == SpecificMoment.OnStateExit) {
                 // if (enemyCharacterSC.target != null) {
                     RaiseGetTargetInRangeTiles();    
                 // }

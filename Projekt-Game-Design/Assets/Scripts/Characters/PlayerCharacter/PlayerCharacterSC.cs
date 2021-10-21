@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Characters.PlayerCharacter.ScriptableObjects;
 using Events.ScriptableObjects;
@@ -10,9 +8,10 @@ using Grid;
 using Util;
 
 
-// script attached to each playable character 
-// contains relevant data such as stats
-//
+/// <summary>
+/// attached to each playable character 
+/// contains relevant data such as stats
+/// </summary> 
 [System.Serializable]
 public class PlayerCharacterSC : MonoBehaviour {
     [Header("Receiving events on")]
@@ -35,8 +34,8 @@ public class PlayerCharacterSC : MonoBehaviour {
     public CharacterStats CurrentStats => currentStats;
 
     // TODO: implement status effects
-    // stat changing temporary effects
-    [SerializeField] private List<ScriptableObject> statusEffects;
+    // <summary>stat changing temporary effects</summary>
+    // [SerializeField] private List<ScriptableObject> statusEffects;
 
     public string playerName; 
 
@@ -82,9 +81,9 @@ public class PlayerCharacterSC : MonoBehaviour {
     // Statemachine
     //
     [Header("State Machine")] 
-    public bool isSelected = false;
-    public bool abilitySelected = false;
-    public bool abilityConfirmed = false;
+    public bool isSelected;
+    public bool abilitySelected;
+    public bool abilityConfirmed;
     public bool abilityExecuted;
 
     [Header("Movement Chache")]
@@ -101,15 +100,15 @@ public class PlayerCharacterSC : MonoBehaviour {
     public bool waitForAttackToFinish = false;
 
     [Header("Timer")]
-    public float timeSinceTransition = 0;
+    public float timeSinceTransition;
 
     private void Awake() {
-        input.mouseClicked += ToggleIsSelected;
+        input.MouseClicked += ToggleIsSelected;
         targetTileEvent.OnEventRaised += TargetTile;
     }
 
     private void OnDisable() {
-        input.mouseClicked -= ToggleIsSelected;
+        input.MouseClicked -= ToggleIsSelected;
         targetTileEvent.OnEventRaised -= TargetTile;
     }
 
@@ -140,7 +139,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 
     // transforms the gameobject to it's tile position
     public void TransformToPosition() {
-        var pos = gridPosition + globalGridData.getCellCenter();
+        var pos = gridPosition + globalGridData.GetCellCenter();
         pos *= globalGridData.CellSize;
         pos += globalGridData.OriginPosition;
 
@@ -181,7 +180,7 @@ public class PlayerCharacterSC : MonoBehaviour {
         experience = playerSpawnData.experience;
         healthPoints = playerType.stats.maxHealthPoints;
         energy = playerType.stats.maxEnergy;
-        movementPointsPerEnergy = playerSpawnData.movementpointsPerEnergy;
+        movementPointsPerEnergy = playerSpawnData.movementPointsPerEnergy;
         currentStats = playerType.stats;
 
         RefreshAbilities();

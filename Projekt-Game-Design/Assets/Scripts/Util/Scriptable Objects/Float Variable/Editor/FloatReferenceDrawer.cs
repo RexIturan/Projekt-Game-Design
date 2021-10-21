@@ -1,17 +1,11 @@
-﻿using System.Configuration;
-using UnityEditor;
-using UnityEditor.UIElements;
+﻿using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+using Util.ScriptableObjects;
 
-namespace Util.ScriptableObjects.Editor {
+namespace Util.Scriptable_Objects.Float_Variable.Editor {
     
     [CustomPropertyDrawer(typeof(FloatReference))]
     public class FloatReferenceDrawer : PropertyDrawer {
-        
-        public override VisualElement CreatePropertyGUI(SerializedProperty property) {
-            return base.CreatePropertyGUI(property);
-        }
         
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             
@@ -63,10 +57,6 @@ namespace Util.ScriptableObjects.Editor {
         
             EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();
-        }
-        
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-            return base.GetPropertyHeight(property, label);
         }
         
         private void SetProperty(SerializedProperty property, bool value) {

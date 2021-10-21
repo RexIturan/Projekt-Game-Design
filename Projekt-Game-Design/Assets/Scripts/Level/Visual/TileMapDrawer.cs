@@ -6,7 +6,7 @@ namespace Visual {
     public class TileMapDrawer : MonoBehaviour,  IMapDrawer {
 
         [System.Serializable]
-        struct tileTypePair {
+        private struct TileTypePair {
             public TileTypeSO tileType;
             public TileBase tile;
         }
@@ -20,7 +20,7 @@ namespace Visual {
         [SerializeField] private Tilemap[] gridTilemap;
         [SerializeField] private Tilemap cursorTilemap;
 
-        [SerializeField] private tileTypePair[] tileTypeTileDict;
+        [SerializeField] private TileTypePair[] tileTypeTileDict;
         [SerializeField] private TileBase cursor;
         [SerializeField] private TileBase errorTile;
 
@@ -92,7 +92,7 @@ namespace Visual {
             return new Vector3Int(flooredPos.x, flooredPos.z, 0);
         }
 
-        public void clearCursor() {
+        public void ClearCursor() {
             cursorTilemap.ClearAllTiles();
         }
     }

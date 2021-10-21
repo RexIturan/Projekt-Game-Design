@@ -1,16 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New_TacticsGameData", menuName = "GameManager/New TacticsGameData")]
 public class TacticsGameDataSO : ScriptableObject {
     // turn indicator and order
-    public EFaction currentPlayer;
+    public Faction currentPlayer;
     public int currentPlayerIndex;
-    public List<EFaction> turnOrder;
+    public List<Faction> turnOrder;
     
     // turn data
-    public int turnNum = 0;
+    public int turnNum;
 
     public void GoToNextTurn() {
         turnNum++;
@@ -18,7 +17,7 @@ public class TacticsGameDataSO : ScriptableObject {
         currentPlayer = turnOrder[currentPlayerIndex];
     }
 
-    public void SetStartingPlayer(EFaction faction) {
+    public void SetStartingPlayer(Faction faction) {
         currentPlayerIndex = turnOrder.IndexOf(faction);
         currentPlayer = faction;
     }
@@ -28,7 +27,7 @@ public class TacticsGameDataSO : ScriptableObject {
     }
 }
 
-public enum EFaction {
-    player,
-    enemy
+public enum Faction {
+    Player,
+    Enemy
 }

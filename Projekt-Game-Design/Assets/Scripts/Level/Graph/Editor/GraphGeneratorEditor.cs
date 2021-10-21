@@ -1,7 +1,8 @@
-﻿using UnityEditor;
+﻿using Graph;
+using UnityEditor;
 using UnityEngine;
-using Graph;
 
+// ReSharper disable once CheckNamespace
 namespace GDP01.Graph.Editor {
     [CustomEditor(typeof(GraphGenerator))]
     public class GraphGeneratorEditor : UnityEditor.Editor {

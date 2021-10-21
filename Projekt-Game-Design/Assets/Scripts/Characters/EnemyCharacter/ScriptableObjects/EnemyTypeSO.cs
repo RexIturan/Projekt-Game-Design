@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-// Enemy type containing constant data for individual types of enemies
-// such as stats and drops
-//
+/// <summary>
+/// Enemy type containing constant data for individual types of enemies
+/// such as stats and drops
+/// </summary>
 [CreateAssetMenu(fileName = "New EnemyType", menuName = "Character/Enemy/EnemyType")]
 public class EnemyTypeSO : ScriptableObject {
     public int id;

@@ -1,11 +1,9 @@
-using Events.ScriptableObjects;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
 using UnityEngine.InputSystem;
 using Grid;
-using Pathfinding;
 using Util;
 using System.Collections.Generic;
 
@@ -19,27 +17,27 @@ public class TargetTileSO : StateActionSO
 
 public class TargetTile : StateAction
 {
-    private const float TIME_BEFORE_ACCEPTING_INPUT = 0.5f;
+    private const float TimeBeforeAcceptingInput = 0.5f;
     
-    private GridDataSO globalGridData;
-    private PlayerCharacterSC playerStateContainer;
+    private GridDataSO _globalGridData;
+    private PlayerCharacterSC _playerStateContainer;
 
     public TargetTile(GridDataSO globalGridData)
     {
-        this.globalGridData = globalGridData;
+        this._globalGridData = globalGridData;
     }
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+        _playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
 
     public override void OnUpdate()
     {
-        if (playerStateContainer.timeSinceTransition > TIME_BEFORE_ACCEPTING_INPUT && Mouse.current.leftButton.wasPressedThisFrame)
+        if (_playerStateContainer.timeSinceTransition > TimeBeforeAcceptingInput && Mouse.current.leftButton.wasPressedThisFrame)
         {
             bool isReachable = false;
-            List<PathNode> tiles = playerStateContainer.reachableTiles;
+            List<PathNode> tiles = _playerStateContainer.reachableTiles;
             // todo fix this !!!
             var pos = MousePosition.GetMouseWorldPosition(Vector3.up, 1f);
             Vector2Int mousePos = WorldPosToGridPos(pos);
@@ -53,8 +51,8 @@ public class TargetTile : StateAction
                     tiles[i].y == mousePos.y)
                 {
                     isReachable = true;
-                    playerStateContainer.movementTarget = tiles[i];
-                    playerStateContainer.abilityConfirmed = true;
+                    _playerStateContainer.movementTarget = tiles[i];
+                    _playerStateContainer.abilityConfirmed = true;
                 }
             }
 
@@ -76,7 +74,7 @@ public class TargetTile : StateAction
     // TODO: Codeverdopplung vermeiden (copy paste aus PathfindingController) 
     public Vector2Int WorldPosToGridPos(Vector3 worldPos)
     {
-        var lowerBounds = Vector3Int.FloorToInt(globalGridData.OriginPosition);
+        var lowerBounds = Vector3Int.FloorToInt(_globalGridData.OriginPosition);
         var flooredPos = Vector3Int.FloorToInt(worldPos);
         return new Vector2Int(
             x: flooredPos.x + Mathf.Abs(lowerBounds.x),

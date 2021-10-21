@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using Util;
 
 namespace Grid {
@@ -19,7 +17,7 @@ namespace Grid {
                 height,
                 cellSize,
                 originPosition,
-                (GenericGrid1D<Tile> g, int x, int y) => new Tile(g, x, y),
+                (grid, x, y) => new Tile(grid, x, y),
                 showDebug,
                 debugTextParent) { }
 

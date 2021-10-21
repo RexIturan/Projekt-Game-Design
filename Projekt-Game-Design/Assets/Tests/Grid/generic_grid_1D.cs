@@ -23,7 +23,7 @@ namespace Grid {
 
             for (int y = 0; y < grid.Height; y++) {
                 for (int x = 0; x < grid.Width; x++) {
-                    actual.Add(grid.Coord2DToIndex(x, y, grid.Width));
+                    actual.Add(TileGrid.Coord2DToIndex(x, y, grid.Width));
                 }
             }
             

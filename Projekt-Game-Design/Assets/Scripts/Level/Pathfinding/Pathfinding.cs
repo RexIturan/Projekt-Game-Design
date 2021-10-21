@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Graph;
 using Util;
@@ -9,22 +8,18 @@ using Util.VisualDebug;
 namespace Pathfinding {
     public class Pathfinding {
 
-        private const int MOVE_STRAIGHT_COST = 10;
-        private const int MOVE_DIAGONAL_COST = 14;
+        private const int MoveStraightCost = 10;
+        private const int MoveDiagonalCost = 14;
 
-        public static Pathfinding Instance { get; private set; }
-        
-        // private bool diagonal = true;
-        private bool debug = true;
-        
-        private NodeGraph graph;
-        private List<PathNode> openList;
-        private List<PathNode> closedList;
+        // todo(vincent) set in constructor, or make it changeable at runtime
+        private const bool Debug = true;
 
-        
+        private readonly NodeGraph _graph;
+        private List<PathNode> _openList;
+        private List<PathNode> _closedList;
         
         public Pathfinding(NodeGraph graph) {
-            this.graph = graph;
+            this._graph = graph;
         }
 
         /*Calculate list of all reachable nodes from start node using dijkstra
@@ -32,7 +27,7 @@ namespace Pathfinding {
          returns list of all reachable nodes*/
         public List<PathNode> GetReachableNodes(int startX, int startY, int maxDist)
         {
-            var startNode = graph.GetGridObject(startX, startY);
+            var startNode = _graph.GetGridObject(startX, startY);
 
             //used to compare nodes by their distance from start node
             IComparer<PathNode> nodeComparer = new CompareNodeDist(); 
@@ -41,9 +36,9 @@ namespace Pathfinding {
             
             List<PathNode> closedNodes = new List<PathNode>();
 
-            for (int x = 0; x < graph.Width; x++) {
-                for (int y = 0; y < graph.Height; y++) {
-                    PathNode pathNode = graph.GetGridObject(x, y);
+            for (int x = 0; x < _graph.Width; x++) {
+                for (int y = 0; y < _graph.Height; y++) {
+                    PathNode pathNode = _graph.GetGridObject(x, y);
                     pathNode.dist = int.MaxValue;
                     pathNode.parentNode = null;
                 }
@@ -60,27 +55,27 @@ namespace Pathfinding {
                 activeNodes.RemoveAt(0);
                 closedNodes.Add(currentNode);
 
-                if (currentNode.Edges == null) {
+                if (currentNode.edges == null) {
                     continue;    
                 }
                 
-                foreach (var edge in currentNode.Edges)
+                foreach (var edge in currentNode.edges)
                 {
-                    if (!closedNodes.Contains(edge.Target) && currentNode.dist + edge.Cost <= maxDist)
+                    if (!closedNodes.Contains(edge.target) && currentNode.dist + edge.cost <= maxDist)
                     {
-                        if (currentNode.dist + edge.Cost < edge.Target.dist)
+                        if (currentNode.dist + edge.cost < edge.target.dist)
                         {
-                            edge.Target.dist = currentNode.dist + edge.Cost;
-                            edge.Target.parentNode = currentNode;
+                            edge.target.dist = currentNode.dist + edge.cost;
+                            edge.target.parentNode = currentNode;
                         }
 
-                        if (!activeNodes.Contains(edge.Target))
+                        if (!activeNodes.Contains(edge.target))
                         {
                             //get index for insertion
-                            var index = activeNodes.BinarySearch(edge.Target, nodeComparer);
+                            var index = activeNodes.BinarySearch(edge.target, nodeComparer);
                             //if there is no exact match index is set to the binary complement of the index of the next element (invert to get index for insertion)
                             if (index < 0) index = ~index; 
-                            activeNodes.Insert(index, edge.Target);
+                            activeNodes.Insert(index, edge.target);
                             
                             //activeNodes.Add(edge.Target);
                             //activeNodes = activeNodes.OrderBy(x => x.dist).ToList();
@@ -96,16 +91,16 @@ namespace Pathfinding {
         
 
         public List<PathNode> FindPath(int startX, int startY, int endX, int endY, bool ignoreIsWalkable = false) {
-            var startNode = graph.GetGridObject(startX, startY);
-            var endNode = graph.GetGridObject(endX, endY);
+            var startNode = _graph.GetGridObject(startX, startY);
+            var endNode = _graph.GetGridObject(endX, endY);
             if (endNode == null) return null;
             
-            openList = new List<PathNode> { startNode };
-            closedList = new List<PathNode>();
+            _openList = new List<PathNode> { startNode };
+            _closedList = new List<PathNode>();
 
-            for (int x = 0; x < graph.Width; x++) {
-                for (int y = 0; y < graph.Height; y++) {
-                    PathNode pathNode = graph.GetGridObject(x, y);
+            for (int x = 0; x < _graph.Width; x++) {
+                for (int y = 0; y < _graph.Height; y++) {
+                    PathNode pathNode = _graph.GetGridObject(x, y);
                     pathNode.gCost = int.MaxValue;
                     pathNode.hCost = int.MaxValue;
                     pathNode.CalculateFCost();
@@ -117,46 +112,46 @@ namespace Pathfinding {
             startNode.hCost = CalculateDistanceCost(startNode, endNode);
             startNode.CalculateFCost();
 
-            if (debug) {
+            if (Debug) {
                 PathfindingStepsVisualDebug.Instance.ClearSnapshots();
-                PathfindingStepsVisualDebug.Instance.TakeSnapshot(graph, startNode, openList, closedList);    
+                PathfindingStepsVisualDebug.Instance.TakeSnapshot(_graph, startNode, _openList, _closedList);    
             }
 
-            while (openList.Count > 0) {
-                PathNode currentNode = GetLowestFCostNode(openList);
+            while (_openList.Count > 0) {
+                PathNode currentNode = GetLowestFCostNode(_openList);
                 if (currentNode == endNode) { 
                     // Reached Final Node
-                    if (debug) {
-                        PathfindingStepsVisualDebug.Instance.TakeSnapshot(graph, currentNode, openList, closedList);
-                        PathfindingStepsVisualDebug.Instance.TakeSnapshotFinalPath(graph, CalculatePath(endNode));
+                    if (Debug) {
+                        PathfindingStepsVisualDebug.Instance.TakeSnapshot(_graph, currentNode, _openList, _closedList);
+                        PathfindingStepsVisualDebug.Instance.TakeSnapshotFinalPath(_graph, CalculatePath(endNode));
                     }
                     return CalculatePath(endNode);
                 }
 
-                openList.Remove(currentNode);
-                closedList.Add(currentNode);
+                _openList.Remove(currentNode);
+                _closedList.Add(currentNode);
 
-                foreach (var edge in currentNode.Edges) {
-                    if(closedList.Contains(edge.Target)) continue;
-                    if (!edge.Target.isWalkable && !ignoreIsWalkable) {
-                        closedList.Add(edge.Target);
+                foreach (var edge in currentNode.edges) {
+                    if(_closedList.Contains(edge.target)) continue;
+                    if (!edge.target.isWalkable && !ignoreIsWalkable) {
+                        _closedList.Add(edge.target);
                         continue;
                     }
                     
-                    int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, edge.Target);
-                    if (tentativeGCost < edge.Target.gCost) {
-                        edge.Target.parentNode = currentNode;
-                        edge.Target.gCost = tentativeGCost;
-                        edge.Target.hCost = CalculateDistanceCost(edge.Target, endNode);
-                        edge.Target.CalculateFCost();
+                    int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, edge.target);
+                    if (tentativeGCost < edge.target.gCost) {
+                        edge.target.parentNode = currentNode;
+                        edge.target.gCost = tentativeGCost;
+                        edge.target.hCost = CalculateDistanceCost(edge.target, endNode);
+                        edge.target.CalculateFCost();
 
-                        if (!openList.Contains(edge.Target)) {
-                            openList.Add(edge.Target);
+                        if (!_openList.Contains(edge.target)) {
+                            _openList.Add(edge.target);
                         }
                     }
 
-                    if (debug) {
-                        PathfindingStepsVisualDebug.Instance.TakeSnapshot(graph, currentNode, openList, closedList);
+                    if (Debug) {
+                        PathfindingStepsVisualDebug.Instance.TakeSnapshot(_graph, currentNode, _openList, _closedList);
                     }
                 }
             }
@@ -181,7 +176,7 @@ namespace Pathfinding {
             int xDistance = Mathf.Abs(a.x - b.x);
             int yDistance = Mathf.Abs(a.y - b.y);
             int remaining = Mathf.Abs(xDistance - yDistance);
-            return MOVE_DIAGONAL_COST * Mathf.Min(xDistance, yDistance) + MOVE_STRAIGHT_COST * remaining;
+            return MoveDiagonalCost * Mathf.Min(xDistance, yDistance) + MoveStraightCost * remaining;
         }
 
         private PathNode GetLowestFCostNode(List<PathNode> pathNodeList) {
@@ -197,7 +192,7 @@ namespace Pathfinding {
         //
         public bool IsInBounds(int x, int y)
         {
-            return graph.IsInBounds(x, y);
+            return _graph.IsInBounds(x, y);
         }
     }
 }

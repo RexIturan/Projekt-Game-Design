@@ -12,10 +12,10 @@ public class LoadGameSO : StateActionSO
 public class LoadGame : StateAction
 {
 	protected new LoadGameSO OriginSO => (LoadGameSO)base.OriginSO;
-	private GameSC gameSc;
+	private GameSC _gameSc;
 
 	public override void Awake(StateMachine stateMachine) {
-		gameSc = stateMachine.gameObject.GetComponent<GameSC>();
+		_gameSc = stateMachine.gameObject.GetComponent<GameSC>();
 	}
 	
 	public override void OnUpdate()
@@ -24,7 +24,7 @@ public class LoadGame : StateAction
 	
 	public override void OnStateEnter()
 	{
-		gameSc.LoadLocationLevel();
+		_gameSc.LoadLocationLevel();
 	}
 	
 	public override void OnStateExit()

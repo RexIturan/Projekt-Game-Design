@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Util;
 
 namespace WorldObjects {
@@ -8,7 +7,7 @@ namespace WorldObjects {
         public WorldObjectGrid(
             int width, int height, float cellSize, Vector3 originPosition) :
             base(width, height, cellSize, originPosition,
-                (GenericGrid1D<WorldObject> g, int x, int y) => new WorldObject(g, x, y), false) {
+                (g, x, y) => new WorldObject(g, x, y), false) {
             
         }
         

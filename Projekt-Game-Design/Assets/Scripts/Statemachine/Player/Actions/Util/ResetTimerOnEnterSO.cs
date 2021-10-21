@@ -1,6 +1,4 @@
-using Events.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
@@ -13,12 +11,7 @@ public class ResetTimerOnEnterSO : StateActionSO
 
 public class ResetTimerOnEnter : StateAction
 {
-    private PlayerCharacterSC playerStateContainer;
-
-    public ResetTimerOnEnter()
-    {
-
-    }
+    private PlayerCharacterSC _playerStateContainer;
 
     public override void OnUpdate()
     {
@@ -27,11 +20,11 @@ public class ResetTimerOnEnter : StateAction
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+        _playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
 
     public override void OnStateEnter()
     {
-        playerStateContainer.timeSinceTransition = 0;
+        _playerStateContainer.timeSinceTransition = 0;
     }
 }

@@ -7,6 +7,6 @@ namespace Characters.EnemyCharacter.ScriptableObjects {
         public Vector3Int gridPos;
         public int range;
         public int attack;
-        public int movementpointsPerEnergy;
+        public int movementPointsPerEnergy;
     }
 }

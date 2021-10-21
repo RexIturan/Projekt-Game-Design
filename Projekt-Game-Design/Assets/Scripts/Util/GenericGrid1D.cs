@@ -3,17 +3,17 @@ using TMPro;
 using UnityEngine;
 
 namespace Util {
+    [Serializable]
     public class GenericGrid1D<TGridObject> {
-        
-        [SerializeField] private int width;
-        [SerializeField] private int height;
-        [SerializeField] private float cellSize;
-        [SerializeField] private Vector3 originPosition;
-        [SerializeField] private TGridObject[] grid1DArray;
+	    [SerializeField] private int width;
+	    [SerializeField] private int height;
+	    [SerializeField] private float cellSize;
+	    [SerializeField] private Vector3 originPosition;
+	    [SerializeField] private TGridObject[] grid1DArray;
         
         //debug
-        [SerializeField] private readonly Transform debugTextParent;
-        [SerializeField] private bool showDebug { get; }
+        private readonly Transform _debugTextParent;
+        private bool ShowDebug { get; }
 
         public int Width => width;
         public int Height => height;
@@ -25,12 +25,12 @@ namespace Util {
         public GenericGrid1D(int width, int height, float cellSize, Vector3 originPosition,
             Func<GenericGrid1D<TGridObject>, int, int, TGridObject> createGridObject, bool showDebug,
             Transform debugTextParent = null) {
-            this.showDebug = showDebug;
+            this.ShowDebug = showDebug;
             this.width = width;
             this.height = height;
             this.cellSize = cellSize;
             this.originPosition = originPosition;
-            this.debugTextParent = debugTextParent;
+            this._debugTextParent = debugTextParent;
 
             grid1DArray = new TGridObject[width * height];
 
@@ -49,7 +49,7 @@ namespace Util {
             for (var x = 0; x < width; x++) {
                 debugTextArray[x, y] = Text.CreateWorldText(
                     grid1DArray[Coord2DToIndex(x, y, width)].ToString(),
-                    debugTextParent,
+                    _debugTextParent,
                     GetCellDimensions(),
                     GetWorldPosition(x, y) + GetCellCenter(),
                     GetWorldRotation(),
@@ -63,7 +63,7 @@ namespace Util {
             Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100);
 
             OnGridObjectChanged +=
-                (AssemblyDefinitionReferenceAsset, eventArgs) => {
+                (assemblyDefinitionReferenceAsset, eventArgs) => {
                     debugTextArray[eventArgs.x, eventArgs.y].text =
                         grid1DArray[Coord2DToIndex(eventArgs.x, eventArgs.y, width)].ToString();
                 };
@@ -135,20 +135,20 @@ namespace Util {
             return GetGridObject(x, y);
         }
 
-        public int Coord2DToIndex(Vector2Int coord, int width) {
+        public static int Coord2DToIndex(Vector2Int coord, int width) {
             return Coord2DToIndex(coord.x, coord.y, width);
         }
 
-        public int Coord2DToIndex(int x, int y, int width) {
+        public static int Coord2DToIndex(int x, int y, int width) {
             return x + y * width;
         }
 
-        public void IndexToCoord(int index, int width, out int x, out int y) {
+        public static void IndexToCoord(int index, int width, out int x, out int y) {
             x = index % width;
             y = index / width;
         }
         
-        public Vector2Int IndexToCoord2D(int index, int width, int height) {
+        public static Vector2Int IndexToCoord2D(int index, int width, int height) {
             int x, y;
             IndexToCoord(index, width, out x, out y);
             return new Vector2Int(x, y);

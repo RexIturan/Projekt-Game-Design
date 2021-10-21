@@ -11,7 +11,7 @@ namespace Events.ScriptableObjects {
     [CreateAssetMenu(menuName = "Events/Load Event Channel")]
     public class LoadEventChannelSO : EventChannelBaseSO
     {
-        public Action<GameSceneSO[], bool, bool> OnLoadingRequested;
+        public event Action<GameSceneSO[], bool, bool> OnLoadingRequested;
 
         public void RaiseEvent(GameSceneSO[] locationsToLoad, bool showLoadingScreen = false, bool closeLoadingScreenOnSceneReady = true)
         {

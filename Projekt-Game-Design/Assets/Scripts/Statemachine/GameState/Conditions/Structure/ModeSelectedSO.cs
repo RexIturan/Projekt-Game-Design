@@ -6,31 +6,31 @@ using UOP1.StateMachine.ScriptableObjects;
 
 [CreateAssetMenu(fileName = "ModeSelected", menuName = "State Machines/Conditions/GameState/Mode Selected")]
 public class ModeSelectedSO : StateConditionSO {
-	[SerializeField] private EMode mode;
+	[SerializeField] private Mode mode;
 	protected override Condition CreateCondition() => new ModeSelected(mode);
 }
 
 public class ModeSelected : Condition
 {
 	protected new ModeSelectedSO OriginSO => (ModeSelectedSO)base.OriginSO;
-	private GameSC gameSc;
-	private EMode mode;
+	private GameSC _gameSc;
+	private Mode _mode;
 
-	public ModeSelected(EMode mode) {
-		this.mode = mode;
+	public ModeSelected(Mode mode) {
+		this._mode = mode;
 	}
 	
 	public override void Awake(StateMachine stateMachine) {
-		gameSc = stateMachine.gameObject.GetComponent<GameSC>();
+		_gameSc = stateMachine.gameObject.GetComponent<GameSC>();
 	}
 
 	protected override bool Statement() {
 		bool statement = false;
-		switch (mode) {
-			case EMode.tactics:
-				statement = gameSc.isInTacticsMode;
+		switch (_mode) {
+			case Mode.Tactics:
+				statement = _gameSc.isInTacticsMode;
 				break;
-			case EMode.macro:
+			case Mode.Macro:
 				throw new ArgumentOutOfRangeException();
 				// break;
 			default:
@@ -48,7 +48,7 @@ public class ModeSelected : Condition
 	}
 }
 
-public enum EMode {
-	tactics,
-	macro
+public enum Mode {
+	Tactics,
+	Macro
 }

@@ -8,10 +8,10 @@ using UnityEngine.InputSystem.Utilities;
 
 public class @GameInput : IInputActionCollection, IDisposable
 {
-    public InputActionAsset asset { get; }
+    public InputActionAsset Asset { get; }
     public @GameInput()
     {
-        asset = InputActionAsset.FromJson(@"{
+        Asset = InputActionAsset.FromJson(@"{
     ""name"": ""GameInput"",
     ""maps"": [
         {
@@ -530,63 +530,63 @@ public class @GameInput : IInputActionCollection, IDisposable
     ]
 }");
         // Gameplay
-        m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_EndTurn = m_Gameplay.FindAction("EndTurn", throwIfNotFound: true);
-        m_Gameplay_Menu = m_Gameplay.FindAction("Menu", throwIfNotFound: true);
-        m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
-        m_Gameplay_MouseClicked = m_Gameplay.FindAction("MouseClicked", throwIfNotFound: true);
+        _mGameplay = Asset.FindActionMap("Gameplay", throwIfNotFound: true);
+        _mGameplayEndTurn = _mGameplay.FindAction("EndTurn", throwIfNotFound: true);
+        _mGameplayMenu = _mGameplay.FindAction("Menu", throwIfNotFound: true);
+        _mGameplayInventory = _mGameplay.FindAction("Inventory", throwIfNotFound: true);
+        _mGameplayMouseClicked = _mGameplay.FindAction("MouseClicked", throwIfNotFound: true);
         // LevelEditor
-        m_LevelEditor = asset.FindActionMap("LevelEditor", throwIfNotFound: true);
-        m_LevelEditor_Menu = m_LevelEditor.FindAction("Menu", throwIfNotFound: true);
+        _mLevelEditor = Asset.FindActionMap("LevelEditor", throwIfNotFound: true);
+        _mLevelEditorMenu = _mLevelEditor.FindAction("Menu", throwIfNotFound: true);
         // Camera
-        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
-        m_Camera_MoveCamera = m_Camera.FindAction("MoveCamera", throwIfNotFound: true);
-        m_Camera_RotateCamera = m_Camera.FindAction("RotateCamera", throwIfNotFound: true);
-        m_Camera_CameraZoom = m_Camera.FindAction("CameraZoom", throwIfNotFound: true);
+        _mCamera = Asset.FindActionMap("Camera", throwIfNotFound: true);
+        _mCameraMoveCamera = _mCamera.FindAction("MoveCamera", throwIfNotFound: true);
+        _mCameraRotateCamera = _mCamera.FindAction("RotateCamera", throwIfNotFound: true);
+        _mCameraCameraZoom = _mCamera.FindAction("CameraZoom", throwIfNotFound: true);
         // Menu
-        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
-        m_Menu_Confirm = m_Menu.FindAction("Confirm", throwIfNotFound: true);
-        m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
+        _mMenu = Asset.FindActionMap("Menu", throwIfNotFound: true);
+        _mMenuConfirm = _mMenu.FindAction("Confirm", throwIfNotFound: true);
+        _mMenuCancel = _mMenu.FindAction("Cancel", throwIfNotFound: true);
         // Pathfinding Debug
-        m_PathfindingDebug = asset.FindActionMap("Pathfinding Debug", throwIfNotFound: true);
-        m_PathfindingDebug_Toggle = m_PathfindingDebug.FindAction("Toggle", throwIfNotFound: true);
-        m_PathfindingDebug_Step = m_PathfindingDebug.FindAction("Step", throwIfNotFound: true);
-        m_PathfindingDebug_ShowCompletePath = m_PathfindingDebug.FindAction("ShowCompletePath", throwIfNotFound: true);
+        _mPathfindingDebug = Asset.FindActionMap("Pathfinding Debug", throwIfNotFound: true);
+        _mPathfindingDebugToggle = _mPathfindingDebug.FindAction("Toggle", throwIfNotFound: true);
+        _mPathfindingDebugStep = _mPathfindingDebug.FindAction("Step", throwIfNotFound: true);
+        _mPathfindingDebugShowCompletePath = _mPathfindingDebug.FindAction("ShowCompletePath", throwIfNotFound: true);
         // Inventory
-        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
-        m_Inventory_CancelInventory = m_Inventory.FindAction("CancelInventory", throwIfNotFound: true);
+        _mInventory = Asset.FindActionMap("Inventory", throwIfNotFound: true);
+        _mInventoryCancelInventory = _mInventory.FindAction("CancelInventory", throwIfNotFound: true);
         // LoadingScreen
-        m_LoadingScreen = asset.FindActionMap("LoadingScreen", throwIfNotFound: true);
-        m_LoadingScreen_Continue = m_LoadingScreen.FindAction("Continue", throwIfNotFound: true);
+        _mLoadingScreen = Asset.FindActionMap("LoadingScreen", throwIfNotFound: true);
+        _mLoadingScreenContinue = _mLoadingScreen.FindAction("Continue", throwIfNotFound: true);
     }
 
     public void Dispose()
     {
-        UnityEngine.Object.Destroy(asset);
+        UnityEngine.Object.Destroy(Asset);
     }
 
     public InputBinding? bindingMask
     {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
+        get => Asset.bindingMask;
+        set => Asset.bindingMask = value;
     }
 
     public ReadOnlyArray<InputDevice>? devices
     {
-        get => asset.devices;
-        set => asset.devices = value;
+        get => Asset.devices;
+        set => Asset.devices = value;
     }
 
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+    public ReadOnlyArray<InputControlScheme> controlSchemes => Asset.controlSchemes;
 
     public bool Contains(InputAction action)
     {
-        return asset.Contains(action);
+        return Asset.Contains(action);
     }
 
     public IEnumerator<InputAction> GetEnumerator()
     {
-        return asset.GetEnumerator();
+        return Asset.GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -596,52 +596,52 @@ public class @GameInput : IInputActionCollection, IDisposable
 
     public void Enable()
     {
-        asset.Enable();
+        Asset.Enable();
     }
 
     public void Disable()
     {
-        asset.Disable();
+        Asset.Disable();
     }
 
     // Gameplay
-    private readonly InputActionMap m_Gameplay;
-    private IGameplayActions m_GameplayActionsCallbackInterface;
-    private readonly InputAction m_Gameplay_EndTurn;
-    private readonly InputAction m_Gameplay_Menu;
-    private readonly InputAction m_Gameplay_Inventory;
-    private readonly InputAction m_Gameplay_MouseClicked;
+    private readonly InputActionMap _mGameplay;
+    private IGameplayActions _mGameplayActionsCallbackInterface;
+    private readonly InputAction _mGameplayEndTurn;
+    private readonly InputAction _mGameplayMenu;
+    private readonly InputAction _mGameplayInventory;
+    private readonly InputAction _mGameplayMouseClicked;
     public struct GameplayActions
     {
-        private @GameInput m_Wrapper;
-        public GameplayActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @EndTurn => m_Wrapper.m_Gameplay_EndTurn;
-        public InputAction @Menu => m_Wrapper.m_Gameplay_Menu;
-        public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
-        public InputAction @MouseClicked => m_Wrapper.m_Gameplay_MouseClicked;
-        public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
+        private @GameInput _mWrapper;
+        public GameplayActions(@GameInput wrapper) { _mWrapper = wrapper; }
+        public InputAction @EndTurn => _mWrapper._mGameplayEndTurn;
+        public InputAction @Menu => _mWrapper._mGameplayMenu;
+        public InputAction @Inventory => _mWrapper._mGameplayInventory;
+        public InputAction @MouseClicked => _mWrapper._mGameplayMouseClicked;
+        public InputActionMap Get() { return _mWrapper._mGameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
         public void SetCallbacks(IGameplayActions instance)
         {
-            if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
+            if (_mWrapper._mGameplayActionsCallbackInterface != null)
             {
-                @EndTurn.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEndTurn;
-                @EndTurn.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEndTurn;
-                @EndTurn.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEndTurn;
-                @Menu.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
-                @Menu.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
-                @Menu.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
-                @Inventory.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
-                @Inventory.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
-                @Inventory.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
-                @MouseClicked.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseClicked;
-                @MouseClicked.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseClicked;
-                @MouseClicked.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseClicked;
+                @EndTurn.started -= _mWrapper._mGameplayActionsCallbackInterface.OnEndTurn;
+                @EndTurn.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnEndTurn;
+                @EndTurn.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnEndTurn;
+                @Menu.started -= _mWrapper._mGameplayActionsCallbackInterface.OnMenu;
+                @Menu.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnMenu;
+                @Inventory.started -= _mWrapper._mGameplayActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnInventory;
+                @MouseClicked.started -= _mWrapper._mGameplayActionsCallbackInterface.OnMouseClicked;
+                @MouseClicked.performed -= _mWrapper._mGameplayActionsCallbackInterface.OnMouseClicked;
+                @MouseClicked.canceled -= _mWrapper._mGameplayActionsCallbackInterface.OnMouseClicked;
             }
-            m_Wrapper.m_GameplayActionsCallbackInterface = instance;
+            _mWrapper._mGameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @EndTurn.started += instance.OnEndTurn;
@@ -662,28 +662,28 @@ public class @GameInput : IInputActionCollection, IDisposable
     public GameplayActions @Gameplay => new GameplayActions(this);
 
     // LevelEditor
-    private readonly InputActionMap m_LevelEditor;
-    private ILevelEditorActions m_LevelEditorActionsCallbackInterface;
-    private readonly InputAction m_LevelEditor_Menu;
+    private readonly InputActionMap _mLevelEditor;
+    private ILevelEditorActions _mLevelEditorActionsCallbackInterface;
+    private readonly InputAction _mLevelEditorMenu;
     public struct LevelEditorActions
     {
-        private @GameInput m_Wrapper;
-        public LevelEditorActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Menu => m_Wrapper.m_LevelEditor_Menu;
-        public InputActionMap Get() { return m_Wrapper.m_LevelEditor; }
+        private @GameInput _mWrapper;
+        public LevelEditorActions(@GameInput wrapper) { _mWrapper = wrapper; }
+        public InputAction @Menu => _mWrapper._mLevelEditorMenu;
+        public InputActionMap Get() { return _mWrapper._mLevelEditor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(LevelEditorActions set) { return set.Get(); }
         public void SetCallbacks(ILevelEditorActions instance)
         {
-            if (m_Wrapper.m_LevelEditorActionsCallbackInterface != null)
+            if (_mWrapper._mLevelEditorActionsCallbackInterface != null)
             {
-                @Menu.started -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnMenu;
-                @Menu.performed -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnMenu;
-                @Menu.canceled -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnMenu;
+                @Menu.started -= _mWrapper._mLevelEditorActionsCallbackInterface.OnMenu;
+                @Menu.performed -= _mWrapper._mLevelEditorActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= _mWrapper._mLevelEditorActionsCallbackInterface.OnMenu;
             }
-            m_Wrapper.m_LevelEditorActionsCallbackInterface = instance;
+            _mWrapper._mLevelEditorActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Menu.started += instance.OnMenu;
@@ -695,38 +695,38 @@ public class @GameInput : IInputActionCollection, IDisposable
     public LevelEditorActions @LevelEditor => new LevelEditorActions(this);
 
     // Camera
-    private readonly InputActionMap m_Camera;
-    private ICameraActions m_CameraActionsCallbackInterface;
-    private readonly InputAction m_Camera_MoveCamera;
-    private readonly InputAction m_Camera_RotateCamera;
-    private readonly InputAction m_Camera_CameraZoom;
+    private readonly InputActionMap _mCamera;
+    private ICameraActions _mCameraActionsCallbackInterface;
+    private readonly InputAction _mCameraMoveCamera;
+    private readonly InputAction _mCameraRotateCamera;
+    private readonly InputAction _mCameraCameraZoom;
     public struct CameraActions
     {
-        private @GameInput m_Wrapper;
-        public CameraActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MoveCamera => m_Wrapper.m_Camera_MoveCamera;
-        public InputAction @RotateCamera => m_Wrapper.m_Camera_RotateCamera;
-        public InputAction @CameraZoom => m_Wrapper.m_Camera_CameraZoom;
-        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        private @GameInput _mWrapper;
+        public CameraActions(@GameInput wrapper) { _mWrapper = wrapper; }
+        public InputAction @MoveCamera => _mWrapper._mCameraMoveCamera;
+        public InputAction @RotateCamera => _mWrapper._mCameraRotateCamera;
+        public InputAction @CameraZoom => _mWrapper._mCameraCameraZoom;
+        public InputActionMap Get() { return _mWrapper._mCamera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
         public void SetCallbacks(ICameraActions instance)
         {
-            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
+            if (_mWrapper._mCameraActionsCallbackInterface != null)
             {
-                @MoveCamera.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveCamera;
-                @MoveCamera.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveCamera;
-                @MoveCamera.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveCamera;
-                @RotateCamera.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateCamera;
-                @RotateCamera.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateCamera;
-                @RotateCamera.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateCamera;
-                @CameraZoom.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraZoom;
-                @CameraZoom.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraZoom;
-                @CameraZoom.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraZoom;
+                @MoveCamera.started -= _mWrapper._mCameraActionsCallbackInterface.OnMoveCamera;
+                @MoveCamera.performed -= _mWrapper._mCameraActionsCallbackInterface.OnMoveCamera;
+                @MoveCamera.canceled -= _mWrapper._mCameraActionsCallbackInterface.OnMoveCamera;
+                @RotateCamera.started -= _mWrapper._mCameraActionsCallbackInterface.OnRotateCamera;
+                @RotateCamera.performed -= _mWrapper._mCameraActionsCallbackInterface.OnRotateCamera;
+                @RotateCamera.canceled -= _mWrapper._mCameraActionsCallbackInterface.OnRotateCamera;
+                @CameraZoom.started -= _mWrapper._mCameraActionsCallbackInterface.OnCameraZoom;
+                @CameraZoom.performed -= _mWrapper._mCameraActionsCallbackInterface.OnCameraZoom;
+                @CameraZoom.canceled -= _mWrapper._mCameraActionsCallbackInterface.OnCameraZoom;
             }
-            m_Wrapper.m_CameraActionsCallbackInterface = instance;
+            _mWrapper._mCameraActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @MoveCamera.started += instance.OnMoveCamera;
@@ -744,33 +744,33 @@ public class @GameInput : IInputActionCollection, IDisposable
     public CameraActions @Camera => new CameraActions(this);
 
     // Menu
-    private readonly InputActionMap m_Menu;
-    private IMenuActions m_MenuActionsCallbackInterface;
-    private readonly InputAction m_Menu_Confirm;
-    private readonly InputAction m_Menu_Cancel;
+    private readonly InputActionMap _mMenu;
+    private IMenuActions _mMenuActionsCallbackInterface;
+    private readonly InputAction _mMenuConfirm;
+    private readonly InputAction _mMenuCancel;
     public struct MenuActions
     {
-        private @GameInput m_Wrapper;
-        public MenuActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Confirm => m_Wrapper.m_Menu_Confirm;
-        public InputAction @Cancel => m_Wrapper.m_Menu_Cancel;
-        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        private @GameInput _mWrapper;
+        public MenuActions(@GameInput wrapper) { _mWrapper = wrapper; }
+        public InputAction @Confirm => _mWrapper._mMenuConfirm;
+        public InputAction @Cancel => _mWrapper._mMenuCancel;
+        public InputActionMap Get() { return _mWrapper._mMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
         public void SetCallbacks(IMenuActions instance)
         {
-            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+            if (_mWrapper._mMenuActionsCallbackInterface != null)
             {
-                @Confirm.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnConfirm;
-                @Confirm.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnConfirm;
-                @Confirm.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnConfirm;
-                @Cancel.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
-                @Cancel.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
-                @Cancel.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
+                @Confirm.started -= _mWrapper._mMenuActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= _mWrapper._mMenuActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= _mWrapper._mMenuActionsCallbackInterface.OnConfirm;
+                @Cancel.started -= _mWrapper._mMenuActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= _mWrapper._mMenuActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= _mWrapper._mMenuActionsCallbackInterface.OnCancel;
             }
-            m_Wrapper.m_MenuActionsCallbackInterface = instance;
+            _mWrapper._mMenuActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Confirm.started += instance.OnConfirm;
@@ -785,38 +785,38 @@ public class @GameInput : IInputActionCollection, IDisposable
     public MenuActions @Menu => new MenuActions(this);
 
     // Pathfinding Debug
-    private readonly InputActionMap m_PathfindingDebug;
-    private IPathfindingDebugActions m_PathfindingDebugActionsCallbackInterface;
-    private readonly InputAction m_PathfindingDebug_Toggle;
-    private readonly InputAction m_PathfindingDebug_Step;
-    private readonly InputAction m_PathfindingDebug_ShowCompletePath;
+    private readonly InputActionMap _mPathfindingDebug;
+    private IPathfindingDebugActions _mPathfindingDebugActionsCallbackInterface;
+    private readonly InputAction _mPathfindingDebugToggle;
+    private readonly InputAction _mPathfindingDebugStep;
+    private readonly InputAction _mPathfindingDebugShowCompletePath;
     public struct PathfindingDebugActions
     {
-        private @GameInput m_Wrapper;
-        public PathfindingDebugActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Toggle => m_Wrapper.m_PathfindingDebug_Toggle;
-        public InputAction @Step => m_Wrapper.m_PathfindingDebug_Step;
-        public InputAction @ShowCompletePath => m_Wrapper.m_PathfindingDebug_ShowCompletePath;
-        public InputActionMap Get() { return m_Wrapper.m_PathfindingDebug; }
+        private @GameInput _mWrapper;
+        public PathfindingDebugActions(@GameInput wrapper) { _mWrapper = wrapper; }
+        public InputAction @Toggle => _mWrapper._mPathfindingDebugToggle;
+        public InputAction @Step => _mWrapper._mPathfindingDebugStep;
+        public InputAction @ShowCompletePath => _mWrapper._mPathfindingDebugShowCompletePath;
+        public InputActionMap Get() { return _mWrapper._mPathfindingDebug; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(PathfindingDebugActions set) { return set.Get(); }
         public void SetCallbacks(IPathfindingDebugActions instance)
         {
-            if (m_Wrapper.m_PathfindingDebugActionsCallbackInterface != null)
+            if (_mWrapper._mPathfindingDebugActionsCallbackInterface != null)
             {
-                @Toggle.started -= m_Wrapper.m_PathfindingDebugActionsCallbackInterface.OnToggle;
-                @Toggle.performed -= m_Wrapper.m_PathfindingDebugActionsCallbackInterface.OnToggle;
-                @Toggle.canceled -= m_Wrapper.m_PathfindingDebugActionsCallbackInterface.OnToggle;
-                @Step.started -= m_Wrapper.m_PathfindingDebugActionsCallbackInterface.OnStep;
-                @Step.performed -= m_Wrapper.m_PathfindingDebugActionsCallbackInterface.OnStep;
-                @Step.canceled -= m_Wrapper.m_PathfindingDebugActionsCallbackInterface.OnStep;
-                @ShowCompletePath.started -= m_Wrapper.m_PathfindingDebugActionsCallbackInterface.OnShowCompletePath;
-                @ShowCompletePath.performed -= m_Wrapper.m_PathfindingDebugActionsCallbackInterface.OnShowCompletePath;
-                @ShowCompletePath.canceled -= m_Wrapper.m_PathfindingDebugActionsCallbackInterface.OnShowCompletePath;
+                @Toggle.started -= _mWrapper._mPathfindingDebugActionsCallbackInterface.OnToggle;
+                @Toggle.performed -= _mWrapper._mPathfindingDebugActionsCallbackInterface.OnToggle;
+                @Toggle.canceled -= _mWrapper._mPathfindingDebugActionsCallbackInterface.OnToggle;
+                @Step.started -= _mWrapper._mPathfindingDebugActionsCallbackInterface.OnStep;
+                @Step.performed -= _mWrapper._mPathfindingDebugActionsCallbackInterface.OnStep;
+                @Step.canceled -= _mWrapper._mPathfindingDebugActionsCallbackInterface.OnStep;
+                @ShowCompletePath.started -= _mWrapper._mPathfindingDebugActionsCallbackInterface.OnShowCompletePath;
+                @ShowCompletePath.performed -= _mWrapper._mPathfindingDebugActionsCallbackInterface.OnShowCompletePath;
+                @ShowCompletePath.canceled -= _mWrapper._mPathfindingDebugActionsCallbackInterface.OnShowCompletePath;
             }
-            m_Wrapper.m_PathfindingDebugActionsCallbackInterface = instance;
+            _mWrapper._mPathfindingDebugActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Toggle.started += instance.OnToggle;
@@ -834,28 +834,28 @@ public class @GameInput : IInputActionCollection, IDisposable
     public PathfindingDebugActions @PathfindingDebug => new PathfindingDebugActions(this);
 
     // Inventory
-    private readonly InputActionMap m_Inventory;
-    private IInventoryActions m_InventoryActionsCallbackInterface;
-    private readonly InputAction m_Inventory_CancelInventory;
+    private readonly InputActionMap _mInventory;
+    private IInventoryActions _mInventoryActionsCallbackInterface;
+    private readonly InputAction _mInventoryCancelInventory;
     public struct InventoryActions
     {
-        private @GameInput m_Wrapper;
-        public InventoryActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @CancelInventory => m_Wrapper.m_Inventory_CancelInventory;
-        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
+        private @GameInput _mWrapper;
+        public InventoryActions(@GameInput wrapper) { _mWrapper = wrapper; }
+        public InputAction @CancelInventory => _mWrapper._mInventoryCancelInventory;
+        public InputActionMap Get() { return _mWrapper._mInventory; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
         public void SetCallbacks(IInventoryActions instance)
         {
-            if (m_Wrapper.m_InventoryActionsCallbackInterface != null)
+            if (_mWrapper._mInventoryActionsCallbackInterface != null)
             {
-                @CancelInventory.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCancelInventory;
-                @CancelInventory.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCancelInventory;
-                @CancelInventory.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCancelInventory;
+                @CancelInventory.started -= _mWrapper._mInventoryActionsCallbackInterface.OnCancelInventory;
+                @CancelInventory.performed -= _mWrapper._mInventoryActionsCallbackInterface.OnCancelInventory;
+                @CancelInventory.canceled -= _mWrapper._mInventoryActionsCallbackInterface.OnCancelInventory;
             }
-            m_Wrapper.m_InventoryActionsCallbackInterface = instance;
+            _mWrapper._mInventoryActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @CancelInventory.started += instance.OnCancelInventory;
@@ -867,28 +867,28 @@ public class @GameInput : IInputActionCollection, IDisposable
     public InventoryActions @Inventory => new InventoryActions(this);
 
     // LoadingScreen
-    private readonly InputActionMap m_LoadingScreen;
-    private ILoadingScreenActions m_LoadingScreenActionsCallbackInterface;
-    private readonly InputAction m_LoadingScreen_Continue;
+    private readonly InputActionMap _mLoadingScreen;
+    private ILoadingScreenActions _mLoadingScreenActionsCallbackInterface;
+    private readonly InputAction _mLoadingScreenContinue;
     public struct LoadingScreenActions
     {
-        private @GameInput m_Wrapper;
-        public LoadingScreenActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Continue => m_Wrapper.m_LoadingScreen_Continue;
-        public InputActionMap Get() { return m_Wrapper.m_LoadingScreen; }
+        private @GameInput _mWrapper;
+        public LoadingScreenActions(@GameInput wrapper) { _mWrapper = wrapper; }
+        public InputAction @Continue => _mWrapper._mLoadingScreenContinue;
+        public InputActionMap Get() { return _mWrapper._mLoadingScreen; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
+        public bool Enabled => Get().enabled;
         public static implicit operator InputActionMap(LoadingScreenActions set) { return set.Get(); }
         public void SetCallbacks(ILoadingScreenActions instance)
         {
-            if (m_Wrapper.m_LoadingScreenActionsCallbackInterface != null)
+            if (_mWrapper._mLoadingScreenActionsCallbackInterface != null)
             {
-                @Continue.started -= m_Wrapper.m_LoadingScreenActionsCallbackInterface.OnContinue;
-                @Continue.performed -= m_Wrapper.m_LoadingScreenActionsCallbackInterface.OnContinue;
-                @Continue.canceled -= m_Wrapper.m_LoadingScreenActionsCallbackInterface.OnContinue;
+                @Continue.started -= _mWrapper._mLoadingScreenActionsCallbackInterface.OnContinue;
+                @Continue.performed -= _mWrapper._mLoadingScreenActionsCallbackInterface.OnContinue;
+                @Continue.canceled -= _mWrapper._mLoadingScreenActionsCallbackInterface.OnContinue;
             }
-            m_Wrapper.m_LoadingScreenActionsCallbackInterface = instance;
+            _mWrapper._mLoadingScreenActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Continue.started += instance.OnContinue;
@@ -898,13 +898,13 @@ public class @GameInput : IInputActionCollection, IDisposable
         }
     }
     public LoadingScreenActions @LoadingScreen => new LoadingScreenActions(this);
-    private int m_KeyboardSchemeIndex = -1;
+    private int _mKeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
         get
         {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
+            if (_mKeyboardSchemeIndex == -1) _mKeyboardSchemeIndex = Asset.FindControlSchemeIndex("Keyboard");
+            return Asset.controlSchemes[_mKeyboardSchemeIndex];
         }
     }
     public interface IGameplayActions

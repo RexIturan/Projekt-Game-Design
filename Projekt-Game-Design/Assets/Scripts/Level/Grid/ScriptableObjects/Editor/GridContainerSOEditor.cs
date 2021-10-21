@@ -1,42 +1,38 @@
-﻿using System;
-using Grid;
+﻿using Grid;
 using UnityEditor;
-using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 namespace GDP01.Grid.Editor {
     [CustomEditor(typeof(GridContainerSO))]
     public class GridContainerSOEditor : UnityEditor.Editor {
 
-        private SerializedObject so;
+        private SerializedObject _so;
 
         private void OnEnable() {
-            so = serializedObject;
+            _so = serializedObject;
             //propStuff = so.FindProperty("");
         }
-
-        
         
         public override void OnInspectorGUI() {
         
-            so.Update();
+            _so.Update();
             // EditorGUILayout.PropertyField( propStuff );
-            if (so.ApplyModifiedProperties()) {
+            if (_so.ApplyModifiedProperties()) {
                 // true if something changed
             }
             
-            
             DrawDefaultInspector();
         
-            var container = (GridContainerSO) target;
+            // var container = (GridContainerSO) target;
             
             // styling
-            using (new GUILayout.VerticalScope(EditorStyles.helpBox)) {
-            
-                using (new GUILayout.HorizontalScope()) {
-                    GUILayout.Label("test", GUILayout.Width( 60 ));
-                    GUILayout.Label("test2");
-                }
-            }
+            // using (new GUILayout.VerticalScope(EditorStyles.helpBox)) {
+            //
+            //     using (new GUILayout.HorizontalScope()) {
+            //         GUILayout.Label("test", GUILayout.Width( 60 ));
+            //         GUILayout.Label("test2");
+            //     }
+            // }
         }
 
     }

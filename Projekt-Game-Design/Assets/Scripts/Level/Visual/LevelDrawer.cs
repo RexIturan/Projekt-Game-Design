@@ -14,8 +14,8 @@ namespace Visual {
         public void Awake() {
             levelLoaded.OnEventRaised += RedrawLevel;
         }
-        
-        public void RedrawLevel() {
+
+        private void RedrawLevel() {
             drawer.DrawGrid();
             updateMeshEC.RaiseEvent();
         }

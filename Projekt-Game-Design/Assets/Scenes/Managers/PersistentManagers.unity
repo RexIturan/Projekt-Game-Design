@@ -417,13 +417,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f83631ac993407c835b436c331b0e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameplayScene: {fileID: 11400000, guid: e35cd8d4811081a4f80a80280bf4f60c, type: 2}
-  _LoadingScreenScene: {fileID: 0}
-  _loadLocation: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
-  _loadMenu: {fileID: 11400000, guid: d4f619ca60109054faab02a134bbbf02, type: 2}
-  _toggleLoadingScreen: {fileID: 11400000, guid: 1813d57a6be071c45977e16f33bbbf82, type: 2}
-  _enableLoadingScreenInput: {fileID: 11400000, guid: 390c6cfe22017ee4ebc6233afb443b42, type: 2}
-  _onSceneReady: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}
+  gameplayScene: {fileID: 11400000, guid: e35cd8d4811081a4f80a80280bf4f60c, type: 2}
+  loadLocation: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
+  loadMenu: {fileID: 11400000, guid: d4f619ca60109054faab02a134bbbf02, type: 2}
+  toggleLoadingScreen: {fileID: 11400000, guid: 1813d57a6be071c45977e16f33bbbf82, type: 2}
+  enableLoadingScreenInput: {fileID: 11400000, guid: 390c6cfe22017ee4ebc6233afb443b42, type: 2}
+  onSceneReady: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}
 --- !u!4 &1394080783
 Transform:
   m_ObjectHideFlags: 0
@@ -484,5 +483,5 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   loadingScreenTreeAsset: {fileID: 9197481963319205126, guid: 2c2dff7b24b8be04681fcd9cdfcb1d91, type: 3}
   uiDocument: {fileID: 1170638170}
-  _toggleLoadingScreen: {fileID: 11400000, guid: 1813d57a6be071c45977e16f33bbbf82, type: 2}
-  enableGamplayInput_EC: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
+  toggleLoadingScreen: {fileID: 11400000, guid: 1813d57a6be071c45977e16f33bbbf82, type: 2}
+  enableGamplayInputEC: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}

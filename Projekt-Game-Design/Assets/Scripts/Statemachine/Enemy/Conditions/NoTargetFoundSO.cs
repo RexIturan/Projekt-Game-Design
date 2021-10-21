@@ -13,15 +13,15 @@ namespace Statemachine.Enemy.Conditions {
 	{
 		protected new NoTargetFoundSO OriginSO => (NoTargetFoundSO)base.OriginSO;
 	
-		private EnemyCharacterSC enemyCharacterSC;
+		private EnemyCharacterSC _enemyCharacterSC;
 	
 		public override void Awake(StateMachine stateMachine) {
-			enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
+			_enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
 		}
 	
 		protected override bool Statement()
 		{
-			return enemyCharacterSC.noTargetFound;
+			return _enemyCharacterSC.noTargetFound;
 		}
 	
 		public override void OnStateEnter()

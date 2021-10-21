@@ -14,7 +14,7 @@ namespace Util {
             TextAlignmentOptions textAlignmentOptions = TextAlignmentOptions.Center, 
             int sortingOrder = 0) {
             if(color == null) color = Color.white;
-            return CreateWorldText(parent, text, dimensions, localPosition, localRotationEuler, fontSize, (Color) color, 
+            return CreateWorldText(parent, text, dimensions, localPosition, localRotationEuler, fontSize, color, 
                 textAlignmentOptions, sortingOrder);
         }
 

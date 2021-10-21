@@ -1,23 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UIElements;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 
 
 public class MainMenuUIController : MonoBehaviour
 {
-    private Button startButton;
-    private Button loadLevelButton;
-    private Button settingsButton;
-    private Button exitButton;
-    private Button backButton;
-    private VisualElement menuContainer;
-    private VisualElement settingsContainer;
-    private VisualElement loadGame;
+    private Button _startButton;
+    private Button _loadLevelButton;
+    private Button _settingsButton;
+    private Button _exitButton;
+    private Button _backButton;
+    private VisualElement _menuContainer;
+    private VisualElement _settingsContainer;
+    private VisualElement _loadGame;
     // todo remove from here
-    private TemplateContainer LoadTestLevelScreen;
+    private TemplateContainer _loadTestLevelScreen;
     
     // Start is called before the first frame update
     void Start()
@@ -26,64 +22,64 @@ public class MainMenuUIController : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         
         // Holen der Buttons
-        startButton = root.Q<Button>("startButton");
-        loadLevelButton = root.Q<Button>("loadLevelButton");
-        settingsButton = root.Q<Button>("settingsButton");
-        exitButton = root.Q<Button>("exitButton");
-        backButton = root.Q<Button>("backButton");
+        _startButton = root.Q<Button>("startButton");
+        _loadLevelButton = root.Q<Button>("loadLevelButton");
+        _settingsButton = root.Q<Button>("settingsButton");
+        _exitButton = root.Q<Button>("exitButton");
+        _backButton = root.Q<Button>("backButton");
         
         // Holen der Menü Container
-        menuContainer = root.Q<VisualElement>("menuContainer");
-        settingsContainer = root.Q<VisualElement>("SettingsContainer");
-        loadGame = root.Q<VisualElement>("LoadScreen");
+        _menuContainer = root.Q<VisualElement>("menuContainer");
+        _settingsContainer = root.Q<VisualElement>("SettingsContainer");
+        _loadGame = root.Q<VisualElement>("LoadScreen");
         
         // TODO move to injection point
         // load testlevel stuff
-        LoadTestLevelScreen = root.Q<TemplateContainer>("LoadTestLevelScreen");
+        _loadTestLevelScreen = root.Q<TemplateContainer>("LoadTestLevelScreen");
         root.Q<Button>("loadTestLevelButton").clicked += () => {
-            LoadTestLevelScreen.visible = true;
-            menuContainer.visible = false;
+            _loadTestLevelScreen.visible = true;
+            _menuContainer.visible = false;
         };
-        LoadTestLevelScreen.Q<Button>("BackButton").clicked += () => {
-            LoadTestLevelScreen.visible = false;
-            menuContainer.visible = true;
+        _loadTestLevelScreen.Q<Button>("BackButton").clicked += () => {
+            _loadTestLevelScreen.visible = false;
+            _menuContainer.visible = true;
         };
         
         
-        startButton.clicked += StartButtonPressed;
-        exitButton.clicked += QuitGame;
-        backButton.clicked += BackButtonPressed;
-        settingsButton.clicked += SettingsButtonPressed;
-        loadLevelButton.clicked += LoadLevelButtonPressed;
-        loadGame.Q<Button>("BackButton").clicked += BackButtonLoadGamePressed;
+        _startButton.clicked += StartButtonPressed;
+        _exitButton.clicked += QuitGame;
+        _backButton.clicked += BackButtonPressed;
+        _settingsButton.clicked += SettingsButtonPressed;
+        _loadLevelButton.clicked += LoadLevelButtonPressed;
+        _loadGame.Q<Button>("BackButton").clicked += BackButtonLoadGamePressed;
     }
     
     void SettingsButtonPressed()
     {
         // Menü ausblenden und Einstellungen zeigen
-        menuContainer.style.display = DisplayStyle.None;
-        settingsContainer.style.display = DisplayStyle.Flex;
+        _menuContainer.style.display = DisplayStyle.None;
+        _settingsContainer.style.display = DisplayStyle.Flex;
     }
     
     void LoadLevelButtonPressed()
     {
         // Menü ausblenden und Einstellungen zeigen
-        menuContainer.style.display = DisplayStyle.None;
-        loadGame.style.display = DisplayStyle.Flex;
+        _menuContainer.style.display = DisplayStyle.None;
+        _loadGame.style.display = DisplayStyle.Flex;
     }
     
     void BackButtonPressed()
     {
         // Einstellungen ausblenden und Menü zeigen
-        menuContainer.style.display = DisplayStyle.Flex;
-        settingsContainer.style.display = DisplayStyle.None;
+        _menuContainer.style.display = DisplayStyle.Flex;
+        _settingsContainer.style.display = DisplayStyle.None;
     }
     
     void BackButtonLoadGamePressed()
     {
         // Einstellungen ausblenden und Menü zeigen
-        menuContainer.style.display = DisplayStyle.Flex;
-        loadGame.style.display = DisplayStyle.None;
+        _menuContainer.style.display = DisplayStyle.Flex;
+        _loadGame.style.display = DisplayStyle.None;
     }
 
     void StartButtonPressed()

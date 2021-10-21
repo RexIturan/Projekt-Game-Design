@@ -166,10 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42935c5c0b818574e8d954dda8e273f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _persistentManagersScene: {fileID: 11400000, guid: 941453c757a325a48bd0724d01d8dea8, type: 2}
-  _menuToLoad:
+  persistentManagersScene: {fileID: 11400000, guid: 941453c757a325a48bd0724d01d8dea8, type: 2}
+  menuToLoad:
   - {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
-  _menuLoadChannel:
+  menuLoadChannel:
     m_AssetGUID: d4f619ca60109054faab02a134bbbf02
     m_SubObjectName: 
     m_SubObjectType: 

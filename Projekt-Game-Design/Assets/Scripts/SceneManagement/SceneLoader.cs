@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Events.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
@@ -13,17 +12,16 @@ using UnityEngine.SceneManagement;
 /// This class manages the scene loading and unloading.
 /// </summary>
 public class SceneLoader : MonoBehaviour {
-    [SerializeField] private GameSceneSO _gameplayScene = default;
-    [SerializeField] private GameSceneSO _LoadingScreenScene = default;
+    [SerializeField] private GameSceneSO gameplayScene;
     
     [Header("Load Events")] 
-    [SerializeField] private LoadEventChannelSO _loadLocation = default;
-    [SerializeField] private LoadEventChannelSO _loadMenu = default;
+    [SerializeField] private LoadEventChannelSO loadLocation;
+    [SerializeField] private LoadEventChannelSO loadMenu;
 
     [Header("Broadcasting on")] 
-    [SerializeField] private BoolEventChannelSO _toggleLoadingScreen = default;
-    [SerializeField] private VoidEventChannelSO _enableLoadingScreenInput = default;
-    [SerializeField] private VoidEventChannelSO _onSceneReady = default;
+    [SerializeField] private BoolEventChannelSO toggleLoadingScreen;
+    [SerializeField] private VoidEventChannelSO enableLoadingScreenInput;
+    [SerializeField] private VoidEventChannelSO onSceneReady;
 
     
     private readonly List<AsyncOperationHandle<SceneInstance>> _loadingOperationHandles =
@@ -37,16 +35,16 @@ public class SceneLoader : MonoBehaviour {
     private bool _showLoadingScreen;
     private bool _closeLoadingScreenOnSceneReady;
 
-    private SceneInstance _gameplayManagerSceneInstance = new SceneInstance();
+    private SceneInstance _gameplayManagerSceneInstance;
 
     private void OnEnable() {
-        _loadLocation.OnLoadingRequested += LoadLocation;
-        _loadMenu.OnLoadingRequested += LoadMenu;
+        loadLocation.OnLoadingRequested += LoadLocation;
+        loadMenu.OnLoadingRequested += LoadMenu;
     }
 
     private void OnDisable() {
-        _loadLocation.OnLoadingRequested -= LoadLocation;
-        _loadMenu.OnLoadingRequested -= LoadMenu;
+        loadLocation.OnLoadingRequested -= LoadLocation;
+        loadMenu.OnLoadingRequested -= LoadMenu;
     }
 
     /// <summary>
@@ -59,6 +57,7 @@ public class SceneLoader : MonoBehaviour {
         _closeLoadingScreenOnSceneReady = closeLoadingScreenOnSceneReady;
 
         //In case we are coming from the main menu, we need to load the persistent Gameplay manager scene first
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalse
         if (_gameplayManagerSceneInstance.Scene == null
             || !_gameplayManagerSceneInstance.Scene.isLoaded) {
             StartCoroutine(ProcessGameplaySceneLoading());
@@ -70,7 +69,7 @@ public class SceneLoader : MonoBehaviour {
 
     private IEnumerator ProcessGameplaySceneLoading() {
         _gameplayManagerLoadingOpHandle =
-            _gameplayScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);
+            gameplayScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive);
 
         while (_gameplayManagerLoadingOpHandle.Status != AsyncOperationStatus.Succeeded) {
             yield return null;
@@ -92,7 +91,7 @@ public class SceneLoader : MonoBehaviour {
 
         //In case we are coming from a Location back to the main menu, we need to get rid of the persistent Gameplay manager scene
         if (_gameplayManagerSceneInstance.Scene is { isLoaded: true })
-            Addressables.UnloadSceneAsync(_gameplayManagerLoadingOpHandle, true);
+            Addressables.UnloadSceneAsync(_gameplayManagerLoadingOpHandle);
 
         UnloadPreviousScenes();
     }
@@ -113,7 +112,7 @@ public class SceneLoader : MonoBehaviour {
     /// </summary>
     private void LoadNewScenes() {
         if (_showLoadingScreen) {
-            _toggleLoadingScreen.RaiseEvent(true);
+            toggleLoadingScreen.RaiseEvent(true);
         }
 
         _loadingOperationHandles.Clear();
@@ -148,11 +147,11 @@ public class SceneLoader : MonoBehaviour {
         SetActiveScene();
 
         if (_closeLoadingScreenOnSceneReady) {
-            _toggleLoadingScreen.RaiseEvent(false);
+            toggleLoadingScreen.RaiseEvent(false);
         }
         else {
             // todo move to location initialiser
-            _enableLoadingScreenInput.RaiseEvent();
+            enableLoadingScreenInput.RaiseEvent();
         }
     }
 
@@ -161,16 +160,17 @@ public class SceneLoader : MonoBehaviour {
     /// </summary>
     private void SetActiveScene() {
         //All the scenes have been loaded, so we assume the first in the array is ready to become the active scene
-        Scene s = ((SceneInstance)_loadingOperationHandles[0].Result).Scene;
+        Scene s = (_loadingOperationHandles[0].Result).Scene;
         SceneManager.SetActiveScene(s);
 
         // LightProbes.TetrahedralizeAsync();
 
-        _onSceneReady.RaiseEvent();
+        onSceneReady.RaiseEvent();
     }
 
-    private void ExitGame() {
-        Application.Quit();
-        Debug.Log("Exit!");
-    }
+    // TODO use
+    // private void ExitGame() {
+    //     Application.Quit();
+    //     Debug.Log("Exit!");
+    // }
 }

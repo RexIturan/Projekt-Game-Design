@@ -1,5 +1,4 @@
-﻿using Characters.ScriptableObjects;
-using UnityEngine;
+﻿using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
@@ -11,10 +10,10 @@ public class Refill_OnEnterSO : StateActionSO {
 
 public class Refill_OnEnter : StateAction {
     protected new Refill_OnEnterSO OriginSO => (Refill_OnEnterSO) base.OriginSO;
-    private TacticsGameDataSO tacticsGameData;
+    private readonly TacticsGameDataSO _tacticsGameData;
     
     public Refill_OnEnter(TacticsGameDataSO tacticsGameData) {
-        this.tacticsGameData = tacticsGameData;
+        this._tacticsGameData = tacticsGameData;
     }
 
     public override void Awake(StateMachine stateMachine) { }
@@ -22,19 +21,17 @@ public class Refill_OnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void OnStateEnter() {
-        var characterList = GameObject.FindObjectOfType<CharacterList>();
-        switch (tacticsGameData.currentPlayer) { 
-            case EFaction.player:
+        var characterList = Object.FindObjectOfType<CharacterList>();
+        switch (_tacticsGameData.currentPlayer) { 
+            case Faction.Player:
                 foreach (var player in characterList.playerContainer) {
                     player.GetComponent<PlayerCharacterSC>().Refill();
                 }
                 break;
-            case EFaction.enemy:
+            case Faction.Enemy:
                 foreach (var enemy in characterList.enemyContainer) {
                     enemy.GetComponent<EnemyCharacterSC>().Refill();
                 }
-                break;
-            default:
                 break;
         }
     }

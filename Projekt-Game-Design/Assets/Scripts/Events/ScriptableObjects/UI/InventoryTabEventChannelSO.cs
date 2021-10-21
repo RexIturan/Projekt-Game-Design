@@ -6,12 +6,10 @@
         [CreateAssetMenu(menuName = "Events/InventoryTab Event Channel")]
         public class InventoryTabEventChannelSO : EventChannelBaseSO {
         
-            public event Action<InventoryUIController.inventoryTab> OnEventRaised;
+            public event Action<InventoryUIController.InventoryTab> OnEventRaised;
 
-            public void RaiseEvent(InventoryUIController.inventoryTab value)
-            {
-                if (OnEventRaised != null)
-                    OnEventRaised.Invoke(value);
+            public void RaiseEvent(InventoryUIController.InventoryTab value) {
+	            OnEventRaised?.Invoke(value);
             }
         }
     }

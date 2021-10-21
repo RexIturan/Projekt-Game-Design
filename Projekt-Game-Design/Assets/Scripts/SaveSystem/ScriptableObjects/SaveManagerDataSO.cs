@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SaveLoad.ScriptableObjects {
+namespace SaveSystem.ScriptableObjects {
     [CreateAssetMenu(fileName = "SaveManagerData", menuName = "Game/SaveManagerData", order = 0)]
     public class SaveManagerDataSO : ScriptableObject {
         public bool inputLoad;

@@ -417,8 +417,8 @@ MonoBehaviour:
   visualTree: {fileID: 9197481963319205126, guid: 6ff293d0276c73d41abb3a382b03a45e, type: 3}
   uiDocument: {fileID: 945489883}
   saveSlotTemplateContainer: {fileID: 9197481963319205126, guid: c6b35eb7ef272ae4baad54c965380a36, type: 3}
-  _loadLocation: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
-  _locationsToLoad:
+  loadLocation: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
+  locationsToLoad:
   - {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
   saveManagerDataSo: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
 --- !u!4 &1961413314

@@ -3,7 +3,6 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
-using Pathfinding;
 
 [CreateAssetMenu(fileName = "DrawReachableTiles", menuName = "State Machines/Actions/Player/DrawReachableTiles")]
 public class DrawReachableTilesSO : StateActionSO {
@@ -14,16 +13,16 @@ public class DrawReachableTilesSO : StateActionSO {
 
 public class DrawReachableTiles : StateAction
 {
-    private NodeListEventChannelSO drawReachableTileEC;
-    private PlayerCharacterSC playerStateContainer;
+    private NodeListEventChannelSO _drawReachableTileEC;
+    private PlayerCharacterSC _playerStateContainer;
     
     public DrawReachableTiles(NodeListEventChannelSO drawReachableTileEC) {
-        this.drawReachableTileEC = drawReachableTileEC;
+        this._drawReachableTileEC = drawReachableTileEC;
     }
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+        _playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
     
     public override void OnUpdate()
@@ -35,7 +34,7 @@ public class DrawReachableTiles : StateAction
     {
         // pathfindingDrawer.ClearPreviewTilemap();
         // Debug.Log("Zeichne reachable tiles von Player aus");
-        drawReachableTileEC.RaiseEvent(playerStateContainer.reachableTiles);
+        _drawReachableTileEC.RaiseEvent(_playerStateContainer.reachableTiles);
     }
 
     public override void OnStateExit()

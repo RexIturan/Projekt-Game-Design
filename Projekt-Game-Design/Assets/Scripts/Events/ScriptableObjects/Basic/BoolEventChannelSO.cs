@@ -8,11 +8,8 @@ namespace Events.ScriptableObjects {
         
         public event Action<bool> OnEventRaised;
         
-        public void RaiseEvent(bool value)
-        {
-            if (OnEventRaised != null)
-                OnEventRaised.Invoke(value);
+        public void RaiseEvent(bool value) {
+	        OnEventRaised?.Invoke(value);
         }
-        
     }
 }

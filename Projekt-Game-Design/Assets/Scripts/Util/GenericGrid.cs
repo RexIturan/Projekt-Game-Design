@@ -10,55 +10,55 @@ namespace Util {
             public int y;
         }
 
-        [SerializeField] private bool showDebug { get; set; }
         
-        [SerializeField] private int width;
-        [SerializeField] private int height;
-        [SerializeField] private float cellSize;
-        [SerializeField] private Vector3 originPosition;
-        [SerializeField] private TGridObject[,] gridArray;
 
-        public int Width => width;
-        public int Height => height;
-        public float CellSize => cellSize;
+        private int _width;
+        private int _height;
+        private float _cellSize;
+        private Vector3 _originPosition;
+        private TGridObject[,] _gridArray;
+
+        public int Width => _width;
+        public int Height => _height;
+        public float CellSize => _cellSize;
         
         
         //debug
-        [SerializeField] private Transform debugTextParent;
-        
+        private Transform _debugTextParent;
+        private readonly bool _showDebug;
 
         public GenericGrid(int width, int height, float cellSize, Vector3 originPosition,
             Func<GenericGrid<TGridObject>, int, int, TGridObject> createGridObject, bool showDebug, Transform debugTextParent = null) {
-            this.showDebug = showDebug;
-            this.width = width;
-            this.height = height;
-            this.cellSize = cellSize;
-            this.originPosition = originPosition;
-            this.debugTextParent = debugTextParent;
+            this._showDebug = showDebug;
+            this._width = width;
+            this._height = height;
+            this._cellSize = cellSize;
+            this._originPosition = originPosition;
+            this._debugTextParent = debugTextParent;
 
-            gridArray = new TGridObject[width, height];
+            _gridArray = new TGridObject[width, height];
 
 
-            for (int x = 0; x < gridArray.GetLength(0); x++) {
-                for (int y = 0; y < gridArray.GetLength(1); y++) {
-                    gridArray[x, y] = createGridObject(this, x, y);
+            for (int x = 0; x < _gridArray.GetLength(0); x++) {
+                for (int y = 0; y < _gridArray.GetLength(1); y++) {
+                    _gridArray[x, y] = createGridObject(this, x, y);
                 }
             }
 
             // todo expose as getter setter or event to change during runtime
-            if (showDebug) {
+            if (_showDebug) {
                 CreateDebugDisplay();
             }
         }
 
         public void CreateDebugDisplay() {
-            TextMeshPro[,] debugTextArray = new TextMeshPro[width, height];
+            TextMeshPro[,] debugTextArray = new TextMeshPro[_width, _height];
 
-            for (int x = 0; x < gridArray.GetLength(0); x++) {
-                for (int y = 0; y < gridArray.GetLength(1); y++) {
-                    debugTextArray[x, y] = Util.Text.CreateWorldText(
-                        gridArray[x, y].ToString(),
-                        debugTextParent,
+            for (int x = 0; x < _gridArray.GetLength(0); x++) {
+                for (int y = 0; y < _gridArray.GetLength(1); y++) {
+                    debugTextArray[x, y] = Text.CreateWorldText(
+                        _gridArray[x, y].ToString(),
+                        _debugTextParent,
                         GetCellDimensions(),
                         GetWorldPosition(x, y) + GetCellCenter(),
                         GetWorldRotation(),
@@ -69,28 +69,28 @@ namespace Util {
                 }
             }
 
-            Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100);
-            Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100);
+            Debug.DrawLine(GetWorldPosition(0, _height), GetWorldPosition(_width, _height), Color.white, 100);
+            Debug.DrawLine(GetWorldPosition(_width, 0), GetWorldPosition(_width, _height), Color.white, 100);
 
             OnGridObjectChanged +=
-                (object AssemblyDefinitionReferenceAsset, OnGridObjectChangedEventArgs eventArgs) => {
-                    debugTextArray[eventArgs.x, eventArgs.y].text = gridArray[eventArgs.x, eventArgs.y].ToString();
+                (assemblyDefinitionReferenceAsset, eventArgs) => {
+                    debugTextArray[eventArgs.x, eventArgs.y].text = _gridArray[eventArgs.x, eventArgs.y].ToString();
                 };
         }
 
         private Vector3 GetWorldPosition(int x, int y) {
             // todo use grid axis / rotation
-            return new Vector3(x, 0, y) * cellSize + originPosition;
+            return new Vector3(x, 0, y) * _cellSize + _originPosition;
         }
 
         public void GetXY(Vector3 worldPosition, out int x, out int y) {
-            x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize);
-            y = Mathf.FloorToInt((worldPosition - originPosition).z / cellSize);
+            x = Mathf.FloorToInt((worldPosition - _originPosition).x / _cellSize);
+            y = Mathf.FloorToInt((worldPosition - _originPosition).z / _cellSize);
         }
 
         private Vector3 GetCellCenter() {
             // todo use grid axis / rotation
-            return new Vector3(0.5f, 0, 0.5f) * cellSize;
+            return new Vector3(0.5f, 0, 0.5f) * _cellSize;
         }
 
         private Vector3 GetWorldRotation() {
@@ -100,11 +100,11 @@ namespace Util {
         }
 
         private Vector2 GetCellDimensions() {
-            return new Vector2(cellSize, cellSize);
+            return new Vector2(_cellSize, _cellSize);
         }
 
         public bool IsInBounds(int x, int y) {
-            return x >= 0 && y >= 0 && x < width && y < height;
+            return x >= 0 && y >= 0 && x < _width && y < _height;
         }
 
         public void TriggerGridObjectChanged(int x, int y) {
@@ -113,7 +113,7 @@ namespace Util {
 
         public void SetGridObject(int x, int y, TGridObject value) {
             if (IsInBounds(x, y)) {
-                gridArray[x, y] = value;
+                _gridArray[x, y] = value;
                 TriggerGridObjectChanged(x, y);
             }
         }
@@ -126,7 +126,7 @@ namespace Util {
 
         public TGridObject GetGridObject(int x, int y) {
             if (IsInBounds(x, y)) {
-                return gridArray[x, y];
+                return _gridArray[x, y];
             }
 
             return default(TGridObject);

@@ -2,7 +2,7 @@
 using Grid;
 using UnityEngine;
 
-namespace SaveSystem.SaveForamts {
+namespace SaveSystem.SaveFormats {
     [Serializable]
     public class GridData_Save {
         public int width;

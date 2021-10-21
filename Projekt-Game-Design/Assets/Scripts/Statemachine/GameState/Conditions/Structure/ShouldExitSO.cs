@@ -12,15 +12,15 @@ public class ShouldExitSO : StateConditionSO
 public class ShouldExit : Condition
 {
 	protected new ShouldExitSO OriginSO => (ShouldExitSO)base.OriginSO;
-	private GameSC gameSc;
+	private GameSC _gameSc;
 
 	public override void Awake(StateMachine stateMachine) {
-		gameSc = stateMachine.gameObject.GetComponent<GameSC>();
+		_gameSc = stateMachine.gameObject.GetComponent<GameSC>();
 	}
 	
 	protected override bool Statement()
 	{
-		return gameSc.shouldExit;
+		return _gameSc.shouldExit;
 	}
 	
 	public override void OnStateEnter()

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Events.ScriptableObjects;
-using SaveLoad;
-using SaveLoad.ScriptableObjects;
+using SaveSystem;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 
 namespace UI.SaveGames {
@@ -29,18 +22,18 @@ namespace UI.SaveGames {
         
         // todo load with assetdatabase
         [SerializeField] private VisualTreeAsset saveSlotTemplateContainer;
-        private ScrollView saveSlotContainer;
+        private ScrollView _saveSlotContainer;
 
         [Header("Sending Events On")]
-        [SerializeField] private LoadEventChannelSO _loadLocation = default;
+        [SerializeField] private LoadEventChannelSO loadLocation;
 
         [Header("Location Scene To Load")]
-        [SerializeField] private GameSceneSO[] _locationsToLoad;  
+        [SerializeField] private GameSceneSO[] locationsToLoad;  
         
-        private SaveManager saveSystem;
+        private SaveManager _saveSystem;
         
         private void Awake() {
-            saveSystem = GameObject.FindObjectOfType<SaveManager>();
+            _saveSystem = GameObject.FindObjectOfType<SaveManager>();
             
             var tree = visualTree.CloneTree("LoadTestLevelScreen");
             tree.name = "LoadTestLevelScreen";
@@ -49,7 +42,7 @@ namespace UI.SaveGames {
             tree.style.height = new StyleLength(Length.Percent(100)); 
             uiDocument.rootVisualElement.Add(tree);
 
-            saveSlotContainer = uiDocument.rootVisualElement.Q<ScrollView>();
+            _saveSlotContainer = uiDocument.rootVisualElement.Q<ScrollView>();
             
             GetAllTestSaveFiles();
         }
@@ -63,14 +56,14 @@ namespace UI.SaveGames {
         // VisualElement Scroll View
 
         // [SerializeField] private StringEventChannelSO loadGameFromPath;
-        [SerializeField] private SaveManagerDataSO saveManagerDataSo;
+        // [SerializeField] private SaveManagerDataSO saveManagerDataSo;
         
         
         public void GetAllTestSaveFiles() {
             
             // get all savefile names
             // -> create placeholder with names
-            var placeholderFilenames = saveSystem.GetAllTestLevelNames();
+            var placeholderFilenames = _saveSystem.GetAllTestLevelNames();
             // List<Action<string, bool, int>> callbacks = new List<Action<string, bool, int>>();
             List<Button> saveSlotButtons = new List<Button>(); 
             List<Label> saveSlotLabels = new List<Label>();
@@ -79,7 +72,7 @@ namespace UI.SaveGames {
                 // Debug.Log(placeholder);
                 var saveSlot = saveSlotTemplateContainer.CloneTree();
                 saveSlots.Add(saveSlot);
-                saveSlotContainer.Add(saveSlot);
+                _saveSlotContainer.Add(saveSlot);
                 
                 var saveSlotButton = saveSlot.Q<Button>("SaveSlotButton");
                 saveSlotButtons.Add(saveSlotButton);
@@ -111,7 +104,7 @@ namespace UI.SaveGames {
                 // });                
             }
             
-            saveSystem.LoadTextAssetsAsSaves((filename, valid, index) => {
+            _saveSystem.LoadTextAssetsAsSaves((filename, valid, index) => {
                 if (valid) {
                     // Debug.Log($"Load {index} {filename}" );
 
@@ -120,16 +113,16 @@ namespace UI.SaveGames {
                     button.SetEnabled(true);
                     button.clicked += () => {
                         // Debug.Log($"Load {filename}" );
-                        saveSystem.SetCurrentSaveTo(index);
-                        _loadLocation.RaiseEvent(_locationsToLoad, true, false);
-                        saveSystem.saveManagerData.inputLoad = true;
-                        saveSystem.saveManagerData.loaded = true;
+                        _saveSystem.SetCurrentSaveTo(index);
+                        loadLocation.RaiseEvent(locationsToLoad, true, false);
+                        _saveSystem.saveManagerData.inputLoad = true;
+                        _saveSystem.saveManagerData.loaded = true;
                     };
                 }
                 else {
-                    saveSlotContainer.Remove(saveSlots[index]);
+                    _saveSlotContainer.Remove(saveSlots[index]);
                 }
-            }, saveSystem.GetValidTestLevel());
+            }, _saveSystem.GetValidTestLevel());
         }
     }
 }

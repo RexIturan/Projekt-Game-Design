@@ -1,5 +1,4 @@
-﻿using System;
-using Events.ScriptableObjects;
+﻿using Events.ScriptableObjects;
 using Input;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,39 +10,39 @@ namespace UI.LoadingScreen {
         [SerializeField] private UIDocument uiDocument;
 
         [Header("Recieving Event On")] 
-        [SerializeField] private BoolEventChannelSO _toggleLoadingScreen;
+        [SerializeField] private BoolEventChannelSO toggleLoadingScreen;
 
         [Header("Sending Event On")]
-        [SerializeField] private VoidEventChannelSO enableGamplayInput_EC;
+        [SerializeField] private VoidEventChannelSO enableGamplayInputEC;
         
-        private TemplateContainer loadingScreenRoot;
+        private TemplateContainer _loadingScreenRoot;
         
         private void Awake() {
-            _toggleLoadingScreen.OnEventRaised += ToggleLoadingScreen;
-            inputReader.anyKeyEvent += ToggleLoadingScreen;
+            toggleLoadingScreen.OnEventRaised += ToggleLoadingScreen;
+            inputReader.AnyKeyEvent += ToggleLoadingScreen;
         }
 
         private void OnDisable() {
-            _toggleLoadingScreen.OnEventRaised -= ToggleLoadingScreen;
-            inputReader.anyKeyEvent -= ToggleLoadingScreen;
+            toggleLoadingScreen.OnEventRaised -= ToggleLoadingScreen;
+            inputReader.AnyKeyEvent -= ToggleLoadingScreen;
         }
 
         private void Start() {
             var loadingScreenName = "LoadingScreenContainer";
-            loadingScreenRoot = loadingScreenTreeAsset.CloneTree(loadingScreenName);
-            loadingScreenRoot.name = loadingScreenName;
-            loadingScreenRoot.visible = false;
-            loadingScreenRoot.style.height = new StyleLength(Length.Percent(100));
-            uiDocument.rootVisualElement.Add(loadingScreenRoot);
+            _loadingScreenRoot = loadingScreenTreeAsset.CloneTree(loadingScreenName);
+            _loadingScreenRoot.name = loadingScreenName;
+            _loadingScreenRoot.visible = false;
+            _loadingScreenRoot.style.height = new StyleLength(Length.Percent(100));
+            uiDocument.rootVisualElement.Add(_loadingScreenRoot);
         }
 
         void ToggleLoadingScreen(bool show) {
-            loadingScreenRoot.visible = show;
+            _loadingScreenRoot.visible = show;
         }
 
         void ToggleLoadingScreen() {
-            loadingScreenRoot.visible = !loadingScreenRoot.visible;
-            enableGamplayInput_EC.RaiseEvent();
+            _loadingScreenRoot.visible = !_loadingScreenRoot.visible;
+            enableGamplayInputEC.RaiseEvent();
         }
     }
 }

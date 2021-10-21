@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Events.ScriptableObjects;
 using Grid;
 using UnityEngine;

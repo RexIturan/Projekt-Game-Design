@@ -7,8 +7,7 @@ namespace Events.ScriptableObjects {
         public event Action<string> OnEventRaised;
 
         public void RaiseEvent(string value) {
-            if (OnEventRaised != null)
-                OnEventRaised.Invoke(value);
+	        OnEventRaised?.Invoke(value);
         }
     }
 }

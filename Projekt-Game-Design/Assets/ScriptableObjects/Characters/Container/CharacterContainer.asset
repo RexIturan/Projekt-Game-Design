@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CharacterContainer
   m_EditorClassIdentifier: 
   playerContainer:
-  - {fileID: 0}
+  - {fileID: 4201453750377344852, guid: b6f5dc55e03a1d944b7361058c91e19c, type: 3}
   enemyContainer:
-  - {fileID: 0}
+  - {fileID: 498592685408855684, guid: 5c8e089f4fca80b4680632dc908fafb6, type: 3}

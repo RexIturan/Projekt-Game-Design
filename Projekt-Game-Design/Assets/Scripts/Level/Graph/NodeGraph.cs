@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Util;
 
 namespace Graph {
@@ -18,7 +17,7 @@ namespace Graph {
                 height, 
                 cellSize, 
                 originPosition, 
-                (GenericGrid1D<PathNode> g, int x, int y) => new PathNode(g, x, y), 
+                (grid, x, y) => new PathNode(grid, x, y), 
                 showDebug, 
                 debugTextParent) { }
         
@@ -28,7 +27,7 @@ namespace Graph {
             for (int y = Height - 1; y >= 0; y--) {
                 for (int x = 0; x < Width; x++) {
                     str += "[";
-                    if (GetGridObject(x, y).Edges != null) {
+                    if (GetGridObject(x, y).edges != null) {
                         str += GetGridObject(x, y).ToString();                        
                     }
                     else {
@@ -39,7 +38,6 @@ namespace Graph {
 
                 str += "\n";
             }
-
             return str;
         }
     }

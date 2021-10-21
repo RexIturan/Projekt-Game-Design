@@ -1,27 +1,23 @@
-﻿using System;
-using SaveLoad;
+﻿using SaveSystem;
 using UnityEngine;
 
 namespace SceneManagement {
     public class LocationLoader : MonoBehaviour {
         
-        // [Header("recieving Events On")]
-        // private VoidEventChannelSO onSceneReady_EC;
-        
         [Header("Sending Events On")]
-        [SerializeField] private VoidEventChannelSO enableLoadingScreenInput_EC;
+        [SerializeField] private VoidEventChannelSO enableLoadingScreenInputEC;
         
         // get at runtime
-        private SaveManager saveSystem;
+        private SaveManager _saveSystem;
         
         private void Awake() {
-            saveSystem = GameObject.FindObjectOfType<SaveManager>();
+            _saveSystem = FindObjectOfType<SaveManager>();
         }
 
         private void Start() {
-            if (saveSystem is { }) {
-                saveSystem.InitializeLevel();
-                enableLoadingScreenInput_EC.RaiseEvent();    
+            if (_saveSystem is { }) {
+                _saveSystem.InitializeLevel();
+                enableLoadingScreenInputEC.RaiseEvent();    
             }
         }
     }

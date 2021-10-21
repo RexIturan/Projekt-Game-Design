@@ -1,5 +1,4 @@
 ﻿using System;
-using Events.ScriptableObjects;
 using Events.ScriptableObjects.FieldOfView;
 using Grid;
 using Level.Grid;
@@ -9,45 +8,46 @@ namespace FieldOfView {
     public class FieldOfViewController : MonoBehaviour {
         [SerializeField] private GridContainerSO grid;
         [SerializeField] private TileTypeContainerSO tileTypeContainer;
-        [SerializeField] private bool debug = false;
-        [SerializeField] private int visionRangeTest;
-        [SerializeField] private Vector2Int startPosTest;
+        [SerializeField] private bool debug;
+        // [SerializeField] private int visionRangeTest;
+        // [SerializeField] private Vector2Int startPosTest;
         [SerializeField] private GridDataSO globalGridData;
+        
+        [Header("Receiving Event On")]
+        [SerializeField] private FOVQueryEventChannelSO fieldOfViewQueryEventChannel;
 
-        [SerializeField] private FOV_Query_EventChannelSO fieldOfViewQueryEventChannel;
+        // fov algorithms
+        private FieldOfView_Adam _fieldOfViewAdam;
+        // private FieldOfView _fieldOfView;
 
-        // algorythm
-        private FieldOfView_Adam fieldOfViewAdam;
-        private FieldOfView fieldOfView;
-
-        //adamFOV settings
+        [Header("AdamFOV Settings")]
         [SerializeField] private Vector2Int posAdam;
         [SerializeField] private int rangeAdam;
-        private bool[,] visible;
+        
+        private bool[,] _visible;
 
         public void Awake() {
-            fieldOfView = InitFieldOfView();
-            fieldOfViewQueryEventChannel.OnEventRaised += handleQueryEvent;
+            // _fieldOfView = InitFieldOfView();
+            fieldOfViewQueryEventChannel.OnEventRaised += HandleQueryEvent;
         }
 
         private FieldOfView InitFieldOfView() {
             return new FieldOfView(grid, tileTypeContainer, debug);
         }
 
-        private void handleQueryEvent(Vector3Int startpos, int range, ETileFlags blocking, Action<bool[,]> callback) {
-            var pos = globalGridData.GridPos3DToGridPos2D(startpos);
-            // callback(fieldOfView.GetVisibleTiles(range, pos, blocking));
+        private void HandleQueryEvent(Vector3Int startPos, int range, TileProperties blocking, Action<bool[,]> callback) {
+            var pos = globalGridData.GridPos3DToGridPos2D(startPos);
 
-            initFieldOfViewAdam();
-            fieldOfViewAdam.Compute(pos, range);
-            callback(visible);
+            InitFieldOfViewAdam();
+            _fieldOfViewAdam.Compute(pos, range);
+            callback(_visible);
         }
 
         // debug
         public void GenerateVision() {
             // fieldOfView.GetVisibleTiles(visionRangeTest, startPosTest, ETileFlags.opaque);
-            initFieldOfViewAdam();
-            fieldOfViewAdam.Compute(posAdam, rangeAdam);
+            InitFieldOfViewAdam();
+            _fieldOfViewAdam.Compute(posAdam, rangeAdam);
 
             // gen string
             string str = " \n";
@@ -56,7 +56,7 @@ namespace FieldOfView {
 
             for (int y = height-1; y >= 0; y--) {
                 for (int x = 0; x < width; x++) {
-                    if (visible[x, y]) {
+                    if (_visible[x, y]) {
                         str += "+";
                     }
                     else {
@@ -70,23 +70,23 @@ namespace FieldOfView {
             Debug.Log(str);
         }
 
-        void initFieldOfViewAdam() {
+        private void InitFieldOfViewAdam() {
             var width = globalGridData.Width;
             var height = globalGridData.Height;
-            visible = new bool[width, height];
-            fieldOfViewAdam = new FieldOfView_Adam(
-                (x, y) => BlocksLight(x, y, blocker: ETileFlags.opaque),
+            _visible = new bool[width, height];
+            _fieldOfViewAdam = new FieldOfView_Adam(
+                (x, y) => BlocksLight(x, y, blocker: TileProperties.Opaque),
                 SetVisible,
                 GetDistance);
         }
 
-        bool BlocksLight(int x, int y, ETileFlags blocker) {
+        private bool BlocksLight(int x, int y, TileProperties blocker) {
             bool blocksLight = true;
 
             if (globalGridData.IsInGridBounds(x, y)) {
                 var type = grid.tileGrids[1].GetGridObject(x, y).tileTypeID;
-                var flags = tileTypeContainer.tileTypes[type].flags;
-                blocksLight = flags.HasFlag(blocker);
+                var flags = tileTypeContainer.tileTypes[type].properties;
+                blocksLight = flags.HasFlag(flag: blocker);
             }
 
             return blocksLight;
@@ -94,7 +94,7 @@ namespace FieldOfView {
 
         void SetVisible(int x, int y) {
             if (globalGridData.IsInGridBounds(x, y)) {
-                visible[x, y] = true;
+                _visible[x, y] = true;
             }
         }
 

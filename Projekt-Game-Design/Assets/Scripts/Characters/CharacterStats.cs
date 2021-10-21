@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-// data container for stats for both players and enemy
+/// <summary>data container for stats for both players and enemy</summary> 
 [System.Serializable]
 public struct CharacterStats
 {

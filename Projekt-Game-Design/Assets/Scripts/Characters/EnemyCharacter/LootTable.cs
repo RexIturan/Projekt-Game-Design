@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-// General structure to store information about drops
-//
+/// <summary>General structure to store information about drops</summary>
 [System.Serializable]
 public struct LootTable
 {
@@ -13,12 +10,12 @@ public struct LootTable
     [SerializeField] public int experience; 
 
     [System.Serializable]
-    public struct itemDropPair
+    public struct ItemDropPair
     {
-        [SerializeField] ScriptableObject item;
-        [SerializeField] float probability; // value between 0 and 1
+        public ScriptableObject item;
+        public float probability; // value between 0 and 1
     }
 
-    [SerializeField] public itemDropPair [] itemDropList;
+    [SerializeField] public ItemDropPair [] itemDropList;
 
 }

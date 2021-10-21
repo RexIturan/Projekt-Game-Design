@@ -45,10 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
   equipmentInventory: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
-  OnItemPickupEventChannel: {fileID: 11400000, guid: 923c7a859e7f1f744b297552276d93a8, type: 2}
-  OnItemDropEventChannel: {fileID: 11400000, guid: a2d61755a24c4ac4f95ba6d812bdcf70, type: 2}
-  ChangeInventoryListEventChannel: {fileID: 11400000, guid: 93022818b29b1ce4da9ed669857028b9, type: 2}
-  ChangeEquipmentInventoryListEventChannel: {fileID: 11400000, guid: 93022818b29b1ce4da9ed669857028b9, type: 2}
+  onItemPickupEventChannel: {fileID: 11400000, guid: 923c7a859e7f1f744b297552276d93a8, type: 2}
+  onItemDropEventChannel: {fileID: 11400000, guid: a2d61755a24c4ac4f95ba6d812bdcf70, type: 2}
+  inventoryChanged_EC: {fileID: 11400000, guid: 93022818b29b1ce4da9ed669857028b9, type: 2}
+  equipmentChanged_EC: {fileID: 11400000, guid: c0189a8607968d94fb0aa9726f238639, type: 2}
   inventoryTabChanged: {fileID: 11400000, guid: c0c391df13a8ed149a1fcb343bb20c4d, type: 2}
   toEquipmentEventChannel: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
   toInventoryEventChannel: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}

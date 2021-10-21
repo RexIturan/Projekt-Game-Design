@@ -12,10 +12,10 @@ namespace Statemachine.Enemy.Actions.Combat {
 	public class AttackTarget_OnEnter : StateAction
 	{
 		protected new AttackTarget_OnEnterSO OriginSO => (AttackTarget_OnEnterSO)base.OriginSO;
-		private EnemyCharacterSC enemyCharacterSC;
+		private EnemyCharacterSC _enemyCharacterSC;
 
 		public override void Awake(StateMachine stateMachine) {
-			enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
+			_enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
 		}
 	
 		public override void OnUpdate()
@@ -24,15 +24,15 @@ namespace Statemachine.Enemy.Actions.Combat {
 	
 		public override void OnStateEnter() {
 			var attackEnergyCost = 1;
-			if (enemyCharacterSC.energy >= attackEnergyCost) {
-				Debug.Log($"enemy attacked player for {enemyCharacterSC.attackDamage} damage");
-				enemyCharacterSC.target.healthPoints -= enemyCharacterSC.attackDamage;
+			if (_enemyCharacterSC.energy >= attackEnergyCost) {
+				Debug.Log($"enemy attacked player for {_enemyCharacterSC.attackDamage} damage");
+				_enemyCharacterSC.target.healthPoints -= _enemyCharacterSC.attackDamage;
 				// todo move somewhere else
-				enemyCharacterSC.energy -= attackEnergyCost;
-				enemyCharacterSC.abilityExecuted = true;	
+				_enemyCharacterSC.energy -= attackEnergyCost;
+				_enemyCharacterSC.abilityExecuted = true;	
 			}
 			else {
-				enemyCharacterSC.isDone = true;
+				_enemyCharacterSC.isDone = true;
 			}
 		}
 	

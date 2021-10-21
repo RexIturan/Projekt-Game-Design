@@ -1,15 +1,13 @@
-using System;
-using Characters.ScriptableObjects;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
-using SaveLoad;
-using SaveLoad.ScriptableObjects;
+using SaveSystem;
+using SaveSystem.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
 
 namespace GameManager {
     public class GameSC : MonoBehaviour {
-        [Header("Recieving Events On")] [SerializeField]
+        [Header("Receiving Events On")] [SerializeField]
         private EFactionEventChannelSO endTurnEC;
 
         [Header("Sending Events On")] [SerializeField]
@@ -34,13 +32,13 @@ namespace GameManager {
         public bool gameOver;
 
         [Header("SaveManagerData")] public SaveManagerDataSO saveManagerData;
-        [SerializeField] private StringEventChannelSO loadGameFromPath;
+        // [SerializeField] private StringEventChannelSO loadGameFromPath;
         [SerializeField] private VoidEventChannelSO levelLoaded;
 
         [Header("sceneloading stuff")] [SerializeField]
         private VoidEventChannelSO onSceneReady;
 
-        [SerializeField] private LoadEventChannelSO loadLocationEC;
+        // [SerializeField] private LoadEventChannelSO loadLocationEC;
         public GameSceneSO[] locationsToLoad;
         public bool showLoadScreen;
 
@@ -51,7 +49,7 @@ namespace GameManager {
             
             saveManagerData.Reset();
             tacticsData.Reset();
-            tacticsData.SetStartingPlayer(EFaction.player);
+            tacticsData.SetStartingPlayer(Faction.Player);
         }
 
         private void OnDisable() {
@@ -61,9 +59,9 @@ namespace GameManager {
             saveManagerData.Reset();
         }
 
-        private void HandleEndTurn(EFaction faction) {
+        private void HandleEndTurn(Faction faction) {
             // todo needs update if we introduce more factions
-            setTurnIndicatorVisibilityEC.RaiseEvent(faction == EFaction.player);
+            setTurnIndicatorVisibilityEC.RaiseEvent(faction == Faction.Player);
 
             if (tacticsData.currentPlayer == faction) {
                 tacticsData.GoToNextTurn();
@@ -74,11 +72,12 @@ namespace GameManager {
             }
         }
 
-
+        //todo isnt used, remove or use
         public SaveManager saveSystem;
-        private bool _hasSaveData;
-
+        private bool _hasSaveData = false;
+        
         public void LoadLocationLevel() {
+	        
             // _hasSaveData = saveSystem.LoadSaveDataFromDisk(saveSystem.saveManagerData.path);
 
             if (_hasSaveData) {
