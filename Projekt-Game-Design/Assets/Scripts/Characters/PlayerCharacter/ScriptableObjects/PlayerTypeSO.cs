@@ -17,5 +17,5 @@ public class PlayerTypeSO : ScriptableObject
 
     [Header("Visuals")]
     public Sprite profilePicture;
-    public float TIME_OF_ATTACK_ANIMATION;
+    public float time_Of_Attack_Animation;
 }

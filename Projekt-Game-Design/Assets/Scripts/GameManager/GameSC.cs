@@ -16,20 +16,7 @@ namespace GameManager {
         [Header("SO References")] [SerializeField]
         private TacticsGameDataSO tacticsData;
 
-        [Header("StateMachine")] public bool evaluated;
-
-        // structure
-        public bool shouldExit;
-        public bool exited;
-        public bool initializedGame;
-
-        public bool initializedTactics;
-
-        // todo refactor to enum
-        public bool isInTacticsMode;
-
-        // public bool isInMacroMode;
-        public bool gameOver;
+        
 
         [Header("SaveManagerData")] public SaveManagerDataSO saveManagerData;
         // [SerializeField] private StringEventChannelSO loadGameFromPath;
@@ -42,6 +29,22 @@ namespace GameManager {
         public GameSceneSO[] locationsToLoad;
         public bool showLoadScreen;
 
+        //todo isnt used, remove or use
+        public SaveManager saveSystem;
+        private bool _hasSaveData = false;
+        
+        [Header("StateMachine")] 
+        public bool evaluated;
+        // structure
+        public bool shouldExit;
+        public bool exited;
+        public bool initializedGame;
+        public bool initializedTactics;
+        // todo refactor to enum
+        public bool isInTacticsMode;
+        // public bool isInMacroMode;
+        public bool gameOver;
+        
         private void Awake() {
             endTurnEC.OnEventRaised += HandleEndTurn;
             onSceneReady.OnEventRaised += LoadGameFromPath;
@@ -71,10 +74,6 @@ namespace GameManager {
                 Debug.Log("You can only end the Turn, when its your Turn");
             }
         }
-
-        //todo isnt used, remove or use
-        public SaveManager saveSystem;
-        private bool _hasSaveData = false;
         
         public void LoadLocationLevel() {
 	        

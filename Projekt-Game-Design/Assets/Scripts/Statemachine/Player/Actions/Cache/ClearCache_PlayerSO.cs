@@ -33,5 +33,6 @@ public class ClearCache_Player : StateAction
 		_playerCharacterSC.movementTarget = default;
         _playerCharacterSC.playerTarget = null;
         _playerCharacterSC.enemyTarget = null;
-	}
+        _playerCharacterSC.waitForAttackToFinish = false;
+    }
 }

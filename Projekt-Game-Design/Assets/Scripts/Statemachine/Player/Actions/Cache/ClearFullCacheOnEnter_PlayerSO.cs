@@ -33,7 +33,8 @@ public class ClearFullCacheOnEnter_Player : StateAction
         _playerCharacterSC.playerTarget = null;
         _playerCharacterSC.enemyTarget = null;
         _playerCharacterSC.tilesInRange.Clear();
-}
+        _playerCharacterSC.waitForAttackToFinish = false;
+    }
 	
 	public override void OnStateExit()
 	{

@@ -3,24 +3,24 @@ using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
 [CreateAssetMenu(fileName = "p_AttackDone", menuName = "State Machines/Conditions/Player/Attack Done")]
-public class p_AttackDoneSO : StateConditionSO
+public class P_AttackDoneSO : StateConditionSO
 {
-    protected override Condition CreateCondition() => new p_AttackDone();
+    protected override Condition CreateCondition() => new P_AttackDone();
 }
 
-public class p_AttackDone : Condition
+public class P_AttackDone : Condition
 {
-    private PlayerCharacterSC playerSC;
+    private PlayerCharacterSC _playerSC;
 
     public override void Awake(StateMachine stateMachine)
     {
-        playerSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+        _playerSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
 
     protected override bool Statement()
     {
-        return !playerSC.waitForAttackToFinish ||
-            playerSC.timeSinceTransition >= playerSC.playerType.TIME_OF_ATTACK_ANIMATION;
+        return !_playerSC.waitForAttackToFinish ||
+            _playerSC.timeSinceTransition >= _playerSC.playerType.time_Of_Attack_Animation;
     }
 
     public override void OnStateEnter()

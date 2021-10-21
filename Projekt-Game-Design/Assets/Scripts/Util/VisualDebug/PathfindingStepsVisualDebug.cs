@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Graph.ScriptableObjects;
 using Grid;
 using Input;
 using UnityEngine;
@@ -18,7 +17,6 @@ namespace Util.VisualDebug {
         public Color defaultBackgroundColor = new Color32(99, 99, 99, 255);
 
         [Header("Settings")] 
-        [SerializeField] private GraphContainerSO graphContainer;
         [SerializeField] private GridDataSO globalGridData;
         [SerializeField] private InputReader inputReader;
         [SerializeField] private Transform parent;

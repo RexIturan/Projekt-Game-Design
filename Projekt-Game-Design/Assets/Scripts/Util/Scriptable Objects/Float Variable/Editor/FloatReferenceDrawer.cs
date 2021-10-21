@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Util.ScriptableObjects;
 
 namespace Util.Scriptable_Objects.Float_Variable.Editor {
@@ -7,19 +8,22 @@ namespace Util.Scriptable_Objects.Float_Variable.Editor {
     [CustomPropertyDrawer(typeof(FloatReference))]
     public class FloatReferenceDrawer : PropertyDrawer {
         
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+	    public override VisualElement CreatePropertyGUI(SerializedProperty property) {
+		    return base.CreatePropertyGUI(property);
+	    }
+
+	    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             
             EditorGUI.BeginProperty(position, label, property);
-            //
-            // Draw Lable
+
+            // Draw Label
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
             
             // Don't make child fields be indented
             var indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
             
-            //
-            bool useConstant = property.FindPropertyRelative("UseConstant").boolValue;
+            bool useConstant = property.FindPropertyRelative("useConstant").boolValue;
             
             var dropdownRect = new Rect(position.position, new Vector2(1, 1) * 20);
             position.xMin += 20;
@@ -45,14 +49,14 @@ namespace Util.Scriptable_Objects.Float_Variable.Editor {
             
             if (useConstant) {
         
-                EditorGUI.PropertyField(textFieldRect, property.FindPropertyRelative("ConstantValue"), GUIContent.none);
+                EditorGUI.PropertyField(textFieldRect, property.FindPropertyRelative("constantValue"), GUIContent.none);
                 // float value = property.FindPropertyRelative("ConstantValue").floatValue;
                 // string newValue = EditorGUI.TextField(textFieldRect, value.ToString());
                 // float.TryParse(newValue, out value);
                 // property.FindPropertyRelative("ConstantValue").floatValue = value;
             }
             else {
-                EditorGUI.ObjectField(objectFieldRect, property.FindPropertyRelative("Variable"), GUIContent.none);
+                EditorGUI.ObjectField(objectFieldRect, property.FindPropertyRelative("variable"), GUIContent.none);
             }
         
             EditorGUI.indentLevel = indent;
@@ -60,7 +64,7 @@ namespace Util.Scriptable_Objects.Float_Variable.Editor {
         }
         
         private void SetProperty(SerializedProperty property, bool value) {
-            var propRelative = property.FindPropertyRelative("UseConstant");
+            var propRelative = property.FindPropertyRelative("useConstant");
             propRelative.boolValue = value;
             property.serializedObject.ApplyModifiedProperties();
         }

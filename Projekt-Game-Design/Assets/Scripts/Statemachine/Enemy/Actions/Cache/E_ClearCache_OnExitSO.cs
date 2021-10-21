@@ -14,32 +14,37 @@ namespace Characters.PlayerCharacter.StateMachine.Actions
         [SerializeField] private bool abilityExecuted;
         [SerializeField] private bool abilityID;
         [SerializeField] private bool movementTarget;
+        [SerializeField] private bool waitForAttack;
 
         public override StateAction CreateAction() => new E_ClearCache_OnExit(isOnTurn, isDone, abilitySelected, 
-                                                                              abilityExecuted, abilityID, movementTarget);
+                                                                              abilityExecuted, abilityID, movementTarget,
+                                                                              waitForAttack);
     }
 
     public class E_ClearCache_OnExit : StateAction
     {
         private EnemyCharacterSC _enemyCharacterSC;
         
-        private readonly bool _isOnTurn;
-        private readonly bool _isDone;
-        private readonly bool _abilitySelected;
-        private readonly bool _abilityExecuted;
-        private readonly bool _abilityID;
-        private readonly bool _movementTarget;
+        private bool _isOnTurn;
+        private bool _isDone;
+        private bool _abilitySelected;
+        private bool _abilityExecuted;
+        private bool _abilityID;
+        private bool _movementTarget;
+        private bool _waitForAttack;
 
         public E_ClearCache_OnExit(bool isOnTurn, bool isDone, bool abilitySelected, 
-                                   bool abilityExecuted, bool abilityID, bool movementTarget)
+                                   bool abilityExecuted, bool abilityID, bool movementTarget,
+                                   bool waitForAttack)
         {
-            _isOnTurn = isOnTurn;
-            _isDone = isDone;
-            _abilitySelected = abilitySelected;
-            _abilityExecuted = abilityExecuted;
-            _abilityID = abilityID;
-            _movementTarget = movementTarget;
-    }
+            this._isOnTurn = isOnTurn;
+            this._isDone = isDone;
+            this._abilitySelected = abilitySelected;
+            this._abilityExecuted = abilityExecuted;
+            this._abilityID = abilityID;
+            this._movementTarget = movementTarget;
+            this._waitForAttack = waitForAttack;
+        }
 
         public override void Awake(UOP1.StateMachine.StateMachine stateMachine)
         {
@@ -74,6 +79,9 @@ namespace Characters.PlayerCharacter.StateMachine.Actions
 
             if (_movementTarget)
                 _enemyCharacterSC.movementTarget = null;
+
+            if (_waitForAttack)
+                _enemyCharacterSC.waitForAttackToFinish = false;
         }
     }
 }
