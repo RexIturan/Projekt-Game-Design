@@ -7,7 +7,7 @@ using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
 
-[CreateAssetMenu(fileName = "p_InflictDamage_OnEnter", menuName = "State Machines/Actions/Player/Inflict Damage On Enter")]
+[CreateAssetMenu(fileName = "P_InflictDamage_OnEnter", menuName = "State Machines/Actions/Player/Inflict Damage On Enter")]
 public class P_InflictDamage_OnEnterSO : StateActionSO
 {
     [Header("Sending events on: ")]

@@ -7,7 +7,7 @@ using UOP1.StateMachine.ScriptableObjects;
 using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
 
-[CreateAssetMenu(fileName = "p_SaveTilesInRange_OnEnter", menuName = "State Machines/Actions/Player/Save Tiles In Range On Enter")]
+[CreateAssetMenu(fileName = "P_SaveTilesInRange_OnEnter", menuName = "State Machines/Actions/Player/Save Tiles In Range On Enter")]
 public class P_SaveTilesInRange_OnEnterSO : StateActionSO
 {
     [SerializeField] private PathfindingQueryEventChannelSO pathfindingQueryEvent;

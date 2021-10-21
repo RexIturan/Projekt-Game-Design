@@ -4,7 +4,7 @@ using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
 
-[CreateAssetMenu(fileName = "p_DrawRange_OnEnter", menuName = "State Machines/Actions/Player/Draw Range On Enter")]
+[CreateAssetMenu(fileName = "P_DrawRange_OnEnter", menuName = "State Machines/Actions/Player/Draw Range On Enter")]
 public class P_DrawRange_OnEnterSO : StateActionSO
 {
     [Header("Sending Events On")]

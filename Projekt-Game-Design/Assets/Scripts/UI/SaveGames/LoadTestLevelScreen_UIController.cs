@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Events.ScriptableObjects;
 using SaveSystem;
-using SaveSystem.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -26,7 +25,7 @@ namespace UI.SaveGames {
         private ScrollView _saveSlotContainer;
 
         [Header("Sending Events On")]
-        [SerializeField] private LoadEventChannelSO loadLocation = default;
+        [SerializeField] private LoadEventChannelSO loadLocation;
 
         [Header("Location Scene To Load")]
         [SerializeField] private GameSceneSO[] locationsToLoad;  
@@ -57,7 +56,7 @@ namespace UI.SaveGames {
         // VisualElement Scroll View
 
         // [SerializeField] private StringEventChannelSO loadGameFromPath;
-        [SerializeField] private SaveManagerDataSO saveManagerDataSo;
+        // [SerializeField] private SaveManagerDataSO saveManagerDataSo;
         
         
         public void GetAllTestSaveFiles() {

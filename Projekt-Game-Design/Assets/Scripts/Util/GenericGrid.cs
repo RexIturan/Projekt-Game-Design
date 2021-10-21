@@ -10,7 +10,7 @@ namespace Util {
             public int y;
         }
 
-        private bool ShowDebug { get; set; }
+        
 
         private int _width;
         private int _height;
@@ -25,11 +25,11 @@ namespace Util {
         
         //debug
         private Transform _debugTextParent;
-        
+        private readonly bool _showDebug;
 
         public GenericGrid(int width, int height, float cellSize, Vector3 originPosition,
             Func<GenericGrid<TGridObject>, int, int, TGridObject> createGridObject, bool showDebug, Transform debugTextParent = null) {
-            this.ShowDebug = showDebug;
+            this._showDebug = showDebug;
             this._width = width;
             this._height = height;
             this._cellSize = cellSize;
@@ -46,7 +46,7 @@ namespace Util {
             }
 
             // todo expose as getter setter or event to change during runtime
-            if (showDebug) {
+            if (_showDebug) {
                 CreateDebugDisplay();
             }
         }
@@ -56,7 +56,7 @@ namespace Util {
 
             for (int x = 0; x < _gridArray.GetLength(0); x++) {
                 for (int y = 0; y < _gridArray.GetLength(1); y++) {
-                    debugTextArray[x, y] = Util.Text.CreateWorldText(
+                    debugTextArray[x, y] = Text.CreateWorldText(
                         _gridArray[x, y].ToString(),
                         _debugTextParent,
                         GetCellDimensions(),
@@ -73,7 +73,7 @@ namespace Util {
             Debug.DrawLine(GetWorldPosition(_width, 0), GetWorldPosition(_width, _height), Color.white, 100);
 
             OnGridObjectChanged +=
-                (object assemblyDefinitionReferenceAsset, OnGridObjectChangedEventArgs eventArgs) => {
+                (assemblyDefinitionReferenceAsset, eventArgs) => {
                     debugTextArray[eventArgs.x, eventArgs.y].text = _gridArray[eventArgs.x, eventArgs.y].ToString();
                 };
         }

@@ -26,6 +26,7 @@ namespace Statemachine.Enemy.Actions.StatChange {
         public override void OnUpdate() { }
 
         public override void OnStateEnter() {
+	        //TODO activate again
             var currentAbility = _abilityContainer.abilities[_enemyCharacterSC.abilityID];
 
             // var energyReduction =  

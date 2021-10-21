@@ -44,10 +44,10 @@ public class OverlayUIController : MonoBehaviour {
     private Action<int> _callBackAction;
 
     // Start is called before the first frame update
-    void Start() {
+    // void Start() {
         // overlayContainer = root.Q<VisualElement>("OverlayContainer");
         // overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
-    }
+    // }
 
     private void Awake() {
         // Holen des UXML Trees, zum getten der einzelnen Komponenten
@@ -148,7 +148,7 @@ public class OverlayUIController : MonoBehaviour {
             _abilityIconSlotList[counter].HoldAbility(ability);
             _abilityIconSlotList[counter]
                 .RegisterCallback<MouseDownEvent, int>(CallBackMouseDownAbility,
-                    _abilityIconSlotList[counter].abilityID, TrickleDown.NoTrickleDown);
+                    _abilityIconSlotList[counter].abilityID);
             _abilityIconSlotList[counter]
                 .RegisterCallback<MouseEnterEvent, string>(CallBackMouseEnterAbility, ability.description);
             _abilityIconSlotList[counter].RegisterCallback<MouseLeaveEvent>(CallBackMouseLeaveAbility);

@@ -1,7 +1,9 @@
 namespace Ability
 {
-    // effect with information about damage/heal, attribute boni, 
-    // applied status effects and evniromental effects
+	/// <summary>
+	/// effect with information about damage/heal, attribute boni, 
+	/// applied status effects and evniromental effects
+	/// </summary>
     [System.Serializable]
     public struct Effect
     {

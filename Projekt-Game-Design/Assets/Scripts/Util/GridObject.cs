@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-
-namespace Util {
+﻿namespace Util {
     public abstract class GridObject {
-        
-            [HideInInspector] public string name = "GridObject";
+	    public string name = "GridObject";
 
             public GenericGrid1D<GridObject> grid;
             public int x;

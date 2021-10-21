@@ -2,7 +2,7 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "p_UpdateAbilities_OnEnter", menuName = "State Machines/Actions/Player/Update Abilities On Enter")]
+[CreateAssetMenu(fileName = "P_UpdateAbilities_OnEnter", menuName = "State Machines/Actions/Player/Update Abilities On Enter")]
 public class P_UpdateAbilities_OnEnterSO : StateActionSO
 {
     public override StateAction CreateAction() => new P_UpdateAbilities_OnEnter();

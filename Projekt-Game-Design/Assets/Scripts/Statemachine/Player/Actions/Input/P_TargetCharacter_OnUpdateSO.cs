@@ -7,9 +7,8 @@ using Grid;
 using Util;
 using Ability;
 using Ability.ScriptableObjects;
-using Level.Grid;
 
-[CreateAssetMenu(fileName = "p_TargetCharacter_OnUpdate", menuName = "State Machines/Actions/Player/Target Character On Update")]
+[CreateAssetMenu(fileName = "P_TargetCharacter_OnUpdate", menuName = "State Machines/Actions/Player/Target Character On Update")]
 public class P_TargetCharacter_OnUpdateSO : StateActionSO
 {
     [Header("SO Data")]

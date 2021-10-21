@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Graph.ScriptableObjects;
 using Grid;
 using Input;
-using TMPro;
 using UnityEngine;
 
 namespace Util.VisualDebug {
@@ -40,9 +39,9 @@ namespace Util.VisualDebug {
             inputReader.ShowFullPathEvent += HandleOnShowFullPathEvent;
         }
 
-        private void Start() {
+        // private void Start() {
             // Setup(graphContainer.basicMovementGraph[1]);
-        }
+        // }
 
         private void OnDestroy() {
             inputReader.StepEvent -= HandleOnStepEvent;
@@ -206,12 +205,12 @@ namespace Util.VisualDebug {
             _gridSnapshotActionList.Clear();
         }
         
-        private struct DebugTile {
-            public TextMeshPro gCostText;
-            public TextMeshPro hCostText;
-            public TextMeshPro fCostText;
-            public Sprite background;
-        }
+        // private struct DebugTile {
+        //     public TextMeshPro gCostText;
+        //     public TextMeshPro hCostText;
+        //     public TextMeshPro fCostText;
+        //     public Sprite background;
+        // }
 
         private class GridSnapshotAction {
             private Action _action;

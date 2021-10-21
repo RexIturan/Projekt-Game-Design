@@ -21,7 +21,7 @@ public class E_MoveToTarget_OnUpdate : StateAction {
 	protected new MoveToTargetSO OriginSO => ( MoveToTargetSO )base.OriginSO;
 
 	private EnemyCharacterSC _enemyCharacterSC;
-	private float _timeSinceLastStep = 0;
+	private float _timeSinceLastStep;
 	private List<PathNode> _path;
 	private int _currentStep;
 	private readonly PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;

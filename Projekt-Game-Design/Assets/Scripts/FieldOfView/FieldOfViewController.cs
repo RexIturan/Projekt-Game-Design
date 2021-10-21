@@ -9,8 +9,8 @@ namespace FieldOfView {
         [SerializeField] private GridContainerSO grid;
         [SerializeField] private TileTypeContainerSO tileTypeContainer;
         [SerializeField] private bool debug;
-        [SerializeField] private int visionRangeTest;
-        [SerializeField] private Vector2Int startPosTest;
+        // [SerializeField] private int visionRangeTest;
+        // [SerializeField] private Vector2Int startPosTest;
         [SerializeField] private GridDataSO globalGridData;
         
         [Header("Receiving Event On")]
@@ -18,7 +18,7 @@ namespace FieldOfView {
 
         // fov algorithms
         private FieldOfView_Adam _fieldOfViewAdam;
-        private FieldOfView _fieldOfView;
+        // private FieldOfView _fieldOfView;
 
         [Header("AdamFOV Settings")]
         [SerializeField] private Vector2Int posAdam;
@@ -27,7 +27,7 @@ namespace FieldOfView {
         private bool[,] _visible;
 
         public void Awake() {
-            _fieldOfView = InitFieldOfView();
+            // _fieldOfView = InitFieldOfView();
             fieldOfViewQueryEventChannel.OnEventRaised += HandleQueryEvent;
         }
 

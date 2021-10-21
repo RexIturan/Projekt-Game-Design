@@ -1,10 +1,15 @@
 using Events.ScriptableObjects;
+using SceneManagement.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class InGameMenuUIController : MonoBehaviour {
     
+	
+	[Header("Loading settings")] 
+	[SerializeField] private GameSceneSO[] menuToLoad;
+	[SerializeField] private LoadEventChannelSO loadMenuEC;
+	
 	private VisualElement _inGameMenuContainer;
 
     [Header("Receiving Events On")] [SerializeField]
@@ -113,8 +118,8 @@ public class InGameMenuUIController : MonoBehaviour {
     }
 
     void MainMenuButtonPressed() {
-        // Szene laden
-        SceneManager.LoadScene("MainMenu");
+        // load Scene
+        loadMenuEC.RaiseEvent(menuToLoad, true);
     }
 
     void QuitGame() {
