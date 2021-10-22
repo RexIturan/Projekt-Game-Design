@@ -1,0 +1,24 @@
+{
+    "name": "StateMachineWrapper",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f5a2611bdfe852b4c8fca5bac89a209d",
+        "GUID:20e1af7e65b430244924993fb3219d29",
+        "GUID:18b4fb767b8f81047b7c24fdec94709e",
+        "GUID:6077d53cee304074ab132af0ea2850ae",
+        "GUID:8aa539bd3286aa34ab6d4bc41eb45a21",
+        "GUID:784148ec08432ab4a974dd364656dae9",
+        "GUID:8c0a18d9d0551b541815cb03f6f62fb4"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
