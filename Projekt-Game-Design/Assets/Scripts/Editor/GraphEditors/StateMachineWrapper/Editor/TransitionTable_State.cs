@@ -18,13 +18,8 @@ namespace Editor.GraphEditors.StateMachineWrapper.Editor {
 
 				if (!(dispatcher is CommandDispatcher commandDispatcher))
 					return;
-
-				commandDispatcher.RegisterCommandHandler<SetNumberCommand>(SetNumberCommand.DefaultHandler);
-				// commandDispatcher.RegisterCommandHandler<AddPortCommand>(AddPortCommand.DefaultHandler);
-				// commandDispatcher.RegisterCommandHandler<RemovePortCommand>(RemovePortCommand.DefaultHandler);
-				//
-				// commandDispatcher.RegisterCommandHandler<SetTemperatureCommand>(SetTemperatureCommand.DefaultHandler);
-				// commandDispatcher.RegisterCommandHandler<SetDurationCommand>(SetDurationCommand.DefaultHandler);
+				
+				commandDispatcher.RegisterCommandHandler<SetStateReferenceCommand>(SetStateReferenceCommand.DefaultHandler);
 			}
 		}
 	}

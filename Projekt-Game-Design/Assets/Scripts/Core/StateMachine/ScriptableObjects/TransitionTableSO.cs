@@ -8,8 +8,9 @@ namespace UOP1.StateMachine.ScriptableObjects
 	[CreateAssetMenu(fileName = "New Transition Table", menuName = "State Machines/Transition Table")]
 	public class TransitionTableSO : ScriptableObject
 	{
-		[SerializeField] private TransitionItem[] _transitions = default;
+		public TransitionItem[] _transitions = default;
 
+		//todo(vincent) rename, because GetInitialState, also initialises the hole table 
 		/// <summary>
 		/// Will get the initial state and instantiate all subsequent states, transitions, actions and conditions.
 		/// </summary>
