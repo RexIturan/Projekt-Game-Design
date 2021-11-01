@@ -5,6 +5,7 @@ namespace UOP1.StateMachine.Editor
 {
 	internal static class ContentStyle
 	{
+		internal static Color Red { get; private set; }
 		internal static Color DarkGray { get; private set; }
 		internal static Color LightGray { get; private set; }
 		internal static Color Focused { get; private set; }
@@ -28,6 +29,7 @@ namespace UOP1.StateMachine.Editor
 
 			_initialised = true;
 
+			Red = new Color(1.0f, 0f, 0f);
 			DarkGray = EditorGUIUtility.isProSkin ? new Color(0.283f, 0.283f, 0.283f) : new Color(0.7f, 0.7f, 0.7f);
 			LightGray = EditorGUIUtility.isProSkin ? new Color(0.33f, 0.33f, 0.33f) : new Color(0.8f, 0.8f, 0.8f);
 			ZebraDark = new Color(0.4f, 0.4f, 0.4f, 0.1f);

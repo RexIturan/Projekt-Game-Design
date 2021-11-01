@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using UOP1.StateMachine.ScriptableObjects;
 using static UnityEditor.EditorGUI;
 
 namespace UOP1.StateMachine.Editor
@@ -53,7 +54,15 @@ namespace UOP1.StateMachine.Editor
 				rect.x += 5;
 				rect.width -= 10;
 				rect.height -= listHeight;
-				DrawRect(rect, ContentStyle.DarkGray);
+
+				if ( NullFieldFinderHelper.checkForNullValuesInConditionsProperty(
+						SerializedTransition.Conditions)
+				     ) {
+					DrawRect(rect, ContentStyle.Red);
+				}
+				else {
+					DrawRect(rect, ContentStyle.DarkGray);
+				}
 			}
 
 			// Transition Header
@@ -195,9 +204,11 @@ namespace UOP1.StateMachine.Editor
 					r.width = rect.width;
 					GUI.Label(r, label, EditorStyles.boldLabel);
 				}
-				else
-				{
+				else {
+					var lastColor = GUI.color; 
+					GUI.color = Color.red;
 					EditorGUI.PropertyField(new Rect(rect.x, rect.y, 150, rect.height), condition, GUIContent.none);
+					GUI.color = lastColor;
 				}
 
 				// Draw the boolean value expected by the condition (i.e. "Is True", "Is False")

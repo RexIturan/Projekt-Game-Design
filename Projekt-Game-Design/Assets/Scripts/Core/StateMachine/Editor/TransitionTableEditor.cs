@@ -94,10 +94,29 @@ namespace UOP1.StateMachine.Editor
 			// For each fromState
 			for (int i = 0; i < _fromStates.Count; i++)
 			{
-				var stateRect = BeginVertical(ContentStyle.WithPaddingAndMargins);
-				EditorGUI.DrawRect(stateRect, ContentStyle.LightGray);
-
 				var transitions = _transitionsByFromStates[i];
+				
+				//check for null values in state
+				bool stateHasNullValue = NullFieldFinderHelper.checkForNullValuesInState(
+					(StateSO)transitions[0].SerializedTransition.FromState.objectReferenceValue);
+
+				bool conditionsHaveNullValues = false;
+					
+				foreach ( var transition in transitions ) {
+					if (NullFieldFinderHelper.checkForNullValuesInConditionsProperty(
+						transition.SerializedTransition.Conditions)) {
+						conditionsHaveNullValues = true;
+					}
+				}
+				
+				var stateRect = BeginVertical(ContentStyle.WithPaddingAndMargins);
+
+				// if ( stateHasNullValue ) {
+				// 	EditorGUI.DrawRect(stateRect, ContentStyle.Red);	
+				// }
+				// else {
+				// 	EditorGUI.DrawRect(stateRect, ContentStyle.LightGray);
+				// }
 
 				// State Header
 				var headerRect = BeginHorizontal();
@@ -122,9 +141,27 @@ namespace UOP1.StateMachine.Editor
 						toggleRect.width -= 140;
 						var customStyle = ContentStyle.StateListStyle;
 						customStyle.alignment = TextAnchor.LowerLeft;
+
+						var lastColor = GUI.color;
+						
+						if ( conditionsHaveNullValues ) {
+							// GUI.color = Color.red;
+							EditorGUI.DrawRect(stateRect, ContentStyle.Red);
+							
+						}
+						else {
+							EditorGUI.DrawRect(stateRect, ContentStyle.LightGray);	
+						}
+						
+						
 						_toggledIndex = 
 							EditorGUI.BeginFoldoutHeaderGroup(toggleRect, _toggledIndex == i, label, customStyle) ?
-							i : _toggledIndex == i ? -1 : _toggledIndex;
+								i : 
+								_toggledIndex == i ? 
+									-1 : 
+									_toggledIndex;
+
+						GUI.color = lastColor;
 					}
 
 					Separator();
@@ -160,6 +197,11 @@ namespace UOP1.StateMachine.Editor
 							buttonRect.x -= 40;
 						}
 
+						var lastColor = GUI.color;
+						if ( stateHasNullValue ) {
+							GUI.color = Color.red;	
+						}
+						
 						// Switch to state editor
 						if (Button(buttonRect, "SceneViewTools"))
 						{
@@ -167,7 +209,8 @@ namespace UOP1.StateMachine.Editor
 							EarlyOut();
 							return;
 						}
-
+						GUI.color = lastColor;
+						
 						void EarlyOut()
 						{
 							EndHorizontal();

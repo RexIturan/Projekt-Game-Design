@@ -106,7 +106,12 @@ namespace UOP1.StateMachine.Editor
 				label.AddToClassList(labelClass);
 				return label;
 			};
-			listView.bindItem = (element, i) => ((Label)element).text = assets[i].name;
+			listView.bindItem = (element, i) => {
+				( ( Label )element ).text = assets[i].name;
+				if ( NullFieldFinderHelper.checkForNullValues(assets[i]) ) {
+					element.style.color = new StyleColor(Color.red);
+				}
+			};
 			listView.selectionType = SelectionType.Single;
 
 			listView.onSelectionChanged -= OnListSelectionChanged;

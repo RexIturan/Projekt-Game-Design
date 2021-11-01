@@ -79,11 +79,11 @@ namespace Editor.GraphEditors.StateMachineWrapper.Editor.UI {
 			SerializedObject so = new SerializedObject(transitionNode.transitionTable);
 
 			
-			var property = so.FindProperty("_transitions");
-			var transitionItem = property.GetArrayElementAtIndex(transitionNode.transitionID);
-			var conditions = transitionItem.FindPropertyRelative("Conditions");
+			var property = so.FindProperty("_transitions").GetArrayElementAtIndex(transitionNode.transitionID).FindPropertyRelative("Conditions");
+			// var transitionItem = property.GetArrayElementAtIndex(transitionNode.transitionID);
+			// var conditions = transitionItem.FindPropertyRelative("Conditions");
 			
-			var copy = conditions.Copy();
+			var copy = property.Copy();
 				
 			ReorderableList = new ReorderableList(so, copy);
 			
@@ -134,6 +134,10 @@ namespace Editor.GraphEditors.StateMachineWrapper.Editor.UI {
 
 					EditorGUI.BeginDisabledGroup(!transitionNode.editable);
 					{
+						if ( conditionProp.objectReferenceValue == null ) {
+							GUI.color = Color.red;
+						}
+						
 						var refRect = r;
 						EditorGUI.PropertyField(refRect, conditionProp, GUIContent.none);
 						// r.x += 42;
@@ -143,6 +147,8 @@ namespace Editor.GraphEditors.StateMachineWrapper.Editor.UI {
 						EditorGUI.PropertyField(r, operatorProp, GUIContent.none);
 						r.x += r.width;
 						EditorGUI.PropertyField(r, resultProp, GUIContent.none);
+
+						GUI.color = GUI.contentColor;
 					}
 					EditorGUI.EndDisabledGroup();
 				}
