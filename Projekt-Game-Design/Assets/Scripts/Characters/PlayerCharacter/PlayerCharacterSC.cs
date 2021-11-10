@@ -78,6 +78,11 @@ public class PlayerCharacterSC : MonoBehaviour {
         set => abilityID = value;
     }
 
+	// for playing animations
+	private CharacterAnimationController animationController;
+
+	public CharacterAnimationController GetAnimationController() { return animationController; }
+
     // Statemachine
     //
     [Header("State Machine")] 
@@ -113,8 +118,12 @@ public class PlayerCharacterSC : MonoBehaviour {
     }
 
     public void Start() {
-        // set Position of gameobject    
+        // set position of gameobject    
         TransformToPosition();
+		// create model
+		GameObject model = Instantiate(playerType.model, transform);
+		// save animation controller
+		animationController = model.GetComponent<CharacterAnimationController>();
     }
 
     public void FixedUpdate() {

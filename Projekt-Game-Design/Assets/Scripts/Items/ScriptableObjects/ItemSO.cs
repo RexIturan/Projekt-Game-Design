@@ -7,16 +7,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Items/Item")]
 public class ItemSO : ScriptableObject
 {
-    [SerializeField] public int id;
+    public int id;
 
     // art
-    [SerializeField] public Sprite icon;
-    [SerializeField] public GameObject prefab;
+    public Sprite icon;
+    public GameObject prefab;
 
     // data
-    [SerializeField] public int goldValue;
-    [SerializeField] public int rarity;
-    [SerializeField] public ItemType type; // Quest-item? Weapon? Etc. 
+    public int goldValue;
+    public int rarity;
+    public ItemType type; // Quest-item? Weapon? Etc. 
 
-    [SerializeField] public AbilitySO[] abilities; 
+    public AbilitySO[] abilities; 
 }

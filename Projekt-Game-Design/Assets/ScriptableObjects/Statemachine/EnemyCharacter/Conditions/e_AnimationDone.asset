@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c70ff368bf0011547a4bc96b641c787f, type: 3}
-  m_Name: p_TriggerIdleAnimation_OnEnter
+  m_Script: {fileID: 11500000, guid: 85558c75eefb2a24e950a012a54f9aa5, type: 3}
+  m_Name: e_AnimationDone
   m_EditorClassIdentifier: 
-  animation: 

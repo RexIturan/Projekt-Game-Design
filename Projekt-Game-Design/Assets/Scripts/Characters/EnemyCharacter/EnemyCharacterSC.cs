@@ -56,11 +56,21 @@ public class EnemyCharacterSC : MonoBehaviour
     [Header("Timer")]
     public float timeSinceTransition = 0;
 
-    public void Start()
+	// for playing animations
+	private CharacterAnimationController animationController;
+
+	public CharacterAnimationController GetAnimationController() { return animationController; }
+
+	public void Start()
     {
         MoveToGridPosition();
         characterList = characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
-    }
+
+		// create model
+		GameObject model = Instantiate(enemyType.model, transform);
+		// save animation controller
+		animationController = model.GetComponent<CharacterAnimationController>();
+	}
 
     public void FixedUpdate() {
         timeSinceTransition += Time.fixedDeltaTime;

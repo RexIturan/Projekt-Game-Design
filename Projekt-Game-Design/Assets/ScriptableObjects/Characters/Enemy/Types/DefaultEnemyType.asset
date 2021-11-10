@@ -28,3 +28,5 @@ MonoBehaviour:
     experience: 1
     itemDropList: []
   basicAbilities: []
+  model: {fileID: 8839921088689484587, guid: 3bc60f3f9e3f61b4cb1586783afde6b0, type: 3}
+  profilePicture: {fileID: 0}

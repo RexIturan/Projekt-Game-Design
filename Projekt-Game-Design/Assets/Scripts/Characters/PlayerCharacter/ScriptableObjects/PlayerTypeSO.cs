@@ -8,14 +8,14 @@ using UnityEngine;
 public class PlayerTypeSO : ScriptableObject
 {
     public int id;
-    public GameObject prefab;
-    public CharacterStats stats;
+	public GameObject prefab;
+	public CharacterStats stats;
     // todo remove or change
     // public CharacterStats gainPerLevel; // TODO: gain is Linear in this case
     // public ScriptableObject startWeapon; // is not necessarily equipped weapon
     public AbilitySO[] basicAbilities; // actions at all time available
 
     [Header("Visuals")]
-    public Sprite profilePicture;
-    public float time_Of_Attack_Animation;
+	public GameObject model;
+	public Sprite profilePicture;
 }

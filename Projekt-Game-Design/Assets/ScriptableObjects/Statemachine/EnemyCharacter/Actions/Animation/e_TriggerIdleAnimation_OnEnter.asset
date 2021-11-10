@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559f9c4a4d537544ba51928f49e47e70, type: 3}
   m_Name: e_TriggerIdleAnimation_OnEnter
   m_EditorClassIdentifier: 
-  animation: startIdle
+  animation: 0

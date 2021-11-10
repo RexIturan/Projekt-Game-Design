@@ -31,4 +31,5 @@ MonoBehaviour:
       probability: 0.9
   basicAbilities:
   - {fileID: 11400000, guid: aa392b409b2e48e4b90d0f718e6e6085, type: 2}
-  TIME_OF_ATTACK_ANIMATION: 2.167
+  model: {fileID: 8839921088689484587, guid: 3bc60f3f9e3f61b4cb1586783afde6b0, type: 3}
+  profilePicture: {fileID: 0}

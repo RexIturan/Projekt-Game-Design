@@ -5,32 +5,28 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 
 [CreateAssetMenu(fileName = "p_TriggerAnimation_OnEnter", menuName = "State Machines/Actions/Player/TriggerAnimation")]
 public class P_TriggerAnimation_OnEnterSO : StateActionSO {
-    [SerializeField] private string animation;
+    [SerializeField] private AnimationType animation;
 
-    public override StateAction CreateAction() => new P_TriggerAnimation_OnEnter(animation);
+	public override StateAction CreateAction() => new P_TriggerAnimation_OnEnter(animation);
 }
 
 public class P_TriggerAnimation_OnEnter : StateAction {
-    private Animator _animator;
-    private string _animation;
+	private PlayerCharacterSC player;
+    private AnimationType animation;
 
-    public P_TriggerAnimation_OnEnter(string animation) {
-        this._animation = animation;
+    public P_TriggerAnimation_OnEnter(AnimationType animation) {
+        this.animation = animation;
     }
 
     public override void OnUpdate() {
     }
 
     public override void Awake(StateMachine stateMachine) {
-        _animator = stateMachine.gameObject.GetComponentInChildren<Animator>();
+        player = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
     }
 
     public override void OnStateEnter() {
-        if (_animator) {
-            Debug.Log("Try to play animation: " + _animation);
-            _animator.SetTrigger(_animation);
-        }
-        else
-            Debug.LogWarning("Animator in gameobject not found. ");
+		CharacterAnimationController controller = player.GetAnimationController();
+		controller.PlayAnimation(animation);
     }
 }

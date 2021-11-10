@@ -14,5 +14,6 @@ public class EnemyTypeSO : ScriptableObject {
     [SerializeField] public AbilitySO[] basicAbilities; // actions at all time available
 
     [Header("Visuals")]
-    public float time_Of_Attack_Animation;
+	public GameObject model;
+	public Sprite profilePicture;
 }
