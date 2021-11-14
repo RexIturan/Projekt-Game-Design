@@ -17,6 +17,9 @@ public class CharacterAnimationController : MonoBehaviour
 	private float timeSinceStart; // in seconds
 	private bool newAnimation;
 
+	// for stance
+	private CharacterStanceController stanceController;
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -24,6 +27,8 @@ public class CharacterAnimationController : MonoBehaviour
 		newAnimation = false;
 		timeSinceStart = 0;
 		clipLength = animator.GetCurrentAnimatorStateInfo(BASE_LAYER_INDEX).length;
+
+		stanceController = gameObject.GetComponentInChildren<CharacterStanceController>();
     }
 
     // Update is called once per frame
@@ -99,5 +104,10 @@ public class CharacterAnimationController : MonoBehaviour
 	public bool IsAnimationInProgress()
 	{
 		return timeSinceStart < clipLength;
+	}
+
+	public void TakeStance(StanceType stance)
+	{
+		stanceController.TakeStance(stance);
 	}
 }

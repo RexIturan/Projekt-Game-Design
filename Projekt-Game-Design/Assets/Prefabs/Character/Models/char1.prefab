@@ -1507,7 +1507,7 @@ GameObject:
   - component: {fileID: 491231925345269302}
   m_Layer: 0
   m_Name: ShoulderSupportTargeting
-  m_TagString: Untagged
+  m_TagString: Stance/RightOverShoulder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2074,7 +2074,7 @@ GameObject:
   - component: {fileID: 639948863730194301}
   m_Layer: 0
   m_Name: PointingWeponUp_L
-  m_TagString: Untagged
+  m_TagString: Stance/LeftUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2401,7 +2401,7 @@ GameObject:
   - component: {fileID: 952626462735217059}
   m_Layer: 0
   m_Name: PointingWeponUp_R
-  m_TagString: Untagged
+  m_TagString: Stance/RightUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

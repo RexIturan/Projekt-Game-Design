@@ -126,8 +126,13 @@ public class PlayerCharacterSC : MonoBehaviour {
 		animationController = model.GetComponent<CharacterAnimationController>();
     }
 
-    public void FixedUpdate() {
+	// TODO: !!DEBUG!!
+	public StanceType stance;
+	// !!!!!!!!!!!!
+	public void FixedUpdate() {
         timeSinceTransition += Time.fixedDeltaTime;
+		// DEBUG!!!!!!!
+		animationController.TakeStance(stance);
     }
 
     void ToggleIsSelected() {

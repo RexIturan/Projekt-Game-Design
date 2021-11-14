@@ -8,7 +8,8 @@
         "UOP1.StateMachine",
         "Unity.Addressables",
         "Unity.ResourceManager",
-        "FogOfWar"
+        "FogOfWar",
+        "Unity.Animation.Rigging"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
