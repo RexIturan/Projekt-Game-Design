@@ -7,7 +7,7 @@ namespace SaveSystem {
     {
         public static bool WriteToFile(string fileName, string fileContents)
         {
-            var fullPath = Path.Combine(Application.persistentDataPath, fileName);
+            var fullPath = Path.Combine(Application.dataPath, fileName);
 
             try
             {
@@ -23,7 +23,7 @@ namespace SaveSystem {
 
         public static bool LoadFromFile(string fileName, out string result)
         {
-            var fullPath = Path.Combine(Application.persistentDataPath, fileName);
+            var fullPath = Path.Combine(Application.dataPath, fileName);
 
             try
             {
@@ -41,8 +41,8 @@ namespace SaveSystem {
 
         public static bool MoveFile(string fileName, string newFileName)
         {
-            var fullPath = Path.Combine(Application.persistentDataPath, fileName);
-            var newFullPath = Path.Combine(Application.persistentDataPath, newFileName);
+            var fullPath = Path.Combine(Application.dataPath, fileName);
+            var newFullPath = Path.Combine(Application.dataPath, newFileName);
 
             try
             {

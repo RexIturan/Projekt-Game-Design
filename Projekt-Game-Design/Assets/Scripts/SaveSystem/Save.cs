@@ -5,8 +5,9 @@ using UnityEngine;
 
 namespace SaveSystem {
     public class Save {
+	    //todo rename achtung savefiles will be incompatible
         public GridData_Save gridDataSave;
-        public List<PC_Save> players;
+        public List<PlayerCharacter_Save> players;
         public List<Enemy_Save> enemies;
         public Inventory_Save inventory;
         public List<Inventory_Save> equipmentInventory;
@@ -16,7 +17,7 @@ namespace SaveSystem {
             inventory = new Inventory_Save();
             equipmentInventory = new List<Inventory_Save>();
             gridDataSave = new GridData_Save();
-            players = new List<PC_Save>();
+            players = new List<PlayerCharacter_Save>();
             enemies = new List<Enemy_Save>();
             gridSave = new List<TileGrid>();
         }
@@ -27,6 +28,7 @@ namespace SaveSystem {
         }
 
         public void LoadFromJson(string json) {
+	        var save = JsonUtility.FromJson<Save>(json);
             JsonUtility.FromJsonOverwrite(json, this);
         }
 

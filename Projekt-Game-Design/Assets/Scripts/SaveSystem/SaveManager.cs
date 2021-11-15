@@ -42,7 +42,7 @@ namespace SaveSystem {
         // public PlayerDataContainerSO PlayerDataContainerSo;
         // public EnemyDataContainerSO EnemyDataContainerSo;
         public ItemContainerSO itemContainerSo;
-        public EquipmentInventoryContainerSO equipmentInventoryContainerSo;
+        public EquipmentInventoryContainerSO equipmentContainer;
         public InventorySO inventory;
 
         public CharacterInitialiser characterInitializer;
@@ -55,18 +55,55 @@ namespace SaveSystem {
         [Header("Debug Settings")]
         [SerializeField] private bool showDebugMessage;
 
-        public Save saveData = new Save();
+//////////////////////////////////////// Local Variables ///////////////////////////////////////////
         
+		// Save Data
+        private Save _saveData = new Save();
+        private SaveWriter _saveWriter;
+        private SaveReader _saveReader;
+
+
+//////////////////////////////////////// Local Functions ///////////////////////////////////////////
+        
+        #region Local Functions
+
+        private Save UpdateSaveData() {
+	        _saveData.Clear();
+	        _saveWriter.SetRuntimeReferences(characterList);
+	        _saveData = _saveWriter.WirteLevelToSave();
+	        return _saveData;
+        }
+
+        #endregion
+        
+//////////////////////////////////////// Public Functions //////////////////////////////////////////
+		
         private void Awake() {
             saveLevel.OnEventRaised += SaveGridContainer;
             loadLevel.OnEventRaised += LoadGridContainer;
             saveGame.OnEventRaised += SaveGame;
             loadGame.OnEventRaised += LoadGame;
-            loadGameFromPath.OnEventRaised += LoadGridContainer;
+            // loadGameFromPath.OnEventRaised += LoadGridContainer;
             saveManagerData.Reset();
         }
 
+        private void OnDestroy() {
+	        saveLevel.OnEventRaised -= SaveGridContainer;
+	        loadLevel.OnEventRaised -= LoadGridContainer;
+	        saveGame.OnEventRaised -= SaveGame;
+	        loadGame.OnEventRaised -= LoadGame;
+	        // loadGameFromPath.OnEventRaised -= LoadGridContainer;
+        }
+
         private void Start() {
+
+	        // setup save Writer
+	        _saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, equipmentContainer);
+
+	        // setup save Reader
+	        _saveReader = new SaveReader(gridContainer, globalGridData, inventory,
+		        equipmentContainer);
+	        
             if (gameSaveFilenames == null || gameSaveFilenames.Length < 3) {
                 gameSaveFilenames = new string[3];
                 for (int i = 0; i < gameSaveFilenames.Length; i++) {
@@ -80,7 +117,7 @@ namespace SaveSystem {
                 SaveGridContainer(gameSavePathBase, gameSaveFilenames[value]);    
             }
             else {
-                //TODO Error
+	            Debug.LogError("SaveGame(int value)");
             }
         }
 
@@ -89,7 +126,7 @@ namespace SaveSystem {
                 LoadGridContainer(gameSavePathBase, gameSaveFilenames[value]);    
             }
             else {
-                //TODO Error
+	            Debug.LogError("LoadGame(int value)");
             }
         }
 
@@ -97,131 +134,79 @@ namespace SaveSystem {
             SaveGridContainer(pathBase, defaultFilename);
         }
         
-        //TODO return bool if successful
-        public void SaveGridContainer(string directoryPath, string filename) {
+        private bool SaveGridContainer(string directoryPath, string filename) {
             characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
             
             // var json = JsonUtility.ToJson(gridContainer);
             var path = $"{directoryPath}{filename}{FileSuffix}";
 
             //fill saveData
+            // buildup saveData by reading from all scriptable objects, and converting them into save objects
+            Save save = UpdateSaveData();
 
-        #region FillSaveData
-
-            saveData.Clear();
-            //get all players,
-            foreach (var player in characterList.playerContainer) {
-                var playerCharacterSc = player.GetComponent<PlayerCharacterSC>();
-                saveData.players.Add(
-                    new PC_Save() {
-                        plyerTypeId = playerCharacterSc.playerType.id,
-                        plyerSpawnDataId = playerCharacterSc.playerSpawnData.id,
-                        pos = playerCharacterSc.gridPosition
-                    });                 
-            }
-            foreach (var enemy in characterList.enemyContainer) {
-                var enemySC = enemy.GetComponent<EnemyCharacterSC>();
-                saveData.enemies.Add(new Enemy_Save() {
-                    enemyTypeId = enemySC.enemyType.id,
-                    enemySpawnDataId = enemySC.enemySpawnData.id,
-                    pos = enemySC.gridPosition
-                });                 
-            }
-            foreach (var grids in gridContainer.tileGrids) {
-                saveData.gridSave.Add(grids);
-            }
-            saveData.gridDataSave.SetValues(globalGridData);
-
-            saveData.inventory.size = inventory.inventory.Capacity;
-            foreach (var item in inventory.inventory) {
-                saveData.inventory.itemIds.Add(item.id);    
-            }
-
-            foreach (var equipment in equipmentInventoryContainerSo.inventories) {
-
-                var equiped = new List<int>();
-                foreach (var item in equipment.inventory) {
-                    equiped.Add(item.id);
-                }
-                
-                saveData.equipmentInventory.Add(new Inventory_Save() {
-                    size = equipment.inventory.Capacity,
-                    itemIds = equiped
-                });    
-            }
-            #endregion    
-            
-            var json = saveData.ToJson();
-
-            if (showDebugMessage) {
-                // TODO Debug Macro
-                Debug.Log($"Save Test GridContainer to JSON at {path} \n{json}");    
+            if ( save == null ) {
+	            Debug.LogError("SaveGridContainer: save is null");
             }
             
-            using (var fs = new FileStream(path, FileMode.Create)) {
-                using (var writer = new StreamWriter(fs)) {
-                    writer.Write(json);
-                }
+            bool saveWritten = FileManager.WriteToFile(path, save.ToJson()); 
+            if ( saveWritten ) {
+	            // set savemanager flag
+	            //todo idk if we need this, use event instead??
+	            saveManagerData.saved = true;    
+            }
+            else {
+	            Debug.LogError("SaveGridContainer: couldn't save");
             }
             
-            saveManagerData.saved = true;
+            // var json = _saveData.ToJson();
+            //
+            // if (showDebugMessage) {
+            //     // TODO Debug Macro
+            //     Debug.Log($"Save Test GridContainer to JSON at {path} \n{json}");    
+            // }
+            //
+            // using (var fs = new FileStream(path, FileMode.Create)) {
+            //     using (var writer = new StreamWriter(fs)) {
+            //         writer.Write(json);
+            //     }
+            // }
+            //
+            return saveWritten;
         }
 
         public void LoadGridContainer() {
             var path = pathBase + defaultFilename + FileSuffix;
-            LoadSaveDataFromDisk(path);
+            LoadGridContainer(path);
         }
 
-        void LoadGridContainer(string path) {
-            LoadSaveDataFromDisk(path);
+        public bool LoadGridContainer(string directoryPath, string filename) {
+            string path = $"{directoryPath}{filename}{FileSuffix}";
+            return LoadGridContainer(path);
         }
         
-        public bool LoadGridContainer(string directoryPath, string filename) {
-            var path = $"{directoryPath}{filename}{FileSuffix}";
-            return LoadSaveDataFromDisk(path);
+        private bool LoadGridContainer(string path) {
+	        return LoadSaveDataFromDisk(path);
         }
         
         public bool LoadSaveDataFromDisk(string path) {
 	        using (var fs = new FileStream(path, FileMode.Open)) {
                 using (var reader = new StreamReader(fs)) {
                     var json = reader.ReadToEnd();
-                    saveData.LoadFromJson(json);
+                    _saveData.LoadFromJson(json);
                     Debug.Log($"Load JSON from {path} \n{json}");
                     return true;
                 }
             }
         }
 
+        /// <summary> InitializeLevel:
+        /// sets up all the scriptable objects that represent the runtime level
+        /// uses the data from saveData, which is read in beforehand, for example in LoadTextAssetsAsSaves
+        /// </summary>
         public void InitializeLevel() {
-            
-            // globalGridData.Width = gridContainer.tileGrids[0].Width;
-            // globalGridData.Height = gridContainer.tileGrids[0].Height;
-            // globalGridData.cellSize = gridContainer.tileGrids[0].CellSize;
-            // globalGridData.OriginPosition = gridContainer.tileGrids[0].OriginPosition;
-            // // JsonUtility.FromJson<GridContainerSO>(json);
 
-            gridContainer.tileGrids = new List<TileGrid>();
-            gridContainer.tileGrids.AddRange(saveData.gridSave);
-            
-            saveData.gridDataSave.GetValues(globalGridData);
-
-            characterInitializer.Initialise(saveData.players, saveData.enemies);
-
-            inventory.inventory.Clear();
-            foreach (var ids in saveData.inventory.itemIds) {
-                inventory.inventory.Add(itemContainerSo.itemList[ids]);    
-            }
-            
-            foreach (var equipmentInventory in saveData.equipmentInventory) {
-                var equip = new List<ItemSO>();
-                foreach (var ids in equipmentInventory.itemIds) {
-                    equip.Add(itemContainerSo.itemList[ids]);
-                }
-
-                var eInventory = ScriptableObject.CreateInstance<EquipmentInventorySO>();
-                eInventory.inventory = equip;
-                equipmentInventoryContainerSo.inventories.Add(eInventory);
-            }
+	        _saveReader.SetRuntimeReferences(characterInitializer);
+	        _saveReader.ReadSave(_saveData);
             
             saveManagerData.loaded = true;
             levelLoaded.RaiseEvent();
@@ -242,7 +227,7 @@ namespace SaveSystem {
                     // Debug.Log($"before {i} {assetReference.AssetGUID}");
                     var operationHandle = assetReference.LoadAssetAsync<TextAsset>();
                     indexDict.Add(operationHandle, i);
-                    operationHandle.Completed += //(handle) => HandleTextAssetLoaded(handle, index, callbacks);
+                    operationHandle.Completed += 
                         handle => {
                             var index = indexDict[handle];
                             // Debug.Log($"completed {index} {handle.Result.name}");
@@ -264,61 +249,12 @@ namespace SaveSystem {
             }
         }
 
-        // void HandleTextAssetLoaded(AsyncOperationHandle<TextAsset> handle, int index, List<Action<string, bool, int>> callbacks) {
-        //     
-        //     // Debug.Log($"loadTextAsset  {index}");
-        //     var save = new Save();
-        //     save.LoadFromJson(handle.Result.text);
-        //     _saveObjects.Add(save);
-        //     index = _saveObjects.Count-1;
-        //     if (handle.IsDone) {
-        //         callbacks[index](handle.Result.name, true, index);    
-        //     }
-        //     else {
-        //         callbacks[index]("Could Not Load Save", false, index);
-        //     }
-        //     Addressables.Release(handle);
-        // }
-        
-        // public async Task<bool> LoadLevelFromAssetReferenc(AssetReference assetReference) {
-        //     bool result = false;
-        //     if (assetReference.RuntimeKeyIsValid()) {
-        //         var handle = assetReference.LoadAssetAsync<TextAsset>();
-        //         await Task.WhenAll(handle.Task);
-        //         handle.Completed += operationHandle => {
-        //             operationHandles.Add(assetReference, operationHandle);
-        //         };
-        //         if (handle.IsDone) {
-        //             result = true;
-        //         }
-        //     }
-        //
-        //     return result;
-        // }
-        
-        // public IEnumerable<AsyncOperationHandle<TextAsset>> LoadTestLevel() {
-        //     foreach (var level in testLevel) {
-        //         if (level.RuntimeKeyIsValid()) {
-        //             var handle = level.LoadAssetAsync<TextAsset>();
-        //             handle.Completed += operationHandle => {
-        //                 operationHandles.Add(level, operationHandle);
-        //             };
-        //             yield return handle;
-        //         }
-        //     }
-        // }
-
-        // public async Task<List<string>> GetAllTestSaveNames() {
-        //     List<string> filenames = new List<string>();
-        //
-        //     foreach (AsyncOperationHandle<TextAsset> operationHandle in LoadTestLevel()) {
-        //         await Task.WhenAll(operationHandle.Task);
-        //         Debug.Log(operationHandle.Result.name);
-        //         filenames.Add(operationHandle.Result.name);
-        //     }
-        //     
-        //     return filenames;
-        // }
+        void LoadSaveFromTextAsset(AssetReference assetReference) {
+	        if(!assetReference.RuntimeKeyIsValid())
+		        return;
+	        
+	        
+        }
 
         public List<string> GetAllTestLevelNames() {
             List<string> filenames = new List<string>();
@@ -331,7 +267,7 @@ namespace SaveSystem {
         }
 
         public void SetCurrentSaveTo(int index) {
-            saveData = _saveObjects[index];
+            _saveData = _saveObjects[index];
             
             // todo clear saveObjects here?
             _saveObjects.Clear();

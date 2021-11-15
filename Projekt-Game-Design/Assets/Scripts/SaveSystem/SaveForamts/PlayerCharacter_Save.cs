@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SaveSystem.SaveFormats {
     [Serializable]
-    public class PC_Save {
+    public class PlayerCharacter_Save {
         public int plyerTypeId;
         public int plyerSpawnDataId;
         public int equipmentInventoryId;

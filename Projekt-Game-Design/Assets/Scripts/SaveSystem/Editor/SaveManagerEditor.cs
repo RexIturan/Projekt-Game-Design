@@ -21,7 +21,8 @@ namespace SaveSystem.Editor {
             }
             
             if (GUILayout.Button("LoadLevel")) {  
-                saveManager.InitializeLevel(); 
+	            //todo create new savegame object??
+	            saveManager.InitializeLevel(); 
                 AssetDatabase.Refresh();
             }
         }
