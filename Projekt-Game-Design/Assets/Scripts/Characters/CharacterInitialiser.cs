@@ -13,7 +13,7 @@ namespace Characters {
         [SerializeField] private EnemyDataContainerSO enemyDataContainerSO;
         [SerializeField] private PlayerDataContainerSO playerDataContainerSo;
 
-        public void Initialise(List<PC_Save> saveDataPlayers, List<Enemy_Save> saveDataEnemys) {
+        public void Initialise(List<PlayerCharacter_Save> saveDataPlayers, List<Enemy_Save> saveDataEnemys) {
             _characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
             
             _characterList.enemyContainer.Clear();

@@ -184,6 +184,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
+--- !u!1 &693501668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 693501669}
+  - component: {fileID: 693501670}
+  m_Layer: 0
+  m_Name: Help
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &693501669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693501668}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 842792788}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &693501670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693501668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa0ffa24fd040ee8c6cab2edf4b7664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: "Controls a Help Box, \nToggles Visibility on Input Event, default:
+    H\nHelpBox Text can be acessed by a string event channel"
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  helpBoxTreeAsset: {fileID: 9197481963319205126, guid: 7007152ed7f32fd448fb935f4472ba12, type: 3}
+  uiDocument: {fileID: 1170638170}
+  setHelpTextEC: {fileID: 11400000, guid: 359b389c79f78b14baeb26c90242c714, type: 2}
 --- !u!1 &842792787
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +263,7 @@ Transform:
   - {fileID: 1170638171}
   - {fileID: 863252158}
   - {fileID: 1413045655}
+  - {fileID: 693501669}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -448,7 +498,7 @@ GameObject:
   - component: {fileID: 1413045655}
   - component: {fileID: 1413045656}
   m_Layer: 0
-  m_Name: LoadingScreenController
+  m_Name: LoadingScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -6,6 +6,9 @@ namespace SceneManagement {
         
         [Header("Sending Events On")]
         [SerializeField] private VoidEventChannelSO enableLoadingScreenInputEC;
+        [SerializeField] private VoidEventChannelSO enableGampleyInputEC;
+
+        [SerializeField] private bool initializeFromSave;
         
         // get at runtime
         private SaveManager _saveSystem;
@@ -15,10 +18,19 @@ namespace SceneManagement {
         }
 
         private void Start() {
-            if (_saveSystem is { }) {
-                _saveSystem.InitializeLevel();
-                enableLoadingScreenInputEC.RaiseEvent();    
-            }
+	        if ( initializeFromSave ) {
+		        // try to load level from save object
+		        if (_saveSystem is { }) {
+			        _saveSystem.InitializeLevel();
+			        enableLoadingScreenInputEC.RaiseEvent();    
+		        }    
+	        }
+	        else {
+		        //todo load empty or default??
+		        
+		        // enable on Start
+		        enableGampleyInputEC.RaiseEvent();
+	        }
         }
     }
 }

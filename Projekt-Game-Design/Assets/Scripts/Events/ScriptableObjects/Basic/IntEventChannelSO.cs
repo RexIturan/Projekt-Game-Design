@@ -3,7 +3,7 @@ using Events.ScriptableObjects.Core;
 using UnityEngine;
 
 namespace Events.ScriptableObjects {
-    [CreateAssetMenu(menuName = "Events/Int Event Channel")]
+    [CreateAssetMenu(menuName = "Events/Basic/Int Event Channel")]
     public class IntEventChannelSO : EventChannelBaseSO {
         
         public event Action<int> OnEventRaised;

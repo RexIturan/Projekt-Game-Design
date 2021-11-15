@@ -27,6 +27,6 @@ public class P_TriggerAnimation_OnEnter : StateAction {
 
     public override void OnStateEnter() {
 		CharacterAnimationController controller = player.GetAnimationController();
-		controller.PlayAnimation(animation);
+		// controller.PlayAnimation(animation);
     }
 }

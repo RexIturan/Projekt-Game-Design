@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// This class is used for Events that have no arguments (Example: Exit game event)
 /// </summary>
-[CreateAssetMenu(menuName = "Events/Void Event Channel")]
+[CreateAssetMenu(menuName = "Events/Basic/Void Event Channel")]
 public class VoidEventChannelSO : EventChannelBaseSO
 {
     public event Action OnEventRaised;

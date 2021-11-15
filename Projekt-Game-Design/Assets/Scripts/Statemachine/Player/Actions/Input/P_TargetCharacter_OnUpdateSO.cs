@@ -135,7 +135,7 @@ public class P_TargetCharacter_OnUpdate : StateAction
             return Mathf.Abs(end.x - start.x) + Mathf.Abs(end.z - start.z);
     }
 
-    // TODO: Codeverdopplung vermeiden (copy paste aus PathfindingController) 
+    // TODO(): Codeverdopplung vermeiden (copy paste aus PathfindingController) 
     public Vector2Int WorldPosToGridPos(Vector3 worldPos)
     {
         var lowerBounds = Vector3Int.FloorToInt(_globalGridData.OriginPosition);

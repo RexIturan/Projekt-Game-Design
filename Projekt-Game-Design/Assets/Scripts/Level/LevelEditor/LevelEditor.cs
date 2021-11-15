@@ -1,4 +1,6 @@
-﻿using Grid;
+﻿using System;
+using Events.ScriptableObjects;
+using Grid;
 using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,8 +16,9 @@ namespace LevelEditor {
 			Fill,
 		}
 
-		[Header("Receiving Events On")] [SerializeField]
-		private VoidEventChannelSO levelLoaded;
+		[Header("Receiving Events On")] 
+		[SerializeField] private VoidEventChannelSO levelLoaded;
+		[SerializeField] private IntEventChannelSO setModeEC;
 
 		[Header("SendingEventsOn")] [SerializeField]
 		private VoidEventChannelSO updateMeshEC;
@@ -45,13 +48,27 @@ namespace LevelEditor {
 		private bool _rightClicked;
 		private bool _dragEnd;
 
+/////////////////////////////////////// Local Functions ////////////////////////////////////////////
+		
+		private void SetMode(int mode) {
+			var len = Enum.GetNames(typeof(CursorMode)).Length;
+
+			if ( mode >= 0 && mode < len ) {
+				Mode = (CursorMode)mode;
+			}
+		}
+		
+/////////////////////////////////////// Public Functions ///////////////////////////////////////////
+
 		public void Awake() {
 			selectedTileType = tileTypesContainer.tileTypes[1];
 			levelLoaded.OnEventRaised += RedrawLevel;
+			setModeEC.OnEventRaised += SetMode;
 		}
 
 		public void OnDestroy() {
 			levelLoaded.OnEventRaised -= RedrawLevel;
+			setModeEC.OnEventRaised -= SetMode;
 		}
 
 		public void RedrawLevel() {
@@ -60,7 +77,7 @@ namespace LevelEditor {
 		}
 
 		private void Update() {
-			if ( !inputReader.GameInput.Gameplay.Enabled ) {
+			if ( !inputReader.GameInput.Gameplay.enabled ) {
 				return;
 			}
 
@@ -79,8 +96,11 @@ namespace LevelEditor {
 			}
 
 			switch ( mode ) {
+				case CursorMode.Select:
+					drawer.DrawCursorAt(mousePosition);
+					break;
+				
 				case CursorMode.Paint:
-
 					drawer.DrawCursorAt(mousePosition);
 
 					if ( _rightClicked ) {
@@ -97,6 +117,7 @@ namespace LevelEditor {
 					}
 
 					break;
+				
 				case CursorMode.Box:
 
 					if ( leftMouseWasPressed ) {
@@ -120,6 +141,7 @@ namespace LevelEditor {
 					}
 
 					break;
+				
 				case CursorMode.Fill:
 					break;
 			}

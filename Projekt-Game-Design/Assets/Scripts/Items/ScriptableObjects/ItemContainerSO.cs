@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//todo rename -> ItemDict
 /// <summary>
 /// Item Container SO
 /// List of each Item

@@ -1,4 +1,5 @@
-﻿using Grid;
+﻿using System;
+using Grid;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -23,6 +24,10 @@ namespace Visual {
         [SerializeField] private TileTypePair[] tileTypeTileDict;
         [SerializeField] private TileBase cursor;
         [SerializeField] private TileBase errorTile;
+
+        private void Awake() {
+	        Debug.Log(gameObject.GetInstanceID());
+        }
 
         public TileBase GetTileFromTileType(TileTypeSO tileType) {
             TileBase tile = errorTile;

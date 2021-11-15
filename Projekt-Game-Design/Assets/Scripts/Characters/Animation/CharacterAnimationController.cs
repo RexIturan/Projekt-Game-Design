@@ -108,6 +108,6 @@ public class CharacterAnimationController : MonoBehaviour
 
 	public void TakeStance(StanceType stance)
 	{
-		stanceController.TakeStance(stance);
+		// stanceController.TakeStance(stance);
 	}
 }

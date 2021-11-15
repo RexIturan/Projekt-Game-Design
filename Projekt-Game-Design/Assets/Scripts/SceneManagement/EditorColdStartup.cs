@@ -29,7 +29,8 @@ namespace SceneManagement {
                     persistentManagersSO.sceneReference.LoadSceneAsync(LoadSceneMode.Additive).Completed += LoadEventChannel;
                 }
                 else {
-                    // Debug.Log("cold startup: persistant managers loaded!");
+                    Debug.Log("cold startup: persistant managers loaded!");
+                    //todo destroy this EditorColdStartup
                 }
             }
         }
@@ -44,11 +45,14 @@ namespace SceneManagement {
         {
             // Debug.Log("cold startup: loadEC loaded, reload scene??");
             LoadEventChannelSO loadEventChannelSO = (LoadEventChannelSO)loadSceneEventChannel.Asset;
-            loadEventChannelSO.RaiseEvent(new[] { startSceneSO });
+            // loadEventChannelSO.RaiseEvent(new[] { startSceneSO });
 
             SceneManager.UnloadSceneAsync(thisSceneSO.sceneReference.editorAsset.name).completed += operation => {
-                // Debug.Log("cold startup: unloading of original scene complete");
+                Debug.Log("cold startup: unloading of original scene complete");
+                loadEventChannelSO.RaiseEvent(new[] { startSceneSO });
             };
+            
+            //todo destroy this EditorColdStartup
         }
 #endif
     }

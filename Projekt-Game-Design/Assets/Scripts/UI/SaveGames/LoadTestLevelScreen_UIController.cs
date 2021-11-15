@@ -64,10 +64,11 @@ namespace UI.SaveGames {
             // get all savefile names
             // -> create placeholder with names
             var placeholderFilenames = _saveSystem.GetAllTestLevelNames();
-            // List<Action<string, bool, int>> callbacks = new List<Action<string, bool, int>>();
+
             List<Button> saveSlotButtons = new List<Button>(); 
             List<Label> saveSlotLabels = new List<Label>();
             List<TemplateContainer> saveSlots = new List<TemplateContainer>();
+            
             foreach (var placeholder in placeholderFilenames) {
                 // Debug.Log(placeholder);
                 var saveSlot = saveSlotTemplateContainer.CloneTree();
@@ -82,28 +83,9 @@ namespace UI.SaveGames {
                 saveSlotLabels.Add(saveSlotLabel);
                 saveSlotLabel.text = placeholder;
                 
-                
-                // callbacks.Add((filename, valid, index) => {
-                //     if (valid) {
-                //         Debug.Log($"Load {index} {filename}" );
-                //
-                //         saveSlotLabels[index].text = filename;
-                //         var button = saveSlotButtons[index];
-                //         button.SetEnabled(true);
-                //         button.clicked += () => {
-                //             Debug.Log($"Load {filename}" );
-                //             saveSystem.SetCurrentSaveTo(index);
-                //             _loadLocation.RaiseEvent(_locationsToLoad, true, false);
-                //             saveSystem.saveManagerData.inputLoad = true;
-                //             saveSystem.saveManagerData.loaded = true;
-                //         };
-                //     }
-                //     else {
-                //         saveSlotContainer.Remove(saveSlots[index]);
-                //     }
-                // });                
             }
             
+            //todo move most of this logic to the savesystem or so
             _saveSystem.LoadTextAssetsAsSaves((filename, valid, index) => {
                 if (valid) {
                     // Debug.Log($"Load {index} {filename}" );

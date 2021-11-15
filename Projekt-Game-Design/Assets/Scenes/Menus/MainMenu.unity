@@ -420,7 +420,6 @@ MonoBehaviour:
   loadLocation: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
   locationsToLoad:
   - {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
-  saveManagerDataSo: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
 --- !u!4 &1961413314
 Transform:
   m_ObjectHideFlags: 0
@@ -443,9 +442,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1585765482496538119, guid: 6a43a43ba4cf90f4c8fb5dd969523e94, type: 3}
+      propertyPath: thisSceneSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
+    - target: {fileID: 1585765482496538119, guid: 6a43a43ba4cf90f4c8fb5dd969523e94, type: 3}
       propertyPath: _thisSceneSO
       value: 
       objectReference: {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
+    - target: {fileID: 1585765482496538119, guid: 6a43a43ba4cf90f4c8fb5dd969523e94, type: 3}
+      propertyPath: startSceneSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
+    - target: {fileID: 1585765482496538119, guid: 6a43a43ba4cf90f4c8fb5dd969523e94, type: 3}
+      propertyPath: loadSceneEventChannel.m_AssetGUID
+      value: d4f619ca60109054faab02a134bbbf02
+      objectReference: {fileID: 0}
     - target: {fileID: 3413179617940674565, guid: 6a43a43ba4cf90f4c8fb5dd969523e94, type: 3}
       propertyPath: m_RootOrder
       value: 0
