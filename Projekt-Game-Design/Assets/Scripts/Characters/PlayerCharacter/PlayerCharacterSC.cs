@@ -127,12 +127,20 @@ public class PlayerCharacterSC : MonoBehaviour {
     }
 
 	// TODO: !!DEBUG!!
+	[Header("DEBUG: ")]
 	public StanceType stance;
+	public Mesh weaponLeft;
+	public Mesh weaponRight;
+	public WeaponPositionType weaponRightPosition;
 	// !!!!!!!!!!!!
 	public void FixedUpdate() {
         timeSinceTransition += Time.fixedDeltaTime;
 		// DEBUG!!!!!!!
 		animationController.TakeStance(stance);
+		animationController.ChangeWeapon(EquipmentType.LEFT, weaponLeft);
+		animationController.ChangeWeapon(EquipmentType.RIGHT, weaponRight);
+		animationController.ChangeWeaponPosition(EquipmentType.RIGHT, weaponRightPosition);
+		// !!!!!!!!!!!
     }
 
     void ToggleIsSelected() {

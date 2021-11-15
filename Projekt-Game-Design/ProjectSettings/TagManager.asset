@@ -7,6 +7,10 @@ TagManager:
   - Stance/RightUp
   - Stance/LeftUp
   - Stance/RightOverShoulder
+  - Equipment/WeaponR
+  - Equipment/WeaponL
+  - Equipment/Shield
+  - Equipment/Quiver
   layers:
   - Default
   - TransparentFX

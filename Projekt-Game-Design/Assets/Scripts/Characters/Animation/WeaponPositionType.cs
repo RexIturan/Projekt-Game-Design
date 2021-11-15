@@ -8,5 +8,6 @@ public enum WeaponPositionType
 {
 	EQUIPPED, 
 	BACK_DOWNWARDS,
-	BACK_UPWARDS
+	BACK_UPWARDS,
+	BACK // Only for shields
 }
