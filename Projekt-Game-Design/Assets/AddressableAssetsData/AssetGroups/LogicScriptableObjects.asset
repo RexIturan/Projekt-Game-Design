@@ -22,7 +22,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: f7391bc1fe7bda143b49ff121d138586
-    m_Address: Assets/ScriptableObjects/EventChannels
+    m_Address: EventChannels
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 8c7bb4b013ff18a4db1749795f74f51a

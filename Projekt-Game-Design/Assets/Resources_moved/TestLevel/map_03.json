@@ -1,5 +1,5 @@
 {
-    "GridDataSave": {
+    "gridDataSave": {
         "width": 11,
         "height": 9,
         "cellSize": 1.0,
@@ -52,7 +52,7 @@
             2
         ]
     },
-    "EquipmentInventory": [
+    "equipmentInventory": [
         {
             "size": 2,
             "itemIds": [

@@ -17,38 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 3f77664488fffe24b8349ec20b4f0cd1
   m_SerializeEntries:
-  - m_GUID: a70609dcf4896694083cbfc5f01c76e4
-    m_Address: Assets/ScriptableObjects/Items
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: c6e5837f55dd5a248b0b32c70d00f3e8
-    m_Address: Assets/ScriptableObjects/Grid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 44364d8d006037c448cf97f219d86bb2
-    m_Address: Assets/ScriptableObjects/Graph
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: ea12c03a3f050fd4c920df98d855f24e
-    m_Address: Assets/ScriptableObjects/GameManager
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 47265b47dc9fda84bbd16fb64078367e
-    m_Address: Assets/ScriptableObjects/Abilities
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 848df0028fededa4ea678a87c3e40ce2
-    m_Address: Assets/ScriptableObjects/Characters
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: a4a15136519cb2d4b90fb41bc730c871
-    m_Address: Assets/ScriptableObjects/WorldObjects
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 8ef0f95470e0d2a438ba4d84f5ef60bb
-    m_Address: Assets/ScriptableObjects/Inventory
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: db877d20d0978924eb47b450dfdc4a1e
     m_Address: Assets/UI/Styles/LoadGame_SaveGame.uss
     m_ReadOnly: 0
