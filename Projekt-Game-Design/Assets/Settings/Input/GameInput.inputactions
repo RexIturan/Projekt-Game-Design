@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Help",
+                    "type": "Button",
+                    "id": "8ad52491-5213-4c98-af42-9a54849011e6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -82,17 +90,28 @@
                     "action": "MouseClicked",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aa3b30ad-bfa8-43ba-b6bc-e800330eab89",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Help",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "LevelEditor",
-            "id": "77b5a28f-4e02-4f05-a574-7e0e70b9d0c3",
+            "name": "Inventory",
+            "id": "08413d11-c7a0-4765-9d70-d63dcb1217c5",
             "actions": [
                 {
-                    "name": "Menu",
+                    "name": "CancelInventory",
                     "type": "Button",
-                    "id": "9bb9c08c-2e56-4670-86d2-63c22c675bbc",
+                    "id": "6be97bc3-3d5e-40c1-babf-afbae0049aa3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -101,12 +120,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "e0138707-1d43-4983-b9a7-de2246f43e69",
+                    "id": "6df524d9-a4e0-4479-bd8a-4438977ba4ba",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Menu",
+                    "groups": "Keyboard",
+                    "action": "CancelInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "caa1823f-6396-4c95-97ad-9a46778dc290",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CancelInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -356,6 +386,158 @@
             ]
         },
         {
+            "name": "LoadingScreen",
+            "id": "a3cc2e69-42f1-4589-8213-6954aa98a723",
+            "actions": [
+                {
+                    "name": "Continue",
+                    "type": "PassThrough",
+                    "id": "dec1c71d-f870-48c0-b436-b1fe6b5fe934",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9e56c3d9-adc6-410a-bb1c-0a29457f982d",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "35968cbf-c29f-4944-a512-2e965e6a970e",
+                    "path": "*/Button",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f12239b-87e5-4543-b3b0-a921f63665fc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "LevelEditor",
+            "id": "77b5a28f-4e02-4f05-a574-7e0e70b9d0c3",
+            "actions": [
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "9bb9c08c-2e56-4670-86d2-63c22c675bbc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "72519a15-4b3c-4a4c-8028-9f87df117735",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Paint",
+                    "type": "Button",
+                    "id": "3b530e48-1595-4ea1-99fa-7c907370d3ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Box",
+                    "type": "Button",
+                    "id": "88d68441-6200-4960-ab90-4c1d91d8b23d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Fill",
+                    "type": "Button",
+                    "id": "e65d6032-6861-491c-977c-526f5833273b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e0138707-1d43-4983-b9a7-de2246f43e69",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af168704-90de-49a0-8c7a-8b8985df6c98",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfbd23ac-cc7f-456c-accd-7c3cf19c2b3e",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Paint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62936ca9-76d7-42c2-b4dd-df9b1b360dd9",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Box",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "761cc7cf-f7dc-49be-a03a-0f127014596e",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "Pathfinding Debug",
             "id": "5b80161a-b43e-44c0-950f-42ec70159e52",
             "actions": [
@@ -415,93 +597,6 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "ShowCompletePath",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Inventory",
-            "id": "08413d11-c7a0-4765-9d70-d63dcb1217c5",
-            "actions": [
-                {
-                    "name": "CancelInventory",
-                    "type": "Button",
-                    "id": "6be97bc3-3d5e-40c1-babf-afbae0049aa3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "6df524d9-a4e0-4479-bd8a-4438977ba4ba",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "CancelInventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "caa1823f-6396-4c95-97ad-9a46778dc290",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "CancelInventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "LoadingScreen",
-            "id": "a3cc2e69-42f1-4589-8213-6954aa98a723",
-            "actions": [
-                {
-                    "name": "Continue",
-                    "type": "PassThrough",
-                    "id": "dec1c71d-f870-48c0-b436-b1fe6b5fe934",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "9e56c3d9-adc6-410a-bb1c-0a29457f982d",
-                    "path": "<Keyboard>/anyKey",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Continue",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "35968cbf-c29f-4944-a512-2e965e6a970e",
-                    "path": "*/Button",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Continue",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6f12239b-87e5-4543-b3b0-a921f63665fc",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

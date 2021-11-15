@@ -11,12 +11,12 @@ namespace Input {
 		GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions,
 		GameInput.IInventoryActions, GameInput.ILoadingScreenActions {
 		// todo rework event channels: move and rename them 
-		[Header("Sending Events On")] [SerializeField]
-		private BoolEventChannelSO visibilityMenu;
-
+		[Header("Sending Events On")] 
+		[SerializeField] private BoolEventChannelSO visibilityMenu;
 		[SerializeField] private BoolEventChannelSO visibilityInventory;
 		[SerializeField] private BoolEventChannelSO visibilityGameOverlay;
 		[SerializeField] private EFactionEventChannelSO endTurnEC;
+		[SerializeField] private IntEventChannelSO setLevelEditorModeEC;
 
 		[Header("Receiving Events On")] [SerializeField]
 		private VoidEventChannelSO enableMenuInput;
@@ -29,6 +29,7 @@ namespace Input {
 		// public event UnityAction inventoryEvent = delegate { };
 		// public event UnityAction menuEvent = delegate { };
 		public event UnityAction EndTurnEvent = delegate { };
+		public event Action HelpEvent = delegate { };
 
 		public event UnityAction MouseClicked = delegate { };
 
@@ -84,6 +85,7 @@ namespace Input {
 		}
 
 		public void EnableLevelEditorInput() {
+			_gameInput.LoadingScreen.Disable();
 			_gameInput.Menu.Disable();
 
 			_gameInput.PathfindingDebug.Enable();
@@ -96,6 +98,7 @@ namespace Input {
 			_gameInput.LoadingScreen.Disable();
 			_gameInput.Menu.Disable();
 
+			_gameInput.LevelEditor.Enable();
 			_gameInput.PathfindingDebug.Enable();
 			_gameInput.Gameplay.Enable();
 			_gameInput.Camera.Enable();
@@ -103,6 +106,7 @@ namespace Input {
 
 		// Für das Inventar
 		public void EnableInventoryInput() {
+			_gameInput.LevelEditor.Disable();
 			_gameInput.Menu.Disable();
 			_gameInput.PathfindingDebug.Disable();
 			_gameInput.Gameplay.Disable();
@@ -117,6 +121,7 @@ namespace Input {
 		}
 
 		public void EnableMenuInput() {
+			_gameInput.LevelEditor.Disable();
 			_gameInput.Gameplay.Disable();
 			_gameInput.Camera.Disable();
 			_gameInput.PathfindingDebug.Disable();
@@ -126,6 +131,7 @@ namespace Input {
 		}
 
 		public void EnableLoadingScreenInput() {
+			_gameInput.LevelEditor.Disable();
 			_gameInput.Gameplay.Disable();
 			_gameInput.Camera.Disable();
 			_gameInput.PathfindingDebug.Disable();
@@ -166,6 +172,12 @@ namespace Input {
 		public void OnMouseClicked(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed )
 				MouseClicked.Invoke();
+		}
+
+		public void OnHelp(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed ) {
+				HelpEvent.Invoke();	
+			}
 		}
 
 		#endregion
@@ -256,6 +268,26 @@ namespace Input {
 				AnyKeyEvent.Invoke();
 				Debug.Log("Any Key");
 			}
+		}
+
+		#endregion
+
+		#region Level Editor
+
+		public void OnSelect(InputAction.CallbackContext context) {
+			setLevelEditorModeEC.RaiseEvent(0);
+		}
+
+		public void OnPaint(InputAction.CallbackContext context) {
+			setLevelEditorModeEC.RaiseEvent(1);
+		}
+
+		public void OnBox(InputAction.CallbackContext context) {
+			setLevelEditorModeEC.RaiseEvent(2);
+		}
+
+		public void OnFill(InputAction.CallbackContext context) {
+			setLevelEditorModeEC.RaiseEvent(3);
 		}
 
 		#endregion
