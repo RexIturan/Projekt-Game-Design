@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5914269863946797021
+--- !u!1 &723286307073106099
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3413179617940674565}
-  - component: {fileID: 1585765482496538119}
+  - component: {fileID: 723286307073106096}
+  - component: {fileID: 723286307073106097}
   m_Layer: 0
-  m_Name: EditorInitializer
+  m_Name: Location Initialiser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3413179617940674565
+--- !u!4 &723286307073106096
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5914269863946797021}
+  m_GameObject: {fileID: 723286307073106099}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,23 +31,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1585765482496538119
+--- !u!114 &723286307073106097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5914269863946797021}
+  m_GameObject: {fileID: 723286307073106099}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f909e3d576a4d62860e01dcf9325a1b, type: 3}
+  m_Script: {fileID: 11500000, guid: d2dd9a2a6648498b83555a3e12f64ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisSceneSO: {fileID: 0}
-  startSceneSO: {fileID: 0}
-  persistentManagersSO: {fileID: 11400000, guid: 941453c757a325a48bd0724d01d8dea8, type: 2}
-  loadSceneEventChannel:
-    m_AssetGUID: 4a2ce8bf8a8f20242a23e2ec942c4923
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  enableLoadingScreenInputEC: {fileID: 11400000, guid: 390c6cfe22017ee4ebc6233afb443b42, type: 2}
+  enableGampleyInputEC: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
+  initializeFromSave: 0

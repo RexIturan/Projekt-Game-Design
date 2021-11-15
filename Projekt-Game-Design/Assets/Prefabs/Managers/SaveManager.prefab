@@ -62,22 +62,10 @@ MonoBehaviour:
   - SaveSlot_1
   - SaveSlot_2
   itemContainerSo: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
-  equipmentInventoryContainerSo: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
+  equipmentContainer: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
   characterInitializer: {fileID: 1363089168}
   testLevel:
-  - m_AssetGUID: 48034e30757b90b448479aaeabd9e21b
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 1a30da2b1e49e9c46ba6fd5165e57411
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 151fa8b6dbbbc88478b7aeb418e70f08
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
   - m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 
