@@ -490,6 +490,14 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ResetLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""6817b2fd-2740-4539-83a2-1c0ed4d4eb21"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -545,6 +553,17 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Fill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb95693f-8872-46f2-a38e-faf1eb8e4cb0"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetLevel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -653,6 +672,7 @@ public class @GameInput : IInputActionCollection, IDisposable
         m_LevelEditor_Paint = m_LevelEditor.FindAction("Paint", throwIfNotFound: true);
         m_LevelEditor_Box = m_LevelEditor.FindAction("Box", throwIfNotFound: true);
         m_LevelEditor_Fill = m_LevelEditor.FindAction("Fill", throwIfNotFound: true);
+        m_LevelEditor_ResetLevel = m_LevelEditor.FindAction("ResetLevel", throwIfNotFound: true);
         // Pathfinding Debug
         m_PathfindingDebug = asset.FindActionMap("Pathfinding Debug", throwIfNotFound: true);
         m_PathfindingDebug_Toggle = m_PathfindingDebug.FindAction("Toggle", throwIfNotFound: true);
@@ -933,6 +953,7 @@ public class @GameInput : IInputActionCollection, IDisposable
     private readonly InputAction m_LevelEditor_Paint;
     private readonly InputAction m_LevelEditor_Box;
     private readonly InputAction m_LevelEditor_Fill;
+    private readonly InputAction m_LevelEditor_ResetLevel;
     public struct LevelEditorActions
     {
         private @GameInput m_Wrapper;
@@ -942,6 +963,7 @@ public class @GameInput : IInputActionCollection, IDisposable
         public InputAction @Paint => m_Wrapper.m_LevelEditor_Paint;
         public InputAction @Box => m_Wrapper.m_LevelEditor_Box;
         public InputAction @Fill => m_Wrapper.m_LevelEditor_Fill;
+        public InputAction @ResetLevel => m_Wrapper.m_LevelEditor_ResetLevel;
         public InputActionMap Get() { return m_Wrapper.m_LevelEditor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -966,6 +988,9 @@ public class @GameInput : IInputActionCollection, IDisposable
                 @Fill.started -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnFill;
                 @Fill.performed -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnFill;
                 @Fill.canceled -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnFill;
+                @ResetLevel.started -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnResetLevel;
+                @ResetLevel.performed -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnResetLevel;
+                @ResetLevel.canceled -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnResetLevel;
             }
             m_Wrapper.m_LevelEditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -985,6 +1010,9 @@ public class @GameInput : IInputActionCollection, IDisposable
                 @Fill.started += instance.OnFill;
                 @Fill.performed += instance.OnFill;
                 @Fill.canceled += instance.OnFill;
+                @ResetLevel.started += instance.OnResetLevel;
+                @ResetLevel.performed += instance.OnResetLevel;
+                @ResetLevel.canceled += instance.OnResetLevel;
             }
         }
     }
@@ -1081,6 +1109,7 @@ public class @GameInput : IInputActionCollection, IDisposable
         void OnPaint(InputAction.CallbackContext context);
         void OnBox(InputAction.CallbackContext context);
         void OnFill(InputAction.CallbackContext context);
+        void OnResetLevel(InputAction.CallbackContext context);
     }
     public interface IPathfindingDebugActions
     {

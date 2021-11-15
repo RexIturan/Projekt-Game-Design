@@ -49,6 +49,9 @@ namespace Input {
 		//LoadingScreen Input
 		public event Action AnyKeyEvent = delegate { };
 
+		//Level Editor
+		public event Action ResetEditorLevelEvent = delegate { };
+		
 		private GameInput _gameInput;
 
 		// todo idk if we should expose _gameInput 
@@ -75,6 +78,8 @@ namespace Input {
 			// EnableGameplayInput();
 		}
 
+		#region Action Map Toggles
+		
 		private void OnDisable() {
 			enableMenuInput.OnEventRaised -= EnableMenuInput;
 			enableGameplayInput.OnEventRaised -= EnableGameplayInput;
@@ -148,6 +153,8 @@ namespace Input {
 			_gameInput.LoadingScreen.Disable();
 		}
 
+		#endregion
+		
 		#region Gameplay
 
 		public void OnEndTurn(InputAction.CallbackContext context) {
@@ -288,6 +295,12 @@ namespace Input {
 
 		public void OnFill(InputAction.CallbackContext context) {
 			setLevelEditorModeEC.RaiseEvent(3);
+		}
+
+		public void OnResetLevel(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed ) {
+				ResetEditorLevelEvent.Invoke();	
+			}
 		}
 
 		#endregion

@@ -1,11 +1,19 @@
+using Events.ScriptableObjects;
+using SceneManagement.ScriptableObjects;
 using UnityEngine.UIElements;
 using UnityEngine;
 
 
 public class MainMenuUIController : MonoBehaviour
 {
+	//todo move to LevelEditorLoadingButton or so
+	[Header("Recieving Event On")] 
+	[SerializeField] private LoadEventChannelSO loadLocationEC;
+	[SerializeField] private GameSceneSO[] levelEditor;
+	
     private Button _startButton;
     private Button _loadLevelButton;
+    private Button _levelEditorButton;
     private Button _settingsButton;
     private Button _exitButton;
     private Button _backButton;
@@ -33,6 +41,12 @@ public class MainMenuUIController : MonoBehaviour
         _settingsContainer = root.Q<VisualElement>("SettingsContainer");
         _loadGame = root.Q<VisualElement>("LoadScreen");
         
+        // Level Editor Button
+        _levelEditorButton = root.Q<Button>("LevelEditorButton");
+        _levelEditorButton.clicked += () => {
+	        loadLocationEC.RaiseEvent(levelEditor);
+        };
+        
         // TODO move to injection point
         // load testlevel stuff
         _loadTestLevelScreen = root.Q<TemplateContainer>("LoadTestLevelScreen");
@@ -45,12 +59,13 @@ public class MainMenuUIController : MonoBehaviour
             _menuContainer.visible = true;
         };
         
-        
         _startButton.clicked += StartButtonPressed;
         _exitButton.clicked += QuitGame;
         _backButton.clicked += BackButtonPressed;
         _settingsButton.clicked += SettingsButtonPressed;
         _loadLevelButton.clicked += LoadLevelButtonPressed;
+        
+        // todo move to lode game screen
         _loadGame.Q<Button>("BackButton").clicked += BackButtonLoadGamePressed;
     }
     

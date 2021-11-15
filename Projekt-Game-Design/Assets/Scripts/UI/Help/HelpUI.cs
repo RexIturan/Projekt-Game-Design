@@ -32,7 +32,7 @@ namespace UI.Help {
 		
 /////////////////////////////////////// Private Variables //////////////////////////////////////////
 		
-		private TemplateContainer _helpBoxRoot;
+		private VisualElement _helpBoxRoot;
 		private Label _helpText;
 
 /////////////////////////////////////// Private Functions //////////////////////////////////////////
@@ -54,7 +54,9 @@ namespace UI.Help {
 		}
 
 		private void Start() {
-			_helpBoxRoot = helpBoxTreeAsset.CloneTree("HelpBoxContainer");
+			_helpBoxRoot = helpBoxTreeAsset
+				.CloneTree("HelpBoxContainer")
+				.Q<VisualElement>("HelpBox_Container");
 			_helpBoxRoot.visible = false;	
 			_helpBoxRoot.style.height = new StyleLength(Length.Percent(100));
 

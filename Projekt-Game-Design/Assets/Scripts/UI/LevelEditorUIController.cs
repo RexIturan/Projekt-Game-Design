@@ -34,6 +34,7 @@ namespace UI {
         [SerializeField] private VoidEventChannelSO loadLevel;
         
         private void Start() {
+	        // if()
             var root = GetComponent<UIDocument>().rootVisualElement;
 
             _ingameMenuContainer = root.Q<VisualElement>("IngameMenu");

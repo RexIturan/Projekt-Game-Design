@@ -62,11 +62,13 @@ namespace LevelEditor {
 
 		public void Awake() {
 			selectedTileType = tileTypesContainer.tileTypes[1];
+			inputReader.ResetEditorLevelEvent += ResetLevel;
 			levelLoaded.OnEventRaised += RedrawLevel;
 			setModeEC.OnEventRaised += SetMode;
 		}
 
 		public void OnDestroy() {
+			inputReader.ResetEditorLevelEvent -= ResetLevel;
 			levelLoaded.OnEventRaised -= RedrawLevel;
 			setModeEC.OnEventRaised -= SetMode;
 		}

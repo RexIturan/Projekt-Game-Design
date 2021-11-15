@@ -3,6 +3,8 @@ using System.Linq;
 using Events.ScriptableObjects;
 using Input;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 namespace UI.Help {
 	public class HelpUpdater : MonoBehaviour {
@@ -15,23 +17,34 @@ namespace UI.Help {
 		private void Start() {
 			string str = "";
 
-			var inputs = inputReader.GameInput.LevelEditor.Get().ToArray();
+			str += "Level Editor\n";
+			str += GetInputMappingFromActionMap(inputReader.GameInput.LevelEditor.Get().actions);
+		
+			// str += "\nCamera\n";
+			// str += GetInputMappingFromActionMap(inputReader.GameInput.Camera.Get().actions);
+			
+			setHelpTextEC.RaiseEvent(str);
+		}
 
-			foreach ( var inputAction in inputs ) {
+		private string GetInputMappingFromActionMap(ReadOnlyArray<InputAction> inputActions) {
+			string str = "";
+
+			foreach ( var inputAction in inputActions ) {
 				str += inputAction.name + ": ";
 				if ( inputAction.bindings.Count > 0 ) {
 					if ( inputAction.controls.Count > 0 ) {
 						foreach ( var control in inputAction.controls ) {
-							str += control.name + "\n";	
+							str += control.name + ", ";	
 						}
+						str += "\n";
 					}
 				}
 				else {
 					str += "\n";
 				}
 			}
-			
-			setHelpTextEC.RaiseEvent(str);
+
+			return str;
 		}
 	}
 }

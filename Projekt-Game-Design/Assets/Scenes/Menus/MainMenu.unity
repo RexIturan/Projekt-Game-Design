@@ -264,9 +264,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 945489882}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95d3798654ea9b346970e0be98d024eb, type: 3}
+  m_Script: {fileID: 11500000, guid: fffe95798c6c40c7894488a75f7e7e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadLocationEC: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
+  levelEditor:
+  - {fileID: 11400000, guid: d911fb750a0cffe4c8ea93da07f28943, type: 2}
 --- !u!114 &945489886
 MonoBehaviour:
   m_ObjectHideFlags: 0

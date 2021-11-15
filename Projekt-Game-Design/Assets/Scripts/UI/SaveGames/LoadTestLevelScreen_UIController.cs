@@ -44,7 +44,9 @@ namespace UI.SaveGames {
 
             _saveSlotContainer = uiDocument.rootVisualElement.Q<ScrollView>();
             
-            GetAllTestSaveFiles();
+            if ( _saveSystem != null ) {
+	            GetAllTestSaveFiles();    
+            }
         }
 
         // -------------------------------------
