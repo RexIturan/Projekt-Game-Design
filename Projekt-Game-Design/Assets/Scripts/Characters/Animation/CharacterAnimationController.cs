@@ -19,6 +19,8 @@ public class CharacterAnimationController : MonoBehaviour
 
 	// for stance
 	private CharacterStanceController stanceController;
+	// for equipment
+	private CharacterEquipmentController equipmentController;
 
 	// Start is called before the first frame update
 	void Start()
@@ -29,7 +31,8 @@ public class CharacterAnimationController : MonoBehaviour
 		clipLength = animator.GetCurrentAnimatorStateInfo(BASE_LAYER_INDEX).length;
 
 		stanceController = gameObject.GetComponentInChildren<CharacterStanceController>();
-    }
+		equipmentController = gameObject.GetComponentInChildren<CharacterEquipmentController>();
+	}
 
     // Update is called once per frame
     void Update()
@@ -109,5 +112,20 @@ public class CharacterAnimationController : MonoBehaviour
 	public void TakeStance(StanceType stance)
 	{
 		stanceController.TakeStance(stance);
+	}
+
+	public void ChangeWeapon(EquipmentType type, Mesh newWeapon)
+	{
+		equipmentController.ChangeWeapon(type, newWeapon);
+	}
+
+	public void ChangeWeaponPosition(EquipmentType type, WeaponPositionType newPosition)
+	{
+		equipmentController.ChangeWeaponPosition(type, newPosition);
+	}
+
+	public void DisableEquipment(EquipmentType type, bool disable)
+	{
+		equipmentController.DisableEquipment(type, disable);
 	}
 }
