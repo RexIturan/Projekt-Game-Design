@@ -53,23 +53,16 @@ MonoBehaviour:
   gridContainer: {fileID: 11400000, guid: cf77658e9fdf6c24193f76cce7d45bff, type: 2}
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   characterList: {fileID: 0}
-  saveManagerData: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
-  pathBase: Assets/Resources/Maps/
-  defaultFilename: 
-  gameSavePathBase: Assets/Resources/GameSaves/
-  gameSaveFilenames:
-  - SaveSlot_0
-  - SaveSlot_1
-  - SaveSlot_2
-  itemContainerSo: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
   equipmentContainer: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
   characterInitializer: {fileID: 1363089168}
+  itemContainerSO: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
   testLevel:
   - m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  saveManagerData: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
   showDebugMessage: 1
 --- !u!114 &1363089168
 MonoBehaviour:

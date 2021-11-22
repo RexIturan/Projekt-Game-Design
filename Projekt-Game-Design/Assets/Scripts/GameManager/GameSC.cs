@@ -22,7 +22,7 @@ namespace GameManager {
         // [SerializeField] private StringEventChannelSO loadGameFromPath;
         [SerializeField] private VoidEventChannelSO levelLoaded;
 
-        [Header("sceneloading stuff")] [SerializeField]
+        [Header("sceneloading Event Channel")] [SerializeField]
         private VoidEventChannelSO onSceneReady;
 
         // [SerializeField] private LoadEventChannelSO loadLocationEC;

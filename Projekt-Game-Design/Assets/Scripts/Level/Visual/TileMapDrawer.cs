@@ -25,10 +25,6 @@ namespace Visual {
         [SerializeField] private TileBase cursor;
         [SerializeField] private TileBase errorTile;
 
-        private void Awake() {
-	        Debug.Log(gameObject.GetInstanceID());
-        }
-
         public TileBase GetTileFromTileType(TileTypeSO tileType) {
             TileBase tile = errorTile;
             foreach (var pair in tileTypeTileDict) {

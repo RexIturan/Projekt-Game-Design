@@ -45,4 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableLoadingScreenInputEC: {fileID: 11400000, guid: 390c6cfe22017ee4ebc6233afb443b42, type: 2}
   enableGampleyInputEC: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
+  onSceneReady: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}
   initializeFromSave: 0

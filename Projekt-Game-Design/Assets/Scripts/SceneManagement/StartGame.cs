@@ -14,11 +14,14 @@ namespace SceneManagement {
 
         private bool _hasSaveData;
 
+        //todo refactor??
+        
         private void Start()
         {
             // try loading save file
             Debug.Log("StartGame: try loading save file");
-            _hasSaveData = saveSystem.LoadSaveDataFromDisk(saveSystem.saveManagerData.path);
+            
+            _hasSaveData = saveSystem.LoadLevel("");
             
             if (_hasSaveData)
             {

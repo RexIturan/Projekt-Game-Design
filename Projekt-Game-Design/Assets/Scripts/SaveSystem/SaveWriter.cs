@@ -43,14 +43,16 @@ namespace SaveSystem {
 		private List<PlayerCharacter_Save> GetPlayerSaveData(CharacterList characterList) {
 			List<PlayerCharacter_Save> playerChars = new List<PlayerCharacter_Save>();
 
-			foreach ( var player in characterList.playerContainer ) {
-				var playerCharacterSc = player.GetComponent<PlayerCharacterSC>();
-				playerChars.Add(
-					new PlayerCharacter_Save() {
-						plyerTypeId = playerCharacterSc.playerType.id,
-						plyerSpawnDataId = playerCharacterSc.playerSpawnData.id,
-						pos = playerCharacterSc.gridPosition
-					});
+			if ( characterList ) {
+				foreach ( var player in characterList.playerContainer ) {
+					var playerCharacterSc = player.GetComponent<PlayerCharacterSC>();
+					playerChars.Add(
+						new PlayerCharacter_Save() {
+							plyerTypeId = playerCharacterSc.playerType.id,
+							plyerSpawnDataId = playerCharacterSc.playerSpawnData.id,
+							pos = playerCharacterSc.gridPosition
+						});
+				}	
 			}
 
 			return playerChars;
@@ -59,16 +61,18 @@ namespace SaveSystem {
 		private List<Enemy_Save> GetEnemySaveData(CharacterList characterList) {
 			List<Enemy_Save> enemyChars = new List<Enemy_Save>();
 
-			foreach ( var enemy in characterList.playerContainer ) {
-				var enemySC = enemy.GetComponent<EnemyCharacterSC>();
-				enemyChars.Add(
-					new Enemy_Save() {
-						enemyTypeId = enemySC.enemyType.id,
-						enemySpawnDataId = enemySC.enemySpawnData.id,
-						pos = enemySC.gridPosition
-					});
+			if ( characterList ) {
+				foreach ( var enemy in characterList.playerContainer ) {
+					var enemySC = enemy.GetComponent<EnemyCharacterSC>();
+					enemyChars.Add(
+						new Enemy_Save() {
+							enemyTypeId = enemySC.enemyType.id,
+							enemySpawnDataId = enemySC.enemySpawnData.id,
+							pos = enemySC.gridPosition
+						});
+				}	
 			}
-
+			
 			return enemyChars;
 		}
 

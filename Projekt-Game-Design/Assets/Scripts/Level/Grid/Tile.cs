@@ -7,11 +7,13 @@ namespace Grid {
 
         [HideInInspector] public string name = "Tile";
 
+        // serialisable field used for saving a tile
         public int tileTypeID;
-        
-        public GenericGrid1D<Tile> grid;
+        //todo could possibly be private  
         public int x;
         public int y;
+        
+        private GenericGrid1D<Tile> grid;
         
         public void SetTileType(int id) {
             tileTypeID = id;

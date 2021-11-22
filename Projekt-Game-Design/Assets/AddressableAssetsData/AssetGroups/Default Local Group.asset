@@ -17,22 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 3f77664488fffe24b8349ec20b4f0cd1
   m_SerializeEntries:
-  - m_GUID: db877d20d0978924eb47b450dfdc4a1e
-    m_Address: Assets/UI/Styles/LoadGame_SaveGame.uss
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 6ddf6212474c2a84ca2664a443a93551
-    m_Address: Assets/UI/Styles/Button_Layout.uss
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: fa7e517b8c5f3044db3f0818d98150ff
-    m_Address: Assets/UI/LoadScreen.uxml
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: cf06c9ce71c32d344ba1647f37220971
-    m_Address: Assets/UI/SettingsContainer.uxml
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: b5821c0c90e6f8044a2f1ed32296f05e
     m_Address: Assets/Art/Material/Player_mat.mat
     m_ReadOnly: 0
@@ -49,8 +33,16 @@ MonoBehaviour:
     m_Address: Assets/Art/Material/Enemy_mat.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: ae69a7d0c3b73f94b9c60a5365548121
-    m_Address: Assets/Prefabs
+  - m_GUID: b442d63fc4f688c42b0926627f5f5bd4
+    m_Address: Assets/Art/Character
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 17a9f55167434da498dcb346bf3f8931
+    m_Address: Assets/Art/Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 01b407838620d0d4cbed9a03c66e30ca
+    m_Address: Assets/Art/Shader
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dcb608470fe4f02a63c88f30ff4e687, type: 3}
-  m_Name: Air
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: Prefabs_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  name: Air
-  id: 0
-  properties: 8
-  movementCost: 0
-  color: {r: 1, g: 1, b: 1, a: 0}
+  m_Group: {fileID: 11400000, guid: 542fae4bc75d43f4faa3c8e959c717b3, type: 2}
+  m_StaticContent: 0

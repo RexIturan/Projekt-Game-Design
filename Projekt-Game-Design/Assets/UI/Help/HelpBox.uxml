@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="HelpBox_Container" picking-mode="Ignore" style="height: 100%; align-items: flex-start; justify-content: flex-start; position: absolute;">
-        <ui:Label text="Help:" display-tooltip-when-elided="true" name="Help_Title" picking-mode="Ignore" style="font-size: 47px;" />
-        <ui:Label text="placeholder\ntext" display-tooltip-when-elided="true" name="Help_Text" picking-mode="Ignore" style="font-size: 32px;" />
+        <ui:Label text="Help:" display-tooltip-when-elided="true" name="Help_Title" picking-mode="Ignore" style="font-size: 47px; color: rgba(255, 255, 255, 255);" />
+        <ui:Label text="placeholder\ntext" display-tooltip-when-elided="true" name="Help_Text" picking-mode="Ignore" style="font-size: 32px; color: rgba(255, 255, 255, 255);" />
     </ui:VisualElement>
 </ui:UXML>

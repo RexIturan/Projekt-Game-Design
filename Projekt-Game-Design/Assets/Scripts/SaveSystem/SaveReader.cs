@@ -12,11 +12,9 @@ namespace SaveSystem {
 		// grid
 		private readonly GridContainerSO _gridContaier;
 		private readonly GridDataSO _gridData;
-		private readonly GridDataSO _globalGridData;
 
 		// inventorys
 		private readonly InventorySO _inventory;
-		private readonly EquipmentInventoryContainerSO _equipmentInventoryContainer;
 		private readonly EquipmentInventoryContainerSO _equipmentInventoryContainerSo;
 
 		// dictionarys
@@ -81,12 +79,14 @@ namespace SaveSystem {
 			GridContainerSO gridContaier, 
 			GridDataSO gridData,
 			InventorySO inventory,
-			EquipmentInventoryContainerSO equipmentInventoryContainer) {
+			EquipmentInventoryContainerSO equipmentInventoryContainer, 
+			ItemContainerSO itemContainerSO) {
 			
 			_gridContaier = gridContaier;
 			_gridData = gridData;
 			_inventory = inventory;
-			_equipmentInventoryContainer = equipmentInventoryContainer;
+			_equipmentInventoryContainerSo = equipmentInventoryContainer;
+			_itemContainerSo = itemContainerSO;
 		}
 
 		public void SetRuntimeReferences(CharacterInitialiser characterInitialiser) {
@@ -96,7 +96,7 @@ namespace SaveSystem {
 		public void ReadSave(Save save) {
 				
 			ReadGrid(save.gridSave, _gridContaier);
-			ReadGridData(save.gridDataSave, _globalGridData);
+			ReadGridData(save.gridDataSave, _gridData);
 
 			// ReadCharacter(save.players, save.enemies);
 			_characterInitializer.Initialise(save.players, save.enemies);

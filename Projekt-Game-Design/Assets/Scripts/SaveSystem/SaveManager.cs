@@ -11,276 +11,296 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace SaveSystem {
-    public class SaveManager : MonoBehaviour {
-        [Header("Receiving Events On")]
-        [SerializeField] private IntEventChannelSO saveGame;
-        [SerializeField] private IntEventChannelSO loadGame;
-        [SerializeField] private VoidEventChannelSO saveLevel;
-        [SerializeField] private VoidEventChannelSO loadLevel;
-        [SerializeField] private StringEventChannelSO loadGameFromPath;
-        
-        [Header("Sending Events On")]
-        [SerializeField] private VoidEventChannelSO levelLoaded;
-        
-        [Header("Data References")]
-        [SerializeField] private GridContainerSO gridContainer;
-        [SerializeField] private GridDataSO globalGridData;
-        public CharacterList characterList;
-        public SaveManagerDataSO saveManagerData;
-        
-        [Header("Save/Load Settings")]
-        [SerializeField] private string pathBase;
-        [SerializeField] private string defaultFilename;
-        private const string FileSuffix = ".json";
+	public class SaveManager : MonoBehaviour {
+		
+		[Header("Receiving Events On")] 
+		[SerializeField] private IntEventChannelSO saveGame;
+		[SerializeField] private IntEventChannelSO loadGame;
+		[SerializeField] private VoidEventChannelSO saveLevel;
+		[SerializeField] private VoidEventChannelSO loadLevel;
+		[SerializeField] private StringEventChannelSO loadGameFromPath;
 
-        //todo make scriptable object
-        [Header("GameSave Settings")]
-        [SerializeField] private string gameSavePathBase;
-        [SerializeField] private string[] gameSaveFilenames;
+		[Header("Sending Events On")] [SerializeField]
+		private VoidEventChannelSO levelLoaded;
 
-        [Header("Data Container")] 
-        // public PlayerDataContainerSO PlayerDataContainerSo;
-        // public EnemyDataContainerSO EnemyDataContainerSo;
-        public ItemContainerSO itemContainerSo;
-        public EquipmentInventoryContainerSO equipmentContainer;
-        public InventorySO inventory;
+		[Header("Data References")] 
+		[SerializeField] private GridContainerSO gridContainer;
+		[SerializeField] private GridDataSO globalGridData;
+		public CharacterList characterList;
+		public EquipmentInventoryContainerSO equipmentContainer;
+		public InventorySO inventory;
+		public CharacterInitialiser characterInitializer;
+		[SerializeField] private ItemContainerSO itemContainerSO;
 
-        public CharacterInitialiser characterInitializer;
 
-        [Header("Test Level Data")] 
-        public List<AssetReference> testLevel;
+	//load level from textasset
+		[Header("Test Level Data")] public List<AssetReference> testLevel;
+		private readonly List<Save> _saveObjects = new List<Save>();
 
-        private readonly List<Save> _saveObjects = new List<Save>();
-
-        [Header("Debug Settings")]
-        [SerializeField] private bool showDebugMessage;
+		//settings
+		//save manager state: is something loaded and so on
+		public SaveManagerDataSO saveManagerData;
+		[SerializeField] private readonly string defaultLevelFilename = "level\\test_level";
+		[Header("Debug Settings")] [SerializeField]
+		private bool showDebugMessage;
+		
 
 //////////////////////////////////////// Local Variables ///////////////////////////////////////////
-        
-		// Save Data
-        private Save _saveData = new Save();
-        private SaveWriter _saveWriter;
-        private SaveReader _saveReader;
 
+		// Save Data
+		private Save _saveObject = new Save();
+		private SaveWriter _saveWriter;
+		private SaveReader _saveReader;
 
 //////////////////////////////////////// Local Functions ///////////////////////////////////////////
-        
-        #region Local Functions
 
-        private Save UpdateSaveData() {
-	        _saveData.Clear();
-	        _saveWriter.SetRuntimeReferences(characterList);
-	        _saveData = _saveWriter.WirteLevelToSave();
-	        return _saveData;
-        }
+		#region Local Functions
 
-        #endregion
-        
-//////////////////////////////////////// Public Functions //////////////////////////////////////////
+		// writes the current level data into the save object
+		private Save WriteLevelDataToSave() {
+			_saveObject.Clear();
+
+			//todo move somewhere else
+			var characters = GameObject.Find("Characters");
+			if ( characters ) {
+				characterList = characters.GetComponent<CharacterList>();
+				_saveWriter.SetRuntimeReferences(characterList);
+			} 
+			
+			_saveObject = _saveWriter.WirteLevelToSave();
+			return _saveObject;
+		}
 		
-        private void Awake() {
-            saveLevel.OnEventRaised += SaveGridContainer;
-            loadLevel.OnEventRaised += LoadGridContainer;
-            saveGame.OnEventRaised += SaveGame;
-            loadGame.OnEventRaised += LoadGame;
-            // loadGameFromPath.OnEventRaised += LoadGridContainer;
-            saveManagerData.Reset();
-        }
+		#endregion
 
-        private void OnDestroy() {
-	        saveLevel.OnEventRaised -= SaveGridContainer;
-	        loadLevel.OnEventRaised -= LoadGridContainer;
-	        saveGame.OnEventRaised -= SaveGame;
-	        loadGame.OnEventRaised -= LoadGame;
-	        // loadGameFromPath.OnEventRaised -= LoadGridContainer;
-        }
+		#region MonoBehaviour
 
-        private void Start() {
+		private void Awake() {
+			saveGame.OnEventRaised += SaveGame;
+			loadGame.OnEventRaised += LoadGame;
+			// loadGameFromPath.OnEventRaised += LoadGridContainer;
+			saveManagerData.Reset();
+		}
 
-	        // setup save Writer
-	        _saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, equipmentContainer);
+		private void OnDestroy() {
+			saveGame.OnEventRaised -= SaveGame;
+			loadGame.OnEventRaised -= LoadGame;
+			// loadGameFromPath.OnEventRaised -= LoadGridContainer;
+		}
 
-	        // setup save Reader
-	        _saveReader = new SaveReader(gridContainer, globalGridData, inventory,
-		        equipmentContainer);
-	        
-            if (gameSaveFilenames == null || gameSaveFilenames.Length < 3) {
-                gameSaveFilenames = new string[3];
-                for (int i = 0; i < gameSaveFilenames.Length; i++) {
-                    gameSaveFilenames[i] = $"savefile_{i}";
-                }    
-            }
-        }
+		private void Start() {
+			// setup save Writer
+			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, equipmentContainer);
 
-        public void SaveGame(int value) {
-            if (value >= 0 && value < gameSaveFilenames.Length) {
-                SaveGridContainer(gameSavePathBase, gameSaveFilenames[value]);    
-            }
-            else {
-	            Debug.LogError("SaveGame(int value)");
-            }
-        }
+			// setup save Reader
+			_saveReader = new SaveReader(gridContainer, globalGridData, inventory,
+				equipmentContainer, itemContainerSO);
+		}
 
-        public void LoadGame(int value) {
-            if (value >= 0 && value < gameSaveFilenames.Length) {
-                LoadGridContainer(gameSavePathBase, gameSaveFilenames[value]);    
-            }
-            else {
-	            Debug.LogError("LoadGame(int value)");
-            }
-        }
+		#endregion
+		
+//////////////////////////////////////// Public Functions //////////////////////////////////////////
 
-        public void SaveGridContainer() {
-            SaveGridContainer(pathBase, defaultFilename);
-        }
-        
-        private bool SaveGridContainer(string directoryPath, string filename) {
-            characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
-            
-            // var json = JsonUtility.ToJson(gridContainer);
-            var path = $"{directoryPath}{filename}{FileSuffix}";
+		// Game
 
-            //fill saveData
-            // buildup saveData by reading from all scriptable objects, and converting them into save objects
-            Save save = UpdateSaveData();
+		#region Save Game
 
-            if ( save == null ) {
-	            Debug.LogError("SaveGridContainer: save is null");
-            }
-            
-            bool saveWritten = FileManager.WriteToFile(path, save.ToJson()); 
-            if ( saveWritten ) {
-	            // set savemanager flag
-	            //todo idk if we need this, use event instead??
-	            saveManagerData.saved = true;    
-            }
-            else {
-	            Debug.LogError("SaveGridContainer: couldn't save");
-            }
-            
-            // var json = _saveData.ToJson();
-            //
-            // if (showDebugMessage) {
-            //     // TODO Debug Macro
-            //     Debug.Log($"Save Test GridContainer to JSON at {path} \n{json}");    
-            // }
-            //
-            // using (var fs = new FileStream(path, FileMode.Create)) {
-            //     using (var writer = new StreamWriter(fs)) {
-            //         writer.Write(json);
-            //     }
-            // }
-            //
-            return saveWritten;
-        }
+		// Save Game 
+		// saves the current state of a playthrough
+		// save Obejct for game  
+		
+		public void SaveGame(int value) {
+			throw new NotImplementedException();
+		}
 
-        public void LoadGridContainer() {
-            var path = pathBase + defaultFilename + FileSuffix;
-            LoadGridContainer(path);
-        }
+		#endregion
 
-        public bool LoadGridContainer(string directoryPath, string filename) {
-            string path = $"{directoryPath}{filename}{FileSuffix}";
-            return LoadGridContainer(path);
-        }
-        
-        private bool LoadGridContainer(string path) {
-	        return LoadSaveDataFromDisk(path);
-        }
-        
-        public bool LoadSaveDataFromDisk(string path) {
-	        using (var fs = new FileStream(path, FileMode.Open)) {
-                using (var reader = new StreamReader(fs)) {
-                    var json = reader.ReadToEnd();
-                    _saveData.LoadFromJson(json);
-                    Debug.Log($"Load JSON from {path} \n{json}");
-                    return true;
-                }
-            }
-        }
+		#region Load Game
 
-        /// <summary> InitializeLevel:
-        /// sets up all the scriptable objects that represent the runtime level
-        /// uses the data from saveData, which is read in beforehand, for example in LoadTextAssetsAsSaves
-        /// </summary>
-        public void InitializeLevel() {
+		public void LoadGame(int value) {
+			throw new NotImplementedException();
+		}
 
-	        _saveReader.SetRuntimeReferences(characterInitializer);
-	        _saveReader.ReadSave(_saveData);
-            
-            saveManagerData.loaded = true;
-            levelLoaded.RaiseEvent();
-        }
+		#endregion
+		
+		// Level
+		
+		#region Save Level
+		// Save Level/Map
+		// saves a seperate level
+		//todo SaveObject for Level
 
-        public void LoadTextAssetsAsSaves(Action<string, bool, int> callback, List<AssetReference> assetReferences) {
-            // start loading procedure
-            // Assert.AreEqual(assetReferences.Count, callbacks.Count, "there should be 1 callback for each testlevel");
+		public bool SaveLevel(string saveName) {
+			//todo refactor code duplication
+			var filename = saveName;
+			if ( filename == "" ) {
+				filename = defaultLevelFilename;
+			}
+			
+			// write level to save Object
+			var save = WriteLevelDataToSave();
+			
+			// saveObject to JSON
+			try {
+				var saveJson = save.ToJson();
+				
+				// filemanager: write saveObject to savefile
+				bool written = FileManager.WriteToFile(filename, saveJson);
+				
+				if ( written ) {
+					// set savemanager flag
+					//todo idk if we need this, use event instead??
+					saveManagerData.saved = true;
+					
+					Debug.Log("Level Saved");
+				}
+				return written;
+				// return true;
+			}
+			catch ( Exception e ) {
+				Debug.LogError($"Failed to convert the SaveObject to JSON with exception {e}");
+				return false;
+			}
+		}
 
-            Dictionary<AsyncOperationHandle<TextAsset>, int> indexDict =
-                new Dictionary<AsyncOperationHandle<TextAsset>, int>();
+		#endregion
 
-            _saveObjects.Clear();
-            for (int i = 0; i < assetReferences.Count; i++) {
-                
-                var assetReference = assetReferences[i];
-                if (assetReference.RuntimeKeyIsValid()) {
-                    // Debug.Log($"before {i} {assetReference.AssetGUID}");
-                    var operationHandle = assetReference.LoadAssetAsync<TextAsset>();
-                    indexDict.Add(operationHandle, i);
-                    operationHandle.Completed += 
-                        handle => {
-                            var index = indexDict[handle];
-                            // Debug.Log($"completed {index} {handle.Result.name}");
-                            var save = new Save();
-                            save.LoadFromJson(handle.Result.text);
-                            _saveObjects.Add(save);
-                            if (handle.IsDone) {
-                                callback(handle.Result.name, true, index);    
-                            }
-                            else {
-                                callback("Could Not Load Save", false, index);
-                            }
-                            Addressables.Release(handle);
-                        };    
-                }
-                else {
-                    callback("Could Not Load Save", false, i);
-                }
-            }
-        }
+		#region Load Level
 
-        void LoadSaveFromTextAsset(AssetReference assetReference) {
-	        if(!assetReference.RuntimeKeyIsValid())
-		        return;
-	        
-	        
-        }
+		public bool LoadLevel(string saveName) {
+			//todo refactor code duplication
+			var filename = saveName;
+			if ( filename == "" ) {
+				filename = defaultLevelFilename;
+			}
 
-        public List<string> GetAllTestLevelNames() {
-            List<string> filenames = new List<string>();
-            foreach (var asset in testLevel) {
-                if (asset.RuntimeKeyIsValid()) {
-                    filenames.Add(asset.AssetGUID);    
-                }
-            }
-            return filenames;
-        }
+			// exists??
+			if ( !FileManager.FileExists(filename) )
+				return false;
 
-        public void SetCurrentSaveTo(int index) {
-            _saveData = _saveObjects[index];
-            
-            // todo clear saveObjects here?
-            _saveObjects.Clear();
-        }
+			// FileManager: load json
+			var fileRead = FileManager.ReadFromFile(filename, out string saveJson);
+			
+			//todo save writer write Json to Save??
+			try {
+				// write json to save Object
+				_saveObject.LoadFromJson(saveJson);
 
-        public List<AssetReference> GetValidTestLevel() {
-            List<AssetReference> validTestLevel = new List<AssetReference>();
-            foreach (var asset in testLevel) {
-                if (asset.RuntimeKeyIsValid()) {
-                    validTestLevel.Add(asset);    
-                }
-            }
-            return validTestLevel;
-        }
-    }
+				//todo remove and manage otherwise
+				// save manager state
+				saveManagerData.loaded = true;
+				
+				//todo debug
+				Debug.Log("Level Loaded");
+				
+				return true;
+			}
+			catch ( Exception e ) {
+				Debug.LogError($"Failed to Load Save Object from Json {e}");
+				return false;
+			}
+
+			//todo initialise level??
+		}
+
+		#endregion
+
+		//todo v Refactor
+		
+		// Level Form TextAsset
+
+		#region Load Level From TextAsset
+
+		void LoadSaveFromTextAsset(AssetReference assetReference) {
+			if ( !assetReference.RuntimeKeyIsValid() )
+				return;
+		}
+
+		#endregion
+		
+		// todo move to level controller or so
+		/// <summary> InitializeLevel:
+		/// sets up all the scriptable objects that represent the runtime level
+		/// uses the data from saveData, which is read in beforehand, for example in LoadTextAssetsAsSaves
+		/// </summary>
+		public void InitializeLevel() {
+			_saveReader.SetRuntimeReferences(characterInitializer);
+			_saveReader.ReadSave(_saveObject);
+
+			saveManagerData.loaded = true;
+			levelLoaded.RaiseEvent();
+		}
+
+		#region Addressable Save Loading
+
+		// todo move to filemanager or 
+		public void LoadTextAssetsAsSaves(Action<string, bool, int> callback,
+			List<AssetReference> assetReferences) {
+			// start loading procedure
+			// Assert.AreEqual(assetReferences.Count, callbacks.Count, "there should be 1 callback for each testlevel");
+
+			Dictionary<AsyncOperationHandle<TextAsset>, int> indexDict =
+				new Dictionary<AsyncOperationHandle<TextAsset>, int>();
+
+			_saveObjects.Clear();
+			for ( int i = 0; i < assetReferences.Count; i++ ) {
+				var assetReference = assetReferences[i];
+				if ( assetReference.RuntimeKeyIsValid() ) {
+					// Debug.Log($"before {i} {assetReference.AssetGUID}");
+					var operationHandle = assetReference.LoadAssetAsync<TextAsset>();
+					indexDict.Add(operationHandle, i);
+					operationHandle.Completed +=
+						handle => {
+							var index = indexDict[handle];
+							// Debug.Log($"completed {index} {handle.Result.name}");
+							var save = new Save();
+							save.LoadFromJson(handle.Result.text);
+							_saveObjects.Add(save);
+							if ( handle.IsDone ) {
+								callback(handle.Result.name, true, index);
+							}
+							else {
+								callback("Could Not Load Save", false, index);
+							}
+
+							Addressables.Release(handle);
+						};
+				}
+				else {
+					callback("Could Not Load Save", false, i);
+				}
+			}
+		}
+
+		public List<string> GetAllTestLevelNames() {
+			List<string> filenames = new List<string>();
+			foreach ( var asset in testLevel ) {
+				if ( asset.RuntimeKeyIsValid() ) {
+					filenames.Add(asset.AssetGUID);
+				}
+			}
+
+			return filenames;
+		}
+		
+		public List<AssetReference> GetValidTestLevel() {
+			List<AssetReference> validTestLevel = new List<AssetReference>();
+			foreach ( var asset in testLevel ) {
+				if ( asset.RuntimeKeyIsValid() ) {
+					validTestLevel.Add(asset);
+				}
+			}
+
+			return validTestLevel;
+		}
+
+		#endregion
+		
+		public void SetCurrentSaveTo(int index) {
+			_saveObject = _saveObjects[index];
+
+			// todo clear saveObjects here?
+			_saveObjects.Clear();
+		}
+	}
 }

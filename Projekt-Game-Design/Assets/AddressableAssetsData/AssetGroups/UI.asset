@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  m_GroupName: UI
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 0a3e0adb23be45a40ac355cf60bb645c
+  m_SerializeEntries:
+  - m_GUID: cf06c9ce71c32d344ba1647f37220971
+    m_Address: Assets/UI/SettingsContainer.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: db877d20d0978924eb47b450dfdc4a1e
+    m_Address: Assets/UI/Styles/LoadGame_SaveGame.uss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6ddf6212474c2a84ca2664a443a93551
+    m_Address: Assets/UI/Styles/Button_Layout.uss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fa7e517b8c5f3044db3f0818d98150ff
+    m_Address: Assets/UI/LoadScreen.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b53edde2ec7dd2842981b48bff57a689, type: 2}
+    - {fileID: 11400000, guid: abace88bd8e31e844ba7fd21f6440945, type: 2}

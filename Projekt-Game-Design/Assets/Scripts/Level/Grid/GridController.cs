@@ -98,8 +98,14 @@ namespace Grid {
 
             // Debug.Log($"tilePosOffsetted {x} {y}");
 
+            if ( gridContainer.tileGrids != null ) {
+	            if ( gridContainer.tileGrids.Count > level ) {
+		            if ( gridContainer.tileGrids[level] != null ) {
+			            gridContainer.tileGrids[level].GetGridObject(newPos.x, newPos.y).SetTileType(tileTypeID);  
+		            }
+	            }
+            }
             
-            gridContainer.tileGrids[level].GetGridObject(newPos.x, newPos.y).SetTileType(tileTypeID);
 
             // drawer.DrawGrid();
         }

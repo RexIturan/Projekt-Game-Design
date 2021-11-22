@@ -2,6 +2,7 @@
 using Events.ScriptableObjects;
 using Grid;
 using Input;
+using SaveSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Util;
@@ -16,8 +17,9 @@ namespace LevelEditor {
 			Fill,
 		}
 
-		[Header("Receiving Events On")] 
-		[SerializeField] private VoidEventChannelSO levelLoaded;
+		[Header("Receiving Events On")] [SerializeField]
+		private VoidEventChannelSO levelLoaded;
+
 		[SerializeField] private IntEventChannelSO setModeEC;
 
 		[Header("SendingEventsOn")] [SerializeField]
@@ -49,33 +51,28 @@ namespace LevelEditor {
 		private bool _dragEnd;
 
 /////////////////////////////////////// Local Functions ////////////////////////////////////////////
-		
+
 		private void SetMode(int mode) {
 			var len = Enum.GetNames(typeof(CursorMode)).Length;
 
 			if ( mode >= 0 && mode < len ) {
-				Mode = (CursorMode)mode;
+				Mode = ( CursorMode )mode;
 			}
 		}
-		
-/////////////////////////////////////// Public Functions ///////////////////////////////////////////
 
-		public void Awake() {
+		#region MonoBehaviour
+
+		private void Awake() {
 			selectedTileType = tileTypesContainer.tileTypes[1];
 			inputReader.ResetEditorLevelEvent += ResetLevel;
 			levelLoaded.OnEventRaised += RedrawLevel;
 			setModeEC.OnEventRaised += SetMode;
 		}
 
-		public void OnDestroy() {
+		private void OnDestroy() {
 			inputReader.ResetEditorLevelEvent -= ResetLevel;
 			levelLoaded.OnEventRaised -= RedrawLevel;
 			setModeEC.OnEventRaised -= SetMode;
-		}
-
-		public void RedrawLevel() {
-			drawer.DrawGrid();
-			updateMeshEC.RaiseEvent();
 		}
 
 		private void Update() {
@@ -101,7 +98,7 @@ namespace LevelEditor {
 				case CursorMode.Select:
 					drawer.DrawCursorAt(mousePosition);
 					break;
-				
+
 				case CursorMode.Paint:
 					drawer.DrawCursorAt(mousePosition);
 
@@ -119,7 +116,7 @@ namespace LevelEditor {
 					}
 
 					break;
-				
+
 				case CursorMode.Box:
 
 					if ( leftMouseWasPressed ) {
@@ -143,10 +140,19 @@ namespace LevelEditor {
 					}
 
 					break;
-				
+
 				case CursorMode.Fill:
 					break;
 			}
+		}
+		
+		#endregion
+		
+/////////////////////////////////////// Public Functions ///////////////////////////////////////////
+
+		public void RedrawLevel() {
+			drawer.DrawGrid();
+			updateMeshEC.RaiseEvent();
 		}
 
 		private void HandleBox() {
@@ -173,24 +179,24 @@ namespace LevelEditor {
 			RedrawLevel();
 		}
 
-		public void HandleMouseClick(Vector3 pos) {
+		private void HandleMouseClick(Vector3 pos) {
 			_leftClicked = true;
 			_clickPos = pos;
 		}
 
-		public void HandleMouseDrag(Vector3 pos) {
+		private void HandleMouseDrag(Vector3 pos) {
 			_dragPos = pos;
 		}
 
-		public void HandleMouseDragEnd() {
+		private void HandleMouseDragEnd() {
 			_dragEnd = true;
 		}
 
-		public void AddMultipleTilesAt(Vector3 clickPos, Vector3 dragPos) {
+		private void AddMultipleTilesAt(Vector3 clickPos, Vector3 dragPos) {
 			controller.AddMultipleTilesAt(clickPos, dragPos, selectedTileType.id);
 		}
 
-		public void AddTileAt(Vector3 clickPos) {
+		private void AddTileAt(Vector3 clickPos) {
 			controller.AddTileAt(clickPos, selectedTileType.id);
 		}
 
