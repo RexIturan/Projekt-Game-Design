@@ -152,7 +152,7 @@ namespace SaveSystem {
 					//todo idk if we need this, use event instead??
 					saveManagerData.saved = true;
 					
-					Debug.Log("Level Saved");
+					Debug.Log("SaveManager > SaveLevel > try > written\nLevel Saved");
 				}
 				return written;
 				// return true;

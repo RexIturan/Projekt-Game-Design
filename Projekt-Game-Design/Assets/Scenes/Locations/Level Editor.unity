@@ -975,15 +975,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2055213537}
-  - component: {fileID: 2055213538}
   - component: {fileID: 2055213539}
+  - component: {fileID: 2055213538}
+  - component: {fileID: 2055213540}
   m_Layer: 0
   m_Name: LevelEditor GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2055213537
 Transform:
   m_ObjectHideFlags: 0
@@ -1032,6 +1033,21 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 4affee0ef5c5fb94185dabe62e02303b, type: 3}
   m_SortingOrder: 0
+--- !u!114 &2055213540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055213536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01eecfb1390847769b06691925d1b98d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 2055213539}
+  mouseOverUI_EC: {fileID: 11400000, guid: 2649fdca3d5737645a304d044086dbd7, type: 2}
+  onSceneReady_EC: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}
 --- !u!1 &2093532304
 GameObject:
   m_ObjectHideFlags: 0

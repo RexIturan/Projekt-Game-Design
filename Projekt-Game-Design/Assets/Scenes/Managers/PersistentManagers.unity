@@ -333,6 +333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1170638171}
   - component: {fileID: 1170638170}
+  - component: {fileID: 1170638172}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -370,6 +371,21 @@ Transform:
   m_Father: {fileID: 842792788}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1170638172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170638169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01eecfb1390847769b06691925d1b98d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1170638170}
+  mouseOverUI_EC: {fileID: 11400000, guid: 2649fdca3d5737645a304d044086dbd7, type: 2}
+  onSceneReady_EC: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}
 --- !u!1001 &1363089165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -535,3 +551,47 @@ MonoBehaviour:
   uiDocument: {fileID: 1170638170}
   toggleLoadingScreen: {fileID: 11400000, guid: 1813d57a6be071c45977e16f33bbbf82, type: 2}
   enableGamplayInputEC: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
+--- !u!1 &1615556975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1615556977}
+  - component: {fileID: 1615556976}
+  m_Layer: 0
+  m_Name: InputCache
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1615556976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615556975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfedf62b72114c75adf9279639a4420f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputCache: {fileID: 11400000, guid: 767106d458901634590366e6fae31156, type: 2}
+--- !u!4 &1615556977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615556975}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

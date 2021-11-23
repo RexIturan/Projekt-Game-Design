@@ -29,7 +29,9 @@ namespace LevelEditor {
 		private TileMapDrawer drawer;
 
 		[SerializeField] private GridController controller;
+		//input
 		[SerializeField] private InputReader inputReader;
+		[SerializeField] private InputCache inputCache;
 
 		[Header("SO References")] [SerializeField]
 		private TileTypeContainerSO tileTypesContainer;
@@ -80,14 +82,22 @@ namespace LevelEditor {
 				return;
 			}
 
+			//todo also in input cache??
+			bool leftMouseWasPressed = false;
+			bool leftMouseWasReleased = false;
+			bool leftMousePressed = false;
+			bool rightMousePressed = false;
+			
+			if ( !inputCache.IsMouseOverUI ) {
+				var mouse = Mouse.current;	
+				leftMouseWasPressed =  mouse.leftButton.wasPressedThisFrame;
+				leftMouseWasReleased = mouse.leftButton.wasReleasedThisFrame;
+				leftMousePressed =     mouse.leftButton.isPressed;
+				rightMousePressed =    mouse.rightButton.isPressed;
+			}
+			
 			//todo getMousePosition at level 
 			Vector3 mousePosition = MousePosition.GetMouseWorldPosition(Vector3.up, 1);
-
-			var mouse = Mouse.current;
-			bool leftMouseWasPressed = mouse.leftButton.wasPressedThisFrame;
-			bool leftMouseWasReleased = mouse.leftButton.wasReleasedThisFrame;
-			bool leftMousePressed = mouse.leftButton.isPressed;
-			bool rightMousePressed = mouse.rightButton.isPressed;
 
 			if ( rightMousePressed ) {
 				_rightClicked = true;

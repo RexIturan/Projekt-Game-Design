@@ -49,6 +49,7 @@ MonoBehaviour:
   drawer: {fileID: 0}
   controller: {fileID: 0}
   inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  inputCache: {fileID: 11400000, guid: 767106d458901634590366e6fae31156, type: 2}
   tileTypesContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}
   mode: 0
   selectedTileType: {fileID: 0}
