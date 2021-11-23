@@ -191,7 +191,7 @@ namespace SaveSystem {
 				saveManagerData.loaded = true;
 				
 				//todo debug
-				Debug.Log("Level Loaded");
+				Debug.Log("SaveManager \u27A4 LoadLevel \u27A4 try:\nLevel Loaded");
 				
 				return true;
 			}

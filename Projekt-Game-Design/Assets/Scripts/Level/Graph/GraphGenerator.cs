@@ -63,7 +63,7 @@ namespace Graph {
             
             for (int x = 0; x < graph.Width; x++) {
                 for (int y = 0; y < graph.Height; y++) {
-                    graph.GetGridObject(x, y).SetEdges(diagonal);
+                    graph.GetGridObject(x, y).SetEdges(diagonal, graph);
                 }
             }
         }

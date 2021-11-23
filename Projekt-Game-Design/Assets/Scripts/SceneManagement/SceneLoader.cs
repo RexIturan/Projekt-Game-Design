@@ -62,6 +62,7 @@ public class SceneLoader : MonoBehaviour {
 		// ReSharper disable once ConditionIsAlwaysTrueOrFalse
 		if ( _gameplayManagerSceneInstance.Scene == null
 		     || !_gameplayManagerSceneInstance.Scene.isLoaded ) {
+			//todo timeout condition??
 			StartCoroutine(ProcessGameplaySceneLoading());
 		}
 		else {
@@ -74,7 +75,7 @@ public class SceneLoader : MonoBehaviour {
 			gameplayScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive);
 
 		while ( _gameplayManagerLoadingOpHandle.Status != AsyncOperationStatus.Succeeded ) {
-			Debug.Log("SceneLoader#ProcessGameplaySceneLoading#WhileLoop Load Gameplay Scene");
+			// Debug.Log("SceneLoader#ProcessGameplaySceneLoading#WhileLoop Load Gameplay Scene");
 			//todo timeout condition??
 			yield return null;
 		}
@@ -104,12 +105,12 @@ public class SceneLoader : MonoBehaviour {
 	/// In both Location and Menu loading, this function takes care of removing previously loaded temporary scenes.
 	/// </summary>
 	private void UnloadPreviousScenes() {
-		Debug.Log("Start unload Previous Scene");
+		Debug.Log("SceneLoader > UnloadPreviousScenes:\nStart unload Previous Scene");
 
 		for ( int i = 0; i < _currentlyLoadedScenes.Length; i++ ) {
 			// Addressables.UnloadSceneAsync(_currentlyLoadedScenes[i].sceneReference.OperationHandle);
 			_currentlyLoadedScenes[i].sceneReference.UnLoadScene().Completed += (handle) => {
-				Debug.Log("unloaded previous scene");
+				Debug.Log("SceneLoader > UnloadPreviousScenes\n unloaded previous scene");
 			};
 		}
 
@@ -120,7 +121,7 @@ public class SceneLoader : MonoBehaviour {
 	/// Kicks off the asynchronous loading of an array of scenes, either menus or Locations.
 	/// </summary>
 	private void LoadNewScenes() {
-		Debug.Log("Start Load New Scene");
+		Debug.Log("SceneLoader > LoadNewScenes:\nStart Load New Scene");
 
 		if ( _showLoadingScreen ) {
 			toggleLoadingScreen.RaiseEvent(true);
@@ -139,9 +140,10 @@ public class SceneLoader : MonoBehaviour {
 	private IEnumerator LoadingProcess() {
 		bool done = _loadingOperationHandles.Count == 0;
 
+		//todo timeout for this function
 		//This while will exit when all scenes requested have been unloaded
 		while ( !done ) {
-			Debug.Log("SceneLoader#LoadingProcess#WhileLoop");
+			// Debug.Log("SceneLoader#LoadingProcess#WhileLoop");
 
 			for ( int i = 0; i < _loadingOperationHandles.Count; ++i ) {
 				if ( _loadingOperationHandles[i].Status != AsyncOperationStatus.Succeeded ) {

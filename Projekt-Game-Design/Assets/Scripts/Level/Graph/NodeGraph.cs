@@ -17,7 +17,7 @@ namespace Graph {
                 height, 
                 cellSize, 
                 originPosition, 
-                (grid, x, y) => new PathNode(grid, x, y), 
+                (grid, x, y) => new PathNode(x, y), 
                 showDebug, 
                 debugTextParent) { }
         

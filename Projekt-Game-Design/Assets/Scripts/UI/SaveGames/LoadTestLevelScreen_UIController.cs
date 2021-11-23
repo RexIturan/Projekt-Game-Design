@@ -5,6 +5,7 @@ using SaveSystem;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Util.Logger;
 
 namespace UI.SaveGames {
     public class LoadTestLevelScreen_UIController : MonoBehaviour {
@@ -32,9 +33,12 @@ namespace UI.SaveGames {
         [SerializeField] private GameSceneSO[] locationsToLoad;  
         
         private SaveManager _saveSystem;
+        //debug
+        private CustomLogger logger;
         
         private void Awake() {
             _saveSystem = GameObject.FindObjectOfType<SaveManager>();
+            logger = new CustomLogger();
             
             var tree = visualTree.CloneTree("LoadTestLevelScreen");
             tree.name = "LoadTestLevelScreen";
@@ -56,6 +60,8 @@ namespace UI.SaveGames {
 
         private void CreateLoadLevelButtons(string[] filenames, ScrollView container) {
 
+	        logger.NewLog("LoadTestLevelScreen_UIController \u27A4 CreateLoadLevelButtons \u27A4 saveSlotButton.clicked");
+	        
 	        List<Button> saveSlotButtons = new List<Button>(); 
 	        List<Label> saveSlotLabels = new List<Label>();
 	        List<TemplateContainer> saveSlots = new List<TemplateContainer>();
@@ -77,17 +83,21 @@ namespace UI.SaveGames {
 		        saveSlotButton.clicked += () => {
 			        //try load savefile
 			        try {
-				        Debug.Log("try level Loaded");
+				        logger.Log("try level Loaded");
+				        logger.PrintDebugLog();
 				        bool levelLoaded = _saveSystem.LoadLevel(filename);
 				        
 				        if ( levelLoaded ) {
-					        Debug.Log("level Loaded");
+					        logger.Log("level Loaded");
+					        logger.PrintDebugLog();
 					        loadLocation.RaiseEvent(locationsToLoad, false, true);
 					        _saveSystem.saveManagerData.inputLoad = true;
 					        _saveSystem.saveManagerData.loaded = true;
 				        }
 			        }
 			        catch ( Exception e ) {
+				        // Debug.Log($"Could not load level: {filename}, with Exeption: {e}");
+				        //todo does this work?
 				        Console.WriteLine($"Could not load level: {filename}, with Exeption: {e}");
 				        throw;
 			        }
