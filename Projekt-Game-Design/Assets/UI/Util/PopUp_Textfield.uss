@@ -1,0 +1,47 @@
+:root {
+    --red: rgb(180, 24, 14);
+    --light-red: rgb(248, 114, 103);
+    --green: rgb(19, 173, 34);
+    --light-green: rgb(116, 255, 127);
+}
+
+.unity-base-text-field__input {
+    margin: 0;
+}
+
+.popup-button {
+    width: 49%;
+    margin: 0;
+}
+
+.popup-button:checked {
+    background-color: white;
+}
+
+/* Button Confirm*/
+
+.button-confirm {
+    background-color: var(--green);
+}
+
+.button-confirm:hover {
+    background-color: var(--light-green);
+}
+
+.button-confirm:focus{
+    border-color: white;
+}
+
+/* Button Cancel */
+
+.button-cancel {
+    background-color: var(--red);
+}
+
+.button-cancel:hover {
+    background-color: var(--light-red);
+}
+
+.button-cancel:focus {
+    border-color: white;
+}
