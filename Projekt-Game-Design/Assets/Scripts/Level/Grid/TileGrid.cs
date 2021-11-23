@@ -17,7 +17,7 @@ namespace Grid {
                 height,
                 cellSize,
                 originPosition,
-                (grid, x, y) => new Tile(grid, x, y),
+                (grid, x, y) => new Tile(x, y),
                 showDebug,
                 debugTextParent) { }
 

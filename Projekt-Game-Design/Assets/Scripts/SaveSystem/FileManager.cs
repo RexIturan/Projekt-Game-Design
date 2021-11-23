@@ -6,6 +6,8 @@ namespace SaveSystem {
 	public static class FileManager {
 
 		private static string numberPattern = " ({0})";
+		private static string fileExtension = ".json";
+		private static string levelDirectory = "level";
 		
 //////////////////////////////////////// Local Functions ///////////////////////////////////////////
 
@@ -14,11 +16,10 @@ namespace SaveSystem {
 			// var streamingAssets = Application.streamingAssetsPath;
 			// var dataAssetPath = Application.dataPath;
 			
-			return Application.streamingAssetsPath;
+			return Path.Combine(Application.streamingAssetsPath, levelDirectory);
 		}
 
 		private static string GetFullFilename(string filename) {
-			var fileExtension = ".json";
 			return String.Concat(filename, fileExtension); 
 		}
 		
@@ -80,6 +81,19 @@ namespace SaveSystem {
 		}
 		
 //////////////////////////////////////// Public Functions //////////////////////////////////////////
+
+		public static string[] GetFileNames() {
+			var directory = GetSaveDirectory();
+			var filesPaths = Directory.GetFiles(directory, $"*{fileExtension}");
+
+			string[] fileNames = new string[filesPaths.Length];
+
+			for ( int i = 0; i < filesPaths.Length; i++ ) {
+				fileNames[i] = Path.GetFileNameWithoutExtension(filesPaths[i]);
+			}
+			
+			return fileNames;
+		}
 
 		public static bool FileExists(string filename) {
 			var fullFilename = GetFullFilename(filename);			

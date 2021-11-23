@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Events.ScriptableObjects;
 using SaveSystem;
 using SceneManagement.ScriptableObjects;
@@ -43,23 +44,56 @@ namespace UI.SaveGames {
             uiDocument.rootVisualElement.Add(tree);
 
             _saveSlotContainer = uiDocument.rootVisualElement.Q<ScrollView>();
+
+            // get save fiels from directory
+            var fileNames = FileManager.GetFileNames();
+            CreateLoadLevelButtons(fileNames, _saveSlotContainer);
             
             if ( _saveSystem != null ) {
 	            GetAllTestSaveFiles();    
             }
         }
 
-        // -------------------------------------
+        private void CreateLoadLevelButtons(string[] filenames, ScrollView container) {
 
-        // LoadTestLevelScreen
-        
-        // event channel LoadLevelAt <path>
-        // string path
-        // VisualElement Scroll View
+	        List<Button> saveSlotButtons = new List<Button>(); 
+	        List<Label> saveSlotLabels = new List<Label>();
+	        List<TemplateContainer> saveSlots = new List<TemplateContainer>();
+	        
+	        foreach (var filename in filenames) {
+		        // Debug.Log(placeholder);
+		        var saveSlot = saveSlotTemplateContainer.CloneTree();
+		        saveSlots.Add(saveSlot);
+		        container.Add(saveSlot);
+                
+		        var saveSlotButton = saveSlot.Q<Button>("SaveSlotButton");
+		        saveSlotButtons.Add(saveSlotButton);
+		        // saveSlotButton.SetEnabled(false);
+                
+		        var saveSlotLabel = saveSlot.Q<Label>("SaveSlotLabel");
+		        saveSlotLabels.Add(saveSlotLabel);
+		        saveSlotLabel.text = filename;
 
-        // [SerializeField] private StringEventChannelSO loadGameFromPath;
-        // [SerializeField] private SaveManagerDataSO saveManagerDataSo;
-        
+		        saveSlotButton.clicked += () => {
+			        //try load savefile
+			        try {
+				        Debug.Log("try level Loaded");
+				        bool levelLoaded = _saveSystem.LoadLevel(filename);
+				        
+				        if ( levelLoaded ) {
+					        Debug.Log("level Loaded");
+					        loadLocation.RaiseEvent(locationsToLoad, false, true);
+					        _saveSystem.saveManagerData.inputLoad = true;
+					        _saveSystem.saveManagerData.loaded = true;
+				        }
+			        }
+			        catch ( Exception e ) {
+				        Console.WriteLine($"Could not load level: {filename}, with Exeption: {e}");
+				        throw;
+			        }
+		        };
+	        }
+        }
         
         public void GetAllTestSaveFiles() {
             
@@ -84,7 +118,6 @@ namespace UI.SaveGames {
                 var saveSlotLabel = saveSlot.Q<Label>("SaveSlotLabel");
                 saveSlotLabels.Add(saveSlotLabel);
                 saveSlotLabel.text = placeholder;
-                
             }
             
             //todo move most of this logic to the savesystem or so

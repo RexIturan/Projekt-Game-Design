@@ -51,16 +51,18 @@ namespace SceneManagement {
 				if ( initializeFromSave ) {
 					// try to load level from save object
 					_saveManager.InitializeLevel();
-					enableLoadingScreenInputEC.RaiseEvent();
+					
+					//todo probably remove loading screen control 
+					// enableLoadingScreenInputEC.RaiseEvent();
 				}
 				else {
 					//todo load empty or default??
 					_saveManager.LoadLevel("");
 					_saveManager.InitializeLevel();
-
+				
 					// enable on Start
 					enableGampleyInputEC.RaiseEvent();
-
+				
 					//todo enable ui after level loaded
 				}
 			}

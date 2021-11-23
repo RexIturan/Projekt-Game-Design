@@ -13,16 +13,13 @@ namespace Grid {
         public int x;
         public int y;
         
-        private GenericGrid1D<Tile> grid;
-        
         public void SetTileType(int id) {
             tileTypeID = id;
             //todo grid ref or not??
             // grid.TriggerGridObjectChanged(x, y);
         }
         
-        public Tile(GenericGrid1D<Tile> grid, int x, int y) {
-            this.grid = grid;
+        public Tile(int x, int y) {
             this.x = x;
             this.y = y;
             name += $" {x}:{y}";

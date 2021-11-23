@@ -40,7 +40,7 @@ namespace SaveSystem {
 		//settings
 		//save manager state: is something loaded and so on
 		public SaveManagerDataSO saveManagerData;
-		[SerializeField] private readonly string defaultLevelFilename = "level\\test_level";
+		[SerializeField] private readonly string defaultLevelFilename = "test_level";
 		[Header("Debug Settings")] [SerializeField]
 		private bool showDebugMessage;
 		

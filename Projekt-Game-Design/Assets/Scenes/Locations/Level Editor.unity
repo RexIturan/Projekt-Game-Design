@@ -941,17 +941,9 @@ PrefabInstance:
       value: Level Editor
       objectReference: {fileID: 0}
     - target: {fileID: 8678411914411512487, guid: e60a11f52d47ed44cadd44ffe24b8f9b, type: 3}
-      propertyPath: mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8678411914411512487, guid: e60a11f52d47ed44cadd44ffe24b8f9b, type: 3}
       propertyPath: drawer
       value: 
       objectReference: {fileID: 297601290}
-    - target: {fileID: 8678411914411512487, guid: e60a11f52d47ed44cadd44ffe24b8f9b, type: 3}
-      propertyPath: setModeEC
-      value: 
-      objectReference: {fileID: 11400000, guid: 9d4a76d0eeb24bf49ae35e7d82abeb87, type: 2}
     - target: {fileID: 8678411914411512487, guid: e60a11f52d47ed44cadd44ffe24b8f9b, type: 3}
       propertyPath: controller
       value: 
