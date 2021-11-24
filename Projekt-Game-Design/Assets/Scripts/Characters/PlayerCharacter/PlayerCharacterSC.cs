@@ -50,7 +50,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     public int healthPoints;
     public int energy;
 
-    public int movementPointsPerEnergy;
+    public int movementPointsPerEnergy; // Standardwert 20
 
     public Vector3Int gridPosition; // within the grid
 
@@ -118,30 +118,45 @@ public class PlayerCharacterSC : MonoBehaviour {
     }
 
     public void Start() {
-        // set position of gameobject    
-        TransformToPosition();
-		// create model
-		GameObject model = Instantiate(playerType.model, transform);
-		// save animation controller
-		animationController = model.GetComponent<CharacterAnimationController>();
+				movementPointsPerEnergy = 20;
+				speed = 5f;
+				facingDirection = 0f;
+				// set position of gameobject    
+				TransformToPosition();
+				// create model
+				GameObject model = Instantiate(playerType.model, transform);
+				// save animation controller
+				animationController = model.GetComponent<CharacterAnimationController>();
     }
 
-	// TODO: !!DEBUG!!
-	[Header("DEBUG: ")]
-	public StanceType stance;
-	public Mesh weaponLeft;
-	public Mesh weaponRight;
-	public WeaponPositionType weaponRightPosition;
-	// !!!!!!!!!!!!
-	public void FixedUpdate() {
+		// TODO: !!DEBUG!!
+		[Header("DEBUG: ")]
+		public float speed; // Standardwert 5
+
+		public float facingDirection;
+		public Vector3 position;
+		public StanceType stance;
+		public Mesh weaponLeft;
+		public Mesh weaponRight;
+		public WeaponPositionType weaponRightPosition;
+		// !!!!!!!!!!!!
+		public void FixedUpdate() {
         timeSinceTransition += Time.fixedDeltaTime;
-		// DEBUG!!!!!!!
-		animationController.TakeStance(stance);
-		animationController.ChangeWeapon(EquipmentType.LEFT, weaponLeft);
-		animationController.ChangeWeapon(EquipmentType.RIGHT, weaponRight);
-		animationController.ChangeWeaponPosition(EquipmentType.RIGHT, weaponRightPosition);
-		// !!!!!!!!!!!
-    }
+				// DEBUG!!!!!!!
+				animationController.TakeStance(stance);
+				animationController.ChangeWeapon(EquipmentType.LEFT, weaponLeft);
+				animationController.ChangeWeapon(EquipmentType.RIGHT, weaponRight);
+				animationController.ChangeWeaponPosition(EquipmentType.RIGHT, weaponRightPosition);
+				// !!!!!!!!!!!
+
+				// Move character to position smoothly 
+				transform.position = Vector3.MoveTowards(transform.position, position, speed * Time.deltaTime);
+
+				// Rotate character to facing position smoothly
+				Quaternion target = Quaternion.Euler(0, facingDirection, 0);
+				float rotationSpeed = 360.0f;
+				transform.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * rotationSpeed);
+		}
 
     void ToggleIsSelected() {
         if (!abilitySelected && !abilityConfirmed)
@@ -159,14 +174,38 @@ public class PlayerCharacterSC : MonoBehaviour {
         }
     }
 
+		public void Update()
+		{
+		}
+
     // transforms the gameobject to it's tile position
     public void TransformToPosition() {
         var pos = gridPosition + globalGridData.GetCellCenter();
         pos *= globalGridData.CellSize;
         pos += globalGridData.OriginPosition;
 
-        gameObject.transform.position = pos;
+        position = pos;
     }
+
+		public void FaceDirection(float direction)
+		{
+				facingDirection = direction;
+		}
+
+		public void FaceMovingDirection()
+		{
+				float minDifference = 0.1f;
+
+				Vector3 movingDirection = position - gameObject.transform.position;
+				if ( movingDirection.magnitude > minDifference )
+				{
+						float angle = Vector3.Angle(new Vector3(0, 0, 1), movingDirection);
+						if ( movingDirection.x < 0 )
+								angle += 180;
+
+						facingDirection = angle;
+				}
+		}
 
     // target Tile
     public void TargetTile(PathNode target) {

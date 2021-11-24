@@ -13,253 +13,2757 @@ MonoBehaviour:
   m_Name: GraphContainer
   m_EditorClassIdentifier: 
   basicMovementGraph:
-  - width: 5
-    height: 7
+  - width: 14
+    height: 14
     cellSize: 1
-    originPosition: {x: -2, y: 0, z: -4}
+    originPosition: {x: -7, y: 0, z: -7}
     grid1DArray:
     - x: 0
       y: 0
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 1
       y: 0
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 2
       y: 0
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 3
       y: 0
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 4
       y: 0
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 0
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
     - x: 0
       y: 1
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 1
       y: 1
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
+      dist: 0
       isWalkable: 0
     - x: 2
       y: 1
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 3
       y: 1
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 4
       y: 1
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 1
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
     - x: 0
       y: 2
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 1
       y: 2
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
+      dist: 0
       isWalkable: 0
     - x: 2
       y: 2
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
+      dist: 0
       isWalkable: 0
     - x: 3
       y: 2
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
+      dist: 0
       isWalkable: 0
     - x: 4
       y: 2
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 2
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
       isWalkable: 0
     - x: 0
       y: 3
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 1
       y: 3
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
+      dist: 0
       isWalkable: 0
     - x: 2
       y: 3
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 3
       y: 3
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 4
       y: 3
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 3
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
     - x: 0
       y: 4
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 1
       y: 4
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 2
       y: 4
       gCost: 0
       hCost: 0
       fCost: 0
       dist: 0
-      isWalkable: 1
+      isWalkable: 0
     - x: 3
       y: 4
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 4
       y: 4
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 4
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
     - x: 0
       y: 5
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 1
       y: 5
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 2
       y: 5
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
+      dist: 0
       isWalkable: 0
     - x: 3
       y: 5
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
+      dist: 0
       isWalkable: 0
     - x: 4
       y: 5
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 5
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
     - x: 0
       y: 6
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 1
       y: 6
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 2
       y: 6
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 3
       y: 6
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
-      isWalkable: 1
+      dist: 0
+      isWalkable: 0
     - x: 4
       y: 6
       gCost: 0
       hCost: 0
       fCost: 0
-      dist: 2147483647
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 6
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 0
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 1
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 2
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 3
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 4
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 7
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 0
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 1
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 2
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 3
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 4
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 8
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 0
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 1
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 2
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 3
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 4
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 9
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 0
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 1
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 2
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 3
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 4
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 10
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 0
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 1
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 2
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 3
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 4
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 11
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 0
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 1
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 2
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 3
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 4
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 12
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 0
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 1
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 2
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 3
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 4
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 5
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 6
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 7
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 8
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 9
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 10
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 11
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 12
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+    - x: 13
+      y: 13
+      gCost: 0
+      hCost: 0
+      fCost: 0
+      dist: 0
+      isWalkable: 0
+  - width: 14
+    height: 14
+    cellSize: 1
+    originPosition: {x: -7, y: 0, z: -7}
+    grid1DArray:
+    - x: 0
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 0
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 1
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 2
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 3
+      gCost: 40
+      hCost: 14
+      fCost: 54
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 3
+      gCost: 30
+      hCost: 24
+      fCost: 54
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 3
+      gCost: 20
+      hCost: 34
+      fCost: 54
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 3
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 4
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 4
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 4
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 4
+      gCost: 40
+      hCost: 0
+      fCost: 40
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 4
+      gCost: 30
+      hCost: 10
+      fCost: 40
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 4
+      gCost: 20
+      hCost: 20
+      fCost: 40
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 4
+      gCost: 10
+      hCost: 30
+      fCost: 40
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 4
+      gCost: 20
+      hCost: 40
+      fCost: 60
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 4
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 4
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 4
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 4
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 4
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 4
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 5
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 5
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 5
+      gCost: 40
+      hCost: 14
+      fCost: 54
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 5
+      gCost: 30
+      hCost: 10
+      fCost: 40
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 5
+      gCost: 20
+      hCost: 14
+      fCost: 34
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 5
+      gCost: 10
+      hCost: 24
+      fCost: 34
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 5
+      gCost: 0
+      hCost: 34
+      fCost: 34
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 5
+      gCost: 10
+      hCost: 44
+      fCost: 54
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 5
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 5
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 5
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 5
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 5
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 5
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 6
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 6
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 6
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 6
+      gCost: 40
+      hCost: 20
+      fCost: 60
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 6
+      gCost: 30
+      hCost: 24
+      fCost: 54
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 6
+      gCost: 20
+      hCost: 28
+      fCost: 48
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 6
+      gCost: 10
+      hCost: 38
+      fCost: 48
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 6
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 6
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 6
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 6
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 6
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 6
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 6
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 7
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 8
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 9
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 10
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 11
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 12
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 0
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 1
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 2
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 3
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 4
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 5
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 6
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 7
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 8
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 9
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 10
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 11
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 12
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
+      isWalkable: 1
+    - x: 13
+      y: 13
+      gCost: 2147483647
+      hCost: 2147483647
+      fCost: -2
+      dist: 0
       isWalkable: 1

@@ -17,7 +17,7 @@ public class MoveToTargetSO : StateActionSO
 
 public class MoveToTarget : StateAction
 {
-    private const float TimePerStep = 0.2f;
+    private float TimePerStep;
 
     protected new MoveToTargetSO OriginSO => (MoveToTargetSO)base.OriginSO;
     
@@ -35,23 +35,28 @@ public class MoveToTarget : StateAction
     public override void Awake(StateMachine stateMachine)
     {
         _playerCharacterSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+				TimePerStep = _playerCharacterSC.globalGridData.cellSize / _playerCharacterSC.speed;
     }
     
     public override void OnUpdate()
-    {
-        if(_currentStep >= _path.Count)
+		{
+				if (_currentStep >= _path.Count && _timeSinceLastStep >= TimePerStep )
             _playerCharacterSC.movementDone = true;
 
         if (!_playerCharacterSC.movementDone)
-        {
-            _timeSinceLastStep += Time.deltaTime;
-            if (_timeSinceLastStep >= TimePerStep)
+				{
+						_playerCharacterSC.FaceMovingDirection();
+
+						_timeSinceLastStep += Time.deltaTime;
+
+            if (_timeSinceLastStep >= TimePerStep && _currentStep < _path.Count )
             {
                 _timeSinceLastStep -= TimePerStep;
-
-                _playerCharacterSC.gridPosition = new Vector3Int(_path[_currentStep].x,
+								
+								_playerCharacterSC.gridPosition = new Vector3Int(_path[_currentStep].x,
                                                        1,
                                                        _path[_currentStep].y);
+
                 _playerCharacterSC.TransformToPosition();
                 
                 _currentStep++;

@@ -26,7 +26,10 @@ public class P_TriggerAnimation_OnEnter : StateAction {
     }
 
     public override void OnStateEnter() {
-		CharacterAnimationController controller = player.GetAnimationController();
-		// controller.PlayAnimation(animation);
+			CharacterAnimationController controller = player.GetAnimationController();
+				if ( controller )
+						controller.PlayAnimation(animation);
+				else
+						Debug.Log("Couldn't play animation. Animation controller not found. ");
     }
 }
