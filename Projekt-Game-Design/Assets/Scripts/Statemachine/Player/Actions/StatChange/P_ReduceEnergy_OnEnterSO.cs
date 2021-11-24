@@ -4,20 +4,20 @@ using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
 namespace Characters.PlayerCharacter.StateMachine.Actions {
-	[CreateAssetMenu(fileName = "ReduceEnergy_player", menuName = "State Machines/Actions/Reduce Energy_player")]
-	public class ReduceEnergy_PlayerSO : StateActionSO
+	[CreateAssetMenu(fileName = "p_ReduceEnergy_OnEnter", menuName = "State Machines/Actions/Player/Reduce Energy")]
+	public class P_ReduceEnergy_OnEnterSO : StateActionSO
 	{
 		[SerializeField] private AbilityContainerSO abilityContainer;
-		public override StateAction CreateAction() => new ReduceEnergy_Player(abilityContainer);
+		public override StateAction CreateAction() => new P_ReduceEnergy_OnEnter(abilityContainer);
 	}
 
-	public class ReduceEnergy_Player : StateAction
+	public class P_ReduceEnergy_OnEnter : StateAction
 	{
-		protected new ReduceEnergy_PlayerSO OriginSO => (ReduceEnergy_PlayerSO)base.OriginSO;
+		protected new P_ReduceEnergy_OnEnterSO OriginSO => ( P_ReduceEnergy_OnEnterSO )base.OriginSO;
 		private PlayerCharacterSC _playerCharacterSC;
 		private readonly AbilityContainerSO _abilityContainer;
 
-		public ReduceEnergy_Player(AbilityContainerSO abilityContainer) {
+		public P_ReduceEnergy_OnEnter(AbilityContainerSO abilityContainer) {
 			this._abilityContainer = abilityContainer;
 		}
 	
