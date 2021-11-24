@@ -50,7 +50,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     public int healthPoints;
     public int energy;
 
-    public int movementPointsPerEnergy;
+    public int movementPointsPerEnergy; // Standardwert 20
 
     public Vector3Int gridPosition; // within the grid
 
@@ -118,12 +118,13 @@ public class PlayerCharacterSC : MonoBehaviour {
     }
 
     public void Start() {
-        // set position of gameobject    
-        TransformToPosition();
-		// create model
-		GameObject model = Instantiate(playerType.model, transform);
-		// save animation controller
-		animationController = model.GetComponent<CharacterAnimationController>();
+				movementPointsPerEnergy = 20;
+				// set position of gameobject    
+				TransformToPosition();
+				// create model
+				GameObject model = Instantiate(playerType.model, transform);
+				// save animation controller
+				animationController = model.GetComponent<CharacterAnimationController>();
     }
 
 	// TODO: !!DEBUG!!

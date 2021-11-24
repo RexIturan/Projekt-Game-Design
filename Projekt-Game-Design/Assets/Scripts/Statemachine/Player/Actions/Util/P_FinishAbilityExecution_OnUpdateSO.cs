@@ -2,15 +2,15 @@
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "FinishAbilityExecution_player", menuName = "State Machines/Actions/Finish Ability Execution _player")]
-public class FinishAbilityExecution_PlayerSO : StateActionSO
+[CreateAssetMenu(fileName = "P_FinishAbilityExecution_OnUpdate", menuName = "State Machines/Actions/Player/Finish Ability Execution")]
+public class P_FinishAbilityExecution_OnUpdateSO : StateActionSO
 {
-	public override StateAction CreateAction() => new FinishAbilityExecution_Player();
+	public override StateAction CreateAction() => new P_FinishAbilityExecution_OnUpdate();
 }
 
-public class FinishAbilityExecution_Player : StateAction
+public class P_FinishAbilityExecution_OnUpdate : StateAction
 {
-	protected new FinishAbilityExecution_PlayerSO OriginSO => (FinishAbilityExecution_PlayerSO)base.OriginSO;
+	protected new P_FinishAbilityExecution_OnUpdateSO OriginSO => ( P_FinishAbilityExecution_OnUpdateSO )base.OriginSO;
 
 	private PlayerCharacterSC _playerStateContainer;
 

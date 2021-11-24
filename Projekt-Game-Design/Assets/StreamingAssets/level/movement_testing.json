@@ -9,7 +9,18 @@
             "z": -7.0
         }
     },
-    "players": [],
+    "players": [
+      {
+            "plyerTypeId": 1,
+            "plyerSpawnDataId": 0,
+            "equipmentInventoryId": 0,
+            "pos": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+      }
+],
     "enemies": [],
     "inventory": {
         "size": 3,
