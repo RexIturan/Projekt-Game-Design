@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   icon: {fileID: 0}
-  prefab: {fileID: 0}
+  model: {fileID: -1036429920017294146, guid: a210b4a745a4788488325667ef1bfc7c, type: 3}
   goldValue: 50
   rarity: 4
   type: 5

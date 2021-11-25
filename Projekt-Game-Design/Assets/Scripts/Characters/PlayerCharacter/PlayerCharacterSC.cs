@@ -20,6 +20,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     [Header("SO Reference")]
     public InputReader input;
     public GridDataSO globalGridData;
+		public EquipmentContainerSO equipmentContainer;
 
     [Header("Basic Stats")]
     // Base stats
@@ -64,11 +65,11 @@ public class PlayerCharacterSC : MonoBehaviour {
         set => energy = value;
     }
 
-    [Header("Equipment")]
-    // the equipped item offers a list of actions to take
-    public ItemSO item;
+		[Header("Equipment")]
+		public int equipmentID;
 
-    [Header("Abilities")] [SerializeField] private AbilitySO[] abilities;
+    [Header("Abilities")]
+		[SerializeField] private AbilitySO[] abilities;
     [SerializeField] private int abilityID;
 
     public AbilitySO[] Abilities => abilities;
@@ -78,10 +79,11 @@ public class PlayerCharacterSC : MonoBehaviour {
         set => abilityID = value;
     }
 
-	// for playing animations
-	private CharacterAnimationController animationController;
+		// for playing animations
+		public float movementSpeed; // Standardwert 5
+		private CharacterAnimationController animationController;
 
-	public CharacterAnimationController GetAnimationController() { return animationController; }
+	  public CharacterAnimationController GetAnimationController() { return animationController; }
 
     // Statemachine
     //
@@ -119,7 +121,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 
     public void Start() {
 				movementPointsPerEnergy = 20;
-				speed = 5f;
+				movementSpeed = 5f;
 				facingDirection = 0f;
 				// set position of gameobject    
 				TransformToPosition();
@@ -131,26 +133,22 @@ public class PlayerCharacterSC : MonoBehaviour {
 
 		// TODO: !!DEBUG!!
 		[Header("DEBUG: ")]
-		public float speed; // Standardwert 5
 
 		public float facingDirection;
 		public Vector3 position;
 		public StanceType stance;
-		public Mesh weaponLeft;
-		public Mesh weaponRight;
 		public WeaponPositionType weaponRightPosition;
 		// !!!!!!!!!!!!
 		public void FixedUpdate() {
         timeSinceTransition += Time.fixedDeltaTime;
 				// DEBUG!!!!!!!
 				animationController.TakeStance(stance);
-				animationController.ChangeWeapon(EquipmentType.LEFT, weaponLeft);
-				animationController.ChangeWeapon(EquipmentType.RIGHT, weaponRight);
+				RefreshEquipment();
 				animationController.ChangeWeaponPosition(EquipmentType.RIGHT, weaponRightPosition);
 				// !!!!!!!!!!!
 
 				// Move character to position smoothly 
-				transform.position = Vector3.MoveTowards(transform.position, position, speed * Time.deltaTime);
+				transform.position = Vector3.MoveTowards(transform.position, position, movementSpeed * Time.deltaTime);
 
 				// Rotate character to facing position smoothly
 				Quaternion target = Quaternion.Euler(0, facingDirection, 0);
@@ -231,12 +229,14 @@ public class PlayerCharacterSC : MonoBehaviour {
     public void RefreshAbilities()
     {
         List<AbilitySO> currentAbilities = new List<AbilitySO>(playerType.basicAbilities);
-        if (item is { }) {
-            foreach(AbilitySO ability in item.abilities)
-                if(!currentAbilities.Contains(ability))
-                    currentAbilities.Add(ability);    
-        }
-
+				
+				// abilities from items
+				foreach ( ItemSO item in equipmentContainer.GetEquippedItems(equipmentID) ) {
+					foreach ( AbilitySO ability in item.abilities )
+						if ( !currentAbilities.Contains(ability) )
+							currentAbilities.Add(ability);
+				}
+				
         abilities = currentAbilities.ToArray();
     }
 
@@ -252,7 +252,15 @@ public class PlayerCharacterSC : MonoBehaviour {
         RefreshEquipment();
     }
 
-    private void RefreshEquipment() {
-        Debug.Log("!!!!!!!!!!!!!! Implement ME !!!!!!!!!!!!!!!!!");
-    }
+		private void RefreshEquipment() {
+				List<ItemSO> items = equipmentContainer.GetEquippedItems(equipmentID);
+
+				// change models
+				//
+				if ( animationController )
+				{
+						animationController.ChangeWeapon(EquipmentType.LEFT, items[Equipment.GetListIDLeft()].model);
+						animationController.ChangeWeapon(EquipmentType.RIGHT, items[Equipment.GetListIDRight()].model);
+				}
+		}
 }

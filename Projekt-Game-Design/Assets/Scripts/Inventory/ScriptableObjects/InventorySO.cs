@@ -3,10 +3,21 @@ using UnityEngine;
 
 /// <summary>
 /// InventorySO
-/// Has a List of Items
+/// All items a player has (all equipped and all not equipped items in possession)
 /// </summary>
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventorySO : ScriptableObject
 {
-    public List<ItemSO> inventory = new List<ItemSO>();
+		[SerializeField] private ItemContainerSO itemContainer;
+    public List<int> itemIDs = new List<int>();
+
+		public ItemSO GetItem(int idInInventory) {
+				if(idInInventory >= 0 && idInInventory < itemIDs.Count)
+					return itemContainer.itemList[idInInventory];
+				else
+				{
+						Debug.LogError("Item not in Player Inventory. ID: " + idInInventory);
+						return null;
+				}
+		}
 }

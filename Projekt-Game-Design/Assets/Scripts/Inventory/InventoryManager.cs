@@ -6,7 +6,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour {
 	[SerializeField] private InventorySO playerInventory;
 
-	[SerializeField] private EquipmentInventoryContainerSO equipmentInventory;
+	[SerializeField] private EquipmentContainerSO equipmentInventory;
 
 	[Header("Sending Events On")] [SerializeField]
 	private IntEventChannelSO onItemPickupEventChannel;
@@ -43,15 +43,15 @@ public class InventoryManager : MonoBehaviour {
 	// TODO needs event channels that add, remove items from a inventory
 	
 	// todo Add item to Inventory(ItemSO item, InventorySO inventory)
-	private void AddItemToPlayerInventory(ItemSO item) {
-		playerInventory.inventory.Add(item);
-		onItemPickupEventChannel.RaiseEvent(item.id);
+	private void AddItemToPlayerInventory(int itemID) {
+		playerInventory.itemIDs.Add(itemID);
+		onItemPickupEventChannel.RaiseEvent(itemID);
 	}
 
 	// todo rename -> remove item from Player inventory
-	private void DeleteItemInPlayerInventory(ItemSO item) {
-		playerInventory.inventory.Remove(item);
-		onItemDropEventChannel.RaiseEvent(item.id);
+	private void DeleteItemInPlayerInventory(int itemID) {
+		playerInventory.itemIDs.Remove(itemID);
+		onItemDropEventChannel.RaiseEvent(itemID);
 	}
 
 	#endregion
@@ -73,26 +73,26 @@ public class InventoryManager : MonoBehaviour {
 		}
 	}
 
-	private void HandleItemTransactionToInventory(int itemId, int playerId) {
-		ItemSO item = equipmentInventory.inventories[playerId].inventory
-			.Find(x => x.id.Equals(itemId));
-		equipmentInventory.inventories[playerId].inventory.Remove(item);
-		playerInventory.inventory.Add(item);
+	private void HandleItemTransactionToInventory(int itemID, int playerId) {
+		// TODO: work this out
+		// equipmentInventory.inventories[playerId].inventory.Remove(itemID);
+		// playerInventory.itemIDs.Add(itemID);
 	}
 
-	private void HandleItemTransaktionToEquipment(int itemId, int playerId) {
-		ItemSO item = playerInventory.inventory.Find(x => x.id.Equals(itemId));
-		playerInventory.inventory.Remove(item);
-		equipmentInventory.inventories[playerId].inventory.Add(item);
+	private void HandleItemTransaktionToEquipment(int itemID, int playerId) {
+				// TODO: work this out
+				playerInventory.itemIDs.Remove(itemID);
+		// equipmentInventory.inventories[playerId].inventory.Add(itemID);
 	}
 
 	private void ChangeOverlayByItemType(ItemType itemType) {
 		List<int> list = new List<int>();
-		foreach ( var item in playerInventory.inventory.FindAll(x => ( x.type & itemType ) != 0) ) {
-			list.Add(item.id);
+				// TODO: work this out
+				//foreach ( var item in playerInventory.FindAll(x => ( x.type & itemType ) != 0) ) {
+			//list.Add(item.id);
 			//Debug.Log("Führe Initialisierung für Item Nummer: " + item.id);
 			//OnItemPickupEventChannel.RaiseEvent(item.id);
-		}
+		//}
 
 		inventoryChanged_EC.RaiseEvent(list);
 	}
@@ -100,11 +100,11 @@ public class InventoryManager : MonoBehaviour {
 	private void InitializeEquipmentInventory() {
 		List<int> list = new List<int>();
 		//TODO Für alle Spieler einbauen
-		foreach ( var item in equipmentInventory.inventories[0].inventory ) {
-			list.Add(item.id);
+		//foreach ( var item in equipmentInventory.inventories[0].inventory ) {
+			//list.Add(item.id);
 			//Debug.Log("Führe Initialisierung für Item Nummer: " + item.id);
 			//OnItemPickupEventChannel.RaiseEvent(item.id);
-		}
+		//}
 
 		equipmentChanged_EC.RaiseEvent(list);
 	}
