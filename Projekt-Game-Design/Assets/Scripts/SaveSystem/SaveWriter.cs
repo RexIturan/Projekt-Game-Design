@@ -93,12 +93,12 @@ namespace SaveSystem {
 
 			foreach ( var equipment in equipmentInventoryContainerSo.inventories ) {
 				var equiped = new List<int>();
-				foreach ( var itemID in equipment.equipmentToList() ) {
+				foreach ( var itemID in equipment.items) {
 					equiped.Add(itemID);
 				}
 
 				equipmentInventorys.Add(new Inventory_Save() {
-					size = equipment.equipmentToList().Capacity,
+					size = equipment.items.Capacity,
 					itemIds = equiped
 				});
 			}

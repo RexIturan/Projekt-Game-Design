@@ -60,8 +60,11 @@ namespace SaveSystem {
 			
 			foreach (var equipmentInventory in saveEquipmentInventory) {
 				Equipment equipment = new Equipment();
-				equipment.saveFromList(equipmentInventory.itemIds);
-
+				for(int i = 0; i < equipment.items.Count && i < equipmentInventory.itemIds.Count; i++)
+				{
+					equipment.items[i] = equipmentInventory.itemIds[i];
+				}
+									
 				equipmentContainer.inventories.Add(equipment);
 			}
 		}

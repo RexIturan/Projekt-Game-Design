@@ -4,22 +4,22 @@ using Events.ScriptableObjects;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour {
+	[SerializeField] private ItemContainerSO itemContainer;
 	[SerializeField] private InventorySO playerInventory;
+	[SerializeField] private EquipmentContainerSO equipmentContainer;
 
-	[SerializeField] private EquipmentContainerSO equipmentInventory;
-
-	[Header("Sending Events On")] [SerializeField]
-	private IntEventChannelSO onItemPickupEventChannel;
+	[Header("Sending Events On")]
+	[SerializeField] private IntEventChannelSO onItemPickupEventChannel;
 
 	[SerializeField] private IntEventChannelSO onItemDropEventChannel;
 	[SerializeField] private IntListEventChannelSO inventoryChanged_EC;
 	[SerializeField] private IntListEventChannelSO equipmentChanged_EC;
 
-	[Header("Receiving Events On")] [SerializeField]
-	private InventoryTabEventChannelSO inventoryTabChanged;
+	[Header("Receiving Events On")]
+	[SerializeField] private InventoryTabEventChannelSO inventoryTabChanged;
 
-	[SerializeField] private IntIntToEquipmentEventChannelSO toEquipmentEventChannel;
-	[SerializeField] private IntIntToInventoryEventChannelSO toInventoryEventChannel;
+	[SerializeField] private IntIntEquipmentPositionToEquipmentEventChannelSO toEquipmentEventChannel;
+	[SerializeField] private IntEquipmentPositionToInventoryEventChannelSO toInventoryEventChannel;
 
 	private void Awake() {
 		inventoryTabChanged.OnEventRaised += AddItemsToPlayerOverlay;
@@ -45,18 +45,21 @@ public class InventoryManager : MonoBehaviour {
 	// todo Add item to Inventory(ItemSO item, InventorySO inventory)
 	private void AddItemToPlayerInventory(int itemID) {
 		playerInventory.itemIDs.Add(itemID);
+		playerInventory.equipmentID.Add(-1);
 		onItemPickupEventChannel.RaiseEvent(itemID);
 	}
 
 	// todo rename -> remove item from Player inventory
 	private void DeleteItemInPlayerInventory(int itemID) {
-		playerInventory.itemIDs.Remove(itemID);
+		playerInventory.equipmentID.RemoveAt(itemID);
+		playerInventory.itemIDs.RemoveAt(itemID);
 		onItemDropEventChannel.RaiseEvent(itemID);
 	}
 
 	#endregion
 
 	private void AddItemsToPlayerOverlay(InventoryUIController.InventoryTab tab) {
+			/*
 		switch ( tab ) {
 			case InventoryUIController.InventoryTab.None:
 			case InventoryUIController.InventoryTab.Items:
@@ -71,21 +74,23 @@ public class InventoryManager : MonoBehaviour {
 			default:
 				throw new ArgumentOutOfRangeException(nameof(tab), tab, "AddItemsToPlayerOverlay");
 		}
+		*/
 	}
 
-	private void HandleItemTransactionToInventory(int itemID, int playerId) {
-		// TODO: work this out
-		// equipmentInventory.inventories[playerId].inventory.Remove(itemID);
-		// playerInventory.itemIDs.Add(itemID);
+	private void HandleItemTransactionToInventory(int playerId, EquipmentPosition pos) {
+				// set the player id of the once equipped item in the inventory to -1
+				playerInventory.equipmentID[equipmentContainer.inventories[playerId].items[(int) pos]] = -1;
+				// unequip item
+				equipmentContainer.inventories[playerId].items[(int) pos] = -1;
 	}
 
-	private void HandleItemTransaktionToEquipment(int itemID, int playerId) {
-				// TODO: work this out
-				playerInventory.itemIDs.Remove(itemID);
-		// equipmentInventory.inventories[playerId].inventory.Add(itemID);
+	private void HandleItemTransaktionToEquipment(int itemID, int playerID, EquipmentPosition pos) {
+		playerInventory.equipmentID[itemID] = playerID;
+		equipmentContainer.inventories[playerID].items[(int) pos] = itemID;
 	}
 
 	private void ChangeOverlayByItemType(ItemType itemType) {
+				/*
 		List<int> list = new List<int>();
 				// TODO: work this out
 				//foreach ( var item in playerInventory.FindAll(x => ( x.type & itemType ) != 0) ) {
@@ -95,9 +100,19 @@ public class InventoryManager : MonoBehaviour {
 		//}
 
 		inventoryChanged_EC.RaiseEvent(list);
+		*/
 	}
 
-	private void InitializeEquipmentInventory() {
+		private void InitializeEquipmentInventory() {
+				CharacterList characterList = FindObjectOfType<CharacterList>();
+				if ( characterList ) {
+						equipmentContainer.inventories = new List<Equipment>();
+						foreach ( GameObject player in characterList.playerContainer)
+						{
+								equipmentContainer.inventories.Add(new Equipment());
+						}
+				}
+		/*
 		List<int> list = new List<int>();
 		//TODO Für alle Spieler einbauen
 		//foreach ( var item in equipmentInventory.inventories[0].inventory ) {
@@ -107,5 +122,6 @@ public class InventoryManager : MonoBehaviour {
 		//}
 
 		equipmentChanged_EC.RaiseEvent(list);
+		*/
 	}
 }

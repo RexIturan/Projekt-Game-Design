@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Characters.ScriptableObjects;
 using Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,6 +11,8 @@ public class InventoryUIController : MonoBehaviour {
     public List<InventorySlot> equipmentInventoryItems = new List<InventorySlot>();
 
     public ItemContainerSO itemContainer;
+		[SerializeField] private InventorySO inventory;
+		private CharacterList characterList;
 
     private static ItemContainerSO _staticItemContainer;
 
@@ -23,8 +26,11 @@ public class InventoryUIController : MonoBehaviour {
     // Für das EquipmentInventar
     private VisualElement _equipmentInventoryContainer;
 
-    // Fuer den PlayerView Container
-    private VisualElement _playerViewContainer;
+		// for images of all players to switch between them
+		private VisualElement _playerContainer;
+
+		// Fuer den PlayerView Container
+		private VisualElement _playerViewContainer;
 
     // Für das Ghost Icon
     private static VisualElement _ghostIcon;
@@ -34,11 +40,7 @@ public class InventoryUIController : MonoBehaviour {
     private static bool _isDragging;
     private static InventorySlot _originalSlot;
 
-    // Der aktuell ausgewählte Spieler im Inventar
-    private PlayerCharacterSC _selectedPlayer;
-
     private static int _currentPlayerSelected = 0;
-    [SerializeField] private CharacterList characterList;
     
     
     [Header("Receiving Events On")] 
@@ -52,8 +54,8 @@ public class InventoryUIController : MonoBehaviour {
     [SerializeField] private GameObjEventChannelSO playerDeselectedEC;
     [SerializeField] private GameObjActionEventChannelSO playerSelectedEC;
 
-    [Header("Sending and Receiving Events On")] [SerializeField]
-    private BoolEventChannelSO visibilityGameOverlayEventChannel;
+    [Header("Sending and Receiving Events On")]
+		[SerializeField] private BoolEventChannelSO visibilityGameOverlayEventChannel;
 
     [Header("Sending Events On")]
     // Inputchannel für das Inventar
@@ -61,8 +63,8 @@ public class InventoryUIController : MonoBehaviour {
     [SerializeField] private InventoryTabEventChannelSO changeInventoryTab;
 
     // OutputChannel zwischen den Inventaren
-    [SerializeField] private IntIntToEquipmentEventChannelSO toEquipmentEventChannel;
-    [SerializeField] private IntIntToInventoryEventChannelSO toInventoryEventChannel;
+    [SerializeField] private IntIntEquipmentPositionToEquipmentEventChannelSO toEquipmentEventChannel;
+    [SerializeField] private IntEquipmentPositionToInventoryEventChannelSO toInventoryEventChannel;
 
     //Für das Inventar
     public enum InventoryTab {
@@ -73,23 +75,21 @@ public class InventoryUIController : MonoBehaviour {
     }
 
     private void Awake() {
-        // Holen des UXML Trees, zum getten der einzelnen Komponenten
-        var root = GetComponent<UIDocument>().rootVisualElement;
         //Store the root from the UI Document component
-        root = GetComponent<UIDocument>().rootVisualElement;
+        var root = GetComponent<UIDocument>().rootVisualElement;
         _inventoryContainer = root.Q<VisualElement>("InventoryOverlay");
         _equipmentInventoryContainer = root.Q<VisualElement>("PlayerEquipmentInventory");
         _ghostIcon = root.Query<VisualElement>("GhostIcon");
+				_playerContainer = root.Query<VisualElement>("PlayerContainer");
         _playerViewContainer = _inventoryContainer.Q<VisualElement>("PlayerViewContainer");
+				_inventorySlotContainer = root.Q<VisualElement>("InventoryContent");
 
-        // Lifehack
-        _staticItemContainer = itemContainer;
+				// Lifehack
+				_staticItemContainer = itemContainer;
 
-        //Search the root for the SlotContainer Visual Element
-        _inventorySlotContainer = root.Q<VisualElement>("InventoryContent");
         visibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
         visibilityInventoryEventChannel.OnEventRaised += HandleInventoryOverlay;
-        visibilityGameOverlayEventChannel.OnEventRaised += HandleOtherScreensOpened;
+				visibilityGameOverlayEventChannel.OnEventRaised += HandleOtherScreensOpened;
         onItemPickupEventChannel.OnEventRaised += HandleItemPickup;
         onItemDropEventChannel.OnEventRaised += HandleItemDrop;
         inventoryChanged_EC.OnEventRaised += HandleTabChanged;
@@ -112,20 +112,9 @@ public class InventoryUIController : MonoBehaviour {
         if (characterList == null) {
             characterList = FindObjectOfType<CharacterList>();    
         }
-
-        // BUG adakdlkah
-        if (characterList.playerContainer?.Count > 0) {
-            _selectedPlayer = characterList.playerContainer[0]?.GetComponent<PlayerCharacterSC>();    
-        }
-        else {
-            _selectedPlayer = null;
-        }
-
-        playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
-        playerSelectedEC.OnEventRaised += HandlePlayerSelected;
     }
 
-    private void InitializeInventory() {
+		private void InitializeInventory() {
         //Create InventorySlots and add them as children to the SlotContainer
         for (int i = 0; i < inventoryItemQuantity; i++) {
             InventorySlot item =
@@ -137,33 +126,110 @@ public class InventoryUIController : MonoBehaviour {
         }
     }
 
-    private void InitializeEquipmentInventory() {
-        // Hinzufügen der Item Slots für das Equipment Menü
-        // Muss nicht dynamisch generiert werden, wird nur der Liste hinzugefügt
-        equipmentInventoryItems.Add(
-            _equipmentInventoryContainer.Q<InventorySlot>("HelmetEquipment1"));
+		private void InitializeEquipmentInventory() {
+				// Hinzufügen der Item Slots für das Equipment Menü
+				// Muss nicht dynamisch generiert werden, wird nur der Liste hinzugefügt
+
+				InventorySlot weaponLeft = _equipmentInventoryContainer.Q<InventorySlot>("WeaponLeft");
+				weaponLeft.userData = EquipmentPosition.LEFT;
+				equipmentInventoryItems.Add(weaponLeft);
+
+				InventorySlot weaponRight = _equipmentInventoryContainer.Q<InventorySlot>("WeaponRight");
+				weaponRight.userData = EquipmentPosition.RIGHT;
+				equipmentInventoryItems.Add(weaponRight);
+
+				/*
+        equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("HelmetEquipment1"));
         equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("HeadEquipment1"));
         equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("BodyEquipment1"));
         equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("BodyEquipment2"));
         equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("BodyEquipment3"));
         equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("LegEquipment1"));
         equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("FeetEquipment1"));
-    }
+				*/
+		}
 
     void ResetAllTabs() {
+
+				/*
         _inventoryContainer.Q<Button>("Tab1").RemoveFromClassList("ClickedTab");
         _inventoryContainer.Q<Button>("Tab2").RemoveFromClassList("ClickedTab");
         _inventoryContainer.Q<Button>("Tab3").RemoveFromClassList("ClickedTab");
         _inventoryContainer.Q<Button>("Tab4").RemoveFromClassList("ClickedTab");
         _inventoryContainer.Q<Button>("Tab5").RemoveFromClassList("ClickedTab");
 
-
         _inventoryContainer.Q<Button>("Tab1").AddToClassList("UnclickedTab");
         _inventoryContainer.Q<Button>("Tab2").AddToClassList("UnclickedTab");
         _inventoryContainer.Q<Button>("Tab3").AddToClassList("UnclickedTab");
         _inventoryContainer.Q<Button>("Tab4").AddToClassList("UnclickedTab");
         _inventoryContainer.Q<Button>("Tab5").AddToClassList("UnclickedTab");
+				*/
     }
+
+		/**
+		 * takes all items within the Inventory that are not equipped
+		 * and updates the respective InventorySlots
+		 */
+		public void UpdateInventorySlots()
+		{
+				CleanAllItemSlots();
+
+				int slotIdx = 0;
+				for(int inventoryIdx = 0; inventoryIdx < inventory.itemIDs.Count; inventoryIdx++)
+				{
+						// if item not equipped, display it in ItemSlot Container
+						if(inventoryIdx >= inventory.equipmentID.Count || inventory.equipmentID[inventoryIdx] < 0)
+						{
+								if ( slotIdx < inventoryItems.Count )
+								{
+										inventoryItems[slotIdx].HoldItem(itemContainer.itemList[inventory.itemIDs[inventoryIdx]]);
+										slotIdx++;
+								}
+								else
+										Debug.LogError("Too many items for Inventory UI to display. Item count: " + slotIdx + ", slots in UI: " + inventoryItems.Count);
+						}
+				}
+		}
+
+		public void UpdatePlayerContainer()
+		{
+				_playerContainer.Clear();
+				for(int i = 0; i < characterList.playerContainer.Count; i++) 
+				{
+						GameObject playerCharacter = characterList.playerContainer[i];
+						PlayerCharacterSC playerSC = playerCharacter.GetComponent<PlayerCharacterSC>();
+						if(playerSC)
+						{
+								Debug.Log("Adding player to Character List. ");
+								Image playerIcon = new Image();
+								playerIcon.image = playerSC.playerType.profilePicture.texture;
+								playerIcon.AddToClassList("PlayerContainer");
+								_playerContainer.Add(playerIcon);
+						}
+				}
+		}
+
+		public void UpdateEquipmentContainer()
+		{
+				InventorySlot weaponLeft = _equipmentInventoryContainer.Q<InventorySlot>("WeaponLeft");
+				InventorySlot weaponRight = _equipmentInventoryContainer.Q<InventorySlot>("WeaponRight");
+
+				PlayerCharacterSC currPlayer = characterList.playerContainer[_currentPlayerSelected].GetComponent<PlayerCharacterSC>();
+
+				Equipment equipment = currPlayer.equipmentContainer.inventories[currPlayer.equipmentID];
+
+				if ( equipment.items[(int) EquipmentPosition.LEFT] >= 0)
+				{
+						ItemSO itemLeft = inventory.GetItem(equipment.items[( int )EquipmentPosition.LEFT]);
+						weaponLeft.HoldItem(itemLeft);
+				}
+
+				if ( equipment.items[( int )EquipmentPosition.RIGHT] >= 0 )
+				{
+						ItemSO itemRight = inventory.GetItem(equipment.items[( int )EquipmentPosition.RIGHT]);
+						weaponLeft.HoldItem(itemRight);
+				}
+		}
 
     void InventoryManager(InventoryTab tab, Button button) {
         ResetAllTabs();
@@ -187,10 +253,13 @@ public class InventoryUIController : MonoBehaviour {
     // TODO: copied from OverlayUIController
     //
     private void RefreshPlayerViewContainer() {
-        //VisualElement manaBar = PlayerViewContainer.Q<VisualElement>("ProgressBarManaOverlay");
-        VisualElement healthBar = _playerViewContainer.Q<VisualElement>("ProgressBarHealthOverlay");
-        VisualElement abilityBar =
-            _playerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
+				Debug.Log("Player selected: " + _currentPlayerSelected);
+				Debug.Log("Character List: " + characterList.playerContainer.Count);
+				PlayerCharacterSC _selectedPlayer = characterList.playerContainer[_currentPlayerSelected].GetComponent<PlayerCharacterSC>();
+
+				//VisualElement manaBar = PlayerViewContainer.Q<VisualElement>("ProgressBarManaOverlay");
+				VisualElement healthBar = _playerViewContainer.Q<VisualElement>("ProgressBarHealthOverlay");
+        VisualElement abilityBar = _playerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
 
         CharacterStats playerStats = _selectedPlayer.CurrentStats;
 
@@ -221,18 +290,6 @@ public class InventoryUIController : MonoBehaviour {
         _playerViewContainer.Q<Label>("LevelLabel").text = _selectedPlayer.level.ToString();
     }
 
-    // refresh menu and select
-    private void HandlePlayerSelected(GameObject player, Action<int> callback) {
-        _selectedPlayer = player.GetComponent<PlayerCharacterSC>();
-        RefreshPlayerViewContainer();
-    }
-
-    // refresh menu and select first in container
-    private void HandlePlayerDeselected(GameObject player) {
-        _selectedPlayer = characterList.playerContainer[0].GetComponent<PlayerCharacterSC>();
-        RefreshPlayerViewContainer();
-    }
-
     void HandleItemTabPressed() {
         InventoryManager(InventoryTab.Items, _inventoryContainer.Q<Button>("Tab1"));
     }
@@ -246,7 +303,16 @@ public class InventoryUIController : MonoBehaviour {
     }
 
     void HandleInventoryOverlay(bool value) {
-        if (value) {
+				// add items to ItemSlots
+				UpdateInventorySlots();
+
+				// add all players to container
+				UpdatePlayerContainer();
+
+				// add equipped items to equipment container
+				UpdateEquipmentContainer();
+
+				if (value) {
             enableInventoryInput.RaiseEvent();
             _inventoryContainer.style.display = DisplayStyle.Flex;
         }
@@ -296,7 +362,6 @@ public class InventoryUIController : MonoBehaviour {
         }
     }
 
-
     private void AddItemListToInventoryOverlay(List<int> list) {
         CleanAllItemSlots();
         foreach (int itemId in list) {
@@ -341,20 +406,32 @@ public class InventoryUIController : MonoBehaviour {
         IEnumerable<InventorySlot> slotsEquipment = equipmentInventoryItems.Where(x =>
             x.worldBound.Overlaps(_ghostIcon.worldBound));
         //TODO could be made better, make it abstract
+
         //Found at least one in Normal Inventory
         var inventorySlots = slotsInventory as InventorySlot[] ?? slotsInventory.ToArray();
         if (inventorySlots.Count() != 0) {
             InventorySlot closestSlot = inventorySlots.OrderBy(x => Vector2.Distance
                 (x.worldBound.position, _ghostIcon.worldBound.position)).First();
 
-            //Set the new inventory slot with the data
-            // TODO Wenn Slot bereits belegt, dann tausche closestSlot mit OriginalSlot
-            closestSlot.HoldItem(itemContainer.itemList[_originalSlot.itemGuid]);
+						//Set the new inventory slot with the data
+						if ( closestSlot.itemGuid > -1 )
+						{
+								ItemSO itemInTarget = itemContainer.itemList[closestSlot.itemGuid];
+								closestSlot.HoldItem(itemContainer.itemList[_originalSlot.itemGuid]);
+								_originalSlot.HoldItem(itemInTarget);
+						}
+						else
+								closestSlot.HoldItem(itemContainer.itemList[_originalSlot.itemGuid]);
 
-            // Zum Verschieben von einem Gegenstand zum normalen Inventory
-            if (_originalSlot.slotType == InventorySlot.InventorySlotType.EquipmentInventory) {
-                toInventoryEventChannel.RaiseEvent(_originalSlot.itemGuid, _currentPlayerSelected);
-                closestSlot.itemGuid = _originalSlot.itemGuid;
+						// Zum Verschieben von einem Gegenstand zum normalen Inventory
+						if (_originalSlot.slotType == InventorySlot.InventorySlotType.EquipmentInventory)
+						{
+								if ( typeof(EquipmentPosition).IsInstanceOfType(closestSlot.userData) )
+								{
+										EquipmentPosition pos = ( EquipmentPosition )closestSlot.userData;
+										toInventoryEventChannel.RaiseEvent(_currentPlayerSelected, pos);
+										closestSlot.itemGuid = _originalSlot.itemGuid;
+								}
             }
 
             if (!closestSlot.Equals(_originalSlot)) {
@@ -369,14 +446,24 @@ public class InventoryUIController : MonoBehaviour {
 		        InventorySlot closestSlot = equipmentSlotsList.OrderBy(x => Vector2.Distance
 			        (x.worldBound.position, _ghostIcon.worldBound.position)).First();
 
-		        //Set the new inventory slot with the data
-		        // TODO Wenn Slot bereits belegt, dann tausche closestSlot mit OriginalSlot
-		        closestSlot.HoldItem(itemContainer.itemList[_originalSlot.itemGuid]);
+								//Set the new inventory slot with the data
+								if ( closestSlot.itemGuid > -1 )
+								{
+										ItemSO itemInTarget = itemContainer.itemList[closestSlot.itemGuid];
+										closestSlot.HoldItem(itemContainer.itemList[_originalSlot.itemGuid]);
+										_originalSlot.HoldItem(itemInTarget);
+								}
+								else
+										closestSlot.HoldItem(itemContainer.itemList[_originalSlot.itemGuid]);
 
-		        // Zum Verschieben von einem Gegenstand zum Equipment Inventory
-		        if (_originalSlot.slotType == InventorySlot.InventorySlotType.NormalInventory) {
-			        toEquipmentEventChannel.RaiseEvent(_originalSlot.itemGuid, _currentPlayerSelected);
-			        closestSlot.itemGuid = _originalSlot.itemGuid;
+								// Zum Verschieben von einem Gegenstand zum Equipment Inventory
+								if (_originalSlot.slotType == InventorySlot.InventorySlotType.NormalInventory) {
+										if ( typeof(EquipmentPosition).IsInstanceOfType(closestSlot.userData) )
+										{
+												EquipmentPosition pos = (EquipmentPosition) closestSlot.userData;
+												toEquipmentEventChannel.RaiseEvent(_originalSlot.itemGuid, _currentPlayerSelected, pos);
+												closestSlot.itemGuid = _originalSlot.itemGuid;
+										}
 		        }
 
 		        if (!closestSlot.Equals(_originalSlot)) {

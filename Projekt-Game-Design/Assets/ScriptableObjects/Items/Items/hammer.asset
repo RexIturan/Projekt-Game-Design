@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: hammer
   m_EditorClassIdentifier: 
   id: 1
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 16076d8503cfcc849a63de1023db868e, type: 3}
   model: {fileID: 8193850524621578839, guid: 4303c08d5cb0dc34da8024f8e3d1c406, type: 3}
   goldValue: 20
   rarity: 1

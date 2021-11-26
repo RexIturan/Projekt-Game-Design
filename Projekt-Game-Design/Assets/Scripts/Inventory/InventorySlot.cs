@@ -37,6 +37,7 @@ public class InventorySlot : VisualElement
         itemGuid = item.id;
         // Debug.Log("Test in HoldItem");
     }
+
     public void DropItem()
     {
         itemGuid = -1;
@@ -55,6 +56,7 @@ public class InventorySlot : VisualElement
         //Start the drag
         InventoryUIController.StartDrag(evt.position, this);
     }
+
     public enum InventorySlotType
     {
         None,

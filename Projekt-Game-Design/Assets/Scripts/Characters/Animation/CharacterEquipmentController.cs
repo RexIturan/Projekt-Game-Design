@@ -11,15 +11,11 @@ public class CharacterEquipmentController : MonoBehaviour
 {
 	public void ChangeWeapon(EquipmentType type, Mesh newWeapon)
 	{
-
-		if ( newWeapon )
+		MeshFilter[] meshes = gameObject.GetComponentsInChildren<MeshFilter>();
+		foreach ( MeshFilter mesh in meshes )
 		{
-			MeshFilter[] meshes = gameObject.GetComponentsInChildren<MeshFilter>();
-			foreach ( MeshFilter mesh in meshes )
-			{
-				if ( mesh.tag.Equals(GetTagForEquipmentType(type)) )
-					mesh.mesh = newWeapon;
-			}
+			if ( mesh.tag.Equals(GetTagForEquipmentType(type)) )
+				mesh.mesh = newWeapon;
 		}
 	}
 

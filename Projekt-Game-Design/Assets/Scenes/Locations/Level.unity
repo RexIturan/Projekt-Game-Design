@@ -1053,6 +1053,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
+    - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
+      propertyPath: characters
+      value: 
+      objectReference: {fileID: 11400000, guid: fdb6506e2806b5d448ee3e966f4f70bf, type: 2}
+    - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
       propertyPath: characterList
       value: 
       objectReference: {fileID: 521218106}
@@ -1113,6 +1121,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8249263230387100160, guid: fc8468785089d404997c3806015ef3c3, type: 3}
+      propertyPath: itemContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
+    - target: {fileID: 8249263230387100160, guid: fc8468785089d404997c3806015ef3c3, type: 3}
+      propertyPath: equipmentContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
     - target: {fileID: 8249263230387100161, guid: fc8468785089d404997c3806015ef3c3, type: 3}
       propertyPath: m_RootOrder
       value: 9

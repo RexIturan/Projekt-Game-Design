@@ -9,14 +9,23 @@ using UnityEngine;
 public class InventorySO : ScriptableObject
 {
 		[SerializeField] private ItemContainerSO itemContainer;
-    public List<int> itemIDs = new List<int>();
+    public List<int> itemIDs = new List<int>(); // id within item container
+		public List<int> equipmentID = new List<int>(); // if item is equipped, this list saves id of equipment within EquipmentContainer
+																										// id is -1 if item is not currently equipped
+
+		public InventorySO ()
+		{
+				equipmentID = new List<int>();
+				foreach ( int itemID in itemIDs )
+						equipmentID.Add(-1);
+		}
 
 		public ItemSO GetItem(int idInInventory) {
 				if(idInInventory >= 0 && idInInventory < itemIDs.Count)
 					return itemContainer.itemList[idInInventory];
 				else
 				{
-						Debug.LogError("Item not in Player Inventory. ID: " + idInInventory);
+						// Debug.LogWarning("Item not in Player Inventory. ID: " + idInInventory);
 						return null;
 				}
 		}

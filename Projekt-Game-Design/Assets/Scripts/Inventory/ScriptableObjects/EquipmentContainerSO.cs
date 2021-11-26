@@ -14,10 +14,13 @@ public class EquipmentContainerSO : ScriptableObject
 		public List<ItemSO> GetEquippedItems(int equipmentID) {
 				List<ItemSO> items = new List<ItemSO>();
 				if ( equipmentID >= inventories.Count || equipmentID < 0 )
-						Debug.LogError("ID, " + equipmentID + ", was no valid Equipment (Inventory)");
+				{
+						return null;
+						//Debug.LogWarning("ID, " + equipmentID + ", was no valid Equipment (Inventory)");
+				}
 				else
 				{
-						foreach(int inventoryID in inventories[equipmentID].equipmentToList())
+						foreach ( int inventoryID in inventories[equipmentID].items )
 						{
 								items.Add(inventory.GetItem(inventoryID));
 						}

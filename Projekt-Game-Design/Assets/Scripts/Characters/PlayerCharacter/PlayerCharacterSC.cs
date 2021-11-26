@@ -229,12 +229,14 @@ public class PlayerCharacterSC : MonoBehaviour {
     public void RefreshAbilities()
     {
         List<AbilitySO> currentAbilities = new List<AbilitySO>(playerType.basicAbilities);
-				
+
 				// abilities from items
-				foreach ( ItemSO item in equipmentContainer.GetEquippedItems(equipmentID) ) {
-					foreach ( AbilitySO ability in item.abilities )
-						if ( !currentAbilities.Contains(ability) )
-							currentAbilities.Add(ability);
+				List<ItemSO> items = equipmentContainer.GetEquippedItems(equipmentID);
+				if(items != null)
+					foreach ( ItemSO item in  items) {
+						foreach ( AbilitySO ability in item.abilities )
+							if ( !currentAbilities.Contains(ability) )
+								currentAbilities.Add(ability);
 				}
 				
         abilities = currentAbilities.ToArray();
@@ -259,8 +261,15 @@ public class PlayerCharacterSC : MonoBehaviour {
 				//
 				if ( animationController )
 				{
-						animationController.ChangeWeapon(EquipmentType.LEFT, items[Equipment.GetListIDLeft()].model);
-						animationController.ChangeWeapon(EquipmentType.RIGHT, items[Equipment.GetListIDRight()].model);
+						if(items.Count >= 1)
+							animationController.ChangeWeapon(EquipmentType.LEFT, items[(int) EquipmentPosition.LEFT]?.model);
+						else
+							animationController.ChangeWeapon(EquipmentType.LEFT, null);
+
+						if (items.Count >= 2)
+							animationController.ChangeWeapon(EquipmentType.RIGHT, items[(int) EquipmentPosition.RIGHT]?.model);
+						else
+								animationController.ChangeWeapon(EquipmentType.RIGHT, null);
 				}
 		}
 }
