@@ -144,6 +144,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 				// DEBUG!!!!!!!
 				animationController.TakeStance(stance);
 				RefreshEquipment();
+				RefreshAbilities();
 				animationController.ChangeWeaponPosition(EquipmentType.RIGHT, weaponRightPosition);
 				// !!!!!!!!!!!
 
@@ -232,11 +233,15 @@ public class PlayerCharacterSC : MonoBehaviour {
 
 				// abilities from items
 				List<ItemSO> items = equipmentContainer.GetEquippedItems(equipmentID);
-				if(items != null)
-					foreach ( ItemSO item in  items) {
-						foreach ( AbilitySO ability in item.abilities )
-							if ( !currentAbilities.Contains(ability) )
-								currentAbilities.Add(ability);
+				if ( items != null )
+				{
+						foreach ( ItemSO item in items )
+						{
+								if ( item != null && item.abilities != null )
+										foreach ( AbilitySO ability in item.abilities )
+												if ( !currentAbilities.Contains(ability) )
+														currentAbilities.Add(ability);
+						}
 				}
 				
         abilities = currentAbilities.ToArray();

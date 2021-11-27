@@ -47,10 +47,6 @@ public class InventoryUIController : MonoBehaviour {
     [Header("Receiving Events On")] 
     [SerializeField] private BoolEventChannelSO visibilityMenuEventChannel;
     [SerializeField] private BoolEventChannelSO visibilityInventoryEventChannel;
-    [SerializeField] private IntEventChannelSO onItemPickupEventChannel;
-    [SerializeField] private IntEventChannelSO onItemDropEventChannel;
-    [SerializeField] private IntListEventChannelSO inventoryChanged_EC;
-    [SerializeField] private IntListEventChannelSO equipmentChanged_EC;
     // Selected events
     [SerializeField] private GameObjEventChannelSO playerDeselectedEC;
     [SerializeField] private GameObjActionEventChannelSO playerSelectedEC;
@@ -66,14 +62,6 @@ public class InventoryUIController : MonoBehaviour {
     // OutputChannel zwischen den Inventaren
     [SerializeField] private IntIntEquipmentPositionEquipEventChannelSO EquipEvent;
     [SerializeField] private IntEquipmentPositionUnequipEventChannelSO UnequipEvent;
-
-    //Für das Inventar
-    public enum InventoryTab {
-        None,
-        Items,
-        Armory,
-        Weapons
-    }
 
     private void Awake() {
         //Store the root from the UI Document component
@@ -92,13 +80,6 @@ public class InventoryUIController : MonoBehaviour {
         visibilityInventoryEventChannel.OnEventRaised += HandleInventoryOverlay;
 				visibilityGameOverlayEventChannel.OnEventRaised += HandleOtherScreensOpened;
 
-				/*
-        onItemPickupEventChannel.OnEventRaised += HandleItemPickup;
-        onItemDropEventChannel.OnEventRaised += HandleItemDrop;
-        inventoryChanged_EC.OnEventRaised += HandleTabChanged;
-        equipmentChanged_EC.OnEventRaised += AddEquipmentItems;
-				*/
-
         // Callbacks fürs draggen
         // _ghostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
         _ghostIcon.RegisterCallback<PointerUpEvent>(OnPointerUp);
@@ -107,12 +88,6 @@ public class InventoryUIController : MonoBehaviour {
     private void Start() {
         InitializeInventory();
         InitializeEquipmentInventory();
-
-				/*
-        _inventoryContainer.Q<Button>("Tab1").clicked += HandleItemTabPressed;
-        _inventoryContainer.Q<Button>("Tab2").clicked += HandleArmoryTabPressed;
-        _inventoryContainer.Q<Button>("Tab3").clicked += HandleWeaponsTabPressed;
-				*/
 
         // initially select first player
         if (characterList == null) {
@@ -123,7 +98,6 @@ public class InventoryUIController : MonoBehaviour {
 		private void Update()
 		{
 				OnPointerMove();
-				// OnPointerUp();
 		}
 
 		private void InitializeInventory() {
@@ -149,34 +123,7 @@ public class InventoryUIController : MonoBehaviour {
 				InventorySlot weaponRight = _equipmentInventoryContainer.Q<InventorySlot>("WeaponRight");
 				weaponRight.userData = EquipmentPosition.RIGHT;
 				equipmentInventoryItems.Add(weaponRight);
-
-				/*
-        equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("HelmetEquipment1"));
-        equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("HeadEquipment1"));
-        equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("BodyEquipment1"));
-        equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("BodyEquipment2"));
-        equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("BodyEquipment3"));
-        equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("LegEquipment1"));
-        equipmentInventoryItems.Add(_equipmentInventoryContainer.Q<InventorySlot>("FeetEquipment1"));
-				*/
 		}
-
-    void ResetAllTabs() {
-
-				/*
-        _inventoryContainer.Q<Button>("Tab1").RemoveFromClassList("ClickedTab");
-        _inventoryContainer.Q<Button>("Tab2").RemoveFromClassList("ClickedTab");
-        _inventoryContainer.Q<Button>("Tab3").RemoveFromClassList("ClickedTab");
-        _inventoryContainer.Q<Button>("Tab4").RemoveFromClassList("ClickedTab");
-        _inventoryContainer.Q<Button>("Tab5").RemoveFromClassList("ClickedTab");
-
-        _inventoryContainer.Q<Button>("Tab1").AddToClassList("UnclickedTab");
-        _inventoryContainer.Q<Button>("Tab2").AddToClassList("UnclickedTab");
-        _inventoryContainer.Q<Button>("Tab3").AddToClassList("UnclickedTab");
-        _inventoryContainer.Q<Button>("Tab4").AddToClassList("UnclickedTab");
-        _inventoryContainer.Q<Button>("Tab5").AddToClassList("UnclickedTab");
-				*/
-    }
 
 		/**
 		 * takes all items within the Inventory that are not equipped
@@ -247,25 +194,6 @@ public class InventoryUIController : MonoBehaviour {
 				}
 		}
 
-		/*
-    void InventoryManager(InventoryTab tab, Button button) {
-        ResetAllTabs();
-        button.RemoveFromClassList("UnclickedTab");
-        button.AddToClassList("ClickedTab");
-
-        switch (tab) {
-            case InventoryTab.Items:
-                changeInventoryTab.RaiseEvent(InventoryTab.Items);
-                break;
-            case InventoryTab.Armory:
-                changeInventoryTab.RaiseEvent(InventoryTab.Armory);
-                break;
-            case InventoryTab.Weapons:
-                changeInventoryTab.RaiseEvent(InventoryTab.Weapons);
-                break;
-        }
-    }
-		*/
 
     // Sets to selected player or first in container if none selected
     // TODO: copied from OverlayUIController
@@ -308,20 +236,6 @@ public class InventoryUIController : MonoBehaviour {
         _playerViewContainer.Q<Label>("LevelLabel").text = _selectedPlayer.level.ToString();
     }
 
-		/*
-    void HandleItemTabPressed() {
-        InventoryManager(InventoryTab.Items, _inventoryContainer.Q<Button>("Tab1"));
-    }
-
-    void HandleArmoryTabPressed() {
-        InventoryManager(InventoryTab.Armory, _inventoryContainer.Q<Button>("Tab2"));
-    }
-
-    void HandleWeaponsTabPressed() {
-        InventoryManager(InventoryTab.Weapons, _inventoryContainer.Q<Button>("Tab3"));
-    }
-		*/
-
     void HandleInventoryOverlay(bool value) {
 				// add items to ItemSlots
 				UpdateInventorySlots();
@@ -345,44 +259,6 @@ public class InventoryUIController : MonoBehaviour {
         HandleInventoryOverlay(false);
     }
 
-		/*
-    private void HandleItemPickup(int itemGuid) {
-        AddItemToInventoryOverlay(itemGuid);
-    }
-		*/
-
-		/*
-    private void HandleItemDrop(int itemGuid) {
-        RemoveItemFromInventoryOverlay(itemGuid);
-    }
-		*/
-
-				/*
-    private void HandleTabChanged(List<int> itemGuids) {
-        AddItemListToInventoryOverlay(itemGuids);
-    }
-		*/
-
-		/*
-    private void AddItemToInventoryOverlay(int itemGuid) {
-        // Debug.Log("TestAddItemToInventoryOverlay");
-        var emptySlot = inventoryItems.FirstOrDefault(x => x.itemGuid.Equals(-1));
-
-        if (emptySlot != null) {
-            emptySlot.HoldItem(itemContainer.itemList[itemGuid]);
-        }
-    }
-		
-
-    private void RemoveItemFromInventoryOverlay(int itemGuid) {
-        var emptySlot = inventoryItems.FirstOrDefault(x => x.itemGuid.Equals(itemGuid));
-
-        if (emptySlot != null) {
-            emptySlot.DropItem();
-        }
-    }
-		*/
-
     private void CleanAllItemSlots() {
         foreach (var itemSlot in inventoryItems) {
             if (itemSlot != null && itemSlot.inventoryItemID != -1) {
@@ -401,15 +277,6 @@ public class InventoryUIController : MonoBehaviour {
 						}
 				}
 		}
-
-		/*
-    private void AddItemListToInventoryOverlay(List<int> list) {
-        CleanAllItemSlots();
-        foreach (int itemId in list) {
-            AddItemToInventoryOverlay(itemId);
-        }
-    }
-		*/
 
 		public static void StartDrag(Vector2 position, InventorySlot originalSlot) {
         //Set tracking variables
@@ -505,109 +372,54 @@ public class InventoryUIController : MonoBehaviour {
 				_isDragging = false;
 				_originalSlot = null;
 				_ghostIcon.style.visibility = Visibility.Hidden;
-
-				/*
-				IEnumerable<InventorySlot> slotsInventory = inventoryItems.Where(x =>
-            x.worldBound.Overlaps(_ghostIcon.worldBound));
-
-        IEnumerable<InventorySlot> slotsEquipment = equipmentInventoryItems.Where(x =>
-            x.worldBound.Overlaps(_ghostIcon.worldBound));
-        //TODO could be made better, make it abstract
-
-        //Found at least one in Normal Inventory
-        var inventorySlots = slotsInventory as InventorySlot[] ?? slotsInventory.ToArray();
-        if (inventorySlots.Count() != 0) {
-            InventorySlot closestSlot = inventorySlots.OrderBy(x => Vector2.Distance
-                (x.worldBound.position, _ghostIcon.worldBound.position)).First();
-
-						//Set the new inventory slot with the data
-						if ( closestSlot.inventoryItemID > -1 )
-						{
-								int itemIDTarget = closestSlot.inventoryItemID;
-								closestSlot.HoldItem(itemContainer.itemList[_originalSlot.inventoryItemID], _originalSlot.inventoryItemID);
-								_originalSlot.HoldItem(itemContainer.itemList[itemIDTarget], itemIDTarget);
-						}
-						else
-								closestSlot.HoldItem(itemContainer.itemList[_originalSlot.inventoryItemID], _originalSlot.inventoryItemID);
-
-						// Zum Verschieben von einem Gegenstand zum normalen Inventory
-						if (_originalSlot.slotType == InventorySlot.InventorySlotType.EquipmentInventory)
-						{
-								if ( typeof(EquipmentPosition).IsInstanceOfType(closestSlot.userData) )
-								{
-										EquipmentPosition pos = ( EquipmentPosition )closestSlot.userData;
-										UnequipEvent.RaiseEvent(_currentPlayerSelected, pos);
-										closestSlot.inventoryItemID = _originalSlot.inventoryItemID;
-								}
-            }
-
-            if (!closestSlot.Equals(_originalSlot)) {
-                //Clear the original slot
-                _originalSlot.DropItem();
-            }
-        }
-        // Found at least one in Equipment Inventory
-        else {
-	        var equipmentSlotsList = slotsEquipment.ToList();
-	        if (equipmentSlotsList.Count() != 0) {
-		        InventorySlot closestSlot = equipmentSlotsList.OrderBy(x => Vector2.Distance
-			        (x.worldBound.position, _ghostIcon.worldBound.position)).First();
-
-								//Set the new inventory slot with the data
-								if ( closestSlot.inventoryItemID > -1 )
-								{
-										int itemIDTarget = closestSlot.inventoryItemID;
-										closestSlot.HoldItem(itemContainer.itemList[_originalSlot.inventoryItemID], _originalSlot.inventoryItemID);
-										_originalSlot.HoldItem(itemContainer.itemList[itemIDTarget], itemIDTarget);
-								}
-								else
-										closestSlot.HoldItem(itemContainer.itemList[_originalSlot.inventoryItemID], _originalSlot.inventoryItemID);
-
-								// Zum Verschieben von einem Gegenstand zum Equipment Inventory
-								if (_originalSlot.slotType == InventorySlot.InventorySlotType.NormalInventory) {
-										if ( typeof(EquipmentPosition).IsInstanceOfType(closestSlot.userData) )
-										{
-												EquipmentPosition pos = (EquipmentPosition) closestSlot.userData;
-												EquipEvent.RaiseEvent(_originalSlot.inventoryItemID, _currentPlayerSelected, pos);
-												closestSlot.inventoryItemID = _originalSlot.inventoryItemID;
-										}
-		        }
-
-		        if (!closestSlot.Equals(_originalSlot)) {
-			        //Clear the original slot
-			        _originalSlot.DropItem();
-		        }
-	        }
-	        //Didn't find any (dragged off the window)
-	        else {
-		        _originalSlot.icon.image = itemContainer.itemList[_originalSlot.inventoryItemID].icon.texture;
-	        }
-        }
-
-        //Clear dragging related visuals and data
-        _isDragging = false;
-        _originalSlot = null;
-        _ghostIcon.style.visibility = Visibility.Hidden;
-				*/
 		}
 
+		// tab stuff
+		//
+		//Für das Inventar
+    public enum InventoryTab {
+        None,
+        Items,
+        Armory,
+        Weapons
+    }
+
 		/*
-    private void AddItemToEquipmentInventoryOverlay(int itemId) {
-        //TODO Seperation von den unterschiedlichen Equipment Sachen
+    void ResetAllTabs() {
+        _inventoryContainer.Q<Button>("Tab1").RemoveFromClassList("ClickedTab");
 
-        var emptySlot = equipmentInventoryItems.FirstOrDefault(x => x.inventoryItemID.Equals(-1));
+        _inventoryContainer.Q<Button>("Tab1").AddToClassList("UnclickedTab");
+    }
 
-        if (emptySlot != null) {
-            emptySlot.HoldItem(itemContainer.itemList[itemId]);
+    void InventoryManager(InventoryTab tab, Button button) {
+        ResetAllTabs();
+        button.RemoveFromClassList("UnclickedTab");
+        button.AddToClassList("ClickedTab");
+
+        switch (tab) {
+            case InventoryTab.Items:
+                changeInventoryTab.RaiseEvent(InventoryTab.Items);
+                break;
+            case InventoryTab.Armory:
+                changeInventoryTab.RaiseEvent(InventoryTab.Armory);
+                break;
+            case InventoryTab.Weapons:
+                changeInventoryTab.RaiseEvent(InventoryTab.Weapons);
+                break;
         }
     }
 		
-
-    private void AddEquipmentItems(List<int> list) {
-        CleanAllItemEquipmentSlots();
-        foreach (int itemId in list) {
-            AddItemToEquipmentInventoryOverlay(itemId);
-        }
+    void HandleItemTabPressed() {
+        InventoryManager(InventoryTab.Items, _inventoryContainer.Q<Button>("Tab1"));
     }
+
+    void HandleArmoryTabPressed() {
+        InventoryManager(InventoryTab.Armory, _inventoryContainer.Q<Button>("Tab2"));
+    }
+
+    void HandleWeaponsTabPressed() {
+        InventoryManager(InventoryTab.Weapons, _inventoryContainer.Q<Button>("Tab3"));
+    }
+
 		*/
 }
