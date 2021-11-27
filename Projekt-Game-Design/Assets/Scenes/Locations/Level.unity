@@ -1057,9 +1057,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
     - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
+      propertyPath: EquipEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
+    - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
       propertyPath: characters
       value: 
       objectReference: {fileID: 11400000, guid: fdb6506e2806b5d448ee3e966f4f70bf, type: 2}
+    - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
+      propertyPath: equipEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
+    - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
+      propertyPath: UnequipEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
     - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
       propertyPath: characterList
       value: 
@@ -1126,9 +1138,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
     - target: {fileID: 8249263230387100160, guid: fc8468785089d404997c3806015ef3c3, type: 3}
+      propertyPath: equipEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
+    - target: {fileID: 8249263230387100160, guid: fc8468785089d404997c3806015ef3c3, type: 3}
       propertyPath: equipmentContainer
       value: 
       objectReference: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
+    - target: {fileID: 8249263230387100160, guid: fc8468785089d404997c3806015ef3c3, type: 3}
+      propertyPath: unequipEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
     - target: {fileID: 8249263230387100161, guid: fc8468785089d404997c3806015ef3c3, type: 3}
       propertyPath: m_RootOrder
       value: 9

@@ -20,9 +20,19 @@ public class InventorySO : ScriptableObject
 						equipmentID.Add(-1);
 		}
 
-		public ItemSO GetItem(int idInInventory) {
-				if(idInInventory >= 0 && idInInventory < itemIDs.Count)
-					return itemContainer.itemList[idInInventory];
+		public ItemSO GetItem(int idInInventory)
+		{
+				if ( idInInventory >= 0 && idInInventory < itemIDs.Count )
+				{
+						int itemID = itemIDs[idInInventory];
+						if ( itemID >= 0 && itemID < itemContainer.itemList.Count )
+								return itemContainer.itemList[itemID];
+						else
+						{
+								// Debug.LogWarning("Item not in Item Container. ID: " + itemID);
+								return null;
+						}
+				}
 				else
 				{
 						// Debug.LogWarning("Item not in Player Inventory. ID: " + idInInventory);

@@ -91,7 +91,7 @@ namespace SaveSystem {
 			EquipmentContainerSO equipmentInventoryContainerSo) {
 			List<Inventory_Save> equipmentInventorys = new List<Inventory_Save>();
 
-			foreach ( var equipment in equipmentInventoryContainerSo.inventories ) {
+			foreach ( var equipment in equipmentInventoryContainerSo.equipmentInventories ) {
 				var equiped = new List<int>();
 				foreach ( var itemID in equipment.items) {
 					equiped.Add(itemID);

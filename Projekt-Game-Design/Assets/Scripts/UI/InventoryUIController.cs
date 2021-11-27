@@ -4,6 +4,7 @@ using System.Linq;
 using Characters.ScriptableObjects;
 using Events.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class InventoryUIController : MonoBehaviour {
@@ -63,8 +64,8 @@ public class InventoryUIController : MonoBehaviour {
     [SerializeField] private InventoryTabEventChannelSO changeInventoryTab;
 
     // OutputChannel zwischen den Inventaren
-    [SerializeField] private IntIntEquipmentPositionToEquipmentEventChannelSO toEquipmentEventChannel;
-    [SerializeField] private IntEquipmentPositionToInventoryEventChannelSO toInventoryEventChannel;
+    [SerializeField] private IntIntEquipmentPositionEquipEventChannelSO EquipEvent;
+    [SerializeField] private IntEquipmentPositionUnequipEventChannelSO UnequipEvent;
 
     //Für das Inventar
     public enum InventoryTab {
@@ -90,13 +91,16 @@ public class InventoryUIController : MonoBehaviour {
         visibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
         visibilityInventoryEventChannel.OnEventRaised += HandleInventoryOverlay;
 				visibilityGameOverlayEventChannel.OnEventRaised += HandleOtherScreensOpened;
+
+				/*
         onItemPickupEventChannel.OnEventRaised += HandleItemPickup;
         onItemDropEventChannel.OnEventRaised += HandleItemDrop;
         inventoryChanged_EC.OnEventRaised += HandleTabChanged;
         equipmentChanged_EC.OnEventRaised += AddEquipmentItems;
+				*/
 
         // Callbacks fürs draggen
-        _ghostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+        // _ghostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
         _ghostIcon.RegisterCallback<PointerUpEvent>(OnPointerUp);
     }
     
@@ -104,15 +108,23 @@ public class InventoryUIController : MonoBehaviour {
         InitializeInventory();
         InitializeEquipmentInventory();
 
+				/*
         _inventoryContainer.Q<Button>("Tab1").clicked += HandleItemTabPressed;
         _inventoryContainer.Q<Button>("Tab2").clicked += HandleArmoryTabPressed;
         _inventoryContainer.Q<Button>("Tab3").clicked += HandleWeaponsTabPressed;
+				*/
 
         // initially select first player
         if (characterList == null) {
             characterList = FindObjectOfType<CharacterList>();    
         }
     }
+
+		private void Update()
+		{
+				OnPointerMove();
+				// OnPointerUp();
+		}
 
 		private void InitializeInventory() {
         //Create InventorySlots and add them as children to the SlotContainer
@@ -182,7 +194,7 @@ public class InventoryUIController : MonoBehaviour {
 						{
 								if ( slotIdx < inventoryItems.Count )
 								{
-										inventoryItems[slotIdx].HoldItem(itemContainer.itemList[inventory.itemIDs[inventoryIdx]]);
+										inventoryItems[slotIdx].HoldItem(itemContainer.itemList[inventory.itemIDs[inventoryIdx]], inventoryIdx);
 										slotIdx++;
 								}
 								else
@@ -211,26 +223,31 @@ public class InventoryUIController : MonoBehaviour {
 
 		public void UpdateEquipmentContainer()
 		{
+				CleanAllItemEquipmentSlots();
+
 				InventorySlot weaponLeft = _equipmentInventoryContainer.Q<InventorySlot>("WeaponLeft");
 				InventorySlot weaponRight = _equipmentInventoryContainer.Q<InventorySlot>("WeaponRight");
 
 				PlayerCharacterSC currPlayer = characterList.playerContainer[_currentPlayerSelected].GetComponent<PlayerCharacterSC>();
 
-				Equipment equipment = currPlayer.equipmentContainer.inventories[currPlayer.equipmentID];
+				Equipment equipment = currPlayer.equipmentContainer.equipmentInventories[currPlayer.equipmentID];
 
 				if ( equipment.items[(int) EquipmentPosition.LEFT] >= 0)
 				{
-						ItemSO itemLeft = inventory.GetItem(equipment.items[( int )EquipmentPosition.LEFT]);
-						weaponLeft.HoldItem(itemLeft);
+						int inventoryItemID = equipment.items[( int )EquipmentPosition.LEFT];
+						ItemSO itemLeft = inventory.GetItem(inventoryItemID);
+						weaponLeft.HoldItem(itemLeft, inventoryItemID);
 				}
 
 				if ( equipment.items[( int )EquipmentPosition.RIGHT] >= 0 )
 				{
-						ItemSO itemRight = inventory.GetItem(equipment.items[( int )EquipmentPosition.RIGHT]);
-						weaponLeft.HoldItem(itemRight);
+						int inventoryItemID = equipment.items[( int )EquipmentPosition.RIGHT];
+						ItemSO itemRight = inventory.GetItem(inventoryItemID);
+						weaponRight.HoldItem(itemRight, inventoryItemID);
 				}
 		}
 
+		/*
     void InventoryManager(InventoryTab tab, Button button) {
         ResetAllTabs();
         button.RemoveFromClassList("UnclickedTab");
@@ -248,6 +265,7 @@ public class InventoryUIController : MonoBehaviour {
                 break;
         }
     }
+		*/
 
     // Sets to selected player or first in container if none selected
     // TODO: copied from OverlayUIController
@@ -290,6 +308,7 @@ public class InventoryUIController : MonoBehaviour {
         _playerViewContainer.Q<Label>("LevelLabel").text = _selectedPlayer.level.ToString();
     }
 
+		/*
     void HandleItemTabPressed() {
         InventoryManager(InventoryTab.Items, _inventoryContainer.Q<Button>("Tab1"));
     }
@@ -301,6 +320,7 @@ public class InventoryUIController : MonoBehaviour {
     void HandleWeaponsTabPressed() {
         InventoryManager(InventoryTab.Weapons, _inventoryContainer.Q<Button>("Tab3"));
     }
+		*/
 
     void HandleInventoryOverlay(bool value) {
 				// add items to ItemSlots
@@ -325,18 +345,25 @@ public class InventoryUIController : MonoBehaviour {
         HandleInventoryOverlay(false);
     }
 
+		/*
     private void HandleItemPickup(int itemGuid) {
         AddItemToInventoryOverlay(itemGuid);
     }
+		*/
 
+		/*
     private void HandleItemDrop(int itemGuid) {
         RemoveItemFromInventoryOverlay(itemGuid);
     }
+		*/
 
+				/*
     private void HandleTabChanged(List<int> itemGuids) {
         AddItemListToInventoryOverlay(itemGuids);
     }
+		*/
 
+		/*
     private void AddItemToInventoryOverlay(int itemGuid) {
         // Debug.Log("TestAddItemToInventoryOverlay");
         var emptySlot = inventoryItems.FirstOrDefault(x => x.itemGuid.Equals(-1));
@@ -345,6 +372,7 @@ public class InventoryUIController : MonoBehaviour {
             emptySlot.HoldItem(itemContainer.itemList[itemGuid]);
         }
     }
+		
 
     private void RemoveItemFromInventoryOverlay(int itemGuid) {
         var emptySlot = inventoryItems.FirstOrDefault(x => x.itemGuid.Equals(itemGuid));
@@ -353,54 +381,133 @@ public class InventoryUIController : MonoBehaviour {
             emptySlot.DropItem();
         }
     }
+		*/
 
     private void CleanAllItemSlots() {
         foreach (var itemSlot in inventoryItems) {
-            if (itemSlot != null && itemSlot.itemGuid != -1) {
+            if (itemSlot != null && itemSlot.inventoryItemID != -1) {
                 itemSlot.DropItem();
             }
         }
-    }
+		}
 
+		private void CleanAllItemEquipmentSlots()
+		{
+				foreach ( var itemSlot in equipmentInventoryItems )
+				{
+						if ( itemSlot != null )
+						{
+								itemSlot.DropItem();
+						}
+				}
+		}
+
+		/*
     private void AddItemListToInventoryOverlay(List<int> list) {
         CleanAllItemSlots();
         foreach (int itemId in list) {
             AddItemToInventoryOverlay(itemId);
         }
     }
+		*/
 
-    public static void StartDrag(Vector2 position, InventorySlot originalSlot) {
+		public static void StartDrag(Vector2 position, InventorySlot originalSlot) {
         //Set tracking variables
         _isDragging = true;
         _originalSlot = originalSlot;
         //Set the new position
         _ghostIcon.style.top = position.y - _ghostIcon.layout.height / 2;
         _ghostIcon.style.left = position.x - _ghostIcon.layout.width / 2;
-        //Set the image
-        _ghostIcon.style.backgroundImage =
-            _staticItemContainer.itemList[originalSlot.itemGuid].icon.texture;
+				//Set the image
+				_ghostIcon.style.backgroundImage = _originalSlot.item.icon.texture;
         //Flip the visibility on
         _ghostIcon.style.visibility = Visibility.Visible;
     }
 
-    private void OnPointerMove(PointerMoveEvent evt) {
+    private void OnPointerMove() {
         //Only take action if the player is dragging an item around the screen
         if (!_isDragging) {
             return;
         }
 
-        //Set the new position
-        _ghostIcon.style.top = evt.position.y - _ghostIcon.layout.height / 2;
-        _ghostIcon.style.left = evt.position.x - _ghostIcon.layout.width / 2;
+				// mouse position
+				Vector3 mousePos = Mouse.current.position.ReadValue();
+				float x = mousePos.x;
+				float y = Screen.height - mousePos.y;
+
+				//Set the new position
+				_ghostIcon.style.top = y - _ghostIcon.layout.height / 2;
+        _ghostIcon.style.left = x - _ghostIcon.layout.width / 2;
     }
 
-    private void OnPointerUp(PointerUpEvent evt) {
+    private void OnPointerUp(PointerUpEvent mouseEvent) {
         if (!_isDragging) {
             return;
         }
 
-        //Check to see if they are dropping the ghost icon over any inventory slots.
-        IEnumerable<InventorySlot> slotsInventory = inventoryItems.Where(x =>
+				//Check to see if they are dropping the ghost icon over any slots.
+				//
+				List<InventorySlot> slots = new List<InventorySlot>();
+				slots.AddRange(inventoryItems);
+				slots.AddRange(equipmentInventoryItems);
+
+				IEnumerable<InventorySlot> overlappedSlots = slots.Where(x => x.worldBound.Overlaps(_ghostIcon.worldBound));
+
+				if (overlappedSlots.Count() != 0)
+				{
+						InventorySlot targetSlot = overlappedSlots.OrderBy(x => Vector2.Distance
+								(x.worldBound.position, _ghostIcon.worldBound.position)).First();
+
+						int originalID = _originalSlot.inventoryItemID;
+						ItemSO originalItem = _originalSlot.item;
+
+						// if targetSlot is not empty, put it to original
+						if (targetSlot.inventoryItemID >= 0)
+						{
+								_originalSlot.HoldItem(targetSlot.item, targetSlot.inventoryItemID);
+
+								// if original slot was in equipment, equip new item
+								if ( typeof(EquipmentPosition).IsInstanceOfType(_originalSlot.userData) )
+								{
+										EquipmentPosition pos = ( EquipmentPosition )_originalSlot.userData;
+										EquipEvent.RaiseEvent(targetSlot.inventoryItemID, _currentPlayerSelected, pos);
+								}
+						}
+						else
+						{
+								//Clear the original slot
+								_originalSlot.DropItem();
+								
+								// if originalSlot was in equipment, unequip original (if target and original were not the same)
+								if ( typeof(EquipmentPosition).IsInstanceOfType(_originalSlot.userData) && !_originalSlot.Equals(targetSlot) )
+								{
+										EquipmentPosition pos = ( EquipmentPosition )_originalSlot.userData;
+										UnequipEvent.RaiseEvent(_currentPlayerSelected, pos);
+								}
+						}
+
+						targetSlot.HoldItem(originalItem, originalID);
+
+						// if targetSlot was in equipment, send events to InventoryManager to change equipment
+						if ( typeof(EquipmentPosition).IsInstanceOfType(targetSlot.userData))
+						{
+								EquipmentPosition pos = ( EquipmentPosition )targetSlot.userData;
+								EquipEvent.RaiseEvent(originalID, _currentPlayerSelected, pos);
+						}
+				}
+				else
+				{
+						// didn't find anything, reset image in original slot
+						_originalSlot.icon.image = _originalSlot.item.icon.texture;
+				}
+
+				// clear dragging related visuals and data
+				_isDragging = false;
+				_originalSlot = null;
+				_ghostIcon.style.visibility = Visibility.Hidden;
+
+				/*
+				IEnumerable<InventorySlot> slotsInventory = inventoryItems.Where(x =>
             x.worldBound.Overlaps(_ghostIcon.worldBound));
 
         IEnumerable<InventorySlot> slotsEquipment = equipmentInventoryItems.Where(x =>
@@ -414,14 +521,14 @@ public class InventoryUIController : MonoBehaviour {
                 (x.worldBound.position, _ghostIcon.worldBound.position)).First();
 
 						//Set the new inventory slot with the data
-						if ( closestSlot.itemGuid > -1 )
+						if ( closestSlot.inventoryItemID > -1 )
 						{
-								ItemSO itemInTarget = itemContainer.itemList[closestSlot.itemGuid];
-								closestSlot.HoldItem(itemContainer.itemList[_originalSlot.itemGuid]);
-								_originalSlot.HoldItem(itemInTarget);
+								int itemIDTarget = closestSlot.inventoryItemID;
+								closestSlot.HoldItem(itemContainer.itemList[_originalSlot.inventoryItemID], _originalSlot.inventoryItemID);
+								_originalSlot.HoldItem(itemContainer.itemList[itemIDTarget], itemIDTarget);
 						}
 						else
-								closestSlot.HoldItem(itemContainer.itemList[_originalSlot.itemGuid]);
+								closestSlot.HoldItem(itemContainer.itemList[_originalSlot.inventoryItemID], _originalSlot.inventoryItemID);
 
 						// Zum Verschieben von einem Gegenstand zum normalen Inventory
 						if (_originalSlot.slotType == InventorySlot.InventorySlotType.EquipmentInventory)
@@ -429,8 +536,8 @@ public class InventoryUIController : MonoBehaviour {
 								if ( typeof(EquipmentPosition).IsInstanceOfType(closestSlot.userData) )
 								{
 										EquipmentPosition pos = ( EquipmentPosition )closestSlot.userData;
-										toInventoryEventChannel.RaiseEvent(_currentPlayerSelected, pos);
-										closestSlot.itemGuid = _originalSlot.itemGuid;
+										UnequipEvent.RaiseEvent(_currentPlayerSelected, pos);
+										closestSlot.inventoryItemID = _originalSlot.inventoryItemID;
 								}
             }
 
@@ -447,22 +554,22 @@ public class InventoryUIController : MonoBehaviour {
 			        (x.worldBound.position, _ghostIcon.worldBound.position)).First();
 
 								//Set the new inventory slot with the data
-								if ( closestSlot.itemGuid > -1 )
+								if ( closestSlot.inventoryItemID > -1 )
 								{
-										ItemSO itemInTarget = itemContainer.itemList[closestSlot.itemGuid];
-										closestSlot.HoldItem(itemContainer.itemList[_originalSlot.itemGuid]);
-										_originalSlot.HoldItem(itemInTarget);
+										int itemIDTarget = closestSlot.inventoryItemID;
+										closestSlot.HoldItem(itemContainer.itemList[_originalSlot.inventoryItemID], _originalSlot.inventoryItemID);
+										_originalSlot.HoldItem(itemContainer.itemList[itemIDTarget], itemIDTarget);
 								}
 								else
-										closestSlot.HoldItem(itemContainer.itemList[_originalSlot.itemGuid]);
+										closestSlot.HoldItem(itemContainer.itemList[_originalSlot.inventoryItemID], _originalSlot.inventoryItemID);
 
 								// Zum Verschieben von einem Gegenstand zum Equipment Inventory
 								if (_originalSlot.slotType == InventorySlot.InventorySlotType.NormalInventory) {
 										if ( typeof(EquipmentPosition).IsInstanceOfType(closestSlot.userData) )
 										{
 												EquipmentPosition pos = (EquipmentPosition) closestSlot.userData;
-												toEquipmentEventChannel.RaiseEvent(_originalSlot.itemGuid, _currentPlayerSelected, pos);
-												closestSlot.itemGuid = _originalSlot.itemGuid;
+												EquipEvent.RaiseEvent(_originalSlot.inventoryItemID, _currentPlayerSelected, pos);
+												closestSlot.inventoryItemID = _originalSlot.inventoryItemID;
 										}
 		        }
 
@@ -473,7 +580,7 @@ public class InventoryUIController : MonoBehaviour {
 	        }
 	        //Didn't find any (dragged off the window)
 	        else {
-		        _originalSlot.icon.image = itemContainer.itemList[_originalSlot.itemGuid].icon.texture;
+		        _originalSlot.icon.image = itemContainer.itemList[_originalSlot.inventoryItemID].icon.texture;
 	        }
         }
 
@@ -481,25 +588,20 @@ public class InventoryUIController : MonoBehaviour {
         _isDragging = false;
         _originalSlot = null;
         _ghostIcon.style.visibility = Visibility.Hidden;
-    }
+				*/
+		}
 
-    private void CleanAllItemEquipmentSlots() {
-        foreach (var itemSlot in equipmentInventoryItems) {
-            if (itemSlot != null && itemSlot.itemGuid != -1) {
-                itemSlot.DropItem();
-            }
-        }
-    }
-
+		/*
     private void AddItemToEquipmentInventoryOverlay(int itemId) {
         //TODO Seperation von den unterschiedlichen Equipment Sachen
 
-        var emptySlot = equipmentInventoryItems.FirstOrDefault(x => x.itemGuid.Equals(-1));
+        var emptySlot = equipmentInventoryItems.FirstOrDefault(x => x.inventoryItemID.Equals(-1));
 
         if (emptySlot != null) {
             emptySlot.HoldItem(itemContainer.itemList[itemId]);
         }
     }
+		
 
     private void AddEquipmentItems(List<int> list) {
         CleanAllItemEquipmentSlots();
@@ -507,4 +609,5 @@ public class InventoryUIController : MonoBehaviour {
             AddItemToEquipmentInventoryOverlay(itemId);
         }
     }
+		*/
 }

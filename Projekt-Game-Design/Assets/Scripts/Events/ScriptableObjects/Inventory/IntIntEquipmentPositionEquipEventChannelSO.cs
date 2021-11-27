@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Events.ScriptableObjects {
     [CreateAssetMenu(menuName = "Events/IntIntEquipmentPos to Equipment Event Channel")]
-    public class IntIntEquipmentPositionToEquipmentEventChannelSO : EventChannelBaseSO {
+    public class IntIntEquipmentPositionEquipEventChannelSO : EventChannelBaseSO {
         
         public event Action<int, int, EquipmentPosition> OnEventRaised;
 

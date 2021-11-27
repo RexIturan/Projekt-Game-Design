@@ -9,28 +9,29 @@ public class InventoryManager : MonoBehaviour {
 	[SerializeField] private EquipmentContainerSO equipmentContainer;
 
 	[Header("Sending Events On")]
+	/*
 	[SerializeField] private IntEventChannelSO onItemPickupEventChannel;
-
 	[SerializeField] private IntEventChannelSO onItemDropEventChannel;
 	[SerializeField] private IntListEventChannelSO inventoryChanged_EC;
 	[SerializeField] private IntListEventChannelSO equipmentChanged_EC;
+	*/
 
 	[Header("Receiving Events On")]
-	[SerializeField] private InventoryTabEventChannelSO inventoryTabChanged;
-
-	[SerializeField] private IntIntEquipmentPositionToEquipmentEventChannelSO toEquipmentEventChannel;
-	[SerializeField] private IntEquipmentPositionToInventoryEventChannelSO toInventoryEventChannel;
+	// [SerializeField] private InventoryTabEventChannelSO inventoryTabChanged;
+	[SerializeField] private IntIntEquipmentPositionEquipEventChannelSO equipEventChannel;
+	[SerializeField] private IntEquipmentPositionUnequipEventChannelSO unequipEventChannel;
 
 	private void Awake() {
-		inventoryTabChanged.OnEventRaised += AddItemsToPlayerOverlay;
-		toEquipmentEventChannel.OnEventRaised += HandleItemTransaktionToEquipment;
-		toInventoryEventChannel.OnEventRaised += HandleItemTransactionToInventory;
+		// inventoryTabChanged.OnEventRaised += AddItemsToPlayerOverlay;
+
+		equipEventChannel.OnEventRaised += EquipItem;
+		unequipEventChannel.OnEventRaised += UnequipItem;
 	}
 
 	private void OnDestroy() {
-		inventoryTabChanged.OnEventRaised -= AddItemsToPlayerOverlay;
-		toEquipmentEventChannel.OnEventRaised -= HandleItemTransaktionToEquipment;
-		toInventoryEventChannel.OnEventRaised -= HandleItemTransactionToInventory;
+		// inventoryTabChanged.OnEventRaised -= AddItemsToPlayerOverlay;
+		equipEventChannel.OnEventRaised -= EquipItem;
+		unequipEventChannel.OnEventRaised -= UnequipItem;
 	}
 
 	private void Start() {
@@ -43,17 +44,19 @@ public class InventoryManager : MonoBehaviour {
 	// TODO needs event channels that add, remove items from a inventory
 	
 	// todo Add item to Inventory(ItemSO item, InventorySO inventory)
+	// itemID is item in ItemContainer
 	private void AddItemToPlayerInventory(int itemID) {
 		playerInventory.itemIDs.Add(itemID);
 		playerInventory.equipmentID.Add(-1);
-		onItemPickupEventChannel.RaiseEvent(itemID);
+		// onItemPickupEventChannel.RaiseEvent(itemID);
 	}
 
 	// todo rename -> remove item from Player inventory
+	// itemID is id within inventory
 	private void DeleteItemInPlayerInventory(int itemID) {
 		playerInventory.equipmentID.RemoveAt(itemID);
 		playerInventory.itemIDs.RemoveAt(itemID);
-		onItemDropEventChannel.RaiseEvent(itemID);
+		// onItemDropEventChannel.RaiseEvent(itemID);
 	}
 
 	#endregion
@@ -77,16 +80,16 @@ public class InventoryManager : MonoBehaviour {
 		*/
 	}
 
-	private void HandleItemTransactionToInventory(int playerId, EquipmentPosition pos) {
+	private void UnequipItem(int playerId, EquipmentPosition pos) {
 				// set the player id of the once equipped item in the inventory to -1
-				playerInventory.equipmentID[equipmentContainer.inventories[playerId].items[(int) pos]] = -1;
+				playerInventory.equipmentID[equipmentContainer.equipmentInventories[playerId].items[(int) pos]] = -1;
 				// unequip item
-				equipmentContainer.inventories[playerId].items[(int) pos] = -1;
+				equipmentContainer.equipmentInventories[playerId].items[(int) pos] = -1;
 	}
 
-	private void HandleItemTransaktionToEquipment(int itemID, int playerID, EquipmentPosition pos) {
-		playerInventory.equipmentID[itemID] = playerID;
-		equipmentContainer.inventories[playerID].items[(int) pos] = itemID;
+	private void EquipItem(int inventoryItemID, int playerID, EquipmentPosition pos) {
+		playerInventory.equipmentID[inventoryItemID] = playerID;
+		equipmentContainer.equipmentInventories[playerID].items[(int) pos] = inventoryItemID;
 	}
 
 	private void ChangeOverlayByItemType(ItemType itemType) {
@@ -106,10 +109,10 @@ public class InventoryManager : MonoBehaviour {
 		private void InitializeEquipmentInventory() {
 				CharacterList characterList = FindObjectOfType<CharacterList>();
 				if ( characterList ) {
-						equipmentContainer.inventories = new List<Equipment>();
+						equipmentContainer.equipmentInventories = new List<Equipment>();
 						foreach ( GameObject player in characterList.playerContainer)
 						{
-								equipmentContainer.inventories.Add(new Equipment());
+								equipmentContainer.equipmentInventories.Add(new Equipment());
 						}
 				}
 		/*

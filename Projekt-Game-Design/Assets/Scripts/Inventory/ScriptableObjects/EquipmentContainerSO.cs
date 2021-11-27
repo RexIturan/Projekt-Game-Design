@@ -9,18 +9,18 @@ using UnityEngine;
 public class EquipmentContainerSO : ScriptableObject
 {
 		[SerializeField] private InventorySO inventory;
-    public List<Equipment> inventories;
+    public List<Equipment> equipmentInventories;
 
 		public List<ItemSO> GetEquippedItems(int equipmentID) {
 				List<ItemSO> items = new List<ItemSO>();
-				if ( equipmentID >= inventories.Count || equipmentID < 0 )
+				if ( equipmentID >= equipmentInventories.Count || equipmentID < 0 )
 				{
 						return null;
 						//Debug.LogWarning("ID, " + equipmentID + ", was no valid Equipment (Inventory)");
 				}
 				else
 				{
-						foreach ( int inventoryID in inventories[equipmentID].items )
+						foreach ( int inventoryID in equipmentInventories[equipmentID].items )
 						{
 								items.Add(inventory.GetItem(inventoryID));
 						}

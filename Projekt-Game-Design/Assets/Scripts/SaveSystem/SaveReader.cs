@@ -65,7 +65,7 @@ namespace SaveSystem {
 					equipment.items[i] = equipmentInventory.itemIds[i];
 				}
 									
-				equipmentContainer.inventories.Add(equipment);
+				equipmentContainer.equipmentInventories.Add(equipment);
 			}
 		}
 		

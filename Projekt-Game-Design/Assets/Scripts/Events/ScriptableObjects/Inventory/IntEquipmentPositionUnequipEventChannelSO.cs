@@ -3,8 +3,8 @@ using Events.ScriptableObjects.Core;
 using UnityEngine;
 
 namespace Events.ScriptableObjects {
-    [CreateAssetMenu(menuName = "Events/IntEquipmentPosition to Inventory Event Channel")]
-    public class IntEquipmentPositionToInventoryEventChannelSO : EventChannelBaseSO {
+    [CreateAssetMenu(menuName = "Events/IntEquipmentPosition Unequip Event Channel")]
+    public class IntEquipmentPositionUnequipEventChannelSO : EventChannelBaseSO {
         
         public event Action<int, EquipmentPosition> OnEventRaised;
 
