@@ -297,6 +297,22 @@ namespace Input {
 			setLevelEditorModeEC.RaiseEvent(3);
 		}
 
+		public void OnTerrain(InputAction.CallbackContext context) {
+			setLevelEditorModeEC.RaiseEvent(4);
+		}
+
+		public void OnItem(InputAction.CallbackContext context) {
+			setLevelEditorModeEC.RaiseEvent(5);
+		}
+
+		public void OnCharacter(InputAction.CallbackContext context) {
+			setLevelEditorModeEC.RaiseEvent(6);
+		}
+
+		public void OnObjects(InputAction.CallbackContext context) {
+			setLevelEditorModeEC.RaiseEvent(7);
+		}
+		
 		public void OnResetLevel(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
 				ResetEditorLevelEvent.Invoke();	

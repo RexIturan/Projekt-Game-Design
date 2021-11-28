@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Characters;
 using Grid;
+using Level.Grid.ItemGrid;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 
@@ -26,12 +27,9 @@ namespace SaveSystem {
 //////////////////////////////////// Local Functions ///////////////////////////////////////////////
 		#region Local Functions
 
-		private bool ReadGridData(GridData_Save gridDataSave, GridDataSO globalGridData) {
+		private bool ReadGridData(GridData_Save gridDataSave, GridDataSO gridData) {
 			
-			globalGridData.height = gridDataSave.height;
-			globalGridData.width = gridDataSave.width;
-			globalGridData.cellSize = gridDataSave.cellSize;
-			globalGridData.originPosition = gridDataSave.originPosition;
+			gridData.InitValues(gridData);
 			
 			//todo check if all read date is valid
 			return true;
@@ -42,7 +40,18 @@ namespace SaveSystem {
 		/// </summary>
 		/// <param name="saveGridSave"></param>
 		/// <param name="gridContaier"></param>
-		private void ReadGrid(List<TileGrid> saveGridSave, GridContainerSO gridContaier) {
+		private void ReadGrid(List<TileGrid> saveGridSave, GridDataSO gridData, GridContainerSO gridContaier) {
+			var grid = saveGridSave[0];
+			
+			//todo move somewhere else
+			gridContaier.InitGrids(gridData);
+			gridContaier.items = new ItemGrid[saveGridSave.Count];
+			for ( int i = 0; i < gridContaier.items.Length; i++ ) {
+				gridContaier.items[i] = new ItemGrid(
+					width: grid.Width,
+					height: grid.Height, cellSize: grid.CellSize, originPosition: grid.OriginPosition);
+			}
+			
 			gridContaier.tileGrids.Clear();
 			gridContaier.tileGrids.AddRange(saveGridSave);
 		}
@@ -94,9 +103,9 @@ namespace SaveSystem {
 		}
 		
 		public void ReadSave(Save save) {
-				
-			ReadGrid(save.gridSave, _gridContaier);
+			
 			ReadGridData(save.gridDataSave, _gridData);
+			ReadGrid(save.gridSave, _gridData, _gridContaier);
 
 			// ReadCharacter(save.players, save.enemies);
 			_characterInitializer.Initialise(save.players, save.enemies);

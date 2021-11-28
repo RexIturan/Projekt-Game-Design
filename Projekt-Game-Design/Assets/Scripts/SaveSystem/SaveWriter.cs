@@ -19,12 +19,13 @@ namespace SaveSystem {
 
 		#region Local Functions
 
-		private GridData_Save GetGridDataSaveData(GridDataSO globalGridData) {
+		private GridData_Save GetGridDataSaveData(GridDataSO gridData) {
 			GridData_Save gridDataSave = new GridData_Save {
-				height = globalGridData.height,
-				width = globalGridData.width,
-				cellSize = globalGridData.cellSize,
-				originPosition = globalGridData.originPosition
+				height = gridData.Height,
+				width = gridData.Width,
+				depth = gridData.Depth,
+				cellSize = gridData.CellSize,
+				originPosition = gridData.OriginPosition
 			};
 
 			return gridDataSave;

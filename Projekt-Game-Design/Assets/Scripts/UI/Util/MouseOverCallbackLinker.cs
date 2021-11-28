@@ -19,17 +19,18 @@ namespace UI.Util {
 		
 		private void MouseExitCallback(MouseOutEvent outEvent) {
 			mouseOverUI_EC.RaiseEvent(false);
-			// Debug.Log("Exit");
+			// Debug.Log($"Exit\n{outEvent.target}");
 		}
 
 		private void MouseEnterCallback(MouseOverEvent enterEvent) {
 			//todo do something with the event
 			mouseOverUI_EC.RaiseEvent(true);
-			// Debug.Log("Enter");
+			// Debug.Log($"Enter\n{enterEvent.target}");
 		}
 
 		private void SetupMouseOverCallback(VisualElement element) {
 			if ( !_elementsWithCallback.Contains(element) ) {
+				//todo if(element.ClassListContains("blocksMouse"))
 				if ( element.pickingMode == PickingMode.Position && element.visible) {
 					_elementsWithCallback.Add(element);
 					element.RegisterCallback<MouseOverEvent>(MouseEnterCallback);

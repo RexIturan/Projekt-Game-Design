@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,22 +42,31 @@ namespace Input {
 
 		#region public functions
 
+		#region Mouse
+
+		
+
+		#endregion
+		
+		#region Mouse UI
+
 		public void SetMouseOverUI(bool over) {
 			//todo map id with if over
 			if ( over ) {
 				_overUICount++;
 				_mouseIsOverUI = true;
-				Debug.Log($"InputCache > SetMouseOverUI:\nInc ++ ref: {_overUICount} value: {IsMouseOverUI}" );
+				// Debug.Log($"InputCache > SetMouseOverUI:\nInc ++ ref: {_overUICount} value: {IsMouseOverUI}" );
 			}
 			else {
 				_overUICount--;
-				if ( _overUICount == 0 ) {
+				if ( _overUICount <= 0 ) {
 					_mouseIsOverUI = false;
 				}
-				else if ( _overUICount < 0 ) {
-					Debug.LogError("InputCache > SetMouseOverUI \n too much want to disable");
+				if ( _overUICount < 0 ) {
+					_overUICount = 0;
+					Debug.LogError("InputCache > SetMouseOverUI \n too much Elements want to disable");
 				}
-				Debug.Log($"InputCache > SetMouseOverUI:\nDec -- ref: {_overUICount} value: {IsMouseOverUI}" );
+				// Debug.Log($"InputCache > SetMouseOverUI:\nDec -- ref: {_overUICount} value: {IsMouseOverUI}" );
 			}
 		}
 
@@ -65,12 +75,19 @@ namespace Input {
 		public bool IsMouseOutsideWindow() {
 			//get mouse position
 			var pos = Mouse.current.position.ReadValue();
-			var view = Camera.current.ScreenToViewportPoint(pos);
+			if ( Camera.main is { } ) {
+				var view = Camera.main.ScreenToViewportPoint(pos);
 
-			// check against viewport
-			var isOutside = view.x < 0 || view.x > 1 || view.y < 0 || view.y > 1;
-			return isOutside;
+				// check against viewport
+				var isOutside = view.x < 0 || view.x > 1 || view.y < 0 || view.y > 1;
+				return isOutside;
+			}
+			else {
+				return true;
+			}
 		}
+
+		#endregion
 
 		#endregion
 	}

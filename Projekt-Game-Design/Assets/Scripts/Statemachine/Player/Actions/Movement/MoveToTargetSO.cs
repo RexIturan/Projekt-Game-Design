@@ -35,7 +35,7 @@ public class MoveToTarget : StateAction
     public override void Awake(StateMachine stateMachine)
     {
         _playerCharacterSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
-				TimePerStep = _playerCharacterSC.globalGridData.cellSize / _playerCharacterSC.speed;
+				TimePerStep = _playerCharacterSC.globalGridData.CellSize / _playerCharacterSC.speed;
     }
     
     public override void OnUpdate()

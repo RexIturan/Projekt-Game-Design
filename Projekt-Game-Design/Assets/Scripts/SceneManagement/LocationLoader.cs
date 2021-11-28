@@ -57,8 +57,8 @@ namespace SceneManagement {
 				}
 				else {
 					//todo load empty or default??
-					_saveManager.LoadLevel("");
-					_saveManager.InitializeLevel();
+					// _saveManager.LoadLevel("");
+					// _saveManager.InitializeLevel();
 				
 					// enable on Start
 					enableGampleyInputEC.RaiseEvent();

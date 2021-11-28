@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7814138535658991266}
   - component: {fileID: 7814138535658991293}
-  - component: {fileID: 7814138535658991267}
   - component: {fileID: 7814138535658991264}
   - component: {fileID: 7814138535658991265}
   - component: {fileID: 7814138535658991270}
@@ -51,31 +50,6 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 64ab7daf4a83bdb429be7a57dbf1d64e, type: 3}
   m_SortingOrder: 0
---- !u!114 &7814138535658991267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814138535658991292}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afe6c4600f907e64ca01409d01326a60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RepeatDelay: 0.5
-  m_RepeatRate: 0.05
-  m_FallbackOnIMGUIKeyboardEvents: 0
-  m_InputActionAsset: {fileID: -944628639613478452, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
-  m_NavigateAction: {fileID: -8784545083839296357, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
-  m_TabAction: {fileID: 8583089105167418208, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
-  m_ClickAction: {fileID: 3001919216989983466, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
 --- !u!114 &7814138535658991264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fe446a5bcbd7848a1985a8b484332f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuToLoad:
+  - {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
+  loadMenuEC: {fileID: 0}
   visibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
   visibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
   enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}

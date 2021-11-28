@@ -1,9 +1,15 @@
-﻿using UnityEngine.UIElements;
+﻿using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AbilitySlot : VisualElement {
 	public readonly Image icon;
 	public int abilityID = -1;
 
+	private void SetAbility(Texture texture, int id) {
+		icon.image = texture;
+		abilityID = id;
+	}
+	
 	public AbilitySlot() {
 		//Create a new Image element and add it to the root
 		icon = new Image();
@@ -12,14 +18,11 @@ public class AbilitySlot : VisualElement {
 		icon.AddToClassList("slotIcon");
 	}
 
-	public void HoldAbility(AbilitySO ability) {
-		icon.image = ability.icon.texture;
-		abilityID = ability.abilityID;
-		// Debug.Log("Test in HoldItem");
+	public void SetAbility(AbilitySO ability) {
+		SetAbility(ability.icon.texture, ability.abilityID);
 	}
-
-	public void DropAbility() {
-		abilityID = -1;
-		icon.image = null;
+	
+	public void ClearAbility() {
+		SetAbility(null, -1);
 	}
 }

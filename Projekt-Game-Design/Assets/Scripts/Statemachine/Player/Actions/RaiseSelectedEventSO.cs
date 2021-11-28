@@ -38,7 +38,6 @@ public class RaiseSelectedEvent : StateAction
     //TODO: Muss geändert werden
     private void AbilityCallback(int value) {
         Debug.Log("Es wurde die Ability mit der ID: " + value + " gedrückt.");
-        Debug.Log(this._gameObject.GetInstanceID());
         if (!_playerCharacterSc.abilitySelected)
         {
             _playerCharacterSc.abilitySelected = true;
