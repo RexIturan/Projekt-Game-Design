@@ -21,13 +21,7 @@ namespace Grid {
                 showDebug,
                 debugTextParent) { }
 
-        public void CopyTo(TileGrid tileGrid, Vector2Int offset) {
-            for (int x = 0; x < Width; x++) {
-                for (int y = 0; y < Height; y++) {
-                    tileGrid.SetGridObject(x + offset.x, y + offset.y, GetGridObject(x, y));
-                }
-            }
-        }
+        
 
         public override string ToString() {
             var str = "";

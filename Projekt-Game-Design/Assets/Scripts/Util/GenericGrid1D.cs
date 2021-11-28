@@ -121,7 +121,7 @@ namespace Util {
 			if ( IsInBounds(x, y) )
 				return grid1DArray[Coord2DToIndex(x, y, width)];
 			else {
-				Debug.LogWarning("Index of Grid object out of bounds! x: " + x + ", y: " + y);
+				Debug.LogWarning($"Index of Grid object out of bounds! x: {x}, y: {y}, dims are: {width}, {height}");
 				return default;
 			}
 		}
@@ -155,6 +155,14 @@ namespace Util {
 			return new Vector2Int(x, y);
 		}
 
+		public void CopyTo(GenericGrid1D<TGridObject> grid, Vector2Int offset) {
+			for (int x = 0; x < Width; x++) {
+				for (int y = 0; y < Height; y++) {
+					grid.SetGridObject(x + offset.x, y + offset.y, this.GetGridObject(x, y));
+				}
+			}
+		}
+		
 		public class OnGridObjectChangedGrid1DEventArgs {
 			public int x;
 			public int y;

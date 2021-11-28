@@ -45,11 +45,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}
   setModeEC: {fileID: 11400000, guid: 9d4a76d0eeb24bf49ae35e7d82abeb87, type: 2}
-  updateMeshEC: {fileID: 11400000, guid: 9f8a7d3a00a8db44e8e9538720f9a6b4, type: 2}
-  drawer: {fileID: 0}
-  controller: {fileID: 0}
+  redrawLevelEC: {fileID: 11400000, guid: 076a51549e7ef074aaa161d0013325a5, type: 2}
+  gridDrawer: {fileID: 0}
+  cursorDrawer: {fileID: 0}
+  gridController: {fileID: 0}
   inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   inputCache: {fileID: 11400000, guid: 767106d458901634590366e6fae31156, type: 2}
   tileTypesContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}
+  gridDataSO: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   mode: 0
+  editMode: 0
   selectedTileType: {fileID: 0}

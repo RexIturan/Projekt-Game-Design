@@ -20,9 +20,11 @@ namespace Visual {
         [Header("Visuals")]
         [SerializeField] private Tilemap[] gridTilemap;
         [SerializeField] private Tilemap cursorTilemap;
+        [SerializeField] private Tilemap bottomTilemap;
 
         [SerializeField] private TileTypePair[] tileTypeTileDict;
         [SerializeField] private TileBase cursor;
+        [SerializeField] private TileBase bottomTile;
         [SerializeField] private TileBase errorTile;
 
         public TileBase GetTileFromTileType(TileTypeSO tileType) {
@@ -33,6 +35,20 @@ namespace Visual {
                 }
             }
             return tile;
+        }
+
+        public void DrawGridLayout() {
+	        bottomTilemap.ClearAllTiles();
+
+	        var width = globalGridData.Width;
+	        var depth = globalGridData.Depth;
+	        var offset = globalGridData.GetLowerBounds();
+	        
+	        for ( int x = 0; x < width; x++ ) {
+		        for ( int z = 0; z < depth; z++ ) {
+							bottomTilemap.SetTile(new Vector3Int(x + offset.x, z + offset.y, 0), bottomTile);			        
+		        }
+	        }
         }
         
         public void DrawGrid() {

@@ -1,217 +1,202 @@
 ﻿using System.Collections.Generic;
+using Level.Grid;
+using Level.Grid.CharacterGrid;
+using Level.Grid.ItemGrid;
+using Level.Grid.ObjectGrid;
 using UnityEngine;
+using Util.Extensions;
 
 namespace Grid {
-    public class GridController : MonoBehaviour {
-        [SerializeField] private GridContainerSO gridContainer;
-        [SerializeField] private GridDataSO globalGridData;
+	//todo rename -> GridEditor??
+	public class GridController : MonoBehaviour {
+		[SerializeField] private GridContainerSO gridContainer;
+		[SerializeField] private GridDataSO gridData;
 
-        [SerializeField] private TileTypeContainerSO tileTypesContainer;
-        
-        // int level 0 - 1 
-        public TileGrid CreateNewTileGrid() {
-            return new TileGrid(
-                globalGridData.Width,
-                globalGridData.Height,
-                globalGridData.CellSize,
-                globalGridData.OriginPosition
-            );
-        }
+		[SerializeField] private TileTypeContainerSO tileTypesContainer;
 
-        // TODO move to grid data 
-        // bounds are inclusive
-        public bool IsInBounds(int x, int y, Vector2Int lowerBounds, Vector2Int upperBounds) {
-            return x >= lowerBounds.x &&
-                   y >= lowerBounds.y &&
-                   x <= upperBounds.x &&
-                   y <= upperBounds.y;
-        }
+		#region private functions
+		
+		private void FillTileGrid(TileGrid tileGrid, int tileTypeID) {
+			for ( int x = 0; x < tileGrid.Width; x++ ) {
+				for ( int y = 0; y < tileGrid.Height; y++ ) {
+					tileGrid.GetGridObject(x, y).SetTileType(tileTypeID);
+				}
+			}
+		}
 
-        public bool IsInBounds(Vector2Int pos, Vector2Int lowerBounds, Vector2Int upperBounds) {
-            return IsInBounds(pos.x, pos.y, lowerBounds, upperBounds);
-        }
+		private void ResizeGrids(Vector2Int gridPos, out Vector2Int newGridPos) {
+			newGridPos = gridPos;
+			if ( !gridData.IsIn2DGridBounds(gridPos) ) {
+			
+				// calc new offset & new dimensions
+				// 0 or something negative
+				Vector2Int originOffset = gridData.GetOriginOffset(gridPos);
+				// bigger then before??
+				Vector2Int newDimensions = gridData.GetNewDimensions(gridPos, originOffset);
+				
+				newGridPos = gridPos + originOffset.Abs();
 
-        // pos in -/- direction
-        // returns inclusive bound
-        public Vector2Int GetLowerBounds() {
-            return WorldPosToTilePos(globalGridData.OriginPosition);
-        }
+				Debug.Log($"pos:{gridPos}| offset{originOffset} new dim{newDimensions}| oldDim {gridData.Width}|{gridData.Depth}");
+				
+				// resize grid
+				ResizeGrid(originOffset, newDimensions, gridData);
+			}
+		}
 
-        // pos in -/- direction
-        // returns inclusive bound
-        public Vector2Int GetUpperBounds(Vector2Int pos, int width, int height) {
-            return new Vector2Int(width - 1 + pos.x, height - 1 + pos.y);
-        }
+		private void ResizeGrids(Vector2Int min2D, Vector2Int max2D, out Vector2Int newMin2D, out Vector2Int newMax2D) {
 
-        // y == layer
-        public Vector2Int WorldPosToTilePos(Vector3 worldPos) {
-            var flooredPos = Vector3Int.FloorToInt(worldPos);
-            return new Vector2Int(flooredPos.x, flooredPos.z);
-        }
+			newMin2D = min2D;
+			newMax2D = max2D;
+			
+			if ( !gridData.IsIn2DGridBounds(min2D) || !gridData.IsIn2DGridBounds(max2D) ) {
 
-        private Vector2Int TilePosToGridPos(Vector2Int pos, Vector2Int lowerBounds) {
-            // shift pos into grid space
-            return new Vector2Int(
-                x: pos.x + Mathf.Abs(lowerBounds.x),
-                y: pos.y + Mathf.Abs(lowerBounds.y));
-        }
+				// calc new offset & new dimensions
+				// 0 or something negative
+				Vector2Int originOffset = gridData.GetOriginOffset(min2D);
+				// bigger then before??
+				Vector2Int newDimensions = gridData.GetNewDimensions(max2D, originOffset);
+				
+				newMin2D = min2D + originOffset.Abs();
+				newMax2D = max2D + originOffset.Abs();
+				
+				Debug.Log($"min:{min2D} max:{max2D} | offset{originOffset} new dim{newDimensions}| oldDim {gridData.Width}|{gridData.Depth}");
+				
+				ResizeGrid(originOffset, newDimensions, gridData);				
+			}
+		}
+		
+		//todo maybe move to grid data or gridContainer??
+		private void ResizeGrid(Vector2Int originOffset, Vector2Int newDimensions, GridDataSO gridDataSO) {
+			
+			gridDataSO.ChangeBounds(newDimensions.x, newDimensions.y, originOffset);
+			
+			//copy grids into the new grids
+			gridContainer.CopyAllGrids(originOffset, gridDataSO);
+		}
+		
+		#endregion
+		
+		#region Add One
 
-        public void AddTileAt(Vector3 pos, int tileTypeID) {
-            AddTileAt(WorldPosToTilePos(pos), 1, tileTypeID);
-        }
+		public void AddItemAt(Vector3 pos, int itemId) {
+			AddItemAt(gridData.GetGridPos3DFromWorldPos(pos), itemId);
+		}
+		
+		public void AddCharacterAt(Vector3 pos, Faction faction) {
+			AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction);
+		}
+		
+		public void AddTileAt(Vector3 pos, int tileTypeID) {
+			AddTileAt(gridData.GetGridPos3DFromWorldPos(pos), tileTypeID);
+		}
 
-        public void AddTileAt(Vector2Int pos, int level, int tileTypeID) {
-            var lowerBounds = GetLowerBounds();
-            var upperBounds = GetUpperBounds(
-                WorldPosToTilePos(globalGridData.OriginPosition),
-                globalGridData.Width,
-                globalGridData.Height);
+		private void AddCharacterAt(Vector3Int gridPos, Faction faction) {
+			
+			var layer = gridPos.y;
+			var gridPos2D = gridData.GetGridPos2DFromGridPos3D(gridPos);
 
-            Vector2Int newLowerBounds = lowerBounds;
-            Vector2Int newUpperBounds = upperBounds;
+			ResizeGrids(gridPos2D, out var finalPos);
+			
+			SetCharacterAt(finalPos.x, layer, finalPos.y, faction);
+		}
 
-            if (!IsInBounds(pos.x, pos.y, lowerBounds, upperBounds)) {
-                // Debug.Log("Out of Bounds");
+		private void AddItemAt(Vector3Int gridPos, int itemId) {
+			var layer = gridPos.y;
+			var gridPos2D = gridData.GetGridPos2DFromGridPos3D(gridPos);
 
-                newLowerBounds = new Vector2Int(
-                    Mathf.Min(pos.x, lowerBounds.x),
-                    Mathf.Min(pos.y, lowerBounds.y)
-                );
+			ResizeGrids(gridPos2D, out var finalPos);
+			
+			SetItemAt(finalPos, layer, itemId);
+		}
+		
+		private void AddTileAt(Vector3Int gridPos, int tileTypeID) {
 
-                newUpperBounds = new Vector2Int(
-                    Mathf.Max(pos.x, upperBounds.x),
-                    Mathf.Max(pos.y, upperBounds.y)
-                );
+			var layer = gridPos.y;
+			var gridPos2D = gridData.GetGridPos2DFromGridPos3D(gridPos);
 
-                IncreaseGrid(lowerBounds, newLowerBounds, newUpperBounds);
+			ResizeGrids(gridPos2D, out var finalPos);
+			
+			if ( gridContainer.tileGrids != null ) {
+				if ( gridContainer.tileGrids.Count > layer ) {
+					if ( gridContainer.tileGrids[layer] != null ) {
+						gridContainer.tileGrids[layer].GetGridObject(finalPos.x, finalPos.y)
+							.SetTileType(tileTypeID);
+					}
+				}
+			}
+		}
+		
+		private void SetCharacterAt(int x, int y, int z, Faction faction) {
+			//todo char data
+			if ( gridContainer.characters != null ) {
+				if ( gridContainer.characters.Length > y ) {
+					if ( gridContainer.characters[y] != null ) {
+						gridContainer.characters[y].GetGridObject(x, z).SetCharData(faction);
+					}
+				}
+			}
+		}
 
-                // TODO newPos?
+		private void SetItemAt(Vector2Int pos, int layer, int itemId) {
+			Debug.Log($"SetItemAt {pos} {itemId} |{gridContainer.items[layer].Width}, {layer}, {gridContainer.items[layer].Height}");
 
-                // Debug.Log($"pos:{pos}| lower{lowerBounds} upper{upperBounds}| newLower{newLowerBounds} newUpper{newUpperBounds}");
-            }
-            else {
-                // Debug.Log("In Bounds");
-                // Debug.Log($"pos:{pos}| lower{lowerBounds} upper{upperBounds}|");
-            }
+			var tileId = gridContainer.tileGrids[layer].GetGridObject(pos).tileTypeID;
+			var tile = tileTypesContainer.tileTypes[tileId];
+			if ( ! tile.properties.HasFlag(TileProperties.Solid | TileProperties.Opaque) ) {
+				gridContainer.items[layer].GetGridObject(pos).SetId(itemId);	
+			}
+		}
+		
+		#endregion
 
-            var newPos = TilePosToGridPos(pos, newLowerBounds);
+		#region Remove One
 
-            // Debug.Log($"tilePosOffsetted {x} {y}");
+		// public void RemoveTileAt()
 
-            if ( gridContainer.tileGrids != null ) {
-	            if ( gridContainer.tileGrids.Count > level ) {
-		            if ( gridContainer.tileGrids[level] != null ) {
-			            gridContainer.tileGrids[level].GetGridObject(newPos.x, newPos.y).SetTileType(tileTypeID);  
-		            }
-	            }
-            }
-            
+		public void RemoveItemAt(Vector3 worldPos) {
+			AddItemAt(worldPos, -1);
+		}
+		
+		#endregion
 
-            // drawer.DrawGrid();
-        }
+		#region Add Many
 
-        public void AddMultipleTilesAt(Vector3 start, Vector3 end, int tileTypeID) {
-            AddMultipleTilesAt(WorldPosToTilePos(start), WorldPosToTilePos(end), tileTypeID);
-        }
+		public void AddMultipleTilesAt(Vector3 start, Vector3 end, int tileTypeID) {
+			// AddMultipleTilesAt(WorldPosToTilePos(start), WorldPosToTilePos(end), tileTypeID);
+			AddMultipleTilesAt(
+				gridPos3DStart: gridData.GetGridPos3DFromWorldPos(start),
+				gridPos3DEnd: gridData.GetGridPos3DFromWorldPos(end), 
+				tileTypeID);
+		}
 
-        // from = -OO -> origin | to origin -> +OO
-        public void AddMultipleTilesAt(Vector2Int start, Vector2Int end, int tileTypeID) {
-            var minXY = new Vector2Int(Mathf.Min(start.x, end.x), Mathf.Min(start.y, end.y));
-            var maxXY = new Vector2Int(Mathf.Max(start.x, end.x), Mathf.Max(start.y, end.y));
+		private void AddMultipleTilesAt(Vector3Int gridPos3DStart, Vector3Int gridPos3DEnd, int tileTypeID) {
 
-            var lowerBounds = GetLowerBounds();
-            var upperBounds = GetUpperBounds(
-                WorldPosToTilePos(globalGridData.OriginPosition),
-                globalGridData.Width,
-                globalGridData.Height);
+			var min3D = Vector3Int.Min(gridPos3DStart, gridPos3DEnd);
+			var max3D = Vector3Int.Max(gridPos3DStart, gridPos3DEnd);
 
-            Vector2Int newLowerBounds = lowerBounds;
-            Vector2Int newUpperBounds = upperBounds;
+			var min2D = gridData.GetGridPos2DFromGridPos3D(min3D);
+			var max2D = gridData.GetGridPos2DFromGridPos3D(max3D);
 
-            if (!IsInBounds(start, lowerBounds, upperBounds) || !IsInBounds(end, lowerBounds, upperBounds)) {
-                // Debug.Log("Out of Bounds");
+			ResizeGrids(min2D, max2D, out var newMin2D, out var newMax2D);
 
-                newLowerBounds = new Vector2Int(
-                    Mathf.Min(start.x, end.x, lowerBounds.x),
-                    Mathf.Min(start.y, end.y, lowerBounds.y)
-                );
+			for ( int y = min3D.y; y <= max3D.y; y++ ) {
+				var tileGrid = gridContainer.tileGrids[y];
+				for ( int x = newMin2D.x; x <= newMax2D.x; x++ ) {
+					for ( int z = newMin2D.y; z <= newMax2D.y; z++ ) {
+						tileGrid.GetGridObject(x, z).SetTileType(tileTypeID);
+					}
+				}
+			}
+		}
+		
+		#endregion
 
-                newUpperBounds = new Vector2Int(
-                    Mathf.Max(start.x, end.x, upperBounds.x),
-                    Mathf.Max(start.y, end.y, upperBounds.y)
-                );
+		public void ResetGrid() {
+			gridData.Reset();
 
-                IncreaseGrid(lowerBounds, newLowerBounds, newUpperBounds);
-            }
-
-            minXY = TilePosToGridPos(minXY, newLowerBounds);
-            maxXY = TilePosToGridPos(maxXY, newLowerBounds);
-
-            foreach (var tileGrid in gridContainer.tileGrids) {
-                for (int x = minXY.x; x <= maxXY.x; x++) {
-                    for (int y = minXY.y; y <= maxXY.y; y++) {
-                        tileGrid.GetGridObject(x, y).SetTileType(tileTypeID);
-                    }
-                }
-            }
-
-            // drawer.DrawGrid();
-        }
-
-        public void FillGrid(TileGrid tileGrid, int tileTypeID) {
-            for (int x = 0; x < tileGrid.Width; x++) {
-                for (int y = 0; y < tileGrid.Height; y++) {
-                    tileGrid.GetGridObject(x, y).SetTileType(tileTypeID);
-                }
-            }
-        }
-
-        // TODO wording
-        // TODO maybe => from -> negChange && to -> positiveChange 
-        // from = -OO -> origin | to = origin -> +OO
-        public void IncreaseGrid(Vector2Int lowerBounds, Vector2Int newLowerBounds, Vector2Int newUpperBounds) {
-            var oldTileGrids = gridContainer.tileGrids;
-
-            //TODO get change easier
-            var offset = TilePosToGridPos(newLowerBounds, lowerBounds) * -1;
-
-            ChangeBounds(newLowerBounds, newUpperBounds);
-
-            for (int i = 0; i < gridContainer.tileGrids.Count; i++) {
-                
-                TileGrid newTileGrid = CreateNewTileGrid();
-                //TODO default fill
-                if (i == 0) {
-                    FillGrid(newTileGrid, tileTypesContainer.tileTypes[1].id);    
-                }
-                else {
-                    FillGrid(newTileGrid, tileTypesContainer.tileTypes[0].id);
-                }
-                oldTileGrids[i].CopyTo(newTileGrid, offset);
-                gridContainer.tileGrids[i] = newTileGrid;
-            }
-        }
-
-        private void ChangeBounds(Vector2Int newLowerBounds, Vector2Int newUpperBounds) {
-            globalGridData.Width = newUpperBounds.x + Mathf.Abs(newLowerBounds.x) + 1;
-            globalGridData.Height = newUpperBounds.y + Mathf.Abs(newLowerBounds.y) + 1;
-            globalGridData.OriginPosition = new Vector3(
-                x: newLowerBounds.x,
-                y: globalGridData.OriginPosition.y,
-                z: newLowerBounds.y);
-        }
-
-        public void ResetGrid() {
-            globalGridData.height = 1;
-            globalGridData.width = 1;
-            globalGridData.originPosition = new Vector3(0, 0, 0);
-            globalGridData.cellSize = 1;
-
-            gridContainer.tileGrids = new List<TileGrid>();
-            gridContainer.tileGrids.Add(CreateNewTileGrid());
-            gridContainer.tileGrids.Add(CreateNewTileGrid());
-            FillGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[1].id);
-            FillGrid(gridContainer.tileGrids[1], tileTypesContainer.tileTypes[0].id);
-        }
-    }
+			gridContainer.InitGrids(gridData);
+			FillTileGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[1].id);
+			FillTileGrid(gridContainer.tileGrids[1], tileTypesContainer.tileTypes[0].id);
+		}
+	}
 }

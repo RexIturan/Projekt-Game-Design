@@ -9,7 +9,8 @@
         "Unity.Addressables",
         "Unity.ResourceManager",
         "FogOfWar",
-        "Unity.Animation.Rigging"
+        "Unity.Animation.Rigging",
+        "UnityEditor.UIElementsModule"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

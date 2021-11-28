@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Events.ScriptableObjects;
 using Grid;
 using Input;
-using SaveSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Util;
@@ -10,6 +10,7 @@ using Visual;
 
 namespace LevelEditor {
 	public class LevelEditor : MonoBehaviour {
+		//todo(vincent) rename
 		public enum CursorMode {
 			Select,
 			Paint,
@@ -17,54 +18,94 @@ namespace LevelEditor {
 			Fill,
 		}
 
+		//todo rename
+		public enum EditType {
+			Terrain,
+			Item,
+			Character,
+			Objects,
+		}
+
 		[Header("Receiving Events On")] [SerializeField]
 		private VoidEventChannelSO levelLoaded;
 
 		[SerializeField] private IntEventChannelSO setModeEC;
 
-		[Header("SendingEventsOn")] [SerializeField]
-		private VoidEventChannelSO updateMeshEC;
+		[Header("Sending Events On")] [SerializeField]
+		private VoidEventChannelSO redrawLevelEC;
 
-		[Header("scene References")] [SerializeField]
-		private TileMapDrawer drawer;
+		[Header("scene References")] 
+		[SerializeField] private TileMapDrawer gridDrawer;
+		[SerializeField] private CursorDrawer cursorDrawer;
 
-		[SerializeField] private GridController controller;
-		//input
-		[SerializeField] private InputReader inputReader;
+		[SerializeField] private GridController gridController;
+
+		[Header("Input")] [SerializeField] private InputReader inputReader;
 		[SerializeField] private InputCache inputCache;
 
-		[Header("SO References")] [SerializeField]
-		private TileTypeContainerSO tileTypesContainer;
+		[Header("SO References")] 
+		[SerializeField] private TileTypeContainerSO tileTypesContainer;
+		[SerializeField] private GridDataSO gridDataSO;
 
 		[Header("Settings")] [SerializeField] private CursorMode mode = CursorMode.Paint;
+		[SerializeField] private EditType editMode = EditType.Terrain;
+
+		[Header("Settings")] [SerializeField] private TileTypeSO selectedTileType;
+
+/////////////////////////////////////// Properties ////////////////////////////////////////////
 
 		public CursorMode Mode {
 			get => mode;
 			set => mode = value;
 		}
 
-		[SerializeField] private TileTypeSO selectedTileType;
+		public EditType EditMode {
+			get => editMode;
+			set => editMode = value;
+		}
 
+/////////////////////////////////////// Local Variables ////////////////////////////////////////////
+
+		//todo move to InputCache
 		// runtime input data data
-		private Vector3 _clickPos;
-		private Vector3 _dragPos;
+		// mouse input
+
+		private bool rightMouseWasReleased = false;
+		private bool leftMouseWasReleased = false;
+		private bool leftMouseIsPressed = false;
+		private bool rightMouseIsPressed = false;
+
 		private bool _leftClicked;
 		private bool _rightClicked;
 		private bool _dragEnd;
 
+		private bool remove = false;
+
+		private List<Vector3> _leftClickedPos;
+		private List<Vector3> _rightClickedPos;
+
 /////////////////////////////////////// Local Functions ////////////////////////////////////////////
 
-		private void SetMode(int mode) {
+		private void SetMode(int newMode) {
 			var len = Enum.GetNames(typeof(CursorMode)).Length;
 
-			if ( mode >= 0 && mode < len ) {
-				Mode = ( CursorMode )mode;
+			if ( newMode >= len ) {
+				editMode = ( EditType )( newMode - len );
 			}
+
+			if ( newMode >= 0 && newMode < len ) {
+				Mode = ( CursorMode )newMode;
+			}
+			
+			Debug.Log($"Level Editor > Set Mode\n {mode} {editMode}");
 		}
 
 		#region MonoBehaviour
 
 		private void Awake() {
+			_leftClickedPos = new List<Vector3>();
+			_rightClickedPos = new List<Vector3>();
+
 			selectedTileType = tileTypesContainer.tileTypes[1];
 			inputReader.ResetEditorLevelEvent += ResetLevel;
 			levelLoaded.OnEventRaised += RedrawLevel;
@@ -78,145 +119,236 @@ namespace LevelEditor {
 		}
 
 		private void Update() {
-			if ( !inputReader.GameInput.Gameplay.enabled ) {
+			if ( !inputReader.GameInput.Gameplay.enabled || inputCache.IsMouseOutsideWindow() ) {
 				return;
 			}
 
-			//todo also in input cache??
-			bool leftMouseWasPressed = false;
-			bool leftMouseWasReleased = false;
-			bool leftMousePressed = false;
-			bool rightMousePressed = false;
+			//todo(vincent) refactor #input cache
+
+			#region refactor to mouse input / input cache
+
+			// Debug.Log(inputCache.IsMouseOverUI);
 			
 			if ( !inputCache.IsMouseOverUI ) {
-				var mouse = Mouse.current;	
-				leftMouseWasPressed =  mouse.leftButton.wasPressedThisFrame;
+				var mouse = Mouse.current;
+				rightMouseWasReleased = mouse.rightButton.wasReleasedThisFrame;
 				leftMouseWasReleased = mouse.leftButton.wasReleasedThisFrame;
-				leftMousePressed =     mouse.leftButton.isPressed;
-				rightMousePressed =    mouse.rightButton.isPressed;
+				leftMouseIsPressed = mouse.leftButton.isPressed;
+				rightMouseIsPressed = mouse.rightButton.isPressed;
 			}
-			
-			//todo getMousePosition at level 
-			Vector3 mousePosition = MousePosition.GetMouseWorldPosition(Vector3.up, 1);
+			else {
+				rightMouseWasReleased = false;
+				leftMouseWasReleased = false;
+				leftMouseIsPressed = false;
+				rightMouseIsPressed = false;
+			}
 
-			if ( rightMousePressed ) {
+			//todo getMousePosition at level 
+			// Vector3 mousePosition = MousePosition.GetMouseWorldPosition(Vector3.up, 1);
+
+			Vector3 positionAbove = MousePosition.GetTilePositionFromMousePosition(gridDataSO, true);
+			Vector3 positionBelow = MousePosition.GetTilePositionFromMousePosition(gridDataSO, false);
+			
+			if ( rightMouseIsPressed ) {
+				remove = true;
 				_rightClicked = true;
-				_clickPos = mousePosition;
+				_rightClickedPos.Add(positionBelow);
 			}
+			else {
+				_rightClicked = false;
+			}
+
+			if ( leftMouseIsPressed ) {
+				remove = false;
+				_leftClicked = true;
+				_leftClickedPos.Add(positionAbove);
+			}
+			else {
+				_leftClicked = false;
+			}
+
+			#endregion
+
+			var gridPosAbove = gridDataSO.GetCellPositionFromWorldPos(positionAbove);
+			var gridPosBelow = gridDataSO.GetCellPositionFromWorldPos(positionBelow);
 
 			switch ( mode ) {
 				case CursorMode.Select:
-					drawer.DrawCursorAt(mousePosition);
+					cursorDrawer.DrawCursorAt(gridPosAbove, PreviewBlockController.CursorMode.Select);
 					break;
 
 				case CursorMode.Paint:
-					drawer.DrawCursorAt(mousePosition);
+					if (remove) {
+						cursorDrawer.DrawCursorAt(gridPosBelow, PreviewBlockController.CursorMode.Remove);
+					}
+					else {
+						cursorDrawer.DrawCursorAt(gridPosAbove, PreviewBlockController.CursorMode.Add);
+					}
 
 					if ( _rightClicked ) {
-						HandleRemove();
+						RemoveOne(editMode);
 						break;
 					}
 
 					if ( _leftClicked ) {
-						HandlePaint();
-					}
-
-					if ( leftMousePressed ) {
-						HandleMouseClick(mousePosition);
+						AddOne(editMode);
 					}
 
 					break;
 
 				case CursorMode.Box:
 
-					if ( leftMouseWasPressed ) {
-						HandleMouseClick(mousePosition);
+					if ( _leftClicked ) {
+						HandleMouseDrag(positionAbove);
+						Debug.Log($"left:{_leftClicked} right:{_rightClicked}");
 					}
-
-					if ( leftMousePressed ) {
-						HandleMouseDrag(mousePosition);
+					else if ( _rightClicked) {
+						HandleMouseDrag(positionBelow);
+						Debug.Log($"left:{_leftClicked} right:{_rightClicked}");
 					}
-					else if ( leftMouseWasReleased ) {
+					else if ( leftMouseWasReleased || rightMouseWasReleased ) {
 						HandleMouseDragEnd();
+						_dragEnd = true;
 					}
 
 					if ( _dragEnd ) {
-						HandleBox();
-					}
-					else {
-						if ( _leftClicked ) {
-							drawer.DrawBoxCursorAt(_clickPos, _dragPos);
+						//todo remove
+						Debug.Log("drag ended");
+						if ( remove ) {
+							RemoveMany(EditType.Terrain);
+						}
+						else {
+							AddMany();
 						}
 					}
-
-					break;
-
-				case CursorMode.Fill:
+					else {
+						if ( !remove ) {
+							//todo nicht so 
+							if ( _leftClickedPos.Count > 2 ) {
+								var start = gridDataSO.GetCellPositionFromWorldPos(_leftClickedPos[0]);
+								var end = gridDataSO.GetCellPositionFromWorldPos(_leftClickedPos[1]);
+								cursorDrawer.DrawBoxCursorAt(start, end, PreviewBlockController.CursorMode.Add);
+							}
+						}
+						else if ( remove ) {
+							if ( _rightClickedPos.Count > 2 ) {
+								var startRemove = gridDataSO.GetCellPositionFromWorldPos(_rightClickedPos[0]);
+								var endRemove = gridDataSO.GetCellPositionFromWorldPos(_rightClickedPos[1]);
+								cursorDrawer.DrawBoxCursorAt(startRemove, endRemove, PreviewBlockController.CursorMode.Remove);
+							}
+						}
+					}
 					break;
 			}
 		}
-		
-		#endregion
-		
+
+			#endregion
+
 /////////////////////////////////////// Public Functions ///////////////////////////////////////////
 
-		public void RedrawLevel() {
-			drawer.DrawGrid();
-			updateMeshEC.RaiseEvent();
-		}
+			public void RedrawLevel() {
+				gridDrawer.DrawGridLayout();
+				redrawLevelEC.RaiseEvent();
+			}
 
-		private void HandleBox() {
-			AddMultipleTilesAt(_clickPos, _dragPos);
-			_leftClicked = false;
-			_dragEnd = false;
-			_clickPos = Vector3Int.zero;
-			_dragPos = Vector3Int.zero;
-			drawer.ClearCursor();
-			RedrawLevel();
-		}
+			private void AddMany() {
+				AddMultipleTilesAt(_leftClickedPos[0], _leftClickedPos[1]);
+				_leftClickedPos.Clear();
+				_leftClicked = false;
+				_dragEnd = false;
+				cursorDrawer.HideCursor();
+				RedrawLevel();
+			}
 
-		private void HandleRemove() {
-			controller.AddTileAt(_clickPos, tileTypesContainer.tileTypes[0].id);
-			_clickPos = Vector3Int.zero;
-			_rightClicked = false;
-			RedrawLevel();
-		}
+			private void RemoveOne(EditType type) {
+				switch ( type ) {
+					case EditType.Terrain:
+						gridController.AddTileAt(_rightClickedPos[0], tileTypesContainer.tileTypes[0].id);
+						break;
+					case EditType.Item:
+						gridController.RemoveItemAt(_rightClickedPos[0]);
+						break;
+				}
 
-		private void HandlePaint() {
-			AddTileAt(_clickPos);
-			_clickPos = Vector3Int.zero;
-			_leftClicked = false;
-			RedrawLevel();
-		}
+				_rightClickedPos.Clear();
+				_rightClicked = false;
 
-		private void HandleMouseClick(Vector3 pos) {
-			_leftClicked = true;
-			_clickPos = pos;
-		}
+				RedrawLevel();
+			}
 
-		private void HandleMouseDrag(Vector3 pos) {
-			_dragPos = pos;
-		}
+			private void RemoveMany(EditType type) {
+				switch ( type ) {
+					case EditType.Terrain:
+						gridController.AddMultipleTilesAt(_rightClickedPos[0], _rightClickedPos[1],
+							tileTypesContainer.tileTypes[0].id);
+						break;
+				}
 
-		private void HandleMouseDragEnd() {
-			_dragEnd = true;
-		}
+				//todo move to iunput cache??
+				// reset input cache
+				_rightClickedPos.Clear();
+				_rightClicked = false;
+				_dragEnd = false;
+				cursorDrawer.HideCursor();
+				RedrawLevel();
+			}
 
-		private void AddMultipleTilesAt(Vector3 clickPos, Vector3 dragPos) {
-			controller.AddMultipleTilesAt(clickPos, dragPos, selectedTileType.id);
-		}
+			private void AddOne(EditType type) {
+				
+				Debug.Log($"AddOne: {mode} {editMode} {_leftClickedPos[0]}");
+				
+				switch ( type ) {
+					case EditType.Terrain:
+						AddTileAt(_leftClickedPos[0]);
+						break;
+					case EditType.Item:
+						gridController.AddItemAt(_leftClickedPos[0], 0);
+						break;
+				}
+				
+				_leftClickedPos.Clear();
+				_leftClicked = false;
+				RedrawLevel();
+			}
 
-		private void AddTileAt(Vector3 clickPos) {
-			controller.AddTileAt(clickPos, selectedTileType.id);
-		}
+			private void HandleMouseDrag(Vector3 pos) {
+				if ( _leftClicked ) {
+					if ( _leftClickedPos.Count == 1 ) {
+						_leftClickedPos.Add(pos);
+					}
+					else {
+						_leftClickedPos[1] = pos;
+					}
+				}
+				else {
+					if ( _rightClickedPos.Count == 1 ) {
+						_rightClickedPos.Add(pos);
+					}
+					else {
+						_rightClickedPos[1] = pos;
+					}
+				}
+			}
 
-		public void ResetLevel() {
-			controller.ResetGrid();
-			RedrawLevel();
-		}
+			private void HandleMouseDragEnd() {
+				_dragEnd = true;
+			}
 
-		// public void AddObjectAt(Vector3 clickPos) {
-		//     objectController.AddTileAt(clickPos, worldObjectContainer.worldObjects[1]);
-		// }
+			private void AddMultipleTilesAt(Vector3 clickPos, Vector3 dragPos) {
+				gridController.AddMultipleTilesAt(clickPos, dragPos, selectedTileType.id);
+			}
+
+			private void AddTileAt(Vector3 clickPos) {
+				gridController.AddTileAt(clickPos, selectedTileType.id);
+			}
+
+			public void ResetLevel() {
+				gridController.ResetGrid();
+				RedrawLevel();
+			}
+
+			// public void AddObjectAt(Vector3 clickPos) {
+			//     objectController.AddTileAt(clickPos, worldObjectContainer.worldObjects[1]);
+			// }
+		}
 	}
-}

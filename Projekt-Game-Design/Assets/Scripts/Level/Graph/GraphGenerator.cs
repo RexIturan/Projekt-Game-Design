@@ -57,7 +57,7 @@ namespace Graph {
             // }
             
             foreach (var enemy in characterList.enemyContainer) {
-                var pos = globalGridData.GridPos3DToGridPos2D(enemy.GetComponent<EnemyCharacterSC>().gridPosition);
+                var pos = globalGridData.GetGridPos2DFromGridPos3D(enemy.GetComponent<EnemyCharacterSC>().gridPosition);
                 graph.GetGridObject(pos).SetIsWalkable(false);
             }    
             
@@ -71,7 +71,7 @@ namespace Graph {
         public NodeGraph CreateNewGraph() {
             NodeGraph graph = new NodeGraph(
                 width: globalGridData.Width,
-                height: globalGridData.Height,
+                height: globalGridData.Depth,
                 cellSize: globalGridData.CellSize,
                 originPosition: globalGridData.OriginPosition);
             return graph;

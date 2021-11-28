@@ -12,6 +12,8 @@ public class ItemSO : ScriptableObject
     // art
     public Sprite icon;
     public GameObject prefab;
+    public Mesh mesh;
+    public Material material;
 
     // data
     public int goldValue;

@@ -18,6 +18,7 @@ namespace MeshGenerator {
 		[SerializeField] private GridContainerSO gridContainer;
 		[SerializeField] private TileTypeContainerSO tileTypeContainer;
 
+		private MeshCollider _meshCollider;
 		private MeshFilter _meshFilter;
 		// private MeshRenderer _meshRenderer;
 
@@ -41,6 +42,7 @@ namespace MeshGenerator {
 			_mesh.name = "generatedMesh";
 
 			_meshFilter = GetComponent<MeshFilter>();
+			_meshCollider = GetComponent<MeshCollider>();
 			// _meshRenderer = GetComponent<MeshRenderer>();
 		}
 
@@ -51,8 +53,8 @@ namespace MeshGenerator {
 		public void UpdateTileData() {
 			// setup 3d tile data representation
 			int width = globalGridData.Width;
-			int height = gridContainer.tileGrids.Count;
-			int depth = globalGridData.Height;
+			int height = globalGridData.Height;
+			int depth = globalGridData.Depth;
 			//todo maybe use [x,y,z] and not [y,z,x]
 			_tileData = new DataTile[height, depth, width];
 
@@ -103,7 +105,7 @@ namespace MeshGenerator {
 					for ( int x = lowerBounds.x; x < dimensions.x; x++ ) {
 						if ( _tileData[y, z, x] == DataTile.Block ) {
 							var intPos = new Vector3Int(x, y, z);
-							var pos = new Vector3(x, y, z) + globalGridData.originPosition;
+							var pos = new Vector3(x, y, z) + globalGridData.OriginPosition;
 
 							if ( !TileInDirection(intPos, Direction.Top, lowerBounds, dimensions) ) {
 								// draw top
@@ -317,6 +319,7 @@ namespace MeshGenerator {
 
 		public void UpdateMesh() {
 			_meshFilter = GetComponent<MeshFilter>();
+			_meshCollider = GetComponent<MeshCollider>();
 			// _meshRenderer = GetComponent<MeshRenderer>();
 
 			_mesh.Clear();
@@ -328,6 +331,7 @@ namespace MeshGenerator {
 			_mesh.RecalculateNormals();
 
 			_meshFilter.sharedMesh = _mesh;
+			_meshCollider.sharedMesh = _meshFilter.sharedMesh;
 		}
 
 
