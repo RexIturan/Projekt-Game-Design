@@ -194,14 +194,18 @@ public class PlayerCharacterSC : MonoBehaviour {
 
 		public void FaceMovingDirection()
 		{
-				float minDifference = 0.1f;
+				float minDifference = 0.1f; // the point that's being moved to 
+																		// has to be at least this far away from the player
 
 				Vector3 movingDirection = position - gameObject.transform.position;
 				if ( movingDirection.magnitude > minDifference )
 				{
 						float angle = Vector3.Angle(new Vector3(0, 0, 1), movingDirection);
 						if ( movingDirection.x < 0 )
-								angle += 180;
+						{
+								// mirror angle
+								angle = -angle + 360;
+						}
 
 						facingDirection = angle;
 				}
