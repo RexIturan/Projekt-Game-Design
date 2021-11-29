@@ -13,7 +13,7 @@ namespace SaveSystem {
 
 		// inventorys
 		private readonly InventorySO _inventory;
-		private readonly EquipmentInventoryContainerSO _equipmentInventoryContainerSo;
+		private readonly EquipmentContainerSO _equipmentInventoryContainerSo;
 
 //////////////////////////////////// Local Functions ///////////////////////////////////////////////
 
@@ -78,9 +78,9 @@ namespace SaveSystem {
 
 		private Inventory_Save GetInventorySaveData(InventorySO inventory) {
 			Inventory_Save inventorySave = new Inventory_Save();
-			inventorySave.size = inventory.inventory.Capacity;
-			foreach ( var item in inventory.inventory ) {
-				inventorySave.itemIds.Add(item.id);
+			inventorySave.size = inventory.itemIDs.Capacity;
+			foreach ( var itemID in inventory.itemIDs) {
+				inventorySave.itemIds.Add(itemID);
 			}
 
 			return inventorySave;
@@ -88,17 +88,17 @@ namespace SaveSystem {
 
 		// todo shorten names
 		private List<Inventory_Save> GetEquipmentInventorySaveData(
-			EquipmentInventoryContainerSO equipmentInventoryContainerSo) {
+			EquipmentContainerSO equipmentInventoryContainerSo) {
 			List<Inventory_Save> equipmentInventorys = new List<Inventory_Save>();
 
-			foreach ( var equipment in equipmentInventoryContainerSo.inventories ) {
+			foreach ( var equipment in equipmentInventoryContainerSo.equipmentInventories ) {
 				var equiped = new List<int>();
-				foreach ( var item in equipment.inventory ) {
-					equiped.Add(item.id);
+				foreach ( var itemID in equipment.items) {
+					equiped.Add(itemID);
 				}
 
 				equipmentInventorys.Add(new Inventory_Save() {
-					size = equipment.inventory.Capacity,
+					size = equipment.items.Capacity,
 					itemIds = equiped
 				});
 			}
@@ -116,7 +116,7 @@ namespace SaveSystem {
 			GridContainerSO gridContaier, 
 			GridDataSO gridData,
 			InventorySO inventory,
-			EquipmentInventoryContainerSO equipmentInventoryContainer) {
+			EquipmentContainerSO equipmentInventoryContainer) {
 
 			_gridContaier = gridContaier;
 			_globalGridData = gridData;

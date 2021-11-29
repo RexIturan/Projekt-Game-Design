@@ -5,7 +5,8 @@ public class InventorySlot : VisualElement
 {
     public readonly Image icon;
     public readonly InventorySlotType slotType;
-    public int itemGuid = -1;
+    public int inventoryItemID = -1; // ID within Inventory
+		public ItemSO item;
     
     public InventorySlot()
     {
@@ -31,22 +32,25 @@ public class InventorySlot : VisualElement
         slotType = type;
     }
     
-    public void HoldItem(ItemSO item)
+    public void HoldItem(ItemSO item, int inventoryItemID)
     {
+				this.item = item;
         icon.image = item.icon.texture;
-        itemGuid = item.id;
+        this.inventoryItemID = inventoryItemID;
         // Debug.Log("Test in HoldItem");
     }
+
     public void DropItem()
     {
-        itemGuid = -1;
+        inventoryItemID = -1;
         icon.image = null;
+				item = null;
     }
     
     private void OnPointerDown(PointerDownEvent evt)
     {
         //Not the left mouse button
-        if (itemGuid == -1 || evt.button != 0)
+        if (inventoryItemID == -1 || evt.button != 0)
         {
             return;
         }
@@ -55,6 +59,7 @@ public class InventorySlot : VisualElement
         //Start the drag
         InventoryUIController.StartDrag(evt.position, this);
     }
+
     public enum InventorySlotType
     {
         None,

@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="Styles/Inventory.uss" />
     <ui:VisualElement style="flex-grow: 1;">
-        <ui:VisualElement name="TabBar" style="width: 100%; height: 8%; flex-direction: row;">
+        <ui:VisualElement name="TabBar" style="width: 100%; height: 8%; flex-direction: row; display: none;">
             <ui:VisualElement name="LeftContainer" style="height: 100%; width: 50%; flex-direction: row;">
                 <ui:Button text="Items" display-tooltip-when-elided="true" name="Tab1" class="ClickedTab" />
                 <ui:Button text="Armor" display-tooltip-when-elided="true" name="Tab2" class="UnclickedTab" />

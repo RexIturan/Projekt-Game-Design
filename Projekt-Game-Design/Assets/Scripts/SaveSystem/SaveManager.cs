@@ -27,7 +27,7 @@ namespace SaveSystem {
 		[SerializeField] private GridContainerSO gridContainer;
 		[SerializeField] private GridDataSO globalGridData;
 		public CharacterList characterList;
-		public EquipmentInventoryContainerSO equipmentContainer;
+		public EquipmentContainerSO equipmentContainer;
 		public InventorySO inventory;
 		public CharacterInitialiser characterInitializer;
 		[SerializeField] private ItemContainerSO itemContainerSO;

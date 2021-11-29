@@ -161,6 +161,7 @@ MonoBehaviour:
   targetTileEvent: {fileID: 11400000, guid: 06d375aa5b115fd4ba98c0967522e31a, type: 2}
   input: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  equipmentContainer: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
   playerType: {fileID: 11400000, guid: b74bf689d067c784aa3e98c68eaf4e4d, type: 2}
   playerSpawnData: {fileID: 11400000, guid: 101bf8e4924253e4eae939d90884588d, type: 2}
   currentStats:
@@ -177,9 +178,10 @@ MonoBehaviour:
   energy: 5
   movementPointsPerEnergy: 20
   gridPosition: {x: 1, y: 1, z: 1}
-  item: {fileID: 0}
+  equipmentID: 0
   abilities: []
   abilityID: 0
+  movementSpeed: 0
   isSelected: 0
   abilitySelected: 0
   abilityConfirmed: 0
@@ -199,3 +201,9 @@ MonoBehaviour:
   tilesInRange: []
   waitForAttackToFinish: 0
   timeSinceTransition: 0
+  facingDirection: 0
+  position: {x: 0, y: 0, z: 0}
+  stance: 0
+  weaponLeft: {fileID: 0}
+  weaponRight: {fileID: 0}
+  weaponRightPosition: 0

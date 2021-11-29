@@ -15,7 +15,7 @@ namespace SaveSystem {
 
 		// inventorys
 		private readonly InventorySO _inventory;
-		private readonly EquipmentInventoryContainerSO _equipmentInventoryContainerSo;
+		private readonly EquipmentContainerSO _equipmentInventoryContainerSo;
 
 		// dictionarys
 		private ItemContainerSO _itemContainerSo;
@@ -48,25 +48,24 @@ namespace SaveSystem {
 		}
 		
 		private void ReadInventory(Inventory_Save saveInventory, InventorySO inventory) {
-			inventory.inventory.Clear();
+			inventory.itemIDs.Clear();
 			foreach (var ids in saveInventory.itemIds) {
 				//todo inventory should just have indices
-				inventory.inventory.Add(_itemContainerSo.itemList[ids]);    
+				inventory.itemIDs.Add(ids);    
 			}
 		}
 		
 		private void ReadEquipmentInventory(List<Inventory_Save> saveEquipmentInventory, 
-			EquipmentInventoryContainerSO equipmentContainer) {
+			EquipmentContainerSO equipmentContainer) {
 			
 			foreach (var equipmentInventory in saveEquipmentInventory) {
-				var equip = new List<ItemSO>();
-				foreach (var ids in equipmentInventory.itemIds) {
-					equip.Add(_itemContainerSo.itemList[ids]);
+				Equipment equipment = new Equipment();
+				for(int i = 0; i < equipment.items.Count && i < equipmentInventory.itemIds.Count; i++)
+				{
+					equipment.items[i] = equipmentInventory.itemIds[i];
 				}
-
-				var eInventory = ScriptableObject.CreateInstance<EquipmentInventorySO>();
-				eInventory.inventory = equip;
-				equipmentContainer.inventories.Add(eInventory);
+									
+				equipmentContainer.equipmentInventories.Add(equipment);
 			}
 		}
 		
@@ -79,7 +78,7 @@ namespace SaveSystem {
 			GridContainerSO gridContaier, 
 			GridDataSO gridData,
 			InventorySO inventory,
-			EquipmentInventoryContainerSO equipmentInventoryContainer, 
+			EquipmentContainerSO equipmentInventoryContainer, 
 			ItemContainerSO itemContainerSO) {
 			
 			_gridContaier = gridContaier;

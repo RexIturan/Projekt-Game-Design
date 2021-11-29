@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b001412dba193ab4ba91ad496afc04ce, type: 3}
   m_Name: DefaultPlayerType
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2430696722745496732, guid: 49d5e345cb0025348934f6e75155b456, type: 3}
   id: 0
+  prefab: {fileID: 2430696722745496732, guid: 49d5e345cb0025348934f6e75155b456, type: 3}
   stats:
     maxHealthPoints: 20
     maxEnergy: 5
@@ -24,5 +24,4 @@ MonoBehaviour:
   basicAbilities:
   - {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}
   model: {fileID: 8839921088689484587, guid: 3bc60f3f9e3f61b4cb1586783afde6b0, type: 3}
-  profilePicture: {fileID: 0}
-  time_Of_Attack_Animation: 0
+  profilePicture: {fileID: 21300000, guid: ae9b2c8af7a4c09479be43d9df077672, type: 3}
