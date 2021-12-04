@@ -1,0 +1,396 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2212653873551418263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2212653873551418260}
+  m_Layer: 0
+  m_Name: Modle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2212653873551418260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873551418263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2212653873986084086}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2212653873986083977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2212653873986084086}
+  - component: {fileID: 2212653873986084093}
+  - component: {fileID: 2212653873986084092}
+  - component: {fileID: 2212653873986084095}
+  - component: {fileID: 2212653873986084094}
+  - component: {fileID: 2212653873986084081}
+  - component: {fileID: 2212653873986084080}
+  - component: {fileID: 2212653873986084083}
+  - component: {fileID: 2212653873986084082}
+  - component: {fileID: 1915383006283477928}
+  - component: {fileID: 2212653873986084085}
+  - component: {fileID: 2212653873986084084}
+  - component: {fileID: 2212653873986084087}
+  m_Layer: 9
+  m_Name: Base Character
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2212653873986084086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2212653873551418260}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2212653873986084093
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &2212653873986084092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eeda163c70b3cb4ebb88ba92f608fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transitionTableSO: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
+  _debugger:
+    debugTransitions: 0
+    appendConditionsInfo: 1
+    appendActionsInfo: 1
+    currentState: 
+--- !u!114 &2212653873986084095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db92712c79bf4f4b842aca898d1dbf8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayName: 
+  stats:
+    _statusValues:
+    - _name: None
+      _type: 0
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: HitPoints
+      _type: 1
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: HitPointRegeneration
+      _type: 2
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: TemporeryHitPoints
+      _type: 3
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: Energy
+      _type: 4
+      _value: 0
+      _max: 30
+      _min: 0
+    - _name: EnergyRegeneration
+      _type: 5
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: MovementRange
+      _type: 6
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: ViewDistance
+      _type: 7
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: Strength
+      _type: 8
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: Dexterity
+      _type: 9
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: Intelligence
+      _type: 10
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: Level
+      _type: 11
+      _value: 0
+      _max: 0
+      _min: 0
+    - _name: Experience
+      _type: 12
+      _value: 0
+      _max: 0
+      _min: 0
+  faction: 0
+--- !u!114 &2212653873986084094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb4698d5b4504003896fd6e3b3ee7a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSelected: 0
+--- !u!114 &2212653873986084081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8392edbd17a741e4b3aa49918501c3f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2212653873986084080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2039b7c907624264b286b67bf6435203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  tilesInRange: []
+  tileInRangeOfTarget: []
+  waitForAttackToFinish: 0
+  characterList: {fileID: 0}
+  attackRange: 0
+  attackDamage: 0
+  playerTarget: {fileID: 0}
+  enemyTarget: {fileID: 0}
+--- !u!114 &2212653873986084083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd92fd736a4245d2beb28e6db1413654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalGridData: {fileID: 0}
+  moveSpeed: 0
+  rotationSpeed: 360
+  gridPosition: {x: 0, y: 0, z: 0}
+  position: {x: 0, y: 0, z: 0}
+  facingDirection: 0
+  movementPointsPerEnergy: 0
+  reachableTiles: []
+  movementTarget:
+    x: 0
+    y: 0
+    gCost: 0
+    hCost: 0
+    fCost: 0
+    dist: 0
+    isWalkable: 0
+  movementDone: 1
+  isMoving: 0
+--- !u!114 &2212653873986084082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e83536468e3408cad5533fbdcc65ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityID: 0
+  abilities: []
+  baseAbilities: []
+  abilitySelected: 0
+  abilityConfirmed: 0
+  abilityExecuted: 0
+--- !u!114 &1915383006283477928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc4e25d0f5d4af9b7dd2aaacd284543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentContainerSO: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
+  equipmentID: 0
+  weaponLeft: {fileID: 0}
+  weaponRight: {fileID: 0}
+  stance: 0
+  weaponRightPosition: 0
+--- !u!114 &2212653873986084085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b77ded57c84f4d8214024ffd7d21d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 2212653873551418263}
+  playerType: {fileID: 0}
+  prefab: {fileID: 8839921088689484587, guid: f36b8162ad7839b44a6bb5d7f833d6df, type: 3}
+  mesh: {fileID: 0}
+  material: {fileID: -7394430928645769640, guid: 220c3379b05db7a4da9bb7ab2736c248, type: 3}
+  image: {fileID: 0}
+--- !u!114 &2212653873986084084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8032b130c34934986320ba357d33f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOnTurn: 0
+  isDone: 0
+  enemyType: {fileID: 0}
+  enemySpawnData: {fileID: 0}
+  behavior: {fileID: 0}
+  noTargetFound: 0
+  rangeChecked: 0
+--- !u!114 &2212653873986084087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61beff83ece1f2c41869fecfa859320d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTileEvent: {fileID: 0}
+  input: {fileID: 0}
+  globalGridData: {fileID: 0}
+  playerType: {fileID: 0}
+  playerSpawnData: {fileID: 0}
+  currentStats:
+    maxHealthPoints: 0
+    maxEnergy: 0
+    strength: 0
+    dexterity: 0
+    intelligence: 0
+    viewDistance: 0
+  playerName: 
+  level: 0
+  experience: 0
+  healthPoints: 0
+  energy: 0
+  movementPointsPerEnergy: 0
+  gridPosition: {x: 0, y: 0, z: 0}
+  item: {fileID: 0}
+  abilities: []
+  abilityID: 0
+  isSelected: 0
+  abilitySelected: 0
+  abilityConfirmed: 0
+  abilityExecuted: 0
+  movementTarget:
+    x: 0
+    y: 0
+    gCost: 0
+    hCost: 0
+    fCost: 0
+    dist: 0
+    isWalkable: 0
+  reachableTiles: []
+  movementDone: 1
+  playerTarget: {fileID: 0}
+  enemyTarget: {fileID: 0}
+  tilesInRange: []
+  waitForAttackToFinish: 0
+  timeSinceTransition: 0
+  speed: 0
+  facingDirection: 0
+  position: {x: 0, y: 0, z: 0}
+  stance: 0
+  weaponLeft: {fileID: 0}
+  weaponRight: {fileID: 0}
+  weaponRightPosition: 0

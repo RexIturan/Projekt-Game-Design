@@ -40,20 +40,35 @@ namespace SaveSystem {
 		/// </summary>
 		/// <param name="saveGridSave"></param>
 		/// <param name="gridContaier"></param>
-		private void ReadGrid(List<TileGrid> saveGridSave, GridDataSO gridData, GridContainerSO gridContaier) {
-			var grid = saveGridSave[0];
-			
-			//todo move somewhere else
+		private void ReadGrid(Save save, GridDataSO gridData, GridContainerSO gridContaier) {
 			gridContaier.InitGrids(gridData);
-			gridContaier.items = new ItemGrid[saveGridSave.Count];
-			for ( int i = 0; i < gridContaier.items.Length; i++ ) {
-				gridContaier.items[i] = new ItemGrid(
-					width: grid.Width,
-					height: grid.Height, cellSize: grid.CellSize, originPosition: grid.OriginPosition);
-			}
 			
-			gridContaier.tileGrids.Clear();
-			gridContaier.tileGrids.AddRange(saveGridSave);
+			var saveTileGridSave = save.tileGrids;
+			var saveItemGridSave = save.itemGrids;
+			var saveCharacterGridSave = save.characterGrids;
+			var saveObjectGridSave = save.objectGrids;
+
+			var layers = gridData.Height;
+
+			if ( saveTileGridSave.Count == layers ) {
+				//init tile grid
+				gridContaier.tileGrids.AddRange(saveTileGridSave);	
+			}
+
+			if (saveItemGridSave.Count == layers && 
+			    saveCharacterGridSave.Count == layers && 
+			    saveObjectGridSave.Count == layers) {
+				
+				for ( int i = 0; i < layers; i++ ) {
+					// init item grid
+					gridContaier.items[i] = saveItemGridSave[i];
+					// inti character grid
+					gridContaier.characters[i] = saveCharacterGridSave[i];
+					// init object grid
+					gridContaier.objects[i] = saveObjectGridSave[i];
+				}
+				
+			}
 		}
 		
 		private void ReadInventory(Inventory_Save saveInventory, InventorySO inventory) {
@@ -105,7 +120,7 @@ namespace SaveSystem {
 		public void ReadSave(Save save) {
 			
 			ReadGridData(save.gridDataSave, _gridData);
-			ReadGrid(save.gridSave, _gridData, _gridContaier);
+			ReadGrid(save, _gridData, _gridContaier);
 
 			// ReadCharacter(save.players, save.enemies);
 			_characterInitializer.Initialise(save.players, save.enemies);

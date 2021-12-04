@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 [System.Serializable]
-public enum AnimationType
+public enum CharacterAnimation
 {
 	IDLE,
 	DEATH_A,

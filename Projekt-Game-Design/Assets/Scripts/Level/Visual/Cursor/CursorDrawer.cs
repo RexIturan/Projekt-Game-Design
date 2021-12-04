@@ -22,14 +22,14 @@ namespace LevelEditor {
 			cursorController = cursor.GetComponent<PreviewBlockController>();
 		}
 		
-		public void DrawCursorAt(Vector3 worldPos, PreviewBlockController.CursorMode mode) {
+		public void DrawCursorAt(Vector3 worldPos, CursorMode mode) {
 			ShowCursor();
 			cursorController.ResetScale();
 			cursorController.UpdatePreviewColor(mode);
 			cursor.transform.position = worldPos;
 		}
 
-		public void DrawBoxCursorAt(Vector3 worldPosStart, Vector3 worldPosEnd, PreviewBlockController.CursorMode mode) {
+		public void DrawBoxCursorAt(Vector3 worldPosStart, Vector3 worldPosEnd, CursorMode mode) {
 			var minPos = Vector3.Min(worldPosStart, worldPosEnd);
 			var maxPos = Vector3.Max(worldPosStart, worldPosEnd);
 			

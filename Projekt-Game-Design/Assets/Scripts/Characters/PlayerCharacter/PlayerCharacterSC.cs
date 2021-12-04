@@ -28,9 +28,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 
     [Header("Current Max Stats")]
     // Stats influenced by status effects
-    [SerializeField]
-    private CharacterStats currentStats;
-
+    [SerializeField] private CharacterStats currentStats;
     public CharacterStats CurrentStats => currentStats;
 
     // TODO: implement status effects
@@ -44,7 +42,6 @@ public class PlayerCharacterSC : MonoBehaviour {
     // TODO: maybe a more complex type later on
     public int level;
     public int experience;
-
 
     // Current values, dynamic
     public int healthPoints;
@@ -108,13 +105,13 @@ public class PlayerCharacterSC : MonoBehaviour {
     public float timeSinceTransition;
 
     private void Awake() {
-        input.MouseClicked += ToggleIsSelected;
-        targetTileEvent.OnEventRaised += TargetTile;
+        // input.MouseClicked += ToggleIsSelected;
+        // targetTileEvent.OnEventRaised += TargetTile;
     }
 
     private void OnDisable() {
-        input.MouseClicked -= ToggleIsSelected;
-        targetTileEvent.OnEventRaised -= TargetTile;
+        // input.MouseClicked -= ToggleIsSelected;
+        // targetTileEvent.OnEventRaised -= TargetTile;
     }
 
     public void Start() {
@@ -144,9 +141,9 @@ public class PlayerCharacterSC : MonoBehaviour {
         timeSinceTransition += Time.fixedDeltaTime;
 				// DEBUG!!!!!!!
 				animationController.TakeStance(stance);
-				animationController.ChangeWeapon(EquipmentType.LEFT, weaponLeft);
-				animationController.ChangeWeapon(EquipmentType.RIGHT, weaponRight);
-				animationController.ChangeWeaponPosition(EquipmentType.RIGHT, weaponRightPosition);
+				animationController.ChangeWeapon(EquipmentPosition.LEFT, weaponLeft);
+				animationController.ChangeWeapon(EquipmentPosition.RIGHT, weaponRight);
+				animationController.ChangeWeaponPosition(EquipmentPosition.RIGHT, weaponRightPosition);
 				// !!!!!!!!!!!
 
 				// Move character to position smoothly 

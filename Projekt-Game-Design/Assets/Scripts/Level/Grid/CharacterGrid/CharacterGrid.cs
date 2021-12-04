@@ -1,8 +1,10 @@
 ﻿using System;
+using Characters;
 using UnityEngine;
 using Util;
 
 namespace Level.Grid.CharacterGrid {
+	[Serializable]
 	public class CharacterGrid : GenericGrid1D<CharPlaceholder> {
 		public CharacterGrid(
 			int width, int height, float cellSize, Vector3 originPosition) : 
@@ -10,6 +12,7 @@ namespace Level.Grid.CharacterGrid {
 			originPosition, (grid, x, y) => new CharPlaceholder(), false) { }
 	}
 
+	[Serializable]
 	public class CharPlaceholder {
 		public Faction faction;
 		public PlayerCharacterSC playerData;

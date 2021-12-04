@@ -55,6 +55,12 @@ namespace Grid {
 	        return _cellCenter;
         }
 
+        public Vector3 GetCellCenter3D() {
+	        //todo(vincent) init this better, this is a fix for the level editor
+	        _cellCenter = new Vector3(cellSize, cellSize, cellSize) * 0.5f;
+	        return _cellCenter;
+        }
+        
         #region Get Bounds
 
         // pos in -/- direction

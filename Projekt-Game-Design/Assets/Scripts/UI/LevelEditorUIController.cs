@@ -128,19 +128,19 @@ namespace UI {
         
         
         void HandleSelectModusButtonClicked() {
-            levelEditor.Mode = LevelEditor.LevelEditor.CursorMode.Select;
+            levelEditor.Mode = LevelEditor.LevelEditor.EditType.Select;
         }
         
         void HandlePaintModusButtonClicked() {
-            levelEditor.Mode = LevelEditor.LevelEditor.CursorMode.Paint;
+            levelEditor.Mode = LevelEditor.LevelEditor.EditType.Paint;
         }
         
         void HandleBoxModusButtonClicked() {
-            levelEditor.Mode = LevelEditor.LevelEditor.CursorMode.Box;
+            levelEditor.Mode = LevelEditor.LevelEditor.EditType.Box;
         }
         
         void HandleFillModusButtonClicked() {
-            levelEditor.Mode = LevelEditor.LevelEditor.CursorMode.Fill;
+            levelEditor.Mode = LevelEditor.LevelEditor.EditType.Fill;
         }
         
     }

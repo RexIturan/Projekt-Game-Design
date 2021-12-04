@@ -50,13 +50,6 @@ namespace LevelEditor {
 			public Material material;
 		}
 		
-		[Serializable]
-		public enum CursorMode {
-			None,
-			Select,
-			Add,
-			Remove,
-			Error,
-		}
+		
 	}
 }

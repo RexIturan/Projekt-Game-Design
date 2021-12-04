@@ -1,3 +1,4 @@
+using Characters;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
 using SaveSystem;

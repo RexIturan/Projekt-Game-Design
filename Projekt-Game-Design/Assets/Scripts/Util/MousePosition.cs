@@ -33,13 +33,14 @@ namespace Util {
             return worldPosition;
         }
 
-        public static Vector3 GetTilePositionFromMousePosition(GridDataSO gridData, bool above) {
+        public static Vector3 GetTilePositionFromMousePosition(GridDataSO gridData, bool above, out bool hitBottom) {
 	        // raycast against tile Mesh layer
 	        // raycast against bottom
 	        Plane bottomPlane = new Plane(Vector3.up, Vector3.zero);
 	        Vector3 worldPosition = new Vector3();
 	        float maxDistance = 1000;
 	        int layer_mask = LayerMask.GetMask("Terrain");
+	        hitBottom = false;
 	        
 	        if ( Camera.main is { } ) {
 		        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -48,31 +49,38 @@ namespace Util {
 			        var hitPos = hit.point;
 			        Vector3 pos;
 			        if ( above ) {
-				        pos = hitPos + hit.normal * ( gridData.CellSize * 0.5f );  
+				        pos = hitPos + hit.normal * ( gridData.CellSize * 0.5f );
+				        Debug.DrawLine(hitPos, pos, Color.blue, 1);
 			        }
 			        else {
 				        pos = hitPos - hit.normal * ( gridData.CellSize * 0.5f );
+				        Debug.DrawLine(hitPos, pos, Color.green, 1);
 			        }
 			        
 			        worldPosition = gridData.GetGridPosWithoutOffsetFromWorldPos(pos );
 			        
 			        Debug.DrawLine(ray.origin, hitPos, Color.yellow, 1);
-			        Debug.DrawLine(hitPos, pos, Color.blue, 1);
 			        // DebugDrawRaycastHit(gridPos, Color.green);
 		        }
 		        else if(bottomPlane.Raycast(ray, out var distance)) {
-			        var hitPos = ray.GetPoint(distance);
+			        var hitPos = ray.GetPoint(distance) + bottomPlane.normal * ( gridData.CellSize * 0.5f );
 			        worldPosition = gridData.GetGridPosWithoutOffsetFromWorldPos(hitPos);
+			        hitBottom = true;
 		        }
 	        }
-	        
-	        DebugDrawRaycastHit(worldPosition + gridData.GetCellCenter(), Color.red);
+
+	        if ( above ) {
+		        DebugDrawRaycastHit(worldPosition + gridData.GetCellCenter3D(), Color.blue);  
+	        }
+	        else {
+		        DebugDrawRaycastHit(worldPosition + gridData.GetCellCenter3D(), Color.green);
+	        }
 	        
 	        return worldPosition;
         }
 
         private static void DebugDrawRaycastHit(Vector3 pos, Color color) {
-	        var duration = 1;
+	        var duration = .2f;
 	        Debug.DrawLine(pos + new Vector3(0, -0.2f, 0), pos + new Vector3(0, 0.2f, 0), color, duration);
 	        Debug.DrawLine(pos + new Vector3(-0.2f, 0, 0), pos + new Vector3(0.2f, 0, 0), color, duration);
 	        Debug.DrawLine(pos + new Vector3(0, 0, -0.2f), pos + new Vector3(0, 0, 0.2f), color, duration);

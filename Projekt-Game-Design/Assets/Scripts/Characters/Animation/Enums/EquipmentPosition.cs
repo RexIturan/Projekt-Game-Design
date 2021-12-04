@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public enum EquipmentType 
+public enum EquipmentPosition 
 {
 	RIGHT,
 	LEFT,

@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Characters;
+using Characters.EnemyCharacter.ScriptableObjects;
+using Characters.PlayerCharacter.ScriptableObjects;
 using Level.Grid;
 using Level.Grid.CharacterGrid;
 using Level.Grid.ItemGrid;
@@ -82,22 +85,31 @@ namespace Grid {
 			AddItemAt(gridData.GetGridPos3DFromWorldPos(pos), itemId);
 		}
 		
-		public void AddCharacterAt(Vector3 pos, Faction faction) {
-			AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction);
+		// public void AddCharacterAt(Vector3 pos, Faction faction) {
+		// 	AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction);
+		// }
+		
+		public void AddEnemyCharacterAt(Vector3 pos, Faction faction, EnemySpawnDataSO enemySpawnDataSO, EnemyTypeSO enemyTypeSO) {
+			
+			AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction, null, null);
+		}
+		
+		public void AddPlayerCharacterAt(Vector3 pos, Faction faction, PlayerSpawnDataSO playerSpawnDataSO, PlayerTypeSO playerTypeSO) {
+			AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction, null, null);
 		}
 		
 		public void AddTileAt(Vector3 pos, int tileTypeID) {
 			AddTileAt(gridData.GetGridPos3DFromWorldPos(pos), tileTypeID);
 		}
 
-		private void AddCharacterAt(Vector3Int gridPos, Faction faction) {
+		private void AddCharacterAt(Vector3Int gridPos, Faction faction, PlayerCharacterSC playerCharacterSC, EnemyCharacterSC enemyCharacterSC) {
 			
 			var layer = gridPos.y;
 			var gridPos2D = gridData.GetGridPos2DFromGridPos3D(gridPos);
 
 			ResizeGrids(gridPos2D, out var finalPos);
 			
-			SetCharacterAt(finalPos.x, layer, finalPos.y, faction);
+			SetCharacterAt(finalPos.x, layer, finalPos.y, faction, playerCharacterSC, enemyCharacterSC);
 		}
 
 		private void AddItemAt(Vector3Int gridPos, int itemId) {
@@ -126,12 +138,12 @@ namespace Grid {
 			}
 		}
 		
-		private void SetCharacterAt(int x, int y, int z, Faction faction) {
+		private void SetCharacterAt(int x, int y, int z, Faction faction, PlayerCharacterSC playerCharacterSC, EnemyCharacterSC enemyCharacterSC) {
 			//todo char data
 			if ( gridContainer.characters != null ) {
 				if ( gridContainer.characters.Length > y ) {
 					if ( gridContainer.characters[y] != null ) {
-						gridContainer.characters[y].GetGridObject(x, z).SetCharData(faction);
+						gridContainer.characters[y].GetGridObject(x, z).SetCharData(faction, playerCharacterSC, enemyCharacterSC);
 					}
 				}
 			}

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Characters;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
 using UI.Components;

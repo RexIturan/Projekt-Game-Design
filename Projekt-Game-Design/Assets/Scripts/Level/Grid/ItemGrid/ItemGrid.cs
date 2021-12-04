@@ -14,7 +14,7 @@ namespace Level.Grid.ItemGrid {
 
 	[Serializable]
 	public class Item {
-		[HideInInspector] public new string name = "Item";
+		[HideInInspector] private new string name = "Item";
 		[SerializeField] private int id = -1;
 
 		public int ID {
