@@ -4,15 +4,11 @@ using UnityEngine;
 public class CharacterSC : MonoBehaviour {
 	
 ////////////////////////////////////////// Character State ////////////////////////////////////
-	
+
 	//gameplay character
 	public bool isOnTurn; // it's Enemy's turn
 	public bool isDone; 
-	
-	//ability
-	// public bool abilitySelected;
-	// public bool abilityConfirmed;
-	// public bool abilityExecuted;
+
 	
 ////////////////////////////////////////// Init Player ////////////////////////////////////
 

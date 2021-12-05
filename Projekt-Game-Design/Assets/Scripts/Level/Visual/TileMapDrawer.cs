@@ -58,10 +58,10 @@ namespace Visual {
 
             var offset = new Vector2Int((int)globalGridData.OriginPosition.x, (int)globalGridData.OriginPosition.z); 
             
-            for (int l = 0; l < gridContainer.tileGrids.Count; l++) {
+            for (int l = 0; l < globalGridData.Height; l++) {
                 var tileGrid = gridContainer.tileGrids[l];
                 for (int x = 0; x < tileGrid.Width; x++) {
-                    for (int y = 0; y < tileGrid.Height; y++) {
+                    for (int y = 0; y < tileGrid.Depth; y++) {
                         var tile = tileGrid.GetGridObject(x, y);
                         var type = tileTypeContainer.tileTypes[tile.tileTypeID];
                         if (tile != null) {

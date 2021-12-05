@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Characters;
+using UnityEngine;
 
 namespace Combat {
 	//todo Targatsble Or Damageable
@@ -12,5 +13,17 @@ namespace Combat {
 		// on die / dying
 		// droptable ??
 		// effects
+
+		[SerializeField] private Statistics statistics;
+		[SerializeField] private GridTransform gridTransform;
+
+		
+		public void ReceivesDamage(int damage) {
+			statistics.StatusValues.HitPoints.Decrease(damage);
+		}
+
+		public Vector3Int GetGridPosition() {
+			return gridTransform.gridPosition;
+		}
 	}
 }

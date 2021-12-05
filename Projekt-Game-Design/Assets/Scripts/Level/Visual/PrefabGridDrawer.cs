@@ -41,7 +41,7 @@ namespace Visual {
 	        // for each
 	        for ( int layer = 0; layer < items.Length; layer++ ) {
 		        var currentItemGrid = items[layer];
-		        for ( int y = 0; y < currentItemGrid.Height; y++ ) {
+		        for ( int y = 0; y < currentItemGrid.Depth; y++ ) {
 			        for ( int x = 0; x < currentItemGrid.Width; x++ ) {
 				        
 				        var item = currentItemGrid.GetGridObject(x, y);
@@ -128,7 +128,7 @@ namespace Visual {
             for (int l = 0; l < worldObjectGridContainer.worldObjectGrids.Count; l++) {
                 var worldObjectGrid = worldObjectGridContainer.worldObjectGrids[l];
                 for (int x = 0; x < worldObjectGrid.Width; x++) {
-                    for (int y = 0; y < worldObjectGrid.Height; y++) {
+                    for (int y = 0; y < worldObjectGrid.Depth; y++) {
                         var tile = worldObjectGrid.GetGridObject(x, y).type;
                         
                         if (tile != null) {

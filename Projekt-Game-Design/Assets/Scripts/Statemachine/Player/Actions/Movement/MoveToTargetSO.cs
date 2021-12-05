@@ -1,88 +1,86 @@
 using Events.ScriptableObjects;
 using System.Collections.Generic;
-// using UnityEditorInternal;
+using Characters;
+using Characters.Movement;
+using Grid;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
 
-[CreateAssetMenu(fileName = "MoveToTarget", menuName = "State Machines/Actions/Player/MoveToTarget")]
-public class MoveToTargetSO : StateActionSO
-{
-    [SerializeField] private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
+[CreateAssetMenu(fileName = "MoveToTarget",
+	menuName = "State Machines/Actions/Player/MoveToTarget")]
+public class MoveToTargetSO : StateActionSO {
+	[SerializeField] private GridDataSO gridDataSO;
+	[SerializeField] private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
 
-    public override StateAction CreateAction() => new MoveToTarget(pathfindingPathQueryEventChannel);
+	public override StateAction CreateAction() => new MoveToTarget(pathfindingPathQueryEventChannel, gridDataSO);
 }
 
-public class MoveToTarget : StateAction
-{
-    private float TimePerStep;
+public class MoveToTarget : StateAction {
+	protected new MoveToTargetSO OriginSO => ( MoveToTargetSO )base.OriginSO;
 
-    protected new MoveToTargetSO OriginSO => (MoveToTargetSO)base.OriginSO;
-    
-    private PlayerCharacterSC _playerCharacterSC;
-    private float _timeSinceLastStep;
-    private List<PathNode> _path;
-    private int _currentStep;
-    private PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;
+	private readonly PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;
+	private readonly GridDataSO _gridDataSO;
+	
+	// Game Object Components
 
-    public MoveToTarget(PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel)
-    {
-        this._pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel; 
-    }
+	private MovementController _movementController;
+	private GridTransform _gridTransform;
+	
+	// local variables
+	
+	private float TimePerStep;
+	private float _timeSinceLastStep;
+	private List<PathNode> _path;
+	private int _currentStep;
 
-    public override void Awake(StateMachine stateMachine)
-    {
-        _playerCharacterSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
-				TimePerStep = _playerCharacterSC.globalGridData.CellSize / _playerCharacterSC.speed;
-    }
-    
-    public override void OnUpdate()
-		{
-				if (_currentStep >= _path.Count && _timeSinceLastStep >= TimePerStep )
-            _playerCharacterSC.movementDone = true;
+	public MoveToTarget(PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel, GridDataSO gridDataSO) {
+		this._pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
+		_gridDataSO = gridDataSO;
+	}
 
-        if (!_playerCharacterSC.movementDone)
-				{
-						_playerCharacterSC.FaceMovingDirection();
+	public override void Awake(StateMachine stateMachine) {
+		_movementController = stateMachine.gameObject.GetComponent<MovementController>();
+		_gridTransform = stateMachine.gameObject.GetComponent<GridTransform>();
+		TimePerStep = _gridDataSO.CellSize / _movementController.moveSpeed;
+	}
 
-						_timeSinceLastStep += Time.deltaTime;
+	public override void OnUpdate() {
+		if ( _currentStep >= _path.Count && _timeSinceLastStep >= TimePerStep )
+			_movementController.MovementDone = true;
 
-            if (_timeSinceLastStep >= TimePerStep && _currentStep < _path.Count )
-            {
-                _timeSinceLastStep -= TimePerStep;
-								
-								_playerCharacterSC.gridPosition = new Vector3Int(_path[_currentStep].x,
-                                                       1,
-                                                       _path[_currentStep].y);
+		if ( !_movementController.MovementDone ) {
+			_movementController.FaceMovingDirection();
 
-                _playerCharacterSC.TransformToPosition();
-                
-                _currentStep++;
-            }
-        }
-    }
+			_timeSinceLastStep += Time.deltaTime;
 
-    public override void OnStateEnter()
-    {
+			if ( _timeSinceLastStep >= TimePerStep && _currentStep < _path.Count ) {
+				_timeSinceLastStep -= TimePerStep;
 
-        Vector3Int startNode = new Vector3Int(_playerCharacterSC.gridPosition.x,
-                                            _playerCharacterSC.gridPosition.z,
-                                            0);
-        Vector3Int endNode = new Vector3Int(_playerCharacterSC.movementTarget.x,
-                                            _playerCharacterSC.movementTarget.y,
-                                            0);
+				_gridTransform.gridPosition = _path[_currentStep].pos;
 
-        _pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, SavePath);
+				_movementController.MoveToGridPosition();
 
-        _timeSinceLastStep = 0;
-        _currentStep = 1;
-        _playerCharacterSC.movementDone = false;
-    }
+				_currentStep++;
+			}
+		}
+	}
 
-    private void SavePath(List<PathNode> path)
-    {
-        this._path = path;
-    }
+	public override void OnStateEnter() {
+		Vector3Int startNode = _gridTransform.gridPosition;
+		Vector3Int endNode = _movementController.movementTarget.pos; 
+
+		_pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, SavePath);
+
+		_timeSinceLastStep = 0;
+		_currentStep = 1;
+		_movementController.MovementDone = false;
+	}
+
+	private void SavePath(List<PathNode> path) {
+		this._path = path;
+	}
 }
+

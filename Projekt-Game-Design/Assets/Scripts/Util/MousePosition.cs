@@ -50,16 +50,16 @@ namespace Util {
 			        Vector3 pos;
 			        if ( above ) {
 				        pos = hitPos + hit.normal * ( gridData.CellSize * 0.5f );
-				        Debug.DrawLine(hitPos, pos, Color.blue, 1);
+				        // Debug.DrawLine(hitPos, pos, Color.blue, 1);
 			        }
 			        else {
 				        pos = hitPos - hit.normal * ( gridData.CellSize * 0.5f );
-				        Debug.DrawLine(hitPos, pos, Color.green, 1);
+				        // Debug.DrawLine(hitPos, pos, Color.green, 1);
 			        }
 			        
 			        worldPosition = gridData.GetGridPosWithoutOffsetFromWorldPos(pos );
 			        
-			        Debug.DrawLine(ray.origin, hitPos, Color.yellow, 1);
+			        // Debug.DrawLine(ray.origin, hitPos, Color.yellow, 1);
 			        // DebugDrawRaycastHit(gridPos, Color.green);
 		        }
 		        else if(bottomPlane.Raycast(ray, out var distance)) {
@@ -67,6 +67,9 @@ namespace Util {
 			        worldPosition = gridData.GetGridPosWithoutOffsetFromWorldPos(hitPos);
 			        hitBottom = true;
 		        }
+	        }
+	        else {
+		        Debug.LogError("Can't find a Camera with the Tag Main Camera.");
 	        }
 
 	        if ( above ) {

@@ -17,7 +17,7 @@ namespace Grid {
                 expected[i] = i;
             }
 
-            for (int y = 0; y < grid.Height; y++) {
+            for (int y = 0; y < grid.Depth; y++) {
                 for (int x = 0; x < grid.Width; x++) {
                     actual.Add(TileGrid.Coord2DToIndex(x, y, grid.Width));
                 }

@@ -26,7 +26,10 @@ namespace Statemachine.Enemy.Actions.Combat {
 			var attackEnergyCost = 1;
 			if (_enemyCharacterSC.energy >= attackEnergyCost) {
 				Debug.Log($"enemy attacked player for {_enemyCharacterSC.attackDamage} damage");
-				_enemyCharacterSC.target.healthPoints -= _enemyCharacterSC.attackDamage;
+				//todo(combat) use compat system to determin damage and dealing damage
+
+				var damage = _enemyCharacterSC.attackDamage;
+				_enemyCharacterSC.target.ReceivesDamage(damage);
 				// todo move somewhere else
 				_enemyCharacterSC.energy -= attackEnergyCost;
 				_enemyCharacterSC.abilityExecuted = true;	

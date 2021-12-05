@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Characters;
 using Events.ScriptableObjects;
+using Player;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -35,11 +37,10 @@ public class InventoryUIController : MonoBehaviour {
     private static InventorySlot _originalSlot;
 
     // Der aktuell ausgewählte Spieler im Inventar
-    private PlayerCharacterSC _selectedPlayer;
+    private Statistics _selectedPlayerStatistics;
 
     private static int _currentPlayerSelected = 0;
     [SerializeField] private CharacterList characterList;
-    
     
     [Header("Receiving Events On")] 
     [SerializeField] private BoolEventChannelSO visibilityMenuEventChannel;
@@ -52,8 +53,8 @@ public class InventoryUIController : MonoBehaviour {
     [SerializeField] private GameObjEventChannelSO playerDeselectedEC;
     [SerializeField] private GameObjActionEventChannelSO playerSelectedEC;
 
-    [Header("Sending and Receiving Events On")] [SerializeField]
-    private BoolEventChannelSO visibilityGameOverlayEventChannel;
+    [Header("Sending and Receiving Events On")] 
+    [SerializeField] private BoolEventChannelSO visibilityGameOverlayEventChannel;
 
     [Header("Sending Events On")]
     // Inputchannel für das Inventar
@@ -113,12 +114,12 @@ public class InventoryUIController : MonoBehaviour {
             characterList = FindObjectOfType<CharacterList>();    
         }
 
-        // BUG adakdlkah
+        // BUG adakdlkah?
         if (characterList.playerContainer?.Count > 0) {
-            _selectedPlayer = characterList.playerContainer[0]?.GetComponent<PlayerCharacterSC>();    
+            _selectedPlayerStatistics = characterList.playerContainer[0]?.GetComponent<Statistics>();    
         }
         else {
-            _selectedPlayer = null;
+            _selectedPlayerStatistics = null;
         }
 
         playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
@@ -192,44 +193,46 @@ public class InventoryUIController : MonoBehaviour {
         VisualElement abilityBar =
             _playerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
 
-        CharacterStats playerStats = _selectedPlayer.CurrentStats;
+        StatusValues playerStats = _selectedPlayerStatistics.StatusValues;
 
+        //todo ui refactoring 
         healthBar.style.width =
-            new StyleLength(Length.Percent((100 * (float)_selectedPlayer.HealthPoints /
-                                            playerStats.maxHealthPoints)));
+            new StyleLength(Length.Percent((100 * (float)playerStats.HitPoints.value /
+                                            playerStats.HitPoints.max)));
         abilityBar.style.width =
-            new StyleLength(Length.Percent((100 * (float)_selectedPlayer.EnergyPoints /
-                                            playerStats.maxEnergy)));
+            new StyleLength(Length.Percent((100 * (float)playerStats.Energy.value /
+                                            playerStats.Energy.max)));
+        
         //manaBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
 
         // Labels für Stats
-        _playerViewContainer.Q<Label>("StrengthLabel").text = playerStats.strength.ToString();
-        _playerViewContainer.Q<Label>("DexterityLabel").text = playerStats.dexterity.ToString();
+        _playerViewContainer.Q<Label>("StrengthLabel").text = playerStats.Strength.value.ToString();
+        _playerViewContainer.Q<Label>("DexterityLabel").text = playerStats.Dexterity.value.ToString();
         _playerViewContainer.Q<Label>("IntelligenceLabel").text =
-            playerStats.intelligence.ToString();
-        _playerViewContainer.Q<Label>("MovementLabel").text = playerStats.viewDistance.ToString();
+            playerStats.Intelligence.value.ToString();
+        _playerViewContainer.Q<Label>("MovementLabel").text = playerStats.ViewDistance.value.ToString();
 
         // Image
         VisualElement image = _playerViewContainer.Q<VisualElement>("PlayerPicture");
         image.Clear();
         Image newProfile = new Image();
         image.Add(newProfile);
-        newProfile.image = _selectedPlayer.playerType.profilePicture.texture;
+        newProfile.image = _selectedPlayerStatistics.DisplayImage.texture;
 
         // Name and Level
-        _playerViewContainer.Q<Label>("PlayerName").text = _selectedPlayer.playerName;
-        _playerViewContainer.Q<Label>("LevelLabel").text = _selectedPlayer.level.ToString();
+        _playerViewContainer.Q<Label>("PlayerName").text = _selectedPlayerStatistics.DisplayName;
+        _playerViewContainer.Q<Label>("LevelLabel").text = playerStats.Level.value.ToString();
     }
 
     // refresh menu and select
     private void HandlePlayerSelected(GameObject player, Action<int> callback) {
-        _selectedPlayer = player.GetComponent<PlayerCharacterSC>();
+        _selectedPlayerStatistics = player.GetComponent<Statistics>();
         RefreshPlayerViewContainer();
     }
 
     // refresh menu and select first in container
     private void HandlePlayerDeselected(GameObject player) {
-        _selectedPlayer = characterList.playerContainer[0].GetComponent<PlayerCharacterSC>();
+        _selectedPlayerStatistics = characterList.playerContainer[0].GetComponent<Statistics>();
         RefreshPlayerViewContainer();
     }
 

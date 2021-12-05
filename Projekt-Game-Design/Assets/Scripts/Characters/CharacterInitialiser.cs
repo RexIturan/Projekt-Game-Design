@@ -35,7 +35,6 @@ namespace Characters {
 					var playerSC = obj.GetComponent<PlayerCharacterSC>();
 					playerSC.playerType = type;
 					playerSC.playerSpawnData = spawnData;
-					playerSC.gridPosition = playerSave.pos;
 					playerSC.Initialize();
 					_characterList.playerContainer.Add(playerSC.gameObject);
 				}

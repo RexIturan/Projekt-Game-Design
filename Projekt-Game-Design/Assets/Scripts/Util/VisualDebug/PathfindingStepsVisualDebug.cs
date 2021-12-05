@@ -47,10 +47,10 @@ namespace Util.VisualDebug {
         }
 
         public void Setup(GenericGrid1D<PathNode> grid) {
-            _visualNodes = new PathfindingDebugTileData[grid.Width, grid.Height];
+            _visualNodes = new PathfindingDebugTileData[grid.Width, grid.Depth];
 
             for (int x = 0; x < grid.Width; x++) {
-                for (int y = 0; y < grid.Height; y++) {
+                for (int y = 0; y < grid.Depth; y++) {
                     Vector3 gridPosition = new Vector3(x, 0.01f, y) * grid.CellSize;// + new Vector3(0.5f, 0, 0.5f) * grid.CellSize;// + Vector3.one * grid.CellSize * .5f;
                     gridPosition += new Vector3(0.5f, 0, 0.5f) * grid.CellSize;
                     gridPosition += globalGridData.OriginPosition;
@@ -100,7 +100,7 @@ namespace Util.VisualDebug {
             gridSnapshotAction.AddAction(HideNodeVisuals);
 
             for (int x = 0; x < grid.Width; x++) {
-                for (int y = 0; y < grid.Height; y++) {
+                for (int y = 0; y < grid.Depth; y++) {
                     PathNode pathNode = grid.GetGridObject(x, y);
 
                     int gCost = pathNode.gCost;
@@ -144,7 +144,7 @@ namespace Util.VisualDebug {
             gridSnapshotAction.AddAction(HideNodeVisuals);
 
             for (int x = 0; x < grid.Width; x++) {
-                for (int y = 0; y < grid.Height; y++) {
+                for (int y = 0; y < grid.Depth; y++) {
                     PathNode pathNode = grid.GetGridObject(x, y);
 
                     int gCost = pathNode.gCost;

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Characters;
+using Characters.Movement;
 using Grid;
 using Level.Grid.CharacterGrid;
 using Level.Grid.ItemGrid;
@@ -80,11 +82,13 @@ namespace SaveSystem {
 			if ( characterList ) {
 				foreach ( var player in characterList.playerContainer ) {
 					var playerCharacterSc = player.GetComponent<PlayerCharacterSC>();
+					var pcGridTransform = player.GetComponent<GridTransform>();
+					
 					playerChars.Add(
 						new PlayerCharacter_Save() {
 							plyerTypeId = playerCharacterSc.playerType.id,
 							plyerSpawnDataId = playerCharacterSc.playerSpawnData.id,
-							pos = playerCharacterSc.gridPosition
+							pos = pcGridTransform.gridPosition
 						});
 				}	
 			}

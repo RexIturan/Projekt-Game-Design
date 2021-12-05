@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Characters;
 using UnityEngine;
 
 /// <summary>
@@ -7,15 +9,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New PlayerType", menuName = "Character/PlayerType")]
 public class PlayerTypeSO : ScriptableObject {
 	public int id;
+
+	//base prefab
 	public GameObject prefab;
 
-	public CharacterStats stats;
+	//stats
+	public List<StatusValue> baseStatusValues;
+	//todo save somewhere else
+	public int movementPointsPerEnergy;
 
-	// todo remove or change
-	// public CharacterStats gainPerLevel; // TODO: gain is Linear in this case
-	// public ScriptableObject startWeapon; // is not necessarily equipped weapon
+	//equipment
+	public EquipmentInventoryContainerSO equipmentContainer;
+	public int startingEquipmentID;
+	
+	// ability
 	public AbilitySO[] basicAbilities; // actions at all time available
-
-	[Header("Visuals")] public GameObject model;
-	public Sprite profilePicture;
 }

@@ -29,7 +29,7 @@ namespace FieldOfView
             bool[,] visibleTiles = new bool[2*visionRange+1, 2*visionRange+1];
             
             int maxWidth = _grid.tileGrids[1].Width;
-            int maxHeight = _grid.tileGrids[1].Height;
+            int maxHeight = _grid.tileGrids[1].Depth;
 
             int lowerX = Mathf.Max(0, startTile[0] - visionRange);
             int upperX = Mathf.Min(maxWidth, startTile[0] + visionRange);

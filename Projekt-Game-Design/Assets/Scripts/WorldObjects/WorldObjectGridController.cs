@@ -121,7 +121,7 @@ namespace WorldObjects {
         
         public void FillWorldObjectGrid(WorldObjectGrid worldObjectGrid, WorldObjectTypeSO worldObjectType) {
             for (int x = 0; x < worldObjectGrid.Width; x++) {
-                for (int y = 0; y < worldObjectGrid.Height; y++) {
+                for (int y = 0; y < worldObjectGrid.Depth; y++) {
                     worldObjectGrid.GetGridObject(x, y).SetWorldObjectType(worldObjectType);
                 }
             }

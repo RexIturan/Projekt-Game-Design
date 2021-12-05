@@ -1,30 +1,26 @@
+using Characters;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
 
-[CreateAssetMenu(fileName = "ResetTimeSinceTransition", menuName = "State Machines/Actions/Player/ResetTimeSinceTransition")]
-public class ResetTimerOnEnterSO : StateActionSO
-{
-    public override StateAction CreateAction() => new ResetTimerOnEnter();
+[CreateAssetMenu(fileName = "ResetTimeSinceTransition",
+	menuName = "State Machines/Actions/Player/ResetTimeSinceTransition")]
+public class ResetTimerOnEnterSO : StateActionSO {
+	public override StateAction CreateAction() => new ResetTimerOnEnter();
 }
 
-public class ResetTimerOnEnter : StateAction
-{
-    private PlayerCharacterSC _playerStateContainer;
+public class ResetTimerOnEnter : StateAction {
 
-    public override void OnUpdate()
-    {
+	private Timer _timer;
 
-    }
+	public override void OnUpdate() { }
 
-    public override void Awake(StateMachine stateMachine)
-    {
-        _playerStateContainer = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
-    }
+	public override void Awake(StateMachine stateMachine) {
+		_timer = stateMachine.gameObject.GetComponent<Timer>();
+	}
 
-    public override void OnStateEnter()
-    {
-        _playerStateContainer.timeSinceTransition = 0;
-    }
+	public override void OnStateEnter() {
+		_timer.timeSinceTransition = 0;
+	}
 }

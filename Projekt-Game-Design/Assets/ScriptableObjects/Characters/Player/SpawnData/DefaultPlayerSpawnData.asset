@@ -13,8 +13,68 @@ MonoBehaviour:
   m_Name: DefaultPlayerSpawnData
   m_EditorClassIdentifier: 
   id: 0
-  level: 1
-  experience: 1
-  movementpointsPerEnergy: 20
   gridPos: {x: 1, y: 1, z: 1}
   equipmentID: 0
+  overrideStatusValues:
+  - _name: 
+    _type: 1
+    _value: 0
+    _max: 0
+    _min: 0
+  - _name: 
+    _type: 2
+    _value: 0
+    _max: 0
+    _min: 0
+  - _name: 
+    _type: 3
+    _value: 0
+    _max: 0
+    _min: 0
+  - _name: 
+    _type: 4
+    _value: 5
+    _max: 5
+    _min: 0
+  - _name: 
+    _type: 5
+    _value: 1
+    _max: 100
+    _min: 0
+  - _name: 
+    _type: 6
+    _value: 1
+    _max: 100
+    _min: 0
+  - _name: 
+    _type: 7
+    _value: 10
+    _max: 100
+    _min: 0
+  - _name: 
+    _type: 8
+    _value: 10
+    _max: 20
+    _min: 0
+  - _name: 
+    _type: 9
+    _value: 10
+    _max: 20
+    _min: 0
+  - _name: 
+    _type: 10
+    _value: 10
+    _max: 20
+    _min: 0
+  - _name: 
+    _type: 11
+    _value: 1
+    _max: 100
+    _min: 0
+  - _name: 
+    _type: 12
+    _value: 0
+    _max: 1000
+    _min: 0
+  imageID: 0
+  profilePicture: {fileID: 21300000, guid: 2727d8462e1b04e4fbbdcb31cf2b0a62, type: 3}

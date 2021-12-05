@@ -7,23 +7,40 @@ namespace Characters {
 	public class StatusValues {
 
 		//health
-		// public StatusValue hitPoints;
+		public StatusValue HitPoints {
+			get { return GetValue(StatusType.HitPoints); }
+		}
 		// public StatusValue temporaryHitPoints;
-		//
-		// //attributes
-		// public StatusValue strength;
-		// public StatusValue dexterity;
-		// public StatusValue intelligence;
-		//
+		
+		//attributes
+		public StatusValue Strength {
+			get { return GetValue(StatusType.Strength); }
+		}
+		
+		public StatusValue Dexterity {
+			get { return GetValue(StatusType.Dexterity); }
+		}
+		
+		public StatusValue Intelligence {
+			get { return GetValue(StatusType.Intelligence); }
+		}
+		
 		// //energy
-		// public StatusValue energy;
-		//
+		public StatusValue Energy {
+			get { return GetValue(StatusType.Energy); }
+		}
+		
 		// //movement
 		// public StatusValue movementRange;
 		//
 		// //view
-		public StatusValue viewDistance {
+		public StatusValue ViewDistance {
 			get { return GetValue(StatusType.ViewDistance); }
+		}
+		
+		//level
+		public StatusValue Level {
+			get { return GetValue(StatusType.Level); }
 		}
 		
 //////////////////////////////////////////////////////////////////

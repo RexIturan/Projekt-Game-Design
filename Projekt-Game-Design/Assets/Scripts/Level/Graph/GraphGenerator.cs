@@ -41,7 +41,7 @@ namespace Graph {
             // and generate a pathnode for that
             // and then set the isWalkableFlag 
             for (int x = 0; x < ground.Width; x++) {
-                for (int y = 0; y < ground.Height; y++) {
+                for (int y = 0; y < ground.Depth; y++) {
                     var type = tileTypeContainer.tileTypes[ground.GetGridObject(x, y).tileTypeID];
                     var walkable = !type.Properties.HasFlag(TileProperties.Solid);// &&
                     //     !current.GetGridObject(x, y).Type.Flags.HasFlag(ETileFlags.solid);
@@ -62,7 +62,7 @@ namespace Graph {
             }    
             
             for (int x = 0; x < graph.Width; x++) {
-                for (int y = 0; y < graph.Height; y++) {
+                for (int y = 0; y < graph.Depth; y++) {
                     graph.GetGridObject(x, y).SetEdges(diagonal, graph);
                 }
             }
@@ -71,7 +71,8 @@ namespace Graph {
         public NodeGraph CreateNewGraph() {
             NodeGraph graph = new NodeGraph(
                 width: globalGridData.Width,
-                height: globalGridData.Depth,
+                height: globalGridData.Height,
+                depth: globalGridData.Depth,
                 cellSize: globalGridData.CellSize,
                 originPosition: globalGridData.OriginPosition);
             return graph;

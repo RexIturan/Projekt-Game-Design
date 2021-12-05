@@ -1,6 +1,7 @@
 using Grid;
 using System.Collections.Generic;
 using Characters.EnemyCharacter.ScriptableObjects;
+using Combat;
 using UnityEngine;
 using Util;
 
@@ -29,7 +30,7 @@ public class EnemyCharacterSC : MonoBehaviour
     [Header("Target")]
     public CharacterList characterList;
     public PathNode movementTarget;
-    public PlayerCharacterSC target;
+    public Targetable target;
 
     [Header("Combat")] 
     public float attackRange;

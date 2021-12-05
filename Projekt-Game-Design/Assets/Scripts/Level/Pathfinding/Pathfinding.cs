@@ -37,7 +37,7 @@ namespace Pathfinding {
             List<PathNode> closedNodes = new List<PathNode>();
 
             for (int x = 0; x < _graph.Width; x++) {
-                for (int y = 0; y < _graph.Height; y++) {
+                for (int y = 0; y < _graph.Depth; y++) {
                     PathNode pathNode = _graph.GetGridObject(x, y);
                     pathNode.dist = int.MaxValue;
                     pathNode.parentNode = null;
@@ -99,7 +99,7 @@ namespace Pathfinding {
             _closedList = new List<PathNode>();
 
             for (int x = 0; x < _graph.Width; x++) {
-                for (int y = 0; y < _graph.Height; y++) {
+                for (int y = 0; y < _graph.Depth; y++) {
                     PathNode pathNode = _graph.GetGridObject(x, y);
                     pathNode.gCost = int.MaxValue;
                     pathNode.hCost = int.MaxValue;
@@ -173,8 +173,8 @@ namespace Pathfinding {
         }
         
         private int CalculateDistanceCost(PathNode a, PathNode b) {
-            int xDistance = Mathf.Abs(a.x - b.x);
-            int yDistance = Mathf.Abs(a.y - b.y);
+            int xDistance = Mathf.Abs(a.pos.x - b.pos.x);
+            int yDistance = Mathf.Abs(a.pos.y - b.pos.y);
             int remaining = Mathf.Abs(xDistance - yDistance);
             return MoveDiagonalCost * Mathf.Min(xDistance, yDistance) + MoveStraightCost * remaining;
         }

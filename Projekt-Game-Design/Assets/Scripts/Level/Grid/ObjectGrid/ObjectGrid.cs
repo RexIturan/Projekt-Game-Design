@@ -6,7 +6,7 @@ using Util;
 namespace Level.Grid.ObjectGrid {
 	[Serializable]
 	public class ObjectGrid : GenericGrid1D<ObjectPlaceholder> {
-		public ObjectGrid(int width, int height, float cellSize, Vector3 originPosition) : base(width, height, cellSize,
+		public ObjectGrid(int width, int depth, float cellSize, Vector3 originPosition) : base(width, depth, cellSize,
 			originPosition, (grid, x, y) => new ObjectPlaceholder(), false) { }
 	}
 

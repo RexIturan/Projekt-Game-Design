@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Characters;
+using Characters.Movement;
 using Events.ScriptableObjects;
 using UnityEngine;
 using UOP1.StateMachine;
@@ -31,12 +33,11 @@ namespace Statemachine.Enemy.Actions.Movement {
         public override void OnStateEnter() {
             var inRangeTiles = _enemySC.tileInRangeOfTarget;
             var reachableTiles = _enemySC.reachableNodes;
-            var level = _enemySC.gridPosition.y;
 
             List<PathNode> reachableTilesInRange = new List<PathNode>();
 
             foreach (var node in reachableTiles) {
-                var pos = new Vector3Int(node.x, level, node.y);
+	            var pos = node.pos;
                 foreach (var tilePos in inRangeTiles) {
                     if (pos == tilePos) {
                         reachableTilesInRange.Add(node);
@@ -58,13 +59,13 @@ namespace Statemachine.Enemy.Actions.Movement {
                     _enemySC.isDone = true;
                 }
                 else {
-                    PlayerCharacterSC targetContainer = targetPlayer.GetComponent<PlayerCharacterSC>();
+                    var targetGridTransform = targetPlayer.GetComponent<GridTransform>();
 
                     Vector3Int startNode = new Vector3Int(_enemySC.gridPosition.x,
                         _enemySC.gridPosition.z,
                         0);
-                    Vector3Int endNode = new Vector3Int(targetContainer.gridPosition.x,
-                        targetContainer.gridPosition.z,
+                    Vector3Int endNode = new Vector3Int(targetGridTransform.gridPosition.x,
+                        targetGridTransform.gridPosition.z,
                         0);
 
                     _pathfindingPathQueryEC.RaiseEvent(startNode, endNode, SaveClosestToPlayer);                    
@@ -72,7 +73,7 @@ namespace Statemachine.Enemy.Actions.Movement {
             }
             else {
                 _enemySC.movementTarget = nearestNode;
-                var targetPos = new Vector3Int(nearestNode.x, 1, nearestNode.y);
+                var targetPos = nearestNode.pos;
                 _enemySC.gridPosition = targetPos;
                 _enemySC.MoveToGridPosition();
 
@@ -102,7 +103,7 @@ namespace Statemachine.Enemy.Actions.Movement {
                 var nearestNode = path[index];
                 nearestNode.dist = nearestNode.gCost;
                 _enemySC.movementTarget = nearestNode;
-                var targetPos = new Vector3Int(nearestNode.x, 1, nearestNode.y);
+                var targetPos = nearestNode.pos;
                 _enemySC.gridPosition = targetPos;
                 _enemySC.MoveToGridPosition();
 

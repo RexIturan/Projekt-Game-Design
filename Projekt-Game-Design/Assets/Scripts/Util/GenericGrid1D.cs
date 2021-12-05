@@ -6,7 +6,7 @@ namespace Util {
 	[Serializable]
 	public class GenericGrid1D<TGridObject> {
 		[SerializeField] private int width;
-		[SerializeField] private int height;
+		[SerializeField] private int depth;
 		[SerializeField] private float cellSize;
 		[SerializeField] private Vector3 originPosition;
 		[SerializeField] private TGridObject[] grid1DArray;
@@ -16,25 +16,25 @@ namespace Util {
 		private bool ShowDebug { get; }
 
 		public int Width => width;
-		public int Height => height;
+		public int Depth => depth;
 		public float CellSize => cellSize;
 		public Vector3 OriginPosition => originPosition;
 
 		public event EventHandler<OnGridObjectChangedGrid1DEventArgs> OnGridObjectChanged;
 
-		public GenericGrid1D(int width, int height, float cellSize, Vector3 originPosition,
+		public GenericGrid1D(int width, int depth, float cellSize, Vector3 originPosition,
 			Func<GenericGrid1D<TGridObject>, int, int, TGridObject> createGridObject, bool showDebug,
 			Transform debugTextParent = null) {
 			this.ShowDebug = showDebug;
 			this.width = width;
-			this.height = height;
+			this.depth = depth;
 			this.cellSize = cellSize;
 			this.originPosition = originPosition;
 			this._debugTextParent = debugTextParent;
 
-			grid1DArray = new TGridObject[width * height];
+			grid1DArray = new TGridObject[width * depth];
 
-			for ( var y = 0; y < this.height; y++ )
+			for ( var y = 0; y < this.depth; y++ )
 			for ( var x = 0; x < this.width; x++ )
 				grid1DArray[Coord2DToIndex(x, y, width)] = createGridObject(this, x, y);
 
@@ -43,9 +43,9 @@ namespace Util {
 		}
 
 		public void CreateDebugDisplay() {
-			var debugTextArray = new TextMeshPro[width, height];
+			var debugTextArray = new TextMeshPro[width, depth];
 
-			for ( var y = 0; y < height; y++ )
+			for ( var y = 0; y < depth; y++ )
 			for ( var x = 0; x < width; x++ ) {
 				debugTextArray[x, y] = Text.CreateWorldText(
 					grid1DArray[Coord2DToIndex(x, y, width)].ToString(),
@@ -59,9 +59,9 @@ namespace Util {
 				Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100);
 			}
 
-			Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white,
+			Debug.DrawLine(GetWorldPosition(0, depth), GetWorldPosition(width, depth), Color.white,
 				100);
-			Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100);
+			Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, depth), Color.white, 100);
 
 			OnGridObjectChanged +=
 				(assemblyDefinitionReferenceAsset, eventArgs) => {
@@ -96,7 +96,7 @@ namespace Util {
 		}
 
 		public bool IsInBounds(int x, int y) {
-			return x >= 0 && y >= 0 && x < width && y < height;
+			return x >= 0 && y >= 0 && x < width && y < depth;
 		}
 
 		public void TriggerGridObjectChanged(int x, int y) {
@@ -121,7 +121,7 @@ namespace Util {
 			if ( IsInBounds(x, y) )
 				return grid1DArray[Coord2DToIndex(x, y, width)];
 			else {
-				Debug.LogWarning($"Index of Grid object out of bounds! x: {x}, y: {y}, dims are: {width}, {height}");
+				Debug.LogWarning($"Index of Grid object out of bounds! x: {x}, y: {y}, dims are: {width}, {depth}");
 				return default;
 			}
 		}
@@ -157,7 +157,7 @@ namespace Util {
 
 		public void CopyTo(GenericGrid1D<TGridObject> grid, Vector2Int offset) {
 			for (int x = 0; x < Width; x++) {
-				for (int y = 0; y < Height; y++) {
+				for (int y = 0; y < Depth; y++) {
 					grid.SetGridObject(x + offset.x, y + offset.y, this.GetGridObject(x, y));
 				}
 			}

@@ -109,8 +109,6 @@ namespace Grid {
         #endregion
         
         #region Exchange Positions
-
-        
         
         
         /// <summary>
@@ -201,7 +199,5 @@ namespace Grid {
 
         #endregion
         #endregion
-
-        
     }
 }

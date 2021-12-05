@@ -32,7 +32,7 @@ namespace SceneManagement {
 				}
 				else {
 					Debug.Log("EditorColdStartup > Start \ncold startup: persistant managers loaded!");
-					//todo destroy this EditorColdStartup
+					//todo(vincent) destroy this EditorColdStartup
 				}
 			}
 		}
@@ -54,7 +54,7 @@ namespace SceneManagement {
 					loadEventChannelSO.RaiseEvent(new[] { startSceneSO });
 				};
 
-			//todo destroy this EditorColdStartup
+			//todo(vincent) destroy this EditorColdStartup
 		}
 #endif
 	}

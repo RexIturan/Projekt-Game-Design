@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc923948592522d43bac72e142b3b581, type: 3}
-  m_Name: g_OnPlayerTurn
+  m_Script: {fileID: 11500000, guid: 695b24cb321c43728627fb883cab39ae, type: 3}
+  m_Name: Char_Test
   m_EditorClassIdentifier: 
-  tacticsGameData: {fileID: 11400000, guid: 5d053a97eac47be4d8da941f3a2772c7, type: 2}
-  faction: 1
+  description: 
+  sceneType: 0
+  sceneReference:
+    m_AssetGUID: b977ca3ce5392ec4fbb5d1b94ffb6acd
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

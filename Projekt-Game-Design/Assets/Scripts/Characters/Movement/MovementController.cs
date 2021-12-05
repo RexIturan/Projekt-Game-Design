@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Grid;
 using UnityEngine;
 using Util;
@@ -6,64 +7,53 @@ using Util;
 namespace Characters.Movement {
 	public class MovementController : MonoBehaviour {
 		
-		//Scriptable Object Reference 
-		public GridDataSO globalGridData;
+		//todo ref OR find on awake?
+		[SerializeField] private Statistics statistics;
+		
+		//get grid data to snap to grid and calculate movement correctly
+		[SerializeField] private GridDataSO gridData;
 		
 		//Movement Settings
-		public float moveSpeed; // Standardwert 5
+		public float moveSpeed = 5; // Standardwert 5
 		public float rotationSpeed = 360.0f;
 
-		//grid pos cache
-		public Vector3Int gridPosition; // within the grid
-		
 		//todo transform.position
 		public Vector3 position;
 		
 		//todo transform.rotation.forward?
-		public float facingDirection;		
+		public float facingDirection = 0;
 		
 		//todo settings OR stat value??
 		//todo should be in tile distance
-		public int movementPointsPerEnergy; // Standardwert 20
+		public int movementPointsPerEnergy = 20; // Standardwert 20
 
 		//pathfinding cache
 		public List<PathNode> reachableTiles;
 		public PathNode movementTarget;
 
 		//todo animation? 
-		[SerializeField] private bool movementDone = true;
+		public bool MovementDone { get; set; } = true;
 		[SerializeField] private bool isMoving = false;
-
-		//todo initialise
-		private StatusValues stats;
+		[SerializeField] private GridTransform gridTransform;
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////		
-		
-		public void StartMovement() {
-			movementPointsPerEnergy = 20;
-			moveSpeed = 5f;
-			facingDirection = 0f;
+
+		#region Monobehaviour
+
+		private void Start() {
+			
+			//test if references are set
+			if(statistics is null)
+				Debug.LogError($"MovementController#Start\n statistics is null!");
+			
+			if(gridData is null)
+				Debug.LogError($"MovementController#Start\n gridData is null!");
+			
 			// set position of gameobject    
 			MoveToGridPosition();
 		}
 
-		public void MoveToGridPosition() {
-			var pos = gridPosition + globalGridData.GetCellCenter();
-			pos *= globalGridData.CellSize;
-			pos += globalGridData.OriginPosition;
-
-			gameObject.transform.position = pos;
-		}
-
-		public int GetEnergyUseUpFromMovement() {
-			return Mathf.CeilToInt(( float )movementTarget.dist / movementPointsPerEnergy);
-		}
-
-		public int GetMaxMoveDistance() {
-			return stats.GetValue(StatusType.Energy).value * movementPointsPerEnergy;
-		}
-
-		public void FixedUpdateMovement() {
+		private void FixedUpdate() {
 			// Move character to position smoothly 
 			transform.position =
 				Vector3.MoveTowards(transform.position, position, moveSpeed * Time.deltaTime);
@@ -75,6 +65,26 @@ namespace Characters.Movement {
 				transform.rotation,
 				target,
 				Time.deltaTime * rotationSpeed);
+		}
+
+		#endregion
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		public void MoveToGridPosition() {
+			var pos = gridTransform.gridPosition + gridData.GetCellCenter();
+			pos *= gridData.CellSize;
+			pos += gridData.OriginPosition;
+
+			gameObject.transform.position = pos;
+		}
+
+		public int GetEnergyUseUpFromMovement() {
+			return Mathf.CeilToInt(( float )movementTarget.dist / movementPointsPerEnergy);
+		}
+
+		public int GetMaxMoveDistance() {
+			return statistics.StatusValues.GetValue(StatusType.Energy).value * movementPointsPerEnergy;
 		}
 
 		public void FaceMovingDirection() {

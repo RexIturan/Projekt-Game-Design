@@ -54,11 +54,11 @@ namespace Characters {
 			value -= decValue;
 		}
 
-		public bool IsAtMax() {
+		public bool IsMax() {
 			return value == max;
 		}
 
-		public bool IsAtMin() {
+		public bool IsMin() {
 			return value == min;
 		}
 

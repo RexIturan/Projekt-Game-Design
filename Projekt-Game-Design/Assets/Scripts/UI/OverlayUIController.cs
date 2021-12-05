@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Characters;
+using Characters.Ability;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
 using UI.Components;
@@ -115,7 +116,7 @@ public class OverlayUIController : MonoBehaviour {
 		_callBackAction = callBackAction;
 		FlushAbilityListIcons();
 		List<AbilitySO> abilities =
-			new List<AbilitySO>(player.GetComponent<PlayerCharacterSC>().Abilities);
+			new List<AbilitySO>(player.GetComponent<AbilityController>().Abilities);
 		int counter = 0;
 
 		foreach ( var ability in abilities ) {
@@ -142,33 +143,35 @@ public class OverlayUIController : MonoBehaviour {
 		VisualElement healthBar = _playerViewContainer.Q<VisualElement>("ProgressBarHealthOverlay");
 		VisualElement abilityBar = _playerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
 
-		PlayerCharacterSC playerSC = obj.GetComponent<PlayerCharacterSC>();
-		CharacterStats playerStats = obj.GetComponent<PlayerCharacterSC>().CurrentStats;
+		var statistics = obj.GetComponent<Statistics>();
+		var chracterStats = statistics.StatusValues;
 
 		healthBar.style.width =
 			new StyleLength(
-				Length.Percent(( 100 * ( float )playerSC.HealthPoints / playerStats.maxHealthPoints )));
+				Length.Percent(( 100 * ( float )chracterStats.HitPoints.value / chracterStats.HitPoints.max )));
+		
 		abilityBar.style.width =
 			new StyleLength(
-				Length.Percent(( 100 * ( float )playerSC.EnergyPoints / playerStats.maxEnergy )));
+				Length.Percent(( 100 * ( float )chracterStats.Energy.value / chracterStats.Energy.max )));
+		
 		//manaBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
 
 		// Labels für Stats
-		_playerViewContainer.Q<Label>("StrengthLabel").text = playerStats.strength.ToString();
-		_playerViewContainer.Q<Label>("DexterityLabel").text = playerStats.dexterity.ToString();
-		_playerViewContainer.Q<Label>("IntelligenceLabel").text = playerStats.intelligence.ToString();
-		_playerViewContainer.Q<Label>("MovementLabel").text = playerStats.viewDistance.ToString();
+		_playerViewContainer.Q<Label>("StrengthLabel").text = chracterStats.Strength.value.ToString();
+		_playerViewContainer.Q<Label>("DexterityLabel").text = chracterStats.Dexterity.value.ToString();
+		_playerViewContainer.Q<Label>("IntelligenceLabel").text = chracterStats.Intelligence.value.ToString();
+		_playerViewContainer.Q<Label>("MovementLabel").text = chracterStats.ViewDistance.value.ToString();
 
 		// Image
 		VisualElement image = _playerViewContainer.Q<VisualElement>("PlayerPicture");
 		image.Clear();
 		Image newProfile = new Image();
 		image.Add(newProfile);
-		newProfile.image = playerSC.playerType.profilePicture.texture;
+		newProfile.image = statistics.DisplayImage.texture;
 
 		// Name and Level
-		_playerViewContainer.Q<Label>("PlayerName").text = playerSC.playerName;
-		_playerViewContainer.Q<Label>("LevelLabel").text = playerSC.level.ToString();
+		_playerViewContainer.Q<Label>("PlayerName").text = statistics.DisplayName;
+		_playerViewContainer.Q<Label>("LevelLabel").text = chracterStats.Level.value.ToString();
 	}
 
 	void ShowMenu() {

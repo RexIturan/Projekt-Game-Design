@@ -7,8 +7,8 @@ namespace Level.Grid.CharacterGrid {
 	[Serializable]
 	public class CharacterGrid : GenericGrid1D<CharPlaceholder> {
 		public CharacterGrid(
-			int width, int height, float cellSize, Vector3 originPosition) : 
-			base(width, height, cellSize,
+			int width, int depth, float cellSize, Vector3 originPosition) : 
+			base(width, depth, cellSize,
 			originPosition, (grid, x, y) => new CharPlaceholder(), false) { }
 	}
 

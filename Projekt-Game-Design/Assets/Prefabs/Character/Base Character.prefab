@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 2212653873986084086}
   - component: {fileID: 2212653873986084093}
   - component: {fileID: 2212653873986084092}
+  - component: {fileID: 6601210392787000488}
   - component: {fileID: 2212653873986084095}
   - component: {fileID: 2212653873986084094}
   - component: {fileID: 2212653873986084081}
@@ -49,8 +50,7 @@ GameObject:
   - component: {fileID: 2212653873986084082}
   - component: {fileID: 1915383006283477928}
   - component: {fileID: 2212653873986084085}
-  - component: {fileID: 2212653873986084084}
-  - component: {fileID: 2212653873986084087}
+  - component: {fileID: 1676697125739664753}
   m_Layer: 9
   m_Name: Base Character
   m_TagString: Untagged
@@ -65,7 +65,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2212653873986083977}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -104,6 +104,19 @@ MonoBehaviour:
     appendConditionsInfo: 1
     appendActionsInfo: 1
     currentState: 
+--- !u!114 &6601210392787000488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a407255e9ed41cca18c9777bb0c7aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &2212653873986084095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: 
+  DisplayImage: {fileID: 21300000, guid: 2727d8462e1b04e4fbbdcb31cf2b0a62, type: 3}
   stats:
     _statusValues:
     - _name: None
@@ -210,6 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8392edbd17a741e4b3aa49918501c3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statistics: {fileID: 2212653873986084095}
+  gridTransform: {fileID: 6601210392787000488}
 --- !u!114 &2212653873986084080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,8 +239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  tilesInRange: []
   tileInRangeOfTarget: []
+  tilesInRange: []
   waitForAttackToFinish: 0
   characterList: {fileID: 0}
   attackRange: 0
@@ -243,24 +259,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd92fd736a4245d2beb28e6db1413654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalGridData: {fileID: 0}
-  moveSpeed: 0
+  statistics: {fileID: 0}
+  gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  moveSpeed: 5
   rotationSpeed: 360
-  gridPosition: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
   facingDirection: 0
   movementPointsPerEnergy: 0
   reachableTiles: []
   movementTarget:
-    x: 0
-    y: 0
+    pos: {x: 0, y: 0, z: 0}
     gCost: 0
     hCost: 0
     fCost: 0
     dist: 0
     isWalkable: 0
-  movementDone: 1
   isMoving: 0
+  gridTransform: {fileID: 6601210392787000488}
 --- !u!114 &2212653873986084082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,10 +308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentContainerSO: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
   equipmentID: 0
-  weaponLeft: {fileID: 0}
-  weaponRight: {fileID: 0}
-  stance: 0
-  weaponRightPosition: 0
 --- !u!114 &2212653873986084085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,32 +320,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b77ded57c84f4d8214024ffd7d21d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 2212653873551418263}
-  playerType: {fileID: 0}
-  prefab: {fileID: 8839921088689484587, guid: f36b8162ad7839b44a6bb5d7f833d6df, type: 3}
-  mesh: {fileID: 0}
-  material: {fileID: -7394430928645769640, guid: 220c3379b05db7a4da9bb7ab2736c248, type: 3}
-  image: {fileID: 0}
---- !u!114 &2212653873986084084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2212653873986083977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8032b130c34934986320ba357d33f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOnTurn: 0
-  isDone: 0
-  enemyType: {fileID: 0}
-  enemySpawnData: {fileID: 0}
-  behavior: {fileID: 0}
-  noTargetFound: 0
-  rangeChecked: 0
---- !u!114 &2212653873986084087
+  prefab: {fileID: 8839921088689484587, guid: 3bc60f3f9e3f61b4cb1586783afde6b0, type: 3}
+  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
+  weaponLeft: {fileID: 0}
+  weaponRight: {fileID: 0}
+  stance: 0
+  weaponRightPosition: 0
+--- !u!114 &1676697125739664753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -346,51 +338,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61beff83ece1f2c41869fecfa859320d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTileEvent: {fileID: 0}
-  input: {fileID: 0}
-  globalGridData: {fileID: 0}
   playerType: {fileID: 0}
   playerSpawnData: {fileID: 0}
-  currentStats:
-    maxHealthPoints: 0
-    maxEnergy: 0
-    strength: 0
-    dexterity: 0
-    intelligence: 0
-    viewDistance: 0
-  playerName: 
-  level: 0
-  experience: 0
-  healthPoints: 0
-  energy: 0
-  movementPointsPerEnergy: 0
-  gridPosition: {x: 0, y: 0, z: 0}
-  item: {fileID: 0}
-  abilities: []
-  abilityID: 0
-  isSelected: 0
-  abilitySelected: 0
-  abilityConfirmed: 0
-  abilityExecuted: 0
-  movementTarget:
-    x: 0
-    y: 0
-    gCost: 0
-    hCost: 0
-    fCost: 0
-    dist: 0
-    isWalkable: 0
-  reachableTiles: []
-  movementDone: 1
-  playerTarget: {fileID: 0}
-  enemyTarget: {fileID: 0}
-  tilesInRange: []
-  waitForAttackToFinish: 0
-  timeSinceTransition: 0
-  speed: 0
-  facingDirection: 0
-  position: {x: 0, y: 0, z: 0}
-  stance: 0
-  weaponLeft: {fileID: 0}
-  weaponRight: {fileID: 0}
-  weaponRightPosition: 0
+  _statistics: {fileID: 2212653873986084095}
+  _gridTransform: {fileID: 6601210392787000488}
+  _attacker: {fileID: 2212653873986084080}
+  _movementController: {fileID: 2212653873986084083}
+  _equipmentController: {fileID: 1915383006283477928}
+  _abilityController: {fileID: 2212653873986084082}
+  _modelController: {fileID: 2212653873986084085}

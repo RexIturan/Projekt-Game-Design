@@ -8,8 +8,8 @@ namespace Level.Grid.ItemGrid {
 
 		private static Func<GenericGrid1D<Item>, int, int, Item> createGridObject = (grid, x, y) => new Item(); 
 		
-		public ItemGrid( int width, int height, float cellSize, Vector3 originPosition ) : 
-			base( width, height, cellSize, originPosition, createGridObject, false) { }
+		public ItemGrid( int width, int depth, float cellSize, Vector3 originPosition ) : 
+			base( width, depth, cellSize, originPosition, createGridObject, false) { }
 	}
 
 	[Serializable]

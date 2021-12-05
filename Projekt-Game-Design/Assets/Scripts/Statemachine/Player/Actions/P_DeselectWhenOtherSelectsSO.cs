@@ -1,5 +1,6 @@
 using Events.ScriptableObjects;
 using System;
+using Player;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -34,7 +35,7 @@ public class P_DeselectWhenOtherSelects : StateAction {
 
 	private void DeselectSelf(GameObject selectedPlayer, Action<int> callback) {
 		if ( !selectedPlayer.Equals(_gameObject) ) {
-			_gameObject.GetComponent<PlayerCharacterSC>().isSelected = false;
+			_gameObject.GetComponent<Selectable>().isSelected = false;
 		}
 	}
 }

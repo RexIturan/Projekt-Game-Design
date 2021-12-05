@@ -48,7 +48,7 @@ namespace Pathfinding {
                     bool reachable = false;
                     PathNode currentNode = null;
                     foreach (var node in _reachableNodes) {
-                        if (node.x == gridPos.x && node.y == gridPos.y) {
+                        if (node.pos.x == gridPos.x && node.pos.y == gridPos.y) {
                             reachable = true;
                             currentNode = node;
                         }

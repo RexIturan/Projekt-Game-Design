@@ -21,7 +21,7 @@ namespace Grid {
 		
 		private void FillTileGrid(TileGrid tileGrid, int tileTypeID) {
 			for ( int x = 0; x < tileGrid.Width; x++ ) {
-				for ( int y = 0; y < tileGrid.Height; y++ ) {
+				for ( int y = 0; y < tileGrid.Depth; y++ ) {
 					tileGrid.GetGridObject(x, y).SetTileType(tileTypeID);
 				}
 			}
@@ -150,7 +150,7 @@ namespace Grid {
 		}
 
 		private void SetItemAt(Vector2Int pos, int layer, int itemId) {
-			Debug.Log($"SetItemAt {pos} {itemId} |{gridContainer.items[layer].Width}, {layer}, {gridContainer.items[layer].Height}");
+			Debug.Log($"SetItemAt {pos} {itemId} |{gridContainer.items[layer].Width}, {layer}, {gridContainer.items[layer].Depth}");
 
 			var tileId = gridContainer.tileGrids[layer].GetGridObject(pos).tileTypeID;
 			var tile = tileTypesContainer.tileTypes[tileId];

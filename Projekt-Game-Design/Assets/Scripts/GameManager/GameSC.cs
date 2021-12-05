@@ -67,12 +67,14 @@ namespace GameManager {
             // todo needs update if we introduce more factions
             setTurnIndicatorVisibilityEC.RaiseEvent(faction == Faction.Player);
 
+            Debug.Log($"End Turn.\n Turn: {tacticsData.turnNum} Current Faction: {tacticsData.currentPlayer}");
+            
             if (tacticsData.currentPlayer == faction) {
                 tacticsData.GoToNextTurn();
                 // Debug.Log($"{tacticsData.currentPlayer}, turn:{tacticsData.turnNum}");    
             }
             else {
-                Debug.Log("You can only end the Turn, when its your Turn");
+                Debug.Log($"You can only end the Turn, when its your Turn.\nTurn: {tacticsData.turnNum}");
             }
         }
         

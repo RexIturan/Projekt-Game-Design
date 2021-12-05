@@ -20,7 +20,7 @@ namespace Player {
 
 		[SerializeField] private CursorDrawer cursorDrawer;
 
-		[SerializeField] private PlayerCharacterSC selectedPlayerCharacter;
+		[SerializeField] private Selectable selectedPlayerCharacter;
 		[SerializeField] private EnemyCharacterSC selectedEnemyCharacter;
 
 		private void Awake() {

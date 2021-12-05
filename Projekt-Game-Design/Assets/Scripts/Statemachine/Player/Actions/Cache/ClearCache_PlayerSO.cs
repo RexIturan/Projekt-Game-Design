@@ -1,38 +1,39 @@
-﻿using UnityEngine;
+﻿using Characters.Ability;
+using Characters.Movement;
+using Combat;
+using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "ClearCache_player", menuName = "State Machines/Actions/Clear Cache_player")]
-public class ClearCache_PlayerSO : StateActionSO
-{
+[CreateAssetMenu(fileName = "ClearCache_player",
+	menuName = "State Machines/Actions/Clear Cache_player")]
+public class ClearCache_PlayerSO : StateActionSO {
 	public override StateAction CreateAction() => new ClearCache_Player();
 }
 
-public class ClearCache_Player : StateAction
-{
-	protected new ClearCache_PlayerSO OriginSO => (ClearCache_PlayerSO)base.OriginSO;
-	private PlayerCharacterSC _playerCharacterSC;
-	
-	
+public class ClearCache_Player : StateAction {
+	protected new ClearCache_PlayerSO OriginSO => ( ClearCache_PlayerSO )base.OriginSO;
+	private AbilityController _abilityController;
+	private MovementController _movementController;
+	private Attacker _attacker;
+
 	public override void Awake(StateMachine stateMachine) {
-		_playerCharacterSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+		_abilityController = stateMachine.gameObject.GetComponent<AbilityController>();
+		_movementController = stateMachine.gameObject.GetComponent<MovementController>();
+		_attacker = stateMachine.gameObject.GetComponent<Attacker>();
 	}
-	
-	public override void OnUpdate()
-	{
-	}
-	
-	public override void OnStateEnter()
-	{
-	}
-	
+
+	public override void OnUpdate() { }
+
+	public override void OnStateEnter() { }
+
 	public override void OnStateExit() {
-		_playerCharacterSC.AbilityID = -1;
-		_playerCharacterSC.abilitySelected = false;
-		_playerCharacterSC.abilityConfirmed = false;
-		_playerCharacterSC.movementTarget = default;
-        _playerCharacterSC.playerTarget = null;
-        _playerCharacterSC.enemyTarget = null;
-        _playerCharacterSC.waitForAttackToFinish = false;
-    }
+		_abilityController.SelectedAbilityID = -1;
+		_abilityController.abilitySelected = false;
+		_abilityController.abilityConfirmed = false;
+		_movementController.movementTarget = default;
+		_attacker.playerTarget = null;
+		_attacker.enemyTarget = null;
+		_attacker.waitForAttackToFinish = false;
+	}
 }

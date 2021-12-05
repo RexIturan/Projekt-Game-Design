@@ -3,11 +3,14 @@
 namespace Characters {
 	//todo move to Character SC ??
 	public class Statistics : MonoBehaviour {
-		[SerializeField] private string DisplayName;
+		public string DisplayName;
+		public Sprite DisplayImage;
 		[SerializeField] private StatusValues stats;
 		//todo move somewhere else??
-		[SerializeField] private Faction faction;	
+		[SerializeField] private Faction faction;
 
+		//property -> getter
+		public StatusValues StatusValues => stats;
 
 		public void RefillEnergy() {
 			// refill energy etc.

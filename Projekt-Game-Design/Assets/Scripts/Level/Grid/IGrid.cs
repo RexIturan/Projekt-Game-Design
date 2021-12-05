@@ -7,7 +7,7 @@ namespace Level.Grid {
 
 		protected IGrid(
 			int width,
-			int height,
+			int depth,
 			float cellSize,
 			Vector3 originPosition,
 			Func<GenericGrid1D<T>, int, int, T> createGridObject,
@@ -15,7 +15,7 @@ namespace Level.Grid {
 			Transform debugTextParent = null) :
 			base(
 				width,
-				height,
+				depth,
 				cellSize,
 				originPosition,
 				createGridObject,
