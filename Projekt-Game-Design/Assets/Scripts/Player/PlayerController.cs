@@ -80,8 +80,9 @@ namespace Player {
 			}
 
 			if ( inputCache.rightButton.started ) {
-				if ( selectedPlayerCharacter ) {
+				if ( selectedPlayerCharacter is { } ) {
 					selectedPlayerCharacter.Deselect();
+					selectedPlayerCharacter = null;
 				}
 			}
 		}
