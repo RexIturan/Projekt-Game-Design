@@ -1,4 +1,5 @@
-﻿using Events.ScriptableObjects.GameState;
+﻿using Characters;
+using Events.ScriptableObjects.GameState;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;

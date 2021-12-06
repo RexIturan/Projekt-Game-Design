@@ -1,5 +1,7 @@
 using Events.ScriptableObjects;
 using System.Collections.Generic;
+using Characters;
+using Characters.Movement;
 // using UnityEditorInternal;
 using UnityEngine;
 using UOP1.StateMachine;
@@ -7,98 +9,85 @@ using UOP1.StateMachine.ScriptableObjects;
 using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
 
-[CreateAssetMenu(fileName = "e_MoveToTarget_OnUpdate", menuName = "State Machines/Actions/Enemy/Move To Target On Update")]
-public class E_MoveToTarget_OnUpdateSO : StateActionSO
-{
-    [SerializeField] private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
+[CreateAssetMenu(fileName = "e_MoveToTarget_OnUpdate",
+	menuName = "State Machines/Actions/Enemy/Move To Target On Update")]
+public class E_MoveToTarget_OnUpdateSO : StateActionSO {
+	[SerializeField] private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
 
-    public override StateAction CreateAction() => new E_MoveToTarget_OnUpdate(pathfindingPathQueryEventChannel);
+	public override StateAction CreateAction() =>
+		new E_MoveToTarget_OnUpdate(pathfindingPathQueryEventChannel);
 }
 
-public class E_MoveToTarget_OnUpdate : StateAction
-{
-    private const float TimePerStep = 0.5f;
+public class E_MoveToTarget_OnUpdate : StateAction {
+	protected new MoveToTargetSO OriginSO => ( MoveToTargetSO )base.OriginSO;
+	
+	private const float TimePerStep = 0.5f;
+	private readonly PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;
+	
+	private EnemyCharacterSC _enemyCharacterSC;
+	private float _timeSinceLastStep = 0;
+	private List<PathNode> _path;
+	private int _currentStep;
+	
+	private CharacterList _characterList;
 
-    protected new MoveToTargetSO OriginSO => (MoveToTargetSO)base.OriginSO;
+	public E_MoveToTarget_OnUpdate(
+		PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel) {
+		this._pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
+	}
 
-    private EnemyCharacterSC _enemyCharacterSC;
-    private float _timeSinceLastStep = 0;
-    private List<PathNode> _path;
-    private int _currentStep;
-    private PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;
-    private CharacterList _characterList;
-    
-    public E_MoveToTarget_OnUpdate(PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel)
-    {
-        this._pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
-    }
+	public override void Awake(StateMachine stateMachine) {
+		_enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
+	}
 
-    public override void Awake(StateMachine stateMachine)
-    {
-        _enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
-    }
+	public override void OnStateEnter() {
+		_characterList = GameObject.FindObjectOfType<CharacterList>();
+		Vector3Int startNode = _enemyCharacterSC.gridPosition;
+		Vector3Int endNode = _enemyCharacterSC.movementTarget.pos;
 
-    public override void OnStateEnter() {
-        _characterList = GameObject.FindObjectOfType<CharacterList>();
-        Vector3Int startNode = new Vector3Int(_enemyCharacterSC.gridPosition.x,
-            _enemyCharacterSC.gridPosition.z,
-            0);
-        Vector3Int endNode = new Vector3Int(_enemyCharacterSC.movementTarget.x,
-            _enemyCharacterSC.movementTarget.y,
-            0);
+		_pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, SavePath);
 
-        _pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, SavePath);
+		_timeSinceLastStep = 0;
+		_currentStep = 1;
+		_enemyCharacterSC.movementDone = false;
+	}
 
-        _timeSinceLastStep = 0;
-        _currentStep = 1;
-        _enemyCharacterSC.movementDone = false;
-    }
-    
-    public override void OnUpdate()
-    {
-        if (_currentStep >= _path.Count || playerOnField())
-        {
-            _enemyCharacterSC.movementDone = true;
-            _enemyCharacterSC.abilityExecuted = true;
-            _enemyCharacterSC.isDone = true;
-        }
+	public override void OnUpdate() {
+		Vector3Int stepPosition = _path[_currentStep].pos;
 
-        if (!_enemyCharacterSC.movementDone)
-        {
-            _timeSinceLastStep += Time.deltaTime;
-            if (_timeSinceLastStep >= TimePerStep)
-            {
-                _timeSinceLastStep -= TimePerStep;
+		if ( _currentStep >= _path.Count || isFieldOccupied(stepPosition) ) {
+			_enemyCharacterSC.movementDone = true;
+			_enemyCharacterSC.abilityExecuted = true;
+			_enemyCharacterSC.isDone = true;
+		}
 
-                _enemyCharacterSC.gridPosition = new Vector3Int(_path[_currentStep].x,
-                                                       1,
-                                                       _path[_currentStep].y);
-                _enemyCharacterSC.MoveToGridPosition();
+		if ( !_enemyCharacterSC.movementDone ) {
+			_timeSinceLastStep += Time.deltaTime;
+			if ( _timeSinceLastStep >= TimePerStep ) {
+				_timeSinceLastStep -= TimePerStep;
 
-                _currentStep++;
-            }
-        }
-    }
+				_enemyCharacterSC.gridPosition = _path[_currentStep].pos;
+				_enemyCharacterSC.MoveToGridPosition();
 
-    private void SavePath(List<PathNode> path)
-    {
-        this._path = path;
-    }
+				_currentStep++;
+			}
+		}
+	}
 
-    private bool playerOnField()
-    {
-        bool fieldOccupied = false;
-            
-        Vector3Int stepPosition = new Vector3Int(_path[_currentStep].x,
-                                                 1,
-                                                 _path[_currentStep].y);
-        foreach (GameObject player in _characterList.playerContainer)
-        {
-            //todo move get component outside of methode?? OR cache playerCharcterSC
-            if (player.GetComponent<PlayerCharacterSC>().gridPosition.Equals(stepPosition))
-                fieldOccupied = true;
-        }
+	private void SavePath(List<PathNode> path) {
+		this._path = path;
+	}
 
-        return fieldOccupied;
-    }
+	//todo(grid/graph/pathfinding) move methode to GridContainer or GraphContainer
+	private bool isFieldOccupied(Vector3Int position) {
+		bool fieldOccupied = false;
+
+		foreach ( GameObject player in _characterList.playerContainer ) {
+			//todo move get component outside of methode?? OR cache playerCharcterSC
+			if ( player.GetComponent<GridTransform>().gridPosition.Equals(position) )
+				fieldOccupied = true;
+		}
+
+		return fieldOccupied;
+	}
 }

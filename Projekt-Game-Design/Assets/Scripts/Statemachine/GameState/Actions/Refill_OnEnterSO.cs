@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Characters;
+using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
@@ -25,7 +26,7 @@ public class Refill_OnEnter : StateAction {
         switch (_tacticsGameData.currentPlayer) { 
             case Faction.Player:
                 foreach (var player in characterList.playerContainer) {
-                    player.GetComponent<PlayerCharacterSC>().Refill();
+                    player.GetComponent<Statistics>().RefillEnergy();
                 }
                 break;
             case Faction.Enemy:

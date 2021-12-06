@@ -20,9 +20,11 @@ namespace Visual {
         [Header("Visuals")]
         [SerializeField] private Tilemap[] gridTilemap;
         [SerializeField] private Tilemap cursorTilemap;
+        [SerializeField] private Tilemap bottomTilemap;
 
         [SerializeField] private TileTypePair[] tileTypeTileDict;
         [SerializeField] private TileBase cursor;
+        [SerializeField] private TileBase bottomTile;
         [SerializeField] private TileBase errorTile;
 
         public TileBase GetTileFromTileType(TileTypeSO tileType) {
@@ -34,6 +36,20 @@ namespace Visual {
             }
             return tile;
         }
+
+        public void DrawGridLayout() {
+	        bottomTilemap.ClearAllTiles();
+
+	        var width = globalGridData.Width;
+	        var depth = globalGridData.Depth;
+	        var offset = globalGridData.GetLowerBounds();
+	        
+	        for ( int x = 0; x < width; x++ ) {
+		        for ( int z = 0; z < depth; z++ ) {
+							bottomTilemap.SetTile(new Vector3Int(x + offset.x, z + offset.y, 0), bottomTile);			        
+		        }
+	        }
+        }
         
         public void DrawGrid() {
             foreach (var tilemap in gridTilemap) {
@@ -42,10 +58,10 @@ namespace Visual {
 
             var offset = new Vector2Int((int)globalGridData.OriginPosition.x, (int)globalGridData.OriginPosition.z); 
             
-            for (int l = 0; l < gridContainer.tileGrids.Count; l++) {
+            for (int l = 0; l < globalGridData.Height; l++) {
                 var tileGrid = gridContainer.tileGrids[l];
                 for (int x = 0; x < tileGrid.Width; x++) {
-                    for (int y = 0; y < tileGrid.Height; y++) {
+                    for (int y = 0; y < tileGrid.Depth; y++) {
                         var tile = tileGrid.GetGridObject(x, y);
                         var type = tileTypeContainer.tileTypes[tile.tileTypeID];
                         if (tile != null) {

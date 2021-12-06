@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
+using Characters;
+using Characters.Movement;
 using Grid;
+using Level.Grid.CharacterGrid;
+using Level.Grid.ItemGrid;
+using Level.Grid.ObjectGrid;
 using SaveSystem.SaveFormats;
 
 namespace SaveSystem {
@@ -19,21 +24,52 @@ namespace SaveSystem {
 
 		#region Local Functions
 
-		private GridData_Save GetGridDataSaveData(GridDataSO globalGridData) {
+		private GridData_Save GetGridDataSaveData(GridDataSO gridData) {
 			GridData_Save gridDataSave = new GridData_Save {
-				height = globalGridData.height,
-				width = globalGridData.width,
-				cellSize = globalGridData.cellSize,
-				originPosition = globalGridData.originPosition
+				height = gridData.Height,
+				width = gridData.Width,
+				depth = gridData.Depth,
+				cellSize = gridData.CellSize,
+				originPosition = gridData.OriginPosition
 			};
 
 			return gridDataSave;
 		}
 		
-		private List<TileGrid> GetGridSaveData(GridContainerSO gridContainer) {
+		private List<TileGrid> GetTileGridSaveData(GridContainerSO gridContainer) {
 			List<TileGrid> gridSaveData = new List<TileGrid>();
 			
 			foreach (var grids in gridContainer.tileGrids) {
+				gridSaveData.Add(grids);
+			}
+
+			return gridSaveData;
+		}
+		
+		private List<ItemGrid> GetItemGridSaveData(GridContainerSO gridContainer) {
+			List<ItemGrid> gridSaveData = new List<ItemGrid>();
+			
+			foreach (var grids in gridContainer.items) {
+				gridSaveData.Add(grids);
+			}
+
+			return gridSaveData;
+		}
+		
+		private List<CharacterGrid> GetCharacterGridSaveData(GridContainerSO gridContainer) {
+			List<CharacterGrid> gridSaveData = new List<CharacterGrid>();
+			
+			foreach (var grids in gridContainer.characters) {
+				gridSaveData.Add(grids);
+			}
+
+			return gridSaveData;
+		}
+		
+		private List<ObjectGrid> GetObjectGridSaveData(GridContainerSO gridContainer) {
+			List<ObjectGrid> gridSaveData = new List<ObjectGrid>();
+			
+			foreach (var grids in gridContainer.objects) {
 				gridSaveData.Add(grids);
 			}
 
@@ -46,11 +82,13 @@ namespace SaveSystem {
 			if ( characterList ) {
 				foreach ( var player in characterList.playerContainer ) {
 					var playerCharacterSc = player.GetComponent<PlayerCharacterSC>();
+					var pcGridTransform = player.GetComponent<GridTransform>();
+					
 					playerChars.Add(
 						new PlayerCharacter_Save() {
 							plyerTypeId = playerCharacterSc.playerType.id,
 							plyerSpawnDataId = playerCharacterSc.playerSpawnData.id,
-							pos = playerCharacterSc.gridPosition
+							pos = pcGridTransform.gridPosition
 						});
 				}	
 			}
@@ -92,6 +130,9 @@ namespace SaveSystem {
 			List<Inventory_Save> equipmentInventorys = new List<Inventory_Save>();
 
 			foreach ( var equipment in equipmentInventoryContainerSo.equipmentInventories ) {
+				if(equipment is null)
+					break;
+				
 				var equiped = new List<int>();
 				foreach ( var itemID in equipment.items) {
 					equiped.Add(itemID);
@@ -131,7 +172,10 @@ namespace SaveSystem {
 		public Save WirteLevelToSave() {
 			Save save = new Save {
 				gridDataSave = GetGridDataSaveData(_globalGridData),
-				gridSave = GetGridSaveData(_gridContaier),
+				tileGrids = GetTileGridSaveData(_gridContaier),
+				itemGrids = GetItemGridSaveData(_gridContaier),
+				characterGrids = GetCharacterGridSaveData(_gridContaier),
+				objectGrids = GetObjectGridSaveData(_gridContaier),
 				players = GetPlayerSaveData(_characterList),
 				enemies = GetEnemySaveData(_characterList),
 				inventory = GetInventorySaveData(_inventory),

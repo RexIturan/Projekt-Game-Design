@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ability.ScriptableObjects;
+using Characters.Ability;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -16,14 +18,14 @@ public class SuperAction : StateAction
 	protected new SuperActionSO OriginSO => (SuperActionSO)base.OriginSO;
 
 	// input for each
-	private AbilityContainerSO _abilityContainer;
-	private AbilityPhase _phase;
+	private readonly AbilityContainerSO _abilityContainer;
+	private readonly AbilityPhase _phase;
 	
 	// 
 	private StateMachine _stateMachine;
 	private List<StateAction> _subActions;
 	private int _abilityID;
-	private PlayerCharacterSC _playerCharacterSC;
+	private AbilityController _abilityController;
 
 	public SuperAction(AbilityPhase phase, AbilityContainerSO abilityContainer) {
 		this._phase = phase;
@@ -32,20 +34,20 @@ public class SuperAction : StateAction
 	
 	public override void Awake(StateMachine stateMachine) {
 		this._stateMachine = stateMachine;
-		_playerCharacterSC = stateMachine.GetComponent<PlayerCharacterSC>();
+		_abilityController = stateMachine.GetComponent<AbilityController>();
 	}
 	
 	public override void OnStateEnter() {
 		_subActions = new List<StateAction>();
-		// get Actions from Ability
-		_abilityID = _playerCharacterSC.AbilityID;
+		// get Ability from Ability Controller
+		_abilityID = _abilityController.SelectedAbilityID;
 		var ability = _abilityContainer.abilities[_abilityID];
-		StateActionSO[] actions;
+		StateActionSO[] actions = Array.Empty<StateActionSO>();
 
 		if (_phase == AbilityPhase.Selected) {
 			actions = ability.selectedActions.ToArray();
 		}
-		else {
+		else if (_phase == AbilityPhase.Executing) {
 			actions = ability.executingActions.ToArray();
 		}
 		
@@ -75,11 +77,6 @@ public class SuperAction : StateAction
 			action.OnStateExit();
 		}
 	}
-
-	// enum AbilityPhase {
-	// 	selected,
-	// 	executing
-	// }
 }
 
 public enum AbilityPhase {

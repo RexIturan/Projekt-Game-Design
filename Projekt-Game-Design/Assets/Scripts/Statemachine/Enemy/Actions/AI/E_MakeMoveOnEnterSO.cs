@@ -1,5 +1,7 @@
 using Events.ScriptableObjects;
 using System.Collections.Generic;
+using Characters;
+using Characters.Movement;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -44,7 +46,7 @@ public class E_MakeMoveOnEnter : StateAction {
 
             // TODO: find nearest player instead
             _targetPlayer = _enemySC.characterList.playerContainer[0].gameObject;
-            PlayerCharacterSC targetContainer = _targetPlayer.GetComponent<PlayerCharacterSC>();
+            var targetContainer = _targetPlayer.GetComponent<GridTransform>();
 
             Vector3Int startNode = new Vector3Int(_enemySC.gridPosition.x,
                 _enemySC.gridPosition.z,

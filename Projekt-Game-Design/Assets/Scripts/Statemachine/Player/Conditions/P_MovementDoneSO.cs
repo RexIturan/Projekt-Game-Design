@@ -1,3 +1,4 @@
+using Characters.Movement;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -9,14 +10,14 @@ public class P_MovementDoneSO : StateConditionSO {
 }
 
 public class P_MovementDone : Condition {
-	private PlayerCharacterSC _playerSC;
+	private MovementController _movementController;
 
 	public override void Awake(StateMachine stateMachine) {
-		_playerSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+		_movementController = stateMachine.gameObject.GetComponent<MovementController>();
 	}
 
 	protected override bool Statement() {
-		return _playerSC.movementDone;
+		return _movementController.MovementDone;
 	}
 
 	public override void OnStateEnter() { }

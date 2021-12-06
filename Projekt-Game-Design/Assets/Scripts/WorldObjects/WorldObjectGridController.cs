@@ -26,7 +26,7 @@ namespace WorldObjects {
         public WorldObjectGrid CreateNewWorldObjectGrid() {
             return new WorldObjectGrid(
                 globalGridData.Width,
-                globalGridData.Height,
+                globalGridData.Depth,
                 globalGridData.CellSize,
                 globalGridData.OriginPosition
             );
@@ -80,7 +80,7 @@ namespace WorldObjects {
             var upperBounds = GetUpperBounds(
                 WorldPosToGridPos(globalGridData.OriginPosition),
                 globalGridData.Width,
-                globalGridData.Height);
+                globalGridData.Depth);
 
             Vector2Int newLowerBounds = lowerBounds;
             Vector2Int newUpperBounds = upperBounds;
@@ -121,7 +121,7 @@ namespace WorldObjects {
         
         public void FillWorldObjectGrid(WorldObjectGrid worldObjectGrid, WorldObjectTypeSO worldObjectType) {
             for (int x = 0; x < worldObjectGrid.Width; x++) {
-                for (int y = 0; y < worldObjectGrid.Height; y++) {
+                for (int y = 0; y < worldObjectGrid.Depth; y++) {
                     worldObjectGrid.GetGridObject(x, y).SetWorldObjectType(worldObjectType);
                 }
             }
@@ -144,16 +144,16 @@ namespace WorldObjects {
         }
 
         public void OffsetGlobalGridData(Vector2Int lowerBounds, Vector2Int newLowerBounds, Vector2Int newUpperBounds) {
-            ChangeBounds(newLowerBounds, newUpperBounds);
+            // ChangeBounds(newLowerBounds, newUpperBounds);
         }
         
-        private void ChangeBounds(Vector2Int newLowerBounds, Vector2Int newUpperBounds) {
-            globalGridData.Width = newUpperBounds.x + Mathf.Abs(newLowerBounds.x) + 1;
-            globalGridData.Height = newUpperBounds.y + Mathf.Abs(newLowerBounds.y) + 1;
-            globalGridData.OriginPosition = new Vector3(
-                x: newLowerBounds.x,
-                y: globalGridData.OriginPosition.y,
-                z: newLowerBounds.y);
-        }
+        // private void ChangeBounds(Vector2Int newLowerBounds, Vector2Int newUpperBounds) {
+        //     globalGridData.Width = newUpperBounds.x + Mathf.Abs(newLowerBounds.x) + 1;
+        //     globalGridData.Height = newUpperBounds.y + Mathf.Abs(newLowerBounds.y) + 1;
+        //     globalGridData.OriginPosition = new Vector3(
+        //         x: newLowerBounds.x,
+        //         y: globalGridData.OriginPosition.y,
+        //         z: newLowerBounds.y);
+        // }
     }
 }

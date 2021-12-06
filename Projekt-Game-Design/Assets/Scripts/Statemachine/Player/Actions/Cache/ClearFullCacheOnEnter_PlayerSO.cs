@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Characters.Ability;
+using Characters.Movement;
+using Combat;
+using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
@@ -12,31 +15,30 @@ public class ClearFullCacheOnEnter_Player : StateAction
 {
 	protected new ClearFullCacheOnEnter_PlayerSO OriginSO => (ClearFullCacheOnEnter_PlayerSO)base.OriginSO;
 
-	private PlayerCharacterSC _playerCharacterSC;
+	private AbilityController _abilityController;
+	private MovementController _movementController;
+	private Attacker _attacker;
 
-	public override void Awake(StateMachine stateMachine)
-	{
-		_playerCharacterSC = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+	public override void Awake(StateMachine stateMachine) {
+		_abilityController = stateMachine.gameObject.GetComponent<AbilityController>();
+		_movementController = stateMachine.gameObject.GetComponent<MovementController>();
+		_attacker = stateMachine.gameObject.GetComponent<Attacker>();
 	}
-	
-	public override void OnUpdate()
-	{
-	}
-	
-	public override void OnStateEnter() {
-		_playerCharacterSC.AbilityID = -1;
-		_playerCharacterSC.abilityConfirmed = false;
-		_playerCharacterSC.abilityExecuted = false;
-		_playerCharacterSC.abilitySelected = false;
-		_playerCharacterSC.reachableTiles.Clear();
-		_playerCharacterSC.movementTarget = null;
-        _playerCharacterSC.playerTarget = null;
-        _playerCharacterSC.enemyTarget = null;
-        _playerCharacterSC.tilesInRange.Clear();
-        _playerCharacterSC.waitForAttackToFinish = false;
-    }
-	
-	public override void OnStateExit()
-	{
+
+	public override void OnUpdate() { }
+
+	public override void OnStateEnter() { }
+
+	public override void OnStateExit() {
+		_abilityController.SelectedAbilityID = -1;
+		_abilityController.abilitySelected = false;
+		_abilityController.abilityConfirmed = false;
+		_abilityController.abilityExecuted = false;
+		_movementController.movementTarget = default;
+		_movementController.reachableTiles.Clear();
+		_attacker.playerTarget = null;
+		_attacker.enemyTarget = null;
+		_attacker.ClearTilesInRange();
+		_attacker.waitForAttackToFinish = false;
 	}
 }

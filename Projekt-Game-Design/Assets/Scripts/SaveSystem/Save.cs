@@ -1,42 +1,56 @@
 ﻿using System.Collections.Generic;
+using Characters;
 using Grid;
+using Level.Grid.CharacterGrid;
+using Level.Grid.ItemGrid;
+using Level.Grid.ObjectGrid;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 
 namespace SaveSystem {
-    public class Save {
-	    //todo rename achtung savefiles will be incompatible
-        public GridData_Save gridDataSave;
-        public List<PlayerCharacter_Save> players;
-        public List<Enemy_Save> enemies;
-        public Inventory_Save inventory;
-        public List<Inventory_Save> equipmentInventory;
-        public List<TileGrid> gridSave;
+	public class Save {
+		//todo rename achtung savefiles will be incompatible
+		public GridData_Save gridDataSave;
+		public List<PlayerCharacter_Save> players;
+		public List<Enemy_Save> enemies;
+		public Inventory_Save inventory;
+		public List<Inventory_Save> equipmentInventory;
+		public List<TileGrid> tileGrids;
+		public List<ItemGrid> itemGrids;
+		public List<CharacterGrid> characterGrids;
+		public List<ObjectGrid> objectGrids;
 
-        public Save() {
-            inventory = new Inventory_Save();
-            equipmentInventory = new List<Inventory_Save>();
-            gridDataSave = new GridData_Save();
-            players = new List<PlayerCharacter_Save>();
-            enemies = new List<Enemy_Save>();
-            gridSave = new List<TileGrid>();
-        }
-        
-        public string ToJson() {
-            var json = JsonUtility.ToJson(this, true);
-            return json;
-        }
+		public Save() {
+			inventory = new Inventory_Save();
+			equipmentInventory = new List<Inventory_Save>();
+			gridDataSave = new GridData_Save();
+			players = new List<PlayerCharacter_Save>();
+			enemies = new List<Enemy_Save>();
+			tileGrids = new List<TileGrid>();
+			itemGrids = new List<ItemGrid>();
+			characterGrids = new List<CharacterGrid>();
+			objectGrids = new List<ObjectGrid>();
+		}
 
-        public void LoadFromJson(string json) {
-	        var save = JsonUtility.FromJson<Save>(json);
-            JsonUtility.FromJsonOverwrite(json, this);
-        }
+		public string ToJson() {
+			var json = JsonUtility.ToJson(this, true);
+			return json;
+		}
 
-        public void Clear() {
-            players.Clear();
-            enemies.Clear();
-            gridSave.Clear();
-            gridDataSave = new GridData_Save();
-        }
-    }
+		public void LoadFromJson(string json) {
+			var save = JsonUtility.FromJson<Save>(json);
+			JsonUtility.FromJsonOverwrite(json, this);
+		}
+
+		public void Clear() {
+			players.Clear();
+			enemies.Clear();
+			tileGrids.Clear();
+			itemGrids.Clear();
+			characterGrids.Clear();
+			objectGrids.Clear();
+			gridDataSave = new GridData_Save();
+			inventory = new Inventory_Save();
+		}
+	}
 }

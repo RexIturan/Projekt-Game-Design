@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Characters.Ability;
+using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
@@ -11,16 +12,15 @@ public class AbilityCanceledSO : StateConditionSO
 public class AbilityCanceled : Condition
 {
 	protected new AbilityCanceledSO OriginSO => (AbilityCanceledSO)base.OriginSO;
-
-	private PlayerCharacterSC _playerCharacterSc;
+	private AbilityController _abilityController;
 	
 	public override void Awake(StateMachine stateMachine) {
-		_playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+		_abilityController = stateMachine.gameObject.GetComponent<AbilityController>();
 	}
 	
 	protected override bool Statement()
 	{
-		return !_playerCharacterSc.abilitySelected;
+		return !_abilityController.abilitySelected;
 	}
 	
 	public override void OnStateEnter()

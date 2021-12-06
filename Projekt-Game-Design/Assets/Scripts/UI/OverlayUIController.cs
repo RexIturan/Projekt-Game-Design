@@ -1,214 +1,198 @@
 using System;
 using System.Collections.Generic;
+using Characters;
+using Characters.Ability;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using UI.Components;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = System.Object;
 
 
 public class OverlayUIController : MonoBehaviour {
-    // Für die UI Elemente
-    private VisualElement _overlayContainer;
+	[Header("Receiving Events On")] [SerializeField]
+	private BoolEventChannelSO showGameOverlayEC;
 
-    // Action Container
-    private VisualElement _actionContainer;
+	[SerializeField] private BoolEventChannelSO showTurnIndicatorEC;
+	[SerializeField] private BoolEventChannelSO visibilityInventoryEventChannel;
 
-    // PlayerView Container
-    private VisualElement _playerViewContainer;
+	// Action Menu
+	[SerializeField] private GameObjEventChannelSO playerDeselectedEC;
+	[SerializeField] private GameObjActionEventChannelSO playerSelectedEC;
 
-    private TemplateContainer _turnIndicator;
+	[Header("Sending Events On")] [SerializeField]
+	private VoidEventChannelSO enableGamplayInput;
 
-    // Liste der Ability-Visual-Elements und Icons
-    private List<VisualElement> _abilityList;
-    private List<AbilitySlot> _abilityIconSlotList = new List<AbilitySlot>();
+	[SerializeField] private EFactionEventChannelSO endTurnEC;
 
-    [Header("Receiving Events On")] 
-    [SerializeField] private BoolEventChannelSO showGameOverlayEC;
-    [SerializeField] private BoolEventChannelSO showTurnIndicatorEC;
-    [SerializeField] private BoolEventChannelSO visibilityInventoryEventChannel;
+	[Header("Sending and Receiving Events On")] [SerializeField]
+	private BoolEventChannelSO visibilityMenuEventChannel;
 
-    // Action Menu
-    [SerializeField] private GameObjEventChannelSO playerDeselectedEC;
-    [SerializeField] private GameObjActionEventChannelSO playerSelectedEC;
+	// Für die UI Elemente
+	private VisualElement _overlayContainer;
 
-    [Header("Sending Events On")] [SerializeField]
-    private VoidEventChannelSO enableGamplayInput;
+	// Action Container
+	private ActionBar _actionBar;
 
-    [SerializeField] private EFactionEventChannelSO endTurnEC;
+	// PlayerView Container
+	private VisualElement _playerViewContainer;
 
-    [Header("Sending and Receiving Events On")] [SerializeField]
-    private BoolEventChannelSO visibilityMenuEventChannel;
+	private TemplateContainer _turnIndicator;
+
+	// Callbackfunktion für die Abilitys
+	private Action<int> _callBackAction;
 
 
-    // Callbackfunktion für die Abilitys
-    private Action<int> _callBackAction;
+	private void Awake() {
+		// Holen des UXML Trees, zum getten der einzelnen Komponenten
+		var root = GetComponent<UIDocument>().rootVisualElement;
+		_actionBar = root.Q<ActionBar>("ActionBar");
+		_overlayContainer = root.Q<VisualElement>("OverlayContainer");
+		_playerViewContainer = root.Q<VisualElement>("PlayerViewContainer");
+		_turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
+		_overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
+		_overlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
+		visibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
+		visibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
+		showGameOverlayEC.OnEventRaised += SetGameOverlayVisibility;
+		showTurnIndicatorEC.OnEventRaised += SetTurnIndicatorVisibility;
+		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
 
-    // Start is called before the first frame update
-    // void Start() {
-        // overlayContainer = root.Q<VisualElement>("OverlayContainer");
-        // overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
-    // }
+		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
+	}
 
-    private void Awake() {
-        // Holen des UXML Trees, zum getten der einzelnen Komponenten
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        _actionContainer = root.Q<VisualElement>("ActionContainer");
-        _overlayContainer = root.Q<VisualElement>("OverlayContainer");
-        _playerViewContainer = root.Q<VisualElement>("PlayerViewContainer");
-        _turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
-        _overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
-        _overlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
-        visibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
-        visibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
-        showGameOverlayEC.OnEventRaised += SetGameOverlayVisibility;
-        showTurnIndicatorEC.OnEventRaised += SetTurnIndicatorVisibility;
-        playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
+	private void HandleEndTurnUI() {
+		endTurnEC.RaiseEvent(Faction.Player);
+	}
 
-        InitializeAbilityList();
-        playerSelectedEC.OnEventRaised += HandlePlayerSelected;
-    }
+	void SetTurnIndicatorVisibility(bool show) {
+		_turnIndicator.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
+	}
 
-    private void HandleEndTurnUI() {
-        endTurnEC.RaiseEvent(Faction.Player);
-    }
+	void SetGameOverlayVisibility(bool value) {
+		if ( value ) {
+			enableGamplayInput.RaiseEvent();
+			_overlayContainer.style.display = DisplayStyle.Flex;
+		}
+		else {
+			_overlayContainer.style.display = DisplayStyle.None;
+		}
+	}
 
-    void SetTurnIndicatorVisibility(bool show) {
-        _turnIndicator.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
-    }
+	void HandleOtherScreensOpened(bool value) {
+		SetGameOverlayVisibility(false);
+	}
 
-    void SetGameOverlayVisibility(bool value) {
-        if (value) {
-            enableGamplayInput.RaiseEvent();
-            _overlayContainer.style.display = DisplayStyle.Flex;
-        }
-        else {
-            _overlayContainer.style.display = DisplayStyle.None;
-        }
-    }
+	void FlushAbilityListIcons() {
+		foreach ( var button in _actionBar.actionButtons ) {
+			button.UnbindAction();
+		}
+	}
 
-    void HandleOtherScreensOpened(bool value) {
-        SetGameOverlayVisibility(false);
-    }
+	//todo use for tooltip 
+	// void CallBackMouseEnterAbility(MouseEnterEvent evt, string description) {
+	//     Label text = _overlayContainer.Q<Label>("AbilityDescription");
+	//     text.style.display = DisplayStyle.Flex;
+	//     text.text = description;
+	// }
+	//
+	// void CallBackMouseLeaveAbility(MouseLeaveEvent evt) {
+	//     Label text = _overlayContainer.Q<Label>("AbilityDescription");
+	//     text.style.display = DisplayStyle.None;
+	// }
 
-    void InitializeAbilityList() {
-        _abilityList = new List<VisualElement>();
-        _abilityList.Add(_actionContainer.Q<VisualElement>("Action1"));
-        _abilityList.Add(_actionContainer.Q<VisualElement>("Action2"));
-        _abilityList.Add(_actionContainer.Q<VisualElement>("Action3"));
-        _abilityList.Add(_actionContainer.Q<VisualElement>("Action4"));
-        _abilityList.Add(_actionContainer.Q<VisualElement>("Action5"));
-        _abilityList.Add(_actionContainer.Q<VisualElement>("Action6"));
-        _abilityList.Add(_actionContainer.Q<VisualElement>("Action7"));
+	// todo(vincent) -> show character stats
+	/// <summary>
+	/// HandlePlayerSelected
+	/// </summary>
+	/// <param name="player">player Character Game Object</param>
+	/// <param name="callBackAction">callback to call when a action ist clicked</param>
+	void HandlePlayerSelected(GameObject player, Action<int> callBackAction) {
+		// Anzeigen der notwendigen Komponenten
+		ShowActionMenu();
+		ShowPlayerViewContainer();
 
-        _abilityIconSlotList = new List<AbilitySlot>();
-        int counter = 0;
+		_callBackAction = callBackAction;
+		FlushAbilityListIcons();
+		List<AbilitySO> abilities =
+			new List<AbilitySO>(player.GetComponent<AbilityController>().Abilities);
+		int counter = 0;
 
-        foreach (var ability in _abilityList) {
-            _abilityIconSlotList.Add(new AbilitySlot());
-            ability.Add(_abilityIconSlotList[counter++]);
-        }
-    }
+		foreach ( var ability in abilities ) {
 
-    void FlushAbilityListIcons() {
-        foreach (var abilitySlot in _abilityIconSlotList) {
-            if (abilitySlot != null && abilitySlot.abilityID != -1) {
-                abilitySlot.DropAbility();
-            }
-        }
-    }
+			// new AvtionBar
+			var id = ability.abilityID;
+			var args = new Object[] { id };
 
-    void CallBackMouseDownAbility(MouseDownEvent evt, int abilityID) {
-        Debug.Log(evt.target);
-        _callBackAction(abilityID);
-    }
+			void AbilityCallback(object[] args) {
+				Debug.Log($"AbilityCallback {args[0]}");
+				_callBackAction(( int )args[0]);
+			}
 
-    void CallBackMouseEnterAbility(MouseEnterEvent evt, string description) {
-        Label text = _overlayContainer.Q<Label>("AbilityDescription");
-        text.style.display = DisplayStyle.Flex;
-        text.text = description;
-    }
+			_actionBar.actionButtons[counter++]
+				.BindAction(AbilityCallback, args, ability.icon, ability.name);
+		}
 
-    void CallBackMouseLeaveAbility(MouseLeaveEvent evt) {
-        Label text = _overlayContainer.Q<Label>("AbilityDescription");
-        text.style.display = DisplayStyle.None;
-    }
+		RefreshStats(player);
+		//TODO: Hier die Stats einbauen, für den ausgewählten Spieler
+	}
 
-    void HandlePlayerSelected(GameObject obj, Action<int> callBackAction) {
-        // Anzeigen der notwendigen Komponenten
-        ShowActionMenu();
-        ShowPlayerViewContainer();
+	void RefreshStats(GameObject obj) {
+		//VisualElement manaBar = PlayerViewContainer.Q<VisualElement>("ProgressBarManaOverlay");
+		VisualElement healthBar = _playerViewContainer.Q<VisualElement>("ProgressBarHealthOverlay");
+		VisualElement abilityBar = _playerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
 
-        _callBackAction = callBackAction;
-        FlushAbilityListIcons();
-        List<AbilitySO> abilities = new List<AbilitySO>(obj.GetComponent<PlayerCharacterSC>().Abilities);
-        int counter = 0;
+		var statistics = obj.GetComponent<Statistics>();
+		var chracterStats = statistics.StatusValues;
 
-        foreach (var ability in abilities) {
-            Debug.Log(ability.abilityID);
-            _abilityIconSlotList[counter].HoldAbility(ability);
-            _abilityIconSlotList[counter]
-                .RegisterCallback<MouseDownEvent, int>(CallBackMouseDownAbility,
-                    _abilityIconSlotList[counter].abilityID);
-            _abilityIconSlotList[counter]
-                .RegisterCallback<MouseEnterEvent, string>(CallBackMouseEnterAbility, ability.description);
-            _abilityIconSlotList[counter].RegisterCallback<MouseLeaveEvent>(CallBackMouseLeaveAbility);
-            counter++;
-        }
+		healthBar.style.width =
+			new StyleLength(
+				Length.Percent(( 100 * ( float )chracterStats.HitPoints.value / chracterStats.HitPoints.max )));
+		
+		abilityBar.style.width =
+			new StyleLength(
+				Length.Percent(( 100 * ( float )chracterStats.Energy.value / chracterStats.Energy.max )));
+		
+		//manaBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
 
-        RefreshStats(obj);
-        //TODO: Hier die Stats einbauen, für den ausgewählten Spieler
-    }
+		// Labels für Stats
+		_playerViewContainer.Q<Label>("StrengthLabel").text = chracterStats.Strength.value.ToString();
+		_playerViewContainer.Q<Label>("DexterityLabel").text = chracterStats.Dexterity.value.ToString();
+		_playerViewContainer.Q<Label>("IntelligenceLabel").text = chracterStats.Intelligence.value.ToString();
+		_playerViewContainer.Q<Label>("MovementLabel").text = chracterStats.ViewDistance.value.ToString();
 
-    void RefreshStats(GameObject obj) {
-        //VisualElement manaBar = PlayerViewContainer.Q<VisualElement>("ProgressBarManaOverlay");
-        VisualElement healthBar = _playerViewContainer.Q<VisualElement>("ProgressBarHealthOverlay");
-        VisualElement abilityBar = _playerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
+		// Image
+		VisualElement image = _playerViewContainer.Q<VisualElement>("PlayerPicture");
+		image.Clear();
+		Image newProfile = new Image();
+		image.Add(newProfile);
+		newProfile.image = statistics.DisplayImage.texture;
 
-        PlayerCharacterSC playerSC = obj.GetComponent<PlayerCharacterSC>();
-        CharacterStats playerStats = obj.GetComponent<PlayerCharacterSC>().CurrentStats;
+		// Name and Level
+		_playerViewContainer.Q<Label>("PlayerName").text = statistics.DisplayName;
+		_playerViewContainer.Q<Label>("LevelLabel").text = chracterStats.Level.value.ToString();
+	}
 
-        healthBar.style.width =
-            new StyleLength(Length.Percent((100 * (float) playerSC.HealthPoints / playerStats.maxHealthPoints)));
-        abilityBar.style.width =
-            new StyleLength(Length.Percent((100 * (float) playerSC.EnergyPoints / playerStats.maxEnergy)));
-        //manaBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
+	void ShowMenu() {
+		visibilityMenuEventChannel.RaiseEvent(true);
+	}
 
-        // Labels für Stats
-        _playerViewContainer.Q<Label>("StrengthLabel").text = playerStats.strength.ToString();
-        _playerViewContainer.Q<Label>("DexterityLabel").text = playerStats.dexterity.ToString();
-        _playerViewContainer.Q<Label>("IntelligenceLabel").text = playerStats.intelligence.ToString();
-        _playerViewContainer.Q<Label>("MovementLabel").text = playerStats.viewDistance.ToString();
+	void HandlePlayerDeselected(GameObject obj) {
+		_actionBar.SetVisibility(false);
 
-        // Image
-        VisualElement image = _playerViewContainer.Q<VisualElement>("PlayerPicture");
-        image.Clear();
-        Image newProfile = new Image();
-        image.Add(newProfile);
-        newProfile.image = playerSC.playerType.profilePicture.texture;
+		_playerViewContainer.style.display = DisplayStyle.None;
+	}
 
-        // Name and Level
-        _playerViewContainer.Q<Label>("PlayerName").text = playerSC.playerName;
-        _playerViewContainer.Q<Label>("LevelLabel").text = playerSC.level.ToString();
-    }
+	void ShowPlayerViewContainer() {
+		_playerViewContainer.style.display = DisplayStyle.Flex;
+	}
 
-    void ShowMenu() {
-        visibilityMenuEventChannel.RaiseEvent(true);
-    }
+	void HidePlayerViewContainer() {
+		_playerViewContainer.style.display = DisplayStyle.None;
+	}
 
-    void HandlePlayerDeselected(GameObject obj) {
-        _actionContainer.style.display = DisplayStyle.None;
-        _playerViewContainer.style.display = DisplayStyle.None;
-    }
-
-    void ShowPlayerViewContainer() {
-        _playerViewContainer.style.display = DisplayStyle.Flex;
-    }
-
-    void HidePlayerViewContainer() {
-        _playerViewContainer.style.display = DisplayStyle.None;
-    }
-
-    void ShowActionMenu() {
-        _actionContainer.style.display = DisplayStyle.Flex;
-    }
+	void ShowActionMenu() {
+		_actionBar.SetVisibility(true);
+	}
 }

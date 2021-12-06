@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: g_OnPlayerTurn
   m_EditorClassIdentifier: 
   tacticsGameData: {fileID: 11400000, guid: 5d053a97eac47be4d8da941f3a2772c7, type: 2}
-  faction: 0
+  faction: 1

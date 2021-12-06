@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 448a4c58ba61e6d499ff2f635c6fb623
+<<<<<<< HEAD:Projekt-Game-Design/Assets/StreamingAssets/level/inventory_testing.json.meta
+guid: 145bc7b3daebf414490e4747b16042a2
+=======
+guid: b977ca3ce5392ec4fbb5d1b94ffb6acd
+>>>>>>> feature/level-editor/character:Projekt-Game-Design/Assets/Scenes/Testing/char_test.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

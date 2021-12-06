@@ -20,9 +20,7 @@ public class E_MoveToTarget_OnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void OnStateEnter() {
-        _enemyCharacterSC.gridPosition = new Vector3Int(_enemyCharacterSC.movementTarget.x,
-            1,
-            _enemyCharacterSC.movementTarget.y);
+	    _enemyCharacterSC.gridPosition = _enemyCharacterSC.movementTarget.pos;
         _enemyCharacterSC.MoveToGridPosition();
     }
 }

@@ -32,7 +32,7 @@ namespace Statemachine.Enemy.Actions {
 
         public void SetTilesWithinRange(bool[,] visible) {
             var level = _enemyCharacterSC.gridPosition.y;
-            var pos = _enemyCharacterSC.target.gridPosition;
+            var pos = _enemyCharacterSC.target.GetGridPosition();
 
             var inRange = new List<Vector3Int>();
 
@@ -63,7 +63,7 @@ namespace Statemachine.Enemy.Actions {
             var range = (int) _enemyCharacterSC.attackRange;
             var blocking = TileProperties.Solid;
 
-            _fieldOfViewQueryEC.RaiseEvent(target.gridPosition, range, blocking, SetTilesWithinRange);
+            _fieldOfViewQueryEC.RaiseEvent(target.GetGridPosition(), range, blocking, SetTilesWithinRange);
         }
         
         public override void OnUpdate() {

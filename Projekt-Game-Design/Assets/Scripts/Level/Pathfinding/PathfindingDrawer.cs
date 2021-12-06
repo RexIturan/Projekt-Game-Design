@@ -42,7 +42,7 @@ namespace Pathfinding {
             
             Debug.Log("Draw Preview Tilemap, inside drawer");
             foreach (var node in nodes) {
-                Vector2Int pos = GridPosToTilePos(node.x, node.y);
+                Vector2Int pos = GridPosToTilePos(node.pos.x, node.pos.y);
                 previewTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), previewTile);                
             }
         }
@@ -51,7 +51,7 @@ namespace Pathfinding {
             ClearPreviewPathTilemap();
             if (nodes != null) {
                 foreach (var node in nodes) {
-                    Vector2Int pos = GridPosToTilePos(node.x, node.y);
+                    Vector2Int pos = GridPosToTilePos(node.pos.x, node.pos.y);
                     previewPathTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), previewPathTile);                
                 }    
             }

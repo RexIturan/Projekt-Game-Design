@@ -7,24 +7,25 @@ namespace Graph {
         
         public NodeGraph(
             int width, 
-            int height, 
+            int height,
+            int depth,
             float cellSize, 
             Vector3 originPosition,
             bool showDebug = false, 
             Transform debugTextParent = null) : 
             base(
                 width, 
-                height, 
+                depth, 
                 cellSize, 
                 originPosition, 
-                (grid, x, y) => new PathNode(x, y), 
+                (grid, x, z) => new PathNode(x, height, z), 
                 showDebug, 
                 debugTextParent) { }
         
         public override string ToString() {
             var str = "";
 
-            for (int y = Height - 1; y >= 0; y--) {
+            for (int y = Depth - 1; y >= 0; y--) {
                 for (int x = 0; x < Width; x++) {
                     str += "[";
                     if (GetGridObject(x, y).edges != null) {

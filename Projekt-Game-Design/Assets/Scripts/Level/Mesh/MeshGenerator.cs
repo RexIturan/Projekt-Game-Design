@@ -18,6 +18,7 @@ namespace MeshGenerator {
 		[SerializeField] private GridContainerSO gridContainer;
 		[SerializeField] private TileTypeContainerSO tileTypeContainer;
 
+		private MeshCollider _meshCollider;
 		private MeshFilter _meshFilter;
 		// private MeshRenderer _meshRenderer;
 
@@ -41,6 +42,7 @@ namespace MeshGenerator {
 			_mesh.name = "generatedMesh";
 
 			_meshFilter = GetComponent<MeshFilter>();
+			_meshCollider = GetComponent<MeshCollider>();
 			// _meshRenderer = GetComponent<MeshRenderer>();
 		}
 
@@ -51,8 +53,8 @@ namespace MeshGenerator {
 		public void UpdateTileData() {
 			// setup 3d tile data representation
 			int width = globalGridData.Width;
-			int height = gridContainer.tileGrids.Count;
-			int depth = globalGridData.Height;
+			int height = globalGridData.Height;
+			int depth = globalGridData.Depth;
 			//todo maybe use [x,y,z] and not [y,z,x]
 			_tileData = new DataTile[height, depth, width];
 
@@ -103,7 +105,7 @@ namespace MeshGenerator {
 					for ( int x = lowerBounds.x; x < dimensions.x; x++ ) {
 						if ( _tileData[y, z, x] == DataTile.Block ) {
 							var intPos = new Vector3Int(x, y, z);
-							var pos = new Vector3(x, y, z) + globalGridData.originPosition;
+							var pos = new Vector3(x, y, z) + globalGridData.OriginPosition;
 
 							if ( !TileInDirection(intPos, Direction.Top, lowerBounds, dimensions) ) {
 								// draw top
@@ -290,33 +292,9 @@ namespace MeshGenerator {
 			});
 		}
 
-		// private void AddQuadAt(Vector3 pos, Vector3 normal, Vector2 uvPos) {
-		//     // vertices.Append(start)
-		//
-		//     var v = _vertices.Count;
-		//     
-		//     _vertices.AddRange(new [] {
-		//         new Vector3(pos.x - 0.5f, pos.y, pos.z - 0.5f),
-		//         new Vector3(pos.x - 0.5f, pos.y, pos.z + 0.5f),
-		//         new Vector3(pos.x + 0.5f, pos.y, pos.z - 0.5f),
-		//         new Vector3(pos.x + 0.5f, pos.y, pos.z + 0.5f),
-		//     });
-		//     
-		//     _uvs.AddRange(new [] {
-		//         uvPos,
-		//         uvPos,
-		//         uvPos,
-		//         uvPos
-		//     });
-		//     
-		//     _triangles.AddRange(new [] {
-		//           v, v+1, v+2,
-		//         v+1, v+3, v+2,
-		//     });
-		// }
-
 		public void UpdateMesh() {
 			_meshFilter = GetComponent<MeshFilter>();
+			_meshCollider = GetComponent<MeshCollider>();
 			// _meshRenderer = GetComponent<MeshRenderer>();
 
 			_mesh.Clear();
@@ -328,24 +306,8 @@ namespace MeshGenerator {
 			_mesh.RecalculateNormals();
 
 			_meshFilter.sharedMesh = _mesh;
+			_meshCollider.sharedMesh = _meshFilter.sharedMesh;
 		}
-
-
-		// TODO move to texture util stuff
-//         private void SaveTexture(Texture2D texture)
-//         {
-//             byte[] bytes = texture.EncodeToPNG();
-//             var dirPath = Application.dataPath + "/RenderOutput";
-//             if (!System.IO.Directory.Exists(dirPath))
-//             {
-//                 System.IO.Directory.CreateDirectory(dirPath);
-//             }
-//             System.IO.File.WriteAllBytes(dirPath + "/R_" + Random.Range(0, 100000) + ".png", bytes);
-//             Debug.Log(bytes.Length / 1024 + "Kb was saved as: " + dirPath);
-// #if UNITY_EDITOR
-//             UnityEditor.AssetDatabase.Refresh();
-// #endif
-//         }
 	}
 
 	internal enum DataTile {

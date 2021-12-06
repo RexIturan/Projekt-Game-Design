@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -9,24 +7,27 @@ using UnityEngine.Animations.Rigging;
  */
 public class CharacterEquipmentController : MonoBehaviour
 {
-	public void ChangeWeapon(EquipmentType type, Mesh newWeapon)
+	public void ChangeWeapon(EquipmentPosition position, Mesh newWeapon)
 	{
-		MeshFilter[] meshes = gameObject.GetComponentsInChildren<MeshFilter>();
-		foreach ( MeshFilter mesh in meshes )
+		if ( newWeapon )
 		{
-			if ( mesh.tag.Equals(GetTagForEquipmentType(type)) )
-				mesh.mesh = newWeapon;
+			MeshFilter[] meshes = gameObject.GetComponentsInChildren<MeshFilter>();
+			foreach ( MeshFilter mesh in meshes )
+			{
+				if ( mesh.tag.Equals(GetTagForEquipmentType(position)) )
+					mesh.mesh = newWeapon;
+			}
 		}
 	}
 
-	public void ChangeWeaponPosition(EquipmentType type, WeaponPositionType newPosition)
+	public void ChangeWeaponPosition(EquipmentPosition position, WeaponPositionType newPosition)
 	{
 		MultiParentConstraint[] constraints = gameObject.GetComponentsInChildren<MultiParentConstraint>();
 		foreach ( MultiParentConstraint constraint in constraints )
 		{
-			if ( constraint.tag.Equals(GetTagForEquipmentType(type)) )
+			if ( constraint.tag.Equals(GetTagForEquipmentType(position)) )
 			{
-				if ( type.Equals(EquipmentType.LEFT) || type.Equals(EquipmentType.RIGHT) )
+				if ( position.Equals(EquipmentPosition.LEFT) || position.Equals(EquipmentPosition.RIGHT) )
 				{
 					WeightedTransformArray sourceObjects = constraint.data.sourceObjects;
 					// NOTE: the order of source objects in character model is important
@@ -50,7 +51,7 @@ public class CharacterEquipmentController : MonoBehaviour
 							break;
 					}
 				}
-				else if ( type.Equals(EquipmentType.SHIELD) )
+				else if ( position.Equals(EquipmentPosition.SHIELD) )
 				{
 					WeightedTransformArray sourceObjects = constraint.data.sourceObjects;
 					// NOTE: the order of source objects in character model is important
@@ -74,31 +75,31 @@ public class CharacterEquipmentController : MonoBehaviour
 		}
 	}
 
-	public void DisableEquipment(EquipmentType type, bool disable)
+	public void DisableEquipment(EquipmentPosition position, bool disable)
 	{
 		MeshRenderer[] renderers = gameObject.GetComponentsInChildren<MeshRenderer>();
 		foreach ( MeshRenderer renderer in renderers )
 		{
-			if ( renderer.tag.Equals(GetTagForEquipmentType(type)) )
+			if ( renderer.tag.Equals(GetTagForEquipmentType(position)) )
 				renderer.enabled = !disable;
 		}
 	}
 
-	private string GetTagForEquipmentType(EquipmentType equipment)
+	private string GetTagForEquipmentType(EquipmentPosition equipment)
 	{
 		string tag = "UnknownEquipment";
 		switch ( equipment )
 		{
-			case EquipmentType.RIGHT:
+			case EquipmentPosition.RIGHT:
 				tag = "Equipment/WeaponR";
 				break;
-			case EquipmentType.LEFT:
+			case EquipmentPosition.LEFT:
 				tag = "Equipment/WeaponL";
 				break;
-			case EquipmentType.SHIELD:
+			case EquipmentPosition.SHIELD:
 				tag = "Equipment/Shield";
 				break;
-			case EquipmentType.QUIVER:
+			case EquipmentPosition.QUIVER:
 				tag = "Equipment/Quiver";
 				break;
 		}

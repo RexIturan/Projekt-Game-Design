@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Characters;
 using Grid;
+using Level.Grid.ItemGrid;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 
@@ -26,12 +27,9 @@ namespace SaveSystem {
 //////////////////////////////////// Local Functions ///////////////////////////////////////////////
 		#region Local Functions
 
-		private bool ReadGridData(GridData_Save gridDataSave, GridDataSO globalGridData) {
+		private bool ReadGridData(GridData_Save gridDataSave, GridDataSO gridData) {
 			
-			globalGridData.height = gridDataSave.height;
-			globalGridData.width = gridDataSave.width;
-			globalGridData.cellSize = gridDataSave.cellSize;
-			globalGridData.originPosition = gridDataSave.originPosition;
+			gridData.InitFromSaveValues(gridDataSave);
 			
 			//todo check if all read date is valid
 			return true;
@@ -42,9 +40,36 @@ namespace SaveSystem {
 		/// </summary>
 		/// <param name="saveGridSave"></param>
 		/// <param name="gridContaier"></param>
-		private void ReadGrid(List<TileGrid> saveGridSave, GridContainerSO gridContaier) {
-			gridContaier.tileGrids.Clear();
-			gridContaier.tileGrids.AddRange(saveGridSave);
+		private void ReadGrid(Save save, GridDataSO gridData, GridContainerSO gridContaier) {
+			gridContaier.InitGrids(gridData);
+			
+			var saveTileGridSave = save.tileGrids;
+			var saveItemGridSave = save.itemGrids;
+			var saveCharacterGridSave = save.characterGrids;
+			var saveObjectGridSave = save.objectGrids;
+
+			var layers = gridData.Height;
+
+			if ( saveTileGridSave.Count == layers ) {
+				gridContaier.tileGrids.Clear();
+				//init tile grid
+				gridContaier.tileGrids.AddRange(saveTileGridSave);	
+			}
+			
+			if (saveItemGridSave.Count == layers && 
+			    saveCharacterGridSave.Count == layers && 
+			    saveObjectGridSave.Count == layers) {
+				
+				for ( int i = 0; i < layers; i++ ) {
+					// init item grid
+					gridContaier.items[i] = saveItemGridSave[i];
+					// inti character grid
+					gridContaier.characters[i] = saveCharacterGridSave[i];
+					// init object grid
+					gridContaier.objects[i] = saveObjectGridSave[i];
+				}
+				
+			}
 		}
 		
 		private void ReadInventory(Inventory_Save saveInventory, InventorySO inventory) {
@@ -93,9 +118,9 @@ namespace SaveSystem {
 		}
 		
 		public void ReadSave(Save save) {
-				
-			ReadGrid(save.gridSave, _gridContaier);
+			
 			ReadGridData(save.gridDataSave, _gridData);
+			ReadGrid(save, _gridData, _gridContaier);
 
 			// ReadCharacter(save.players, save.enemies);
 			_characterInitializer.Initialise(save.players, save.enemies);

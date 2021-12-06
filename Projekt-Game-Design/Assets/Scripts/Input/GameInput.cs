@@ -498,6 +498,38 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Terrain"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd8afcb7-85dc-4b91-af01-e6c4f55c72f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc69cd6b-7c70-43d5-93e1-384f83dff62e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Character"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f3d0037-30f6-49f1-adf9-99dc1b2c1eef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Objects"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7b80cc6-fafe-4609-ba5f-3967d81e38a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -564,6 +596,50 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ResetLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9b6801b-4f88-4942-9a82-29796f1c9faa"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Terrain"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca274ee0-a9c9-4cf8-842d-fc69f1ee0429"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""845f84f3-6bdc-48a5-b684-7d76555cc0a9"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Character"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49166d04-8b9a-432e-a923-0b90e58aaf60"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Objects"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -673,6 +749,10 @@ public class @GameInput : IInputActionCollection, IDisposable
         m_LevelEditor_Box = m_LevelEditor.FindAction("Box", throwIfNotFound: true);
         m_LevelEditor_Fill = m_LevelEditor.FindAction("Fill", throwIfNotFound: true);
         m_LevelEditor_ResetLevel = m_LevelEditor.FindAction("ResetLevel", throwIfNotFound: true);
+        m_LevelEditor_Terrain = m_LevelEditor.FindAction("Terrain", throwIfNotFound: true);
+        m_LevelEditor_Item = m_LevelEditor.FindAction("Item", throwIfNotFound: true);
+        m_LevelEditor_Character = m_LevelEditor.FindAction("Character", throwIfNotFound: true);
+        m_LevelEditor_Objects = m_LevelEditor.FindAction("Objects", throwIfNotFound: true);
         // Pathfinding Debug
         m_PathfindingDebug = asset.FindActionMap("Pathfinding Debug", throwIfNotFound: true);
         m_PathfindingDebug_Toggle = m_PathfindingDebug.FindAction("Toggle", throwIfNotFound: true);
@@ -954,6 +1034,10 @@ public class @GameInput : IInputActionCollection, IDisposable
     private readonly InputAction m_LevelEditor_Box;
     private readonly InputAction m_LevelEditor_Fill;
     private readonly InputAction m_LevelEditor_ResetLevel;
+    private readonly InputAction m_LevelEditor_Terrain;
+    private readonly InputAction m_LevelEditor_Item;
+    private readonly InputAction m_LevelEditor_Character;
+    private readonly InputAction m_LevelEditor_Objects;
     public struct LevelEditorActions
     {
         private @GameInput m_Wrapper;
@@ -964,6 +1048,10 @@ public class @GameInput : IInputActionCollection, IDisposable
         public InputAction @Box => m_Wrapper.m_LevelEditor_Box;
         public InputAction @Fill => m_Wrapper.m_LevelEditor_Fill;
         public InputAction @ResetLevel => m_Wrapper.m_LevelEditor_ResetLevel;
+        public InputAction @Terrain => m_Wrapper.m_LevelEditor_Terrain;
+        public InputAction @Item => m_Wrapper.m_LevelEditor_Item;
+        public InputAction @Character => m_Wrapper.m_LevelEditor_Character;
+        public InputAction @Objects => m_Wrapper.m_LevelEditor_Objects;
         public InputActionMap Get() { return m_Wrapper.m_LevelEditor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -991,6 +1079,18 @@ public class @GameInput : IInputActionCollection, IDisposable
                 @ResetLevel.started -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnResetLevel;
                 @ResetLevel.performed -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnResetLevel;
                 @ResetLevel.canceled -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnResetLevel;
+                @Terrain.started -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnTerrain;
+                @Terrain.performed -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnTerrain;
+                @Terrain.canceled -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnTerrain;
+                @Item.started -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnItem;
+                @Item.performed -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnItem;
+                @Item.canceled -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnItem;
+                @Character.started -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnCharacter;
+                @Character.performed -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnCharacter;
+                @Character.canceled -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnCharacter;
+                @Objects.started -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnObjects;
+                @Objects.performed -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnObjects;
+                @Objects.canceled -= m_Wrapper.m_LevelEditorActionsCallbackInterface.OnObjects;
             }
             m_Wrapper.m_LevelEditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -1013,6 +1113,18 @@ public class @GameInput : IInputActionCollection, IDisposable
                 @ResetLevel.started += instance.OnResetLevel;
                 @ResetLevel.performed += instance.OnResetLevel;
                 @ResetLevel.canceled += instance.OnResetLevel;
+                @Terrain.started += instance.OnTerrain;
+                @Terrain.performed += instance.OnTerrain;
+                @Terrain.canceled += instance.OnTerrain;
+                @Item.started += instance.OnItem;
+                @Item.performed += instance.OnItem;
+                @Item.canceled += instance.OnItem;
+                @Character.started += instance.OnCharacter;
+                @Character.performed += instance.OnCharacter;
+                @Character.canceled += instance.OnCharacter;
+                @Objects.started += instance.OnObjects;
+                @Objects.performed += instance.OnObjects;
+                @Objects.canceled += instance.OnObjects;
             }
         }
     }
@@ -1110,6 +1222,10 @@ public class @GameInput : IInputActionCollection, IDisposable
         void OnBox(InputAction.CallbackContext context);
         void OnFill(InputAction.CallbackContext context);
         void OnResetLevel(InputAction.CallbackContext context);
+        void OnTerrain(InputAction.CallbackContext context);
+        void OnItem(InputAction.CallbackContext context);
+        void OnCharacter(InputAction.CallbackContext context);
+        void OnObjects(InputAction.CallbackContext context);
     }
     public interface IPathfindingDebugActions
     {

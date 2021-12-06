@@ -34,7 +34,8 @@ namespace SaveSystem {
 
 
 	//load level from textasset
-		[Header("Test Level Data")] public List<AssetReference> testLevel;
+		[Header("Test Level Data")] 
+		public List<AssetReference> testLevel;
 		private readonly List<Save> _saveObjects = new List<Save>();
 
 		//settings
@@ -301,6 +302,10 @@ namespace SaveSystem {
 
 			// todo clear saveObjects here?
 			_saveObjects.Clear();
+		}
+
+		public bool IsSaveLoaded() {
+			return saveManagerData.loaded;
 		}
 	}
 }

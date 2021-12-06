@@ -36,7 +36,7 @@ namespace FieldOfView {
         }
 
         private void HandleQueryEvent(Vector3Int startPos, int range, TileProperties blocking, Action<bool[,]> callback) {
-            var pos = globalGridData.GridPos3DToGridPos2D(startPos);
+            var pos = globalGridData.GetGridPos2DFromGridPos3D(startPos);
 
             InitFieldOfViewAdam();
             _fieldOfViewAdam.Compute(pos, range);
@@ -51,10 +51,10 @@ namespace FieldOfView {
 
             // gen string
             string str = " \n";
-            var width = globalGridData.Height;
-            var height = globalGridData.Height;
+            var width = globalGridData.Width;
+            var depth = globalGridData.Depth;
 
-            for (int y = height-1; y >= 0; y--) {
+            for (int y = depth-1; y >= 0; y--) {
                 for (int x = 0; x < width; x++) {
                     if (_visible[x, y]) {
                         str += "+";
@@ -72,8 +72,8 @@ namespace FieldOfView {
 
         private void InitFieldOfViewAdam() {
             var width = globalGridData.Width;
-            var height = globalGridData.Height;
-            _visible = new bool[width, height];
+            var depth = globalGridData.Depth;
+            _visible = new bool[width, depth];
             _fieldOfViewAdam = new FieldOfView_Adam(
                 (x, y) => BlocksLight(x, y, blocker: TileProperties.Opaque),
                 SetVisible,
@@ -83,7 +83,7 @@ namespace FieldOfView {
         private bool BlocksLight(int x, int y, TileProperties blocker) {
             bool blocksLight = true;
 
-            if (globalGridData.IsInGridBounds(x, y)) {
+            if (globalGridData.IsIn2DGridBounds(x, y)) {
                 var type = grid.tileGrids[1].GetGridObject(x, y).tileTypeID;
                 var flags = tileTypeContainer.tileTypes[type].properties;
                 blocksLight = flags.HasFlag(flag: blocker);
@@ -93,7 +93,7 @@ namespace FieldOfView {
         }
 
         void SetVisible(int x, int y) {
-            if (globalGridData.IsInGridBounds(x, y)) {
+            if (globalGridData.IsIn2DGridBounds(x, y)) {
                 _visible[x, y] = true;
             }
         }

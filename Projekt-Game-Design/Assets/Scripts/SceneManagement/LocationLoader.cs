@@ -14,7 +14,7 @@ namespace SceneManagement {
 		private VoidEventChannelSO onSceneReady;
 		
 		[SerializeField] private bool initializeFromSave;
-
+		[SerializeField] private string initializeLevelName;
 		// get at runtime
 		private SaveManager _saveManager;
 
@@ -50,16 +50,22 @@ namespace SceneManagement {
 			if ( _saveManager ) {
 				if ( initializeFromSave ) {
 					// try to load level from save object
+					if ( !_saveManager.IsSaveLoaded() ) {
+						_saveManager.LoadLevel(initializeLevelName);
+					}
 					_saveManager.InitializeLevel();
-					
+					// movement_testing.json
+					enableGampleyInputEC.RaiseEvent();
 					//todo probably remove loading screen control 
 					// enableLoadingScreenInputEC.RaiseEvent();
 				}
 				else {
 					//todo load empty or default??
-					_saveManager.LoadLevel("");
+					// _saveManager.LoadLevel("");
+					// _saveManager.InitializeLevel();
+
 					_saveManager.InitializeLevel();
-				
+					
 					// enable on Start
 					enableGampleyInputEC.RaiseEvent();
 				

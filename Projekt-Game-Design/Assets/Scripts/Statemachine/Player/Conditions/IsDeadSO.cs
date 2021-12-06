@@ -1,32 +1,27 @@
-﻿using UnityEngine;
+﻿using Characters;
+using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
 [CreateAssetMenu(fileName = "IsDead", menuName = "State Machines/Conditions/Is Dead")]
-public class IsDeadSO : StateConditionSO
-{
+public class IsDeadSO : StateConditionSO {
 	protected override Condition CreateCondition() => new IsDead();
 }
 
-public class IsDead : Condition
-{
-	protected new IsDeadSO OriginSO => (IsDeadSO)base.OriginSO;
+public class IsDead : Condition {
+	protected new IsDeadSO OriginSO => ( IsDeadSO )base.OriginSO;
 
-	private PlayerCharacterSC _playerCharacterSc;
-	
+	private Statistics _statistics;
+
 	public override void Awake(StateMachine stateMachine) {
-		_playerCharacterSc = stateMachine.gameObject.GetComponent<PlayerCharacterSC>();
+		_statistics = stateMachine.gameObject.GetComponent<Statistics>();
 	}
-	
+
 	protected override bool Statement() {
-		return _playerCharacterSc.HealthPoints <= 0;
+		return _statistics.StatusValues.HitPoints.IsMin();
 	}
-	
-	public override void OnStateEnter()
-	{
-	}
-	
-	public override void OnStateExit()
-	{
-	}
+
+	public override void OnStateEnter() { }
+
+	public override void OnStateExit() { }
 }

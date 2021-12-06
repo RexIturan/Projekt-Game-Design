@@ -1,23 +1,35 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Visual {
-    public class LevelDrawer : MonoBehaviour {
-        
-        [SerializeField] private TileMapDrawer drawer;
-        
-        [Header("Receiving Events On")]
-        [SerializeField] private VoidEventChannelSO levelLoaded;
-        
-        [Header("SendingEventsOn")]
-        [SerializeField] private VoidEventChannelSO updateMeshEC;
-        
-        public void Awake() {
-            levelLoaded.OnEventRaised += RedrawLevel;
-        }
+	public class LevelDrawer : MonoBehaviour {
+		[Header("Receiving Events On")] 
+		[SerializeField] private VoidEventChannelSO levelLoaded;
+		[SerializeField] private VoidEventChannelSO redrawLevelEC;
+		
+		[Header("SendingEventsOn")] [SerializeField]
+		private VoidEventChannelSO updateMeshEC;
 
-        private void RedrawLevel() {
-            drawer.DrawGrid();
-            updateMeshEC.RaiseEvent();
-        }
-    }
+		
+		[SerializeField] private TileMapDrawer drawer;
+		[SerializeField] private PrefabGridDrawer objectDrawer;
+		
+		public void Awake() {
+			levelLoaded.OnEventRaised += RedrawLevel;
+			redrawLevelEC.OnEventRaised += RedrawLevel;
+		}
+
+		private void OnDestroy() {
+			levelLoaded.OnEventRaised -= RedrawLevel;
+			redrawLevelEC.OnEventRaised -= RedrawLevel;
+		}
+
+		public void RedrawLevel() {
+			drawer.DrawGrid();
+			if ( objectDrawer ) {
+				objectDrawer.RedrawItems();	
+			}
+			updateMeshEC.RaiseEvent();
+		}
+	}
 }
