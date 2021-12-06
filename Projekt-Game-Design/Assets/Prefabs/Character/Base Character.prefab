@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 1915383006283477928}
   - component: {fileID: 2212653873986084085}
   - component: {fileID: 1676697125739664753}
+  - component: {fileID: -2446830190145593374}
   m_Layer: 9
   m_Name: Base Character
   m_TagString: Untagged
@@ -259,7 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd92fd736a4245d2beb28e6db1413654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statistics: {fileID: 0}
+  statistics: {fileID: 2212653873986084095}
+  gridTransform: {fileID: 6601210392787000488}
   gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   moveSpeed: 5
   rotationSpeed: 360
@@ -275,7 +277,6 @@ MonoBehaviour:
     dist: 0
     isWalkable: 0
   isMoving: 0
-  gridTransform: {fileID: 6601210392787000488}
 --- !u!114 &2212653873986084082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,3 +348,16 @@ MonoBehaviour:
   _equipmentController: {fileID: 1915383006283477928}
   _abilityController: {fileID: 2212653873986084082}
   _modelController: {fileID: 2212653873986084085}
+--- !u!114 &-2446830190145593374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212653873986083977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a178bd4e9354cd3ac160a6d68f6cb09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeSinceTransition: 0

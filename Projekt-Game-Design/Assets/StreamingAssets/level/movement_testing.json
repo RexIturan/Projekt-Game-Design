@@ -1,13 +1,14 @@
 {
     "gridDataSave": {
-        "width": 14,
-        "height": 14,
-        "cellSize": 1.0,
-        "originPosition": {
-            "x": -7.0,
-            "y": 0.0,
-            "z": -7.0
-        }
+      "width": 7,
+      "height": 2,
+      "depth": 7,
+      "cellSize": 1.0,
+      "originPosition": {
+        "x": -3.0,
+        "y": 0.0,
+        "z": -3.0
+      }
     },
     "players": [
       {
@@ -58,13 +59,13 @@
     ],
     "tileGrids": [
       {
-        "width": 8,
-        "height": 8,
+        "width": 7,
+        "depth": 7,
         "cellSize": 1.0,
         "originPosition": {
-          "x": -4.0,
+          "x": -3.0,
           "y": 0.0,
-          "z": -4.0
+          "z": -3.0
         },
         "grid1DArray": [
           {
@@ -110,114 +111,6 @@
             "y": 0
           },
           {
-            "name": "Tile 7:0",
-            "tileTypeID": 1,
-            "x": 7,
-            "y": 0
-          },
-          {
-            "name": "Tile 0:0",
-            "tileTypeID": 1,
-            "x": 0,
-            "y": 0
-          },
-          {
-            "name": "Tile 1:0",
-            "tileTypeID": 1,
-            "x": 1,
-            "y": 0
-          },
-          {
-            "name": "Tile 2:0",
-            "tileTypeID": 1,
-            "x": 2,
-            "y": 0
-          },
-          {
-            "name": "Tile 3:0",
-            "tileTypeID": 1,
-            "x": 3,
-            "y": 0
-          },
-          {
-            "name": "Tile 4:0",
-            "tileTypeID": 1,
-            "x": 4,
-            "y": 0
-          },
-          {
-            "name": "Tile 5:0",
-            "tileTypeID": 1,
-            "x": 5,
-            "y": 0
-          },
-          {
-            "name": "Tile 6:0",
-            "tileTypeID": 1,
-            "x": 6,
-            "y": 0
-          },
-          {
-            "name": "Tile 7:0",
-            "tileTypeID": 1,
-            "x": 7,
-            "y": 0
-          },
-          {
-            "name": "Tile 0:0",
-            "tileTypeID": 1,
-            "x": 0,
-            "y": 0
-          },
-          {
-            "name": "Tile 0:0",
-            "tileTypeID": 1,
-            "x": 0,
-            "y": 0
-          },
-          {
-            "name": "Tile 1:0",
-            "tileTypeID": 1,
-            "x": 1,
-            "y": 0
-          },
-          {
-            "name": "Tile 2:0",
-            "tileTypeID": 1,
-            "x": 2,
-            "y": 0
-          },
-          {
-            "name": "Tile 3:0",
-            "tileTypeID": 1,
-            "x": 3,
-            "y": 0
-          },
-          {
-            "name": "Tile 4:0",
-            "tileTypeID": 1,
-            "x": 4,
-            "y": 0
-          },
-          {
-            "name": "Tile 6:0",
-            "tileTypeID": 1,
-            "x": 6,
-            "y": 0
-          },
-          {
-            "name": "Tile 7:1",
-            "tileTypeID": 1,
-            "x": 7,
-            "y": 1
-          },
-          {
-            "name": "Tile 0:1",
-            "tileTypeID": 1,
-            "x": 0,
-            "y": 1
-          },
-          {
             "name": "Tile 0:1",
             "tileTypeID": 1,
             "x": 0,
@@ -248,22 +141,16 @@
             "y": 1
           },
           {
+            "name": "Tile 5:1",
+            "tileTypeID": 1,
+            "x": 5,
+            "y": 1
+          },
+          {
             "name": "Tile 6:1",
             "tileTypeID": 1,
             "x": 6,
             "y": 1
-          },
-          {
-            "name": "Tile 7:2",
-            "tileTypeID": 1,
-            "x": 7,
-            "y": 2
-          },
-          {
-            "name": "Tile 0:2",
-            "tileTypeID": 1,
-            "x": 0,
-            "y": 2
           },
           {
             "name": "Tile 0:2",
@@ -296,22 +183,16 @@
             "y": 2
           },
           {
+            "name": "Tile 5:2",
+            "tileTypeID": 1,
+            "x": 5,
+            "y": 2
+          },
+          {
             "name": "Tile 6:2",
             "tileTypeID": 1,
             "x": 6,
             "y": 2
-          },
-          {
-            "name": "Tile 7:3",
-            "tileTypeID": 1,
-            "x": 7,
-            "y": 3
-          },
-          {
-            "name": "Tile 0:3",
-            "tileTypeID": 1,
-            "x": 0,
-            "y": 3
           },
           {
             "name": "Tile 0:3",
@@ -344,22 +225,16 @@
             "y": 3
           },
           {
+            "name": "Tile 5:3",
+            "tileTypeID": 1,
+            "x": 5,
+            "y": 3
+          },
+          {
             "name": "Tile 6:3",
             "tileTypeID": 1,
             "x": 6,
             "y": 3
-          },
-          {
-            "name": "Tile 7:4",
-            "tileTypeID": 1,
-            "x": 7,
-            "y": 4
-          },
-          {
-            "name": "Tile 0:4",
-            "tileTypeID": 1,
-            "x": 0,
-            "y": 4
           },
           {
             "name": "Tile 0:4",
@@ -392,22 +267,16 @@
             "y": 4
           },
           {
+            "name": "Tile 5:4",
+            "tileTypeID": 1,
+            "x": 5,
+            "y": 4
+          },
+          {
             "name": "Tile 6:4",
             "tileTypeID": 1,
             "x": 6,
             "y": 4
-          },
-          {
-            "name": "Tile 7:5",
-            "tileTypeID": 1,
-            "x": 7,
-            "y": 5
-          },
-          {
-            "name": "Tile 0:5",
-            "tileTypeID": 1,
-            "x": 0,
-            "y": 5
           },
           {
             "name": "Tile 0:5",
@@ -440,27 +309,69 @@
             "y": 5
           },
           {
+            "name": "Tile 5:5",
+            "tileTypeID": 1,
+            "x": 5,
+            "y": 5
+          },
+          {
             "name": "Tile 6:5",
             "tileTypeID": 1,
             "x": 6,
             "y": 5
           },
           {
-            "name": "Tile 7:6",
+            "name": "Tile 0:6",
             "tileTypeID": 1,
-            "x": 7,
+            "x": 0,
+            "y": 6
+          },
+          {
+            "name": "Tile 1:6",
+            "tileTypeID": 1,
+            "x": 1,
+            "y": 6
+          },
+          {
+            "name": "Tile 2:6",
+            "tileTypeID": 1,
+            "x": 2,
+            "y": 6
+          },
+          {
+            "name": "Tile 3:6",
+            "tileTypeID": 1,
+            "x": 3,
+            "y": 6
+          },
+          {
+            "name": "Tile 4:6",
+            "tileTypeID": 1,
+            "x": 4,
+            "y": 6
+          },
+          {
+            "name": "Tile 5:6",
+            "tileTypeID": 1,
+            "x": 5,
+            "y": 6
+          },
+          {
+            "name": "Tile 6:6",
+            "tileTypeID": 1,
+            "x": 6,
             "y": 6
           }
         ]
       },
       {
-        "width": 8,
-        "height": 8,
+        "width": 7,
+        "depth": 7,
         "cellSize": 1.0,
         "originPosition": {
-          "x": -4.0,
+          "x": -3.0,
           "y": 0.0,
-          "z": -4.0
+          "z": -3.0
         },
         "grid1DArray": [
           {
@@ -506,114 +417,6 @@
             "y": 0
           },
           {
-            "name": "Tile 7:0",
-            "tileTypeID": 0,
-            "x": 7,
-            "y": 0
-          },
-          {
-            "name": "Tile 0:0",
-            "tileTypeID": 0,
-            "x": 0,
-            "y": 0
-          },
-          {
-            "name": "Tile 1:0",
-            "tileTypeID": 0,
-            "x": 1,
-            "y": 0
-          },
-          {
-            "name": "Tile 2:0",
-            "tileTypeID": 0,
-            "x": 2,
-            "y": 0
-          },
-          {
-            "name": "Tile 3:0",
-            "tileTypeID": 0,
-            "x": 3,
-            "y": 0
-          },
-          {
-            "name": "Tile 4:0",
-            "tileTypeID": 0,
-            "x": 4,
-            "y": 0
-          },
-          {
-            "name": "Tile 5:0",
-            "tileTypeID": 0,
-            "x": 5,
-            "y": 0
-          },
-          {
-            "name": "Tile 6:0",
-            "tileTypeID": 0,
-            "x": 6,
-            "y": 0
-          },
-          {
-            "name": "Tile 7:0",
-            "tileTypeID": 0,
-            "x": 7,
-            "y": 0
-          },
-          {
-            "name": "Tile 0:0",
-            "tileTypeID": 0,
-            "x": 0,
-            "y": 0
-          },
-          {
-            "name": "Tile 0:0",
-            "tileTypeID": 0,
-            "x": 0,
-            "y": 0
-          },
-          {
-            "name": "Tile 1:0",
-            "tileTypeID": 0,
-            "x": 1,
-            "y": 0
-          },
-          {
-            "name": "Tile 2:0",
-            "tileTypeID": 0,
-            "x": 2,
-            "y": 0
-          },
-          {
-            "name": "Tile 3:0",
-            "tileTypeID": 0,
-            "x": 3,
-            "y": 0
-          },
-          {
-            "name": "Tile 4:0",
-            "tileTypeID": 0,
-            "x": 4,
-            "y": 0
-          },
-          {
-            "name": "Tile 6:0",
-            "tileTypeID": 0,
-            "x": 6,
-            "y": 0
-          },
-          {
-            "name": "Tile 7:1",
-            "tileTypeID": 0,
-            "x": 7,
-            "y": 1
-          },
-          {
-            "name": "Tile 0:1",
-            "tileTypeID": 0,
-            "x": 0,
-            "y": 1
-          },
-          {
             "name": "Tile 0:1",
             "tileTypeID": 0,
             "x": 0,
@@ -644,22 +447,16 @@
             "y": 1
           },
           {
+            "name": "Tile 5:1",
+            "tileTypeID": 0,
+            "x": 5,
+            "y": 1
+          },
+          {
             "name": "Tile 6:1",
             "tileTypeID": 0,
             "x": 6,
             "y": 1
-          },
-          {
-            "name": "Tile 7:2",
-            "tileTypeID": 0,
-            "x": 7,
-            "y": 2
-          },
-          {
-            "name": "Tile 0:2",
-            "tileTypeID": 0,
-            "x": 0,
-            "y": 2
           },
           {
             "name": "Tile 0:2",
@@ -692,22 +489,16 @@
             "y": 2
           },
           {
+            "name": "Tile 5:2",
+            "tileTypeID": 0,
+            "x": 5,
+            "y": 2
+          },
+          {
             "name": "Tile 6:2",
             "tileTypeID": 0,
             "x": 6,
             "y": 2
-          },
-          {
-            "name": "Tile 7:3",
-            "tileTypeID": 0,
-            "x": 7,
-            "y": 3
-          },
-          {
-            "name": "Tile 0:3",
-            "tileTypeID": 0,
-            "x": 0,
-            "y": 3
           },
           {
             "name": "Tile 0:3",
@@ -740,22 +531,16 @@
             "y": 3
           },
           {
+            "name": "Tile 5:3",
+            "tileTypeID": 0,
+            "x": 5,
+            "y": 3
+          },
+          {
             "name": "Tile 6:3",
             "tileTypeID": 0,
             "x": 6,
             "y": 3
-          },
-          {
-            "name": "Tile 7:4",
-            "tileTypeID": 0,
-            "x": 7,
-            "y": 4
-          },
-          {
-            "name": "Tile 0:4",
-            "tileTypeID": 0,
-            "x": 0,
-            "y": 4
           },
           {
             "name": "Tile 0:4",
@@ -788,22 +573,16 @@
             "y": 4
           },
           {
+            "name": "Tile 5:4",
+            "tileTypeID": 0,
+            "x": 5,
+            "y": 4
+          },
+          {
             "name": "Tile 6:4",
             "tileTypeID": 0,
             "x": 6,
             "y": 4
-          },
-          {
-            "name": "Tile 7:5",
-            "tileTypeID": 0,
-            "x": 7,
-            "y": 5
-          },
-          {
-            "name": "Tile 0:5",
-            "tileTypeID": 0,
-            "x": 0,
-            "y": 5
           },
           {
             "name": "Tile 0:5",
@@ -836,15 +615,57 @@
             "y": 5
           },
           {
+            "name": "Tile 5:5",
+            "tileTypeID": 0,
+            "x": 5,
+            "y": 5
+          },
+          {
             "name": "Tile 6:5",
             "tileTypeID": 0,
             "x": 6,
             "y": 5
           },
           {
-            "name": "Tile 7:6",
+            "name": "Tile 0:6",
             "tileTypeID": 0,
-            "x": 7,
+            "x": 0,
+            "y": 6
+          },
+          {
+            "name": "Tile 1:6",
+            "tileTypeID": 0,
+            "x": 1,
+            "y": 6
+          },
+          {
+            "name": "Tile 2:6",
+            "tileTypeID": 0,
+            "x": 2,
+            "y": 6
+          },
+          {
+            "name": "Tile 3:6",
+            "tileTypeID": 0,
+            "x": 3,
+            "y": 6
+          },
+          {
+            "name": "Tile 4:6",
+            "tileTypeID": 0,
+            "x": 4,
+            "y": 6
+          },
+          {
+            "name": "Tile 5:6",
+            "tileTypeID": 0,
+            "x": 5,
+            "y": 6
+          },
+          {
+            "name": "Tile 6:6",
+            "tileTypeID": 0,
+            "x": 6,
             "y": 6
           }
         ]
@@ -852,60 +673,15 @@
     ],
     "itemGrids": [
       {
-        "width": 8,
-        "height": 8,
+        "width": 7,
+        "depth": 7,
         "cellSize": 1.0,
         "originPosition": {
-          "x": -4.0,
+          "x": -3.0,
           "y": 0.0,
-          "z": -4.0
+          "z": -3.0
         },
         "grid1DArray": [
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
           {
             "id": -1
           },
@@ -1056,60 +832,15 @@
         ]
       },
       {
-        "width": 8,
-        "height": 8,
+        "width": 7,
+        "depth": 7,
         "cellSize": 1.0,
         "originPosition": {
-          "x": -4.0,
+          "x": -3.0,
           "y": 0.0,
-          "z": -4.0
+          "z": -3.0
         },
         "grid1DArray": [
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
-          {
-            "id": -1
-          },
           {
             "id": -1
           },
@@ -1262,150 +993,15 @@
     ],
     "characterGrids": [
       {
-        "width": 8,
-        "height": 8,
+        "width": 7,
+        "depth": 7,
         "cellSize": 1.0,
         "originPosition": {
-          "x": -4.0,
+          "x": -3.0,
           "y": 0.0,
-          "z": -4.0
+          "z": -3.0
         },
         "grid1DArray": [
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
           {
             "faction": 0,
             "playerData": {
@@ -1850,150 +1446,15 @@
         ]
       },
       {
-        "width": 8,
-        "height": 8,
+        "width": 7,
+        "depth": 7,
         "cellSize": 1.0,
         "originPosition": {
-          "x": -4.0,
+          "x": -3.0,
           "y": 0.0,
-          "z": -4.0
+          "z": -3.0
         },
         "grid1DArray": [
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
-          {
-            "faction": 0,
-            "playerData": {
-              "instanceID": 0
-            },
-            "enemyData": {
-              "instanceID": 0
-            }
-          },
           {
             "faction": 0,
             "playerData": {
@@ -2440,60 +1901,15 @@
     ],
     "objectGrids": [
       {
-        "width": 8,
-        "height": 8,
+        "width": 7,
+        "depth": 7,
         "cellSize": 1.0,
         "originPosition": {
-          "x": -4.0,
+          "x": -3.0,
           "y": 0.0,
-          "z": -4.0
+          "z": -3.0
         },
         "grid1DArray": [
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
           {
             "id": 0
           },
@@ -2644,60 +2060,15 @@
         ]
       },
       {
-        "width": 8,
-        "height": 8,
+        "width": 7,
+        "depth": 7,
         "cellSize": 1.0,
         "originPosition": {
-          "x": -4.0,
+          "x": -3.0,
           "y": 0.0,
-          "z": -4.0
+          "z": -3.0
         },
         "grid1DArray": [
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
-          {
-            "id": 0
-          },
           {
             "id": 0
           },

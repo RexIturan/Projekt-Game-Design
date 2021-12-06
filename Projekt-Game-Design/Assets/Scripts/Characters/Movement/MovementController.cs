@@ -9,6 +9,7 @@ namespace Characters.Movement {
 		
 		//todo ref OR find on awake?
 		[SerializeField] private Statistics statistics;
+		[SerializeField] private GridTransform gridTransform;
 		
 		//get grid data to snap to grid and calculate movement correctly
 		[SerializeField] private GridDataSO gridData;
@@ -34,7 +35,6 @@ namespace Characters.Movement {
 		//todo animation? 
 		public bool MovementDone { get; set; } = true;
 		[SerializeField] private bool isMoving = false;
-		[SerializeField] private GridTransform gridTransform;
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////		
 
@@ -51,13 +51,19 @@ namespace Characters.Movement {
 			
 			// set position of gameobject    
 			MoveToGridPosition();
+			position = gameObject.transform.position;
 		}
 
 		private void FixedUpdate() {
 			// Move character to position smoothly 
-			transform.position =
-				Vector3.MoveTowards(transform.position, position, moveSpeed * Time.deltaTime);
-
+			var newPos = 
+				Vector3.MoveTowards(
+					current: transform.position, 
+					target:gridData.GetWorldPosFromGridPos(gridTransform.gridPosition), 
+					maxDistanceDelta:moveSpeed * Time.deltaTime);
+			
+			transform.position = newPos;
+			
 			// Rotate character to facing position smoothly
 			Quaternion target = Quaternion.Euler(0, facingDirection, 0);
 			//
@@ -72,11 +78,7 @@ namespace Characters.Movement {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		public void MoveToGridPosition() {
-			var pos = gridTransform.gridPosition + gridData.GetCellCenter();
-			pos *= gridData.CellSize;
-			pos += gridData.OriginPosition;
-
-			gameObject.transform.position = pos;
+			gameObject.transform.position = gridData.GetWorldPosFromGridPos(gridTransform.gridPosition);
 		}
 
 		public int GetEnergyUseUpFromMovement() {

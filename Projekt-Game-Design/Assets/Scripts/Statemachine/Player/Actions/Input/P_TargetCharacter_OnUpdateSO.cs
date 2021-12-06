@@ -59,7 +59,7 @@ public class P_TargetCharacter_OnUpdate : StateAction {
 		var characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
 		if ( _timer.timeSinceTransition > TimeBeforeAcceptingInput &&
 		     Mouse.current.leftButton.wasPressedThisFrame ) {
-			var pos = MousePosition.GetTilePositionFromMousePosition(_globalGridData, true, out bool hitBottom);
+			var pos = MousePosition.GetTilePos(_globalGridData, true, out bool hitBottom);
 			//todo unnoetig
 			Vector3Int mouseGridPos = _globalGridData.GetGridPos3DFromWorldPos(pos);
 

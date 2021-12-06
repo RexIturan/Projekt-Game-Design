@@ -54,7 +54,7 @@ public class DrawPathPreview : StateAction {
 		List<PathNode> tiles = _movementController.reachableTiles;
 		// todo move to central pos
 		var mousePos =
-			MousePosition.GetTilePositionFromMousePosition(_globalGridData, true, out bool hitBottom);
+			MousePosition.GetTilePos(_globalGridData, true, out bool hitBottom);
 		var mouse2DGridPos = _globalGridData.GetGridPos3DFromWorldPos(mousePos);
 
 		for ( int i = 0; i < tiles.Count && !isReachable; i++ ) {

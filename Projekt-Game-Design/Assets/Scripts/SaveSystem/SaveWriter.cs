@@ -130,6 +130,9 @@ namespace SaveSystem {
 			List<Inventory_Save> equipmentInventorys = new List<Inventory_Save>();
 
 			foreach ( var equipment in equipmentInventoryContainerSo.inventories ) {
+				if(equipment is null)
+					break;
+				
 				var equiped = new List<int>();
 				foreach ( var item in equipment.inventory ) {
 					equiped.Add(item.id);

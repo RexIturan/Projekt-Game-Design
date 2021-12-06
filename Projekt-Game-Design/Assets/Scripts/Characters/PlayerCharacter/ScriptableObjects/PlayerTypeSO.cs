@@ -12,6 +12,7 @@ public class PlayerTypeSO : ScriptableObject {
 
 	//base prefab
 	public GameObject prefab;
+	public GameObject modelPrefab;
 
 	//stats
 	public List<StatusValue> baseStatusValues;

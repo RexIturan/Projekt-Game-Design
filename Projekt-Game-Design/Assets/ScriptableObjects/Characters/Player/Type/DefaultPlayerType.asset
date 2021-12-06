@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   prefab: {fileID: 2212653873986083977, guid: f59f89ef95affd9408aad1fc39215b05, type: 3}
+  modelPrefab: {fileID: 8839921088689484587, guid: 3bc60f3f9e3f61b4cb1586783afde6b0, type: 3}
   baseStatusValues:
   - _name: HitPoints
     _type: 1

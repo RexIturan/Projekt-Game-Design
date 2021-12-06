@@ -41,7 +41,7 @@ public class TargetTile : StateAction {
 			bool isReachable = false;
 			List<PathNode> tiles = _movementController.reachableTiles;
 			//todo get from input cache
-			var pos = MousePosition.GetTilePositionFromMousePosition(_globalGridData, true,
+			var pos = MousePosition.GetTilePos(_globalGridData, true,
 				out bool hitBottom);
 			Vector3Int mouseGridPos = _globalGridData.GetGridPos3DFromWorldPos(pos);
 

@@ -47,6 +47,6 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    _abilityController.BaseAbilities = playerType.basicAbilities;
 
 	    //model
-	    _modelController.prefab = playerType.prefab;
+	    _modelController.prefab = playerType.modelPrefab;
     }
 }

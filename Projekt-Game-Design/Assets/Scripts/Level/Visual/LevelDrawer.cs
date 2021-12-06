@@ -24,7 +24,7 @@ namespace Visual {
 			redrawLevelEC.OnEventRaised -= RedrawLevel;
 		}
 
-		private void RedrawLevel() {
+		public void RedrawLevel() {
 			drawer.DrawGrid();
 			if ( objectDrawer ) {
 				objectDrawer.RedrawItems();	

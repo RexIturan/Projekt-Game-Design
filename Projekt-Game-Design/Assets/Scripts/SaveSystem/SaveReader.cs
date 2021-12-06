@@ -29,7 +29,7 @@ namespace SaveSystem {
 
 		private bool ReadGridData(GridData_Save gridDataSave, GridDataSO gridData) {
 			
-			gridData.InitValues(gridData);
+			gridData.InitFromSaveValues(gridDataSave);
 			
 			//todo check if all read date is valid
 			return true;
@@ -51,10 +51,11 @@ namespace SaveSystem {
 			var layers = gridData.Height;
 
 			if ( saveTileGridSave.Count == layers ) {
+				gridContaier.tileGrids.Clear();
 				//init tile grid
 				gridContaier.tileGrids.AddRange(saveTileGridSave);	
 			}
-
+			
 			if (saveItemGridSave.Count == layers && 
 			    saveCharacterGridSave.Count == layers && 
 			    saveObjectGridSave.Count == layers) {

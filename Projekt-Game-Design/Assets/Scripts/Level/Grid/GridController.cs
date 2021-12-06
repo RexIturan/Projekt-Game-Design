@@ -122,22 +122,26 @@ namespace Grid {
 		}
 		
 		private void AddTileAt(Vector3Int gridPos, int tileTypeID) {
-
 			var layer = gridPos.y;
 			var gridPos2D = gridData.GetGridPos2DFromGridPos3D(gridPos);
 
 			ResizeGrids(gridPos2D, out var finalPos);
+
+			SetTileAt(finalPos.x, layer, finalPos.y, tileTypeID);
+		}
+
+		private void SetTileAt(int x, int y, int z, int tileTypeID) {
 			
 			if ( gridContainer.tileGrids != null ) {
-				if ( gridContainer.tileGrids.Count > layer ) {
-					if ( gridContainer.tileGrids[layer] != null ) {
-						gridContainer.tileGrids[layer].GetGridObject(finalPos.x, finalPos.y)
+				if ( gridContainer.tileGrids.Count > y ) {
+					if ( gridContainer.tileGrids[y] != null ) {
+						gridContainer.tileGrids[y].GetGridObject(x, z)
 							.SetTileType(tileTypeID);
 					}
 				}
 			}
 		}
-		
+
 		private void SetCharacterAt(int x, int y, int z, Faction faction, PlayerCharacterSC playerCharacterSC, EnemyCharacterSC enemyCharacterSC) {
 			//todo char data
 			if ( gridContainer.characters != null ) {
