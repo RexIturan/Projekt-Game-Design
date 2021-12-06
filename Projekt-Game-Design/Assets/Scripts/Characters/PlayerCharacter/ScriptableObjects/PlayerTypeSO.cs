@@ -20,7 +20,7 @@ public class PlayerTypeSO : ScriptableObject {
 	public int movementPointsPerEnergy;
 
 	//equipment
-	public EquipmentInventoryContainerSO equipmentContainer;
+	public EquipmentContainerSO equipmentContainer;
 	public int startingEquipmentID;
 	
 	// ability

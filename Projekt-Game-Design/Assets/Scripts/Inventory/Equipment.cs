@@ -18,9 +18,3 @@ public class Equipment {
 				items.Add(-1);
 		}
 }
-
-public enum EquipmentPosition
-{
-		LEFT = 0,
-		RIGHT = 1
-}

@@ -54,7 +54,7 @@ namespace SceneManagement {
 						_saveManager.LoadLevel(initializeLevelName);
 					}
 					_saveManager.InitializeLevel();
-					// movement_testing.json
+					
 					enableGampleyInputEC.RaiseEvent();
 					//todo probably remove loading screen control 
 					// enableLoadingScreenInputEC.RaiseEvent();

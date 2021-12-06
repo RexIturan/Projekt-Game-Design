@@ -10,4 +10,8 @@ public class CharacterList : MonoBehaviour
 {
     [SerializeField] public List<GameObject> playerContainer;
     [SerializeField] public List<GameObject> enemyContainer;
+
+    public static CharacterList FindInstant() {
+	    return GameObject.Find("Characters").GetComponent<CharacterList>();
+    }
 }

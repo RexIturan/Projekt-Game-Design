@@ -98,6 +98,7 @@ public class InventoryUIController : MonoBehaviour {
 		if ( characterList == null ) {
 			characterList = FindObjectOfType<CharacterList>();
 		}
+		characterList = CharacterList.FindInstant(); 
 
 		// BUG adakdlkah?
 		if ( characterList.playerContainer?.Count > 0 ) {
@@ -166,6 +167,8 @@ public class InventoryUIController : MonoBehaviour {
 
 	public void UpdatePlayerContainer() {
 		_playerContainer.Clear();
+		characterList = CharacterList.FindInstant(); 
+		
 		for ( int i = 0; i < characterList.playerContainer.Count; i++ ) {
 			GameObject playerCharacter = characterList.playerContainer[i];
 			var stats = playerCharacter.GetComponent<Statistics>();

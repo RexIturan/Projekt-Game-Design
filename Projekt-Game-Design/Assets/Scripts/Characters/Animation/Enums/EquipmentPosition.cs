@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public enum EquipmentPosition 
 {
-	RIGHT,
 	LEFT,
+	RIGHT,
 	SHIELD,
 	QUIVER
 }

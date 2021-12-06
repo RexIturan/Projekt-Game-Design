@@ -2,7 +2,7 @@
 
 namespace Characters.Equipment {
 	public class EquipmentController : MonoBehaviour {
-		[SerializeField] private EquipmentInventoryContainerSO equipmentContainerSO;
+		[SerializeField] private EquipmentContainerSO equipmentContainerSO;
 		public int equipmentID;
 
 

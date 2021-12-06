@@ -45,10 +45,6 @@ MonoBehaviour:
     m_Address: Assets/Art/Shader
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: b977ca3ce5392ec4fbb5d1b94ffb6acd
-    m_Address: Assets/Scenes/Testing/char_test.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
   m_SchemaSet:
