@@ -26,7 +26,9 @@ namespace Graph {
             graphContainer.basicMovementGraph = new List<NodeGraph>();
             
             foreach (var grid in gridContainer.tileGrids) {
-                var graph = CreateNewGraph();
+								// TODO: check if this assumption is correct
+								// the y-position of the grid/graph is assumed to be the index within the grid container
+                var graph = CreateNewGraph(gridContainer.tileGrids.IndexOf(grid));
 
                 GenerateGraph(grid, graph);
                 
@@ -41,11 +43,11 @@ namespace Graph {
             // and generate a pathnode for that
             // and then set the isWalkableFlag 
             for (int x = 0; x < ground.Width; x++) {
-                for (int y = 0; y < ground.Depth; y++) {
-                    var type = tileTypeContainer.tileTypes[ground.GetGridObject(x, y).tileTypeID];
+                for (int z = 0; z < ground.Depth; z++) {
+                    var type = tileTypeContainer.tileTypes[ground.GetGridObject(x, z).tileTypeID];
                     var walkable = !type.Properties.HasFlag(TileProperties.Solid);// &&
                     //     !current.GetGridObject(x, y).Type.Flags.HasFlag(ETileFlags.solid);
-                    graph.GetGridObject(x, y).SetIsWalkable(walkable);
+                    graph.GetGridObject(x, z).SetIsWalkable(walkable);
                 }
             }
             
@@ -62,16 +64,16 @@ namespace Graph {
             }    
             
             for (int x = 0; x < graph.Width; x++) {
-                for (int y = 0; y < graph.Depth; y++) {
-                    graph.GetGridObject(x, y).SetEdges(diagonal, graph);
+                for (int z = 0; z < graph.Depth; z++) {
+                    graph.GetGridObject(x, z).SetEdges(diagonal, graph);
                 }
             }
         }
         
-        public NodeGraph CreateNewGraph() {
+        public NodeGraph CreateNewGraph(int height) {
             NodeGraph graph = new NodeGraph(
                 width: globalGridData.Width,
-                height: globalGridData.Height,
+                height: height,
                 depth: globalGridData.Depth,
                 cellSize: globalGridData.CellSize,
                 originPosition: globalGridData.OriginPosition);

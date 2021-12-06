@@ -25,9 +25,10 @@ namespace Pathfinding {
         /*Calculate list of all reachable nodes from start node using dijkstra
          maxDist is maximum movement distance
          returns list of all reachable nodes*/
-        public List<PathNode> GetReachableNodes(int startX, int startY, int maxDist)
+				 // TODO: Add third dimension (Y)
+        public List<PathNode> GetReachableNodes(int startX, int startZ, int maxDist)
         {
-            var startNode = _graph.GetGridObject(startX, startY);
+            var startNode = _graph.GetGridObject(startX, startZ);
 
             //used to compare nodes by their distance from start node
             IComparer<PathNode> nodeComparer = new CompareNodeDist(); 
@@ -37,8 +38,8 @@ namespace Pathfinding {
             List<PathNode> closedNodes = new List<PathNode>();
 
             for (int x = 0; x < _graph.Width; x++) {
-                for (int y = 0; y < _graph.Depth; y++) {
-                    PathNode pathNode = _graph.GetGridObject(x, y);
+                for (int z = 0; z < _graph.Depth; z++) {
+                    PathNode pathNode = _graph.GetGridObject(x, z);
                     pathNode.dist = int.MaxValue;
                     pathNode.parentNode = null;
                 }
@@ -90,17 +91,17 @@ namespace Pathfinding {
         }
         
 
-        public List<PathNode> FindPath(int startX, int startY, int endX, int endY, bool ignoreIsWalkable = false) {
-            var startNode = _graph.GetGridObject(startX, startY);
-            var endNode = _graph.GetGridObject(endX, endY);
+        public List<PathNode> FindPath(int startX, int startZ, int endX, int endZ, bool ignoreIsWalkable = false) {
+            var startNode = _graph.GetGridObject(startX, startZ);
+            var endNode = _graph.GetGridObject(endX, endZ);
             if (endNode == null) return null;
             
             _openList = new List<PathNode> { startNode };
             _closedList = new List<PathNode>();
 
             for (int x = 0; x < _graph.Width; x++) {
-                for (int y = 0; y < _graph.Depth; y++) {
-                    PathNode pathNode = _graph.GetGridObject(x, y);
+                for (int z = 0; z < _graph.Depth; z++) {
+                    PathNode pathNode = _graph.GetGridObject(x, z);
                     pathNode.gCost = int.MaxValue;
                     pathNode.hCost = int.MaxValue;
                     pathNode.CalculateFCost();
@@ -172,6 +173,7 @@ namespace Pathfinding {
             return path;
         }
         
+				// Todo: are the axes correct? Maybe add third axis? 
         private int CalculateDistanceCost(PathNode a, PathNode b) {
             int xDistance = Mathf.Abs(a.pos.x - b.pos.x);
             int yDistance = Mathf.Abs(a.pos.y - b.pos.y);
@@ -190,9 +192,9 @@ namespace Pathfinding {
         
         // are coordinates part of the graph
         //
-        public bool IsInBounds(int x, int y)
+        public bool IsInBounds(int x, int z)
         {
-            return _graph.IsInBounds(x, y);
+            return _graph.IsInBounds(x, z);
         }
     }
 }

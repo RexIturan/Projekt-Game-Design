@@ -44,7 +44,7 @@ namespace Pathfinding {
                 var pos = MousePosition.GetMouseWorldPosition();
             
                 if (_clickedPos != null && _reachableNodes != null && _reachableNodes.Count > 0) {
-                    var gridPos = WorldPosToGridPos(pos);
+                    var gridPos = globalGridData.GetGridPos3DFromWorldPos(pos);
                     bool reachable = false;
                     PathNode currentNode = null;
                     foreach (var node in _reachableNodes) {
@@ -85,7 +85,7 @@ namespace Pathfinding {
 
         public List<PathNode> GetReachableNodes(Vector3 pos3d, int maxDist) {
             
-            var pos = WorldPosToGridPos(pos3d);
+            var pos = globalGridData.GetGridPos3DFromWorldPos(pos3d);
             return GetReachableNodes(pos, maxDist);
         }
         
@@ -96,34 +96,18 @@ namespace Pathfinding {
 
         public List<PathNode> GetPath(Vector3 start3d, Vector3 end3d, int maxDist) {
             InitialisePathfinding();
-            Vector2Int start = WorldPosToGridPos(start3d);
-            Vector2Int end = WorldPosToGridPos(end3d);
-            return _pathfinding.FindPath(start.x, start.y, end.x, end.y);
+            Vector3Int start = globalGridData.GetGridPos3DFromWorldPos(start3d);
+            Vector3Int end = globalGridData.GetGridPos3DFromWorldPos(end3d);
+            return _pathfinding.FindPath(start.x, start.z, end.x, end.z);
         }
 
         public List<PathNode> GetPath(Vector3Int start, Vector3Int end)
         {
             // Debug.Log($"PathfindingC: get Path from {start} to {end}");
             InitialisePathfinding();
-            var path = _pathfinding.FindPath(start.x, start.y, end.x, end.y);
+            var path = _pathfinding.FindPath(start.x, start.z, end.x, end.z);
             if(path is null) Debug.Log("no path found");
             return path;
-        }
-
-        // todo Umrechnung zentraler globalgrid data vlt??
-        // private Vector2Int WorldToGridCoords(Vector3 pos3d) {
-        //     var offset = new Vector2Int((int) globalGridData.OriginPosition.x, (int) globalGridData.OriginPosition.y);
-        //     var pos = new Vector2Int((int) pos3d.x, (int) pos3d.z) + offset;
-        //     return pos;
-        // }
-
-        // todo Umrechnung zentraler globalgrid data vlt??
-        public Vector2Int WorldPosToGridPos(Vector3 worldPos) {
-            var lowerBounds = Vector3Int.FloorToInt(globalGridData.OriginPosition);
-            var flooredPos = Vector3Int.FloorToInt(worldPos);
-            return new Vector2Int(
-                x: flooredPos.x + Mathf.Abs(lowerBounds.x),
-                y: flooredPos.z + Mathf.Abs(lowerBounds.z));
         }
 
         // calculate all reachable nodes and call the given method

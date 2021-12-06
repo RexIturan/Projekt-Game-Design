@@ -18,8 +18,8 @@ MonoBehaviour:
   overrideStatusValues:
   - _name: 
     _type: 1
-    _value: 0
-    _max: 0
+    _value: 100
+    _max: 100
     _min: 0
   - _name: 
     _type: 2

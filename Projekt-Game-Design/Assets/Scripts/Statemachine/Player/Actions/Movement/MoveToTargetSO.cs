@@ -61,8 +61,6 @@ public class MoveToTarget : StateAction {
 
 				_gridTransform.gridPosition = _path[_currentStep].pos;
 
-				_movementController.MoveToGridPosition();
-
 				_currentStep++;
 			}
 		}

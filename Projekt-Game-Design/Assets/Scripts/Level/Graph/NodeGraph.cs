@@ -25,11 +25,11 @@ namespace Graph {
         public override string ToString() {
             var str = "";
 
-            for (int y = Depth - 1; y >= 0; y--) {
+            for (int z = Depth - 1; z >= 0; z--) {
                 for (int x = 0; x < Width; x++) {
                     str += "[";
-                    if (GetGridObject(x, y).edges != null) {
-                        str += GetGridObject(x, y).ToString();                        
+                    if (GetGridObject(x, z).edges != null) {
+                        str += GetGridObject(x, z).ToString();                        
                     }
                     else {
                         str += " ";

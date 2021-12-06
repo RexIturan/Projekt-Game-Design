@@ -47,6 +47,7 @@ public class RaiseSelectedEvent : StateAction {
 
 	public override void OnStateEnter() {
 		Debug.Log("Ich bin selected");
+	  _abilityController.RefreshAbilities();
 		_selectNewPlayer.RaiseEvent(_gameObject, AbilityCallback);
 	}
 }

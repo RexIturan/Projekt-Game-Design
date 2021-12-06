@@ -37,7 +37,7 @@ namespace Util {
 		public PathNode(Vector3Int pos) : this(pos.x, pos.y, pos.z) { }
 
 		public PathNode(int x, int y, int z) {
-			this.pos = new Vector3Int(x, y, z);
+			pos = new Vector3Int(x, y, z);
 			isWalkable = true;
 		}
 
@@ -49,40 +49,40 @@ namespace Util {
 
 			edges = new List<Edge>();
 
-			var x = this.pos.x;
-			var y = this.pos.x;
+			var x = pos.x;
+			var z = pos.z;
 			
 			if ( x - 1 >= 0 ) {
 				// Left
-				AddEdge(x - 1, y, MoveStraightCost, grid);
+				AddEdge(x - 1, z, MoveStraightCost, grid);
 				if ( diagonal ) {
 					// Left Down
-					if ( y - 1 >= 0 ) AddEdge(x - 1, y - 1, MoveDiagonalCost, grid);
+					if ( z - 1 >= 0 ) AddEdge(x - 1, z - 1, MoveDiagonalCost, grid);
 					// Left Up
-					if ( y + 1 < grid.Depth ) AddEdge(x - 1, y + 1, MoveDiagonalCost, grid);
+					if ( z + 1 < grid.Depth ) AddEdge(x - 1, z + 1, MoveDiagonalCost, grid);
 				}
 			}
 
 			if ( x + 1 < grid.Width ) {
 				// Right
-				AddEdge(x + 1, y, MoveStraightCost, grid);
+				AddEdge(x + 1, z, MoveStraightCost, grid);
 				if ( diagonal ) {
 					// Right Down
-					if ( y - 1 >= 0 ) AddEdge(x + 1, y - 1, MoveDiagonalCost, grid);
+					if ( z - 1 >= 0 ) AddEdge(x + 1, z - 1, MoveDiagonalCost, grid);
 					// Right Up
-					if ( y + 1 < grid.Depth ) AddEdge(x + 1, y + 1, MoveDiagonalCost, grid);
+					if ( z + 1 < grid.Depth ) AddEdge(x + 1, z + 1, MoveDiagonalCost, grid);
 				}
 			}
 
 			// Down
-			if ( y - 1 >= 0 ) AddEdge(x, y - 1, MoveStraightCost, grid);
+			if ( z - 1 >= 0 ) AddEdge(x, z - 1, MoveStraightCost, grid);
 			// Up
-			if ( y + 1 < grid.Depth ) AddEdge(x, y + 1, MoveStraightCost, grid);
+			if ( z + 1 < grid.Depth ) AddEdge(x, z + 1, MoveStraightCost, grid);
 		}
 
-		private void AddEdge(int posX, int posY, int cost, GenericGrid1D<PathNode> grid) {
-			if ( grid.GetGridObject(posX, posY).isWalkable ) {
-				edges.Add(new Edge(cost * _costFactor, grid.GetGridObject(posX, posY)));
+		private void AddEdge(int posX, int posZ, int cost, GenericGrid1D<PathNode> grid) {
+			if ( grid.GetGridObject(posX, posZ).isWalkable ) {
+				edges.Add(new Edge(cost * _costFactor, grid.GetGridObject(posX, posZ)));
 			}
 		}
 

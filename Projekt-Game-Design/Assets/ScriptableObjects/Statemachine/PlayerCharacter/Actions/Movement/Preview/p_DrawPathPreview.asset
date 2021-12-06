@@ -15,4 +15,4 @@ MonoBehaviour:
   drawPathEvent: {fileID: 11400000, guid: 24e76f8c903214540b6d8bd9b1bf3620, type: 2}
   clearPathEvent: {fileID: 11400000, guid: 2859153d6ff2e4a47b7bbc8f1de406c7, type: 2}
   pathfindingPathQueryEventChannel: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}
-  globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  inputCache: {fileID: 11400000, guid: 767106d458901634590366e6fae31156, type: 2}

@@ -8,6 +8,7 @@ using Characters;
 using Characters.Movement;
 using Util;
 using Grid;
+using Input;
 
 [CreateAssetMenu(fileName = "DrawPathPreview",
 	menuName = "State Machines/Actions/Player/DrawPathPreview")]
@@ -20,28 +21,28 @@ public class DrawPathPreviewSO : StateActionSO {
 	[Header("Receiving Events On")] [SerializeField]
 	private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
 
-	[SerializeField] private GridDataSO globalGridData;
+	[SerializeField] private InputCache inputCache;
 
 	public override StateAction CreateAction() => new DrawPathPreview(drawPathEvent, clearPathEvent,
-		pathfindingPathQueryEventChannel, globalGridData);
+		pathfindingPathQueryEventChannel, inputCache);
 }
 
 public class DrawPathPreview : StateAction {
 	private readonly NodeListEventChannelSO _drawPathEvent;
 	private readonly VoidEventChannelSO _clearPathEvent;
 	private readonly PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;
-	private readonly GridDataSO _globalGridData;
+	private readonly InputCache inputCache;
 	private MovementController _movementController;
 	private GridTransform _gridTransform;
 
 	//Constructor
 	public DrawPathPreview(NodeListEventChannelSO drawPathEvent, VoidEventChannelSO clearPathEvent,
 		PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel,
-		GridDataSO globalGridData) {
+		InputCache inputCache) {
 		this._drawPathEvent = drawPathEvent;
 		this._clearPathEvent = clearPathEvent;
 		this._pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
-		this._globalGridData = globalGridData;
+		this.inputCache = inputCache;
 	}
 
 	public override void Awake(StateMachine stateMachine) {
@@ -53,12 +54,12 @@ public class DrawPathPreview : StateAction {
 		bool isReachable = false;
 		List<PathNode> tiles = _movementController.reachableTiles;
 		// todo move to central pos
-		var mousePos =
-			MousePosition.GetTilePos(_globalGridData, true, out bool hitBottom);
-		var mouse2DGridPos = _globalGridData.GetGridPos3DFromWorldPos(mousePos);
+		// todo: ^ maybe done, idk
+
+		Vector3Int abovePos = inputCache.cursor.abovePos.tilePos;
 
 		for ( int i = 0; i < tiles.Count && !isReachable; i++ ) {
-			if ( tiles[i].pos.Equals(mouse2DGridPos) ) {
+			if ( tiles[i].pos.Equals(abovePos) ) {
 				isReachable = true;
 
 				Vector3Int startNode = _gridTransform.gridPosition;

@@ -17,7 +17,7 @@ namespace Grid {
                 depth,
                 cellSize,
                 originPosition,
-                (grid, x, y) => new Tile(x, y),
+                (grid, x, z) => new Tile(x, z),
                 showDebug,
                 debugTextParent) { }
 
@@ -26,7 +26,7 @@ namespace Grid {
         public override string ToString() {
             var str = "";
 
-            for (int y = Depth - 1; y >= 0; y--) {
+            for (int z = Depth - 1; z >= 0; z--) {
                 for (int x = 0; x < Width; x++) {
                     str += "[";
                     // if (GetGridObject(x, y).tileTypeID >= 0) {
@@ -35,7 +35,7 @@ namespace Grid {
                     // else {
                     //     str += " ";
                     // }
-                    str += GetGridObject(x, y).ToString();
+                    str += GetGridObject(x, z).ToString();
                     str += "] ";
                 }
 

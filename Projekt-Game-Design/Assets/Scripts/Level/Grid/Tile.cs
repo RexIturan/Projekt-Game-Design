@@ -11,7 +11,7 @@ namespace Grid {
         public int tileTypeID;
         //todo could possibly be private  
         public int x;
-        public int y;
+        public int z;
         
         public void SetTileType(int id) {
             tileTypeID = id;
@@ -19,10 +19,10 @@ namespace Grid {
             // grid.TriggerGridObjectChanged(x, y);
         }
         
-        public Tile(int x, int y) {
+        public Tile(int x, int z) {
             this.x = x;
-            this.y = y;
-            name += $" {x}:{y}";
+            this.z = z;
+            name += $" {x}:{z}";
         }
         
         public override string ToString() {

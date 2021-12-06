@@ -39,20 +39,18 @@ namespace Pathfinding {
 
         public void DrawPreview(List<PathNode> nodes) {
             ClearPreviewTilemap();
-            
+						
             Debug.Log("Draw Preview Tilemap, inside drawer");
             foreach (var node in nodes) {
-                Vector2Int pos = GridPosToTilePos(node.pos.x, node.pos.y);
-                previewTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), previewTile);                
+                previewTilemap.SetTile(GridPosToTilePos(node.pos), previewTile);                
             }
-        }
+				}
 
         public void DrawPreviewPath(List<PathNode> nodes) {
             ClearPreviewPathTilemap();
             if (nodes != null) {
                 foreach (var node in nodes) {
-                    Vector2Int pos = GridPosToTilePos(node.pos.x, node.pos.y);
-                    previewPathTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), previewPathTile);                
+                    previewPathTilemap.SetTile(GridPosToTilePos(node.pos), previewPathTile);                
                 }    
             }
         }
@@ -67,9 +65,15 @@ namespace Pathfinding {
         }
         
         // todo move to globla grid data or so
-        private Vector2Int GridPosToTilePos(int x, int y) {
+        private Vector3Int GridPosToTilePos(int x, int y, int z) {
             var offset = Vector3Int.FloorToInt(globalGridData.OriginPosition);
-            return new Vector2Int(x + offset.x, y + offset.z);
+						// y-axis in Grid is z-axis in tilemap
+            return new Vector3Int(x + offset.x, z + offset.z, y + offset.y);
         }
+
+				private Vector3Int GridPosToTilePos(Vector3Int gridPos)
+				{
+						return GridPosToTilePos(gridPos.x, gridPos.y, gridPos.z);
+				}
     }
 }

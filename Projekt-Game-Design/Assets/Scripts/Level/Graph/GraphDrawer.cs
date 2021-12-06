@@ -27,13 +27,13 @@ namespace Graph {
             if (drawGraph) {
                 foreach (var graph in graphContainer.basicMovementGraph)
                     for (var x = 0; x < graph.Width; x++)
-                    for (var y = 0; y < graph.Depth; y++) {
-                        if (graph.GetGridObject(x, y).edges != null) {
-                            foreach (var edge in graph.GetGridObject(x, y).edges) {
+                    for (var z = 0; z < graph.Depth; z++) {
+                        if (graph.GetGridObject(x, z).edges != null) {
+                            foreach (var edge in graph.GetGridObject(x, z).edges) {
                                 var cellOffset = graph.GetCellCenter();
                                 var originOffset = graph.OriginPosition;
                                 var offset = originOffset + cellOffset;
-                                var nodePos = new Vector3(x, 1, y) + offset;
+                                var nodePos = new Vector3(x, 1, z) + offset;
                                 var tartgetPos = new Vector3(edge.target.pos.x, 1, edge.target.pos.y) + offset;
                                 // Handles.DrawLine(nodePos, tartgetPos, 2f);
                                 Debug.DrawLine(nodePos, tartgetPos, Color.red);

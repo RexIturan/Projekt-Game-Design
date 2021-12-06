@@ -93,7 +93,9 @@ namespace Characters.Movement {
 			float minDifference = 0.1f; // the point that's being moved to 
 			// has to be at least this far away from the player
 
-			Vector3 movingDirection = position - gameObject.transform.position;
+			// difference between the "where the player is" and the "where the player goes"
+			Vector3 movingDirection = gridData.GetWorldPosFromGridPos(gridTransform.gridPosition) - gameObject.transform.position;
+
 			if ( movingDirection.magnitude > minDifference ) {
 				float angle = Vector3.Angle(new Vector3(0, 0, 1), movingDirection);
 				if ( movingDirection.x < 0 ) {
