@@ -31,6 +31,7 @@ namespace Statemachine.Enemy.Actions.Movement {
         public override void OnUpdate() { }
 
         public override void OnStateEnter() {
+						/*
             var inRangeTiles = _enemySC.tileInRangeOfTarget;
             var reachableTiles = _enemySC.reachableNodes;
 
@@ -81,11 +82,13 @@ namespace Statemachine.Enemy.Actions.Movement {
                 _enemySC.energy -= _enemySC.GetEnergyUseUpFromMovement();
                 _enemySC.abilityExecuted = true;
             }
+						*/
         }
 
         public override void OnStateExit() { }
         
         private void SaveClosestToPlayer(List<PathNode> path) {
+						/*
             int index = 0;
             for (int i = 1; i < path.Count; i++) {
                 // TODO: distance instead of GCost? 
@@ -111,6 +114,7 @@ namespace Statemachine.Enemy.Actions.Movement {
                 _enemySC.energy -= _enemySC.GetEnergyUseUpFromMovement();
                 _enemySC.abilityExecuted = true;
             }
+						*/
         }
     }
 }

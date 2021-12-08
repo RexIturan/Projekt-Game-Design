@@ -12,9 +12,21 @@ namespace Characters {
 		//property -> getter
 		public StatusValues StatusValues => stats;
 
+		// getter und setter faction
+		public Faction GetFaction() { return faction; }
+		public void SetFaction(Faction faction) { this.faction = faction; }
+
 		public void RefillEnergy() {
 			// refill energy etc.
 			stats.GetValue(StatusType.Energy).Fill();
+		}
+
+    public void RefillAll()
+		{
+			foreach(StatusValue val in stats.GetStatusValues())
+			{
+				val.Fill();
+			}
 		}
 	}
 }

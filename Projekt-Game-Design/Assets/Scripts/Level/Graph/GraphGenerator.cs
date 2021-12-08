@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Characters;
 using Graph.ScriptableObjects;
 using Grid;
 using Level.Grid;
@@ -59,7 +60,7 @@ namespace Graph {
             // }
             
             foreach (var enemy in characterList.enemyContainer) {
-                var pos = globalGridData.GetGridPos2DFromGridPos3D(enemy.GetComponent<EnemyCharacterSC>().gridPosition);
+                var pos = globalGridData.GetGridPos2DFromGridPos3D(enemy.GetComponent<GridTransform>().gridPosition);
                 graph.GetGridObject(pos).SetIsWalkable(false);
             }    
             

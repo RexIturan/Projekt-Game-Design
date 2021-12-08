@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Characters;
+using Combat;
 using Events.ScriptableObjects;
 using Grid;
 using Input;
@@ -10,8 +12,12 @@ using CursorMode = LevelEditor.CursorMode;
 
 namespace Player {
 	public class PlayerController : MonoBehaviour {
-		[Header("Receiving events on")] [SerializeField]
-		private PathNodeEventChannelSO targetTileEvent;
+		[Header("Receiving events on")]
+		[SerializeField] private PathNodeEventChannelSO targetTileEvent;
+		// when an ability is selected, depending on the ability, 
+		// an event can tell the PlayerController when to recognize targets
+		// if no ability is selected, there shouldn't be any targets taken on
+		[SerializeField] private VoidEventChannelSO clearTargetCacheEvent;
 
 		[Header("Input")] 
 		[SerializeField] private InputReader input;
@@ -23,12 +29,15 @@ namespace Player {
 
 		[SerializeField] private Selectable selectedPlayerCharacter;
 		[SerializeField] private EnemyCharacterSC selectedEnemyCharacter;
+				
+		[SerializeField] private Targetable target;
 
 		private CharacterList characterList; 
 		
 		private void Awake() {
 			input.MouseClicked += ToggleIsSelected;
 			targetTileEvent.OnEventRaised += TargetTile;
+			clearTargetCacheEvent.OnEventRaised += ClearTargetCache;
 			
 			//get character List
 			characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
@@ -37,6 +46,7 @@ namespace Player {
 		private void OnDisable() {
 			input.MouseClicked -= ToggleIsSelected;
 			targetTileEvent.OnEventRaised -= TargetTile;
+			clearTargetCacheEvent.OnEventRaised -= ClearTargetCache;
 		}
 
 		private void Update() {
@@ -54,6 +64,8 @@ namespace Player {
 			// Debug.Log($"inputCache.cursor.abovePos.gridPos\n{inputCache.cursor.abovePos.gridPos}");
 			
 			if ( gridData.IsIn3DGridBounds(inputCache.cursor.abovePos.gridPos) ) {
+				// selection
+				//
 				Selectable selectable = GetPlayerAtPos(inputCache.cursor.abovePos.gridPos);
 				
 				if ( selectable ) {
@@ -77,6 +89,18 @@ namespace Player {
 						selectedPlayerCharacter.Select();
 					}
 				}
+
+				// targeting
+				//
+				if ( inputCache.leftButton.started ) {
+				  Targetable newTarget = GetTargetAtPos(inputCache.cursor.abovePos.gridPos);
+  				if(newTarget) { 
+	  			  target = newTarget;
+		  			Attacker playerAttacker = selectedPlayerCharacter.gameObject.GetComponent<Attacker>();
+						if(playerAttacker)
+							playerAttacker.SetTarget(newTarget);
+          }
+				}
 			}
 
 			if ( inputCache.rightButton.started ) {
@@ -95,22 +119,42 @@ namespace Player {
 		}
 
 		private Selectable GetPlayerAtPos(Vector3Int gridPos) {
-			
+
 			foreach ( var playerCharObj in characterList.playerContainer ) {
 				var gridTransform = playerCharObj.GetComponent<GridTransform>();
 				if ( gridTransform.gridPosition.Equals(gridPos) ) {
-					return playerCharObj.GetComponent<Selectable>();;
+					return playerCharObj.GetComponent<Selectable>();
 				}
 			}
 			return null;
 		}
 		
+		// gets player or enemy character targetable component with grid position
+		// todo: add world objects if they are targetable too!
+		private Targetable GetTargetAtPos(Vector3Int gridPos) { 
+			List<GameObject> targetableObjects = new List<GameObject>();
+			targetableObjects.AddRange(characterList.playerContainer);
+			targetableObjects.AddRange(characterList.enemyContainer);
+
+		  foreach( GameObject charObj in targetableObjects)
+			{
+				Targetable objTarget = charObj.GetComponent<Targetable>();
+				if( objTarget.GetGridPosition().Equals(gridPos))
+					return objTarget;
+			}
+			return null;
+    }
+
 		private void SelectCharacter() {
 			
 		}
 
 	// target Tile
 		public void TargetTile(PathNode target) { }
+
+		private void ClearTargetCache() {
+			target = null;
+		}
 
 		void ToggleIsSelected() {
 			// if ( !abilitySelected && !abilityConfirmed ) {

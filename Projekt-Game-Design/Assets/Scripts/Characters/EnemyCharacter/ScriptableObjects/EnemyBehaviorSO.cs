@@ -4,5 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New EnemyBehavior", menuName = "Character/Enemy/EnemyBehavior")]
 public class EnemyBehaviorSO : ScriptableObject
 {
+		// todo: later create BehaviorContainer
     public bool alwaysSkip;
 }

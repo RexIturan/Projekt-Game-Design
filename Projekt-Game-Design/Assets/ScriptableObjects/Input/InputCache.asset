@@ -15,15 +15,15 @@ MonoBehaviour:
   mouseOverChangedEC: {fileID: 11400000, guid: 2649fdca3d5737645a304d044086dbd7, type: 2}
   cursorDebug:
     showGridCenterPos: 1
-    showMousePos: 0
+    showMousePos: 1
   cursor:
     selectedPos:
-      mousePosition: {x: 1.9802217, y: 0.49999905, z: 2.2408133}
-      tilePos: {x: 1, y: 0, z: 2}
-      tileCenter: {x: 1.5, y: 0, z: 2.5}
-      gridPos: {x: 6, y: 0, z: 9}
+      mousePosition: {x: -2.5618343, y: 0.5, z: 7.4078712}
+      tilePos: {x: 0, y: 0, z: 10}
+      tileCenter: {x: 0.5, y: 0, z: 10.5}
+      gridPos: {x: 0, y: 0, z: 10}
     abovePos:
-      mousePosition: {x: 1.9802217, y: 0.49999905, z: 2.2408133}
-      tilePos: {x: 1, y: 0, z: 2}
-      tileCenter: {x: 1.5, y: 0, z: 2.5}
-      gridPos: {x: 6, y: 0, z: 9}
+      mousePosition: {x: -2.5618343, y: 0.5, z: 7.4078712}
+      tilePos: {x: 0, y: 0, z: 10}
+      tileCenter: {x: 0.5, y: 0, z: 10.5}
+      gridPos: {x: 0, y: 0, z: 10}

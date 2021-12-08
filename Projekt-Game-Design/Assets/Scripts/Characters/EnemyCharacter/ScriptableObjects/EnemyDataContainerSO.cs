@@ -6,5 +6,6 @@ namespace Characters.EnemyCharacter.ScriptableObjects {
     public class EnemyDataContainerSO : ScriptableObject {
         public List<EnemyTypeSO> enemyTypes;
         public List<EnemySpawnDataSO> enemySpawnData;
+				// maybe add one for behavior later on
     }
 }

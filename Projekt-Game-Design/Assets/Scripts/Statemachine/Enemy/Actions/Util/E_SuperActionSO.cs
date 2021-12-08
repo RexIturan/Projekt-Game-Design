@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Ability.ScriptableObjects;
+using Characters.Ability;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -24,6 +25,7 @@ public class E_SuperAction : StateAction {
 	private List<StateAction> _subActions;
 	private int _abilityID;
 	private EnemyCharacterSC _enemyCharacterSC;
+  private AbilityController _abilityController;
 
 	public E_SuperAction(AbilityPhase phase, AbilityContainerSO abilityContainer) {
 		this._phase = phase;
@@ -33,12 +35,13 @@ public class E_SuperAction : StateAction {
 	public override void Awake(StateMachine stateMachine) {
 		this._stateMachine = stateMachine;
 		_enemyCharacterSC = stateMachine.GetComponent<EnemyCharacterSC>();
+		_abilityController = stateMachine.GetComponent<AbilityController>();
 	}
 
 	public override void OnStateEnter() {
 		_subActions = new List<StateAction>();
 		// get Actions from Ability
-		_abilityID = _enemyCharacterSC.abilityID;
+		_abilityID = _abilityController.SelectedAbilityID;
 		var ability = _abilityContainer.abilities[_abilityID];
 		StateActionSO[] actions;
 

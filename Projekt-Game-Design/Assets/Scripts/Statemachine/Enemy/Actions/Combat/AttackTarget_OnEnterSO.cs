@@ -23,6 +23,7 @@ namespace Statemachine.Enemy.Actions.Combat {
 		}
 	
 		public override void OnStateEnter() {
+						/*
 			var attackEnergyCost = 1;
 			if (_enemyCharacterSC.energy >= attackEnergyCost) {
 				Debug.Log($"enemy attacked player for {_enemyCharacterSC.attackDamage} damage");
@@ -37,6 +38,7 @@ namespace Statemachine.Enemy.Actions.Combat {
 			else {
 				_enemyCharacterSC.isDone = true;
 			}
+			*/
 		}
 	
 		public override void OnStateExit()

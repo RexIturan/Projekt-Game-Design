@@ -39,6 +39,9 @@ public class E_MakeMoveOnEnter : StateAction {
     }
 
     public override void OnStateEnter() {
+				Skip();
+				// TODO: Make AI later on
+				/*
         if (_behavior.alwaysSkip)
             Skip();
         else {
@@ -65,12 +68,14 @@ public class E_MakeMoveOnEnter : StateAction {
             else
                 Skip();
         }
+				*/
     }
 
     private void Skip() {
         _enemySC.isDone = true;
     }
 
+		/*
     private void SaveClosestToPlayer(List<PathNode> path) {
         int index = 0;
         for (int i = 1; i < path.Count; i++) {
@@ -91,4 +96,5 @@ public class E_MakeMoveOnEnter : StateAction {
             _closesTileToPlayer = path[index];
         }
     }
+		*/
 }

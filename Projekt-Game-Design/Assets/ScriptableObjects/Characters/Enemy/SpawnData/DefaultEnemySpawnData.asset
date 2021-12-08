@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: DefaultEnemySpawnData
   m_EditorClassIdentifier: 
   id: 0
-  gridPos: {x: 0, y: 0, z: 0}
-  range: 2
-  attack: 1
-  movementpointsPerEnergy: 10
+  gridPos: {x: 3, y: 1, z: 3}
+  overrideStatusValues: []
+  overrideBehavior: {fileID: 0}
+  imageID: 0
+  profilePicture: {fileID: 0}

@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTileEvent: {fileID: 11400000, guid: 06d375aa5b115fd4ba98c0967522e31a, type: 2}
+  clearTargetCacheEvent: {fileID: 11400000, guid: 6cec2c07edf3f0b4aadade5efedab8cd, type: 2}
   input: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   inputCache: {fileID: 11400000, guid: 767106d458901634590366e6fae31156, type: 2}
   gridData: {fileID: 0}
   cursorDrawer: {fileID: 0}
   selectedPlayerCharacter: {fileID: 0}
   selectedEnemyCharacter: {fileID: 0}
+  target: {fileID: 0}

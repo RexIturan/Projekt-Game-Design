@@ -62,6 +62,7 @@ namespace Statemachine.Enemy.Actions {
         /// raise event to calculate paths between every player Character And this EnemyCharacter
         /// </summary>
         private void RaiseFindPathBatchEvent() {
+						/*
             _characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
             List<Tuple<Vector3Int, Vector3Int>> coords = new List<Tuple<Vector3Int, Vector3Int>>();
             // for each character get path to them
@@ -71,9 +72,11 @@ namespace Statemachine.Enemy.Actions {
             }
 
             _findPathBatchEC.RaiseEvent(coords, Callback);
+						*/
         }
         
         private void Callback(List<List<PathNode>> paths) {
+						/*
 	        // the character with the shortest path gets set to be the nem target
 
 	        Debug.Log("e_getNewTarget:  get target??");
@@ -114,6 +117,7 @@ namespace Statemachine.Enemy.Actions {
 	        }
 
 	        // todo verarbeitung des gefundenen weges
+					*/
         }
     }
 }

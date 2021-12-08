@@ -90,6 +90,12 @@ namespace Characters {
 			}
 		}
 
+    public StatusValue[] GetStatusValues() {
+		  StatusValue[] values = new StatusValue[_statusValues.Count];
+      _statusValues.CopyTo(values);
+      return values;
+    }
+
 		//todo add Modifier
 		public void ModifyStatusValue(Modifier modifier) {
 			throw new NotImplementedException();

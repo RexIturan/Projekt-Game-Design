@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Characters.EnemyCharacter;
+using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
@@ -12,14 +13,14 @@ namespace Statemachine.Enemy.Conditions {
 	public class HasTarget : Condition {
 		protected new HasTargetSO OriginSO => ( HasTargetSO )base.OriginSO;
 
-		private EnemyCharacterSC _enemyCharacterSC;
+		private AIController _AIController;
 
 		public override void Awake(StateMachine stateMachine) {
-			_enemyCharacterSC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
+			_AIController = stateMachine.gameObject.GetComponent<AIController>();
 		}
 
 		protected override bool Statement() {
-			return !( _enemyCharacterSC.target is null );
+			return !( _AIController.target is null );
 		}
 
 		public override void OnStateEnter() { }

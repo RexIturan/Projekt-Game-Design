@@ -13,14 +13,14 @@ namespace Combat {
 		public bool waitForAttackToFinish = false;
 		
 		//enemy
-		public CharacterList characterList;
+		// public CharacterList characterList;
 	
 		public float attackRange;
 		public int attackDamage;
 		
 		//player
-		public Targetable playerTarget;
-		public Targetable enemyTarget;
+		// public Targetable playerTarget;
+		// public Targetable enemyTarget;
 		
 		
 		public void InitializeEnemyCombat() {
@@ -30,11 +30,15 @@ namespace Combat {
 		}
 	
 		public void StartEnemyCombat() {
-			characterList = characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
+			// characterList = characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
 		}
 
 		public void ClearTilesInRange() {
 			tilesInRange.Clear();
 		}
+
+		// setter and getter
+		public Targetable GetTarget() { return target; }
+		public void SetTarget(Targetable target) { this.target = target; }
 	}
 }

@@ -44,9 +44,10 @@ namespace Characters {
 					var spawnData = enemyDataContainerSO.enemySpawnData[enemySave.enemySpawnDataId];
 					var obj = Instantiate(type.prefab, enemyParent, true);
 					var enemySC = obj.GetComponent<EnemyCharacterSC>();
+          var enemyGridTransform = obj.GetComponent<GridTransform>();
 					enemySC.enemyType = type;
 					enemySC.enemySpawnData = spawnData;
-					enemySC.gridPosition = enemySave.pos;
+					enemyGridTransform.gridPosition = enemySave.pos;
 					enemySC.Initialize();
 					_characterList.enemyContainer.Add(enemySC.gameObject);
 				}

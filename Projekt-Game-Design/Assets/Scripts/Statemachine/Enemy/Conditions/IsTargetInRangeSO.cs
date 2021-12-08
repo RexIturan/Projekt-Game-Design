@@ -19,6 +19,7 @@ public class IsTargetInRange : Condition
 	}
 	
 	protected override bool Statement() {
+				/*
 		var inRangeTiles = _enemyCharacterSC.tileInRangeOfTarget;
 		var pos = _enemyCharacterSC.gridPosition;
 		
@@ -27,7 +28,7 @@ public class IsTargetInRange : Condition
 		foreach (var tilePos in inRangeTiles) {
 			if (pos == tilePos) return true;
 		}
-		
+		*/
 		return false;
 	}
 	

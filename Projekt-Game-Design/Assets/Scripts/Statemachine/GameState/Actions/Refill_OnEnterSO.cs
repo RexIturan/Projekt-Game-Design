@@ -31,7 +31,7 @@ public class Refill_OnEnter : StateAction {
                 break;
             case Faction.Enemy:
                 foreach (var enemy in characterList.enemyContainer) {
-                    enemy.GetComponent<EnemyCharacterSC>().Refill();
+                    enemy.GetComponent<Statistics>().RefillEnergy();
                 }
                 break;
         }

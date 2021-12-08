@@ -12,7 +12,7 @@ public struct LootTable
     [System.Serializable]
     public struct ItemDropPair
     {
-        public ScriptableObject item;
+        public int itemID;
         public float probability; // value between 0 and 1
     }
 
