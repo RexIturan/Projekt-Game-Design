@@ -31,6 +31,15 @@
                 "y": 1,
                 "z": 3
             }
+      },
+      {
+            "enemyTypeId": 0,
+            "enemySpawnDataId": 1,
+            "pos": {
+                "x": 4,
+                "y": 1,
+                "z": 5
+            }
       }
       ],
     "inventory": {

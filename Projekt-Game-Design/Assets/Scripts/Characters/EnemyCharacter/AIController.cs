@@ -114,11 +114,14 @@ namespace Characters.EnemyCharacter
 
 				private void SaveClosestTileToPlayerAsMovementTarget(List<PathNode> pathNodes)
 				{
-						int lastAffordableStep = 1; // 1 because first tile will be skipped
-						while ( lastAffordableStep < pathNodes.Count - 1 && pathNodes[lastAffordableStep].dist < _movementController.GetMaxMoveDistance() )
+						int lastAffordableStep = 0;
+						// the last PathNode(pathNodes[pathNodes.Count - 2]) is the player position: stop before that pathnode
+						while ( lastAffordableStep < pathNodes.Count - 2 && pathNodes[lastAffordableStep + 1].dist <= _movementController.GetMaxMoveDistance() )
 								lastAffordableStep++;
 
-						movementTarget = lastAffordableStep >= pathNodes.Count ? null : pathNodes[lastAffordableStep];
+						// if the only affordable step is the enemies position, set target to null
+						// also if the path to target is empty or if empty is next to enemy, set target to null
+						movementTarget = (lastAffordableStep >= pathNodes.Count || lastAffordableStep < 1) ? null : pathNodes[lastAffordableStep];
 						_movementController.movementTarget = movementTarget;
 				}
 

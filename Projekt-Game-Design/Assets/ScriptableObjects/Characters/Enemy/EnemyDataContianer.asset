@@ -16,3 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c491683a0b68f934db35972bd4517070, type: 2}
   enemySpawnData:
   - {fileID: 11400000, guid: 0a3085fa653bccb409fbc03f1bc7e103, type: 2}
+  - {fileID: 11400000, guid: aa35b7d8788b4544284b541936f3a288, type: 2}

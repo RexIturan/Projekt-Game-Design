@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DontSkip
   m_EditorClassIdentifier: 
   alwaysSkip: 0
-  rangeOfInterestMovement: 100
+  rangeOfInterestMovement: 50000

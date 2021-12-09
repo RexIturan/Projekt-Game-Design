@@ -50,7 +50,7 @@ public class CharacterAnimationController : MonoBehaviour {
 
 	public void PlayAnimation(CharacterAnimation characterAnimation) {
 		if ( animator ) {
-			Debug.Log("Spiele Animation ab: " + characterAnimation.ToString());
+			// Debug.Log("Spiele Animation ab: " + characterAnimation.ToString());
 			switch ( characterAnimation ) {
 				case CharacterAnimation.IDLE:
 					animator.SetTrigger("idle");

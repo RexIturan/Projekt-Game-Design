@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
-  m_Name: p_BasicRanged
+  m_Name: BasicMelee
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 42f2715c74a15e443b5fcc0dd6225bc5, type: 3}
-  description: 'A ranged attack with much range (8). Costs: 2'
-  animation: 6
+  icon: {fileID: 21300000, guid: de4a36bb908b2674586518430ae3cfd6, type: 3}
+  description: 'Einfacher Nahkampf. Kosten: 1'
+  eCharacterAnimation: 0
   targets: 4
   moveToTarget: 0
-  range: 8
+  range: 1
   conditions: 0
-  costs: 2
+  costs: 1
   targetedEffects:
   - effect:
-      type: 2
-      baseDamage: 3
-      strengthBonus: 0
-      dexterityBonus: 0.8
+      type: 1
+      baseDamage: 6
+      strengthBonus: 0.52
+      dexterityBonus: 0
       intelligenceBonus: 0
     targets: 4
     targetIsCenter: 1
     area: 1
-  abilityID: 3
+  abilityID: 1
   selectedActions:
   - {fileID: 11400000, guid: 944d1fed4d2b9624d8224c0bd30e43e3, type: 2}
   - {fileID: 11400000, guid: 91a528d44b0383848a019fbc0509b9f9, type: 2}
@@ -38,5 +38,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d5abf5e064648d46a86187da80dd12b, type: 2}
   executingActions:
   - {fileID: 11400000, guid: 45027094d4b799243a3cfa555ca9d099, type: 2}
-  - {fileID: 11400000, guid: 744ff87b44f31794eb710429547ab1be, type: 2}
+  - {fileID: 11400000, guid: c6ff258bc012f104f99ecc63e4a53f6f, type: 2}
+  - {fileID: 11400000, guid: 8785839d6e22f444a977cad51877fcaa, type: 2}
   - {fileID: 11400000, guid: b76cc6e520aa25f49bbdd9b7a6ee82fc, type: 2}
+  - {fileID: 11400000, guid: 744ff87b44f31794eb710429547ab1be, type: 2}

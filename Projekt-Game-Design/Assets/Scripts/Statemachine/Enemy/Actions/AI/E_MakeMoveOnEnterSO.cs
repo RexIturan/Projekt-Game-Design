@@ -39,113 +39,68 @@ public class E_MakeMoveOnEnter : StateAction {
 		}
 
     public override void OnStateEnter() {
-				_abilityController.RefreshAbilities();
+				_aiController.ClearFullCache();
 
-				_aiController.TargetClosestPlayer();
-				if ( !_aiController.aiTarget )
+				if ( _enemySC.behavior.alwaysSkip )
 						Skip();
 				else
 				{
-						Debug.Log("Closest player found ");
+						_abilityController.RefreshAbilities();
 
-						// try to attack player
-						_aiController.SaveValidAbilities();
-						if ( _aiController.validAbilities.Count > 0 )
-						{
-								// choose random ability
-								// choose index of ability in ValidAbility list, index is between 0 and validAbilities.Count - 1
-								int randomAbility = Mathf.FloorToInt(Random.value * _aiController.validAbilities.Count);
-
-								_abilityController.SelectedAbilityID = _aiController.validAbilities[randomAbility].abilityID;
-								_abilityController.abilityConfirmed = true;
-						}
+						_aiController.TargetClosestPlayer();
+						if ( !_aiController.aiTarget )
+								Skip();
 						else
 						{
-								// try to move towards player
-								_aiController.TargetNearestTileToPlayerTarget();
-								if ( _aiController.movementTarget != null )
+								// Debug.Log("Closest player found ");
+
+								// try to attack player
+								_aiController.SaveValidAbilities();
+								if ( _aiController.validAbilities.Count > 0 )
 								{
-										// execute movement
-										Debug.Log("Closest Tile to player target found ");
+										// choose random ability
+										// choose index of ability in ValidAbility list, index is between 0 and validAbilities.Count - 1
+										int randomAbility = Mathf.FloorToInt(Random.value * _aiController.validAbilities.Count);
 
-										// does enemy character have moveing ability?
-										int abilityId = -1;
-										foreach ( var ability in _abilityController.Abilities )
+										_abilityController.SelectedAbilityID = _aiController.validAbilities[randomAbility].abilityID;
+										_abilityController.abilityConfirmed = true;
+								}
+								else
+								{
+										// try to move towards player
+										_aiController.TargetNearestTileToPlayerTarget();
+										if ( _aiController.movementTarget != null )
 										{
-												if ( ability.moveToTarget )
+												// execute movement
+												// Debug.Log("Closest Tile to player target found ");
+
+												// does enemy character have moveing ability?
+												int abilityId = -1;
+												foreach ( var ability in _abilityController.Abilities )
 												{
-														abilityId = ability.abilityID;
+														if ( ability.moveToTarget )
+														{
+																abilityId = ability.abilityID;
+														}
 												}
-										}
 
-										if ( abilityId != -1 )
-										{
-												// moving ability available, so execute it
-												_abilityController.SelectedAbilityID = abilityId;
-												_abilityController.abilityConfirmed = true;
+												if ( abilityId != -1 )
+												{
+														// moving ability available, so execute it
+														_abilityController.SelectedAbilityID = abilityId;
+														_abilityController.abilityConfirmed = true;
+												}
+												else
+														Skip();
 										}
 										else
 												Skip();
 								}
-								else
-										Skip();
 						}
 				}
-				// TODO: Make AI later on
-				/*
-        if (_behavior.alwaysSkip)
-            Skip();
-        else {
-            _canMove = true;
-
-            // TODO: find nearest player instead
-            _targetPlayer = _enemySC.characterList.playerContainer[0].gameObject;
-            var targetContainer = _targetPlayer.GetComponent<GridTransform>();
-
-            Vector3Int startNode = new Vector3Int(_enemySC.gridPosition.x,
-                _enemySC.gridPosition.z,
-                0);
-            Vector3Int endNode = new Vector3Int(targetContainer.gridPosition.x,
-                targetContainer.gridPosition.z,
-                0);
-
-            _pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, SaveClosestToPlayer);
-
-            if (_canMove) {
-                _enemySC.movementTarget = _closesTileToPlayer;
-                _enemySC.abilityID = 0;
-                _enemySC.abilitySelected = true;
-            }
-            else
-                Skip();
-        }
-				*/
     }
 
     private void Skip() {
         _enemySC.isDone = true;
     }
-
-		/*
-    private void SaveClosestToPlayer(List<PathNode> path) {
-        int index = 0;
-        for (int i = 1; i < path.Count; i++) {
-            // TODO: distance instead of GCost? 
-            if (path[i].gCost <= _enemySC.movementPointsPerEnergy * _enemySC.energy)
-                index = i;
-            else
-                break;
-        }
-
-        if (index == 0) {
-            Debug.Log("Gegner kann sich nicht bewegen");
-            _closesTileToPlayer = null;
-            _canMove = false;
-        }
-        else {
-            path[index].dist = path[index].gCost;
-            _closesTileToPlayer = path[index];
-        }
-    }
-		*/
 }

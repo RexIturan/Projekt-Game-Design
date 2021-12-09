@@ -34,10 +34,11 @@ namespace Characters.PlayerCharacter.StateMachine.Actions {
 
 		public override void OnStateEnter() {
 			var currentAbility = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
-
-			var energyReduction = currentAbility.costs + ( currentAbility.moveToTarget
-				? _movementController.GetEnergyUseUpFromMovement()
-				: 0 );
+						
+			var energyReduction = currentAbility.costs;
+			if(currentAbility.moveToTarget) {
+				energyReduction += _movementController.GetEnergyUseUpFromMovement();
+			}
 			_statistics.StatusValues.Energy.Decrease(energyReduction);
 
 			Debug.Log("Reducing energy by " + energyReduction + " points.");

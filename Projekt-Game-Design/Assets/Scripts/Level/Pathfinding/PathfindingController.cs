@@ -34,7 +34,9 @@ namespace Pathfinding {
         private List<PathNode> _reachableNodes;
 
         private void Awake() {
-            pathfindingAllNodesQueryEventChannel.OnEventRaised += HandlePathfindingQueryEvent;
+						Debug.LogWarning("The distance of path (in HanglePathQueryEvent) is set here in the Pathfinding controller and not quite prettily ");
+
+						pathfindingAllNodesQueryEventChannel.OnEventRaised += HandlePathfindingQueryEvent;
             pathfindingPathQueryEventChannel.OnEventRaised += HandlePathfindingPathQueryEvent;
             findPathBatchEC.OnEventRaised += HandleFindPathBatch;
         }
@@ -122,7 +124,16 @@ namespace Pathfinding {
         //
         private void HandlePathfindingPathQueryEvent(Vector3Int startNode, Vector3Int endNode, Action<List<PathNode>> callback)
         {
-            callback(GetPath(startNode, endNode));
+						// TODO: calculate distance in Pathfinding
+						// adding distance to Path
+						List<PathNode> path = GetPath(startNode, endNode);
+						int distance = 0;
+						foreach ( PathNode node in path )
+						{
+								node.dist = distance;
+								distance += 20;
+						}
+						callback(path);
         }
         
         private void HandleFindPathBatch(List<Tuple<Vector3Int, Vector3Int>> input, Action<List<List<PathNode>>> callback) {

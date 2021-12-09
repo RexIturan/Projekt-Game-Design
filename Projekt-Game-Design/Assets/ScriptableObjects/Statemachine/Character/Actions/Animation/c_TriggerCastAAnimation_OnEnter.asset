@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f360a064dbc8421c8cb267832de97739, type: 3}
-  m_Name: e_AbilityContainer
+  m_Script: {fileID: 11500000, guid: c70ff368bf0011547a4bc96b641c787f, type: 3}
+  m_Name: c_TriggerCastAAnimation_OnEnter
   m_EditorClassIdentifier: 
-  abilities:
-  - {fileID: 11400000, guid: 6fba664d05de07d4ea73c18ea794dc6f, type: 2}
+  characterAnimation: 10
