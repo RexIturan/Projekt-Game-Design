@@ -98,7 +98,7 @@ public class C_HasValidTarget : Condition
 
 		// TODO: maybe in util class?
 		// returns true if abilityTarget has given flag set
-		private static bool HasFlag(AbilityTarget abilityTarget, AbilityTarget flag) 
+		public static bool HasFlag(AbilityTarget abilityTarget, AbilityTarget flag) 
 		{
 				return ( (int)abilityTarget & (int)flag ).Equals((int)flag);
 		}

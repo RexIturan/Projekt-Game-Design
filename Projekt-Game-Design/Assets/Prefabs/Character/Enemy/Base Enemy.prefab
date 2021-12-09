@@ -324,8 +324,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathfindingQueryEvent: {fileID: 11400000, guid: ffe98f2118ac7d549ad4bfed89b6f94d, type: 2}
   pathfindingPathQueryEvent: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}
-  playerTarget: {fileID: 0}
-  enemyTarget: {fileID: 0}
+  fieldOfViewQueryEvent: {fileID: 11400000, guid: a8df37a37a427914e8db4b19294fa893, type: 2}
+  aiTarget: {fileID: 0}
   movementTarget:
     pos: {x: 0, y: 0, z: 0}
     gCost: 0
@@ -333,8 +333,14 @@ MonoBehaviour:
     fCost: 0
     dist: 0
     isWalkable: 0
+  selectedAbility: 0
+  validAbilities: []
+  abilityPerTilesInRange: []
   _gridTransform: {fileID: 6601210392787000488}
+  _statistics: {fileID: 2212653873986084095}
   _movementController: {fileID: 2212653873986084083}
+  _abilityController: {fileID: 2212653873986084082}
+  _attacker: {fileID: 2212653873986084080}
 --- !u!114 &3154257668925584087
 MonoBehaviour:
   m_ObjectHideFlags: 0

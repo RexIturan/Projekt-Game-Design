@@ -46,9 +46,6 @@ public class C_SaveTilesInRange_OnEnter : StateAction {
 	}
 
 	public override void OnStateEnter() {
-				if ( !fieldOfViewQueryEvent )
-						Debug.LogError("Kein event channel lol");
-
 			fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition,
 			( _abilityContainer.abilities[_abilityController.SelectedAbilityID].range ),
 			TileProperties.ShootTrough,
@@ -61,7 +58,7 @@ public class C_SaveTilesInRange_OnEnter : StateAction {
 
 	// TODO: move to somewhere else I guess?
 	// TODO: add third dimension to visibility and also this function
-	public List<PathNode> VisibleTilesToPathNodeList(bool[,] visibleTiles) {
+	public static List<PathNode> VisibleTilesToPathNodeList(bool[,] visibleTiles) {
 		List<PathNode> tilesInRange = new List<PathNode>();
 		for(int x = 0; x < visibleTiles.GetLength(0); x++)
 		{
