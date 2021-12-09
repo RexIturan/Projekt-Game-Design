@@ -72,9 +72,10 @@ namespace Characters {
 		}
 		
 		// getter setter
+		// uses a deep copy of value and not actually same value TODO: check if this is the expected behavior of function
 		public void SetValue(StatusType type, StatusValue value) {
 			if ( _values.ContainsKey(type) ) {
-				_values[type] = value;	
+				_values[type] = value.Copy();	
 			}
 			else {
 				throw new InvalidOperationException();

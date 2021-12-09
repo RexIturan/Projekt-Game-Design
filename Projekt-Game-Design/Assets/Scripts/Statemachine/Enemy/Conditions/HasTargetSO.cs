@@ -20,7 +20,7 @@ namespace Statemachine.Enemy.Conditions {
 		}
 
 		protected override bool Statement() {
-			return !( _AIController.target is null );
+			return !( _AIController.playerTarget is null );
 		}
 
 		public override void OnStateEnter() { }

@@ -6,4 +6,6 @@ public class EnemyBehaviorSO : ScriptableObject
 {
 		// todo: later create BehaviorContainer
     public bool alwaysSkip;
+		public int rangeOfInterestMovement; // only characters (players) this far away from the enemy character
+																				// are considered in enemy's decisions
 }

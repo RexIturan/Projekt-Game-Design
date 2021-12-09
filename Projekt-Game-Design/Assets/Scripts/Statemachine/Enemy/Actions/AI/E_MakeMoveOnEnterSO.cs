@@ -7,39 +7,74 @@ using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
+using Characters.EnemyCharacter;
+using Characters.Ability;
 
 [CreateAssetMenu(fileName = "e_MakeMoveOnEnter", menuName = "State Machines/Actions/Enemy/e_MakeMoveOnEnter")]
 public class E_MakeMoveOnEnterSO : StateActionSO {
-    [Header("Sending events on")] [SerializeField]
-    private PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel;
-
-    public override StateAction CreateAction() => new E_MakeMoveOnEnter(pathfindingPathQueryEventChannel);
+    public override StateAction CreateAction() => new E_MakeMoveOnEnter();
 }
 
 public class E_MakeMoveOnEnter : StateAction {
     private EnemyCharacterSC _enemySC;
-    private EnemyBehaviorSO _behavior;
+		private AIController _aiController;
+		private AbilityController _abilityController;
+		private EnemyBehaviorSO _behavior;
 
     private GameObject _targetPlayer;
     private PathNode _closesTileToPlayer;
 
-    private bool _canMove;
+
+		private bool _canMove;
 
     private PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;
-
-    public E_MakeMoveOnEnter(PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel) {
-        this._pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
-    }
 
     public override void OnUpdate() { }
 
     public override void Awake(StateMachine stateMachine) {
         _enemySC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
         _behavior = _enemySC.behavior;
-    }
+				_aiController = stateMachine.gameObject.GetComponent<AIController>();
+				_abilityController = _enemySC.gameObject.GetComponent<AbilityController>();
+		}
 
     public override void OnStateEnter() {
-				Skip();
+				_abilityController.RefreshAbilities();
+
+				_aiController.TargetClosestPlayer();
+				if ( !_aiController.playerTarget )
+						Skip();
+				else
+				{
+						Debug.Log("Closest player found ");
+						_aiController.TargetNearestTileToPlayerTarget();
+						if ( _aiController.movementTarget != null)
+						{
+								// execute movement
+								Debug.Log("Closest Tile to player target found ");
+
+								// does enemy character have moveing ability?
+								int abilityId = -1;
+								foreach(var ability in _abilityController.Abilities)
+								{
+										if(ability.moveToTarget)
+										{
+												abilityId = ability.abilityID;
+										}
+								}
+
+								if ( abilityId != -1 )
+								{
+										// moving ability available, so execute it
+										_abilityController.SelectedAbilityID = abilityId;
+										_abilityController.abilityConfirmed = true;
+								}
+								else
+										Skip();
+						}
+						else
+								Skip();
+				}
 				// TODO: Make AI later on
 				/*
         if (_behavior.alwaysSkip)

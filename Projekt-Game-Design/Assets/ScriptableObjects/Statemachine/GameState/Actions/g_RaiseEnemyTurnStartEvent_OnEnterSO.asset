@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: e_Attack
+  m_Script: {fileID: 11500000, guid: a0e996ac798d5b541ae66ae0d0957339, type: 3}
+  m_Name: g_RaiseEnemyTurnStartEvent_OnEnterSO
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: 680ce8fee1b268a4bb57f7024cfb9257, type: 2}
+  startTurnEvent: {fileID: 11400000, guid: 3a28845fa87e62b47abeaf01656a2806, type: 2}
+  faction: 2

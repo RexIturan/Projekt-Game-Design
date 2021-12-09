@@ -27,7 +27,7 @@ namespace Characters {
 				if ( value < min ) {
 					_value = min;
 				}
-				else if( value < max ) {
+				else if( value > max ) {
 					_value = max;
 				}
 				else {
@@ -76,6 +76,11 @@ namespace Characters {
 			//todo overthink this plz
 			this._name = Enum.GetName(typeof(StatusType), type);
 			this.name = _name;
+		}
+
+		// make deep copy
+		public StatusValue Copy() {
+			return new StatusValue(this.type, this.min, this.value, this.max);
 		}
 	}
 }

@@ -39,6 +39,8 @@ namespace Characters.PlayerCharacter.StateMachine.Actions {
 				? _movementController.GetEnergyUseUpFromMovement()
 				: 0 );
 			_statistics.StatusValues.Energy.Decrease(energyReduction);
+
+			Debug.Log("Reducing energy by " + energyReduction + " points.");
 		}
 
 		public override void OnStateExit() { }

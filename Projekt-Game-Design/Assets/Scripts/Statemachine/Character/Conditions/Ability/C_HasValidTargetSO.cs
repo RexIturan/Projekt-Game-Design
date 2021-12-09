@@ -65,7 +65,8 @@ public class C_HasValidTarget : Condition
 						}
 						if ( HasFlag(ability.targets, AbilityTarget.Ally) )
 						{
-								if ( attackerFaction.Equals(targetFaction) )
+								if ( attackerFaction.Equals(targetFaction) &&
+										 _attacker.gameObject != _target.gameObject )
 										targetRelationshipValid = true;
 						}
 						if ( HasFlag(ability.targets, AbilityTarget.Enemy) )

@@ -1,5 +1,6 @@
 using Characters;
 using Characters.Ability;
+using Characters.EnemyCharacter;
 using Characters.EnemyCharacter.ScriptableObjects;
 using Characters.Equipment;
 using Characters.Movement;
@@ -22,10 +23,11 @@ public class EnemyCharacterSC : MonoBehaviour
 		[SerializeField] private MovementController _movementController;
 		[SerializeField] private AbilityController _abilityController;
 		[SerializeField] private ModelController _modelController;
+		[SerializeField] private AIController _aIController;
 
 		[Header("Statemachine")]
-		public bool isOnTurn; // it's Enemy's turn
-		public bool isDone; // this enemy in particular is done
+		public bool isNextToAct; // it's the enemy character's turn to act (decided by Enemy Controller)
+		public bool isDone; // this enemy character in particular is done
 		public bool abilitySelected;
 		public bool abilityExecuted;
 		public bool noTargetFound;
@@ -52,6 +54,9 @@ public class EnemyCharacterSC : MonoBehaviour
 
 				//model
 				_modelController.prefab = enemyType.modelPrefab;
+
+				//ai
+				_aIController.SetBehavior(behavior);
 		}
 }
 

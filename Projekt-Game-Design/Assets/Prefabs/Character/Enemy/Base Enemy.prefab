@@ -156,7 +156,7 @@ MonoBehaviour:
       _min: 0
     - _name: Energy
       _type: 4
-      _value: 0
+      _value: 30
       _max: 30
       _min: 0
     - _name: EnergyRegeneration
@@ -243,11 +243,8 @@ MonoBehaviour:
   tileInRangeOfTarget: []
   tilesInRange: []
   waitForAttackToFinish: 0
-  characterList: {fileID: 0}
   attackRange: 0
   attackDamage: 0
-  playerTarget: {fileID: 0}
-  enemyTarget: {fileID: 0}
 --- !u!114 &2212653873986084083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,7 +322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d869fc2c5ec627478f1d8eb41accfc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  pathfindingQueryEvent: {fileID: 11400000, guid: ffe98f2118ac7d549ad4bfed89b6f94d, type: 2}
+  pathfindingPathQueryEvent: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}
+  playerTarget: {fileID: 0}
+  enemyTarget: {fileID: 0}
   movementTarget:
     pos: {x: 0, y: 0, z: 0}
     gCost: 0
@@ -333,6 +333,8 @@ MonoBehaviour:
     fCost: 0
     dist: 0
     isWalkable: 0
+  _gridTransform: {fileID: 6601210392787000488}
+  _movementController: {fileID: 2212653873986084083}
 --- !u!114 &3154257668925584087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,14 +349,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: {fileID: 0}
   enemySpawnData: {fileID: 0}
-  behavior: {fileID: 0}
+  behavior: {fileID: 11400000, guid: 1f2adb223990b1f458c58b0569d99fbf, type: 2}
   _statistics: {fileID: 2212653873986084095}
   _gridTransform: {fileID: 6601210392787000488}
   _attacker: {fileID: 2212653873986084080}
   _movementController: {fileID: 2212653873986084083}
   _abilityController: {fileID: 2212653873986084082}
   _modelController: {fileID: 2212653873986084085}
-  isOnTurn: 0
+  _aIController: {fileID: 106175245239994627}
+  isNextToAct: 0
   isDone: 0
   abilitySelected: 0
   abilityExecuted: 0
