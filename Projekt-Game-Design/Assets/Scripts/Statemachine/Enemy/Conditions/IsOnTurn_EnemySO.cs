@@ -16,7 +16,7 @@ public class IsOnTurn_Enemy : Condition {
 	}
 
 	protected override bool Statement() {
-		return _enemyCharacterSc.isOnTurn;
+		return _enemyCharacterSc.isNextToAct;
 	}
 
 	public override void OnStateEnter() { }

@@ -19,7 +19,7 @@ public class ActivateEnemies_OnEnter : StateAction {
         Debug.Log("Activating Enemies. ");
         var characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
         foreach (var enemy in characterList.enemyContainer) {
-            enemy.GetComponent<EnemyCharacterSC>().isOnTurn = true;
+            enemy.GetComponent<EnemyCharacterSC>().isNextToAct = true;
         }
     }
 

@@ -72,9 +72,10 @@ namespace Characters {
 		}
 		
 		// getter setter
+		// uses a deep copy of value and not actually same value TODO: check if this is the expected behavior of function
 		public void SetValue(StatusType type, StatusValue value) {
 			if ( _values.ContainsKey(type) ) {
-				_values[type] = value;	
+				_values[type] = value.Copy();	
 			}
 			else {
 				throw new InvalidOperationException();
@@ -89,6 +90,12 @@ namespace Characters {
 				throw new InvalidOperationException();
 			}
 		}
+
+    public StatusValue[] GetStatusValues() {
+		  StatusValue[] values = new StatusValue[_statusValues.Count];
+      _statusValues.CopyTo(values);
+      return values;
+    }
 
 		//todo add Modifier
 		public void ModifyStatusValue(Modifier modifier) {

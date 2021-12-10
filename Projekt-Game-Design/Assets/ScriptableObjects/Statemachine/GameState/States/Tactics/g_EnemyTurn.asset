@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: g_EnemyTurn
   m_EditorClassIdentifier: 
   _actions:
+  - {fileID: 11400000, guid: 6d1ce6c0528115a4ab8a2940d64e55f2, type: 2}
   - {fileID: 11400000, guid: de6080dfaac32fd4bbc6da7834af0d0c, type: 2}
-  - {fileID: 11400000, guid: c097bd2c6d204d34a9282235075ef408, type: 2}
-  - {fileID: 11400000, guid: 89b207d41b4cf7948be704382489e34e, type: 2}

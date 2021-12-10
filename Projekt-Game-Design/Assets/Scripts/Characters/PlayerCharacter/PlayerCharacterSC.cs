@@ -30,6 +30,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     public void Initialize() {
 	    //stats
 	    _statistics.StatusValues.InitValues(playerSpawnData.overrideStatusValues);
+			_statistics.SetFaction(Faction.Player);
 	    
 	    //movement Position
 	    _movementController.movementPointsPerEnergy = playerType.movementPointsPerEnergy;

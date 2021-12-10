@@ -102,11 +102,12 @@ namespace SaveSystem {
 			if ( characterList ) {
 				foreach ( var enemy in characterList.playerContainer ) {
 					var enemySC = enemy.GetComponent<EnemyCharacterSC>();
+					var enemyGridTransform = enemy.GetComponent<GridTransform>();
 					enemyChars.Add(
 						new Enemy_Save() {
 							enemyTypeId = enemySC.enemyType.id,
 							enemySpawnDataId = enemySC.enemySpawnData.id,
-							pos = enemySC.gridPosition
+							pos = enemyGridTransform.gridPosition
 						});
 				}	
 			}

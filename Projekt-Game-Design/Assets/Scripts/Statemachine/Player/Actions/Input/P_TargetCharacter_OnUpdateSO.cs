@@ -15,7 +15,8 @@ using UnityEngine.UIElements;
 [CreateAssetMenu(fileName = "P_TargetCharacter_OnUpdate",
 	menuName = "State Machines/Actions/Player/Target Character On Update")]
 public class P_TargetCharacter_OnUpdateSO : StateActionSO {
-	[Header("SO Data")] [SerializeField] private GridDataSO globalGridData;
+	[Header("SO Data")]
+	[SerializeField] private GridDataSO globalGridData;
 	[SerializeField] private AbilityContainerSO abilityContainer;
 
 	public override StateAction CreateAction() =>
@@ -55,7 +56,9 @@ public class P_TargetCharacter_OnUpdate : StateAction {
 		_range = _abilityContainer.abilities[_abilityController.SelectedAbilityID].range;
 	}
 
+
 	public override void OnUpdate() {
+	/*
 		var characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
 		if ( _timer.timeSinceTransition > TimeBeforeAcceptingInput &&
 		     Mouse.current.leftButton.wasPressedThisFrame ) {
@@ -90,6 +93,7 @@ public class P_TargetCharacter_OnUpdate : StateAction {
 					// Debug.Log("Enemy position: " + enemy.gridPosition.x + ", " + enemy.gridPosition.y + ", " + enemy.gridPosition.z);
 
 					var ecTargetable = enemy.GetComponent<Targetable>();
+
 					if ( ecTargetable.GetGridPosition().Equals(mouseGridPos) &&
 					     _range >= CalcDistance(_thisTargatable.GetGridPosition(),
 						     ecTargetable.GetGridPosition(), Diagonal) ) {
@@ -112,6 +116,8 @@ public class P_TargetCharacter_OnUpdate : StateAction {
 				}
 			}
 		}
+
+	  */
 	}
 
 	public override void OnStateEnter() { }
