@@ -6,6 +6,8 @@ namespace Util.Extensions {
             return $"[{vector3.x}, {vector3.y}, {vector3.z}]";
         }
 
+        
+        
         public static Vector3 Abs(this Vector3 vector3) {
 	        return new Vector3(
 		        x: Mathf.Abs(vector3.x), 

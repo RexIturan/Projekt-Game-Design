@@ -56,8 +56,6 @@ namespace Visual {
                 tilemap.ClearAllTiles();    
             }
 
-            var offset = new Vector2Int((int)globalGridData.OriginPosition.x, (int)globalGridData.OriginPosition.z); 
-            
             for (int l = 0; l < globalGridData.Height; l++) {
                 var tileGrid = gridContainer.tileGrids[l];
                 for (int x = 0; x < tileGrid.Width; x++) {
@@ -66,13 +64,13 @@ namespace Visual {
                         var type = tileTypeContainer.tileTypes[tile.tileTypeID];
                         if (tile != null) {
                             gridTilemap[l].SetTile(
-                                new Vector3Int(x + offset.x, y + offset.y, l),
+                                new Vector3Int(x, y, l),
                                 GetTileFromTileType(type));    
                         }
                         else {
                             Debug.Log("error tile");
                             gridTilemap[l].SetTile(
-                                new Vector3Int(x + offset.x, y + offset.y, l),
+                                new Vector3Int(x, y, l),
                                 errorTile);    
                         }
                     }
@@ -83,16 +81,11 @@ namespace Visual {
         public void DrawBoxCursorAt(Vector3 start, Vector3 end) {
             cursorTilemap.ClearAllTiles();
 
-            var startPos = WorldPosToTileMapPos(start);
-            var endPos = WorldPosToTileMapPos(end);
-            
-            int xMin = Mathf.Min(startPos.x, endPos.x);
-            int yMin = Mathf.Min(startPos.y, endPos.y);
-            int xMax = Mathf.Max(startPos.x, endPos.x);
-            int yMax = Mathf.Max(startPos.y, endPos.y);
+            Vector3Int min = Vector3Int.FloorToInt(Vector3.Min(start, end));
+            Vector3Int max = Vector3Int.FloorToInt(Vector3.Max(start, end));
         
-            for (int x = xMin; x <= xMax; x++) {
-                for (int y = yMin; y <= yMax; y++) {
+            for (int x = min.x; x <= max.x; x++) {
+                for (int y = min.y; y <= max.y; y++) {
                     Vector3Int tilePos = new Vector3Int(x, y, 0);
                     cursorTilemap.SetTile(tilePos, cursor);
                 }
@@ -101,14 +94,9 @@ namespace Visual {
         
         public void DrawCursorAt(Vector3 pos) {
             cursorTilemap.ClearAllTiles();
-            cursorTilemap.SetTile(WorldPosToTileMapPos(pos), cursor);
+            cursorTilemap.SetTile(Vector3Int.FloorToInt(pos), cursor);
         }
         
-        public Vector3Int WorldPosToTileMapPos(Vector3 pos) {
-            Vector3Int flooredPos = Vector3Int.FloorToInt(pos);
-            return new Vector3Int(flooredPos.x, flooredPos.z, 0);
-        }
-
         public void ClearCursor() {
             cursorTilemap.ClearAllTiles();
         }

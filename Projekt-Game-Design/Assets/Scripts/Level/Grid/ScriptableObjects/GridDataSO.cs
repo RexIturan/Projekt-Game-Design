@@ -161,13 +161,11 @@ namespace Grid {
 
 		public Vector2Int GetTilePosFromWorldPos(Vector3 worldPos) {
 			var flooredPos = Vector3Int.FloorToInt(worldPos);
-			var offset = Vector3Int.FloorToInt(originPosition);
-			return new Vector2Int(flooredPos.x - offset.x, flooredPos.z - offset.z);
+			return new Vector2Int(flooredPos.x, flooredPos.z);
 		}
 
 		public Vector3Int GetTilePos3DFromWorldPos(Vector3 worldPos) {
-			var offset = Vector3Int.FloorToInt(originPosition);
-			return Vector3Int.FloorToInt(worldPos - offset);
+			return Vector3Int.FloorToInt(worldPos);
 		}
 
 		public Vector3 GetTileCenter3DFromWorldPos(Vector3 worldPos) {
