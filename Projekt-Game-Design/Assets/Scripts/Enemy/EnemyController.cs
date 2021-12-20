@@ -61,7 +61,8 @@ public class EnemyController : MonoBehaviour
 						FindCharacterListIfNotSet();
 
 						// find next enemy character that isn't done
-						while ( currentlyActingEnemy < enemyOrder.Count && enemyOrder[currentlyActingEnemy].isDone )
+						while ( currentlyActingEnemy < enemyOrder.Count && 
+								(enemyOrder[currentlyActingEnemy].isDone || enemyOrder[currentlyActingEnemy].isDead) )
 								currentlyActingEnemy++;
 
 						// if there is no enemy character that isn't done (= all enemy characters are done),

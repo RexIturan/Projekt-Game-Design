@@ -28,6 +28,7 @@ public class EnemyCharacterSC : MonoBehaviour
 		[Header("Statemachine")]
 		public bool isNextToAct; // it's the enemy character's turn to act (decided by Enemy Controller)
 		public bool isDone; // this enemy character in particular is done
+		public bool isDead; // set when enemy enters the dead state
 		public bool abilitySelected;
 		public bool abilityExecuted;
 		public bool noTargetFound;
