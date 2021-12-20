@@ -304,8 +304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b77ded57c84f4d8214024ffd7d21d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8839921088689484587, guid: 3bc60f3f9e3f61b4cb1586783afde6b0, type: 3}
-  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
+  prefab: {fileID: 8839921088689484587, guid: 40de477da2fde4445bb9e2932cfa69c8, type: 3}
+  material: {fileID: 2100000, guid: a2e76941eb8ac734195b509949af023f, type: 2}
   weaponLeft: {fileID: 0}
   weaponRight: {fileID: 0}
   stance: 0
@@ -365,6 +365,7 @@ MonoBehaviour:
   _aIController: {fileID: 106175245239994627}
   isNextToAct: 0
   isDone: 0
+  isDead: 0
   abilitySelected: 0
   abilityExecuted: 0
   noTargetFound: 0
