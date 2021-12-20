@@ -97,18 +97,26 @@ namespace Characters.Movement {
 			Vector3 movingDirection = gridData.GetWorldPosFromGridPos(gridTransform.gridPosition) - gameObject.transform.position;
 
 			if ( movingDirection.magnitude > minDifference ) {
-				float angle = Vector3.Angle(new Vector3(0, 0, 1), movingDirection);
-				if ( movingDirection.x < 0 ) {
-					// mirror angle
-					angle = -angle + 360;
-				}
-
-				facingDirection = angle;
+				FaceDirection(GetDirectionFromVector(movingDirection));
 			}
 		}
 		
 		public void FaceDirection(float direction) {
 			facingDirection = direction;
 		}
+		
+		public void FaceDirection(Vector3 vector) {
+			FaceDirection(GetDirectionFromVector(vector));
+		}
+
+		private static float GetDirectionFromVector(Vector3 vector) { 
+			float angle = Vector3.Angle(new Vector3(0, 0, 1), vector);
+			if ( vector.x < 0 ) {
+				// mirror angle
+				angle = -angle + 360;
+			}
+
+			return angle;
+    }
 	}
 }
