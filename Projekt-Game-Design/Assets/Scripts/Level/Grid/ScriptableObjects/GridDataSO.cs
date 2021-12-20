@@ -168,6 +168,13 @@ namespace Grid {
 			return Vector3Int.FloorToInt(worldPos);
 		}
 
+		/* todo: is this right? */
+		public Vector3Int GetTilePosFromGridPos(Vector3Int gridPos) {
+			var lowerBounds = Vector3Int.FloorToInt(OriginPosition);
+			return new Vector3Int(gridPos.x, gridPos.z, gridPos.y) + 
+								new Vector3Int(lowerBounds.x, lowerBounds.z, lowerBounds.y);
+		}
+
 		public Vector3 GetTileCenter3DFromWorldPos(Vector3 worldPos) {
 			var flooredPos = GetTilePos3DFromWorldPos(worldPos);
 			return GetTilePos3DFromWorldPos(worldPos) + GetCellCenter3D();

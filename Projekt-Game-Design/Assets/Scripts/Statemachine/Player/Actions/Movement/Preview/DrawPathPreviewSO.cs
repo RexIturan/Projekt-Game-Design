@@ -35,6 +35,9 @@ public class DrawPathPreview : StateAction {
 	private MovementController _movementController;
 	private GridTransform _gridTransform;
 
+	private Vector3Int lastDrawnGridPos;
+	private bool isDrawn;
+
 	//Constructor
 	public DrawPathPreview(NodeListEventChannelSO drawPathEvent, VoidEventChannelSO clearPathEvent,
 		PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel,
@@ -43,6 +46,8 @@ public class DrawPathPreview : StateAction {
 		this._clearPathEvent = clearPathEvent;
 		this._pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
 		this.inputCache = inputCache;
+
+		isDrawn = false;
 	}
 
 	public override void Awake(StateMachine stateMachine) {
@@ -56,21 +61,29 @@ public class DrawPathPreview : StateAction {
 		// todo move to central pos
 		// todo: ^ maybe done, idk
 
-		Vector3Int abovePos = inputCache.cursor.abovePos.tilePos;
+		Vector3Int abovePos = inputCache.cursor.abovePos.gridPos;
 
 		for ( int i = 0; i < tiles.Count && !isReachable; i++ ) {
 			if ( tiles[i].pos.Equals(abovePos) ) {
 				isReachable = true;
 
-				Vector3Int startNode = _gridTransform.gridPosition;
-				Vector3Int endNode = tiles[i].pos;
+				// only draw path if it wasn't already
+				if(isDrawn == false || !tiles[i].Equals(lastDrawnGridPos)) { 
+		  		Vector3Int startNode = _gridTransform.gridPosition;
+	  			Vector3Int endNode = tiles[i].pos;
 
-				_pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, DrawPath);
+  				_pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, DrawPath);
+
+					isDrawn = true;
+					lastDrawnGridPos = tiles[i].pos;
+				}
 			}
 		}
 
-		if ( !isReachable )
+		if ( !isReachable ) { 
 			_clearPathEvent.RaiseEvent();
+			isDrawn = false;
+		}
 	}
 
 	public override void OnStateEnter() { }

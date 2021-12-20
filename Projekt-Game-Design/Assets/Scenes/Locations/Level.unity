@@ -812,6 +812,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 512017045}
     m_Modifications:
+    - target: {fileID: 1112942784057711956, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
+      propertyPath: gridData
+      value: 
+      objectReference: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
     - target: {fileID: 1112942784057711957, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
       propertyPath: m_Name
       value: PathfindingController
