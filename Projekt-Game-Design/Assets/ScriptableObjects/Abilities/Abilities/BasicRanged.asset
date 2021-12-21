@@ -29,7 +29,10 @@ MonoBehaviour:
       intelligenceBonus: 0
     targets: 4
     targetIsCenter: 1
-    area: 1
+    area:
+      rows:
+      - line: 01
+      anchor: {x: 0, y: 0}
   abilityID: 3
   selectedActions:
   - {fileID: 11400000, guid: 944d1fed4d2b9624d8224c0bd30e43e3, type: 2}
