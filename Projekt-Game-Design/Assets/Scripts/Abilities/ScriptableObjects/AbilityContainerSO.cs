@@ -6,7 +6,7 @@ namespace Ability.ScriptableObjects {
     public class AbilityContainerSO : ScriptableObject {
         public List<AbilitySO> abilities;
 
-				public void Awake()
+				public void InitAbilities()
 				{
 						Debug.Log("Initialising Abilities");
 						foreach ( AbilitySO ability in abilities )

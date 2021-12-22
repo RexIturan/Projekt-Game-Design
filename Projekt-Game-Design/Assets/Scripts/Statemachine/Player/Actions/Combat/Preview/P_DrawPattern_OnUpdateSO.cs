@@ -56,9 +56,11 @@ public class P_DrawPattern_OnUpdate : StateAction {
 
 					AbilitySO ability = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
 
+					int rotations = _attacker.GetRotationsToTarget(mousePos);
+
 					_drawPatternEC.RaiseEvent(mousePos, 
-							ability.targetedEffects[0].area.GetPattern(), 
-							ability.targetedEffects[0].area.GetAnchor());
+							ability.targetedEffects[0].area.GetPattern(rotations), 
+							ability.targetedEffects[0].area.GetAnchor(rotations));
 
 					_isDrawn = true;
 					_lastDrawnGridPos = mousePos;

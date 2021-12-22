@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Characters;
+using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
@@ -11,27 +12,9 @@ namespace Combat {
 		//todo propertys
 		public List<PathNode> tilesInRange;
 		public bool waitForAttackToFinish = false;
-		
-		//enemy
-		// public CharacterList characterList;
 	
 		public float attackRange;
 		public int attackDamage;
-		
-		//player
-		// public Targetable playerTarget;
-		// public Targetable enemyTarget;
-		
-		
-		public void InitializeEnemyCombat() {
-			//todo get [range | damage] from equiped items
-			// attackRange = enemySpawnData.range;
-			// attackDamage = enemySpawnData.attack;
-		}
-	
-		public void StartEnemyCombat() {
-			// characterList = characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
-		}
 
 		public void ClearTilesInRange() {
 			tilesInRange.Clear();
@@ -40,5 +23,29 @@ namespace Combat {
 		// setter and getter
 		public Targetable GetTarget() { return target; }
 		public void SetTarget(Targetable target) { this.target = target; }
+
+		/**
+		 * Calculates the number of 90 degree rotations 
+		 * an attacker has to make to face tile
+		 * if the attacker is facing towards the positive x-axis
+		 */
+		public int GetRotationsToTarget(Vector3Int targetPos) { 
+			Vector3 vec = targetPos - gameObject.GetComponent<GridTransform>().gridPosition;
+			float angle = Vector3.Angle(vec, new Vector3(1, 0, 0));
+			
+			// if the attacker faces the x-axis, the angle should be below 45 degrees
+			if(angle < 45)
+				return 0;
+			// if the attacker faces the z-axis, the angle from the x-axis should be between 45 and 135 degrees
+			else if (angle < 45 + 90) {
+				if(vec.z <= 0)
+					return 3;
+				else
+					return 1;
+			}
+			// if the angle is greater than 135 degrees, the attacker faces negative x-axis, two rotations necessary
+			else
+				return 2;
+    }
 	}
 }

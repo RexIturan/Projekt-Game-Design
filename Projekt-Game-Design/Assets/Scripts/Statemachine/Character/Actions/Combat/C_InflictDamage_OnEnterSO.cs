@@ -66,12 +66,12 @@ public class C_InflictDamage_OnEnter : StateAction {
 	  		damageColor = Color.green;
 	  	else
 	  		damageColor = Color.grey;
-
-			if(!targetedEffect.area.Init())
-				Debug.LogError("Pattern is invalid. ");
+			
+			// rotations of pattern depending on the angle the attacker is facing
+			int rotations = _attacker.GetRotationsToTarget(_attacker.GetTarget().GetGridPosition());
  
   		HashSet<Targetable> targets = CombatUtils.FindAllTargets(_attacker.GetTarget().GetGridPosition(), 
-					targetedEffect.area.GetPattern(), targetedEffect.area.GetAnchor(), _attacker, targetedEffect.targets);
+					targetedEffect.area.GetPattern(rotations), targetedEffect.area.GetAnchor(rotations), _attacker, targetedEffect.targets);
 
   		foreach(Targetable target in targets) { 
 				Debug.Log("Target in range. Dealing damage/healing. ");

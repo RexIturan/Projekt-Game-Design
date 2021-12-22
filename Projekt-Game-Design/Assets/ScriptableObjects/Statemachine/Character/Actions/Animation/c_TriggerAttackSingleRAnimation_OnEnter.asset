@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: g_Game_Initialization
+  m_Script: {fileID: 11500000, guid: c70ff368bf0011547a4bc96b641c787f, type: 3}
+  m_Name: c_TriggerAttackSingleRAnimation_OnEnter
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: 4a5641d2eefdcf543a0365e3900c9696, type: 2}
+  characterAnimation: 9

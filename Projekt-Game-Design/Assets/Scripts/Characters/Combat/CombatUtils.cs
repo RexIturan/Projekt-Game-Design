@@ -84,8 +84,6 @@ namespace Combat
 						// add each target that is in the pattern
 						foreach(Targetable target in possibleTargets)
 						{
-								Debug.Log("Possible Target found. Let's see if it's in range. ");
-
 								// (sorry about bad comment) The Anchor point should correspond to the ground target 
 								// The difference between the position of the ground target and the position of the character 
 								// is the same as the difference between the anchor point and the character within the pattern
@@ -95,17 +93,10 @@ namespace Combat
 								int patternX = patternAnchor.x + (targetPos.x - groundTargetGridPos.x);
 								int patternY = patternAnchor.y + (targetPos.z - groundTargetGridPos.z);
 
-								Debug.Log("Pattern pos is: x: " + patternX + ", y: " + patternY);
-								Debug.Log("Pattern: \n" + TargetPattern.PrintPattern(pattern));
-
 								if ( patternX >= 0 && patternY >= 0 &&
 									 patternX < pattern.Length && patternY < pattern[patternX].Length &&
 									 pattern[patternX][patternY] )
-								{
 										targets.Add(target);
-								}
-								else
-										Debug.Log("No. ");
 						}
 
 						return targets;

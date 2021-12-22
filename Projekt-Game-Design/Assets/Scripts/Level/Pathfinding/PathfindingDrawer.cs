@@ -72,10 +72,7 @@ namespace Pathfinding {
 
 				public void DrawPattern(Vector3Int gridPos, bool[][] pattern, Vector2Int anchor)
 				{
-						ClearPreviewPathTilemap();
-
-						Debug.Log("Drawing pattern. ");
-						Debug.Log("Pattern: \n" + TargetPattern.PrintPattern(pattern));
+						ClearPreviewPatternTilemap();
 
 						for ( int x = 0; x < pattern.Length; x++ )
 						{
