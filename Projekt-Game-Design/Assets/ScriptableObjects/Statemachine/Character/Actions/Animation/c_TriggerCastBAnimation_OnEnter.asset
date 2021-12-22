@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70ff368bf0011547a4bc96b641c787f, type: 3}
   m_Name: c_TriggerCastBAnimation_OnEnter
   m_EditorClassIdentifier: 
-  characterAnimation: 9
+  characterAnimation: 11
