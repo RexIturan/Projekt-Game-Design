@@ -58,8 +58,6 @@ public class DrawPathPreview : StateAction {
 	public override void OnUpdate() {
 		bool isReachable = false;
 		List<PathNode> tiles = _movementController.reachableTiles;
-		// todo move to central pos
-		// todo: ^ maybe done, idk
 
 		Vector3Int abovePos = inputCache.cursor.abovePos.gridPos;
 
