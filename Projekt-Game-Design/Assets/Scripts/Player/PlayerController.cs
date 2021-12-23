@@ -93,13 +93,17 @@ namespace Player {
 				// targeting
 				//
 				if ( inputCache.leftButton.started ) {
-				  Targetable newTarget = GetTargetAtPos(inputCache.cursor.abovePos.gridPos);
-  				if(newTarget) { 
-	  			  target = newTarget;
-		  			Attacker playerAttacker = selectedPlayerCharacter.gameObject.GetComponent<Attacker>();
-						if(playerAttacker)
+		  		Attacker playerAttacker = selectedPlayerCharacter.gameObject.GetComponent<Attacker>();
+					if(playerAttacker) { 
+						Targetable newTarget = GetTargetAtPos(inputCache.cursor.abovePos.gridPos);
+  					if(newTarget) { 
+	  					target = newTarget;
 							playerAttacker.SetTarget(newTarget);
-          }
+						}
+
+						playerAttacker.groundTargetSet = true;
+						playerAttacker.SetGroundTarget(inputCache.cursor.abovePos.gridPos);
+					}
 				}
 			}
 

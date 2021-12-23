@@ -11,6 +11,7 @@ using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
 using Events.ScriptableObjects.FieldOfView;
 using Level.Grid;
+using FieldOfView;
 
 [CreateAssetMenu(fileName = "c_SaveTilesInRange_OnEnter",
 	menuName = "State Machines/Actions/Character/Save Tiles In Range On Enter")]
@@ -53,23 +54,6 @@ public class C_SaveTilesInRange_OnEnter : StateAction {
 	}
 
 	public void SaveToStateContainer(bool[,] tilesInRange) {
-		_attacker.tilesInRange = VisibleTilesToPathNodeList(tilesInRange);
-	}
-
-	// TODO: move to somewhere else I guess?
-	// TODO: add third dimension to visibility and also this function
-	public static List<PathNode> VisibleTilesToPathNodeList(bool[,] visibleTiles) {
-		List<PathNode> tilesInRange = new List<PathNode>();
-		for(int x = 0; x < visibleTiles.GetLength(0); x++)
-		{
-			for(int y = 0; y < visibleTiles.GetLength(1); y++)
-			{
-				if(visibleTiles[x,y])
-		  	{
-					tilesInRange.Add(new PathNode(x, 1, y));
-				}
-			}
-		}
-		return tilesInRange;
+		_attacker.tilesInRange = FieldOfViewController.VisibleTilesToPathNodeList(tilesInRange);
 	}
 }

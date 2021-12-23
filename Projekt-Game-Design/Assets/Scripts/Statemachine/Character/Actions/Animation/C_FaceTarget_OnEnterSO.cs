@@ -26,7 +26,7 @@ public class C_FaceTarget_OnEnter : StateAction {
 
 	public override void OnStateEnter() {
 		Debug.Log("Facing direction of target. ");
-		Vector3 direction = attacker.GetTarget().transform.position - attacker.transform.position;
+		Vector3 direction = attacker.GetTargetPosition() - attackerPos.gridPosition;
 		movementController.FaceDirection(direction);
 	}
 }

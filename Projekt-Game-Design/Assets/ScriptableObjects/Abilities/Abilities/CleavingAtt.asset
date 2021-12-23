@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
-  m_Name: Shockwave
+  m_Name: CleavingAtt
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 16076d8503cfcc849a63de1023db868e, type: 3}
   description: Attacks all enemies in a line
@@ -23,17 +23,19 @@ MonoBehaviour:
   targetedEffects:
   - effect:
       type: 1
-      baseDamage: 7
-      strengthBonus: 0.7
+      baseDamage: 8
+      strengthBonus: 1
       dexterityBonus: 0
       intelligenceBonus: 0
     targets: 4
     targetIsCenter: 1
     area:
       rows:
-      - line: 010101
-      anchor: {x: 0, y: 0}
-  abilityID: 6
+      - line: 01
+      - line: 01
+      - line: 01
+      anchor: {x: 0, y: 1}
+  abilityID: 7
   selectedActions:
   - {fileID: 11400000, guid: 944d1fed4d2b9624d8224c0bd30e43e3, type: 2}
   - {fileID: 11400000, guid: ae2b28614c9f55c429539a655c859735, type: 2}

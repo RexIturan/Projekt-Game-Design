@@ -67,10 +67,12 @@ public class C_InflictDamage_OnEnter : StateAction {
 	  	else
 	  		damageColor = Color.grey;
 			
+			Vector3Int targetPos = _attacker.GetTargetPosition();
+
 			// rotations of pattern depending on the angle the attacker is facing
-			int rotations = _attacker.GetRotationsToTarget(_attacker.GetTarget().GetGridPosition());
+			int rotations = _attacker.GetRotationsToTarget(targetPos);
  
-  		HashSet<Targetable> targets = CombatUtils.FindAllTargets(_attacker.GetTarget().GetGridPosition(), 
+  		HashSet<Targetable> targets = CombatUtils.FindAllTargets(targetPos, 
 					targetedEffect.area.GetPattern(rotations), targetedEffect.area.GetAnchor(rotations), _attacker, targetedEffect.targets);
 
   		foreach(Targetable target in targets) { 

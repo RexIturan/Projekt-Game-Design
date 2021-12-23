@@ -5,6 +5,7 @@ using Combat;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.FieldOfView;
 using Events.ScriptableObjects.Pathfinding;
+using FieldOfView;
 using Level.Grid;
 using System;
 using System.Collections;
@@ -152,7 +153,7 @@ namespace Characters.EnemyCharacter
 
 				private void AddAbilitiesInRangeToValidAbilities(bool[,] visibleTilesInRange)
 				{
-						tilesInRangePerAbility.Add(C_SaveTilesInRange_OnEnter.VisibleTilesToPathNodeList(visibleTilesInRange));
+						tilesInRangePerAbility.Add(FieldOfViewController.VisibleTilesToPathNodeList(visibleTilesInRange));
 				}
 
 				private void AddTilesInRangeToValidAbilities()
@@ -191,18 +192,18 @@ namespace Characters.EnemyCharacter
 						// Debug.Log("Target Faction: " + targetFaction.ToString());
 						// Debug.Log("Attacker Faction: " + attackerFaction.ToString());
 
-						if ( C_HasValidTarget.HasFlag(ability.targets, AbilityTarget.Self) )
+						if ( ability.targets.HasFlag( AbilityTarget.Self) )
 						{
 								if ( _statistics.gameObject == aiTarget.gameObject )
 										isValid = true;
 						}
-						if ( C_HasValidTarget.HasFlag(ability.targets, AbilityTarget.Ally) )
+						if ( ability.targets.HasFlag( AbilityTarget.Ally) )
 						{
 								if ( attackerFaction.Equals(targetFaction) &&
 										 _statistics.gameObject != aiTarget.gameObject )
 										isValid = true;
 						}
-						if ( C_HasValidTarget.HasFlag(ability.targets, AbilityTarget.Enemy) )
+						if ( ability.targets.HasFlag( AbilityTarget.Enemy) )
 						{
 								// only valid if the attacker is enemy and target is player
 								// of if attacker is player and target is enemy

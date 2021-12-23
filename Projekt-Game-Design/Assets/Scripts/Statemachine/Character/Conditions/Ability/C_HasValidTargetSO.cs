@@ -58,18 +58,18 @@ public class C_HasValidTarget : Condition
 						// Debug.Log("Target Faction: " + targetFaction.ToString());
 						// Debug.Log("Attacker Faction: " + attackerFaction.ToString());
 
-						if ( HasFlag(ability.targets, AbilityTarget.Self) )
+						if ( ability.targets.HasFlag(AbilityTarget.Self) )
 						{
 								if ( _attacker.gameObject == _target.gameObject )
 										targetRelationshipValid = true;
 						}
-						if ( HasFlag(ability.targets, AbilityTarget.Ally) )
+						if ( ability.targets.HasFlag(AbilityTarget.Ally) )
 						{
 								if ( attackerFaction.Equals(targetFaction) &&
 										 _attacker.gameObject != _target.gameObject )
 										targetRelationshipValid = true;
 						}
-						if ( HasFlag(ability.targets, AbilityTarget.Enemy) )
+						if ( ability.targets.HasFlag(AbilityTarget.Enemy) )
 						{
 								// only valid if the attacker is enemy and target is player
 								// of if attacker is player and target is enemy
@@ -95,11 +95,4 @@ public class C_HasValidTarget : Condition
 		public override void OnStateEnter() { }
 
 		public override void OnStateExit() { }
-
-		// TODO: maybe in util class?
-		// returns true if abilityTarget has given flag set
-		public static bool HasFlag(AbilityTarget abilityTarget, AbilityTarget flag) 
-		{
-				return ( (int)abilityTarget & (int)flag ).Equals((int)flag);
-		}
 }

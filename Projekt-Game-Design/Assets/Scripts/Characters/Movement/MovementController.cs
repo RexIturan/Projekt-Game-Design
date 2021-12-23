@@ -82,6 +82,11 @@ namespace Characters.Movement {
 		}
 
 		public int GetEnergyUseUpFromMovement() {
+			if(movementTarget == null)
+						{
+								Debug.LogWarning("Kein movement target. ");
+								return 0;
+						}
 			return Mathf.CeilToInt(( float )movementTarget.dist / movementPointsPerEnergy);
 		}
 

@@ -5,8 +5,10 @@ using Util;
 
 namespace Combat {
 	public class Attacker : MonoBehaviour {
-		//todo usefull
+		//todo useful
 		[SerializeField] private Targetable target;
+		[SerializeField] private Vector3Int groundTarget;
+		public bool groundTargetSet;
 		
 		[SerializeField] private List<Vector3Int> tileInRangeOfTarget;
 		//todo propertys
@@ -23,11 +25,22 @@ namespace Combat {
 		// setter and getter
 		public Targetable GetTarget() { return target; }
 		public void SetTarget(Targetable target) { this.target = target; }
+				
+		public Vector3Int GetGroundTarget() { return groundTarget; }
+		public void SetGroundTarget(Vector3Int groundTarget) { this.groundTarget = groundTarget; }
+
+		public Vector3Int GetTargetPosition() {
+			if(target)
+				return target.GetGridPosition();
+			else
+				return groundTarget;
+		}
 
 		/**
 		 * Calculates the number of 90 degree rotations 
 		 * an attacker has to make to face tile
 		 * if the attacker is facing towards the positive x-axis
+		 * Important to rotate patterns of abilities
 		 */
 		public int GetRotationsToTarget(Vector3Int targetPos) { 
 			Vector3 vec = targetPos - gameObject.GetComponent<GridTransform>().gridPosition;

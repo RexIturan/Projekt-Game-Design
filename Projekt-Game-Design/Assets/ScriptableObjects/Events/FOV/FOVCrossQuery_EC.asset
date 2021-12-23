@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8cdd9e2b0c24934fab08ec3e2043046, type: 3}
-  m_Name: FOV_Query_EventChannel
+  m_Script: {fileID: 11500000, guid: 5c5e268361df77e48902d7c68a0257db, type: 3}
+  m_Name: FOVCrossQuery_EC
   m_EditorClassIdentifier: 
-  description: 
+  description: provides the four directly surrounding visible tiles for given position
