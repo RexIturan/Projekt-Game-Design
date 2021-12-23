@@ -37,7 +37,6 @@ MonoBehaviour:
       anchor: {x: 0, y: 1}
   abilityID: 7
   selectedActions:
-  - {fileID: 11400000, guid: 944d1fed4d2b9624d8224c0bd30e43e3, type: 2}
   - {fileID: 11400000, guid: ae2b28614c9f55c429539a655c859735, type: 2}
   - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}
   - {fileID: 11400000, guid: 0a0be4e3712d36d4783fb37465ff98f3, type: 2}
