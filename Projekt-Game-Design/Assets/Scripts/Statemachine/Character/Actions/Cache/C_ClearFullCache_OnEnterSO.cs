@@ -27,9 +27,7 @@ public class C_ClearFullCache_OnEnter : StateAction
 
 	public override void OnUpdate() { }
 
-	public override void OnStateEnter() { }
-
-	public override void OnStateExit() {
+	public override void OnStateEnter() { 
 		_abilityController.SelectedAbilityID = -1;
 		_abilityController.abilitySelected = false;
 		_abilityController.abilityConfirmed = false;
@@ -39,7 +37,11 @@ public class C_ClearFullCache_OnEnter : StateAction
 		// _attacker.playerTarget = null;
 		// _attacker.enemyTarget = null;
 		_attacker.SetTarget(null);
+		_attacker.SetGroundTarget(Vector3Int.zero);
+		_attacker.groundTargetSet = false;
 		_attacker.ClearTilesInRange();
 		_attacker.waitForAttackToFinish = false;
 	}
+
+	public override void OnStateExit() { }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Events.ScriptableObjects.FieldOfView;
 using Grid;
 using Level.Grid;
 using UnityEngine;
+using Util;
 
 namespace FieldOfView {
     public class FieldOfViewController : MonoBehaviour {
@@ -15,9 +17,10 @@ namespace FieldOfView {
         
         [Header("Receiving Event On")]
         [SerializeField] private FOVQueryEventChannelSO fieldOfViewQueryEventChannel;
+				[SerializeField] private FOVCrossQueryEventChannelSO fieldOfViewCrossQueryEventChannel;
 
-        // fov algorithms
-        private FieldOfView_Adam _fieldOfViewAdam;
+				// fov algorithms
+				private FieldOfView_Adam _fieldOfViewAdam;
         // private FieldOfView _fieldOfView;
 
         [Header("AdamFOV Settings")]
@@ -29,7 +32,8 @@ namespace FieldOfView {
         public void Awake() {
             // _fieldOfView = InitFieldOfView();
             fieldOfViewQueryEventChannel.OnEventRaised += HandleQueryEvent;
-        }
+						fieldOfViewCrossQueryEventChannel.OnEventRaised += HandleCrossQueryEvent;
+				}
 
         private FieldOfView InitFieldOfView() {
             return new FieldOfView(grid, tileTypeContainer, debug);
@@ -41,10 +45,38 @@ namespace FieldOfView {
             InitFieldOfViewAdam();
             _fieldOfViewAdam.Compute(pos, range);
             callback(_visible);
-        }
+				}
 
-        // debug
-        public void GenerateVision() {
+				private void HandleCrossQueryEvent(Vector3Int startPos, TileProperties blocking, Action<bool[,]> callback)
+				{
+						var pos = globalGridData.GetGridPos2DFromGridPos3D(startPos);
+
+						// get every surrounding tile
+						InitFieldOfViewAdam();
+						_fieldOfViewAdam.Compute(pos, 1);
+
+						// remove the query origin position and the diagonals
+						_visible[pos.x, pos.y] = false;
+						if ( pos.x > 0 )
+						{
+								if( pos.y + 1 < _visible.GetLength(1) )
+									_visible[pos.x - 1, pos.y + 1] = false;
+								if( pos.y > 0 )
+									_visible[pos.x - 1, pos.y - 1] = false;
+						}
+						if( pos.x + 1 < _visible.GetLength(0) )
+						{
+								if ( pos.y + 1 < _visible.GetLength(1) )
+										_visible[pos.x + 1, pos.y + 1] = false;
+								if ( pos.y > 0 )
+										_visible[pos.x + 1, pos.y - 1] = false;
+						}
+
+						callback(_visible);
+				}
+
+				// debug
+				public void GenerateVision() {
             // fieldOfView.GetVisibleTiles(visionRangeTest, startPosTest, ETileFlags.opaque);
             InitFieldOfViewAdam();
             _fieldOfViewAdam.Compute(posAdam, rangeAdam);
@@ -103,5 +135,23 @@ namespace FieldOfView {
             var dist = new Vector2Int(x, y) - Vector2Int.zero;
             return Mathf.RoundToInt(dist.magnitude);
         }
-    }
+				
+				// TODO: move to somewhere else I guess?
+				// TODO: add third dimension to visibility and also this function
+				public static List<PathNode> VisibleTilesToPathNodeList(bool[,] visibleTiles)
+				{
+						List<PathNode> tilesInRange = new List<PathNode>();
+						for ( int x = 0; x < visibleTiles.GetLength(0); x++ )
+						{
+								for ( int y = 0; y < visibleTiles.GetLength(1); y++ )
+								{
+										if ( visibleTiles[x, y] )
+										{
+												tilesInRange.Add(new PathNode(x, 1, y));
+										}
+								}
+						}
+						return tilesInRange;
+				}
+		}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Characters;
+using Characters.Movement;
 using Combat;
 using Events.ScriptableObjects;
 using Grid;
@@ -93,13 +94,26 @@ namespace Player {
 				// targeting
 				//
 				if ( inputCache.leftButton.started ) {
-				  Targetable newTarget = GetTargetAtPos(inputCache.cursor.abovePos.gridPos);
-  				if(newTarget) { 
-	  			  target = newTarget;
-		  			Attacker playerAttacker = selectedPlayerCharacter.gameObject.GetComponent<Attacker>();
-						if(playerAttacker)
+		  		Attacker playerAttacker = selectedPlayerCharacter.gameObject.GetComponent<Attacker>();
+					if(playerAttacker) {
+						// targetable target
+						Targetable newTarget = GetTargetAtPos(inputCache.cursor.abovePos.gridPos);
+  					if(newTarget) { 
+	  					target = newTarget;
 							playerAttacker.SetTarget(newTarget);
-          }
+						}
+
+						// ground target
+						playerAttacker.groundTargetSet = true;
+						playerAttacker.SetGroundTarget(inputCache.cursor.abovePos.gridPos);
+					}
+
+					// movement target
+					MovementController playerMovementController = selectedPlayerCharacter.gameObject.GetComponent<MovementController>();
+					foreach(PathNode node in playerMovementController.reachableTiles) {
+						if(node.pos.Equals(inputCache.cursor.abovePos.gridPos) )
+						  playerMovementController.movementTarget = node;
+					}
 				}
 			}
 

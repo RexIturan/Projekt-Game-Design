@@ -4,6 +4,7 @@ using Characters;
 using Characters.Ability;
 using Combat;
 using Events.ScriptableObjects;
+using System.Collections.Generic;
 // using UnityEditorInternal;
 using UnityEngine;
 using UOP1.StateMachine;
@@ -51,41 +52,37 @@ public class C_InflictDamage_OnEnter : StateAction {
 
 		// TODO: check conditions for targeted effects and don't 
 		//       just inflict damage on target
-		//AbilitySO ability = playerCharacterSC.Abilities[playerCharacterSC.AbilityID];
 		AbilitySO ability = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
 		Debug.Log("Ability: " + ability.name);
-
-		int damage = 0;
+				
 		foreach ( TargetedEffect targetedEffect in ability.targetedEffects ) {
-			Effect effect = targetedEffect.effect;
-			var stats = _statistics.StatusValues;
-			int effectDamage = effect.baseDamage +
-			                   ( int )effect.strengthBonus * stats.Strength.value +
-			                   ( int )effect.dexterityBonus * stats.Dexterity.value +
-			                   ( int )effect.intelligenceBonus * stats.Intelligence.value;
+			int damage = CombatUtils.CalculateDamage(targetedEffect.effect, _statistics.StatusValues);
 
-			if ( effect.type == DamageType.Healing )
-				effectDamage *= -1;
+  		Color damageColor;
 
-			damage += effectDamage;
-		}
+  		if ( damage > 0 )
+	  		damageColor = Color.red;
+	  	else if ( damage < 0 )
+	  		damageColor = Color.green;
+	  	else
+	  		damageColor = Color.grey;
+			
+			Vector3Int targetPos = _attacker.GetTargetPosition();
 
-		Color damageColor;
+			// rotations of pattern depending on the angle the attacker is facing
+			int rotations = _attacker.GetRotationsToTarget(targetPos);
+ 
+  		HashSet<Targetable> targets = CombatUtils.FindAllTargets(targetPos, 
+					targetedEffect.area.GetPattern(rotations), targetedEffect.area.GetAnchor(rotations), _attacker, targetedEffect.targets);
 
-		if ( damage > 0 )
-			damageColor = Color.red;
-		else if ( damage < 0 )
-			damageColor = Color.green;
-		else
-			damageColor = Color.grey;
+  		foreach(Targetable target in targets) { 
+				Debug.Log("Target in range. Dealing damage/healing. ");
+  			target.ReceivesDamage(damage);
 
-		Targetable target = _attacker.GetTarget();
-		if ( target ) {
-			target.ReceivesDamage(damage);
-
-			_createTextEC.RaiseEvent(Mathf.Abs(damage).ToString(),
-			target.gameObject.transform.position + Vector3.up,
-			damageColor);
+  			_createTextEC.RaiseEvent(Mathf.Abs(damage).ToString(),
+  			target.gameObject.transform.position + Vector3.up,
+  			damageColor);
+  		}
 		}
 	}
 }
