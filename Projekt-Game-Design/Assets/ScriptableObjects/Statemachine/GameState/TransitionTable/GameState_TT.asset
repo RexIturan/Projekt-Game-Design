@@ -67,12 +67,6 @@ MonoBehaviour:
     - ExpectedResult: 0
       Condition: {fileID: 11400000, guid: 778622fb14ced444a8999409efcb8a99, type: 2}
       Operator: 0
-  - FromState: {fileID: 11400000, guid: 68de2ff1b1befa2419fc97a7714e443d, type: 2}
-    ToState: {fileID: 11400000, guid: b1b59e2aca66cdd4a92c8bea58d73e63, type: 2}
-    Conditions:
-    - ExpectedResult: 0
-      Condition: {fileID: 11400000, guid: a680b8c6b0ad0614a8d2c878878a3b81, type: 2}
-      Operator: 0
   - FromState: {fileID: 11400000, guid: 40bcad6a272ee144fbec6563cd0f9ce0, type: 2}
     ToState: {fileID: 11400000, guid: dda56c001685d8345b3ecaacfa9e8098, type: 2}
     Conditions:
@@ -126,4 +120,40 @@ MonoBehaviour:
       Operator: 0
     - ExpectedResult: 0
       Condition: {fileID: 11400000, guid: 2c4b8c14bca36b24c9ceba1b2b8e9557, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: dda56c001685d8345b3ecaacfa9e8098, type: 2}
+    ToState: {fileID: 11400000, guid: c2e8486f56baddf479b6bace32132493, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: 99cdb4e102392db44bf93c0ddad11a02, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: dda56c001685d8345b3ecaacfa9e8098, type: 2}
+    ToState: {fileID: 11400000, guid: 68de2ff1b1befa2419fc97a7714e443d, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: 97192894c91fe5f40a13332df23d4055, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: 83b15294e5acde849aa041a083883e91, type: 2}
+    ToState: {fileID: 11400000, guid: c2e8486f56baddf479b6bace32132493, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: 99cdb4e102392db44bf93c0ddad11a02, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: 83b15294e5acde849aa041a083883e91, type: 2}
+    ToState: {fileID: 11400000, guid: 68de2ff1b1befa2419fc97a7714e443d, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: 97192894c91fe5f40a13332df23d4055, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: 40bcad6a272ee144fbec6563cd0f9ce0, type: 2}
+    ToState: {fileID: 11400000, guid: c2e8486f56baddf479b6bace32132493, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: 99cdb4e102392db44bf93c0ddad11a02, type: 2}
+      Operator: 0
+  - FromState: {fileID: 11400000, guid: 40bcad6a272ee144fbec6563cd0f9ce0, type: 2}
+    ToState: {fileID: 11400000, guid: 68de2ff1b1befa2419fc97a7714e443d, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: 97192894c91fe5f40a13332df23d4055, type: 2}
       Operator: 0

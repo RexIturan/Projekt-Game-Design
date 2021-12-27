@@ -3,15 +3,14 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "IsGameOver", menuName = "State Machines/Conditions/Is Game Over")]
-public class IsGameOverSO : StateConditionSO
+[CreateAssetMenu(fileName = "g_IsDefeat", menuName = "State Machines/Conditions/GameState/Is Defeat")]
+public class G_IsDefeatSO : StateConditionSO
 {
-	protected override Condition CreateCondition() => new IsGameOver();
+	protected override Condition CreateCondition() => new G_IsDefeat();
 }
 
-public class IsGameOver : Condition
+public class G_IsDefeat : Condition
 {
-	protected new IsGameOverSO OriginSO => (IsGameOverSO)base.OriginSO;
 	private GameSC _gameSc;
 
 	public override void Awake(StateMachine stateMachine) {
@@ -20,7 +19,7 @@ public class IsGameOver : Condition
 	
 	protected override bool Statement()
 	{
-		return _gameSc.gameOver;
+		return _gameSc.defeat;
 	}
 	
 	public override void OnStateEnter()

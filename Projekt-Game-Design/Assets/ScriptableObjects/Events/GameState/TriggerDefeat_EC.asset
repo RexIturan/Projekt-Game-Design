@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60247dcc96ad01c4d8c08a3fe9ced284, type: 3}
-  m_Name: g_IsGameOver
+  m_Script: {fileID: 11500000, guid: 16b7e99933e74061ad8512a02b468e22, type: 3}
+  m_Name: TriggerDefeat_EC
   m_EditorClassIdentifier: 
+  description: causes the game state statemachine to change to defeat state

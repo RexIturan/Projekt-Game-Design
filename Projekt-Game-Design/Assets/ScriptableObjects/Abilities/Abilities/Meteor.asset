@@ -23,7 +23,7 @@ MonoBehaviour:
   targetedEffects:
   - effect:
       type: 1
-      baseDamage: 10
+      baseDamage: 100
       strengthBonus: 0.52
       dexterityBonus: 0
       intelligenceBonus: 0

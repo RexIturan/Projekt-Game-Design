@@ -138,6 +138,14 @@ PrefabInstance:
       propertyPath: saveSystem
       value: 
       objectReference: {fileID: 1363089166}
+    - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
+      propertyPath: triggerDefeatEC
+      value: 
+      objectReference: {fileID: 11400000, guid: 737a96b0278c36b4880712610f7b8d96, type: 2}
+    - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
+      propertyPath: triggerVictoryEC
+      value: 
+      objectReference: {fileID: 11400000, guid: dba5723c0c774e942b1f9888c6013e47, type: 2}
     - target: {fileID: 6182407919942541886, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
       propertyPath: m_RootOrder
       value: 1

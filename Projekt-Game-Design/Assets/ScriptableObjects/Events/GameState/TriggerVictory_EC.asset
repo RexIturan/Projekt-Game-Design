@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: g_Evaluate
+  m_Script: {fileID: 11500000, guid: 16b7e99933e74061ad8512a02b468e22, type: 3}
+  m_Name: TriggerVictory_EC
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: 3354c9d0c0a030149886b92d7ec595d6, type: 2}
+  description: causes the game state statemachine to change to victory state
