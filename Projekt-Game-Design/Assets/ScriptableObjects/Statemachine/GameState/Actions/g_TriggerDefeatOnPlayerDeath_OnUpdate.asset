@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: g_Evaluate
+  m_Script: {fileID: 11500000, guid: ac6e26d53410f4c49ab6c61b2c52d41b, type: 3}
+  m_Name: g_TriggerDefeatOnPlayerDeath_OnUpdate
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: 3354c9d0c0a030149886b92d7ec595d6, type: 2}
+  triggerDefeatEC: {fileID: 11400000, guid: 737a96b0278c36b4880712610f7b8d96, type: 2}

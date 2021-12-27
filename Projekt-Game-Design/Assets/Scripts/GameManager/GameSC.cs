@@ -8,16 +8,16 @@ using UnityEngine;
 
 namespace GameManager {
     public class GameSC : MonoBehaviour {
-        [Header("Receiving Events On")] [SerializeField]
-        private EFactionEventChannelSO endTurnEC;
+        [Header("Receiving Events On")]
+				[SerializeField] private EFactionEventChannelSO endTurnEC;
+				[SerializeField] private VoidEventChannelSO triggerDefeatEC;
+				[SerializeField] private VoidEventChannelSO triggerVictoryEC;
 
-        [Header("Sending Events On")] [SerializeField]
+				[Header("Sending Events On")] [SerializeField]
         private BoolEventChannelSO setTurnIndicatorVisibilityEC;
 
         [Header("SO References")] [SerializeField]
         private TacticsGameDataSO tacticsData;
-
-        
 
         [Header("SaveManagerData")] public SaveManagerDataSO saveManagerData;
         // [SerializeField] private StringEventChannelSO loadGameFromPath;
@@ -44,14 +44,17 @@ namespace GameManager {
         // todo refactor to enum
         public bool isInTacticsMode;
         // public bool isInMacroMode;
-        public bool gameOver;
-        
-        private void Awake() {
-            endTurnEC.OnEventRaised += HandleEndTurn;
+        public bool defeat;
+				public bool victory;
+
+				private void Awake() {
+						endTurnEC.OnEventRaised += HandleEndTurn;
             onSceneReady.OnEventRaised += LoadGameFromPath;
             levelLoaded.OnEventRaised += HandlelocationLoaded;
-            
-            saveManagerData.Reset();
+						triggerDefeatEC.OnEventRaised += HandleTriggerDefeat;
+						triggerVictoryEC.OnEventRaised += HandleTriggerVictory;
+
+						saveManagerData.Reset();
             tacticsData.Reset();
             tacticsData.SetStartingPlayer(Faction.Player);
         }
@@ -60,7 +63,9 @@ namespace GameManager {
             endTurnEC.OnEventRaised -= HandleEndTurn;
             onSceneReady.OnEventRaised -= LoadGameFromPath;
             levelLoaded.OnEventRaised -= HandlelocationLoaded;
-            saveManagerData.Reset();
+						triggerDefeatEC.OnEventRaised -= HandleTriggerDefeat;
+						triggerVictoryEC.OnEventRaised -= HandleTriggerVictory;
+						saveManagerData.Reset();
         }
 
         private void HandleEndTurn(Faction faction) {
@@ -110,5 +115,15 @@ namespace GameManager {
         public void TriggerRedraw() {
             // todo could trigger event, but doesnt currently
         }
-    }
+
+				private void HandleTriggerDefeat()
+				{
+						defeat = true;
+				}
+
+				private void HandleTriggerVictory()
+				{
+						victory = true;
+				}
+		}
 }
