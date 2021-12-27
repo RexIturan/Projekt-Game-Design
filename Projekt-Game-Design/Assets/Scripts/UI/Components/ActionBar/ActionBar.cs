@@ -147,6 +147,7 @@ namespace UI.Components {
 								str += obj.ToString() + " ";
 							}
 							Debug.Log(str);
+							//todo(vincent) remove "Wohoo", 2, 5, 4
 						}, new Object[] { "Wohoo", 2, 5, 4 }, null, "callback");
 						element.actionButtons.Add(actionButton);
 						buttonContainer.Add(actionButton);

@@ -20,7 +20,6 @@ namespace UI.Components.ActionButton {
 		public string mapping { get; set; }
 		public string actionText { get; set; }
 		public Action callback;
-		public int arg;
 		
 		// public new static readonly string ussClassName = "action-button";
 		private static readonly string baseUssClassName = "action-button";
@@ -122,7 +121,7 @@ namespace UI.Components.ActionButton {
 			}
 		}
 
-		public void ChangeMapping(string newMapping) {
+		public void SetMapping(string newMapping) {
 			mapping = newMapping;
 			UpdataValues();
 		}
@@ -130,7 +129,6 @@ namespace UI.Components.ActionButton {
 		public void BindAction(Action<object[]> actionCallback, object[] args, Sprite image, string text) {
 			imageData = image;
 			actionText = text;
-			this.arg = arg;
 			this.callback = () => actionCallback(args);
 			
 			button.clicked += this.callback;
