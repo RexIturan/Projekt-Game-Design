@@ -37,16 +37,19 @@ public class PlayerCharacterSC : MonoBehaviour {
 
 	    //Grid Position
 	    _gridTransform.gridPosition = playerSpawnData.gridPos;
+
+	    //model
+	    _modelController.prefab = playerType.modelPrefab;
 	    
 	    //Equipment
 	    _equipmentController.equipmentID = playerSpawnData.equipmentID;
-	    _equipmentController.RefreshEquipment();
 	    
 	    //Abilities
 	    _abilityController.RefreshAbilities();
 	    _abilityController.BaseAbilities = playerType.basicAbilities;
-
-	    //model
-	    _modelController.prefab = playerType.modelPrefab;
     }
+
+		public void Start() {
+			_equipmentController.RefreshEquipment();
+		}
 }

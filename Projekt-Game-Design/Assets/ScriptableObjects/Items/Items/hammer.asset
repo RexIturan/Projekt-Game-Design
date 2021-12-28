@@ -22,6 +22,4 @@ MonoBehaviour:
   rarity: 1
   type: 5
   abilities:
-  - {fileID: 11400000, guid: 653425107135eac4f95c90db962300e7, type: 2}
-  - {fileID: 11400000, guid: 53bdff15fd3132940a7970fc87763599, type: 2}
-  - {fileID: 11400000, guid: 5da2143f63f8e404cbf6683c9b945155, type: 2}
+  - {fileID: 11400000, guid: 5e99a923262791541b0efe9168853c8b, type: 2}

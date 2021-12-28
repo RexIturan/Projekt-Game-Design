@@ -27,4 +27,30 @@ public class EquipmentContainerSO : ScriptableObject
 				}
 				return items;
 		}
+
+		public ItemSO GetItemLeft(int equipmentID)
+		{
+				if ( equipmentID >= equipmentInventories.Count || equipmentID < 0 )
+				{
+						return null;
+						//Debug.LogWarning("ID, " + equipmentID + ", was no valid Equipment (Inventory)");
+				}
+				else
+				{
+						return inventory.GetItem(equipmentInventories[equipmentID].items[0]);
+				}
+		}
+
+		public ItemSO GetItemRight(int equipmentID)
+		{
+				if ( equipmentID >= equipmentInventories.Count || equipmentID < 0 )
+				{
+						return null;
+						//Debug.LogWarning("ID, " + equipmentID + ", was no valid Equipment (Inventory)");
+				}
+				else
+				{
+						return inventory.GetItem(equipmentInventories[equipmentID].items[1]);
+				}
+		}
 }

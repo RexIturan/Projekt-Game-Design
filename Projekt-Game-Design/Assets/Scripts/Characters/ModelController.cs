@@ -21,7 +21,7 @@ namespace Characters {
 		public WeaponPositionType weaponRightPosition;
 		
 		//control model
-		private CharacterAnimationController animationController;
+		public CharacterAnimationController animationController;
 		
 		private void Start() {
 			//init model
@@ -29,15 +29,18 @@ namespace Characters {
 			animationController = charModel.GetComponent<CharacterAnimationController>();
 		}
 		
-		private void FixedUpdate() {
-			// animationController.TakeStance(stance);
-			// animationController.ChangeWeapon(EquipmentPosition.LEFT, weaponLeft);
-			// animationController.ChangeWeapon(EquipmentPosition.RIGHT, weaponRight);
-			// animationController.ChangeWeaponPosition(EquipmentPosition.RIGHT, weaponRightPosition);
-		}
-		
 		public CharacterAnimationController GetAnimationController() {
 			return animationController;
+		}
+
+		public void SetMeshLeft(Mesh left) {
+			weaponLeft = left;
+      animationController.ChangeWeapon(EquipmentPosition.LEFT, weaponLeft);
+		}
+
+		public void SetMeshRight(Mesh right) {
+			weaponRight = right;
+			animationController.ChangeWeapon(EquipmentPosition.RIGHT, weaponRight);
 		}
 	}
 }

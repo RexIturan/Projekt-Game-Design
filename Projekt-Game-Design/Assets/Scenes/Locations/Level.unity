@@ -1665,7 +1665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249263230387100163, guid: fc8468785089d404997c3806015ef3c3, type: 3}
       propertyPath: m_Name
-      value: TestObjectInventory
+      value: InventoryManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc8468785089d404997c3806015ef3c3, type: 3}
