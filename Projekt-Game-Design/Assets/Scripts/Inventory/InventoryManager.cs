@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Characters.Equipment;
 using Events.ScriptableObjects;
 using UnityEngine;
 
@@ -30,6 +31,7 @@ public class InventoryManager : MonoBehaviour {
 
 	private void Start() {
 		InitializeEquipmentInventory();
+		InitializePlayerInventory();
 	}
 		
 	// itemID is item in ItemContainer
@@ -49,11 +51,15 @@ public class InventoryManager : MonoBehaviour {
 		playerInventory.equipmentID[equipmentContainer.equipmentInventories[playerId].items[(int) pos]] = -1;
 		// unequip item
 		equipmentContainer.equipmentInventories[playerId].items[(int) pos] = -1;
+
+		RefreshAllEquipments();
 	}
 
 	private void EquipItem(int inventoryItemID, int playerID, EquipmentPosition pos) {
 		playerInventory.equipmentID[inventoryItemID] = playerID;
 		equipmentContainer.equipmentInventories[playerID].items[(int) pos] = inventoryItemID;
+				
+		RefreshAllEquipments();
 	}
 
 	private void InitializeEquipmentInventory() {
@@ -64,6 +70,36 @@ public class InventoryManager : MonoBehaviour {
 				{
 						equipmentContainer.equipmentInventories.Add(new Equipment());
 				}
+		}
+	}
+
+  /**
+	 * sets all items in the equipment inventory to -1 (unequiped)
+	 * then sets all equipped items to their respective equipment inventories
+	 */
+	private void InitializePlayerInventory() {
+		for(int i = 0; i < playerInventory.equipmentID.Count; i++)
+			playerInventory.equipmentID[i] = -1;
+
+		for(int player = 0; player < equipmentContainer.equipmentInventories.Count; player++) {
+			foreach(int inventoryID in equipmentContainer.equipmentInventories[player].items) {
+				if(inventoryID >= 0) {
+					if(playerInventory.equipmentID[inventoryID] != -1)
+						Debug.LogError("Equipment already equipped! Inventory ID: " + inventoryID);
+					else
+						playerInventory.equipmentID[inventoryID] = player;
+				}
+			}
+		}
+	}
+
+	private void RefreshAllEquipments() {
+		CharacterList characterList = FindObjectOfType<CharacterList>();
+		if ( characterList ) {
+			foreach ( GameObject player in characterList.playerContainer)
+			{
+				player.GetComponent<EquipmentController>().RefreshEquipment();
+			}
 		}
 	}
 }
