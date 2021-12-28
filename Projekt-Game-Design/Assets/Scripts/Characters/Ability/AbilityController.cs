@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Characters.Equipment;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Characters.Ability {
@@ -12,10 +13,7 @@ namespace Characters.Ability {
 			get => baseAbilities;
 			set => baseAbilities = value;
 		}
-
-		//todo get all equiped items from EquipmentController
-		// private ItemSO item;
-		
+				
 		//state
 		public bool abilitySelected;
 		public bool abilityConfirmed;
@@ -28,11 +26,12 @@ namespace Characters.Ability {
 
 		public void RefreshAbilities() {
 			List<AbilitySO> currentAbilities = new List<AbilitySO>(baseAbilities);
-			// if ( item is { } ) {
-			// 	foreach ( AbilitySO ability in item.abilities )
-			// 		if ( !currentAbilities.Contains(ability) )
-			// 			currentAbilities.Add(ability);
-			// }
+
+			EquipmentController equipmentController = gameObject.GetComponent<EquipmentController>();
+			if(equipmentController) {
+				foreach(ItemSO item in equipmentController.GetEquippedItems())
+					currentAbilities.AddRange(item.abilities);
+			}
 
 			abilities = currentAbilities.ToArray();
 		}
