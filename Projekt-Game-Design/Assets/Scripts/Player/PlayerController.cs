@@ -93,7 +93,7 @@ namespace Player {
 
 				// targeting
 				//
-				if ( inputCache.leftButton.started ) {
+				if ( inputCache.leftButton.started && selectedPlayerCharacter) {
 		  		Attacker playerAttacker = selectedPlayerCharacter.gameObject.GetComponent<Attacker>();
 					if(playerAttacker) {
 						// targetable target

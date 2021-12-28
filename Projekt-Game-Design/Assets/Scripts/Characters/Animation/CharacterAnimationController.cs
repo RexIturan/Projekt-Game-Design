@@ -105,14 +105,23 @@ public class CharacterAnimationController : MonoBehaviour {
 	}
 
 	public void ChangeWeapon(EquipmentPosition position, Mesh newWeapon) {
+	  if(!equipmentController)
+		  equipmentController = gameObject.GetComponentInChildren<CharacterEquipmentController>();
+
 		equipmentController.ChangeWeapon(position, newWeapon);
 	}
 
 	public void ChangeWeaponPosition(EquipmentPosition position, WeaponPositionType newPosition) {
+	  if(!equipmentController)
+		  equipmentController = gameObject.GetComponentInChildren<CharacterEquipmentController>();
+
 		equipmentController.ChangeWeaponPosition(position, newPosition);
 	}
 
 	public void DisableEquipment(EquipmentPosition position, bool disable) {
+	  if(!equipmentController)
+		  equipmentController = gameObject.GetComponentInChildren<CharacterEquipmentController>();
+
 		equipmentController.DisableEquipment(position, disable);
 	}
 }

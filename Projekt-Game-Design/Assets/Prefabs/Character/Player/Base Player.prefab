@@ -240,14 +240,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  groundTarget: {x: 0, y: 0, z: 0}
+  groundTargetSet: 0
   tileInRangeOfTarget: []
   tilesInRange: []
   waitForAttackToFinish: 0
-  characterList: {fileID: 0}
   attackRange: 0
   attackDamage: 0
-  playerTarget: {fileID: 0}
-  enemyTarget: {fileID: 0}
 --- !u!114 &2212653873986084083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc4e25d0f5d4af9b7dd2aaacd284543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentContainerSO: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
+  equipmentContainer: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
   equipmentID: 0
 --- !u!114 &2212653873986084085
 MonoBehaviour:
