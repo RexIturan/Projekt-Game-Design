@@ -19,6 +19,8 @@ public class InGameMenuUIController : MonoBehaviour {
 
     [Header("Sending Events On")] [SerializeField]
     private VoidEventChannelSO enableMenuInput;
+		[SerializeField] private VoidEventChannelSO menuOpenedEvent;
+		[SerializeField] private VoidEventChannelSO menuClosedEvent;
 
     [Header("Sending and Receiving Events On")] [SerializeField]
     private BoolEventChannelSO visibilityGameOverlayEventChannel;
@@ -57,10 +59,12 @@ public class InGameMenuUIController : MonoBehaviour {
 
     void HandleGameOverlay(bool value) {
         if (value) {
+						menuOpenedEvent.RaiseEvent();
             enableMenuInput.RaiseEvent();
             _inGameMenuContainer.style.display = DisplayStyle.Flex;
         }
         else {
+						menuClosedEvent.RaiseEvent();
             _inGameMenuContainer.style.display = DisplayStyle.None;
             //HideMenu();
         }

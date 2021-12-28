@@ -138,6 +138,22 @@ PrefabInstance:
       propertyPath: cursorDrawer
       value: 
       objectReference: {fileID: 114199485}
+    - target: {fileID: 8826101848976003544, guid: 123d307ed5fe52444bfb9ec1eb68efcf, type: 3}
+      propertyPath: menuClosedEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
+    - target: {fileID: 8826101848976003544, guid: 123d307ed5fe52444bfb9ec1eb68efcf, type: 3}
+      propertyPath: menuOpenedEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
+    - target: {fileID: 8826101848976003544, guid: 123d307ed5fe52444bfb9ec1eb68efcf, type: 3}
+      propertyPath: abilitySelectedEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 98c46446971a28742b81ca1d0acc9adb, type: 2}
+    - target: {fileID: 8826101848976003544, guid: 123d307ed5fe52444bfb9ec1eb68efcf, type: 3}
+      propertyPath: abilityUnselectedEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: b38142d0f0289314f8bc99aff18d9863, type: 2}
     - target: {fileID: 8826101848976003545, guid: 123d307ed5fe52444bfb9ec1eb68efcf, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1541,6 +1557,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 613459224}
     m_Modifications:
+    - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
+      propertyPath: menuClosedEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
+    - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
+      propertyPath: menuOpenedEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
     - target: {fileID: 7814138535658991266, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1585,6 +1609,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7814138535658991270, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
+      propertyPath: menuClosedEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
+    - target: {fileID: 7814138535658991270, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
+      propertyPath: menuOpenedEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
     - target: {fileID: 7814138535658991292, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
       propertyPath: m_Name
       value: Level UI

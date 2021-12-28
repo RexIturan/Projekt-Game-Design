@@ -16,3 +16,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5d339fb430d10f341bd2896617aec0a2, type: 2}
   playerSpawnData:
   - {fileID: 11400000, guid: 101bf8e4924253e4eae939d90884588d, type: 2}
+  - {fileID: 11400000, guid: 6402c7de14d77f94f8997d4ec9abe5b3, type: 2}
+  - {fileID: 11400000, guid: ff01c7f14dc33164bbe44f68a86a99f4, type: 2}

@@ -68,6 +68,9 @@ public class InventoryUIController : MonoBehaviour {
 	[SerializeField] private IntIntEquipmentPositionEquipEventChannelSO EquipEvent;
 	[SerializeField] private IntEquipmentPositionUnequipEventChannelSO UnequipEvent;
 
+	[SerializeField] private VoidEventChannelSO menuOpenedEvent;
+	[SerializeField] private VoidEventChannelSO menuClosedEvent;
+
 	private void Awake() {
 		//Store the root from the UI Document component
 		var root = GetComponent<UIDocument>().rootVisualElement;
@@ -264,7 +267,19 @@ public class InventoryUIController : MonoBehaviour {
 		RefreshPlayerViewContainer();
 	}
 
+	/**
+	 * if no additional information is given, 
+	 * assume no other menu window is opened
+	 */
 	void HandleInventoryOverlay(bool value) {
+		HandleInventoryOverlay(value, false);
+	}
+
+	/**
+	 * set visibility of this menu window
+	 * only send menuOpened/menuClosed events if no else is open
+	 */
+	void HandleInventoryOverlay(bool value, bool othersOpened) {
 		// add items to ItemSlots
 		UpdateInventorySlots();
 		
@@ -275,16 +290,22 @@ public class InventoryUIController : MonoBehaviour {
 		UpdateEquipmentContainer();
 
 		if ( value ) {
+			if(!othersOpened)
+				menuOpenedEvent.RaiseEvent();
+
 			enableInventoryInput.RaiseEvent();
 			_inventoryContainer.style.display = DisplayStyle.Flex;
 		}
 		else {
-			_inventoryContainer.style.display = DisplayStyle.None;
+			if(!othersOpened)
+				menuClosedEvent.RaiseEvent();
+			
+      _inventoryContainer.style.display = DisplayStyle.None;
 		}
 	}
 
 	void HandleOtherScreensOpened(bool value) {
-		HandleInventoryOverlay(false);
+		HandleInventoryOverlay(false, true);
 	}
 
 	private void CleanAllItemSlots() {

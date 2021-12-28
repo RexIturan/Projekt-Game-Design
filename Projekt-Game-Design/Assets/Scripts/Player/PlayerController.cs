@@ -14,43 +14,59 @@ using CursorMode = LevelEditor.CursorMode;
 namespace Player {
 	public class PlayerController : MonoBehaviour {
 		[Header("Receiving events on")]
-		[SerializeField] private PathNodeEventChannelSO targetTileEvent;
 		// when an ability is selected, depending on the ability, 
 		// an event can tell the PlayerController when to recognize targets
 		// if no ability is selected, there shouldn't be any targets taken on
 		[SerializeField] private VoidEventChannelSO clearTargetCacheEvent;
 
+		[SerializeField] private VoidEventChannelSO menuOpenedEvent;
+		[SerializeField] private VoidEventChannelSO menuClosedEvent;
+		[SerializeField] private VoidEventChannelSO abilitySelectedEvent;
+		[SerializeField] private VoidEventChannelSO abilityUnselectedEvent;
+
+		[Header("Mode Flags")]
+		[SerializeField] private bool menuOpened;
+		[SerializeField] private bool abilitySelected;
+
 		[Header("Input")] 
 		[SerializeField] private InputReader input;
-		//todo used here??
 		[SerializeField] private InputCache inputCache;
 		[SerializeField] private GridDataSO gridData;
 
 		[SerializeField] private CursorDrawer cursorDrawer;
 
 		[SerializeField] private Selectable selectedPlayerCharacter;
-		[SerializeField] private EnemyCharacterSC selectedEnemyCharacter;
 				
 		[SerializeField] private Targetable target;
 
 		private CharacterList characterList; 
 		
 		private void Awake() {
-			input.MouseClicked += ToggleIsSelected;
-			targetTileEvent.OnEventRaised += TargetTile;
+			abilitySelected = false;
+			menuOpened = false;
+
 			clearTargetCacheEvent.OnEventRaised += ClearTargetCache;
+
+			menuOpenedEvent.OnEventRaised += HandleMenuOpened;
+			menuClosedEvent.OnEventRaised += HandleMenuClosed;
+			abilitySelectedEvent.OnEventRaised += HandleAbilitySelected;
+			abilityUnselectedEvent.OnEventRaised += HandleAbilityDeselected;
 			
 			//get character List
 			characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
 		}
 
 		private void OnDisable() {
-			input.MouseClicked -= ToggleIsSelected;
-			targetTileEvent.OnEventRaised -= TargetTile;
 			clearTargetCacheEvent.OnEventRaised -= ClearTargetCache;
+
+			menuOpenedEvent.OnEventRaised -= HandleMenuOpened;
+			menuClosedEvent.OnEventRaised -= HandleMenuClosed;
+			abilitySelectedEvent.OnEventRaised -= HandleAbilitySelected;
+			abilityUnselectedEvent.OnEventRaised -= HandleAbilityDeselected;
 		}
 
 		private void Update() {
+			if(!menuOpened) { 
 			//InputCache? || MousePosition
 			//  get mouse pos in grid
 			//  get mouse clicked (left, right)
@@ -81,7 +97,7 @@ namespace Player {
 					cursorDrawer.DrawCursorAt(inputCache.cursor.abovePos.tileCenter, CursorMode.Select);
 				}
 				
-				if ( inputCache.leftButton.started ) {
+				if ( inputCache.leftButton.started && !abilitySelected) {
 					if ( selectable ) {
 						if (selectedPlayerCharacter) {
 							selectedPlayerCharacter.Deselect();
@@ -123,13 +139,7 @@ namespace Player {
 					selectedPlayerCharacter = null;
 				}
 			}
-		}
-
-		private void FixedUpdate() {
-			//read from Input Cache
-
-			// set selected
-			// set target
+			}
 		}
 
 		private Selectable GetPlayerAtPos(Vector3Int gridPos) {
@@ -159,28 +169,26 @@ namespace Player {
 			return null;
     }
 
-		private void SelectCharacter() {
-			
-		}
-
-	// target Tile
-		public void TargetTile(PathNode target) { }
-
 		private void ClearTargetCache() {
 			target = null;
 		}
 
-		void ToggleIsSelected() {
-			// if ( !abilitySelected && !abilityConfirmed ) {
-			// 	Vector3 mousePos = Mouse.current.position.ReadValue();
-			// 	Ray ray = Camera.main.ScreenPointToRay(mousePos);
-			// 	RaycastHit rayHit;
-			// 	if ( Physics.Raycast(ray, out rayHit, 100.0f) ) {
-			// 		if ( rayHit.collider.gameObject == gameObject ) {
-			// 			isSelected = !isSelected;
-			// 		}
-			// 	}
-			// }
+		private void HandleMenuOpened() {
+			// Debug.Log("Menu opened. Disabling input. ");
+			menuOpened = true;
+		}
+
+		private void HandleMenuClosed() {
+			// Debug.Log("Menu closed. Enabling input. ");
+			menuOpened = false;
+		}
+
+		private void HandleAbilitySelected() {
+			abilitySelected = true;
+		}
+
+		private void HandleAbilityDeselected() {
+			abilitySelected = false;
 		}
 	}
 }
