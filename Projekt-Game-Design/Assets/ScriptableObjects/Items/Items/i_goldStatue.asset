@@ -9,17 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189f26a6be9797f408d0cbb35bfd9424, type: 3}
-  m_Name: w_sword
+  m_Script: {fileID: 11500000, guid: 0060a96a91ff3fb41b85a129587606c5, type: 3}
+  m_Name: i_goldStatue
   m_EditorClassIdentifier: 
-  id: 3
-  icon: {fileID: 21300000, guid: e6d98c25b4f09c1469b5c274573f2557, type: 3}
+  id: 5
+  icon: {fileID: 21300000, guid: 076e9c37e6a8aac4fa3b6e90049e9ce5, type: 3}
   model: {fileID: 0}
   prefab: {fileID: 0}
   mesh: {fileID: 0}
   material: {fileID: 0}
-  goldValue: 0
+  goldValue: 100
   rarity: 0
   type: 0
-  abilities:
-  - {fileID: 11400000, guid: 6f286b61fd61f3a48b80ad5e8d79743a, type: 2}

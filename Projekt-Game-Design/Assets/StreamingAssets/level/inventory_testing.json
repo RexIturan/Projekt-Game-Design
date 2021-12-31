@@ -22,29 +22,21 @@
             }
       }
       ],
-    "enemies": [
-      {
-            "enemyTypeId": 0,
-            "enemySpawnDataId": 0,
-            "pos": {
-                "x": 3,
-                "y": 1,
-                "z": 3
-            }
-      },
-      {
-            "enemyTypeId": 0,
-            "enemySpawnDataId": 1,
-            "pos": {
-                "x": 4,
-                "y": 1,
-                "z": 5
-            }
-      }
-      ],
+    "enemies": [],
     "inventory": {
         "size": 3,
-        "itemIds": []
+        "itemIds": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+        ]
     },
     "equipmentInventory": [
         {

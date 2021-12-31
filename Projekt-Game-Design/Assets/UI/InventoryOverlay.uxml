@@ -11,24 +11,18 @@
             </ui:VisualElement>
             <ui:Instance template="PlayerViewContainer" name="PlayerViewContainer" style="flex-grow: 1;" />
             <ui:VisualElement name="PlayerEquipmentInventory" style="flex-wrap: wrap; flex-grow: 1; width: 100%; flex-direction: column; background-color: rgba(26, 26, 26, 0.43); justify-content: center; height: 30%; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
-                <ui:VisualElement style="flex-direction: row; justify-content: center;">
+                <ui:VisualElement name="Weapons" style="flex-direction: row; justify-content: center;">
                     <InventorySlot name="WeaponLeft" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/two-handed-sword.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159); min-width: auto; min-height: auto; width: 90px; height: 90px;" />
                     <InventorySlot name="WeaponRight" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/two-handed-sword.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159); min-width: auto; min-height: auto; max-width: none; width: 90px; height: 90px;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="HelmetEquipment" class="EquipmentContainer" style="display: none;">
-                    <InventorySlot name="HelmetEquipment1" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/brutal-helm.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159);" />
+                <ui:VisualElement name="Head" style="flex-direction: row; justify-content: center;">
+                    <InventorySlot name="HeadArmor" class="ItemEquipmentContainer" style="background-image: url(&apos;row&apos;); -unity-background-image-tint-color: rgb(159, 159, 159); min-width: auto; min-height: auto; width: 90px; height: 90px;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="HeadEquipment" class="EquipmentContainer" style="flex-direction: row; justify-content: center; display: none;">
-                    <InventorySlot name="HeadEquipment1" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/balaclava.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159);" />
+                <ui:VisualElement name="Body" style="flex-direction: row; justify-content: center;">
+                    <InventorySlot name="BodyArmor" class="ItemEquipmentContainer" style="background-image: url(&apos;row&apos;); -unity-background-image-tint-color: rgb(159, 159, 159); min-width: auto; min-height: auto; width: 90px; height: 90px;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="BodyEquipment" class="EquipmentContainer" style="flex-direction: row; justify-content: center; display: none;">
-                    <InventorySlot name="BodyEquipment2" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/lamellar.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159);" />
-                </ui:VisualElement>
-                <ui:VisualElement name="LegEquipment" class="EquipmentContainer" style="display: none;">
-                    <InventorySlot name="LegEquipment1" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/trousers.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159);" />
-                </ui:VisualElement>
-                <ui:VisualElement name="FeetEquipment" class="EquipmentContainer" style="display: none;">
-                    <InventorySlot name="FeetEquipment1" class="ItemEquipmentContainer" style="background-image: url(&apos;/Assets/UI/Inventory/images/leather-boot.png&apos;); -unity-background-image-tint-color: rgb(159, 159, 159);" />
+                <ui:VisualElement name="Protection" style="flex-direction: row; justify-content: center;">
+                    <InventorySlot name="Shield" class="ItemEquipmentContainer" style="background-image: url(&apos;row&apos;); -unity-background-image-tint-color: rgb(159, 159, 159); min-width: auto; min-height: auto; width: 90px; height: 90px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

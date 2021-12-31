@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189f26a6be9797f408d0cbb35bfd9424, type: 3}
-  m_Name: w_sword
+  m_Script: {fileID: 11500000, guid: 16cbe02d75c3f33428c79dc907f05b54, type: 3}
+  m_Name: b_mythrilVest
   m_EditorClassIdentifier: 
-  id: 3
-  icon: {fileID: 21300000, guid: e6d98c25b4f09c1469b5c274573f2557, type: 3}
+  id: 9
+  icon: {fileID: 21300000, guid: b44c0aed6aeb9f44eac56125b00b3865, type: 3}
   model: {fileID: 0}
   prefab: {fileID: 0}
   mesh: {fileID: 0}
@@ -21,5 +21,5 @@ MonoBehaviour:
   goldValue: 0
   rarity: 0
   type: 0
-  abilities:
-  - {fileID: 11400000, guid: 6f286b61fd61f3a48b80ad5e8d79743a, type: 2}
+  armor: 0
+  movementReduction: 0

@@ -131,13 +131,25 @@ public class InventoryUIController : MonoBehaviour {
 		// Hinzufügen der Item Slots für das Equipment Menü
 		// Muss nicht dynamisch generiert werden, wird nur der Liste hinzugefügt
 
-		InventorySlot weaponLeft = _equipmentInventoryContainer.Q<InventorySlot>("WeaponLeft");
-		weaponLeft.userData = EquipmentPosition.LEFT;
-		equipmentInventoryItems.Add(weaponLeft);
+		InventorySlot equipmentSlot = _equipmentInventoryContainer.Q<InventorySlot>("WeaponLeft");
+		equipmentSlot.userData = EquipmentPosition.LEFT;
+		equipmentInventoryItems.Add(equipmentSlot);
 
-		InventorySlot weaponRight = _equipmentInventoryContainer.Q<InventorySlot>("WeaponRight");
-		weaponRight.userData = EquipmentPosition.RIGHT;
-		equipmentInventoryItems.Add(weaponRight);
+		equipmentSlot = _equipmentInventoryContainer.Q<InventorySlot>("WeaponRight");
+		equipmentSlot.userData = EquipmentPosition.RIGHT;
+		equipmentInventoryItems.Add(equipmentSlot);
+
+		equipmentSlot = _equipmentInventoryContainer.Q<InventorySlot>("HeadArmor");
+		equipmentSlot.userData = EquipmentPosition.HEAD;
+		equipmentInventoryItems.Add(equipmentSlot);
+
+		equipmentSlot = _equipmentInventoryContainer.Q<InventorySlot>("BodyArmor");
+		equipmentSlot.userData = EquipmentPosition.BODY;
+		equipmentInventoryItems.Add(equipmentSlot);
+
+		equipmentSlot = _equipmentInventoryContainer.Q<InventorySlot>("Shield");
+		equipmentSlot.userData = EquipmentPosition.SHIELD;
+		equipmentInventoryItems.Add(equipmentSlot);
 	}
 
 	/**
