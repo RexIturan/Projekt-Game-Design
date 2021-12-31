@@ -72,11 +72,6 @@ public class InventorySO : ScriptableObject
 		{
 				ItemSO previous = null;
 
-				if(item)
-						Debug.Log("Setting item for player " + playerID + " at position " + equipmentPosition + " to item " + item.id);
-				else
-						Debug.Log("Removing item for player " + playerID + " at position " + equipmentPosition);
-
 				switch ( equipmentPosition )
 				{
 						case EquipmentPosition.LEFT:

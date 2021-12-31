@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 10
   icon: {fileID: 21300000, guid: e6492eb0591c65c40a66ebb3177d67ba, type: 3}
-  model: {fileID: 0}
   prefab: {fileID: 0}
-  mesh: {fileID: 0}
+  mesh: {fileID: 5302373922792126519, guid: 09d55a59d560fb242bb53c0de2dbc025, type: 3}
   material: {fileID: 0}
   goldValue: 0
   rarity: 0

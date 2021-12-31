@@ -26,7 +26,6 @@ public class PlayerCharacterSC : MonoBehaviour {
     [SerializeField] private AbilityController _abilityController;
     [SerializeField] private ModelController _modelController;
     
-    
     public void Initialize() {
 	    //stats
 	    _statistics.StatusValues.InitValues(playerSpawnData.overrideStatusValues);
@@ -40,6 +39,9 @@ public class PlayerCharacterSC : MonoBehaviour {
 
 	    //model
 	    _modelController.prefab = playerType.modelPrefab;
+			_modelController.Initialize();
+			_modelController.SetStandardHead(playerType.headModel);
+			_modelController.SetStandardBody(playerType.bodyModel);
 	    
 	    //Equipment
 	    _equipmentController.playerID = playerSpawnData.equipmentID;

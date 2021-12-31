@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using Object = UnityEngine.Object;
+﻿using UnityEngine;
 
 namespace Characters {
 	public class ModelController : MonoBehaviour {
@@ -15,6 +13,9 @@ namespace Characters {
 		//visual model relevance
 		public Mesh weaponLeft;
 		public Mesh weaponRight;
+		public Mesh headArmor;
+		public Mesh bodyArmor;
+		public Mesh shield;
 		
 		//animation controller relevant
 		public StanceType stance;
@@ -23,7 +24,7 @@ namespace Characters {
 		//control model
 		public CharacterAnimationController animationController;
 		
-		private void Start() {
+		public void Initialize() {
 			//init model
 			var charModel = Instantiate(prefab, this.transform);
 			animationController = charModel.GetComponent<CharacterAnimationController>();
@@ -35,12 +36,35 @@ namespace Characters {
 
 		public void SetMeshLeft(Mesh left) {
 			weaponLeft = left;
-      animationController.ChangeWeapon(EquipmentPosition.LEFT, weaponLeft);
+      animationController.ChangeEquipment(EquipmentPosition.LEFT, weaponLeft);
 		}
 
 		public void SetMeshRight(Mesh right) {
 			weaponRight = right;
-			animationController.ChangeWeapon(EquipmentPosition.RIGHT, weaponRight);
+			animationController.ChangeEquipment(EquipmentPosition.RIGHT, weaponRight);
+		}
+
+		public void SetMeshHead(Mesh head) {
+			headArmor = head;
+			animationController.ChangeEquipment(EquipmentPosition.HEAD, headArmor);
+		}
+
+		public void SetMeshBody(Mesh body) {
+			bodyArmor = body;
+			animationController.ChangeEquipment(EquipmentPosition.BODY, bodyArmor);
+		}
+
+		public void SetMeshShield(Mesh shield) {
+			this.shield = shield;
+			animationController.ChangeEquipment(EquipmentPosition.SHIELD, shield);
+		}
+
+		public void SetStandardHead(Mesh mesh) {
+			animationController.SetStandardHead(mesh);
+		}
+
+		public void SetStandardBody(Mesh mesh) {
+			animationController.SetStandardBody(mesh);
 		}
 	}
 }

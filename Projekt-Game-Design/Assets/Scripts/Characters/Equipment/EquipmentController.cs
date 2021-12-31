@@ -25,9 +25,15 @@ namespace Characters.Equipment
 						{
 								ItemSO itemLeft = inventory.equipmentInventories[playerID].weaponLeft;
 								ItemSO itemRight = inventory.equipmentInventories[playerID].weaponRight;
+								ItemSO itemHead = inventory.equipmentInventories[playerID].headArmor;
+								ItemSO itemBody = inventory.equipmentInventories[playerID].bodyArmor;
+								ItemSO itemShield = inventory.equipmentInventories[playerID].shield;
 
 								modelController.SetMeshLeft(itemLeft ? itemLeft.mesh : null);
 								modelController.SetMeshRight(itemRight ? itemRight.mesh : null);
+								modelController.SetMeshHead(itemHead ? itemHead.mesh : null);
+								modelController.SetMeshBody(itemBody ? itemBody.mesh : null);
+								modelController.SetMeshShield(itemShield ? itemShield.mesh : null);
 						}
 
 						AbilityController abilityController = gameObject.GetComponent<AbilityController>();

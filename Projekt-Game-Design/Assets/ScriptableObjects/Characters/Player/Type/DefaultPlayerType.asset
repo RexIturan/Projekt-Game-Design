@@ -15,6 +15,8 @@ MonoBehaviour:
   id: 0
   prefab: {fileID: 2212653873986083977, guid: f59f89ef95affd9408aad1fc39215b05, type: 3}
   modelPrefab: {fileID: 8839921088689484587, guid: 3bc60f3f9e3f61b4cb1586783afde6b0, type: 3}
+  headModel: {fileID: -512814852588796520, guid: a9b97bb237d970d479610c06205b120d, type: 3}
+  bodyModel: {fileID: 5602191634865893685, guid: 2bcdc85eb13225944b79da3eef396cde, type: 3}
   baseStatusValues:
   - _name: HitPoints
     _type: 1
@@ -22,7 +24,6 @@ MonoBehaviour:
     _max: 1000
     _min: 0
   movementPointsPerEnergy: 20
-  equipmentContainer: {fileID: 0}
   startingEquipmentID: 0
   basicAbilities:
   - {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}

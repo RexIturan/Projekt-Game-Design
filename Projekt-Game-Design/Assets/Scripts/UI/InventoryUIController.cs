@@ -194,6 +194,9 @@ public class InventoryUIController : MonoBehaviour {
 
 		InventorySlot weaponLeft = _equipmentInventoryContainer.Q<InventorySlot>("WeaponLeft");
 		InventorySlot weaponRight = _equipmentInventoryContainer.Q<InventorySlot>("WeaponRight");
+		InventorySlot headArmor = _equipmentInventoryContainer.Q<InventorySlot>("HeadArmor");
+		InventorySlot bodyArmor = _equipmentInventoryContainer.Q<InventorySlot>("BodyArmor");
+		InventorySlot shield = _equipmentInventoryContainer.Q<InventorySlot>("Shield");
 
 		PlayerCharacterSC currPlayer = characterList.playerContainer[_currentPlayerSelected]
 			.GetComponent<PlayerCharacterSC>();
@@ -206,6 +209,18 @@ public class InventoryUIController : MonoBehaviour {
 		
 		if ( inventory.equipmentInventories[playerID].weaponRight) {
 			weaponRight.HoldItem(inventory.equipmentInventories[playerID].weaponRight);
+		}
+		
+		if ( inventory.equipmentInventories[playerID].headArmor) {
+			headArmor.HoldItem(inventory.equipmentInventories[playerID].headArmor);
+		}
+		
+		if ( inventory.equipmentInventories[playerID].bodyArmor) {
+			bodyArmor.HoldItem(inventory.equipmentInventories[playerID].bodyArmor);
+		}
+		
+		if ( inventory.equipmentInventories[playerID].shield) {
+			shield.HoldItem(inventory.equipmentInventories[playerID].shield);
 		}
 	}
 
