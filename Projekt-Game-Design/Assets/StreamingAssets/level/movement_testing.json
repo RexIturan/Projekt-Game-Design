@@ -34,7 +34,7 @@
     "equipmentInventory": [
         {
             "size": 7,
-            "itemIds": []
+            "itemIds": [-1, -1, -1, -1, -1]
         }
     ],
     "tileGrids": [
