@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0060a96a91ff3fb41b85a129587606c5, type: 3}
-  m_Name: sword
+  m_Script: {fileID: 11500000, guid: 189f26a6be9797f408d0cbb35bfd9424, type: 3}
+  m_Name: w_hammer
   m_EditorClassIdentifier: 
-  id: 2
-  icon: {fileID: 21300000, guid: e6d98c25b4f09c1469b5c274573f2557, type: 3}
+  id: 1
+  icon: {fileID: 21300000, guid: 16076d8503cfcc849a63de1023db868e, type: 3}
+  model: {fileID: 8193850524621578839, guid: 4303c08d5cb0dc34da8024f8e3d1c406, type: 3}
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
-  mesh: {fileID: 855286130926878122, guid: 14884095c0627db45bcadc031f95a2a8, type: 3}
+  mesh: {fileID: 8193850524621578839, guid: 4303c08d5cb0dc34da8024f8e3d1c406, type: 3}
   material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
-  goldValue: 10
-  rarity: 1
+  goldValue: 25
+  rarity: 2
   type: 5
-  abilities:
-  - {fileID: 11400000, guid: 653425107135eac4f95c90db962300e7, type: 2}
+  abilities: []

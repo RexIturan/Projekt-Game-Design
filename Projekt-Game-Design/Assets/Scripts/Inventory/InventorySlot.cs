@@ -1,6 +1,7 @@
 using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
+[System.Serializable]
 public class InventorySlot : VisualElement
 {
     public readonly Image icon;
@@ -32,11 +33,11 @@ public class InventorySlot : VisualElement
         slotType = type;
     }
     
-    public void HoldItem(ItemSO item, int inventoryItemID)
+    public void HoldItem(ItemSO item)
     {
 				this.item = item;
         icon.image = item.icon.texture;
-        this.inventoryItemID = inventoryItemID;
+        inventoryItemID = item ? item.id : -1;
         // Debug.Log("Test in HoldItem");
     }
 

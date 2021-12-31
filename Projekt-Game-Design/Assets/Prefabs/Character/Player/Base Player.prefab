@@ -306,8 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc4e25d0f5d4af9b7dd2aaacd284543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentContainer: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
-  equipmentID: 0
+  inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
+  playerID: 0
 --- !u!114 &2212653873986084085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +326,7 @@ MonoBehaviour:
   weaponRight: {fileID: 0}
   stance: 0
   weaponRightPosition: 0
+  animationController: {fileID: 0}
 --- !u!114 &1676697125739664753
 MonoBehaviour:
   m_ObjectHideFlags: 0

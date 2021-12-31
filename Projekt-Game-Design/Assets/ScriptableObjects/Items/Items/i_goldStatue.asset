@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0060a96a91ff3fb41b85a129587606c5, type: 3}
-  m_Name: samplePotion
+  m_Name: i_goldStatue
   m_EditorClassIdentifier: 
-  id: 3
-  icon: {fileID: 21300000, guid: caa6ebd497184c044b2c06d7f69ccdce, type: 3}
+  id: 5
+  icon: {fileID: 21300000, guid: 076e9c37e6a8aac4fa3b6e90049e9ce5, type: 3}
+  model: {fileID: 0}
   prefab: {fileID: 0}
-  goldValue: 300
-  rarity: 3
-  type: 132
-  abilities: []
+  mesh: {fileID: 0}
+  material: {fileID: 0}
+  goldValue: 100
+  rarity: 0
+  type: 0

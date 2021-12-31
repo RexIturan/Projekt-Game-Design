@@ -27,7 +27,6 @@ namespace SaveSystem {
 		[SerializeField] private GridContainerSO gridContainer;
 		[SerializeField] private GridDataSO globalGridData;
 		public CharacterList characterList;
-		public EquipmentContainerSO equipmentContainer;
 		public InventorySO inventory;
 		public CharacterInitialiser characterInitializer;
 		[SerializeField] private ItemContainerSO itemContainerSO;
@@ -91,11 +90,10 @@ namespace SaveSystem {
 
 		private void Start() {
 			// setup save Writer
-			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, equipmentContainer);
+			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory);
 
 			// setup save Reader
-			_saveReader = new SaveReader(gridContainer, globalGridData, inventory,
-				equipmentContainer, itemContainerSO);
+			_saveReader = new SaveReader(gridContainer, globalGridData, inventory, itemContainerSO);
 		}
 
 		#endregion

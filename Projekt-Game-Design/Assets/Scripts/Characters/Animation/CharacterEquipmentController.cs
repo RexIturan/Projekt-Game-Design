@@ -7,7 +7,7 @@ using UnityEngine.Animations.Rigging;
  */
 public class CharacterEquipmentController : MonoBehaviour
 {
-	public void ChangeWeapon(EquipmentPosition position, Mesh newWeapon)
+	public void ChangeEquipment(EquipmentPosition position, Mesh newWeapon)
 	{
 		MeshFilter[] meshes = gameObject.GetComponentsInChildren<MeshFilter>();
 		foreach ( MeshFilter mesh in meshes )
@@ -44,7 +44,7 @@ public class CharacterEquipmentController : MonoBehaviour
 							sourceObjects.SetWeight(2, 1.0f);
 							break;
 						default:
-							Debug.LogWarning("Ungueltige Position fuer Waffen. ");
+							Debug.LogWarning("Invalid position for weapons. ");
 							break;
 					}
 				}
@@ -64,7 +64,7 @@ public class CharacterEquipmentController : MonoBehaviour
 							sourceObjects.SetWeight(1, 1.0f);
 							break;
 						default:
-							Debug.LogWarning("Ungueltige Position fuer Schilde. ");
+							Debug.LogWarning("Invalid position for shields. ");
 							break;
 					}
 				}
@@ -95,9 +95,6 @@ public class CharacterEquipmentController : MonoBehaviour
 				break;
 			case EquipmentPosition.SHIELD:
 				tag = "Equipment/Shield";
-				break;
-			case EquipmentPosition.QUIVER:
-				tag = "Equipment/Quiver";
 				break;
 		}
 		return tag;

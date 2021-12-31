@@ -55,6 +55,9 @@ public class EnemyCharacterSC : MonoBehaviour
 
 				//model
 				_modelController.prefab = enemyType.modelPrefab;
+				_modelController.Initialize();
+				_modelController.SetStandardHead(enemyType.headModel);
+				_modelController.SetStandardBody(enemyType.bodyModel);
 
 				//ai
 				_aIController.SetBehavior(behavior);

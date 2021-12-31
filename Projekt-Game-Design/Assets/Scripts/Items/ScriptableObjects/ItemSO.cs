@@ -11,7 +11,6 @@ public class ItemSO : ScriptableObject
 
     // art
     public Sprite icon;
-    public Mesh model;
     public GameObject prefab;
     public Mesh mesh;
     public Material material;
@@ -21,5 +20,8 @@ public class ItemSO : ScriptableObject
     public int rarity;
     public ItemType type; // Quest-item? Weapon? Etc. 
 
-    public AbilitySO[] abilities; 
+		/**
+		 * returns true, if the item type can be used for respective equipment positions
+		 */
+		public virtual bool ValidForPosition(EquipmentPosition equipmentPosition) { return false; }
 }
