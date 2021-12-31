@@ -14,7 +14,6 @@ public class InventoryUIController : MonoBehaviour {
 
 	public ItemContainerSO itemContainer;
 	[SerializeField] private InventorySO inventory;
-	[SerializeField] private EquipmentContainerSO equipmentContainerSO;
 	
 	private CharacterList characterList;
 
@@ -80,9 +79,6 @@ public class InventoryUIController : MonoBehaviour {
 		_playerContainer = root.Query<VisualElement>("PlayerContainer");
 		_playerViewContainer = _inventoryContainer.Q<VisualElement>("PlayerViewContainer");
 		_inventorySlotContainer = root.Q<VisualElement>("InventoryContent");
-
-		// Lifehack
-		
 
 		visibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
 		visibilityInventoryEventChannel.OnEventRaised += HandleInventoryOverlay;
@@ -152,19 +148,15 @@ public class InventoryUIController : MonoBehaviour {
 		CleanAllItemSlots();
 
 		int slotIdx = 0;
-		for ( int inventoryIdx = 0; inventoryIdx < inventory.itemIDs.Count; inventoryIdx++ ) {
+		for ( int inventoryIdx = 0; inventoryIdx < inventory.playerInventory.Count; inventoryIdx++ ) {
 			// if item not equipped, display it in ItemSlot Container
-			if ( inventoryIdx >= inventory.equipmentID.Count ||
-			     inventory.equipmentID[inventoryIdx] < 0 ) {
-				if ( slotIdx < inventoryItems.Count ) {
-					inventoryItems[slotIdx].HoldItem(itemContainer.itemList[inventory.itemIDs[inventoryIdx]],
-						inventoryIdx);
-					slotIdx++;
-				}
-				else
-					Debug.LogError("Too many items for Inventory UI to display. Item count: " + slotIdx +
-					               ", slots in UI: " + inventoryItems.Count);
+			if ( slotIdx < inventoryItems.Count ) {
+				inventoryItems[slotIdx].HoldItem(inventory.playerInventory[inventoryIdx]);
+				slotIdx++;
 			}
+			else
+				Debug.LogError("Too many items for Inventory UI to display. Item count: " + slotIdx +
+				               ", slots in UI: " + inventoryItems.Count);
 		}
 	}
 
@@ -194,19 +186,14 @@ public class InventoryUIController : MonoBehaviour {
 		PlayerCharacterSC currPlayer = characterList.playerContainer[_currentPlayerSelected]
 			.GetComponent<PlayerCharacterSC>();
 
-		var equipmentID = currPlayer.GetComponent<EquipmentController>().equipmentID;
-		Equipment equipment = equipmentContainerSO.equipmentInventories[equipmentID];
+		int playerID = currPlayer.GetComponent<EquipmentController>().playerID;
 
-		if ( equipment.items[( int )EquipmentPosition.LEFT] >= 0 ) {
-			int inventoryItemID = equipment.items[( int )EquipmentPosition.LEFT];
-			ItemSO itemLeft = inventory.GetItem(inventoryItemID);
-			weaponLeft.HoldItem(itemLeft, inventoryItemID);
+		if ( inventory.equipmentInventories[playerID].weaponLeft) {
+			weaponLeft.HoldItem(inventory.equipmentInventories[playerID].weaponLeft);
 		}
-
-		if ( equipment.items[( int )EquipmentPosition.RIGHT] >= 0 ) {
-			int inventoryItemID = equipment.items[( int )EquipmentPosition.RIGHT];
-			ItemSO itemRight = inventory.GetItem(inventoryItemID);
-			weaponRight.HoldItem(itemRight, inventoryItemID);
+		
+		if ( inventory.equipmentInventories[playerID].weaponRight) {
+			weaponRight.HoldItem(inventory.equipmentInventories[playerID].weaponRight);
 		}
 	}
 
@@ -371,43 +358,101 @@ public class InventoryUIController : MonoBehaviour {
 			InventorySlot targetSlot = overlappedSlots.OrderBy(x => Vector2.Distance
 				(x.worldBound.position, _ghostIcon.worldBound.position)).First();
 
-			int originalID = _originalSlot.inventoryItemID;
 			ItemSO originalItem = _originalSlot.item;
+			ItemSO targetItem = targetSlot.item;
+						
+			// There are four cases (sorry about the spaghetti code -.- )
+			//	1. both slots are in player inventory: just swap the inventory slots
+			if(_originalSlot.userData == null && targetSlot.userData == null) {
+				targetSlot.HoldItem(originalItem);
 
-			// if targetSlot is not empty, put it to original
-			if ( targetSlot.inventoryItemID >= 0 ) {
-				_originalSlot.HoldItem(targetSlot.item, targetSlot.inventoryItemID);
+				if(targetItem)
+					_originalSlot.HoldItem(targetItem);
+				else
+					_originalSlot.DropItem();
+			}
+			//	2. original slot is equipment, target is player inventory: 
+			//		If target slot wields an item, check if swap is possible:
+			//		If not, do nothing. Else if it's possible, swap items
+			//		If target slot wields no item, just unequip original
+			else if (_originalSlot.userData != null && _originalSlot.userData is EquipmentPosition && 
+								targetSlot.userData == null) {
+				EquipmentPosition originalPos = (EquipmentPosition)_originalSlot.userData;
 
-				// if original slot was in equipment, equip new item
-				if ( typeof(EquipmentPosition).IsInstanceOfType(_originalSlot.userData) ) {
-					EquipmentPosition pos = ( EquipmentPosition )_originalSlot.userData;
-					EquipEvent.RaiseEvent(targetSlot.inventoryItemID, _currentPlayerSelected, pos);
+				if(!targetItem) { 
+					UnequipEvent.RaiseEvent(_currentPlayerSelected, originalPos);
+					targetSlot.HoldItem(originalItem);
+					_originalSlot.DropItem();
+				}
+				else if(targetItem.ValidForPosition(originalPos)) { 
+					EquipEvent.RaiseEvent(targetItem.id, _currentPlayerSelected, originalPos);
+					targetSlot.HoldItem(originalItem);
+					_originalSlot.HoldItem(targetItem);
+				}
+				else { 
+					Debug.LogWarning("The item " + targetItem.id + 
+							" you want to swap is not valid for the item slot (" + originalPos + ")! ");
 				}
 			}
-			else {
-				//Clear the original slot
-				_originalSlot.DropItem();
+			//	3. original slot is in player inventory, target is equipment:
+			//		If original item is not valid for equipment slot, do nothing
+			//		Else, equip original item. Unequip target item if necessary
+			else if (_originalSlot.userData == null && 
+								targetSlot.userData != null && targetSlot.userData is EquipmentPosition) { 
+				EquipmentPosition targetPos = (EquipmentPosition) targetSlot.userData;
 
-				// if originalSlot was in equipment, unequip original (if target and original were not the same)
-				if ( typeof(EquipmentPosition).IsInstanceOfType(_originalSlot.userData) &&
-				     !_originalSlot.Equals(targetSlot) ) {
-					EquipmentPosition pos = ( EquipmentPosition )_originalSlot.userData;
-					UnequipEvent.RaiseEvent(_currentPlayerSelected, pos);
+				if(originalItem.ValidForPosition(targetPos)) { 
+					EquipEvent.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
+					targetSlot.HoldItem(originalItem);
+					
+					if(targetItem)
+						_originalSlot.HoldItem(targetItem);
+					else
+						_originalSlot.DropItem();
 				}
+				else
+					Debug.LogWarning("Item " + originalItem.id + " is not valid for target slot " + targetPos + "! ");
 			}
+			//	4. original and target slots are equipment:
+			//		Only do anything if the original item is valid for the target slot
+			//		Swap items if necessary
+			else if (_originalSlot.userData != null && _originalSlot.userData is EquipmentPosition &&
+								targetSlot.userData != null && targetSlot.userData is EquipmentPosition) { 
+				EquipmentPosition originalPos = (EquipmentPosition) _originalSlot.userData;
+				EquipmentPosition targetPos = (EquipmentPosition) targetSlot.userData;
 
-			targetSlot.HoldItem(originalItem, originalID);
+				if(originalItem.ValidForPosition(targetPos)) { 
+					if(targetItem) { 
+						if(targetItem.ValidForPosition(originalPos)) { 
+							UnequipEvent.RaiseEvent(_currentPlayerSelected, originalPos);
+							UnequipEvent.RaiseEvent(_currentPlayerSelected, targetPos);
 
-			// if targetSlot was in equipment, send events to InventoryManager to change equipment
-			if ( typeof(EquipmentPosition).IsInstanceOfType(targetSlot.userData) ) {
-				EquipmentPosition pos = ( EquipmentPosition )targetSlot.userData;
-				EquipEvent.RaiseEvent(originalID, _currentPlayerSelected, pos);
+							EquipEvent.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
+							targetSlot.HoldItem(originalItem);
+
+							EquipEvent.RaiseEvent(targetItem.id, _currentPlayerSelected, originalPos);
+							_originalSlot.HoldItem(targetItem);
+						}
+						else
+							Debug.LogWarning("Item " + originalItem.id + " is not valid for target slot " + targetPos + "! ");
+					}
+					else {  
+						UnequipEvent.RaiseEvent(_currentPlayerSelected, originalPos);
+						EquipEvent.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
+						targetSlot.HoldItem(originalItem);
+						
+						_originalSlot.DropItem();
+					}
+				}
+				else
+					Debug.LogWarning("Item " + originalItem.id + " is not valid for target slot " + targetPos + "! ");
 			}
+			else
+				Debug.LogError("You should not see me. ");
 		}
-		else {
-			// didn't find anything, reset image in original slot
+
+		if( _originalSlot.item )
 			_originalSlot.icon.image = _originalSlot.item.icon.texture;
-		}
 
 		// clear dragging related visuals and data
 		_isDragging = false;

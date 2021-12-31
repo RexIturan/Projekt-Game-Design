@@ -96,9 +96,6 @@ public class CharacterEquipmentController : MonoBehaviour
 			case EquipmentPosition.SHIELD:
 				tag = "Equipment/Shield";
 				break;
-			case EquipmentPosition.QUIVER:
-				tag = "Equipment/Quiver";
-				break;
 		}
 		return tag;
 	}

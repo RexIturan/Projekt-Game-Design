@@ -42,10 +42,9 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    _modelController.prefab = playerType.modelPrefab;
 	    
 	    //Equipment
-	    _equipmentController.equipmentID = playerSpawnData.equipmentID;
+	    _equipmentController.playerID = playerSpawnData.equipmentID;
 	    
 	    //Abilities
-	    _abilityController.RefreshAbilities();
 	    _abilityController.BaseAbilities = playerType.basicAbilities;
     }
 

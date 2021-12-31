@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e5df66b7a3db94a8dbfb1324555f87, type: 3}
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  itemContainer: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
-  itemIDs: 010000000400000000000000
-  equipmentID: ffffffffffffffffffffffff
+  playerInventory:
+  - {fileID: 11400000, guid: 67a9ec7fd48b38d458783f0ce375304a, type: 2}
+  - {fileID: 11400000, guid: a81f389fc8001624ea76fefa05ab8091, type: 2}
+  - {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
+  equipmentInventories:
+  - weaponLeft: {fileID: 0}
+    weaponRight: {fileID: 0}
+    headArmor: {fileID: 0}
+    bodyArmor: {fileID: 0}
+    shield: {fileID: 0}

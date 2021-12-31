@@ -29,8 +29,9 @@ namespace Characters.Ability {
 
 			EquipmentController equipmentController = gameObject.GetComponent<EquipmentController>();
 			if(equipmentController) {
-				foreach(ItemSO item in equipmentController.GetEquippedItems())
+				foreach(WeaponSO item in equipmentController.GetEquippedWeapons()) {
 					currentAbilities.AddRange(item.abilities);
+				}
 			}
 
 			abilities = currentAbilities.ToArray();

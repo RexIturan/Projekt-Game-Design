@@ -16,7 +16,6 @@ namespace SaveSystem {
 
 		// inventorys
 		private readonly InventorySO _inventory;
-		private readonly EquipmentContainerSO _equipmentInventoryContainerSo;
 
 		// dictionarys
 		private ItemContainerSO _itemContainerSo;
@@ -73,24 +72,46 @@ namespace SaveSystem {
 		}
 		
 		private void ReadInventory(Inventory_Save saveInventory, InventorySO inventory) {
-			inventory.itemIDs.Clear();
-			foreach (var ids in saveInventory.itemIds) {
+			inventory.playerInventory.Clear();
+			foreach (var itemID in saveInventory.itemIds) {
 				//todo inventory should just have indices
-				inventory.itemIDs.Add(ids);    
+				inventory.playerInventory.Add(_itemContainerSo.itemList[itemID]);    
 			}
 		}
 		
-		private void ReadEquipmentInventory(List<Inventory_Save> saveEquipmentInventory, 
-			EquipmentContainerSO equipmentContainer) {
+		private void ReadEquipmentInventory(List<Inventory_Save> saveEquipmentInventory,
+			InventorySO inventory) {
+			inventory.equipmentInventories.Clear();
 			
 			foreach (var equipmentInventory in saveEquipmentInventory) {
-				Equipment equipment = new Equipment();
-				for(int i = 0; i < equipment.items.Count && i < equipmentInventory.itemIds.Count; i++)
-				{
-					equipment.items[i] = equipmentInventory.itemIds[i];
-				}
+				InventorySO.Equipment equipment = new InventorySO.Equipment();
+				
+				if(equipmentInventory.itemIds[0] >= 0)
+					equipment.weaponLeft = (WeaponSO) _itemContainerSo.itemList[equipmentInventory.itemIds[0]];
+				else
+					equipment.weaponLeft = null;
+
+				if(equipmentInventory.itemIds[1] >= 0)
+					equipment.weaponRight = (WeaponSO) _itemContainerSo.itemList[equipmentInventory.itemIds[1]];
+				else
+					equipment.weaponRight = null;
+
+				if(equipmentInventory.itemIds[2] >= 0)
+					equipment.headArmor = (HeadArmorSO) _itemContainerSo.itemList[equipmentInventory.itemIds[2]];
+				else
+					equipment.headArmor = null;
+
+				if(equipmentInventory.itemIds[3] >= 0)
+					equipment.bodyArmor = (BodyArmorSO) _itemContainerSo.itemList[equipmentInventory.itemIds[3]];
+				else
+					equipment.bodyArmor = null;
+
+				if(equipmentInventory.itemIds[4] >= 0)
+					equipment.shield = (ShieldSO) _itemContainerSo.itemList[equipmentInventory.itemIds[4]];
+				else
+					equipment.shield = null;
 									
-				equipmentContainer.equipmentInventories.Add(equipment);
+				inventory.equipmentInventories.Add(equipment);
 			}
 		}
 		
@@ -103,13 +124,11 @@ namespace SaveSystem {
 			GridContainerSO gridContaier, 
 			GridDataSO gridData,
 			InventorySO inventory,
-			EquipmentContainerSO equipmentInventoryContainer, 
 			ItemContainerSO itemContainerSO) {
 			
 			_gridContaier = gridContaier;
 			_gridData = gridData;
 			_inventory = inventory;
-			_equipmentInventoryContainerSo = equipmentInventoryContainer;
 			_itemContainerSo = itemContainerSO;
 		}
 
@@ -127,7 +146,7 @@ namespace SaveSystem {
 
 			ReadInventory(save.inventory, _inventory);
 
-			ReadEquipmentInventory(save.equipmentInventory, _equipmentInventoryContainerSo);
+			ReadEquipmentInventory(save.equipmentInventory, _inventory);
 		}
 
 		#endregion

@@ -6,8 +6,16 @@ namespace Characters.Equipment
 {
 		public class EquipmentController : MonoBehaviour
 		{
-				[SerializeField] private EquipmentContainerSO equipmentContainer;
-				public int equipmentID;
+				[SerializeField] private InventorySO inventory;
+				public int playerID;
+
+				public void Start()
+				{
+						/*
+						inventory.equipmentInventories.Add(new InventorySO.Equipment());
+						playerID = inventory.equipmentInventories.Count - 1;
+						*/
+				}
 
 				public void RefreshEquipment()
 				{
@@ -15,8 +23,8 @@ namespace Characters.Equipment
 						ModelController modelController = gameObject.GetComponent<ModelController>();
 						if(modelController)
 						{
-								ItemSO itemLeft = equipmentContainer.GetItemLeft(equipmentID);
-								ItemSO itemRight = equipmentContainer.GetItemRight(equipmentID);
+								ItemSO itemLeft = inventory.equipmentInventories[playerID].weaponLeft;
+								ItemSO itemRight = inventory.equipmentInventories[playerID].weaponRight;
 
 								modelController.SetMeshLeft(itemLeft ? itemLeft.mesh : null);
 								modelController.SetMeshRight(itemRight ? itemRight.mesh : null);
@@ -27,15 +35,15 @@ namespace Characters.Equipment
 								abilityController.RefreshAbilities();
 				}
 
-				public List<ItemSO> GetEquippedItems()
+				public List<WeaponSO> GetEquippedWeapons()
 				{
-						List<ItemSO> items = new List<ItemSO>();
+						List<WeaponSO> items = new List<WeaponSO>();
 
-						ItemSO item = equipmentContainer.GetItemLeft(equipmentID);
+						WeaponSO item = inventory.equipmentInventories[playerID].weaponLeft;
 						if ( item )
 								items.Add(item);
 
-						item = equipmentContainer.GetItemRight(equipmentID);
+						item = inventory.equipmentInventories[playerID].weaponRight;
 						if ( item )
 								items.Add(item);
 

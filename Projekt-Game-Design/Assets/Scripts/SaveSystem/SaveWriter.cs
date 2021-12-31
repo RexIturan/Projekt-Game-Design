@@ -18,7 +18,6 @@ namespace SaveSystem {
 
 		// inventorys
 		private readonly InventorySO _inventory;
-		private readonly EquipmentContainerSO _equipmentInventoryContainerSo;
 
 //////////////////////////////////// Local Functions ///////////////////////////////////////////////
 
@@ -117,30 +116,29 @@ namespace SaveSystem {
 
 		private Inventory_Save GetInventorySaveData(InventorySO inventory) {
 			Inventory_Save inventorySave = new Inventory_Save();
-			inventorySave.size = inventory.itemIDs.Capacity;
-			foreach ( var itemID in inventory.itemIDs) {
-				inventorySave.itemIds.Add(itemID);
+			inventorySave.size = inventory.playerInventory.Capacity;
+			foreach ( var item in inventory.playerInventory) {
+				inventorySave.itemIds.Add(item.id);
 			}
 
 			return inventorySave;
 		}
 
 		// todo shorten names
-		private List<Inventory_Save> GetEquipmentInventorySaveData(
-			EquipmentContainerSO equipmentInventoryContainerSo) {
+		private List<Inventory_Save> GetEquipmentInventorySaveData(InventorySO inventory) {
 			List<Inventory_Save> equipmentInventorys = new List<Inventory_Save>();
 
-			foreach ( var equipment in equipmentInventoryContainerSo.equipmentInventories ) {
+			foreach ( var equipment in inventory.equipmentInventories ) {
 				if(equipment is null)
 					break;
 				
 				var equiped = new List<int>();
-				foreach ( var itemID in equipment.items) {
-					equiped.Add(itemID);
+				foreach ( var item in equipment.EquipmentToArray()) {
+					equiped.Add(item ? item.id : -1);
 				}
 
 				equipmentInventorys.Add(new Inventory_Save() {
-					size = equipment.items.Capacity,
+					size = equipment.GetCount(),
 					itemIds = equiped
 				});
 			}
@@ -157,13 +155,11 @@ namespace SaveSystem {
 		public SaveWriter(
 			GridContainerSO gridContaier, 
 			GridDataSO gridData,
-			InventorySO inventory,
-			EquipmentContainerSO equipmentInventoryContainer) {
+			InventorySO inventory) {
 
 			_gridContaier = gridContaier;
 			_globalGridData = gridData;
 			_inventory = inventory;
-			_equipmentInventoryContainerSo = equipmentInventoryContainer;
 		}
 
 		public void SetRuntimeReferences(CharacterList characterList) {
@@ -180,7 +176,7 @@ namespace SaveSystem {
 				players = GetPlayerSaveData(_characterList),
 				enemies = GetEnemySaveData(_characterList),
 				inventory = GetInventorySaveData(_inventory),
-				equipmentInventory = GetEquipmentInventorySaveData(_equipmentInventoryContainerSo)
+				equipmentInventory = GetEquipmentInventorySaveData(_inventory)
 			};
 
 			return save;
