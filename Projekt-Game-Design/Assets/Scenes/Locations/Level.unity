@@ -1655,6 +1655,10 @@ PrefabInstance:
       propertyPath: unequipEventChannel
       value: 
       objectReference: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
+    - target: {fileID: 8249263230387100160, guid: fc8468785089d404997c3806015ef3c3, type: 3}
+      propertyPath: itemPickupEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: c850df41d4dbc034b881094411eeae9d, type: 2}
     - target: {fileID: 8249263230387100161, guid: fc8468785089d404997c3806015ef3c3, type: 3}
       propertyPath: m_RootOrder
       value: 5

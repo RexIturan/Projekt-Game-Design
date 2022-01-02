@@ -79,6 +79,27 @@ namespace Grid {
 		
 		#endregion
 		
+		#region Get
+
+		public List<int> GetItemsAtGridPos(Vector3Int gridPos) {
+			List<int> items = new List<int>();
+
+			int i = 0;
+			foreach(ItemGrid tileGrid in gridContainer.items) {
+
+				var item = tileGrid.GetGridObject(new Vector2Int(gridPos.x, gridPos.z));
+				if(item != null && item.ID >= 0) { 
+					items.Add(item.ID);
+					Debug.Log("Item in layer: " + i);
+				}
+				i++;
+			}
+
+			return items;
+		}
+
+		#endregion
+
 		#region Add One
 
 		public void AddItemAt(Vector3 pos, int itemId) {
@@ -205,6 +226,21 @@ namespace Grid {
 			}
 		}
 		
+		#endregion
+
+		#region Remove many
+
+		public void RemoveAllItemsAtGridPos(Vector3Int gridPos) {
+			for(int layer = 0; layer < gridContainer.items.Length; layer++) { 
+				Vector2Int gridPos2D = new Vector2Int(gridPos.x, gridPos.z);
+			  Debug.Log($"SetItemAt {gridPos2D} {-1} |{gridContainer.items[layer].Width}, {layer}, {gridContainer.items[layer].Depth}");
+
+				var gridObject = gridContainer.items[layer].GetGridObject(gridPos2D);
+				if(gridObject != null)
+					gridObject.SetId(-1);
+			}
+		}
+
 		#endregion
 
 		public void ResetGrid() {

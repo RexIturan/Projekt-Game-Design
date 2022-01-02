@@ -41,7 +41,7 @@ namespace Characters.PlayerCharacter.StateMachine.Actions {
 			}
 			_statistics.StatusValues.Energy.Decrease(energyReduction);
 
-			Debug.Log("Reducing energy by " + energyReduction + " points.");
+			// Debug.Log("Reducing energy by " + energyReduction + " points.");
 		}
 
 		public override void OnStateExit() { }
