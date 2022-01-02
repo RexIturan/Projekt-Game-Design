@@ -180,7 +180,6 @@ public class InventoryUIController : MonoBehaviour {
 			GameObject playerCharacter = characterList.playerContainer[i];
 			var stats = playerCharacter.GetComponent<Statistics>();
 			if ( stats ) {
-				Debug.Log("Adding player to Character List. ");
 				Image playerIcon = new Image();
 				playerIcon.image = stats.DisplayImage.texture;
 				playerIcon.AddToClassList("PlayerContainer");
