@@ -1,0 +1,37 @@
+﻿:root{
+    --background-color: rgba(128, 128, 128, 0.53);
+    --border-color: #373737;
+}
+
+.characterStatusValuePanel{
+}
+
+.characterStatusValuePanel-container{
+    margin: 5px;
+    padding: 5px 20px;
+    
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: var(--border-color);
+    
+    background-color: var(--background-color);
+}
+
+.characterStatusValuePanel-characterIconContainer{
+    
+}
+
+.characterStatusValuePanel-progressBarContainer{
+    
+}
+
+.characterStatusValuePanel-statusValueFieldContainer{
+    margin: 3px 0px;
+}
+
+.characterStatusValuePanel-statusValueFieldRow {
+    margin: 5px 0px;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}

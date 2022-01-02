@@ -5,6 +5,7 @@ using Characters.Ability;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
 using UI.Components;
+using UI.Components.Character;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Object = System.Object;
@@ -36,7 +37,7 @@ public class OverlayUIController : MonoBehaviour {
 	private ActionBar _actionBar;
 
 	// PlayerView Container
-	private VisualElement _playerViewContainer;
+	private CharacterStatusValuePanel _characterStatusValuePanel;
 
 	private TemplateContainer _turnIndicator;
 
@@ -49,7 +50,7 @@ public class OverlayUIController : MonoBehaviour {
 		var root = GetComponent<UIDocument>().rootVisualElement;
 		_actionBar = root.Q<ActionBar>("ActionBar");
 		_overlayContainer = root.Q<VisualElement>("OverlayContainer");
-		_playerViewContainer = root.Q<VisualElement>("PlayerViewContainer");
+		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
 		_turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
 		_overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
 		_overlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
@@ -60,6 +61,9 @@ public class OverlayUIController : MonoBehaviour {
 		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
 
 		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
+		
+		_actionBar.SetVisibility(false);
+		_characterStatusValuePanel.SetViibility(false);
 	}
 
 	private void HandleEndTurnUI() {
@@ -67,7 +71,8 @@ public class OverlayUIController : MonoBehaviour {
 	}
 
 	void SetTurnIndicatorVisibility(bool show) {
-		_turnIndicator.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
+		//todo fix this
+		// _turnIndicator.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
 	}
 
 	void SetGameOverlayVisibility(bool value) {
@@ -139,39 +144,49 @@ public class OverlayUIController : MonoBehaviour {
 	}
 
 	void RefreshStats(GameObject obj) {
-		//VisualElement manaBar = PlayerViewContainer.Q<VisualElement>("ProgressBarManaOverlay");
-		VisualElement healthBar = _playerViewContainer.Q<VisualElement>("ProgressBarHealthOverlay");
-		VisualElement abilityBar = _playerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
 
+		var charIcon = _characterStatusValuePanel.CharIcon;
+		
+		var healthBar = _characterStatusValuePanel.HealthBar;
+		var energyBar = _characterStatusValuePanel.EnergyBar;
+		var armorBar = _characterStatusValuePanel.ArmorBar;
+
+		var strengthField = _characterStatusValuePanel.StrengthField;
+		var dexterityField = _characterStatusValuePanel.DexterityField;
+		var intelligenceField = _characterStatusValuePanel.IntelligenceField;
+		var movementField = _characterStatusValuePanel.MovementField;
+		
 		var statistics = obj.GetComponent<Statistics>();
 		var chracterStats = statistics.StatusValues;
 
-		healthBar.style.width =
-			new StyleLength(
-				Length.Percent(( 100 * ( float )chracterStats.HitPoints.value / chracterStats.HitPoints.max )));
+		charIcon.CharacterName = statistics.DisplayName;
+		charIcon.Level = chracterStats.Level.value;
+		charIcon.Image = statistics.DisplayImage; 
+		charIcon.UpdateComponent();
 		
-		abilityBar.style.width =
-			new StyleLength(
-				Length.Percent(( 100 * ( float )chracterStats.Energy.value / chracterStats.Energy.max )));
+		healthBar.Max = chracterStats.HitPoints.max;
+		healthBar.Value = chracterStats.HitPoints.value;
+		healthBar.UpdateComponent();
+
+		energyBar.Max = chracterStats.Energy.max;
+		energyBar.Value = chracterStats.Energy.value;
+		energyBar.UpdateComponent();
+
+		armorBar.Max = chracterStats.Armor.max;
+		armorBar.Value = chracterStats.Armor.value;
+		armorBar.UpdateComponent();
 		
-		//manaBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
+		strengthField.Value = chracterStats.Strength.value;
+		strengthField.UpdateComponents();
+		
+		dexterityField.Value = chracterStats.Dexterity.value;
+		dexterityField.UpdateComponents();
+		
+		intelligenceField.Value = chracterStats.Intelligence.value;
+		intelligenceField.UpdateComponents();
 
-		// Labels für Stats
-		_playerViewContainer.Q<Label>("StrengthLabel").text = chracterStats.Strength.value.ToString();
-		_playerViewContainer.Q<Label>("DexterityLabel").text = chracterStats.Dexterity.value.ToString();
-		_playerViewContainer.Q<Label>("IntelligenceLabel").text = chracterStats.Intelligence.value.ToString();
-		_playerViewContainer.Q<Label>("MovementLabel").text = chracterStats.ViewDistance.value.ToString();
-
-		// Image
-		VisualElement image = _playerViewContainer.Q<VisualElement>("PlayerPicture");
-		image.Clear();
-		Image newProfile = new Image();
-		image.Add(newProfile);
-		newProfile.image = statistics.DisplayImage.texture;
-
-		// Name and Level
-		_playerViewContainer.Q<Label>("PlayerName").text = statistics.DisplayName;
-		_playerViewContainer.Q<Label>("LevelLabel").text = chracterStats.Level.value.ToString();
+		movementField.Value = chracterStats.MovementRange.value;
+		movementField.UpdateComponents();
 	}
 
 	void ShowMenu() {
@@ -180,16 +195,15 @@ public class OverlayUIController : MonoBehaviour {
 
 	void HandlePlayerDeselected(GameObject obj) {
 		_actionBar.SetVisibility(false);
-
-		_playerViewContainer.style.display = DisplayStyle.None;
+		_characterStatusValuePanel.SetViibility(false);
 	}
 
 	void ShowPlayerViewContainer() {
-		_playerViewContainer.style.display = DisplayStyle.Flex;
+		_characterStatusValuePanel.SetViibility(true);
 	}
 
 	void HidePlayerViewContainer() {
-		_playerViewContainer.style.display = DisplayStyle.None;
+		_characterStatusValuePanel.SetViibility(false);
 	}
 
 	void ShowActionMenu() {

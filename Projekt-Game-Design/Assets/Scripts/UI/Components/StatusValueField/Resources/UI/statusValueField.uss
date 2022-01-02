@@ -1,0 +1,80 @@
+﻿:root{
+    --title-text-color: white;
+    --value-text-color: white;
+    --background-color: #3b3b3b;
+    --border-color: #272727;
+    --icon-tint-color: #ffffff;
+}
+
+.statusValueField{
+    align-items: center;
+}
+
+.statusValueField-container{
+    width: 85px;
+    height: 85px;
+    padding: 2px;
+    
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: var(--border-color);
+    
+    align-items: center;
+    justify-content: space-between;
+    
+    background-color: var(--background-color);
+}
+
+.statusValueField-titleLabel{
+    color: var(--title-text-color);
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    flex-wrap: wrap;
+    font-size: 14px;
+}
+
+.statusValueField-icon{
+    height: 30px;
+    width: 30px;
+    -unity-background-image-tint-color: var(--icon-tint-color);
+    background-image: resource('Assets/Art/Sprites/UI/dexterity.png');
+}
+
+.statusValueField-valueContainer{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.statusValueField-valueLabel{
+    color: var(--value-text-color);
+    
+    padding: 0;
+    margin: 0;
+    
+    font-size: 28px;    
+}
+
+.statusValueField-valueChangeLabel-container{
+    position: absolute;
+
+    width: 100%;
+
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.statusValueField-valueChangeLabel{
+    color: var(--value-text-color);
+    
+    padding: 0;
+    margin: 0;
+    margin-right: 2px;
+
+    font-size: 18px;
+    -unity-text-align: lower-center;
+}

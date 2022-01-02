@@ -14,14 +14,7 @@ namespace UI.Components.ActionButton {
 	}
 	
 	public class ActionButton : VisualElement, IActionButton  {
-
-		public int id { get; set; }
-		public Sprite imageData { get; set; }
-		public string mapping { get; set; }
-		public string actionText { get; set; }
-		public Action callback;
-		
-		// public new static readonly string ussClassName = "action-button";
+		// uss const values
 		private static readonly string baseUssClassName = "action-button";
 		private static readonly string containerSuffix = "container";
 		private static readonly string topContainerSuffix = "top-container";
@@ -30,6 +23,12 @@ namespace UI.Components.ActionButton {
 		private static readonly string buttonSuffix = "button";
 		private static readonly string imageSuffix = "image";
 
+		public int id { get; set; }
+		public Sprite imageData { get; set; }
+		public string mapping { get; set; }
+		public string actionText { get; set; }
+		private Action callback;
+		
 		private VisualElement actionImage;
 		private Button button;
 		private Label nameLabel;
