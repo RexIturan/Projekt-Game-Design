@@ -103,6 +103,9 @@ namespace Visual {
 
 	        obj.transform.SetParent(itemParent.transform);
 	        items[gridPos.x, gridPos.y, gridPos.z] = obj;
+					Item item = items[gridPos.x, gridPos.y, gridPos.z].GetComponent<Item>();
+					item.itemSO = itemData;
+					item.Reset();
         }
 
         private void RemoveItemGameObject(Vector3Int gridPos, GameObject[,,] items) {

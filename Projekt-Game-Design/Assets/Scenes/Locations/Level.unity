@@ -424,6 +424,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridController
       objectReference: {fileID: 0}
+    - target: {fileID: 2590095954336560726, guid: ee9989a80b866054db727cd000eeb9b0, type: 3}
+      propertyPath: gridData
+      value: 
+      objectReference: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
     - target: {fileID: 2590095954336560727, guid: ee9989a80b866054db727cd000eeb9b0, type: 3}
       propertyPath: m_RootOrder
       value: 3

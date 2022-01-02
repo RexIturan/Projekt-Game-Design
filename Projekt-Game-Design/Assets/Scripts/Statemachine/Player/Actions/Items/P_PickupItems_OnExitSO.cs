@@ -11,34 +11,31 @@ using Events.ScriptableObjects;
 	menuName = "State Machines/Actions/Player/Pickup Items On Exit")]
 public class P_PickupItems_OnExitSO : StateActionSO {
 	[SerializeField] private IntEventChannelSO itemPickupEvent;
+	[SerializeField] private VoidEventChannelSO redrawLevelEC;
 
-	public override StateAction CreateAction() => new P_PickupItems_OnExit(itemPickupEvent);
+	public override StateAction CreateAction() => new P_PickupItems_OnExit(itemPickupEvent, redrawLevelEC);
 }
 
 public class P_PickupItems_OnExit : StateAction {
 	private IntEventChannelSO _itemPickupEvent;
+	private VoidEventChannelSO _redrawLevelEC;
 
 	private GridController _gridController;
 	private GridTransform _gridTransform;
 
-	public P_PickupItems_OnExit(IntEventChannelSO itemPickupEvent) {
+	public P_PickupItems_OnExit(IntEventChannelSO itemPickupEvent, VoidEventChannelSO redrawLevelEC) {
 		_itemPickupEvent = itemPickupEvent;
+		_redrawLevelEC = redrawLevelEC;
 	}
 
 	public override void Awake(StateMachine stateMachine) {
 		_gridTransform = stateMachine.gameObject.GetComponent<GridTransform>();
-		FindGridController();
-	}
-
-	private void FindGridController() {
-		GameObject gridControllerGameObject = GameObject.Find("GridController");
-		if ( gridControllerGameObject )
-			_gridController = gridControllerGameObject.GetComponent<GridController>();
+		_gridController = GridController.FindGridController();
 	}
 
 	public override void OnStateExit() {
 		if(!_gridController)
-			FindGridController();
+			_gridController = GridController.FindGridController();
 
 		if(!_gridController)
 			Debug.LogError("Could not find Grid Controller. ");
@@ -52,6 +49,7 @@ public class P_PickupItems_OnExit : StateAction {
 					_itemPickupEvent.RaiseEvent(itemId);
 
 				_gridController.RemoveAllItemsAtGridPos(_gridTransform.gridPosition);
+				_redrawLevelEC.RaiseEvent();
 			}
 		}
 	}

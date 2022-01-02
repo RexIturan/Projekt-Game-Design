@@ -18,5 +18,8 @@ public class TextSpawner : MonoBehaviour {
 
 		textMeshComponent.color = color;
 		textMeshComponent.text = text;
+
+		// Destroy floating text after 5 seconds
+		Destroy(newText, 5);
 	}
 }
