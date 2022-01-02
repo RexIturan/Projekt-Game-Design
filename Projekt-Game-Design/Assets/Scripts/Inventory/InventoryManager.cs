@@ -17,15 +17,23 @@ public class InventoryManager : MonoBehaviour {
 	[Header("Receiving Events On")]
 	[SerializeField] private IntIntEquipmentPositionEquipEventChannelSO equipEventChannel;
 	[SerializeField] private IntEquipmentPositionUnequipEventChannelSO unequipEventChannel;
+	[SerializeField] private IntEventChannelSO itemPickupEventChannel;
 
 	private void Awake() {
 		equipEventChannel.OnEventRaised += EquipItem;
 		unequipEventChannel.OnEventRaised += UnequipItem;
+		itemPickupEventChannel.OnEventRaised += PickupItem;
 	}
 
 	private void OnDestroy() {
 		equipEventChannel.OnEventRaised -= EquipItem;
 		unequipEventChannel.OnEventRaised -= UnequipItem;
+		itemPickupEventChannel.OnEventRaised -= PickupItem;
+	}
+
+  private void PickupItem(int itemID) {
+		if(itemID >= 0)
+			inventory.playerInventory.Add(itemContainer.itemList[itemID]);
 	}
 
 	private void UnequipItem(int playerId, EquipmentPosition pos) {

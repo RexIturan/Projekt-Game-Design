@@ -180,7 +180,6 @@ public class InventoryUIController : MonoBehaviour {
 			GameObject playerCharacter = characterList.playerContainer[i];
 			var stats = playerCharacter.GetComponent<Statistics>();
 			if ( stats ) {
-				Debug.Log("Adding player to Character List. ");
 				Image playerIcon = new Image();
 				playerIcon.image = stats.DisplayImage.texture;
 				playerIcon.AddToClassList("PlayerContainer");
@@ -229,8 +228,8 @@ public class InventoryUIController : MonoBehaviour {
 	// TODO: copied from OverlayUIController
 	//
 	private void RefreshPlayerViewContainer() {
-		Debug.Log("Player selected: " + _currentPlayerSelected);
-		Debug.Log("Character List: " + characterList.playerContainer.Count);
+		// Debug.Log("Player selected: " + _currentPlayerSelected);
+		// Debug.Log("Character List: " + characterList.playerContainer.Count);
 		PlayerCharacterSC _selectedPlayer = characterList.playerContainer[_currentPlayerSelected]
 			.GetComponent<PlayerCharacterSC>();
 

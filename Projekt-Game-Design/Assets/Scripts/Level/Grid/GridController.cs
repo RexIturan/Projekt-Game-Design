@@ -79,10 +79,31 @@ namespace Grid {
 		
 		#endregion
 		
+		#region Get
+
+		public List<int> GetItemsAtGridPos(Vector3Int gridPos) {
+			List<int> items = new List<int>();
+
+			int i = 0;
+			foreach(ItemGrid tileGrid in gridContainer.items) {
+
+				var item = tileGrid.GetGridObject(new Vector2Int(gridPos.x, gridPos.z));
+				if(item != null && item.ID >= 0) { 
+					items.Add(item.ID);
+					Debug.Log("Item in layer: " + i);
+				}
+				i++;
+			}
+
+			return items;
+		}
+
+		#endregion
+
 		#region Add One
 
 		public void AddItemAt(Vector3 pos, int itemId) {
-			AddItemAt(gridData.GetGridPos3DFromWorldPos(pos), itemId);
+			AddItemAtGridPos(gridData.GetGridPos3DFromWorldPos(pos), itemId);
 		}
 		
 		// public void AddCharacterAt(Vector3 pos, Faction faction) {
@@ -112,7 +133,7 @@ namespace Grid {
 			SetCharacterAt(finalPos.x, layer, finalPos.y, faction, playerCharacterSC, enemyCharacterSC);
 		}
 
-		private void AddItemAt(Vector3Int gridPos, int itemId) {
+		public void AddItemAtGridPos(Vector3Int gridPos, int itemId) {
 			var layer = gridPos.y;
 			var gridPos2D = gridData.GetGridPos2DFromGridPos3D(gridPos);
 
@@ -207,12 +228,35 @@ namespace Grid {
 		
 		#endregion
 
+		#region Remove many
+
+		public void RemoveAllItemsAtGridPos(Vector3Int gridPos) {
+			for(int layer = 0; layer < gridContainer.items.Length; layer++) { 
+				Vector2Int gridPos2D = new Vector2Int(gridPos.x, gridPos.z);
+			  Debug.Log($"SetItemAt {gridPos2D} {-1} |{gridContainer.items[layer].Width}, {layer}, {gridContainer.items[layer].Depth}");
+
+				var gridObject = gridContainer.items[layer].GetGridObject(gridPos2D);
+				if(gridObject != null)
+					gridObject.SetId(-1);
+			}
+		}
+
+		#endregion
+
 		public void ResetGrid() {
 			gridData.Reset();
 
 			gridContainer.InitGrids(gridData);
 			FillTileGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[1].id);
 			FillTileGrid(gridContainer.tileGrids[1], tileTypesContainer.tileTypes[0].id);
+		}
+				
+		public static GridController FindGridController() {
+			GameObject gridControllerGameObject = GameObject.Find("GridController");
+			if ( gridControllerGameObject )
+				return gridControllerGameObject.GetComponent<GridController>();
+			else
+				return null;
 		}
 	}
 }

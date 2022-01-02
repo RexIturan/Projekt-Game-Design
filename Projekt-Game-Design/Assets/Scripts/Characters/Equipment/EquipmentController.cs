@@ -9,6 +9,8 @@ namespace Characters.Equipment
 				[SerializeField] private InventorySO inventory;
 				public int playerID;
 
+				private bool rightIsActive = true;
+
 				public void Start()
 				{
 						/*
@@ -19,12 +21,34 @@ namespace Characters.Equipment
 
 				public void RefreshEquipment()
 				{
-						// model wise
+						// Model-wise
+						RefreshModels();
+
+						// Ability-wise
+						AbilityController abilityController = gameObject.GetComponent<AbilityController>();
+						if ( abilityController )
+								abilityController.RefreshAbilities();
+				}
+
+				public void RefreshModels()
+				{
 						ModelController modelController = gameObject.GetComponent<ModelController>();
-						if(modelController)
+						if ( modelController )
 						{
-								ItemSO itemLeft = inventory.equipmentInventories[playerID].weaponLeft;
-								ItemSO itemRight = inventory.equipmentInventories[playerID].weaponRight;
+								ItemSO itemLeft;
+								ItemSO itemRight;
+
+								if ( rightIsActive )
+								{
+										itemLeft = inventory.equipmentInventories[playerID].weaponLeft;
+										itemRight = inventory.equipmentInventories[playerID].weaponRight;
+								}
+								else
+								{
+										itemLeft = inventory.equipmentInventories[playerID].weaponRight;
+										itemRight = inventory.equipmentInventories[playerID].weaponLeft;
+								}
+
 								ItemSO itemHead = inventory.equipmentInventories[playerID].headArmor;
 								ItemSO itemBody = inventory.equipmentInventories[playerID].bodyArmor;
 								ItemSO itemShield = inventory.equipmentInventories[playerID].shield;
@@ -35,10 +59,6 @@ namespace Characters.Equipment
 								modelController.SetMeshBody(itemBody ? itemBody.mesh : null);
 								modelController.SetMeshShield(itemShield ? itemShield.mesh : null);
 						}
-
-						AbilityController abilityController = gameObject.GetComponent<AbilityController>();
-						if ( abilityController )
-								abilityController.RefreshAbilities();
 				}
 
 				public List<WeaponSO> GetEquippedWeapons()
@@ -54,6 +74,28 @@ namespace Characters.Equipment
 								items.Add(item);
 
 						return items;
+				}
+
+				public WeaponSO GetWeaponLeft()
+				{
+						return inventory.equipmentInventories[playerID].weaponLeft;
+				}
+
+				public WeaponSO GetWeaponRight()
+				{
+						return inventory.equipmentInventories[playerID].weaponRight;
+				}
+
+				public void ActivateRight()
+				{
+						rightIsActive = true;
+						RefreshModels();
+				}
+
+				public void ActivateLeft()
+				{
+						rightIsActive = false;
+						RefreshModels();
 				}
 		}
 }

@@ -54,8 +54,7 @@ namespace Pathfinding {
 
 				public void DrawPreview(List<PathNode> nodes) {
 						ClearPreviewTilemap();
-
-						Debug.Log("Draw Preview Tilemap, inside drawer");
+						
 						foreach ( var node in nodes ) {
 								previewTilemap.SetTile(gridData.GetTilePosFromGridPos(node.pos), previewTile);
 						}
