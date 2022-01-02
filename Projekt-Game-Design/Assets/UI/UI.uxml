@@ -1,4 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="IngameMenu" src="IngameMenu.uxml" />
+    <ui:Template name="InventoryOverlay" src="InventoryOverlay.uxml" />
     <Style src="Styles/UI_Classes.uss" />
     <ui:VisualElement name="OverlayContainer" style="flex-grow: 1; display: flex; position: absolute; width: 100%; height: 100%;">
         <ui:VisualElement name="LeftSidebar" style="flex-grow: 0; width: 20%; height: 100%; position: absolute; margin-left: 10px; justify-content: space-between;">
@@ -40,7 +42,7 @@
                     <ui:VisualElement name="PlayerPicture" class="PlayerPicture" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <UI.Components.Character.CharacterStatusValuePanel name="CharacterStatusValuePanel" style="display: none;" />
+            <UI.Components.Character.CharacterStatusValuePanel name="CharacterStatusValuePanel" style="display: flex;" />
         </ui:VisualElement>
         <UI.Components.ActionBar number-of-actions="10" />
         <ui:VisualElement name="ActionContainer" style="background-color: rgba(26, 26, 26, 0.43); height: 10%; width: 40%; left: 30%; bottom: 0; position: absolute; white-space: nowrap; flex-direction: row; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; display: none;">
@@ -61,4 +63,6 @@
         </ui:VisualElement>
         <ui:Label text="Label" display-tooltip-when-elided="true" name="AbilityDescription" style="position: absolute; top: 496px; left: 339px; height: 63px; width: 435px; color: rgb(255, 255, 255); -unity-text-outline-width: 0; font-size: 20px; background-color: rgba(255, 255, 255, 0.16); display: none; flex-wrap: wrap; white-space: normal;" />
     </ui:VisualElement>
+    <ui:Instance template="IngameMenu" name="IngameMenu" style="display: none; width: 100%; height: 100%; position: absolute;" />
+    <ui:Instance template="InventoryOverlay" name="InventoryOverlay" style="width: 100%; height: 100%; position: absolute; display: none;" />
 </ui:UXML>
