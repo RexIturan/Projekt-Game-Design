@@ -1,0 +1,10 @@
+﻿:root {
+    --value: #dfce00;
+    /*--increase: #0bc00b;*/
+    /*--decrease: #8c1313;*/
+    /*--background: #636363;*/
+    /*--border: #353535;*/
+    /*--title-text: white;*/
+    --value-text: #000000;
+    /*--change-text: white;*/
+}

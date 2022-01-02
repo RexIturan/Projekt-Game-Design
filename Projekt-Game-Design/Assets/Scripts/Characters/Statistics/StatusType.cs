@@ -6,6 +6,7 @@
 		TemporeryHitPoints,
 		Energy,
 		EnergyRegeneration,
+		Armor,
 		MovementRange,
 		ViewDistance,
 		Strength,

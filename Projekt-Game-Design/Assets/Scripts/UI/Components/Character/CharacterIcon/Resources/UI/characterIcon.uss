@@ -1,0 +1,88 @@
+﻿:root {
+    --icon-border-color: white;
+    --name-text-color: white;
+    --level-background-color: #a7a7a7;
+    --level-text-color: white;
+    --name-font-size: 20px;
+    --level-font-size: 18px;
+}
+
+.characterIcon {
+    
+}
+
+.characterIcon-container {
+    align-items: center;
+}
+
+.characterIcon-nameLabel {
+    margin: 1px;
+    padding: 0;
+    font-size: var(--name-font-size);
+    color: var(--name-text-color);
+}
+
+.characterIcon-iconContainer {
+    margin: 5px;
+}
+
+.characterIcon-iconButton {
+    height: 100px;
+    width: 100px;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: var(--icon-border-color);
+    
+    padding: 0;
+    margin: 0;
+    
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    background-image: resource('Assets/Art/Sprites/Characters/defaultFace.jpg');
+}
+
+.characterIcon-levelContainer {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+
+    align-items: flex-end;
+    justify-content: flex-start;
+    
+    /*background-color: rgba(0, 0, 0, 0.37);*/
+}
+
+.characterIcon-levelBackground {
+    height: 30px;
+    width: 30px;
+    top: -5px;
+    right: -5px;
+    border-radius: 15px;
+    background-color: var(--level-background-color);
+    
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.characterIcon-levelLabel {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    color: var(--level-text-color);
+    -unity-text-align: middle-center;
+    font-size: var(--level-font-size);
+}
+
+.characterIcon-levelChangeLabel {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    right: -28px;
+    padding: 0;
+    margin: 0;
+    color: var(--level-text-color);
+    -unity-text-align: middle-center;
+    font-size: var(--level-font-size);
+}

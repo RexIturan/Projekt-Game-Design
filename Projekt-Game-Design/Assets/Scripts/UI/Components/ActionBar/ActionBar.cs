@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEditor.UIElements;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Scripting;
 using UnityEngine.UIElements;
-using Object = System.Object;
 
 namespace UI.Components {
 	public class ActionBar : VisualElement {
@@ -75,10 +71,13 @@ namespace UI.Components {
 			public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc) {
 				base.Init(ve, bag, cc);
 
+				
 				if ( ve is ActionBar element ) {
 					element.Clear();
 
 					element.name = "ActionBar";
+					StyleSheet style = Resources.Load<StyleSheet>("UI/actionBar");
+					element.styleSheets.Add(style);
 					
 					element.actionCount = actionNum.GetValueFromBag(bag, cc);
 					element.actionLayout = layout.GetValueFromBag(bag, cc);
@@ -141,13 +140,14 @@ namespace UI.Components {
 							actionText = "Basic Attack" 
 						};
 						actionButton.UpdataValues();
-						actionButton.BindAction((object[] args) => {
+						actionButton.BindAction((args) => {
 							var str = "";
 							foreach ( var obj in args ) {
-								str += obj.ToString() + " ";
+								str += obj + " ";
 							}
 							Debug.Log(str);
-						}, new Object[] { "Wohoo", 2, 5, 4 }, null, "callback");
+							//todo(vincent) remove { "test", 1, 2, 3 }
+						}, new System.Object[] { "test", 1, 2, 3 }, null, "callback");
 						element.actionButtons.Add(actionButton);
 						buttonContainer.Add(actionButton);
 					}
