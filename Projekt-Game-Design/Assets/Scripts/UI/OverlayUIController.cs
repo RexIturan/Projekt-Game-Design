@@ -144,7 +144,7 @@ public class OverlayUIController : MonoBehaviour {
 	}
 
 	void RefreshStats(GameObject obj) {
-
+	//todo move to own class
 		var charIcon = _characterStatusValuePanel.CharIcon;
 		
 		var healthBar = _characterStatusValuePanel.HealthBar;

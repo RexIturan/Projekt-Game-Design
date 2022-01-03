@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -91,11 +92,14 @@ namespace UI.Components.Character {
 				name = "CharacterIcon-IconButton"
 			};
 			iconButton.AddToClassList(GetClassNameWithSuffix(iconButtonSuffix));
+			iconButton.focusable = false;
+			SetHoverOnButton(false);
 
 			levelContainer = new VisualElement {
 				name = "CharacterIcon-LevelContainer"
 			};
 			levelContainer.AddToClassList(GetClassNameWithSuffix(levelContainerSuffix));
+			levelContainer.pickingMode = PickingMode.Ignore;
 
 			levelBackground = new VisualElement {
 				name = "CharacterIcon-levelBackground"
@@ -135,6 +139,20 @@ namespace UI.Components.Character {
 		}
 
 ///// PUBLIC FUNCTIONS  //////////////////////////////////////////////////////////////////////////// 
+
+		public void SetCallback(Action action) {
+			iconButton.clicked += action;
+		}
+
+		public void SetHoverOnButton(bool hover) {
+			var className = GetClassNameWithSuffix(iconButtonSuffix) + ":hover";
+			if ( hover ) {
+				iconButton.AddToClassList(className);	
+			}
+			else {
+				iconButton.RemoveFromClassList(className);	
+			}
+		}
 
 		public void UpdateComponent() {
 			levelElement.text = Level.ToString();

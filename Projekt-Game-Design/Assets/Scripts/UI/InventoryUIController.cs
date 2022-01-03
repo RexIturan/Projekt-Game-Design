@@ -4,6 +4,7 @@ using System.Linq;
 using Characters;
 using Characters.Equipment;
 using Events.ScriptableObjects;
+using UI.Components.Character;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -31,7 +32,7 @@ public class InventoryUIController : MonoBehaviour {
 	private VisualElement _playerContainer;
 
 	// Fuer den PlayerView Container
-	private VisualElement _playerViewContainer;
+	private CharacterStatusValuePanel _characterStatusValuePanel;
 
 	// Für das Ghost Icon
 	private static VisualElement _ghostIcon;
@@ -77,7 +78,7 @@ public class InventoryUIController : MonoBehaviour {
 		_equipmentInventoryContainer = root.Q<VisualElement>("PlayerEquipmentInventory");
 		_ghostIcon = root.Query<VisualElement>("GhostIcon");
 		_playerContainer = root.Query<VisualElement>("PlayerContainer");
-		_playerViewContainer = _inventoryContainer.Q<VisualElement>("PlayerViewContainer");
+		_characterStatusValuePanel = _inventoryContainer.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
 		_inventorySlotContainer = root.Q<VisualElement>("InventoryContent");
 
 		visibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
@@ -177,13 +178,28 @@ public class InventoryUIController : MonoBehaviour {
 		characterList = CharacterList.FindInstant(); 
 		
 		for ( int i = 0; i < characterList.playerContainer.Count; i++ ) {
+			int index = i;
 			GameObject playerCharacter = characterList.playerContainer[i];
 			var stats = playerCharacter.GetComponent<Statistics>();
 			if ( stats ) {
-				Image playerIcon = new Image();
-				playerIcon.image = stats.DisplayImage.texture;
-				playerIcon.AddToClassList("PlayerContainer");
-				_playerContainer.Add(playerIcon);
+				
+				CharacterIcon icon = new CharacterIcon();
+				icon.name += $"-{stats.DisplayImage}";
+				icon.CharacterName = stats.DisplayName;
+				icon.Image = stats.DisplayImage;
+				icon.Level = stats.StatusValues.Level.value;
+				icon.SetHoverOnButton(true);
+				icon.UpdateComponent();
+				
+				//todo refactor this, it works but idont like it
+				icon.SetCallback(() => {
+					_currentPlayerSelected = index;
+					_selectedPlayerStatistics = playerCharacter.GetComponent<Statistics>();
+					UpdateEquipmentContainer();
+					RefreshStats(playerCharacter);
+				});
+
+				_playerContainer.Add(icon);
 			}
 		}
 	}
@@ -223,61 +239,65 @@ public class InventoryUIController : MonoBehaviour {
 		}
 	}
 
-
 	// Sets to selected player or first in container if none selected
 	// TODO: copied from OverlayUIController
 	//
-	private void RefreshPlayerViewContainer() {
-		// Debug.Log("Player selected: " + _currentPlayerSelected);
-		// Debug.Log("Character List: " + characterList.playerContainer.Count);
-		PlayerCharacterSC _selectedPlayer = characterList.playerContainer[_currentPlayerSelected]
-			.GetComponent<PlayerCharacterSC>();
+	void RefreshStats(GameObject obj) {
+		//todo move to own class
+		var charIcon = _characterStatusValuePanel.CharIcon;
+		
+		var healthBar = _characterStatusValuePanel.HealthBar;
+		var energyBar = _characterStatusValuePanel.EnergyBar;
+		var armorBar = _characterStatusValuePanel.ArmorBar;
 
-		//VisualElement manaBar = PlayerViewContainer.Q<VisualElement>("ProgressBarManaOverlay");
-		VisualElement healthBar = _playerViewContainer.Q<VisualElement>("ProgressBarHealthOverlay");
-		VisualElement abilityBar = _playerViewContainer.Q<VisualElement>("ProgressBarAbilityOverlay");
+		var strengthField = _characterStatusValuePanel.StrengthField;
+		var dexterityField = _characterStatusValuePanel.DexterityField;
+		var intelligenceField = _characterStatusValuePanel.IntelligenceField;
+		var movementField = _characterStatusValuePanel.MovementField;
+		
+		var statistics = obj.GetComponent<Statistics>();
+		var chracterStats = statistics.StatusValues;
 
-		StatusValues playerStats = _selectedPlayerStatistics.StatusValues;
+		charIcon.CharacterName = statistics.DisplayName;
+		charIcon.Level = chracterStats.Level.value;
+		charIcon.Image = statistics.DisplayImage; 
+		charIcon.UpdateComponent();
+		
+		healthBar.Max = chracterStats.HitPoints.max;
+		healthBar.Value = chracterStats.HitPoints.value;
+		healthBar.UpdateComponent();
 
-		//todo ui refactoring 
-		healthBar.style.width =
-			new StyleLength(Length.Percent(( 100 * ( float )playerStats.HitPoints.value /
-			                                 playerStats.HitPoints.max )));
-		abilityBar.style.width =
-			new StyleLength(Length.Percent(( 100 * ( float )playerStats.Energy.value /
-			                                 playerStats.Energy.max )));
+		energyBar.Max = chracterStats.Energy.max;
+		energyBar.Value = chracterStats.Energy.value;
+		energyBar.UpdateComponent();
 
-		//manaBar.style.width = new StyleLength(Length.Percent((100* (float)playerSC.EnergyPoints/playerStats.maxEnergy)));
+		armorBar.Max = chracterStats.Armor.max;
+		armorBar.Value = chracterStats.Armor.value;
+		armorBar.UpdateComponent();
+		
+		strengthField.Value = chracterStats.Strength.value;
+		strengthField.UpdateComponents();
+		
+		dexterityField.Value = chracterStats.Dexterity.value;
+		dexterityField.UpdateComponents();
+		
+		intelligenceField.Value = chracterStats.Intelligence.value;
+		intelligenceField.UpdateComponents();
 
-		// Labels für Stats
-		_playerViewContainer.Q<Label>("StrengthLabel").text = playerStats.Strength.value.ToString();
-		_playerViewContainer.Q<Label>("DexterityLabel").text = playerStats.Dexterity.value.ToString();
-		_playerViewContainer.Q<Label>("IntelligenceLabel").text =
-			playerStats.Intelligence.value.ToString();
-		_playerViewContainer.Q<Label>("MovementLabel").text = playerStats.ViewDistance.value.ToString();
-
-		// Image
-		VisualElement image = _playerViewContainer.Q<VisualElement>("PlayerPicture");
-		image.Clear();
-		Image newProfile = new Image();
-		image.Add(newProfile);
-		newProfile.image = _selectedPlayerStatistics.DisplayImage.texture;
-
-		// Name and Level
-		_playerViewContainer.Q<Label>("PlayerName").text = _selectedPlayerStatistics.DisplayName;
-		_playerViewContainer.Q<Label>("LevelLabel").text = playerStats.Level.value.ToString();
+		movementField.Value = chracterStats.MovementRange.value;
+		movementField.UpdateComponents();
 	}
 
 	// refresh menu and select
 	private void HandlePlayerSelected(GameObject player, Action<int> callback) {
 		_selectedPlayerStatistics = player.GetComponent<Statistics>();
-		RefreshPlayerViewContainer();
+		RefreshStats(player);
 	}
 
 	// refresh menu and select first in container
 	private void HandlePlayerDeselected(GameObject player) {
-		_selectedPlayerStatistics = characterList.playerContainer[0].GetComponent<Statistics>();
-		RefreshPlayerViewContainer();
+		_selectedPlayerStatistics = player.GetComponent<Statistics>();
+		RefreshStats(player);
 	}
 
 	/**
@@ -289,10 +309,10 @@ public class InventoryUIController : MonoBehaviour {
 	}
 
 	/**
-	 * set visibility of this menu window
+	 * set visibility of this Inventory menu window
 	 * only send menuOpened/menuClosed events if no else is open
 	 */
-	void HandleInventoryOverlay(bool value, bool othersOpened) {
+	void HandleInventoryOverlay(bool enableInventory, bool othersOpened) {
 		// add items to ItemSlots
 		UpdateInventorySlots();
 		
@@ -302,7 +322,7 @@ public class InventoryUIController : MonoBehaviour {
 		// add equipped items to equipment container
 		UpdateEquipmentContainer();
 
-		if ( value ) {
+		if ( enableInventory ) {
 			if(!othersOpened)
 				menuOpenedEvent.RaiseEvent();
 

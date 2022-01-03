@@ -5,6 +5,7 @@
     --level-text-color: white;
     --name-font-size: 20px;
     --level-font-size: 18px;
+    --icon-border-hover-color: #00aeff;
 }
 
 .characterIcon {
@@ -30,7 +31,7 @@
     height: 100px;
     width: 100px;
     border-width: 2px;
-    border-radius: 5px;
+    border-radius: 10px;
     border-color: var(--icon-border-color);
     
     padding: 0;
@@ -40,6 +41,11 @@
     align-items: flex-end;
 
     background-image: resource('Assets/Art/Sprites/Characters/defaultFace.jpg');
+}
+
+.characterIcon-iconButton:hover {
+    border-width: 4px;
+    border-color: var(--icon-border-hover-color);
 }
 
 .characterIcon-levelContainer {
