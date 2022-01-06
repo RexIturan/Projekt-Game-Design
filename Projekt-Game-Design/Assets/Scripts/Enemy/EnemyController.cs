@@ -22,10 +22,13 @@ public class EnemyController : MonoBehaviour
 		private List<EnemyCharacterSC> enemyOrder; // saves each enemy in order in which they are supposed to act
 		private int currentlyActingEnemy = 0;
 
+		private List<GameObject> enemiesToDestroy; // deletes these enemies after one round
+
     // Start is called before the first frame update
     void Start()
     {
 				isOnTurn = false;
+				enemiesToDestroy = new List<GameObject>();
     }
 
 		private void Awake()
@@ -83,6 +86,7 @@ public class EnemyController : MonoBehaviour
 				{
 						isOnTurn = true;
 						SetUpAllEnemies();
+						DestroyDeadEnemies();
 				}
 		}
 
@@ -111,5 +115,20 @@ public class EnemyController : MonoBehaviour
 		{
 				isOnTurn = false;
 				endTurnEC.RaiseEvent(Faction.Enemy);
+		}
+
+		private void DestroyDeadEnemies()
+		{
+				foreach(GameObject enemy in enemiesToDestroy)
+				{
+						characterList.deadEnemies.Remove(enemy);
+						GameObject.Destroy(enemy);
+				}
+
+				// put new dead enemies on list
+				foreach(GameObject enemy in characterList.deadEnemies)
+				{
+						enemiesToDestroy.Add(enemy);
+				}
 		}
 }

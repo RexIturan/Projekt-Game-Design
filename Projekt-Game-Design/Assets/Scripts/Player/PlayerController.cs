@@ -133,6 +133,8 @@ namespace Player {
 				}
 			}
 
+			// deselecting
+			//
 			if ( inputCache.rightButton.started ) {
 				if ( selectedPlayerCharacter is { } ) {
 					selectedPlayerCharacter.Deselect();

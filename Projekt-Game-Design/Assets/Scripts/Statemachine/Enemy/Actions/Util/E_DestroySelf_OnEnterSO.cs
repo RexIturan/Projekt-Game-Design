@@ -23,8 +23,8 @@ public class E_DestroySelf_OnEnter : StateAction
 
 		public override void OnStateEnter()
 		{
-				GameObject.Find("Characters").GetComponent<CharacterList>().enemyContainer.Remove(_enemy);
-
-				Object.Destroy(_enemy, 10);
+				CharacterList characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
+				characterList.enemyContainer.Remove(_enemy);
+				characterList.deadEnemies.Add(_enemy);
 		}
 }

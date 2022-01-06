@@ -23,7 +23,7 @@ namespace Characters.EnemyCharacter
 				[SerializeField] private FOVQueryEventChannelSO fieldOfViewQueryEvent;
 
 				public Targetable aiTarget; // player, they want to attack
-				// public Targetable enemyTarget; // in case they want to heal each other ... better use just one target
+				public PathNode closestNodeToTarget;
 
 				// these could just be saved in the respective controllers, 
 				// but for debug reasons I think they can stay here, 
@@ -87,6 +87,7 @@ namespace Characters.EnemyCharacter
 						CharacterList characterList = null;
 						if ( characterListObj )
 								characterList = characterListObj.GetComponent<CharacterList>();
+
 						if ( characterList )
 						{
 								for(int i = 0; !aiTarget && i < pathNodes.Count; i++)
@@ -94,9 +95,14 @@ namespace Characters.EnemyCharacter
 										foreach(GameObject player in characterList.playerContainer)
 										{
 												Targetable playerTargetable = player.GetComponent<Targetable>();
-												if ( playerTargetable && playerTargetable.GetGridPosition().Equals(pathNodes[i].pos) )
+
+												float distanceBetweenPlayerAndTile = !playerTargetable ? Int32.MaxValue : 
+														(pathNodes[i].pos - playerTargetable.GetGridPosition()).magnitude;
+
+												if ( distanceBetweenPlayerAndTile < 1.001 )
 												{
 														aiTarget = playerTargetable;
+														closestNodeToTarget = pathNodes[i];
 														// set also in attacker component
 														_attacker.SetTarget(aiTarget);
 												}
@@ -110,14 +116,14 @@ namespace Characters.EnemyCharacter
 				// so if the enemy can't move another tile, movement target will be set to null
 				public void TargetNearestTileToPlayerTarget()
 				{
-						pathfindingPathQueryEvent.RaiseEvent(_gridTransform.gridPosition, aiTarget.GetGridPosition(), SaveClosestTileToPlayerAsMovementTarget);
+						pathfindingPathQueryEvent.RaiseEvent(_gridTransform.gridPosition, closestNodeToTarget.pos, SaveClosestTileToPlayerAsMovementTarget);
 				}
 
 				private void SaveClosestTileToPlayerAsMovementTarget(List<PathNode> pathNodes)
 				{
 						int lastAffordableStep = 0;
-						// the last PathNode(pathNodes[pathNodes.Count - 2]) is the player position: stop before that pathnode
-						while ( lastAffordableStep < pathNodes.Count - 2 && pathNodes[lastAffordableStep + 1].dist <= _movementController.GetMaxMoveDistance() )
+
+						while ( lastAffordableStep < pathNodes.Count - 1 && pathNodes[lastAffordableStep + 1].dist <= _movementController.GetMaxMoveDistance() )
 								lastAffordableStep++;
 
 						// if the only affordable step is the enemies position, set target to null

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Characters.Ability;
+using UnityEngine;
 
 namespace Player {
 	public class Selectable : MonoBehaviour {
@@ -10,6 +11,11 @@ namespace Player {
 
 		public void Deselect() {
 			isSelected = false;
+
+			AbilityController abilityController = gameObject.GetComponent<AbilityController>();
+			if(abilityController) {
+				abilityController.abilitySelected = false;
+			}
 		}
 	}
 }

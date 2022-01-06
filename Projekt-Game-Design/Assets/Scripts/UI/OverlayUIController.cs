@@ -39,6 +39,9 @@ public class OverlayUIController : MonoBehaviour {
 	// PlayerView Container
 	private CharacterStatusValuePanel _characterStatusValuePanel;
 
+	// Zur Identifikation des gewaehlten Spielers
+	private GameObject _selectedPlayer;
+
 	private TemplateContainer _turnIndicator;
 
 	// Callbackfunktion für die Abilitys
@@ -52,15 +55,17 @@ public class OverlayUIController : MonoBehaviour {
 		_overlayContainer = root.Q<VisualElement>("OverlayContainer");
 		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
 		_turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
+
 		_overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
 		_overlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
+
 		visibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
 		visibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
 		showGameOverlayEC.OnEventRaised += SetGameOverlayVisibility;
 		showTurnIndicatorEC.OnEventRaised += SetTurnIndicatorVisibility;
+		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
 
-		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
 		
 		_actionBar.SetVisibility(false);
 		_characterStatusValuePanel.SetViibility(false);
@@ -114,6 +119,8 @@ public class OverlayUIController : MonoBehaviour {
 	/// <param name="player">player Character Game Object</param>
 	/// <param name="callBackAction">callback to call when a action ist clicked</param>
 	void HandlePlayerSelected(GameObject player, Action<int> callBackAction) {
+		_selectedPlayer = player;
+
 		// Anzeigen der notwendigen Komponenten
 		ShowActionMenu();
 		ShowPlayerViewContainer();
@@ -194,8 +201,10 @@ public class OverlayUIController : MonoBehaviour {
 	}
 
 	void HandlePlayerDeselected(GameObject obj) {
-		_actionBar.SetVisibility(false);
-		_characterStatusValuePanel.SetViibility(false);
+		if(obj == _selectedPlayer) { 
+			_actionBar.SetVisibility(false);
+			_characterStatusValuePanel.SetViibility(false);
+		}
 	}
 
 	void ShowPlayerViewContainer() {

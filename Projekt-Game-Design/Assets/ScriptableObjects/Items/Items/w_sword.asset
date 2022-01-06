@@ -16,10 +16,13 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: e6d98c25b4f09c1469b5c274573f2557, type: 3}
   prefab: {fileID: 919132149155446097, guid: bd3a764615475ce4d99ca9acf350d1fa, type: 3}
   mesh: {fileID: 8784857151957811099, guid: bd3a764615475ce4d99ca9acf350d1fa, type: 3}
-  material: {fileID: 0}
+  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
   goldValue: 0
   rarity: 0
   type: 0
+  abilities:
+  - {fileID: 11400000, guid: 6f286b61fd61f3a48b80ad5e8d79743a, type: 2}
+  - {fileID: 11400000, guid: 442d8065907058c4fa5dd6f8b7e47eeb, type: 2}
   abilities:
   - {fileID: 11400000, guid: 6f286b61fd61f3a48b80ad5e8d79743a, type: 2}
   - {fileID: 11400000, guid: 442d8065907058c4fa5dd6f8b7e47eeb, type: 2}

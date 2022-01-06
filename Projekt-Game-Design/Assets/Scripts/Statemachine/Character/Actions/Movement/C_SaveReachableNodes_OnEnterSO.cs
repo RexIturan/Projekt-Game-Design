@@ -38,6 +38,13 @@ public class C_SaveReachableNodes_OnEnter : StateAction {
 	}
 
 	public void SaveToStateContainer(List<PathNode> reachableTiles) {
+		// remove the position of the player from the list
+		int index = 0;
+		while(index < reachableTiles.Count && !reachableTiles[index].pos.Equals(_gridTransform.gridPosition))
+			index++;
+		if(index < reachableTiles.Count)
+			reachableTiles.RemoveAt(index);
+
 		_movementController.reachableTiles = reachableTiles;
 	}
 }

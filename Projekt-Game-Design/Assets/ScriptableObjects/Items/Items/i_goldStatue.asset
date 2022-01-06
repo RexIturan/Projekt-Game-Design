@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0060a96a91ff3fb41b85a129587606c5, type: 3}
   m_Name: i_goldStatue
   m_EditorClassIdentifier: 
-  id: 5
+  id: 7
   icon: {fileID: 21300000, guid: 076e9c37e6a8aac4fa3b6e90049e9ce5, type: 3}
-  model: {fileID: 0}
-  prefab: {fileID: 0}
-  mesh: {fileID: 0}
-  material: {fileID: 0}
+  prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
+  mesh: {fileID: 3718844980611480696, guid: 61833af8696b42e4d9aaa4255e923d71, type: 3}
+  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
   goldValue: 100
   rarity: 0
   type: 0
+  abilities: []

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0060a96a91ff3fb41b85a129587606c5, type: 3}
   m_Name: i_samplePotion
   m_EditorClassIdentifier: 
-  id: 4
+  id: 2
   icon: {fileID: 21300000, guid: caa6ebd497184c044b2c06d7f69ccdce, type: 3}
-  model: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
   mesh: {fileID: 0}
   material: {fileID: 0}
   goldValue: 20
   rarity: 2
   type: 132
+  abilities: []

@@ -62,9 +62,14 @@ namespace Graph {
             foreach (var enemy in characterList.enemyContainer) {
                 var pos = globalGridData.GetGridPos2DFromGridPos3D(enemy.GetComponent<GridTransform>().gridPosition);
                 graph.GetGridObject(pos).SetIsWalkable(false);
-            }    
-            
-            for (int x = 0; x < graph.Width; x++) {
+						}
+
+						foreach ( var player in characterList.playerContainer ) {
+								var pos = globalGridData.GetGridPos2DFromGridPos3D(player.GetComponent<GridTransform>().gridPosition);
+								graph.GetGridObject(pos).SetIsWalkable(false);
+						}
+
+						for (int x = 0; x < graph.Width; x++) {
                 for (int z = 0; z < graph.Depth; z++) {
                     graph.GetGridObject(x, z).SetEdges(diagonal, graph);
                 }
