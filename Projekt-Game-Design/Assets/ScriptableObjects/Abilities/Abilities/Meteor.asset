@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: e6492eb0591c65c40a66ebb3177d67ba, type: 3}
   description: Meteor
-  eCharacterAnimation: 10
+  Animation: 10
   targets: -1
   moveToTarget: 0
   range: 5

@@ -240,6 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  groundTarget: {x: 0, y: 0, z: 0}
+  groundTargetSet: 0
   tileInRangeOfTarget: []
   tilesInRange: []
   waitForAttackToFinish: 0
@@ -289,6 +291,7 @@ MonoBehaviour:
   abilityID: 0
   abilities: []
   baseAbilities: []
+  abilityContainer: {fileID: 11400000, guid: 636fde585deb2974e93548838daccee6, type: 2}
   abilitySelected: 0
   abilityConfirmed: 0
   abilityExecuted: 0
@@ -308,8 +311,12 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: a2e76941eb8ac734195b509949af023f, type: 2}
   weaponLeft: {fileID: 0}
   weaponRight: {fileID: 0}
+  headArmor: {fileID: 0}
+  bodyArmor: {fileID: 0}
+  shield: {fileID: 0}
   stance: 0
   weaponRightPosition: 0
+  animationController: {fileID: 0}
 --- !u!114 &106175245239994627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +333,13 @@ MonoBehaviour:
   pathfindingPathQueryEvent: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}
   fieldOfViewQueryEvent: {fileID: 11400000, guid: a8df37a37a427914e8db4b19294fa893, type: 2}
   aiTarget: {fileID: 0}
+  closestNodeToTarget:
+    pos: {x: 0, y: 0, z: 0}
+    gCost: 0
+    hCost: 0
+    fCost: 0
+    dist: 0
+    isWalkable: 0
   movementTarget:
     pos: {x: 0, y: 0, z: 0}
     gCost: 0

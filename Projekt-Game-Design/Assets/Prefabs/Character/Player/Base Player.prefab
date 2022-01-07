@@ -291,6 +291,7 @@ MonoBehaviour:
   abilityID: 0
   abilities: []
   baseAbilities: []
+  abilityContainer: {fileID: 11400000, guid: 636fde585deb2974e93548838daccee6, type: 2}
   abilitySelected: 0
   abilityConfirmed: 0
   abilityExecuted: 0
@@ -324,6 +325,9 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
   weaponLeft: {fileID: 0}
   weaponRight: {fileID: 0}
+  headArmor: {fileID: 0}
+  bodyArmor: {fileID: 0}
+  shield: {fileID: 0}
   stance: 0
   weaponRightPosition: 0
   animationController: {fileID: 0}

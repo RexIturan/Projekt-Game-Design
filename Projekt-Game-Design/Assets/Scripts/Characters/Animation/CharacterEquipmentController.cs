@@ -26,27 +26,31 @@ public class CharacterEquipmentController : MonoBehaviour
 			{
 				if ( position.Equals(EquipmentPosition.LEFT) || position.Equals(EquipmentPosition.RIGHT) )
 				{
-					WeightedTransformArray sourceObjects = constraint.data.sourceObjects;
-					// NOTE: the order of source objects in character model is important
-					sourceObjects.SetWeight(0, 0f);
-					sourceObjects.SetWeight(1, 0f);
-					sourceObjects.SetWeight(2, 0f);
+					WeightedTransform weightEquipped = new WeightedTransform(constraint.data.sourceObjects.GetTransform(0), 0f);
+					WeightedTransform weightBackUpwards = new WeightedTransform(constraint.data.sourceObjects.GetTransform(1), 0f);
+					WeightedTransform weightBackDownwards = new WeightedTransform(constraint.data.sourceObjects.GetTransform(2), 0f);
 
 					switch ( newPosition )
 					{
 						case ( WeaponPositionType.EQUIPPED ):
-							sourceObjects.SetWeight(0, 1.0f);
+							weightEquipped.weight = 1.0f;
 							break;
 						case ( WeaponPositionType.BACK_UPWARDS ):
-							sourceObjects.SetWeight(1, 1.0f);
+							weightBackUpwards.weight = 1.0f;
 							break;
 						case ( WeaponPositionType.BACK_DOWNWARDS ):
-							sourceObjects.SetWeight(2, 1.0f);
+							weightBackDownwards.weight = 1.0f;
 							break;
 						default:
 							Debug.LogWarning("Invalid position for weapons. ");
 							break;
 					}
+
+					WeightedTransformArray newWeights = new WeightedTransformArray();
+					newWeights.Add(weightEquipped);
+					newWeights.Add(weightBackUpwards);
+					newWeights.Add(weightBackDownwards);
+					constraint.data.sourceObjects = newWeights;
 				}
 				else if ( position.Equals(EquipmentPosition.SHIELD) )
 				{

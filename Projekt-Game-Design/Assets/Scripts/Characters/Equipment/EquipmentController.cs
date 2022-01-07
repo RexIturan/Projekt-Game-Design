@@ -9,7 +9,19 @@ namespace Characters.Equipment
 				[SerializeField] private InventorySO inventory;
 				public int playerID;
 
-				private bool rightIsActive = true;
+				// the position in the equipment inventory
+				// it is the item that grants the ability
+				[SerializeField] private ActiveEquipmentPosition activeEquipment = 0; 
+				// the active hand for the ability (animation)
+				// e.g. Cast A uses the left hand, Attack R uses the right hand
+				[SerializeField] private ActiveEquipmentPosition activeHands = 0;
+
+				[System.Flags, System.Serializable]
+				public enum ActiveEquipmentPosition
+				{
+						LEFT = 1,
+						RIGHT = 2,
+				}
 
 				public void Start()
 				{
@@ -23,6 +35,7 @@ namespace Characters.Equipment
 				{
 						// Model-wise
 						RefreshModels();
+						RefreshWeaponPositions();
 
 						// Ability-wise
 						AbilityController abilityController = gameObject.GetComponent<AbilityController>();
@@ -35,29 +48,52 @@ namespace Characters.Equipment
 						ModelController modelController = gameObject.GetComponent<ModelController>();
 						if ( modelController )
 						{
-								ItemSO itemLeft;
-								ItemSO itemRight;
+								// Find the proper Items for their respective hands
+								//
+								ItemSO itemLeftHand;
+								ItemSO itemRightHand;
 
-								if ( rightIsActive )
+
+								// if the active hand is the left, and the active weapon is in the right equipment position
+								// of if the active hand is the right, and the active weapon is in the left equipment position,
+								// swap the hands
+								if(activeHands.Equals(ActiveEquipmentPosition.LEFT) && activeEquipment.Equals(ActiveEquipmentPosition.RIGHT) ||
+										activeHands.Equals(ActiveEquipmentPosition.RIGHT) && activeEquipment.Equals(ActiveEquipmentPosition.LEFT))
 								{
-										itemLeft = inventory.equipmentInventories[playerID].weaponLeft;
-										itemRight = inventory.equipmentInventories[playerID].weaponRight;
+										itemLeftHand = GetWeaponRight();
+										itemRightHand = GetWeaponLeft();
 								}
 								else
 								{
-										itemLeft = inventory.equipmentInventories[playerID].weaponRight;
-										itemRight = inventory.equipmentInventories[playerID].weaponLeft;
+										// else put the right weapon to the right hand, and the left weapon to the left by default
+										itemLeftHand = GetWeaponLeft();
+										itemRightHand = GetWeaponRight();
 								}
 
 								ItemSO itemHead = inventory.equipmentInventories[playerID].headArmor;
 								ItemSO itemBody = inventory.equipmentInventories[playerID].bodyArmor;
 								ItemSO itemShield = inventory.equipmentInventories[playerID].shield;
 
-								modelController.SetMeshLeft(itemLeft ? itemLeft.mesh : null);
-								modelController.SetMeshRight(itemRight ? itemRight.mesh : null);
+								modelController.SetMeshLeft(itemLeftHand ? itemLeftHand.mesh : null);
+								modelController.SetMeshRight(itemRightHand ? itemRightHand.mesh : null);
 								modelController.SetMeshHead(itemHead ? itemHead.mesh : null);
 								modelController.SetMeshBody(itemBody ? itemBody.mesh : null);
 								modelController.SetMeshShield(itemShield ? itemShield.mesh : null);
+						}
+				}
+
+				public void RefreshWeaponPositions()
+				{
+						ModelController modelController = gameObject.GetComponent<ModelController>();
+						if ( modelController )
+						{
+								modelController.animationController
+										.ChangeWeaponPosition(EquipmentPosition.LEFT, 
+										activeHands.HasFlag(ActiveEquipmentPosition.LEFT) ? WeaponPositionType.EQUIPPED : WeaponPositionType.BACK_UPWARDS);
+
+								modelController.animationController
+										.ChangeWeaponPosition(EquipmentPosition.RIGHT,
+										activeHands.HasFlag(ActiveEquipmentPosition.RIGHT) ? WeaponPositionType.EQUIPPED : WeaponPositionType.BACK_UPWARDS);
 						}
 				}
 
@@ -76,26 +112,38 @@ namespace Characters.Equipment
 						return items;
 				}
 
+				/**
+				 * returns the weapon equipped in the left position in the equipment
+				 */
 				public WeaponSO GetWeaponLeft()
 				{
 						return inventory.equipmentInventories[playerID].weaponLeft;
 				}
-
+				
+				/**
+				 * returns the weapon equipped in the right position in the equipment
+				 */
 				public WeaponSO GetWeaponRight()
 				{
 						return inventory.equipmentInventories[playerID].weaponRight;
 				}
 
-				public void ActivateRight()
+				/**
+				 * sets the active weapon(s) to the given side, 
+				 * mostly the item that grants the respective ability
+				 */
+				public void SetActiveWeapon(ActiveEquipmentPosition sides)
 				{
-						rightIsActive = true;
-						RefreshModels();
+						activeEquipment = sides;
 				}
 
-				public void ActivateLeft()
+				/**
+				 * sets the active hand(s) to given side,
+				 * mostly the hands used for ability's animation
+				 */
+				public void SetActiveHands(ActiveEquipmentPosition sides)
 				{
-						rightIsActive = false;
-						RefreshModels();
+						activeHands = sides;
 				}
 		}
 }

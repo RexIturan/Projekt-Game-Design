@@ -26,8 +26,20 @@ public class P_EquipActiveWeapon_OnEnter : StateAction {
 	}
 
 	public override void OnStateEnter() {
-		// If the ability comes from the ability on the right, do nothing. 
-		// If it comes from the weapon on the left, switch weapons
+		// Set active hands for the animation of the ability
+		//
+		switch(_abilityController.GetSelectedAbility().Animation) {
+			case(CharacterAnimation.CAST_A):
+				_equipmentController.SetActiveHands(EquipmentController.ActiveEquipmentPosition.LEFT);
+				break;
+			default:
+				_equipmentController.SetActiveHands(EquipmentController.ActiveEquipmentPosition.RIGHT);
+				break;
+		}
+
+		// If the ability comes from the ability on the right, set right weapon active. 
+		// If it comes from the weapon on the left, set left weapon active
+		//
 		WeaponSO weaponRight = _equipmentController.GetWeaponRight();
 		bool rightContainsAbility = false;
 
@@ -39,7 +51,7 @@ public class P_EquipActiveWeapon_OnEnter : StateAction {
 		}
 
 		if(rightContainsAbility) {
-			_equipmentController.ActivateRight();
+			_equipmentController.SetActiveWeapon(EquipmentController.ActiveEquipmentPosition.RIGHT);
 		}
 		else { 
 			WeaponSO weaponLeft = _equipmentController.GetWeaponLeft();
@@ -53,8 +65,14 @@ public class P_EquipActiveWeapon_OnEnter : StateAction {
 			}
 
 			if(leftContainsAbility) {
-				_equipmentController.ActivateLeft();
+			_equipmentController.SetActiveWeapon(EquipmentController.ActiveEquipmentPosition.LEFT);
+			}
+			else {
+			_equipmentController.SetActiveWeapon(0);
 			}
 		}
+
+		_equipmentController.RefreshModels();
+	  _equipmentController.RefreshWeaponPositions();
 	}
 }

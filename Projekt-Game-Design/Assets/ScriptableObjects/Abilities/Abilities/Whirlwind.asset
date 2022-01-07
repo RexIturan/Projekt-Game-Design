@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 076e9c37e6a8aac4fa3b6e90049e9ce5, type: 3}
   description: 'Machtvoller Donut! '
-  eCharacterAnimation: 11
+  Animation: 11
   targets: 1
   moveToTarget: 0
   range: 0

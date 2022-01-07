@@ -1,4 +1,5 @@
-﻿using Characters.Equipment;
+﻿using Ability.ScriptableObjects;
+using Characters.Equipment;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Characters.Ability {
 		[SerializeField] private int abilityID;
 		[SerializeField] private AbilitySO[] abilities;
 		[SerializeField] private AbilitySO[] baseAbilities;
+		[SerializeField] private AbilityContainerSO abilityContainer;
 		
 		public AbilitySO[] Abilities => abilities;
 		public AbilitySO[] BaseAbilities {
@@ -22,6 +24,10 @@ namespace Characters.Ability {
 		public int SelectedAbilityID {
 			get => abilityID;
 			set => abilityID = value;
+		}
+
+		public AbilitySO GetSelectedAbility() {
+			return SelectedAbilityID >= 0 ? abilityContainer.abilities[SelectedAbilityID] : null;
 		}
 
 		public void RefreshAbilities() {

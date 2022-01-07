@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: de4a36bb908b2674586518430ae3cfd6, type: 3}
   description: 'Einfacher Nahkampf. Kosten: 1'
-  eCharacterAnimation: 0
+  Animation: 8
   targets: 4
   moveToTarget: 0
   range: 1

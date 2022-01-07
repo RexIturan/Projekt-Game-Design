@@ -9,7 +9,7 @@ public class AbilitySO : ScriptableObject
 {
     public Sprite icon;
     public string description;
-		public CharacterAnimation eCharacterAnimation;
+		public CharacterAnimation Animation;
 
     public AbilityTarget targets; // targetable objects: allies, enemies, etc. 
     public bool moveToTarget; // moves action taker to field of target
