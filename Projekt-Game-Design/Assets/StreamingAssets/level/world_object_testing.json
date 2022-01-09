@@ -20,46 +20,39 @@
                 "y": 1,
                 "z": 1
             }
-      },
-      {
-            "plyerTypeId": 0,
-            "plyerSpawnDataId": 1,
-            "equipmentInventoryId": 0,
-            "pos": {
-                "x": 2,
-                "y": 1,
-                "z": 1
-            }
-      },
-      {
-            "plyerTypeId": 0,
-            "plyerSpawnDataId": 2,
-            "equipmentInventoryId": 0,
-            "pos": {
-                "x": 3,
-                "y": 1,
-                "z": 1
-            }
       }
       ],
-    "enemies": [
+    "enemies": [],
+    "doors": [
       {
-            "enemyTypeId": 0,
-            "enemySpawnDataId": 0,
-            "pos": {
-                "x": 3,
-                "y": 1,
-                "z": 3
-            }
+		"doorTypeId": 0,
+		"gridPos": {
+        	"x": 1,
+        	"y": 1,
+        	"z": 4
+      		},
+		"open": false,
+		"keyIds": [],
+		"switchIds": [],
+		"triggerIds": [],
+		"remainingSwitchIds": [],
+		"remainingTriggerIds": [],
+		"currentHitPoints": 100
       },
       {
-            "enemyTypeId": 0,
-            "enemySpawnDataId": 1,
-            "pos": {
-                "x": 4,
-                "y": 1,
-                "z": 5
-            }
+		"doorTypeId": 0,
+		"gridPos": {
+        	"x": 4,
+        	"y": 1,
+        	"z": 4
+      		},
+		"open": false,
+		"keyIds": [11],
+		"switchIds": [],
+		"triggerIds": [],
+		"remainingSwitchIds": [],
+		"remainingTriggerIds": [],
+		"currentHitPoints": 100
       }
       ],
     "inventory": {
@@ -917,7 +910,7 @@
             "id": -1
           },
           {
-            "id": -1
+            "id": 11
           },
           {
             "id": -1

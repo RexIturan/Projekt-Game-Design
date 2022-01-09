@@ -34,6 +34,7 @@ namespace WorldObjects
 				{
 						this.doorType = doorType;
 						open = saveData.open;
+						locked = true;
 
 						if ( doorType.destructable )
 								gameObject.AddComponent<Targetable>();
