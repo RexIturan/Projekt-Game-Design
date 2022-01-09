@@ -13,6 +13,7 @@ namespace SaveSystem {
 		public GridData_Save gridDataSave;
 		public List<PlayerCharacter_Save> players;
 		public List<Enemy_Save> enemies;
+		public List<Door_Save> doors;
 		public Inventory_Save inventory;
 		public List<Inventory_Save> equipmentInventory;
 		public List<TileGrid> tileGrids;
@@ -26,6 +27,7 @@ namespace SaveSystem {
 			gridDataSave = new GridData_Save();
 			players = new List<PlayerCharacter_Save>();
 			enemies = new List<Enemy_Save>();
+			doors = new List<Door_Save>();
 			tileGrids = new List<TileGrid>();
 			itemGrids = new List<ItemGrid>();
 			characterGrids = new List<CharacterGrid>();
@@ -45,6 +47,7 @@ namespace SaveSystem {
 		public void Clear() {
 			players.Clear();
 			enemies.Clear();
+			doors.Clear();
 			tileGrids.Clear();
 			itemGrids.Clear();
 			characterGrids.Clear();

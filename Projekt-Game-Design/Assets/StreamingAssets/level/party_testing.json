@@ -62,6 +62,23 @@
             }
       }
       ],
+    "doors": [
+      {
+		"doorTypeId": 0,
+		"gridPos": {
+        	"x": 1,
+        	"y": 1,
+        	"z": 5
+      		},
+		"open": false,
+		"keyIds": [],
+		"switchIds": [],
+		"triggerIds": [],
+		"remainingSwitchIds": [],
+		"remainingTriggerIds": [],
+		"currentHitPoints": 100
+      }
+      ],
     "inventory": {
         "size": 3,
         "itemIds": [

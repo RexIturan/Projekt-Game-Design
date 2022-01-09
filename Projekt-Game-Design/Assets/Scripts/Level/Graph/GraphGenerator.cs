@@ -4,6 +4,7 @@ using Graph.ScriptableObjects;
 using Grid;
 using Level.Grid;
 using UnityEngine;
+using WorldObjects;
 
 namespace Graph {
     public class GraphGenerator : MonoBehaviour {
@@ -12,6 +13,7 @@ namespace Graph {
 
         [Header("SO References")] 
         public CharacterList characterList;
+				public WorldObjectList worldObjectList;
         [SerializeField] private TileTypeContainerSO tileTypeContainer;
         [SerializeField] private GraphContainerSO graphContainer;
         [SerializeField] private GridContainerSO gridContainer;
@@ -21,7 +23,8 @@ namespace Graph {
         [SerializeField] private bool diagonal;
         
         public void GenerateGraphFromGrids() {
-            characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
+            characterList = CharacterList.FindInstant();
+						worldObjectList = WorldObjectList.FindWorldObjectList();
             // characterContainer.FillContainer();
             
             graphContainer.basicMovementGraph = new List<NodeGraph>();
@@ -67,6 +70,15 @@ namespace Graph {
 						foreach ( var player in characterList.playerContainer ) {
 								var pos = globalGridData.GetGridPos2DFromGridPos3D(player.GetComponent<GridTransform>().gridPosition);
 								graph.GetGridObject(pos).SetIsWalkable(false);
+						}
+
+						foreach ( var door in worldObjectList.doors )
+						{
+								if(!door.GetComponent<Door>().open)
+								{
+										var pos = globalGridData.GetGridPos2DFromGridPos3D(door.GetComponent<GridTransform>().gridPosition);
+										graph.GetGridObject(pos).SetIsWalkable(false);
+								}
 						}
 
 						for (int x = 0; x < graph.Width; x++) {

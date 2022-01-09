@@ -49,8 +49,7 @@ namespace Characters.Movement {
 			if(gridData is null)
 				Debug.LogError($"MovementController#Start\n gridData is null!");
 			
-			// set position of gameobject    
-			MoveToGridPosition();
+			// set position of gameobject   
 			position = gameObject.transform.position;
 		}
 
@@ -76,10 +75,6 @@ namespace Characters.Movement {
 		#endregion
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		public void MoveToGridPosition() {
-			gameObject.transform.position = gridData.GetWorldPosFromGridPos(gridTransform.gridPosition);
-		}
 
 		public int GetEnergyUseUpFromMovement() {
 			return Mathf.CeilToInt(( float )movementTarget.dist / movementPointsPerEnergy);

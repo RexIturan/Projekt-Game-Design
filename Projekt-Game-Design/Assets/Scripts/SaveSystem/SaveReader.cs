@@ -4,6 +4,7 @@ using Grid;
 using Level.Grid.ItemGrid;
 using SaveSystem.SaveFormats;
 using UnityEngine;
+using WorldObjects;
 
 namespace SaveSystem {
 	public class SaveReader {
@@ -22,6 +23,7 @@ namespace SaveSystem {
 		
 		// runtime ref
 		private CharacterInitialiser _characterInitializer;
+		private WorldObjectInitialiser _worldObjectInitialiser;
 		
 //////////////////////////////////// Local Functions ///////////////////////////////////////////////
 		#region Local Functions
@@ -132,8 +134,10 @@ namespace SaveSystem {
 			_itemContainerSo = itemContainerSO;
 		}
 
-		public void SetRuntimeReferences(CharacterInitialiser characterInitialiser) {
+		public void SetRuntimeReferences(CharacterInitialiser characterInitialiser,
+				WorldObjectInitialiser worldObjectInitialiser) {
 			_characterInitializer = characterInitialiser;
+			_worldObjectInitialiser = worldObjectInitialiser;
 		}
 		
 		public void ReadSave(Save save) {
@@ -143,6 +147,7 @@ namespace SaveSystem {
 
 			// ReadCharacter(save.players, save.enemies);
 			_characterInitializer.Initialise(save.players, save.enemies);
+			_worldObjectInitialiser.Initialise(save.doors);
 
 			ReadInventory(save.inventory, _inventory);
 

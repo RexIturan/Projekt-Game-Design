@@ -445,6 +445,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: worldObjectInitialiser
+      value: 
+      objectReference: {fileID: 1363089168}
     - target: {fileID: 7187340983742418651, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
       propertyPath: m_Name
       value: SaveManager
@@ -456,12 +460,30 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
   m_PrefabInstance: {fileID: 1363089165}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1363089167}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 995418091c1f46a3b0ffe59f9c73bad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1363089167 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7187340983742418651, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+  m_PrefabInstance: {fileID: 1363089165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1363089168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363089167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4f37d6ab8307d45a44d87e033fc7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorContainer: {fileID: 11400000, guid: 9c9e1505ca630dc468131be2225d7281, type: 2}
 --- !u!1 &1394080781
 GameObject:
   m_ObjectHideFlags: 0

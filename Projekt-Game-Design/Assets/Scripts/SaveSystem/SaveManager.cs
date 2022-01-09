@@ -9,6 +9,7 @@ using SaveSystem.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using WorldObjects;
 
 namespace SaveSystem {
 	public class SaveManager : MonoBehaviour {
@@ -29,6 +30,7 @@ namespace SaveSystem {
 		public CharacterList characterList;
 		public InventorySO inventory;
 		public CharacterInitialiser characterInitializer;
+		public WorldObjectInitialiser worldObjectInitialiser;
 		[SerializeField] private ItemContainerSO itemContainerSO;
 
 
@@ -223,7 +225,7 @@ namespace SaveSystem {
 		/// uses the data from saveData, which is read in beforehand, for example in LoadTextAssetsAsSaves
 		/// </summary>
 		public void InitializeLevel() {
-			_saveReader.SetRuntimeReferences(characterInitializer);
+			_saveReader.SetRuntimeReferences(characterInitializer, worldObjectInitialiser);
 			_saveReader.ReadSave(_saveObject);
 
 			saveManagerData.loaded = true;
