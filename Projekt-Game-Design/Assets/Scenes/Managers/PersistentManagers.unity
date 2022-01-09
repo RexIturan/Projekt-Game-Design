@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorContainer: {fileID: 11400000, guid: 9c9e1505ca630dc468131be2225d7281, type: 2}
+  switchContainer: {fileID: 11400000, guid: 78f822e7e41f18f44a7e171d99fd7241, type: 2}
 --- !u!1 &1394080781
 GameObject:
   m_ObjectHideFlags: 0

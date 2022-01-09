@@ -5,8 +5,8 @@ namespace WorldObjects
 		/**
 		 * Contains data to set in door game object
 		 */
-		[CreateAssetMenu(fileName = "newDoor", menuName = "WorldObjects/Door/New Door")]
-		public class DoorSO : ScriptableObject
+		[CreateAssetMenu(fileName = "newDoorType", menuName = "WorldObjects/Door/New Door Type")]
+		public class DoorTypeSO : ScriptableObject
 		{
 				public int id;
 				public GameObject prefab;

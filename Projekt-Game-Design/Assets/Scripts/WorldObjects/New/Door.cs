@@ -20,7 +20,7 @@ namespace WorldObjects
 				[SerializeField] private IntEventChannelSO triggerActivatedEvent;
 
 				public int doorId;
-				public DoorSO doorType;
+				public DoorTypeSO doorType;
 				public bool open;
 				public bool locked;
 				[SerializeField] private List<int> keyIds;
@@ -30,7 +30,7 @@ namespace WorldObjects
 				[SerializeField] private List<int> remainingSwitches;
 				[SerializeField] private List<int> remainingTrigger;
 
-				public void Initialise(Door_Save saveData, DoorSO doorType)
+				public void Initialise(Door_Save saveData, DoorTypeSO doorType)
 				{
 						this.doorType = doorType;
 						open = saveData.open;
@@ -59,6 +59,13 @@ namespace WorldObjects
 						updateWorldObjectsEvent.OnEventRaised += UpdateDoor;
 						switchActivatedEvent.OnEventRaised += HandleSwitchActivatedEvent;
 						triggerActivatedEvent.OnEventRaised += HandleTriggerActivatedEvent;
+				}
+
+				public void OnDestroy()
+				{
+						updateWorldObjectsEvent.OnEventRaised -= UpdateDoor;
+						switchActivatedEvent.OnEventRaised -= HandleSwitchActivatedEvent;
+						triggerActivatedEvent.OnEventRaised -= HandleTriggerActivatedEvent;
 				}
 
 				private void HandleSwitchActivatedEvent(int switchId)

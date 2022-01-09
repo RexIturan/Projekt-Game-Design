@@ -7,6 +7,6 @@ namespace WorldObjects
 		[CreateAssetMenu(fileName = "DoorContainer", menuName = "WorldObjects/Door/Door Container")]
 		public class DoorContainerSO : ScriptableObject
 		{
-				public List<DoorSO> doors;
+				public List<DoorTypeSO> doors;
 		}
 }

@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2861852753429330148}
   - component: {fileID: 8345839291100090504}
-  - component: {fileID: 657795278606191778}
   - component: {fileID: 1641406335026457172}
   - component: {fileID: 3675022155374443427}
-  - component: {fileID: 975126722347142498}
+  - component: {fileID: 6144435644420208162}
   m_Layer: 0
-  m_Name: BaseDoor
+  m_Name: BaseSwitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,93 +47,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.5, z: 1}
   m_Center: {x: 0, y: 0.75, z: 0}
---- !u!114 &657795278606191778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5962490239412866605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db92712c79bf4f4b842aca898d1dbf8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DisplayName: 
-  DisplayImage: {fileID: 0}
-  stats:
-    _statusValues:
-    - _name: None
-      _type: 0
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: HitPoints
-      _type: 1
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: HitPointRegeneration
-      _type: 2
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: TemporeryHitPoints
-      _type: 3
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: Energy
-      _type: 4
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: EnergyRegeneration
-      _type: 5
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: Armor
-      _type: 6
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: MovementRange
-      _type: 7
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: ViewDistance
-      _type: 8
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: Strength
-      _type: 9
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: Dexterity
-      _type: 10
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: Intelligence
-      _type: 11
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: Level
-      _type: 12
-      _value: 0
-      _max: 0
-      _min: 0
-    - _name: Experience
-      _type: 13
-      _value: 0
-      _max: 0
-      _min: 0
-  faction: 0
 --- !u!114 &1641406335026457172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSelected: 0
---- !u!114 &975126722347142498
+--- !u!114 &6144435644420208162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,19 +83,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5962490239412866605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d0001d8a9ff46e47a278900bead939e, type: 3}
+  m_Script: {fileID: 11500000, guid: dc8516333d1cbcf4f8870a8263ab65be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
-  updateWorldObjectsEvent: {fileID: 11400000, guid: 43cbd7484c763514587e57c1e45ea0fa, type: 2}
   switchActivatedEvent: {fileID: 11400000, guid: 447d8770f6205264f9db44ea93ad8822, type: 2}
-  triggerActivatedEvent: {fileID: 11400000, guid: 2f9c33c4086a8754280820559e9caac1, type: 2}
-  doorId: 0
-  doorType: {fileID: 0}
-  open: 0
-  locked: 0
-  keyIds: 
-  switchIds: 
-  triggerIds: 
-  remainingSwitches: 
-  remainingTrigger: 
+  updateWorldObjectEvent: {fileID: 11400000, guid: 43cbd7484c763514587e57c1e45ea0fa, type: 2}
+  switchId: 0
+  switchType: {fileID: 0}

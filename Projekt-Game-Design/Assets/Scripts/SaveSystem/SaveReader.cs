@@ -147,7 +147,7 @@ namespace SaveSystem {
 
 			// ReadCharacter(save.players, save.enemies);
 			_characterInitializer.Initialise(save.players, save.enemies);
-			_worldObjectInitialiser.Initialise(save.doors);
+			_worldObjectInitialiser.Initialise(save.doors, save.switches);
 
 			ReadInventory(save.inventory, _inventory);
 

@@ -47,13 +47,39 @@
         	"z": 4
       		},
 		"open": false,
-		"keyIds": [11],
+		"keyIds": [7],
 		"switchIds": [],
 		"triggerIds": [],
 		"remainingSwitchIds": [],
 		"remainingTriggerIds": [],
 		"currentHitPoints": 100
+      },
+      {
+		"doorTypeId": 0,
+		"gridPos": {
+        	"x": 6,
+        	"y": 1,
+        	"z": 3
+      		},
+		"open": false,
+		"keyIds": [],
+		"switchIds": [0],
+		"triggerIds": [],
+		"remainingSwitchIds": [0],
+		"remainingTriggerIds": [],
+		"currentHitPoints": 100
       }
+      ],
+    "switches": [
+        {
+        "switchId": 0,
+        "switchTypeId": 0,
+	"gridPos": {
+          "x": 4,
+          "y": 1,
+          "z": 2
+      	}
+        }
       ],
     "inventory": {
         "size": 3,
@@ -910,7 +936,7 @@
             "id": -1
           },
           {
-            "id": 11
+            "id": 7
           },
           {
             "id": -1

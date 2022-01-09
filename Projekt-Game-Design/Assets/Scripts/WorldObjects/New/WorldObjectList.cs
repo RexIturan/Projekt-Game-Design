@@ -7,7 +7,7 @@ namespace WorldObjects
 		public class WorldObjectList : MonoBehaviour
 		{
 				public List<GameObject> doors;
-				[SerializeField] private List<GameObject> switches;
+				public List<GameObject> switches;
 				[SerializeField] private List<GameObject> trigger;
 				[SerializeField] private List<GameObject> objects;
 
