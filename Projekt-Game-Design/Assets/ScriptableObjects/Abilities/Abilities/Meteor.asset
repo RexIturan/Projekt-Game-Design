@@ -27,7 +27,7 @@ MonoBehaviour:
       strengthBonus: 0.52
       dexterityBonus: 0
       intelligenceBonus: 0
-    targets: 7
+    targets: 23
     targetIsCenter: 1
     area:
       rows:

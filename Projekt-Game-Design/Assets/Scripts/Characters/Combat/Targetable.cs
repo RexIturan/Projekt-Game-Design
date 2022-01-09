@@ -17,6 +17,10 @@ namespace Combat {
 		[SerializeField] private Statistics statistics;
 		[SerializeField] private GridTransform gridTransform;
 
+		public void Initialise() {
+			statistics = gameObject.GetComponent<Statistics>();
+			gridTransform = gameObject.GetComponent<GridTransform>();
+		}
 		
 		public void ReceivesDamage(int damage) {
 			statistics.StatusValues.HitPoints.Decrease(damage);

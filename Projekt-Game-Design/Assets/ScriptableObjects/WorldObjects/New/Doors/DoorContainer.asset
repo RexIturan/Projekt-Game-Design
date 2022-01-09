@@ -15,3 +15,4 @@ MonoBehaviour:
   doors:
   - {fileID: 11400000, guid: a332522f73c0bbf4dbe440e88190b4ed, type: 2}
   - {fileID: 11400000, guid: b5ccbab22fd4b094daef697739ac3c44, type: 2}
+  - {fileID: 11400000, guid: 1de2e0be05c65c5498763c2a1c833c0b, type: 2}

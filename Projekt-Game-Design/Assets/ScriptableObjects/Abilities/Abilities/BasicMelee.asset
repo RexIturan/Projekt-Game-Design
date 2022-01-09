@@ -15,7 +15,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: de4a36bb908b2674586518430ae3cfd6, type: 3}
   description: 'Einfacher Nahkampf. Kosten: 1'
   Animation: 8
-  targets: 4
+  targets: 20
   moveToTarget: 0
   range: 1
   conditions: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
       strengthBonus: 0.52
       dexterityBonus: 0
       intelligenceBonus: 0
-    targets: 4
+    targets: 20
     targetIsCenter: 1
     area:
       rows:

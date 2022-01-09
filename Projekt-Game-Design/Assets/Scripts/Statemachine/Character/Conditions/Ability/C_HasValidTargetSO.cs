@@ -58,6 +58,11 @@ public class C_HasValidTarget : Condition
 						// Debug.Log("Target Faction: " + targetFaction.ToString());
 						// Debug.Log("Attacker Faction: " + attackerFaction.ToString());
 
+						if ( ability.targets.HasFlag(AbilityTarget.Neutral) &&
+								targetFaction.Equals(Faction.Neutral))
+						{
+								targetRelationshipValid = true;
+						}
 						if ( ability.targets.HasFlag(AbilityTarget.Self) )
 						{
 								if ( _attacker.gameObject == _target.gameObject )

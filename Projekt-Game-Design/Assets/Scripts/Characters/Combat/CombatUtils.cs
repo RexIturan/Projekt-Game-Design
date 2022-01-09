@@ -3,6 +3,7 @@ using Characters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WorldObjects;
 
 namespace Combat
 {
@@ -27,7 +28,7 @@ namespace Combat
 				}
 
 				/**
-				 * Finds all characters, that are appliable to the ability target type 
+				 * Finds all characters/world objects, that are appliable to the ability target type 
 				 * and that are within the pattern at given position
 				 * 
 				 * NOTE: Doesn't work on world objects yet!!!
@@ -40,12 +41,12 @@ namespace Combat
 						HashSet<Targetable> targets = new HashSet<Targetable>();
 
 						HashSet<Targetable> possibleTargets = new HashSet<Targetable>();
-						
-						GameObject characterListGameObject = GameObject.Find("Characters");
-						if ( characterListGameObject )
-						{
-								CharacterList characterList = characterListGameObject.GetComponent<CharacterList>();
 
+						// characters
+						//
+						CharacterList characterList = CharacterList.FindInstant();
+						if ( characterList )
+						{
 								Faction attackerFaction = attacker.gameObject.GetComponent<Statistics>().GetFaction();
 
 								// cases in which player characters are targeted
@@ -73,16 +74,29 @@ namespace Combat
 												}
 										}
 								}
+						}
 
-								// add self
-								if(targetTypes.HasFlag(AbilityTarget.Self))
+						// add self
+						if ( targetTypes.HasFlag(AbilityTarget.Self) )
+						{
+								possibleTargets.Add(attacker.gameObject.GetComponent<Targetable>());
+						}
+
+						// world objects
+						//
+						WorldObjectList worldObjectList = WorldObjectList.FindWorldObjectList();
+						if(worldObjectList && targetTypes.HasFlag(AbilityTarget.Neutral))
+						{
+								foreach(GameObject doorObj in worldObjectList.doors)
 								{
-										possibleTargets.Add(attacker.gameObject.GetComponent<Targetable>());
+										Targetable doorTarget = doorObj.GetComponent<Targetable>();
+										if ( doorTarget )
+												possibleTargets.Add(doorTarget);
 								}
 						}
 
 						// add each target that is in the pattern
-						foreach(Targetable target in possibleTargets)
+						foreach (Targetable target in possibleTargets)
 						{
 								// (sorry about bad comment) The Anchor point should correspond to the ground target 
 								// The difference between the position of the ground target and the position of the character 

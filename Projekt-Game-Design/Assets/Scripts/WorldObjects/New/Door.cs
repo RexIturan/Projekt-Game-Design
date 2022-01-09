@@ -22,6 +22,7 @@ namespace WorldObjects
 				public int doorId;
 				public DoorTypeSO doorType;
 				public bool open;
+				[SerializeField] private bool broken;
 				public bool locked;
 				[SerializeField] private List<int> keyIds;
 				[SerializeField] private List<int> switchIds;
@@ -35,9 +36,13 @@ namespace WorldObjects
 						this.doorType = doorType;
 						open = saveData.open;
 						locked = true;
+						broken = false;
 
 						if ( doorType.destructable )
-								gameObject.AddComponent<Targetable>();
+						{
+								Targetable targetable = gameObject.AddComponent<Targetable>();
+								targetable.Initialise();
+						}
 
 						Instantiate(doorType.model, transform);
 
@@ -46,6 +51,7 @@ namespace WorldObjects
 						Statistics stats = gameObject.GetComponent<Statistics>();
 						stats.StatusValues.HitPoints.max = doorType.hitPoints;
 						stats.StatusValues.HitPoints.value = saveData.currentHitPoints;
+						stats.SetFaction(Faction.Neutral);
 
 						keyIds = saveData.keyIds;
 						switchIds = saveData.switchIds;
@@ -86,43 +92,51 @@ namespace WorldObjects
 				 */
 				private void UpdateDoor()
 				{
-						bool hasAllKeys = true;
-						foreach(int keyId in keyIds)
+						if ( gameObject.GetComponent<Statistics>().StatusValues.HitPoints.IsMin() )
 						{
-								bool hasKey = false;
-								foreach(ItemSO item in inventory.playerInventory)
-								{
-										if ( item.id == keyId )
-												hasKey = true;
-								}
-								if ( !hasKey )
-										hasAllKeys = false;
+								open = true;
+								broken = true;
 						}
-
-						if ( hasAllKeys && remainingSwitches.Count == 0 && remainingTrigger.Count == 0 )
-								locked = false;
-
-						if ( !locked )
+						else
 						{
-								CharacterList characters = CharacterList.FindInstant();
-								bool playerInRange = false;
-
-								if ( !doorType.openManually )
-										playerInRange = true;
-								else
+								bool hasAllKeys = true;
+								foreach ( int keyId in keyIds )
 								{
-										foreach ( GameObject player in characters.playerContainer )
+										bool hasKey = false;
+										foreach ( ItemSO item in inventory.playerInventory )
 										{
-												Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
-												Vector3Int doorPos = gameObject.GetComponent<GridTransform>().gridPosition;
-
-												if ( Vector3Int.Distance(playerPos, doorPos) < OPENING_DISTANCE )
-														playerInRange = true;
+												if ( item.id == keyId )
+														hasKey = true;
 										}
+										if ( !hasKey )
+												hasAllKeys = false;
 								}
 
-								if ( playerInRange )
-										open = true;
+								if ( hasAllKeys && remainingSwitches.Count == 0 && remainingTrigger.Count == 0 )
+										locked = false;
+
+								if ( !locked )
+								{
+										CharacterList characters = CharacterList.FindInstant();
+										bool playerInRange = false;
+
+										if ( !doorType.openManually )
+												playerInRange = true;
+										else
+										{
+												foreach ( GameObject player in characters.playerContainer )
+												{
+														Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
+														Vector3Int doorPos = gameObject.GetComponent<GridTransform>().gridPosition;
+
+														if ( Vector3Int.Distance(playerPos, doorPos) < OPENING_DISTANCE )
+																playerInRange = true;
+												}
+										}
+
+										if ( playerInRange )
+												open = true;
+								}
 						}
 				}
 		}
