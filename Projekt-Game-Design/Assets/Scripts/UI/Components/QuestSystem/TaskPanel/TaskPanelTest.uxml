@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/UI/Styles/test.uss" />
+    <UI.Components.QuestSystem.TaskPanel name="TaskPanel" />
+</ui:UXML>

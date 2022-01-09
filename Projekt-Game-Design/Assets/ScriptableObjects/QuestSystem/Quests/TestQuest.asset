@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8467908750364111612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
+  m_Name: 1_KeyPress_camera-down
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  type: 0
+  textTextBody:
+    title: Press [S][Arrow Down]
+    description: TODO
+    instructions: Press [S][Arrow Down]
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  actionName: MoveCamera
+  mapName: Camera
+  compositeName: down
+  actionNames: []
+--- !u!114 &-7736040180520264606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
+  m_Name: 0_KeyPress_camera-up
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  type: 0
+  textTextBody:
+    title: Press [W][Arrow Up]
+    description: TODO
+    instructions: Press [W][Arrow Up]
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  actionName: MoveCamera
+  mapName: Camera
+  compositeName: up
+  actionNames: []
+--- !u!114 &-4576197144052662707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
+  m_Name: 4_KeyPress_left
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  type: 0
+  textTextBody:
+    title: Press [A][Arrow Left]
+    description: TODO
+    instructions: Press [A][Arrow Left]
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  actionName: MoveCamera
+  mapName: Camera
+  compositeName: left
+  actionNames: []
+--- !u!114 &-3254571590361733681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
+  m_Name: 3_KeyPress_right
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  type: 0
+  textTextBody:
+    title: Press [D][Arrow Right]
+    description: TODO
+    instructions: Press [D][Arrow Right]
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  actionName: MoveCamera
+  mapName: Camera
+  compositeName: right
+  actionNames: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecda0ff7e794b0d8929230fb03c1044, type: 3}
+  m_Name: TestQuest
+  m_EditorClassIdentifier: 
+  description: 
+  available: 0
+  active: 1
+  finished: 0
+  repeatable: 0
+  prerequisits: []
+  currentTaskIndex: 0
+  nextTaskIndex: 0
+  tasks:
+  - name: camera-up
+    type: 0
+    task: {fileID: -7736040180520264606}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 327
+  - name: camera-down
+    type: 0
+    task: {fileID: -8467908750364111612}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 327
+  - name: right - left
+    type: 8
+    task: {fileID: 6261651919942083205}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 327
+  - name: right
+    type: 0
+    task: {fileID: -3254571590361733681}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 327
+  - name: left
+    type: 0
+    task: {fileID: -4576197144052662707}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 327
+--- !u!114 &6261651919942083205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf8303fb84b400a8821a24348d133d5, type: 3}
+  m_Name: 2_Composite_right - left
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  type: 8
+  textTextBody:
+    title: Composite Description
+    description: TODO
+    instructions: Press A And D
+  count: 0
+  subTasks:
+  - {fileID: -3254571590361733681}
+  - {fileID: -4576197144052662707}
