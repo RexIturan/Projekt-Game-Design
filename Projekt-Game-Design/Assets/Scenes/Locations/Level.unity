@@ -889,10 +889,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 512017045}
     m_Modifications:
-    - target: {fileID: 1112942784057711956, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
-      propertyPath: gridData
-      value: 
-      objectReference: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
     - target: {fileID: 1112942784057711957, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
       propertyPath: m_Name
       value: PathfindingController
@@ -1493,10 +1489,6 @@ PrefabInstance:
     - target: {fileID: 3672561659905499288, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_Name
       value: Fog Of War
-      objectReference: {fileID: 0}
-    - target: {fileID: 3672561659905499288, guid: aef65687e09683447a757e0d0244f77f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3672561659905499289, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_RootOrder
