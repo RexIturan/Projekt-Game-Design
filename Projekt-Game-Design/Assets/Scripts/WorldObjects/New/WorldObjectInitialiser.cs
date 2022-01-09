@@ -10,8 +10,11 @@ namespace WorldObjects
 		{
 				[SerializeField] private DoorContainerSO doorContainer;
 				[SerializeField] private SwitchContainerSO switchContainer;
+				[SerializeField] private JunkContainerSO junkContainer;
 
-				public void Initialise(List<Door_Save> door_Saves, List<Switch_Save> switch_Saves)
+				public void Initialise(List<Door_Save> door_Saves, 
+						List<Switch_Save> switch_Saves,
+						List<Junk_Save> junk_Saves)
 				{
 						WorldObjectList worldObjects = WorldObjectList.FindWorldObjectList();
 
@@ -39,6 +42,18 @@ namespace WorldObjects
 								GameObject switchObj = Instantiate(type.prefab, parent, true);
 								switchObj.GetComponent<SwitchComponent>().Initialise(switchSave, type);
 								worldObjects.switches.Add(switchObj);
+						}
+
+						parent = GameObject.Find("WorldObjects/junks").transform;
+
+						worldObjects.junks.Clear();
+
+						foreach ( Junk_Save junk in junk_Saves )
+						{
+								JunkTypeSO type = junkContainer.junks[junk.junkTypeId];
+								GameObject junkObj = Instantiate(type.prefab, parent, true);
+								junkObj.GetComponent<Junk>().Initialise(junk, type);
+								worldObjects.junks.Add(junkObj);
 						}
 				}
 		}

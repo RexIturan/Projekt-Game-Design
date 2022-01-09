@@ -90,6 +90,15 @@ namespace Graph {
 								}
 						}
 
+						foreach ( var junk in worldObjectList.junks )
+						{
+								if ( !junk.GetComponent<Junk>().junkType.walkThrough && !junk.GetComponent<Junk>().broken)
+								{
+										var pos = globalGridData.GetGridPos2DFromGridPos3D(junk.GetComponent<GridTransform>().gridPosition);
+										graph.GetGridObject(pos).SetIsWalkable(false);
+								}
+						}
+
 						for (int x = 0; x < graph.Width; x++) {
                 for (int z = 0; z < graph.Depth; z++) {
                     graph.GetGridObject(x, z).SetEdges(diagonal, graph);

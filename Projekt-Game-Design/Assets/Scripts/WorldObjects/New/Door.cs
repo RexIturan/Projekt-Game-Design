@@ -92,52 +92,65 @@ namespace WorldObjects
 				 */
 				private void UpdateDoor()
 				{
-						if ( gameObject.GetComponent<Statistics>().StatusValues.HitPoints.IsMin() )
+						if ( !broken && !open )
 						{
-								open = true;
-								broken = true;
-						}
-						else
-						{
-								bool hasAllKeys = true;
-								foreach ( int keyId in keyIds )
+								if ( gameObject.GetComponent<Statistics>().StatusValues.HitPoints.IsMin() )
 								{
-										bool hasKey = false;
-										foreach ( ItemSO item in inventory.playerInventory )
-										{
-												if ( item.id == keyId )
-														hasKey = true;
-										}
-										if ( !hasKey )
-												hasAllKeys = false;
+										DoorDestroyed();
 								}
-
-								if ( hasAllKeys && remainingSwitches.Count == 0 && remainingTrigger.Count == 0 )
-										locked = false;
-
-								if ( !locked )
+								else
 								{
-										CharacterList characters = CharacterList.FindInstant();
-										bool playerInRange = false;
-
-										if ( !doorType.openManually )
-												playerInRange = true;
-										else
+										bool hasAllKeys = true;
+										foreach ( int keyId in keyIds )
 										{
-												foreach ( GameObject player in characters.playerContainer )
+												bool hasKey = false;
+												foreach ( ItemSO item in inventory.playerInventory )
 												{
-														Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
-														Vector3Int doorPos = gameObject.GetComponent<GridTransform>().gridPosition;
-
-														if ( Vector3Int.Distance(playerPos, doorPos) < OPENING_DISTANCE )
-																playerInRange = true;
+														if ( item.id == keyId )
+																hasKey = true;
 												}
+												if ( !hasKey )
+														hasAllKeys = false;
 										}
 
-										if ( playerInRange )
-												open = true;
+										if ( hasAllKeys && remainingSwitches.Count == 0 && remainingTrigger.Count == 0 )
+												locked = false;
+
+										if ( !locked )
+										{
+												CharacterList characters = CharacterList.FindInstant();
+												bool playerInRange = false;
+
+												if ( !doorType.openManually )
+														playerInRange = true;
+												else
+												{
+														foreach ( GameObject player in characters.playerContainer )
+														{
+																Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
+																Vector3Int doorPos = gameObject.GetComponent<GridTransform>().gridPosition;
+
+																if ( Vector3Int.Distance(playerPos, doorPos) < OPENING_DISTANCE )
+																		playerInRange = true;
+														}
+												}
+
+												if ( playerInRange )
+														DoorOpened();
+										}
 								}
 						}
+				}
+
+				private void DoorDestroyed()
+				{
+						open = true;
+						broken = true;
+				}
+
+				private void DoorOpened()
+				{
+						open = true;
 				}
 		}
 }

@@ -93,6 +93,13 @@ namespace Combat
 										if ( doorTarget )
 												possibleTargets.Add(doorTarget);
 								}
+
+								foreach ( GameObject junkObj in worldObjectList.junks )
+								{
+										Targetable junkTarget = junkObj.GetComponent<Targetable>();
+										if ( junkTarget )
+												possibleTargets.Add(junkTarget);
+								}
 						}
 
 						// add each target that is in the pattern

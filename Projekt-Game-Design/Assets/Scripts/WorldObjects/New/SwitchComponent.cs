@@ -20,6 +20,7 @@ namespace WorldObjects
 
 				public int switchId;
 				public SwitchTypeSO switchType;
+				[SerializeField] private bool activated;
 
 				public void Awake()
 				{
@@ -33,6 +34,7 @@ namespace WorldObjects
 
 				public void Initialise(Switch_Save switch_Save, SwitchTypeSO switchType)
 				{
+						activated = false;
 						this.switchId = switch_Save.switchId;
 						this.switchType = switchType;
 						
@@ -44,20 +46,29 @@ namespace WorldObjects
 				// activates switch if conditions are met
 				public void UpdateSwitch()
 				{
-						CharacterList characters = CharacterList.FindInstant();
-						bool playerInRange = false;
-						foreach(GameObject player in characters.playerContainer)
+						if ( !activated )
 						{
-								Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
-								Vector3Int switchPos = gameObject.GetComponent<GridTransform>().gridPosition;
-								if(Vector3Int.Distance(playerPos, switchPos) < (float) switchType.range + EPSILON)
+								CharacterList characters = CharacterList.FindInstant();
+								bool playerInRange = false;
+								foreach ( GameObject player in characters.playerContainer )
 								{
-										playerInRange = true;
+										Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
+										Vector3Int switchPos = gameObject.GetComponent<GridTransform>().gridPosition;
+										if ( Vector3Int.Distance(playerPos, switchPos) < ( float )switchType.range + EPSILON )
+										{
+												playerInRange = true;
+										}
 								}
-						}
 
-						if ( playerInRange )
-								switchActivatedEvent.RaiseEvent(switchId);
+								if ( playerInRange )
+										SwitchActivated();
+						}
+				}
+
+				private void SwitchActivated()
+				{
+						switchActivatedEvent.RaiseEvent(switchId);
+						activated = true;
 				}
 		}
 }

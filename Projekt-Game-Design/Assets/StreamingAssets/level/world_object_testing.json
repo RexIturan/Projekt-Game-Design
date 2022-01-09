@@ -120,6 +120,18 @@
       	}
         }
       ],
+    "junks": [
+      {
+        "junkTypeId": 0,
+	"gridPos": {
+          "x": 1,
+          "y": 1,
+          "z": 0
+      	},
+        "broken": false,
+        "currentHitPoints": 20
+      }
+      ],
     "inventory": {
         "size": 3,
         "itemIds": [

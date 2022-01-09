@@ -165,6 +165,7 @@ namespace Player {
 			targetableObjects.AddRange(characterList.playerContainer);
 			targetableObjects.AddRange(characterList.enemyContainer);
 			targetableObjects.AddRange(worldObjectList.doors);
+			targetableObjects.AddRange(worldObjectList.junks);
 
 		  foreach( GameObject targetObj in targetableObjects)
 			{

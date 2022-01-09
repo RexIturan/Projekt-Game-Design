@@ -9,7 +9,7 @@ namespace WorldObjects
 				public List<GameObject> doors;
 				public List<GameObject> switches;
 				[SerializeField] private List<GameObject> trigger;
-				[SerializeField] private List<GameObject> objects;
+				public List<GameObject> junks;
 
 				public static WorldObjectList FindWorldObjectList()
 				{
