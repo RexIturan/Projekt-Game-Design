@@ -37,8 +37,13 @@ public class E_DropLoot_OnEnter : StateAction
 
 		public override void OnStateEnter()
 		{
-				if(!_gridController)
-						_gridController = GridController.FindGridController();
+				DropLoot(_redrawLevelEC, _enemy.enemyType.drops, _gridTransform.gridPosition);
+		}
+
+		// maybe TODO maybe move somewhere else
+		public static void DropLoot(VoidEventChannelSO redrawLevelEC, LootTable drops, Vector3Int gridPos)
+		{
+				GridController _gridController = GridController.FindGridController();
 
 				if ( !_gridController )
 						Debug.LogWarning("Could not find grid controller. ");
@@ -46,18 +51,18 @@ public class E_DropLoot_OnEnter : StateAction
 				{
 						// generate random drop
 						int dropID = -1;
-						foreach(var possibleDrop in _enemy.enemyType.drops.itemDropList)
+						foreach ( var possibleDrop in drops.itemDropList )
 						{
 								if ( dropID == -1 && possibleDrop.probability >= Random.value )
 										dropID = possibleDrop.itemID;
 						}
 
 						// if player was lucky, drop it
-						if(dropID >= 0)
+						if ( dropID >= 0 )
 						{
-								Debug.Log("Dropping loot: " + dropID + " at " + _gridTransform.gridPosition.x + ", " + _gridTransform.gridPosition.z);
-								_gridController.AddItemAtGridPos(_gridTransform.gridPosition, dropID);
-								_redrawLevelEC.RaiseEvent();
+								Debug.Log("Dropping loot: " + dropID + " at " + gridPos.x + ", " + gridPos.z);
+								_gridController.AddItemAtGridPos(gridPos, dropID);
+								redrawLevelEC.RaiseEvent();
 						}
 				}
 		}

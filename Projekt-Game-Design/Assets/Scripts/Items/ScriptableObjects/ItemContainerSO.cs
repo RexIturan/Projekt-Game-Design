@@ -13,12 +13,13 @@ public class ItemContainerSO : ScriptableObject {
 	[SerializeField] public List<ItemSO> itemList = new List<ItemSO>();
 
 	public void UpdateItemList() {
-		for ( int i = 0; i < itemList.Count; i++ ) {
+		for ( int i = 0; i < itemList.Count;) {
 			if ( itemList[i] == null ) {
 				itemList.RemoveAt(i);
 			}
 			else {
 				itemList[i].id = i;
+				i++;
 			}
 		}
 	}

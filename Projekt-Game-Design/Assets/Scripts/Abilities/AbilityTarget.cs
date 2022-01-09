@@ -9,6 +9,6 @@ namespace Ability
         Ally = 2,
         Enemy = 4,
         Ground = 8,
-        WorldObject = 16
+        Neutral = 16
     }
 }

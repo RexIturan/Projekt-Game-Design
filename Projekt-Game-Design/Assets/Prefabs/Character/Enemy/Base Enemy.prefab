@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridPosition: {x: 0, y: 0, z: 0}
+  gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
 --- !u!114 &2212653873986084095
 MonoBehaviour:
   m_ObjectHideFlags: 0

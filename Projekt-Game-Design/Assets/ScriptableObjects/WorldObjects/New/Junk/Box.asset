@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e83dff73502bbe408be1fe8b27689b3, type: 3}
+  m_Name: Box
+  m_EditorClassIdentifier: 
+  id: 0
+  prefab: {fileID: 5962490239412866605, guid: 60ace4b82b2b5d54c96634bb738e42bd, type: 3}
+  model: {fileID: 5177814715606673796, guid: ac16ac2e5cbfc5a45b4bbe1b168aa19f, type: 3}
+  junkName: Box ;)
+  description: Box the box. C'mon
+  walkThrough: 0
+  destructable: 1
+  hitPoints: 20
+  drop:
+    maxGold: 0
+    minGold: 0
+    experience: 0
+    itemDropList:
+    - itemID: 4
+      probability: 1

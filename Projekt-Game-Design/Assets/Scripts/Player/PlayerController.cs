@@ -9,6 +9,7 @@ using Input;
 using LevelEditor;
 using UnityEngine;
 using Util;
+using WorldObjects;
 using CursorMode = LevelEditor.CursorMode;
 
 namespace Player {
@@ -40,6 +41,7 @@ namespace Player {
 		[SerializeField] private Targetable target;
 
 		private CharacterList characterList; 
+		private WorldObjectList worldObjectList;
 		
 		private void Awake() {
 			abilitySelected = false;
@@ -52,8 +54,9 @@ namespace Player {
 			abilitySelectedEvent.OnEventRaised += HandleAbilitySelected;
 			abilityUnselectedEvent.OnEventRaised += HandleAbilityDeselected;
 			
-			//get character List
-			characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
+			//get Lists
+			characterList = CharacterList.FindInstant();
+			worldObjectList = WorldObjectList.FindWorldObjectList();
 		}
 
 		private void OnDisable() {
@@ -161,11 +164,13 @@ namespace Player {
 			List<GameObject> targetableObjects = new List<GameObject>();
 			targetableObjects.AddRange(characterList.playerContainer);
 			targetableObjects.AddRange(characterList.enemyContainer);
+			targetableObjects.AddRange(worldObjectList.doors);
+			targetableObjects.AddRange(worldObjectList.junks);
 
-		  foreach( GameObject charObj in targetableObjects)
+		  foreach( GameObject targetObj in targetableObjects)
 			{
-				Targetable objTarget = charObj.GetComponent<Targetable>();
-				if( objTarget.GetGridPosition().Equals(gridPos))
+				Targetable objTarget = targetObj.GetComponent<Targetable>();
+				if( objTarget != null && objTarget.GetGridPosition().Equals(gridPos))
 					return objTarget;
 			}
 			return null;
