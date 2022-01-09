@@ -68,6 +68,21 @@
 		"remainingSwitchIds": [0],
 		"remainingTriggerIds": [],
 		"currentHitPoints": 100
+      },
+      {
+		"doorTypeId": 1,
+		"gridPos": {
+        	"x": 6,
+        	"y": 1,
+        	"z": 6
+      		},
+		"open": false,
+		"keyIds": [],
+		"switchIds": [0, 1],
+		"triggerIds": [],
+		"remainingSwitchIds": [0, 1],
+		"remainingTriggerIds": [],
+		"currentHitPoints": 100
       }
       ],
     "switches": [
@@ -78,6 +93,15 @@
           "x": 4,
           "y": 1,
           "z": 2
+      	}
+        },
+        {
+        "switchId": 1,
+        "switchTypeId": 0,
+	"gridPos": {
+          "x": 4,
+          "y": 1,
+          "z": 0
       	}
         }
       ],

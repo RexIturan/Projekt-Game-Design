@@ -81,6 +81,15 @@ namespace Graph {
 								}
 						}
 
+						foreach ( var switchComponent in worldObjectList.switches )
+						{
+								if(!switchComponent.GetComponent<SwitchComponent>().switchType.walkThrough)
+								{
+										var pos = globalGridData.GetGridPos2DFromGridPos3D(switchComponent.GetComponent<GridTransform>().gridPosition);
+										graph.GetGridObject(pos).SetIsWalkable(false);
+								}
+						}
+
 						for (int x = 0; x < graph.Width; x++) {
                 for (int z = 0; z < graph.Depth; z++) {
                     graph.GetGridObject(x, z).SetEdges(diagonal, graph);

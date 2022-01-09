@@ -71,11 +71,13 @@ namespace WorldObjects
 				private void HandleSwitchActivatedEvent(int switchId)
 				{
 						remainingSwitches.Remove(switchId);
+						UpdateDoor();
 				}
 
 				private void HandleTriggerActivatedEvent(int triggerId)
 				{
 						remainingTrigger.Remove(triggerId);
+						UpdateDoor();
 				}
 
 				/**
@@ -104,13 +106,19 @@ namespace WorldObjects
 						{
 								CharacterList characters = CharacterList.FindInstant();
 								bool playerInRange = false;
-								foreach(GameObject player in characters.playerContainer)
-								{
-										Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
-										Vector3Int doorPos = gameObject.GetComponent<GridTransform>().gridPosition;
 
-										if ( Vector3Int.Distance(playerPos, doorPos) < OPENING_DISTANCE )
-												playerInRange = true;
+								if ( !doorType.openManually )
+										playerInRange = true;
+								else
+								{
+										foreach ( GameObject player in characters.playerContainer )
+										{
+												Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
+												Vector3Int doorPos = gameObject.GetComponent<GridTransform>().gridPosition;
+
+												if ( Vector3Int.Distance(playerPos, doorPos) < OPENING_DISTANCE )
+														playerInRange = true;
+										}
 								}
 
 								if ( playerInRange )

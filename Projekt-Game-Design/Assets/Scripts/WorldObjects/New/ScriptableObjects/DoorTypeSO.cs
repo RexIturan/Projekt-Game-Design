@@ -13,6 +13,7 @@ namespace WorldObjects
 				public GameObject model;
 				public string doorName;
 				public string description;
+				public bool openManually;
 				public bool destructable;
 				public int hitPoints;
 		}
