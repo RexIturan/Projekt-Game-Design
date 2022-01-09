@@ -1,0 +1,61 @@
+﻿:root{
+    --done-label-color: rgb(0, 66, 170);
+    --done-color: rgb(61, 135, 255);
+    --done-background-color: rgba(61, 181, 255, 0.5);
+    --failed-label-color: #930000;
+    --failed-color: #e91616;
+    --failed-background-color: rgba(255, 0, 0, 0.5);
+    --active-label-color: rgb(109, 109, 109);
+    --active-color: #6d6d6d;
+    --active-background-color: rgba(167, 167, 167, 0.5);
+    
+    --border-width: 3px;
+    --font-size: 20px;
+    
+    --spacing: 3px;
+}
+
+.instructionField{
+
+}
+
+.instructionField-container{
+    border-width: var(--border-width);
+    
+    margin: 0 var(--spacing);
+    margin-bottom: var(--spacing);
+    
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.instructionField-label{
+    font-size: var(--font-size);
+}
+
+.instructionField-active{
+    border-color: var(--active-color);
+    background-color: var(--active-background-color);
+}
+
+.instructionField-done{
+    border-color: var(--done-color);
+    background-color: var(--done-background-color);
+}
+
+.instructionField-failed{
+    border-color: var(--failed-color);
+    background-color: var(--failed-background-color);
+}
+
+.instructionField-active-label{
+    color: var(--active-label-color);
+}
+
+.instructionField-done-label{
+    color: var(--done-label-color);
+}
+
+.instructionField-failed-label{
+    color: var(--failed-label-color);
+}

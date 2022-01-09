@@ -1,19 +1,16 @@
 {
-    "name": "GDP01.Editor",
+    "name": "GDP01.QuestSystem",
     "rootNamespace": "",
     "references": [
-        "GDP01",
-        "Unity.Addressables",
-        "GDP01.QuestSystem"
+        "GUID:5df59458d14b4725b79155a288580a02",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

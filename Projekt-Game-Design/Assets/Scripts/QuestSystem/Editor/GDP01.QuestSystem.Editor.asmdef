@@ -1,10 +1,8 @@
 {
-    "name": "GDP01.Editor",
+    "name": "GDP01.QuestSystem.Editor",
     "rootNamespace": "",
     "references": [
-        "GDP01",
-        "Unity.Addressables",
-        "GDP01.QuestSystem"
+        "GUID:2707f35e1cc7fc94db1a5b521725fcd0"
     ],
     "includePlatforms": [
         "Editor"

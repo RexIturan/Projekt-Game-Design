@@ -1,0 +1,173 @@
+﻿:root{
+    /*color and other variables go here*/
+    --background-color: #b2b2b2;
+    --border-color: #585858;
+    --button-text-color: #141414;
+    --help-color: #ffaa00;
+    --help-highlight-color: #ff6600;
+    --help-background-color: #ddc096;
+    
+    --skip-color: #0090ff;
+    --skip-highlight-color: #0040ff;
+    --skip-background-color: #97bad9;
+
+    --next-color: #06c30e;
+    --next-highlight-color: #00aa30;
+    --next-background-color: #97d999;
+
+    --previous-color: #b80c0c;
+    --previous-highlight-color: #7b0606;
+    --previous-background-color: #dc7777;
+    
+    --border-width: 2px;
+    --button-font-size: 20px;
+    
+    --title-fontSize: 28px;
+    --description-fontSize: 20px;
+    --instruction-fontSize: 20px;
+    
+    --container-padding: 5px;
+    --title-height: 50px;
+}
+
+.taskPanel { 
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+    align-items: flex-end;
+    
+    padding-right: 10;
+    padding-top: 60px;    
+}
+
+.taskPanel-container {
+    width: 350px;
+    /*height: 400px;*/
+    
+    padding: var(--container-padding);
+    
+    background-color: var(--background-color);
+    
+    border-width: var(--border-width);
+    border-radius: 5px;
+    border-color: var(--border-color);
+    
+    align-items: center;
+    justify-content: space-between;
+}
+
+.taskPanel-container-content {
+    position: absolute;
+    top: var(--container-padding);
+    /*padding: var(--container-padding);*/
+    width: 100%;
+    height: 100%;
+}
+
+.taskPanel-titleLabel {
+    height: var(--title-height);
+    padding: 0;
+    margin: 0;
+    
+    -unity-text-align: middle-center;
+    font-size: var(--title-fontSize);
+}
+
+.taskPanel-textContainer{
+    width: 100%;
+    
+    margin-bottom: 5px;    
+    
+    border-width: var(--border-width);
+    border-color: var(--border-color);
+}
+
+.taskPanel-descriptionContainer{
+}
+
+.taskPanel-descriptionLabel {
+    font-size: var(--description-fontSize);
+    white-space: normal;
+}
+
+.taskPanel-instructionContainer{
+    flex-grow: 1;
+}
+
+.taskPanel-instructionLabel {
+    font-size: var(--instruction-fontSize);
+}
+
+.taskPanel-topButtonContainer {
+    width: 100%;
+    height: var(--title-height);
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.taskPanel-navigationButtonContainer {
+    width: 100%;
+
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.taskPanel-button {
+    width: 70px;
+    height: 40px;
+
+    padding: 0;
+    margin: 0;
+    
+    border-width: var(--border-width);
+    /*border-radius: 5px;*/
+    border-color: var(--border-color);
+    
+    color: var(--button-text-color);
+    
+    font-size: var(--button-font-size);
+}
+
+.taskPanel-button-navigation {
+    width: 40%;
+}
+
+.help{
+    border-color: var(--help-color);
+    background-color: var(--help-background-color);
+}
+
+.help:hover, .help:focus{
+    border-color: var(--help-highlight-color);
+}
+
+
+.skip{
+    border-color: var(--skip-color);
+    background-color: var(--skip-background-color);
+}
+
+.skip:hover, .skip:focus{
+    border-color: var(--skip-highlight-color);
+}
+
+
+.next{
+    border-color: var(--next-color);
+    background-color: var(--next-background-color);
+}
+
+.next:hover, .next:focus{
+    border-color: var(--next-highlight-color);
+}
+
+.previous{
+    border-color: var(--previous-color);
+    background-color: var(--previous-background-color);
+}
+
+.previous:hover, .previous:focus{
+    border-color: var(--previous-highlight-color);
+}

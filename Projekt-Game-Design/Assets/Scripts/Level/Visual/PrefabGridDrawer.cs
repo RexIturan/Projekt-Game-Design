@@ -10,7 +10,7 @@ namespace Visual {
         [SerializeField] private GridDataSO globalGridData;
         [SerializeField] private WorldObjectGridContainerSO worldObjectGridContainer;
 
-        private GameObject[,] _prefabObjects;
+        // private GameObject[,] _prefabObjects;
         
         //new
         [SerializeField] private GridDataSO gridData;
@@ -27,7 +27,7 @@ namespace Visual {
 	        
 	        
             ClearPrefabParentChildren();
-            _prefabObjects = new GameObject[100, 100];
+            // _prefabObjects = new GameObject[100, 100];
             _itemObjects = new GameObject[1, 1, 1];
         }
 
@@ -126,41 +126,41 @@ namespace Visual {
         public void DrawGrid() {
             
             // for each instantiate prefab
-            var offset = new Vector2Int((int)globalGridData.OriginPosition.x, (int)globalGridData.OriginPosition.z); 
-            
-            for (int l = 0; l < worldObjectGridContainer.worldObjectGrids.Count; l++) {
-                var worldObjectGrid = worldObjectGridContainer.worldObjectGrids[l];
-                for (int x = 0; x < worldObjectGrid.Width; x++) {
-                    for (int y = 0; y < worldObjectGrid.Depth; y++) {
-                        var tile = worldObjectGrid.GetGridObject(x, y).type;
-                        
-                        if (tile != null) {
-
-                            if (_prefabObjects[x, y] == null) {
-                                _prefabObjects[x,y] = Instantiate(
-                                    worldObjectGrid.GetGridObject(x, y).type.prefab, 
-                                    new Vector3(x + offset.x, l, y + offset.y), 
-                                    Quaternion.identity);
-                            
-                                _prefabObjects[x,y].transform.SetParent(parent);    
-                            }
-                            
-                            
-                                // worldObjectGrid.GetGridObject(x, y).type.prefab, new Vector3Int(x + offset.x, y + offset.y, l),);
-                            // parent
-                            // gridTilemap.SetTile(
-                            //     new Vector3Int(x + offset.x, y + offset.y, l),
-                            //     GetTileFromTileType(worldObjectGrid.GetGridObject(x, y).Type));    
-                        }
-                        else {
-                            Debug.Log("error tile");
-                            // gridTilemap.SetTile(
-                            //     new Vector3Int(x + offset.x, y + offset.y, l),
-                            //     errorTile);    
-                        }
-                    }
-                }
-            }
+            // var offset = new Vector2Int((int)globalGridData.OriginPosition.x, (int)globalGridData.OriginPosition.z); 
+            //
+            // for (int l = 0; l < worldObjectGridContainer.worldObjectGrids.Count; l++) {
+            //     var worldObjectGrid = worldObjectGridContainer.worldObjectGrids[l];
+            //     for (int x = 0; x < worldObjectGrid.Width; x++) {
+            //         for (int y = 0; y < worldObjectGrid.Depth; y++) {
+            //             var tile = worldObjectGrid.GetGridObject(x, y).type;
+            //             
+            //             if (tile != null) {
+            //
+            //                 if (_prefabObjects[x, y] == null) {
+            //                     _prefabObjects[x,y] = Instantiate(
+            //                         worldObjectGrid.GetGridObject(x, y).type.prefab, 
+            //                         new Vector3(x + offset.x, l, y + offset.y), 
+            //                         Quaternion.identity);
+            //                 
+            //                     _prefabObjects[x,y].transform.SetParent(parent);    
+            //                 }
+            //                 
+            //                 
+            //                     // worldObjectGrid.GetGridObject(x, y).type.prefab, new Vector3Int(x + offset.x, y + offset.y, l),);
+            //                 // parent
+            //                 // gridTilemap.SetTile(
+            //                 //     new Vector3Int(x + offset.x, y + offset.y, l),
+            //                 //     GetTileFromTileType(worldObjectGrid.GetGridObject(x, y).Type));    
+            //             }
+            //             else {
+            //                 Debug.Log("error tile");
+            //                 // gridTilemap.SetTile(
+            //                 //     new Vector3Int(x + offset.x, y + offset.y, l),
+            //                 //     errorTile);    
+            //             }
+            //         }
+            //     }
+            // }
         }
 
         private void ClearPrefabParentChildren() {
