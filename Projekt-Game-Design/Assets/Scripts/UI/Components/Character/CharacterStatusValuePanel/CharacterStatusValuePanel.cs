@@ -68,7 +68,8 @@ namespace UI.Components.Character {
 		public StatusValueField IntelligenceField { get; set; }
 		//Movement
 		public StatusValueField MovementField { get; set; }
-
+		public StatusValueField VisionField { get; set; }
+		
 ///// PRIVATE FUNCTIONS ////////////////////////////////////////////////////////////////////////////
 
 		private void BuildComponents() {
@@ -181,7 +182,7 @@ namespace UI.Components.Character {
 			
 			_statusValueRow = new List<VisualElement>();
 			
-			Rows = rows;
+			Rows = 1;
 			
 			//todo remove test
 			HealthBar = new ProgressBar("Health", 10, 10, 0);
@@ -195,20 +196,20 @@ namespace UI.Components.Character {
 			
 			_progressBars.Add(HealthBar);
 			_progressBars.Add(EnergyBar);
-			_progressBars.Add(ArmorBar);
-
+			// _progressBars.Add(ArmorBar);
 
 			StrengthField = new StatusValueField("Strength", 5, 0);
 			DexterityField = new StatusValueField("Dexterity", 5, 0);
 			IntelligenceField = new StatusValueField("Intelligence", 5, 0);
 			MovementField = new StatusValueField("Movement", 5, 0);
+			VisionField = new StatusValueField("Vision Range", 10, 0);
 
-			_statusValueFields.Add(StrengthField);
-			_statusValueFields.Add(DexterityField);
-			_statusValueFields.Add(IntelligenceField);
+			// _statusValueFields.Add(StrengthField);
+			// _statusValueFields.Add(DexterityField);
+			// _statusValueFields.Add(IntelligenceField);
 			_statusValueFields.Add(MovementField);
-			_statusValueFields.Add(new StatusValueField("NA", 0, 0));
-			_statusValueFields.Add(new StatusValueField("NA", 0, 0));
+			_statusValueFields.Add(VisionField);
+			// _statusValueFields.Add(new StatusValueField("NA", 0, 0));
 			
 			BuildComponents();
 			UpdateComponents();

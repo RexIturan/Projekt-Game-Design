@@ -44,7 +44,7 @@ namespace WorldObjects
 								worldObjects.switches.Add(switchObj);
 						}
 
-						parent = GameObject.Find("WorldObjects/junks").transform;
+						parent = GameObject.Find("WorldObjects/junk").transform;
 
 						worldObjects.junks.Clear();
 

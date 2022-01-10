@@ -31,7 +31,7 @@
 
 .characterStatusValuePanel-statusValueFieldRow {
     margin: 5px 0px;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-direction: row;
 }

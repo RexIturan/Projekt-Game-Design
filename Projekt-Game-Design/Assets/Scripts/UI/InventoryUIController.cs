@@ -254,6 +254,7 @@ public class InventoryUIController : MonoBehaviour {
 		var dexterityField = _characterStatusValuePanel.DexterityField;
 		var intelligenceField = _characterStatusValuePanel.IntelligenceField;
 		var movementField = _characterStatusValuePanel.MovementField;
+		var visionField = _characterStatusValuePanel.VisionField;
 		
 		var statistics = obj.GetComponent<Statistics>();
 		var chracterStats = statistics.StatusValues;
@@ -286,6 +287,9 @@ public class InventoryUIController : MonoBehaviour {
 
 		movementField.Value = chracterStats.MovementRange.value;
 		movementField.UpdateComponents();
+		
+		visionField.Value = chracterStats.ViewDistance.value;
+		visionField.UpdateComponents();
 	}
 
 	// refresh menu and select

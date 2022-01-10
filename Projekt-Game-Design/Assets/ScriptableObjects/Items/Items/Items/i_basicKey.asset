@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 8
   icon: {fileID: 21300000, guid: a5e74a8f7d0d00f4e80331e5a1a93a5c, type: 3}
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
-  mesh: {fileID: -4884568072273214817, guid: 595ed9b5b787a3d4a916c6a5f0b8a9cd, type: 3}
-  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
+  mesh: {fileID: -3904652364398873750, guid: 9f5a52d02d0bfe84fa7d83456817da92, type: 3}
+  material: {fileID: 2100000, guid: a799ee3057a0c0c4d83aafb6421ac8e7, type: 2}
   goldValue: 0
   rarity: 0
   type: 0
