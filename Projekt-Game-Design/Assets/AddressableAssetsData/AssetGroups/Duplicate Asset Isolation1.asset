@@ -17,10 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: ff0beb58390b53447866f84f3cd18111
   m_SerializeEntries:
-  - m_GUID: 04ba661f5bb04e2498d93703d8d40f10
-    m_Address: Assets/UI/Inventory/images/leather-boot.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: de45a39375145424abac34c58282d7a7
     m_Address: Assets/Art/Textures/Tiles/red-tile.png
     m_ReadOnly: 0
@@ -57,10 +53,6 @@ MonoBehaviour:
     m_Address: Assets/UI Toolkit/PanelSettings.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: cce7fcd0581cb93418ffaa9ec7a3da1a
-    m_Address: Assets/UI/Inventory/images/balaclava.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 7082954141e3ccc43bc3b217cf12e2e0
     m_Address: Packages/com.unity.ui/Shaders/UIE-RuntimeWorld.shader
     m_ReadOnly: 0
@@ -95,10 +87,6 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 2727d8462e1b04e4fbbdcb31cf2b0a62
     m_Address: Assets/UI/Images/defaultFace.jpg
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 076e9c37e6a8aac4fa3b6e90049e9ce5
-    m_Address: Assets/UI/Inventory/images/trousers.png
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: efde8e3783095f54d86986d1cf9eedf2
@@ -141,10 +129,6 @@ MonoBehaviour:
     m_Address: Assets/UI/Stats/movement.png
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: b44c0aed6aeb9f44eac56125b00b3865
-    m_Address: Assets/UI/Inventory/images/lamellar.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 64ab7daf4a83bdb429be7a57dbf1d64e
     m_Address: Assets/UI/UI.uxml
     m_ReadOnly: 0
@@ -155,14 +139,6 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 2c2dff7b24b8be04681fcd9cdfcb1d91
     m_Address: Assets/UI/SceneLoading/LoadingScreen.uxml
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: de4a36bb908b2674586518430ae3cfd6
-    m_Address: Assets/UI/Inventory/images/brutal-helm.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: e6d98c25b4f09c1469b5c274573f2557
-    m_Address: Assets/UI/Inventory/images/two-handed-sword.png
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

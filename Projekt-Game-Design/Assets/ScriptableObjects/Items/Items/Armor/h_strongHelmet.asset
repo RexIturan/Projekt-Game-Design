@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f46c068859298943b82345325e438c7, type: 3}
   m_Name: h_strongHelmet
   m_EditorClassIdentifier: 
-  id: 10
-  icon: {fileID: 21300000, guid: 74d6c2ab5beb1c64096ab71f18a252f1, type: 3}
+  id: 7
+  icon: {fileID: 21300000, guid: 859bc1520614dc246acb19f6705ebf81, type: 3}
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
   mesh: {fileID: -3800663362518633802, guid: a9b97bb237d970d479610c06205b120d, type: 3}
   material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}

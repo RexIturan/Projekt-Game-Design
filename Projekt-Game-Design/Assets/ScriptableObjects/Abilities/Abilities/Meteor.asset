@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: Meteor
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e6492eb0591c65c40a66ebb3177d67ba, type: 3}
+  icon: {fileID: 21300000, guid: a37a6dbf0d1c69f49aa65149190a0066, type: 3}
   description: Meteor
   Animation: 10
+  activationSound: 
   targets: -1
   moveToTarget: 0
   range: 5

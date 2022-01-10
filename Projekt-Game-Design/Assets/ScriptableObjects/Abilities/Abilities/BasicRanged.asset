@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: BasicRanged
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 42f2715c74a15e443b5fcc0dd6225bc5, type: 3}
+  icon: {fileID: 21300000, guid: 9889ee4a1b03ca248996a9e1e676dd8d, type: 3}
   description: 'A ranged attack with much range (8). Costs: 2'
   Animation: 8
+  activationSound: 
   targets: 20
   moveToTarget: 0
   range: 8

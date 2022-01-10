@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: Whirlwind
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 076e9c37e6a8aac4fa3b6e90049e9ce5, type: 3}
+  icon: {fileID: 21300000, guid: af9b087a7d6c93746be627e69fa01ec5, type: 3}
   description: 'Machtvoller Donut! '
   Animation: 11
-  activationSound: slash_01
+  activationSound: 
   targets: 1
   moveToTarget: 0
   range: 0
@@ -49,6 +49,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 45027094d4b799243a3cfa555ca9d099, type: 2}
   - {fileID: 11400000, guid: c6ff258bc012f104f99ecc63e4a53f6f, type: 2}
   - {fileID: 11400000, guid: f318d8f02ca29014ca7553da6038051a, type: 2}
-  - {fileID: 11400000, guid: 9f84be89c5cd58e4197b5141abacf6ba, type: 2}
   - {fileID: 11400000, guid: b76cc6e520aa25f49bbdd9b7a6ee82fc, type: 2}
   - {fileID: 11400000, guid: 744ff87b44f31794eb710429547ab1be, type: 2}

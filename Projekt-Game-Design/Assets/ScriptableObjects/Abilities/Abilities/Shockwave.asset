@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: Shockwave
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 16076d8503cfcc849a63de1023db868e, type: 3}
+  icon: {fileID: 21300000, guid: 33634726b6d54464a926d9ab44f1b582, type: 3}
   description: Attacks all enemies in a line
   Animation: 9
-  activationSound: slash_01
+  activationSound: 
   targets: 30
   moveToTarget: 0
   range: 1
@@ -46,6 +46,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6ff258bc012f104f99ecc63e4a53f6f, type: 2}
   - {fileID: 11400000, guid: 500d6a1753d7f5647b58a62daf07ba58, type: 2}
   - {fileID: 11400000, guid: dd9b98aed08a83f46b6bf523882204f4, type: 2}
-  - {fileID: 11400000, guid: 9f84be89c5cd58e4197b5141abacf6ba, type: 2}
   - {fileID: 11400000, guid: b76cc6e520aa25f49bbdd9b7a6ee82fc, type: 2}
   - {fileID: 11400000, guid: 744ff87b44f31794eb710429547ab1be, type: 2}
