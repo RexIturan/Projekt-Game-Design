@@ -38,10 +38,12 @@ public class RaiseSelectedEvent : StateAction {
 		if ( !_abilityController.abilitySelected ) {
 			_abilityController.abilitySelected = true;
 			_abilityController.SelectedAbilityID = value;
+			_abilityController.LastSelectedAbilityID = value;
 		}
 		else {
 			_abilityController.abilitySelected = false;
 			_abilityController.SelectedAbilityID = -1;
+			_abilityController.LastSelectedAbilityID = -1;
 		}
 	}
 

@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 'Einfacher Nahkampf. Kosten: 1'
   Animation: 8
   activationSound: 
+  repeated: 1
   targets: 20
   moveToTarget: 0
   range: 1
@@ -43,7 +44,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 45027094d4b799243a3cfa555ca9d099, type: 2}
   - {fileID: 11400000, guid: c6ff258bc012f104f99ecc63e4a53f6f, type: 2}
   - {fileID: 11400000, guid: 500d6a1753d7f5647b58a62daf07ba58, type: 2}
-  - {fileID: 11400000, guid: 8785839d6e22f444a977cad51877fcaa, type: 2}
   - {fileID: 11400000, guid: b76cc6e520aa25f49bbdd9b7a6ee82fc, type: 2}
   - {fileID: 11400000, guid: 744ff87b44f31794eb710429547ab1be, type: 2}
   - {fileID: 11400000, guid: 744ff87b44f31794eb710429547ab1be, type: 2}

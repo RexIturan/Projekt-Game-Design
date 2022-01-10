@@ -11,6 +11,7 @@ public class AbilitySO : ScriptableObject
     public string description;
 		public CharacterAnimation Animation;
 		public string activationSound;
+		public bool repeated;
 
     public AbilityTarget targets; // targetable objects: allies, enemies, etc. 
     public bool moveToTarget; // moves action taker to field of target

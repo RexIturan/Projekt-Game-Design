@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Characters.Ability {
 	public class AbilityController : MonoBehaviour {
 		[SerializeField] private int abilityID;
+		[SerializeField] private int lastAbilityID;
 		[SerializeField] private AbilitySO[] baseAbilities;
 		[SerializeField] private AbilityContainerSO abilityContainer;
 		
@@ -24,9 +25,18 @@ namespace Characters.Ability {
 			get => abilityID;
 			set => abilityID = value;
 		}
+		
+		public int LastSelectedAbilityID {
+			get => lastAbilityID;
+			set => lastAbilityID = value;
+		}
 
 		public AbilitySO GetSelectedAbility() {
 			return SelectedAbilityID >= 0 ? abilityContainer.abilities[SelectedAbilityID] : null;
+		}
+
+		public AbilitySO GetLastSelectedAbility() {
+			return LastSelectedAbilityID >= 0 ? abilityContainer.abilities[LastSelectedAbilityID] : null;
 		}
 
 		public void RefreshAbilities() {

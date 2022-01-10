@@ -48,6 +48,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    
 	    //Abilities
 	    _abilityController.BaseAbilities = playerType.basicAbilities;
+			_abilityController.LastSelectedAbilityID = -1;
     }
 
 		public void Start() {

@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Attacks all enemies in a line
   Animation: 9
   activationSound: 
+  repeated: 0
   targets: 30
   moveToTarget: 0
   range: 1
@@ -47,6 +48,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 45027094d4b799243a3cfa555ca9d099, type: 2}
   - {fileID: 11400000, guid: c6ff258bc012f104f99ecc63e4a53f6f, type: 2}
   - {fileID: 11400000, guid: 500d6a1753d7f5647b58a62daf07ba58, type: 2}
-  - {fileID: 11400000, guid: dd9b98aed08a83f46b6bf523882204f4, type: 2}
   - {fileID: 11400000, guid: b76cc6e520aa25f49bbdd9b7a6ee82fc, type: 2}
   - {fileID: 11400000, guid: 744ff87b44f31794eb710429547ab1be, type: 2}

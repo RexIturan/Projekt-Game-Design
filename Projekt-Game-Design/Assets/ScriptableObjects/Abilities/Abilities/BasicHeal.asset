@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 'Heals a dude or yourself. Costs: 1'
   Animation: 10
   activationSound: 
+  repeated: 0
   targets: 3
   moveToTarget: 0
   range: 4
@@ -42,6 +43,5 @@ MonoBehaviour:
   executingActions:
   - {fileID: 11400000, guid: 45027094d4b799243a3cfa555ca9d099, type: 2}
   - {fileID: 11400000, guid: c6ff258bc012f104f99ecc63e4a53f6f, type: 2}
-  - {fileID: 11400000, guid: ae6575675cf27df4998573e9e9f1ebfb, type: 2}
   - {fileID: 11400000, guid: b76cc6e520aa25f49bbdd9b7a6ee82fc, type: 2}
   - {fileID: 11400000, guid: 744ff87b44f31794eb710429547ab1be, type: 2}
