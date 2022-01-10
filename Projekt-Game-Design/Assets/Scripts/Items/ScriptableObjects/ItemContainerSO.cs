@@ -13,6 +13,7 @@ public class ItemContainerSO : ScriptableObject {
 	[SerializeField] public List<ItemSO> itemList = new List<ItemSO>();
 
 	public void UpdateItemList() {
+		//todo remove magic
 		for ( int i = 0; i < itemList.Count;) {
 			if ( itemList[i] == null ) {
 				itemList.RemoveAt(i);
@@ -25,6 +26,6 @@ public class ItemContainerSO : ScriptableObject {
 	}
 
 	private void OnValidate() {
-		UpdateItemList();
+		// UpdateItemList();
 	}
 }

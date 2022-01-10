@@ -1623,7 +1623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2108877792466552909, guid: 35898a82316c6eb4f915f4a7f24db639, type: 3}
       propertyPath: rangeAdam
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2108877792466552910, guid: 35898a82316c6eb4f915f4a7f24db639, type: 3}
       propertyPath: m_Name

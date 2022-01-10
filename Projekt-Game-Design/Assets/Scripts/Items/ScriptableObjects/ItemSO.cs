@@ -42,19 +42,5 @@ public class ItemSO : ScriptableObject {
 				}  
 			}
     }
-
-    private void OnDisable() {
-	    var itemContainers = AssetDatabase.FindAssets($"t:{nameof(ItemContainerSO)}");
-
-	    foreach ( var containerGuid in itemContainers ) {
-		    var containerPath = AssetDatabase.GUIDToAssetPath(containerGuid);
-		    var itemContainer = AssetDatabase.LoadAssetAtPath<ItemContainerSO>(containerPath);
-			    
-		    if ( itemContainer.itemList.Contains(this) ) {
-			    itemContainer.itemList.Remove(this);
-			    itemContainer.UpdateItemList();
-		    }  
-	    }
-    }
 #endif
 }
