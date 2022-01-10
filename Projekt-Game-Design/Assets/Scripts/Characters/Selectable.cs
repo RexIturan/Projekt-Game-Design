@@ -15,6 +15,7 @@ namespace Player {
 			AbilityController abilityController = gameObject.GetComponent<AbilityController>();
 			if(abilityController) {
 				abilityController.abilitySelected = false;
+				abilityController.LastSelectedAbilityID = -1;
 			}
 		}
 	}

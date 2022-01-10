@@ -84,6 +84,11 @@ namespace Player {
 			// Debug.Log($"inputCache.cursor.abovePos.gridPos\n{inputCache.cursor.abovePos.gridPos}");
 			
 			if ( gridData.IsIn3DGridBounds(inputCache.cursor.abovePos.gridPos) ) {
+			  // player activation
+				//
+				if ( inputCache.leftButton.started )
+					ActivatePlayerAtPos(inputCache.cursor.abovePos.gridPos);
+
 				// selection
 				//
 				Selectable selectable = GetPlayerAtPos(inputCache.cursor.abovePos.gridPos);
@@ -145,6 +150,19 @@ namespace Player {
 				}
 			}
 			}
+		}
+
+		private void ActivatePlayerAtPos(Vector3Int gridPos) {
+			List<PlayerCharacterSC> playersToActivate = new List<PlayerCharacterSC>();
+
+			foreach ( var npcObj in characterList.friendlyContainer ) {
+				PlayerCharacterSC playerSC = npcObj.GetComponent<PlayerCharacterSC>();
+				if(playerSC && npcObj.GetComponent<GridTransform>().gridPosition.Equals(gridPos))
+					playersToActivate.Add(playerSC);
+			}
+
+			foreach ( PlayerCharacterSC player in playersToActivate )
+			  player.Activate();
 		}
 
 		private Selectable GetPlayerAtPos(Vector3Int gridPos) {

@@ -12,6 +12,7 @@
     },
     "players": [
       {
+            "active": true,
             "plyerTypeId": 0,
             "plyerSpawnDataId": 0,
             "equipmentInventoryId": 0,
@@ -22,6 +23,7 @@
             }
       },
       {
+            "active": true,
             "plyerTypeId": 0,
             "plyerSpawnDataId": 1,
             "equipmentInventoryId": 0,
@@ -32,11 +34,12 @@
             }
       },
       {
+            "active": false,
             "plyerTypeId": 0,
             "plyerSpawnDataId": 2,
             "equipmentInventoryId": 0,
             "pos": {
-                "x": 3,
+                "x": 4,
                 "y": 1,
                 "z": 1
             }

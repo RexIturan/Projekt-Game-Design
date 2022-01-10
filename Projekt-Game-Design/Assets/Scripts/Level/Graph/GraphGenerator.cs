@@ -73,6 +73,12 @@ namespace Graph {
 								graph.GetGridObject(pos).SetIsWalkable(false);
 						}
 
+						foreach ( var npc in characterList.friendlyContainer )
+						{
+								var pos = globalGridData.GetGridPos2DFromGridPos3D(npc.GetComponent<GridTransform>().gridPosition);
+								graph.GetGridObject(pos).SetIsWalkable(false);
+						}
+
 						foreach ( var door in worldObjectList.doors )
 						{
 								if(!door.GetComponent<Door>().open)

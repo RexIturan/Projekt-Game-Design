@@ -12,6 +12,7 @@
     },
     "players": [
       {
+            "active": true,
             "plyerTypeId": 0,
             "plyerSpawnDataId": 0,
             "equipmentInventoryId": 0,

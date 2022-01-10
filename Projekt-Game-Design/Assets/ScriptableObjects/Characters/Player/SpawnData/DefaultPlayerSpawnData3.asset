@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultPlayerSpawnData3
   m_EditorClassIdentifier: 
   id: 1
-  gridPos: {x: 3, y: 1, z: 1}
+  gridPos: {x: 4, y: 1, z: 1}
   equipmentID: 2
   overrideStatusValues:
   - _name: 

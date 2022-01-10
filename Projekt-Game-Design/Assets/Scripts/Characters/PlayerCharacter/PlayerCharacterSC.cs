@@ -13,6 +13,8 @@ using UnityEngine;
 /// </summary> 
 [System.Serializable]
 public class PlayerCharacterSC : MonoBehaviour {
+		public bool active;
+
     [Header("Basic Stats")]
     // Base stats
     public PlayerTypeSO playerType;
@@ -53,5 +55,15 @@ public class PlayerCharacterSC : MonoBehaviour {
 
 		public void Start() {
 			_equipmentController.RefreshEquipment();
+		}
+
+		public void Activate()
+		{
+				active = true;
+				_statistics.SetFaction(Faction.Player);
+
+				CharacterList characters = CharacterList.FindInstant();
+				characters.friendlyContainer.Remove(gameObject);
+				characters.playerContainer.Add(gameObject);
 		}
 }

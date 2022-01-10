@@ -34,11 +34,16 @@ namespace Characters {
 					var obj = Instantiate(type.prefab, playerParent, true);
 					var playerSC = obj.GetComponent<PlayerCharacterSC>();
 					var playerGridTransform = obj.GetComponent<GridTransform>();
+					playerSC.active = playerSave.active;
 					playerSC.playerType = type;
 					playerSC.playerSpawnData = spawnData;
 					playerSC.Initialize();
 					playerGridTransform.gridPosition = playerSave.pos;
-					_characterList.playerContainer.Add(playerSC.gameObject);
+
+					if (playerSC.active)
+						_characterList.playerContainer.Add(playerSC.gameObject);
+					else
+						_characterList.friendlyContainer.Add(playerSC.gameObject);
 				}
 
 				foreach ( var enemySave in saveDataEnemys ) {
