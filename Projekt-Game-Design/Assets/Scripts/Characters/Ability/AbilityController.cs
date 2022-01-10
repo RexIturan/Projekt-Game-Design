@@ -26,7 +26,7 @@ namespace Characters.Ability {
 		}
 
 		public AbilitySO GetSelectedAbility() {
-			return SelectedAbilityID >= 0 ? abilityContainer.abilities[SelectedAbilityID] : null;
+			return SelectedAbilityID > -1 ? abilityContainer.abilities[SelectedAbilityID] : null;
 		}
 
 		public void RefreshAbilities() {

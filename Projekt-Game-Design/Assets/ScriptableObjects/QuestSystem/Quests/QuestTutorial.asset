@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
   m_Name: 0_KeyPress_any_camera
   m_EditorClassIdentifier: 
-  active: 1
-  done: 0
+  active: 0
+  done: 1
   type: 0
   textTextBody:
     title: any_camera
@@ -38,12 +38,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   available: 0
-  active: 1
-  finished: 0
+  active: 0
+  finished: 1
   repeatable: 0
   prerequisits: []
-  currentTaskIndex: 0
-  nextTaskIndex: 0
+  currentTaskIndex: 2
+  nextTaskIndex: 2
   tasks:
   - name: any_camera
     type: 0
@@ -54,9 +54,15 @@ MonoBehaviour:
   - name: new Task
     type: 1
     task: {fileID: 4996187089100691172}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+  - name: Move Selected
+    type: 2
+    task: {fileID: 7272605633836887984}
     showProperty: 1
     button: '-'
-    drawerHeight: 95
+    drawerHeight: 237
 --- !u!114 &4996187089100691172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,9 +76,29 @@ MonoBehaviour:
   m_Name: 1_ReadText_new Task
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
+  done: 1
   type: 1
   textTextBody:
-    title: 
-    description: 
+    title: Read This Text
+    description: Read This Text
     instructions: 
+--- !u!114 &7272605633836887984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056743f4be01493596f254546d95b334, type: 3}
+  m_Name: 2_AbilitySelected_new Task
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  type: 2
+  textTextBody:
+    title: Move Selected
+    description: Move Selected
+    instructions: Select the Move Ability
+  ability: {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}

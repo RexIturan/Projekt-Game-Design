@@ -45,7 +45,7 @@ public class P_EquipActiveWeapon_OnEnter : StateAction {
 
 		if(weaponRight) { 
 			foreach(AbilitySO rightAbility in weaponRight.abilities) {
-				if(rightAbility.abilityID == _abilityController.SelectedAbilityID)
+				if(rightAbility.id == _abilityController.SelectedAbilityID)
 					rightContainsAbility = true;
 			}
 		}
@@ -59,7 +59,7 @@ public class P_EquipActiveWeapon_OnEnter : StateAction {
 
 			if(weaponLeft) { 
 				foreach(AbilitySO leftAbility in weaponLeft.abilities) {
-					if(leftAbility.abilityID == _abilityController.SelectedAbilityID)
+					if(leftAbility.id == _abilityController.SelectedAbilityID)
 						leftContainsAbility = true;
 				}
 			}

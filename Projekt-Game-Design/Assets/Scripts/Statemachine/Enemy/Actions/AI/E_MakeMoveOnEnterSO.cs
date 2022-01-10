@@ -59,7 +59,7 @@ public class E_MakeMoveOnEnter : StateAction {
 										// choose index of ability in ValidAbility list, index is between 0 and validAbilities.Count - 1
 										int randomAbility = Mathf.FloorToInt(Random.value * _aiController.validAbilities.Count);
 
-										_abilityController.SelectedAbilityID = _aiController.validAbilities[randomAbility].abilityID;
+										_abilityController.SelectedAbilityID = _aiController.validAbilities[randomAbility].id;
 										_abilityController.abilityConfirmed = true;
 								}
 								else
@@ -77,7 +77,7 @@ public class E_MakeMoveOnEnter : StateAction {
 												{
 														if ( ability.moveToTarget )
 														{
-																abilityId = ability.abilityID;
+																abilityId = ability.id;
 														}
 												}
 

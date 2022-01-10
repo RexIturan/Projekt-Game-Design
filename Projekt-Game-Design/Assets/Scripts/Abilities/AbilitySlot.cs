@@ -19,7 +19,7 @@ public class AbilitySlot : VisualElement {
 	}
 
 	public void SetAbility(AbilitySO ability) {
-		SetAbility(ability.icon.texture, ability.abilityID);
+		SetAbility(ability.icon.texture, ability.id);
 	}
 	
 	public void ClearAbility() {

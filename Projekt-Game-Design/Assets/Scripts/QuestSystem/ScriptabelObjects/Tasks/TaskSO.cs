@@ -14,6 +14,7 @@ namespace QuestSystem.ScriptabelObjects {
 	public enum TaskType {
 		Key_Press,
 		Read_Text,
+		Ability_Selected,
 		Event_Raised,
 		Item_Equipping,
 		Item_Collection,
@@ -57,6 +58,10 @@ namespace QuestSystem.ScriptabelObjects {
 					task = ScriptableObject.CreateInstance<Task_Composite_SO>();
 					break;
 				
+				case TaskType.Ability_Selected:
+					task = ScriptableObject.CreateInstance<Task_AbilitySelected_SO>();
+					break;
+				
 				case TaskType.Read_Text:
 				default:
 					task = ScriptableObject.CreateInstance<Task_ReadText_SO>();
@@ -82,7 +87,7 @@ namespace QuestSystem.ScriptabelObjects {
 
 		public bool active;
 		public bool done;
-		public TaskType type;
+		[HideInInspector] public TaskType type;
 		public TaskTextBody textTextBody;
 		
 		//todo public -> [SerializeField] protected
