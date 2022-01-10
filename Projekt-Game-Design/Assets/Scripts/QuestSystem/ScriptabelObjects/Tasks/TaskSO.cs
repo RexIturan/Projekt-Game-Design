@@ -17,7 +17,7 @@ namespace QuestSystem.ScriptabelObjects {
 		Ability_Selected,
 		Event_Raised,
 		Item_Equipping,
-		Item_Collection,
+		Item_In_Inventory,
 		Object_Selected,
 		Char_At_Pos,
 		Enemy_Dead,

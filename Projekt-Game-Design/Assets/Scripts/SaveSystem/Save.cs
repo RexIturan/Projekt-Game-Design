@@ -16,6 +16,7 @@ namespace SaveSystem {
 		public List<Door_Save> doors;
 		public List<Switch_Save> switches;
 		public List<Junk_Save> junks;
+		public List<Item_Save> items;
 		public Inventory_Save inventory;
 		public List<Inventory_Save> equipmentInventory;
 		public List<TileGrid> tileGrids;
@@ -32,6 +33,7 @@ namespace SaveSystem {
 			doors = new List<Door_Save>();
 			switches = new List<Switch_Save>();
 			junks = new List<Junk_Save>();
+			items = new List<Item_Save>();
 			tileGrids = new List<TileGrid>();
 			itemGrids = new List<ItemGrid>();
 			characterGrids = new List<CharacterGrid>();
