@@ -62,9 +62,16 @@ namespace UI.Components.QuestSystem {
 		// private VisualElement buttonContainer;
 		
 		//buttons
+		private VisualElement nextContainer;
 		private Button nextButton;
+		
+		private VisualElement previousContainer;
 		private Button previousButton;
+		
+		private VisualElement skipContainer;
 		private Button skipButton;
+		
+		private VisualElement helpContainer;
 		private Button helpButton;
 
 ///// PROPERTIES ///////////////////////////////////////////////////////////////////////////////////
@@ -72,6 +79,12 @@ namespace UI.Components.QuestSystem {
 		public List<InstructionWrapper> instructionList;
 		public string Title;
 		public string Description;
+		public Action Next;
+
+		public bool ShowHelp;
+		public bool ShowSkip;
+		public bool ShowPrevious;
+		public bool ShowNext;
 
 ///// PRIVATE FUNCTIONS ////////////////////////////////////////////////////////////////////////////
 
@@ -162,12 +175,22 @@ namespace UI.Components.QuestSystem {
 				"ContainerContent", 
 				new []{containerContentSuffix});
 			
+			InitContainer(
+				ref skipContainer, 
+				"SkipContainer", 
+				new []{ConcatClassNames(skipClassName, containerSuffix)});
+			
 			InitButton(
 				ref skipButton, 
 				"TaskPanel-SkipButton", 
 				"skip", 
 				skipClassName,
 				new string[]{});
+			
+			InitContainer(
+				ref helpContainer, 
+				"HelpContainer", 
+				new []{ConcatClassNames(helpClassName, containerSuffix)});
 			
 			InitButton(
 				ref helpButton, 
@@ -181,12 +204,23 @@ namespace UI.Components.QuestSystem {
 				"NavigationButtonContainer", 
 				new []{navigationButtonContainerSuffix});
 			
+			InitContainer(
+				ref nextContainer, 
+				"NextContainer", 
+				new []{ConcatClassNames(nextClassName, containerSuffix)});
+			
 			InitButton(
 				ref nextButton, 
 				"TaskPanel-NextButton", 
 				"next >>", 
 				nextClassName,
 				new []{navigationbuttonSuffix});
+			
+			
+			InitContainer(
+				ref previousContainer, 
+				"PreviousContainer", 
+				new []{ConcatClassNames(previousClassName, containerSuffix)});
 			
 			InitButton(
 				ref previousButton, 
@@ -195,11 +229,15 @@ namespace UI.Components.QuestSystem {
 				previousClassName,
 				new []{navigationbuttonSuffix});
 
-			topButtonContainer.Add(helpButton);
-			topButtonContainer.Add(skipButton);
+			helpContainer.Add(helpButton);
+			skipContainer.Add(skipButton);
+			topButtonContainer.Add(helpContainer);
+			topButtonContainer.Add(skipContainer);
 
-			navigationButtonContainer.Add(previousButton);
-			navigationButtonContainer.Add(nextButton);
+			previousContainer.Add(previousButton);
+			nextContainer.Add(nextButton);
+			navigationButtonContainer.Add(previousContainer);
+			navigationButtonContainer.Add(nextContainer);
 			
 			descriptionContainer.Add(descriptionLabel);
 			instructionContainer.Add(instructionLabel);
@@ -222,7 +260,11 @@ namespace UI.Components.QuestSystem {
 		}
 		
 		private string GetClassNameWithSuffix(string suffix) {
-			return $"{baseUssClassName}-{suffix}";
+			return ConcatClassNames(baseUssClassName, suffix);
+		}
+
+		private string ConcatClassNames(string firstSuffix, string secondSuffix) {
+			return $"{firstSuffix}-{secondSuffix}";	
 		}
 		
 		private string GetClassNameWithHover(string className) {
@@ -236,6 +278,11 @@ namespace UI.Components.QuestSystem {
 ///// PUBLIC FUNCTIONS  ////////////////////////////////////////////////////////////////////////////
 	
 		public void UpdateComponent() {
+
+			SetVisibility(helpButton, ShowHelp);
+			SetVisibility(skipButton, ShowSkip);
+			SetVisibility(previousButton, ShowPrevious);
+			SetVisibility(nextButton, ShowNext);
 
 			descriptionLabel.text = Description;
 			titleLabel.text = Title;
@@ -255,15 +302,21 @@ namespace UI.Components.QuestSystem {
 		}
 		
 		public void SetVisibility(bool visibility) {
+			SetVisibility(this, visibility);
+		}
+		
+		public void SetVisibility(VisualElement element, bool visibility) {
 			if ( visibility ) {
-				this.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+				element.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
 			} else {
-				this.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+				element.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
 			}
 		}
 
 		public void SetNextCallback(Action callback) {
-			nextButton.clicked += callback;
+			nextButton.clicked -= Next;
+			Next = callback;
+			nextButton.clicked += Next;
 		}
 		
 		public void RemoveNextCallback(Action callback) {
@@ -323,6 +376,11 @@ namespace UI.Components.QuestSystem {
 
 			Title = title;
 			Description = description;
+
+			ShowHelp = false;
+			ShowSkip = false;
+			ShowPrevious = false;
+			ShowNext = true;
 			
 			// instructionList.Add(new InstructionWrapper {
 			// 	state = InstructionState.Done,

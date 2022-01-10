@@ -22,23 +22,29 @@
     --border-width: 2px;
     --button-font-size: 20px;
     
-    --title-fontSize: 28px;
-    --description-fontSize: 20px;
-    --instruction-fontSize: 20px;
+    
+    --description-fontSize: 18px;
+    --instruction-fontSize: 18px;
     
     --container-padding: 5px;
-    --title-height: 50px;
+    --button-height: 40px;
+    --button-width: 70px;
+
+    --title-fontSize: 20px;
+    --title-height: 40px;
 }
 
 .taskPanel { 
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    /*position: absolute;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
     
-    align-items: flex-end;
+    margin: 5px 0;
     
-    padding-right: 10;
-    padding-top: 60px;    
+    /*align-items: flex-end;*/
+    
+    /*padding-right: 10;*/
+    /*padding-top: 60px;    */
 }
 
 .taskPanel-container {
@@ -72,6 +78,8 @@
     
     -unity-text-align: middle-center;
     font-size: var(--title-fontSize);
+    
+    white-space: normal;
 }
 
 .taskPanel-textContainer{
@@ -115,8 +123,8 @@
 }
 
 .taskPanel-button {
-    width: 70px;
-    height: 40px;
+    width: var(--button-width);
+    height: var(--button-height);
 
     padding: 0;
     margin: 0;
@@ -131,7 +139,47 @@
 }
 
 .taskPanel-button-navigation {
-    width: 40%;
+    width: 80%;
+}
+
+.taskPanel-next-container{
+    /*position: absolute;*/
+    width: 100%;
+    height: 100%;
+    /*bottom: var(--container-padding);*/
+
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.taskPanel-previous-container{
+    /*position: absolute;*/
+    width: 100%;
+    height: 100%;
+    /*bottom: var(--container-padding);*/
+
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.taskPanel-help-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: var(--container-padding);
+
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.taskPanel-skip-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: var(--container-padding);
+
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 .help{
