@@ -12,6 +12,7 @@ namespace QuestSystem {
 		
 		private void OnEnable() {
 			activeQuests.ForEach(quest => quest.Reset());
+			activeQuests[0].Activate();
 		}
 
 		private void Update() {

@@ -1,3 +1,8 @@
+:root{
+    --border-color: #343434;
+    --background-color: #5e5e5e;
+}
+
 .action-bar {
     position: relative;
     flex-grow: 1;
@@ -13,8 +18,8 @@
 }
 
 .action-bar-button-container {
-    background-color: red;
-    border-color: tomato;
+    background-color: var(--background-color);
+    border-color: var(--border-color);
     justify-content: center;
     flex-wrap: wrap;
     padding: 5px;
@@ -48,7 +53,7 @@
 .action-button-image {
     width: 100%;
     height: 100%;
-    background-image: resource('Assets/Art/Sprites/UI/move.png');
+    /*background-image: resource('Assets/Art/Sprites/UI/move.png');*/
 }
 
 .action-button-top-container {

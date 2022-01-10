@@ -6,11 +6,10 @@ using UnityEngine;
 namespace Characters.Ability {
 	public class AbilityController : MonoBehaviour {
 		[SerializeField] private int abilityID;
-		[SerializeField] private AbilitySO[] abilities;
 		[SerializeField] private AbilitySO[] baseAbilities;
 		[SerializeField] private AbilityContainerSO abilityContainer;
 		
-		public AbilitySO[] Abilities => abilities;
+		public AbilitySO[] Abilities;
 		public AbilitySO[] BaseAbilities {
 			get => baseAbilities;
 			set => baseAbilities = value;
@@ -40,7 +39,7 @@ namespace Characters.Ability {
 				}
 			}
 
-			abilities = currentAbilities.ToArray();
+			Abilities = currentAbilities.ToArray();
 		}
 	}
 }

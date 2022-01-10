@@ -13,6 +13,9 @@ namespace FieldOfView.Editor {
                 fieldOfViewGenerator.GenerateVision();
             }
             
+            if (GUILayout.Button("generate Player Char Vision")) {
+	            fieldOfViewGenerator.GeneratePlayerCharacterVision();
+            }
         }
     }
 }

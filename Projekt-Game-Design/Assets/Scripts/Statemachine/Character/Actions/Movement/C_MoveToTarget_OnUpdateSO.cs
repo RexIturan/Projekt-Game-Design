@@ -44,6 +44,8 @@ public class C_MoveToTarget_OnUpdate : StateAction {
 	public override void Awake(StateMachine stateMachine) {
 		_movementController = stateMachine.gameObject.GetComponent<MovementController>();
 		_gridTransform = stateMachine.gameObject.GetComponent<GridTransform>();
+		
+		//todo calc in movementcontroller
 		TimePerStep = _gridDataSO.CellSize / _movementController.moveSpeed;
 	}
 

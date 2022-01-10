@@ -82,7 +82,9 @@ namespace Pathfinding {
         public void InitialisePathfinding() {
             // todo give the pathfinding all graphs
             graphGenerator.GenerateGraphFromGrids();
-            _pathfinding = new Pathfinding(graphContainer.basicMovementGraph[1]);
+            
+            //todo pathfinding for each layer 
+            _pathfinding = new Pathfinding(graphContainer.basicMovementGraph[0]);
         }
 
         public List<PathNode> GetReachableNodes(Vector3 pos3d, int maxDist) {
@@ -100,14 +102,18 @@ namespace Pathfinding {
             InitialisePathfinding();
             Vector3Int start = globalGridData.GetGridPos3DFromWorldPos(start3d);
             Vector3Int end = globalGridData.GetGridPos3DFromWorldPos(end3d);
-            return _pathfinding.FindPath(start.x, start.z, end.x, end.z);
+            var startVec2 = new Vector2Int(start.x, start.z);
+            var endVec2 = new Vector2Int(end.x, end.z);
+            return _pathfinding.FindPath(startVec2, endVec2);
         }
 
         public List<PathNode> GetPath(Vector3Int start, Vector3Int end)
         {
             // Debug.Log($"PathfindingC: get Path from {start} to {end}");
-            InitialisePathfinding();
-            var path = _pathfinding.FindPath(start.x, start.z, end.x, end.z);
+            // InitialisePathfinding();
+            var startVec2 = new Vector2Int(start.x, start.z);
+            var endVec2 = new Vector2Int(end.x, end.z);
+            var path = _pathfinding.FindPath(startVec2, endVec2);
             if(path is null) Debug.Log("no path found");
             return path;
         }
@@ -126,7 +132,10 @@ namespace Pathfinding {
         {
 						// TODO: calculate distance in Pathfinding
 						// adding distance to Path
-						List<PathNode> path = GetPath(startNode, endNode);
+						var targetNode = graphContainer.basicMovementGraph[0]
+							.GetGridObject(new Vector2Int(endNode.x, endNode.z));
+
+						List<PathNode> path = _pathfinding.CalculatePath(targetNode);
 						int distance = 0;
 						foreach ( PathNode node in path )
 						{

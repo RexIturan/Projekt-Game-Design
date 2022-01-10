@@ -684,6 +684,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 512017045}
     m_Modifications:
+    - target: {fileID: 8446284169067511300, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8446284169067511300, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8446284169067511300, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8446284170341045904, guid: cf8677a143361d94188e5bd872bd1979, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1394,14 +1406,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 723286307073106097, guid: c489a442679871a4e803ceb3078a5074, type: 3}
-      propertyPath: initializeFromSave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 723286307073106097, guid: c489a442679871a4e803ceb3078a5074, type: 3}
-      propertyPath: initializeLevelName
-      value: movement_testing
-      objectReference: {fileID: 0}
     - target: {fileID: 723286307073106099, guid: c489a442679871a4e803ceb3078a5074, type: 3}
       propertyPath: m_Name
       value: Level Initialiser
@@ -1464,10 +1468,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2108877792466552909, guid: 35898a82316c6eb4f915f4a7f24db639, type: 3}
-      propertyPath: fieldOfViewCrossQueryEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 7eb8bcc3d796f4f408a843946a301b1a, type: 2}
     - target: {fileID: 2108877792466552910, guid: 35898a82316c6eb4f915f4a7f24db639, type: 3}
       propertyPath: m_Name
       value: FieldOfView
@@ -1489,6 +1489,10 @@ PrefabInstance:
     - target: {fileID: 3672561659905499288, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_Name
       value: Fog Of War
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672561659905499288, guid: aef65687e09683447a757e0d0244f77f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3672561659905499289, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_RootOrder

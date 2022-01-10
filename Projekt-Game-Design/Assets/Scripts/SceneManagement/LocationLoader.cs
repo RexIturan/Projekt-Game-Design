@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace SceneManagement {
 	public class LocationLoader : MonoBehaviour {
-		[Header("Sending Events On")] [SerializeField]
-		private VoidEventChannelSO enableLoadingScreenInputEC;
+		[Header("Sending Events On")] 
+		[SerializeField] private VoidEventChannelSO enableLoadingScreenInputEC;
+		[SerializeField] private VoidEventChannelSO fov_PlayerCharViewUpdateEC;
 
 		[SerializeField] private VoidEventChannelSO enableGampleyInputEC;
 
@@ -53,9 +54,7 @@ namespace SceneManagement {
 					if ( !_saveManager.IsSaveLoaded() ) {
 						_saveManager.LoadLevel(initializeLevelName);
 					}
-					_saveManager.InitializeLevel();
-					
-					enableGampleyInputEC.RaiseEvent();
+
 					//todo probably remove loading screen control 
 					// enableLoadingScreenInputEC.RaiseEvent();
 				}
@@ -63,15 +62,15 @@ namespace SceneManagement {
 					//todo load empty or default??
 					// _saveManager.LoadLevel("");
 					// _saveManager.InitializeLevel();
-
-					_saveManager.InitializeLevel();
-					
-					// enable on Start
-					enableGampleyInputEC.RaiseEvent();
 				
 					//todo enable ui after level loaded
 				}
 			}
+			_saveManager.InitializeLevel();
+					
+			// enable on Start
+			enableGampleyInputEC.RaiseEvent();
+			fov_PlayerCharViewUpdateEC.RaiseEvent();
 		}
 	}
 }

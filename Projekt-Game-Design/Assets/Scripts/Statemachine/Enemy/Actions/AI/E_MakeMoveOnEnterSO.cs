@@ -24,10 +24,7 @@ public class E_MakeMoveOnEnter : StateAction {
     private GameObject _targetPlayer;
     private PathNode _closesTileToPlayer;
 
-
 		private bool _canMove;
-
-    private PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;
 
     public override void OnUpdate() { }
 
