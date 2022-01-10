@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ddb023b3571ee489d116d297b34919, type: 3}
-  m_Name: p_DrawRange_OnEnter
+  m_Script: {fileID: 11500000, guid: 6a5851751dacaa048ac4e9a3775a7390, type: 3}
+  m_Name: DrawRange_EC
   m_EditorClassIdentifier: 
-  drawRangeEC: {fileID: 11400000, guid: 6c353effe2c2c744c990b4b6f56b7582, type: 2}
+  description: pathfindingdrawer listens on this channel. Draws the list of Nodes
+    onto tilemap

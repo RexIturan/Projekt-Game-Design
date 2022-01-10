@@ -13,10 +13,15 @@ namespace Pathfinding {
 				[SerializeField] private VoidEventChannelSO clearReachableTilesEC;
 				[SerializeField] private NodeListEventChannelSO drawPathEC;
 				[SerializeField] private VoidEventChannelSO clearPathEC;
+				[SerializeField] private NodeListEventChannelSO drawRangeEC;
+				[SerializeField] private VoidEventChannelSO clearRangeEC;
 
 				// TODO: Maybe use a tilemap drawer instead of this one?
 				[SerializeField] private DrawPatternEventChannelSO drawPatternEC;
 				[SerializeField] private VoidEventChannelSO clearPatternEC;
+
+				[SerializeField] private DrawTargetTilesEventChannelSO drawTargetTilesEC;
+				[SerializeField] private VoidEventChannelSO clearTargetTilesEC;
 
 				[Header("SO References")]
 				[SerializeField] private GridDataSO gridData;
@@ -25,10 +30,16 @@ namespace Pathfinding {
 				[SerializeField] private Tilemap previewTilemap;
 				[SerializeField] private Tilemap previewPathTilemap;
 				[SerializeField] private Tilemap previewPatternTilemap;
+				[SerializeField] private Tilemap previewTargetTilemap;
 
 				[SerializeField] private TileBase previewTile;
 				[SerializeField] private TileBase previewPathTile;
+				[SerializeField] private TileBase previewRangeTile;
 				[SerializeField] private TileBase previewPatternTile;
+				[SerializeField] private TileBase enemyTargetTile;
+				[SerializeField] private TileBase neutralTargetTile;
+				[SerializeField] private TileBase allyTargetTile;
+				[SerializeField] private TileBase healTargetTile;
 
 				private void Awake() {
 						drawReachableTilesEC.OnEventRaised += DrawPreview;
@@ -37,8 +48,14 @@ namespace Pathfinding {
 						drawPathEC.OnEventRaised += DrawPreviewPath;
 						clearPathEC.OnEventRaised += ClearPreviewPathTilemap;
 
+						drawRangeEC.OnEventRaised += DrawRange;
+						clearRangeEC.OnEventRaised += ClearPreviewTilemap;
+
 						drawPatternEC.OnEventRaised += DrawPattern;
 						clearPatternEC.OnEventRaised += ClearPreviewPatternTilemap;
+
+						drawTargetTilesEC.OnEventRaised += DrawTargetTiles;
+						clearTargetTilesEC.OnEventRaised += ClearTargetTilesTilemap;
 				}
 
 				private void OnDisable() {
@@ -48,8 +65,14 @@ namespace Pathfinding {
 						drawPathEC.OnEventRaised -= DrawPreviewPath;
 						clearPathEC.OnEventRaised -= ClearPreviewPathTilemap;
 
+						drawRangeEC.OnEventRaised -= DrawRange;
+						clearRangeEC.OnEventRaised -= ClearPreviewTilemap;
+
 						drawPatternEC.OnEventRaised -= DrawPattern;
 						clearPatternEC.OnEventRaised -= ClearPreviewPatternTilemap;
+
+						drawTargetTilesEC.OnEventRaised -= DrawTargetTiles;
+						clearTargetTilesEC.OnEventRaised -= ClearTargetTilesTilemap;
 				}
 
 				public void DrawPreview(List<PathNode> nodes) {
@@ -65,6 +88,18 @@ namespace Pathfinding {
 						if ( nodes != null ) {
 								foreach ( var node in nodes ) {
 										previewPathTilemap.SetTile(gridData.GetTilePosFromGridPos(node.pos), previewPathTile);
+								}
+						}
+				}
+
+				public void DrawRange(List<PathNode> nodes)
+				{
+						ClearPreviewPathTilemap();
+						if ( nodes != null )
+						{
+								foreach ( var node in nodes )
+								{
+										previewTilemap.SetTile(gridData.GetTilePosFromGridPos(node.pos), previewRangeTile);
 								}
 						}
 				}
@@ -87,6 +122,39 @@ namespace Pathfinding {
 						}
 				}
 
+				private void DrawTargetTiles(List<PathNode> allies, List<PathNode> neutrals, List<PathNode> enemies, bool damage)
+				{
+						ClearTargetTilesTilemap();
+
+						if ( damage )
+						{
+								foreach ( var node in allies )
+								{
+										previewTargetTilemap.SetTile(gridData.GetTilePosFromGridPos(node.pos), allyTargetTile);
+								}
+								foreach ( var node in neutrals )
+								{
+										previewTargetTilemap.SetTile(gridData.GetTilePosFromGridPos(node.pos), neutralTargetTile);
+								}
+								foreach ( var node in enemies )
+								{
+										previewTargetTilemap.SetTile(gridData.GetTilePosFromGridPos(node.pos), enemyTargetTile);
+								}
+						}
+						else
+						{
+								List<PathNode> allNodes = new List<PathNode>();
+								allNodes.AddRange(allies);
+								allNodes.AddRange(neutrals);
+								allNodes.AddRange(enemies);
+
+								foreach( var node in allNodes )
+								{
+										previewTargetTilemap.SetTile(gridData.GetTilePosFromGridPos(node.pos), healTargetTile);
+								}
+						}
+				}
+
 				private void ClearPreviewPathTilemap() {
 						previewPathTilemap.ClearAllTiles();
 				}
@@ -98,6 +166,11 @@ namespace Pathfinding {
 				private void ClearPreviewPatternTilemap()
 				{
 						previewPatternTilemap.ClearAllTiles();
+				}
+
+				private void ClearTargetTilesTilemap()
+				{
+						previewTargetTilemap.ClearAllTiles();
 				}
 		}
 }

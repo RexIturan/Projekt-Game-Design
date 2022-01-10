@@ -17,6 +17,7 @@ MonoBehaviour:
   Animation: 8
   activationSound: 
   repeated: 1
+  damaging: 1
   targets: 20
   moveToTarget: 0
   range: 1

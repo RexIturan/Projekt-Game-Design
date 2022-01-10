@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ddb023b3571ee489d116d297b34919, type: 3}
-  m_Name: p_DrawRange_OnEnter
+  m_Script: {fileID: 11500000, guid: 3b97f2858f4d9264c95143e098446eb5, type: 3}
+  m_Name: p_ClearRange_OnExit
   m_EditorClassIdentifier: 
-  drawRangeEC: {fileID: 11400000, guid: 6c353effe2c2c744c990b4b6f56b7582, type: 2}
+  clearRangeTilesEC: {fileID: 11400000, guid: c39fbe768e9c48f49a4df76e8d19f205, type: 2}
