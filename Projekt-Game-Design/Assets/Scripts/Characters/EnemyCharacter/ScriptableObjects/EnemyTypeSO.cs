@@ -9,6 +9,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New EnemyType", menuName = "Character/Enemy/EnemyType")]
 public class EnemyTypeSO : ScriptableObject {
 	public int id;
+	public EnemyBehaviorSO behaviour;
 
 	//base prefab
 	public GameObject prefab;

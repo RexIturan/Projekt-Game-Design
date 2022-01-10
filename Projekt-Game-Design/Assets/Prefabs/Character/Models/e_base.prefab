@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 2575409168715726627}
   m_Layer: 0
   m_Name: Unit_Body
-  m_TagString: Untagged
+  m_TagString: Equipment/Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1290,7 +1290,7 @@ GameObject:
   - component: {fileID: 5596965302870594955}
   m_Layer: 0
   m_Name: Unit_Head
-  m_TagString: Untagged
+  m_TagString: Equipment/Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

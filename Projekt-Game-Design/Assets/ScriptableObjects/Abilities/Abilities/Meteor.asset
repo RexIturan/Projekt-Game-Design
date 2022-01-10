@@ -15,7 +15,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a37a6dbf0d1c69f49aa65149190a0066, type: 3}
   description: Meteor
   Animation: 10
-  activationSound: 
+  activationSound: slash_01
   repeated: 0
   damaging: 1
   targets: -1

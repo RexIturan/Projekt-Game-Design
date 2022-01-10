@@ -15,7 +15,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 0a64a671c1b32f048b225fb1692082fd, type: 3}
   description: 'Einfacher Nahkampf. Kosten: 1'
   Animation: 8
-  activationSound: 
+  activationSound: slash_01
   repeated: 1
   damaging: 1
   targets: 20

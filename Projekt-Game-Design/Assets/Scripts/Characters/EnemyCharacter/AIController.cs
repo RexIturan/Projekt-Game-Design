@@ -123,7 +123,9 @@ namespace Characters.EnemyCharacter
 				{
 						int lastAffordableStep = 0;
 
-						while ( lastAffordableStep < pathNodes.Count - 1 && pathNodes[lastAffordableStep + 1].dist <= _movementController.GetMaxMoveDistance() )
+						while ( lastAffordableStep < pathNodes.Count - 1 &&
+								pathNodes[lastAffordableStep + 1].dist <= _movementController.GetMaxMoveDistance() &&
+								Vector3.Distance(pathNodes[lastAffordableStep + 1].pos, aiTarget.GetGridPosition()) > behavior.keepDistance)
 								lastAffordableStep++;
 
 						// if the only affordable step is the enemies position, set target to null
