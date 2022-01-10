@@ -9,6 +9,7 @@ namespace SaveSystem.SaveFormats
 		{
 				public int doorTypeId;
 				public Vector3Int gridPos;
+				public Vector3 orientation;
 				public bool open;
 				public List<int> keyIds;
 				public List<int> switchIds;

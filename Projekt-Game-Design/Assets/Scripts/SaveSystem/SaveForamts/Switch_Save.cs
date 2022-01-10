@@ -10,5 +10,6 @@ namespace SaveSystem.SaveFormats
 				public int switchId;
 				public int switchTypeId;
 				public Vector3Int gridPos;
+				public Vector3 orientation;
 		}
 }

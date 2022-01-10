@@ -32,6 +32,11 @@
         	"y": 1,
         	"z": 4
       		},
+                "orientation": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+                },
 		"open": false,
 		"keyIds": [],
 		"switchIds": [],
@@ -47,6 +52,11 @@
         	"y": 1,
         	"z": 4
       		},
+                "orientation": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+                },
 		"open": false,
 		"keyIds": [7],
 		"switchIds": [],
@@ -62,6 +72,11 @@
         	"y": 1,
         	"z": 3
       		},
+                "orientation": {
+                "x": -1,
+                "y": 0,
+                "z": 0
+                },
 		"open": false,
 		"keyIds": [],
 		"switchIds": [0],
@@ -77,6 +92,11 @@
         	"y": 1,
         	"z": 6
       		},
+                "orientation": {
+                "x": 0,
+                "y": 0,
+                "z": -1
+                },
 		"open": false,
 		"keyIds": [],
 		"switchIds": [0, 1],
@@ -92,6 +112,11 @@
         	"y": 1,
         	"z": 6
       		},
+                "orientation": {
+                "x": 1,
+                "y": 0,
+                "z": 1
+                },
 		"open": false,
 		"keyIds": [],
 		"switchIds": [-1],
@@ -109,7 +134,12 @@
           "x": 4,
           "y": 1,
           "z": 2
-      	}
+      	},
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        }
         },
         {
         "switchId": 1,
@@ -118,7 +148,12 @@
           "x": 4,
           "y": 1,
           "z": 0
-      	}
+      	},
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        }
         }
       ],
     "junks": [
@@ -129,6 +164,11 @@
           "y": 1,
           "z": 0
       	},
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
         "broken": false,
         "currentHitPoints": 20
       }

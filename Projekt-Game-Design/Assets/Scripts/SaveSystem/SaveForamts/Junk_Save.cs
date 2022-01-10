@@ -9,6 +9,7 @@ namespace SaveSystem.SaveFormats
 		{
 				public int junkTypeId;
 				public Vector3Int gridPos;
+				public Vector3 orientation;
 				public bool broken;
 				public int currentHitPoints;
 		}

@@ -23,6 +23,8 @@ namespace WorldObjects
 				public SwitchTypeSO switchType;
 				[SerializeField] private bool activated;
 
+				[SerializeField] private Vector3 orientation;
+
 				public void Awake()
 				{
 						updateWorldObjectEvent.OnEventRaised += UpdateSwitch;
@@ -38,10 +40,18 @@ namespace WorldObjects
 						activated = false;
 						this.switchId = switch_Save.switchId;
 						this.switchType = switchType;
+
+						orientation = switch_Save.orientation;
+						InitialiseOrientation();
 						
 						Instantiate(switchType.model, transform);
 
 						gameObject.GetComponent<GridTransform>().gridPosition = switch_Save.gridPos;
+				}
+
+				private void InitialiseOrientation()
+				{
+						gameObject.transform.rotation = Quaternion.LookRotation(orientation);
 				}
 
 				// activates switch if conditions are met

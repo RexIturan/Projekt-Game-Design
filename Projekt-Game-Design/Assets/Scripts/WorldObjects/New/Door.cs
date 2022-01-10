@@ -32,12 +32,17 @@ namespace WorldObjects
 				[SerializeField] private List<int> remainingSwitches;
 				[SerializeField] private List<int> remainingTrigger;
 
+				[SerializeField] private Vector3 orientation;
+
 				public void Initialise(Door_Save saveData, DoorTypeSO doorType)
 				{
 						this.doorType = doorType;
 						open = saveData.open;
 						locked = true;
 						broken = false;
+
+						orientation = saveData.orientation;
+						InitialiseOrientation();
 
 						if ( doorType.destructable )
 						{
@@ -59,6 +64,15 @@ namespace WorldObjects
 						triggerIds = saveData.triggerIds;
 						remainingSwitches = saveData.remainingSwitchIds;
 						remainingTrigger = saveData.remainingTriggerIds;
+				}
+
+				// causes the model's front face to go into the direction 
+				// that is specified by the vector in orientation
+				// for example: orientation (1, 0) would cause the door to have its front face
+				// faced towards the positive x-Axis-Vector
+				private void InitialiseOrientation()
+				{
+					gameObject.transform.rotation = Quaternion.LookRotation(orientation);
 				}
 
 				public void Awake()

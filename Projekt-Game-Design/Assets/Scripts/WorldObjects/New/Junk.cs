@@ -22,10 +22,15 @@ namespace WorldObjects
 				// public int junkId;
 				public JunkTypeSO junkType;
 
+				[SerializeField] private Vector3 orientation;
+
 				public void Initialise(Junk_Save saveData, JunkTypeSO junkType)
 				{
 						broken = saveData.broken;
 						this.junkType = junkType;
+
+						orientation = saveData.orientation;
+						InitialiseOrientation();
 
 						Instantiate(junkType.model, transform);
 
@@ -41,6 +46,11 @@ namespace WorldObjects
 						stats.StatusValues.HitPoints.max = junkType.hitPoints;
 						stats.StatusValues.HitPoints.value = saveData.currentHitPoints;
 						stats.SetFaction(Faction.Neutral);
+				}
+
+				private void InitialiseOrientation()
+				{
+						gameObject.transform.rotation = Quaternion.LookRotation(orientation);
 				}
 
 				public void Awake()

@@ -10,6 +10,7 @@ namespace WorldObjects
 		{
 				public int id;
 				public GameObject prefab;
+				// The front face of the door should face the positive z-Axis vector
 				public GameObject model;
 				public string doorName;
 				public string description;
