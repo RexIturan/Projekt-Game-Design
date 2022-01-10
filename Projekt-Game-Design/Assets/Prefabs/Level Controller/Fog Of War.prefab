@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4214328597082456579, guid: 748e901d969761546819191eac2990f0, type: 3}
+      propertyPath: orthographic size
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4214328597082456589, guid: 748e901d969761546819191eac2990f0, type: 3}
       propertyPath: m_Name
       value: UnexploredAreasCamera
@@ -149,6 +153,10 @@ PrefabInstance:
     - target: {fileID: 516929894755839330, guid: 649687e1e0ed09849b7d83040973fcc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 516929894755839331, guid: 649687e1e0ed09849b7d83040973fcc2, type: 3}
+      propertyPath: orthographic size
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 649687e1e0ed09849b7d83040973fcc2, type: 3}
@@ -219,6 +227,10 @@ PrefabInstance:
     - target: {fileID: 7953925513601284939, guid: 8d8f2a6c172a1c94d8eaafea6c60065c, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7953925513601284939, guid: 8d8f2a6c172a1c94d8eaafea6c60065c, type: 3}
+      propertyPath: m_OrthographicSize
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d8f2a6c172a1c94d8eaafea6c60065c, type: 3}

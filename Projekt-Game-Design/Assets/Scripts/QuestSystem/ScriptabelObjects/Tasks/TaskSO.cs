@@ -54,6 +54,7 @@ namespace QuestSystem.ScriptabelObjects {
 		public TaskType type;
 		public TaskSO task;
 
+#if UNITY_EDITOR
 		public bool UpdateTaskType(QuestSO quest) {
 
 			if ( task != null ) {
@@ -89,6 +90,7 @@ namespace QuestSystem.ScriptabelObjects {
 			AssetDatabase.SaveAssets();
 			return true;
 		}
+#endif
 		
 		//ui fix
 		[SerializeField] private bool showProperty;

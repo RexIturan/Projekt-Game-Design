@@ -29,28 +29,29 @@ namespace Graph {
             
             graphContainer.basicMovementGraph = new List<NodeGraph>();
             
-            foreach (var grid in gridContainer.tileGrids) {
-								// TODO: check if this assumption is correct
-								// the y-position of the grid/graph is assumed to be the index within the grid container
-                var graph = CreateNewGraph(gridContainer.tileGrids.IndexOf(grid));
-
-                GenerateGraph(grid, graph);
-                
-                graphContainer.basicMovementGraph.Add(graph);
-            }
+        //     foreach (var grid in gridContainer.tileGrids) {
+								// // TODO: check if this assumption is correct
+								// // the y-position of the grid/graph is assumed to be the index within the grid container
+        //     }
+        
+        //TODO make graph for each layer
+            var graph = CreateNewGraph(1);
+            GenerateGraph(gridContainer.tileGrids[0], gridContainer.tileGrids[1], graph);
+            graphContainer.basicMovementGraph.Add(graph);
             
             graphDrawer.DrawGraph();
         }
 
-        public void GenerateGraph(TileGrid ground, NodeGraph graph) {
+        public void GenerateGraph(TileGrid ground, TileGrid current, NodeGraph graph) {
             // go through each tile in the grid
             // and generate a pathnode for that
             // and then set the isWalkableFlag 
             for (int x = 0; x < ground.Width; x++) {
                 for (int z = 0; z < ground.Depth; z++) {
-                    var type = tileTypeContainer.tileTypes[ground.GetGridObject(x, z).tileTypeID];
-                    var walkable = !type.Properties.HasFlag(TileProperties.Solid);// &&
-                    //     !current.GetGridObject(x, y).Type.Flags.HasFlag(ETileFlags.solid);
+                    var groundType = tileTypeContainer.tileTypes[ground.GetGridObject(x, z).tileTypeID];
+                    var currentType = tileTypeContainer.tileTypes[current.GetGridObject(x, z).tileTypeID];
+                    var walkable = groundType.Properties.HasFlag(TileProperties.Solid) &&
+                                   !currentType.Properties.HasFlag(TileProperties.Solid);
                     graph.GetGridObject(x, z).SetIsWalkable(walkable);
                 }
             }

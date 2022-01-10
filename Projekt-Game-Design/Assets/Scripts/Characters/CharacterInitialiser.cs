@@ -33,9 +33,11 @@ namespace Characters {
 					var spawnData = playerDataContainerSo.playerSpawnData[playerSave.plyerSpawnDataId];
 					var obj = Instantiate(type.prefab, playerParent, true);
 					var playerSC = obj.GetComponent<PlayerCharacterSC>();
+					var playerGridTransform = obj.GetComponent<GridTransform>();
 					playerSC.playerType = type;
 					playerSC.playerSpawnData = spawnData;
 					playerSC.Initialize();
+					playerGridTransform.gridPosition = playerSave.pos;
 					_characterList.playerContainer.Add(playerSC.gameObject);
 				}
 

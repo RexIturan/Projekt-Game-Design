@@ -117,7 +117,8 @@ namespace QuestSystem.ScriptabelObjects {
 ///// Editor Functions /////////////////////////////////////////////////////////////////////////////		
 		
 		#region Editor Only
-
+#if UNITY_EDITOR
+		
 		private void OnValidate() {
 			foreach ( var taskWrapper in tasks ) {
 				if ( taskWrapper.UpdateTaskType(this) ) {
@@ -309,7 +310,7 @@ namespace QuestSystem.ScriptabelObjects {
 			AssetDatabase.AddObjectToAsset(task, this);
 			AssetDatabase.SaveAssets();
 		}
-
+#endif
 		#endregion
 	}
 }

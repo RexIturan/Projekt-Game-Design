@@ -48,8 +48,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961421260944410573}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -129,13 +129,13 @@ MonoBehaviour:
   - cursorMode: 0
     material: {fileID: 2100000, guid: ae081780bff1a164da25697579b77197, type: 2}
   - cursorMode: 1
-    material: {fileID: 2100000, guid: 7f45dd10a6b24cb4dba5de3c605933b3, type: 2}
+    material: {fileID: 2100000, guid: b2689593248771842be473bfe3e15ee4, type: 2}
   - cursorMode: 2
-    material: {fileID: 2100000, guid: bdf10cf5c899bfb4eaa113b61a6a6b4a, type: 2}
+    material: {fileID: 2100000, guid: cfa662f4e96b9074989fae5bf97e000c, type: 2}
   - cursorMode: 3
-    material: {fileID: 2100000, guid: 1a42651765e017f429a652d7a494cb89, type: 2}
+    material: {fileID: 2100000, guid: 88fe623c5890d6b43965358fc8604d56, type: 2}
   - cursorMode: 4
-    material: {fileID: 2100000, guid: c6a206b04cadb9f47929fadfddf6bf04, type: 2}
+    material: {fileID: 2100000, guid: 2abdc3f6337afc84d94198fb9c8ede68, type: 2}
   modlel: {fileID: 1961421260944410573}
   cursorMode: 1
   defaultScale: {x: 1, y: 1, z: 1}

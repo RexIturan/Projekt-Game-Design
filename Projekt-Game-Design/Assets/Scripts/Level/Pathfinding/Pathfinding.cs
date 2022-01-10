@@ -91,9 +91,9 @@ namespace Pathfinding {
         }
         
 
-        public List<PathNode> FindPath(int startX, int startZ, int endX, int endZ, bool ignoreIsWalkable = false) {
-            var startNode = _graph.GetGridObject(startX, startZ);
-            var endNode = _graph.GetGridObject(endX, endZ);
+        public List<PathNode> FindPath(Vector2Int start, Vector2Int end, bool ignoreIsWalkable = false) {
+            var startNode = _graph.GetGridObject(start);
+            var endNode = _graph.GetGridObject(end);
             if (endNode == null) return null;
             
             _openList = new List<PathNode> { startNode };

@@ -298,12 +298,12 @@ MonoBehaviour:
   clearPathEC: {fileID: 11400000, guid: 2859153d6ff2e4a47b7bbc8f1de406c7, type: 2}
   drawPatternEC: {fileID: 11400000, guid: 4570d0368c3b5954a9fb9f87883e556c, type: 2}
   clearPatternEC: {fileID: 11400000, guid: 519bb4bf4c8c4924e987177af7a3c345, type: 2}
-  gridData: {fileID: 0}
+  gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   previewTilemap: {fileID: 1112942783390242946}
   previewPathTilemap: {fileID: 1112942784886810750}
   previewPatternTilemap: {fileID: 7758569038383994858}
-  previewTile: {fileID: 11400000, guid: 5df0112f3270e7640928005d77d9db4e, type: 2}
-  previewPathTile: {fileID: 11400000, guid: a207a9ddce05b9149be37688adec5bd3, type: 2}
+  previewTile: {fileID: 11400000, guid: 7be3b7d63c6cb09409d1d2cfd35d30aa, type: 2}
+  previewPathTile: {fileID: 11400000, guid: 5df0112f3270e7640928005d77d9db4e, type: 2}
   previewPatternTile: {fileID: 11400000, guid: 7be3b7d63c6cb09409d1d2cfd35d30aa, type: 2}
 --- !u!1 &1112942784759588760
 GameObject:

@@ -57,6 +57,10 @@ MonoBehaviour:
     m_Address: Assets/ScriptableObjects/Art
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: baabfb65c31d68440bdd47861e753119
+    m_Address: Assets/ScriptableObjects/QuestSystem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
   m_SchemaSet:

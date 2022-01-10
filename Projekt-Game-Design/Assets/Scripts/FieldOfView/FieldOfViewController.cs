@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Characters;
 using Events.ScriptableObjects.FieldOfView;
 using Grid;
 using Level.Grid;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Util;
 
 namespace FieldOfView {
@@ -13,11 +15,12 @@ namespace FieldOfView {
         [SerializeField] private bool debug;
         // [SerializeField] private int visionRangeTest;
         // [SerializeField] private Vector2Int startPosTest;
-        [SerializeField] private GridDataSO globalGridData;
+        [SerializeField] private GridDataSO gridData;
         
         [Header("Receiving Event On")]
         [SerializeField] private FOVQueryEventChannelSO fieldOfViewQueryEventChannel;
 				[SerializeField] private FOVCrossQueryEventChannelSO fieldOfViewCrossQueryEventChannel;
+				[SerializeField] private VoidEventChannelSO fov_PlayerCharViewUpdateEC;
 
 				// fov algorithms
 				private FieldOfView_Adam _fieldOfViewAdam;
@@ -27,20 +30,31 @@ namespace FieldOfView {
         [SerializeField] private Vector2Int posAdam;
         [SerializeField] private int rangeAdam;
         
+        [SerializeField] private Tilemap viewTilemap;
+        [SerializeField] private TileBase viewTile;
+        
         private bool[,] _visible;
+        
 
         public void Awake() {
             // _fieldOfView = InitFieldOfView();
+            fov_PlayerCharViewUpdateEC.OnEventRaised += GeneratePlayerCharacterVision;
             fieldOfViewQueryEventChannel.OnEventRaised += HandleQueryEvent;
 						fieldOfViewCrossQueryEventChannel.OnEventRaised += HandleCrossQueryEvent;
 				}
+
+        private void OnDisable() {
+	        fov_PlayerCharViewUpdateEC.OnEventRaised -= GeneratePlayerCharacterVision;
+	        fieldOfViewQueryEventChannel.OnEventRaised -= HandleQueryEvent;
+	        fieldOfViewCrossQueryEventChannel.OnEventRaised -= HandleCrossQueryEvent;
+        }
 
         private FieldOfView InitFieldOfView() {
             return new FieldOfView(grid, tileTypeContainer, debug);
         }
 
         private void HandleQueryEvent(Vector3Int startPos, int range, TileProperties blocking, Action<bool[,]> callback) {
-            var pos = globalGridData.GetGridPos2DFromGridPos3D(startPos);
+            var pos = gridData.GetGridPos2DFromGridPos3D(startPos);
 
             InitFieldOfViewAdam();
             _fieldOfViewAdam.Compute(pos, range);
@@ -49,7 +63,7 @@ namespace FieldOfView {
 
 				private void HandleCrossQueryEvent(Vector3Int startPos, TileProperties blocking, Action<bool[,]> callback)
 				{
-						var pos = globalGridData.GetGridPos2DFromGridPos3D(startPos);
+						var pos = gridData.GetGridPos2DFromGridPos3D(startPos);
 
 						// get every surrounding tile
 						InitFieldOfViewAdam();
@@ -83,13 +97,16 @@ namespace FieldOfView {
 
             // gen string
             string str = " \n";
-            var width = globalGridData.Width;
-            var depth = globalGridData.Depth;
+            var width = gridData.Width;
+            var depth = gridData.Depth;
 
+            viewTilemap.ClearAllTiles();
+            
             for (int y = depth-1; y >= 0; y--) {
                 for (int x = 0; x < width; x++) {
                     if (_visible[x, y]) {
                         str += "+";
+                        viewTilemap.SetTile(new Vector3Int(x, y, 0), viewTile);
                     }
                     else {
                         str += "-";
@@ -102,9 +119,44 @@ namespace FieldOfView {
             Debug.Log(str);
         }
 
+				public void GeneratePlayerCharacterVision() {
+					
+					var charList = CharacterList.FindInstant();
+
+					if ( charList != null ) {
+						var playerList = charList.playerContainer;
+
+						viewTilemap.ClearAllTiles();
+						viewTilemap.transform.position = gridData.OriginPosition;
+						
+						foreach ( var playerObj in playerList ) {
+							var gridTransform = playerObj.GetComponent<GridTransform>();
+							var pos = gridTransform.gridPosition;
+								
+							InitFieldOfViewAdam();
+							_fieldOfViewAdam.Compute(gridData.GetGridPos2DFromGridPos3D(pos), rangeAdam);
+							AddVisionToTilemap();
+						}
+					}
+				}
+
+				private void AddVisionToTilemap() {
+					var width = gridData.Width;
+					var depth = gridData.Depth;
+					
+					for (int z = 0; z < depth; z++) {
+						for (int x = 0; x < width; x++) {
+							if (_visible[x, z]) {
+								//todo grid offset
+								viewTilemap.SetTile(new Vector3Int(x, z, 0), viewTile);
+							}
+						}
+					}
+				}
+				
         private void InitFieldOfViewAdam() {
-            var width = globalGridData.Width;
-            var depth = globalGridData.Depth;
+            var width = gridData.Width;
+            var depth = gridData.Depth;
             _visible = new bool[width, depth];
             _fieldOfViewAdam = new FieldOfView_Adam(
                 (x, y) => BlocksLight(x, y, blocker: TileProperties.Opaque),
@@ -115,7 +167,7 @@ namespace FieldOfView {
         private bool BlocksLight(int x, int y, TileProperties blocker) {
             bool blocksLight = true;
 
-            if (globalGridData.IsIn2DGridBounds(x, y)) {
+            if (gridData.IsIn2DGridBounds(x, y)) {
                 var type = grid.tileGrids[1].GetGridObject(x, y).tileTypeID;
                 var flags = tileTypeContainer.tileTypes[type].properties;
                 blocksLight = flags.HasFlag(flag: blocker);
@@ -125,7 +177,7 @@ namespace FieldOfView {
         }
 
         void SetVisible(int x, int y) {
-            if (globalGridData.IsIn2DGridBounds(x, y)) {
+            if (gridData.IsIn2DGridBounds(x, y)) {
                 _visible[x, y] = true;
             }
         }

@@ -34,8 +34,8 @@ namespace Graph {
                                 var originOffset = graph.OriginPosition;
                                 var offset = originOffset + cellOffset;
                                 var nodePos = new Vector3(x, 1, z) + offset;
-                                var tartgetPos = new Vector3(edge.target.pos.x, 1, edge.target.pos.y) + offset;
-                                // Handles.DrawLine(nodePos, tartgetPos, 2f);
+                                var tartgetPos = new Vector3(edge.target.pos.x, 1, edge.target.pos.z) + offset;
+
                                 Debug.DrawLine(nodePos, tartgetPos, Color.red);
                             }    
                         }

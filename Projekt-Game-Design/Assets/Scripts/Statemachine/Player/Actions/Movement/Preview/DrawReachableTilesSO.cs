@@ -28,14 +28,14 @@ public class DrawReachableTiles : StateAction {
 		_movementController = stateMachine.gameObject.GetComponent<MovementController>();
 	}
 
-	public override void OnUpdate() {
-		// pathfindingDrawer.DrawPreview(playerStateContainer.reachableTiles);
-	}
-
 	public override void OnStateEnter() {
 		// pathfindingDrawer.ClearPreviewTilemap();
 		// Debug.Log("Zeichne reachable tiles von Player aus");
 		_drawReachableTileEC.RaiseEvent(_movementController.reachableTiles);
+	}
+	
+	public override void OnUpdate() {
+		// pathfindingDrawer.DrawPreview(playerStateContainer.reachableTiles);
 	}
 
 	public override void OnStateExit() { }
