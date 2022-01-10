@@ -1,3 +1,4 @@
+using Audio;
 using Characters;
 using Combat;
 using Events.ScriptableObjects;
@@ -68,6 +69,8 @@ namespace WorldObjects
 				{
 						broken = true;
 						E_DropLoot_OnEnter.DropLoot(redrawLevelEC, junkType.drop, gameObject.GetComponent<GridTransform>().gridPosition);
+
+						SoundManager.FindSoundManager().PlaySound(junkType.destructionSound);
 				}
 		}
 }

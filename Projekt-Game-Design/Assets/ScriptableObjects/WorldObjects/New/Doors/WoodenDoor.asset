@@ -17,6 +17,8 @@ MonoBehaviour:
   model: {fileID: 477475561137574740, guid: f1fd36ea81fe1af4c9c8f81381da9b68, type: 3}
   doorName: Wooden Door
   description: 'Destroy it. Destroy it. Destroy it. Destroy. It. '
+  destructionSound: destruction_01
+  openingSound: door_open_01
   openManually: 1
   destructable: 1
   hitPoints: 10

@@ -17,6 +17,7 @@ MonoBehaviour:
   model: {fileID: 5177814715606673796, guid: ac16ac2e5cbfc5a45b4bbe1b168aa19f, type: 3}
   junkName: Box ;)
   description: Box the box. C'mon
+  destructionSound: destruction_01
   walkThrough: 0
   destructable: 1
   hitPoints: 20

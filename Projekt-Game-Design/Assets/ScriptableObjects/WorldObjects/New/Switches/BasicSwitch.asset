@@ -17,5 +17,6 @@ MonoBehaviour:
   model: {fileID: 6552241739913167568, guid: 0b79706ee80d7d74484e96c25689f46f, type: 3}
   switchName: 
   description: 
+  activationSound: activation_01
   range: 1
   walkThrough: 0

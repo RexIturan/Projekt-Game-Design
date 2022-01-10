@@ -13,6 +13,7 @@ namespace WorldObjects
 				public GameObject model;
 				public string switchName;
 				public string description;
+				public string activationSound;
 				public int range;
 				public bool walkThrough;
 		}

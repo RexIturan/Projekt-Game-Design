@@ -1,3 +1,4 @@
+using Audio;
 using Characters;
 using Combat;
 using Events.ScriptableObjects;
@@ -146,11 +147,15 @@ namespace WorldObjects
 				{
 						open = true;
 						broken = true;
+
+						SoundManager.FindSoundManager().PlaySound(doorType.destructionSound);
 				}
 
 				private void DoorOpened()
 				{
 						open = true;
+
+						SoundManager.FindSoundManager().PlaySound(doorType.openingSound);
 				}
 		}
 }
