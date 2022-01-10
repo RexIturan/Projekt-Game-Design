@@ -1,3 +1,4 @@
+using Audio;
 using Characters;
 using Combat;
 using Events.ScriptableObjects;
@@ -69,6 +70,8 @@ namespace WorldObjects
 				{
 						switchActivatedEvent.RaiseEvent(switchId);
 						activated = true;
+
+						SoundManager.FindSoundManager().PlaySound(switchType.activationSound);
 				}
 		}
 }
