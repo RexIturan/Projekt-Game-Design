@@ -13,6 +13,7 @@ namespace QuestSystem.ScriptabelObjects {
 
 	public enum TaskType {
 		Key_Press,
+		Read_Text,
 		Event_Raised,
 		Item_Equipping,
 		Item_Collection,
@@ -22,31 +23,6 @@ namespace QuestSystem.ScriptabelObjects {
 		Round_Timer,
 		Composite
 	}
-	
-	// public enum TaskConditionScope {
-	// 	local,
-	// 	global
-	// }
-	
-	// [Serializable]
-	// public struct TaskCondition {
-	// 	
-	// 	public TaskConditionType type;
-	// 	public bool fulfilled;
-	// }
-	
-	// [Serializable]
-	// public class TaskWrapper {
-	// 	public string name;
-	// 	public bool done;
-	// 	public int count;
-	// 	public int[] intArgs;
-	// 	public float[] floatArgs;
-	// 	public string[] stringArgs;
-	// 	public GameObject[] objArgs;
-	// 	public TaskConditionScope scope;
-	// 	public TaskSO task;
-	// }
 	
 	[Serializable]
 	public class Task_Wrapper {
@@ -80,7 +56,10 @@ namespace QuestSystem.ScriptabelObjects {
 				case TaskType.Composite:
 					task = ScriptableObject.CreateInstance<Task_Composite_SO>();
 					break;
+				
+				case TaskType.Read_Text:
 				default:
+					task = ScriptableObject.CreateInstance<Task_ReadText_SO>();
 					break;
 			}
 
@@ -108,7 +87,12 @@ namespace QuestSystem.ScriptabelObjects {
 		
 		//todo public -> [SerializeField] protected
 		// public TaskCondition condition;
-		
+
+		private void Awake() {
+			type = Type;
+		}
+
+		protected abstract TaskType Type { get; }
 		public abstract string BaseName { get; }
 		
 		public abstract bool IsDone();

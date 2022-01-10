@@ -37,7 +37,7 @@ namespace QuestSystem.ScriptabelObjects {
 			}
 		}
 
-		public bool Available => available;
+		public bool IsAvailable => available;
 		public bool IsDone => finished;
 		public bool IsActive => active;
 
@@ -78,10 +78,6 @@ namespace QuestSystem.ScriptabelObjects {
 				}
 			}
 			
-			available = HasPrerequisitesSatisfied() &&
-			            !active &&
-			            ( ( repeatable && finished ) || !finished );
-
 			finished = true;
 			for ( int i = 0; i < tasks.Count; i++ ) {
 				if ( !tasks[i].task.IsDone() ) {
@@ -89,11 +85,20 @@ namespace QuestSystem.ScriptabelObjects {
 				}
 			}
 		}
+
+		public void UpdateAvailability() {
+			available = HasPrerequisitesSatisfied() &&
+			            !active &&
+			            ( ( repeatable && finished ) || !finished );
+		}
 		
 		public bool HasPrerequisitesSatisfied() {
 			bool satisfied = true;
 			for ( int i = 0; i < prerequisits.Count; i++ ) {
-				if (prerequisits[i] != null && !prerequisits[i].finished ) {
+				if(prerequisits[i] == null)
+					continue;
+				
+				if (!prerequisits[i].IsDone || prerequisits[i].IsActive ) {
 					satisfied = false;
 				}
 			}

@@ -43,6 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc48b1fda4ff40deab63d18590f366fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeQuests:
-  - {fileID: 11400000, guid: de3217a16db257d4e871d437aab56bf6, type: 2}
-  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  questContainer: {fileID: 11400000, guid: 65a51bfc297041f4788c7db5608fe983, type: 2}

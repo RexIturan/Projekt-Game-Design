@@ -37,7 +37,7 @@ MonoBehaviour:
   m_Name: 0_KeyPress_camera-up
   m_EditorClassIdentifier: 
   active: 0
-  done: 1
+  done: 0
   type: 0
   textTextBody:
     title: Press [W][Arrow Up]
@@ -110,10 +110,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   available: 0
-  active: 1
+  active: 0
   finished: 0
   repeatable: 0
-  prerequisits: []
+  prerequisits:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 618c4d4ba775d67438ead21d329fed54, type: 2}
   currentTaskIndex: 0
   nextTaskIndex: 0
   tasks:

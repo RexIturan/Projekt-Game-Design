@@ -15,15 +15,12 @@ namespace UI.QuestSystem {
 ///// Private Variables ////////////////////////////////////////////////////////////////////////////
 		[SerializeField] private UIDocument uiDocument;
 
-		[SerializeField] private List<QuestSO> activeQuests;
+		[SerializeField] private QuestContainerSO questContainer;
 		
 		// [SerializeField] private QuestSO currentQuest;
 		private TaskContainer taskContainer;
 
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
-		
-		
-
 
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
@@ -43,7 +40,7 @@ namespace UI.QuestSystem {
 		}
 
 		private void Update() {
-			taskContainer.Quests = activeQuests;
+			taskContainer.Quests = questContainer.activeQuests;
 			taskContainer.UpdateComponent();
 		}
 	}

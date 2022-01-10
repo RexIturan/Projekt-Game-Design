@@ -496,15 +496,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3963282371009422670, guid: bd4b5d694b50833438d3749397872739, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3835588
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3963282371009422670, guid: bd4b5d694b50833438d3749397872739, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6463865
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3963282371009422670, guid: bd4b5d694b50833438d3749397872739, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.75245494
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3963282371009422670, guid: bd4b5d694b50833438d3749397872739, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1681,14 +1681,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 613459224}
     m_Modifications:
-    - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
-      propertyPath: menuClosedEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
-    - target: {fileID: 7814138535658991265, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
-      propertyPath: menuOpenedEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
     - target: {fileID: 7814138535658991266, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1733,14 +1725,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7814138535658991270, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
-      propertyPath: menuClosedEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
-    - target: {fileID: 7814138535658991270, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
-      propertyPath: menuOpenedEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
     - target: {fileID: 7814138535658991292, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
       propertyPath: m_Name
       value: Level UI
@@ -1752,36 +1736,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7814138535658991266, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
   m_PrefabInstance: {fileID: 7814138535500672978}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7814138535500672980 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7814138535658991292, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
-  m_PrefabInstance: {fileID: 7814138535500672978}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7814138535500672981 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7814138535658991293, guid: 70e5c575b6fe685459c724d8f3e0ced8, type: 3}
-  m_PrefabInstance: {fileID: 7814138535500672978}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814138535500672980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f21c074d86024caca2a0034ce4f53f73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7814138535500672982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814138535500672980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe81667187d14422a22fa3176b6b3cd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiDocument: {fileID: 7814138535500672981}
-  currentQuest: {fileID: 11400000, guid: de3217a16db257d4e871d437aab56bf6, type: 2}
 --- !u!1001 &8249263231753559630
 PrefabInstance:
   m_ObjectHideFlags: 0

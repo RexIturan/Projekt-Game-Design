@@ -119,6 +119,8 @@ namespace QuestSystem.ScriptabelObjects {
 		
 ///// TaskSO Overrides /////////////////////////////////////////////////////////////////////////////
 		
+		protected override TaskType Type { get; } = TaskType.Key_Press;
+
 		public override string BaseName { get; } = "KeyPress";
 
 		public override bool IsDone() {
@@ -128,6 +130,7 @@ namespace QuestSystem.ScriptabelObjects {
 		public override void ResetTask() {
 			done = false;
 			active = false;
+			Cleanup();
 		}
 
 		public override void StartTask() {
@@ -137,15 +140,13 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 		
 		public override void StopTask() {
-			active = false;
 			Cleanup();
+			active = false;
 		}
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////		
 		
 		private void OnEnable() {
-			type = TaskType.Key_Press;
-			
 			// if(inputReader is null)
 			// 	return;
 			//
@@ -166,7 +167,6 @@ namespace QuestSystem.ScriptabelObjects {
 		private void OnValidate() {
 			if(inputReader is null)
 				return;
-			
 			
 			//todo check if settings are correct			
 		}

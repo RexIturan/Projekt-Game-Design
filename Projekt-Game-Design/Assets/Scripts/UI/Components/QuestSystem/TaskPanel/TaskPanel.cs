@@ -79,7 +79,6 @@ namespace UI.Components.QuestSystem {
 		public List<InstructionWrapper> instructionList;
 		public string Title;
 		public string Description;
-		public Action Next;
 
 		public bool ShowHelp;
 		public bool ShowSkip;
@@ -293,6 +292,13 @@ namespace UI.Components.QuestSystem {
 				}
 			});
 			instructions.Clear();
+
+			if ( instructionList.Count == 0 ) {
+				SetVisibility(instructionContainer, false);
+			}
+			else {
+				SetVisibility(instructionContainer, true);
+			}
 			
 			foreach ( var i in instructionList ) {
 				var instruction = new InstructionField(i.text, i.state);
@@ -313,10 +319,9 @@ namespace UI.Components.QuestSystem {
 			}
 		}
 
+		//todo 
 		public void SetNextCallback(Action callback) {
-			nextButton.clicked -= Next;
-			Next = callback;
-			nextButton.clicked += Next;
+			nextButton.clicked += callback;
 		}
 		
 		public void RemoveNextCallback(Action callback) {

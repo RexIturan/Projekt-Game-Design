@@ -97,29 +97,34 @@ namespace UI.Components.QuestSystem {
 
 			if ( tasks[0].type == TaskType.Composite ) {
 				for ( int i = 1; i < tasks.Count; i++ ) {
-					var task = tasks[i];
-					var uiInstructionWrapper = new InstructionWrapper {
-						state = task.done ? InstructionState.Done : InstructionState.Active,
-						text = task.textTextBody.instructions, 
-					};
-					taskPanel.instructionList.Add(uiInstructionWrapper);
-					//todo get instructiion from all sub Tasks
+					TryAddInstructionWrapper(taskPanel, tasks, i);
 				}	
 			}
 			else {
-				//todo get instructiion from singel Task
-				var task = tasks[0];
-				var uiInstructionWrapper = new InstructionWrapper {
-					state = task.done ? InstructionState.Done : InstructionState.Active,
-					text = task.textTextBody.instructions, 
-				};
-				taskPanel.instructionList.Add(uiInstructionWrapper);
+				TryAddInstructionWrapper(taskPanel, tasks, 0);
 			}
+		}
+
+		private void TryAddInstructionWrapper(TaskPanel taskPanel, List<TaskSO> tasks, int index) {
+			if(tasks[index] == null || tasks[index].type == TaskType.Read_Text)
+				return;
+			
+			var uiInstructionWrapper = CreateInstructionWrapper(tasks, index);
+			taskPanel.instructionList.Add(uiInstructionWrapper);
+		}
+		
+		private InstructionWrapper CreateInstructionWrapper(List<TaskSO> tasks, int index) {
+			var task = tasks[index];
+			return new InstructionWrapper {
+				state = task.done ? InstructionState.Done : InstructionState.Active,
+				text = task.textTextBody.instructions, 
+			};
 		}
 		
 ///// Button Callbacks /////////////////////////////////////////////////////////////////////////////
 		
-		private void NextCallback(QuestSO quest) {
+		private void NextCallback(int index) {
+			var quest = Quests[index];
 			if ( quest != null && quest.IsActive ) {
 				quest.Next();
 			}
@@ -159,6 +164,10 @@ namespace UI.Components.QuestSystem {
 				taskPanels.Clear();
 				for ( int i = 0; i < Quests.Count; i++ ) {
 					var taskPanel = new TaskPanel();
+					//todo does this work?
+					//todo potential problem, infinite callbacks
+					var index = i;
+					taskPanel.SetNextCallback(() => NextCallback(index));	
 					taskPanels.Add(taskPanel);
 					taskPanelContainer.Add(taskPanel);
 				}
@@ -172,8 +181,6 @@ namespace UI.Components.QuestSystem {
 				if ( quest is { } ) {
 					taskPanels[i].SetVisibility(quest.IsActive);
 					SetTask(taskPanels[i], quest);
-				
-					taskPanels[i].SetNextCallback(() => NextCallback(quest));	
 				}
 			}
 		}
