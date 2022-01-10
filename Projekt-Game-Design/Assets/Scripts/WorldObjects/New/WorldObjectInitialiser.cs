@@ -16,7 +16,7 @@ namespace WorldObjects
 						List<Switch_Save> switch_Saves,
 						List<Junk_Save> junk_Saves)
 				{
-						WorldObjectList worldObjects = WorldObjectList.FindWorldObjectList();
+						WorldObjectList worldObjects = WorldObjectList.FindInstant();
 
 						// doors
 						//

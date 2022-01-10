@@ -11,7 +11,7 @@ namespace WorldObjects
 				[SerializeField] private List<GameObject> trigger;
 				public List<GameObject> junks;
 
-				public static WorldObjectList FindWorldObjectList()
+				public static WorldObjectList FindInstant()
 				{
 						GameObject worldObjectList = GameObject.Find("WorldObjects");
 						if ( worldObjectList )
@@ -19,5 +19,9 @@ namespace WorldObjects
 						else
 								return null;
 				}
+				
+				// public static WorldObjectList FindInstant() {
+				// 	return GameObject.Find("WorldObjects").GetComponent<WorldObjectList>();
+				// }
 		}
 }

@@ -2,7 +2,7 @@
 
 namespace QuestSystem.ScriptabelObjects {
 	public class Task_ReadText_SO : TaskSO {
-		protected override TaskType Type { get; } = TaskType.Read_Text;
+		public override TaskType Type { get; } = TaskType.Read_Text;
 		public override string BaseName { get; } = "ReadText";
 
 		public override bool IsDone() {

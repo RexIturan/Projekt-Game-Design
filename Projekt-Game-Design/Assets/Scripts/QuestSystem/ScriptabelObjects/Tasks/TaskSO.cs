@@ -15,14 +15,15 @@ namespace QuestSystem.ScriptabelObjects {
 		Key_Press,
 		Read_Text,
 		Ability_Selected,
-		Event_Raised,
-		Item_Equipping,
 		Item_In_Inventory,
-		Object_Selected,
-		Char_At_Pos,
-		Enemy_Dead,
-		Round_Timer,
-		Composite
+		Item_Equipped,
+		Composite,
+		Switch_Active,
+		// Event_Raised,
+		// Object_Selected,
+		// Char_At_Pos,
+		// Enemy_Dead,
+		// Round_Timer,
 	}
 	
 	[Serializable]
@@ -31,11 +32,12 @@ namespace QuestSystem.ScriptabelObjects {
 		public TaskType type;
 		public TaskSO task;
 
+// #define UNITY_EDITOR
 #if UNITY_EDITOR
 		public bool UpdateTaskType(QuestSO quest) {
 
 			if ( task != null ) {
-				if (task.type == type) {
+				if (task.Type == type) {
 					return false;	
 				}
 			}
@@ -62,6 +64,18 @@ namespace QuestSystem.ScriptabelObjects {
 					task = ScriptableObject.CreateInstance<Task_AbilitySelected_SO>();
 					break;
 				
+				case TaskType.Item_In_Inventory:
+					task = ScriptableObject.CreateInstance<Task_ItemInInventory_SO>();
+					break;
+
+				case TaskType.Item_Equipped:
+					task = ScriptableObject.CreateInstance<Task_ItemEquipped_SO>();
+					break;
+
+				case TaskType.Switch_Active:
+					task = ScriptableObject.CreateInstance<Task_SwitchActive_SO>();
+					break;
+
 				case TaskType.Read_Text:
 				default:
 					task = ScriptableObject.CreateInstance<Task_ReadText_SO>();
@@ -87,17 +101,12 @@ namespace QuestSystem.ScriptabelObjects {
 
 		public bool active;
 		public bool done;
-		[HideInInspector] public TaskType type;
 		public TaskTextBody textTextBody;
 		
 		//todo public -> [SerializeField] protected
 		// public TaskCondition condition;
 
-		private void Awake() {
-			type = Type;
-		}
-
-		protected abstract TaskType Type { get; }
+		public abstract TaskType Type { get; }
 		public abstract string BaseName { get; }
 		
 		public abstract bool IsDone();

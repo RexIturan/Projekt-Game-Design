@@ -19,9 +19,19 @@ namespace WorldObjects
 				[Header("Receiving Events on:")]
 				[SerializeField] private VoidEventChannelSO updateWorldObjectEvent;
 
+				[SerializeField] private SwitchAnimator switchAnimator;
+				
 				public int switchId;
 				public SwitchTypeSO switchType;
 				[SerializeField] private bool activated;
+
+				public bool IsActivated {
+					get { return activated; }
+				}
+				
+				public void ToggleState() {
+					activated = !activated;
+				}
 
 				public void Awake()
 				{
@@ -39,7 +49,7 @@ namespace WorldObjects
 						this.switchId = switch_Save.switchId;
 						this.switchType = switchType;
 						
-						Instantiate(switchType.model, transform);
+						// Instantiate(switchType.model, transform);
 
 						gameObject.GetComponent<GridTransform>().gridPosition = switch_Save.gridPos;
 				}
@@ -68,8 +78,9 @@ namespace WorldObjects
 
 				private void SwitchActivated()
 				{
-						switchActivatedEvent.RaiseEvent(switchId);
-						activated = true;
+					activated = true;
+					switchAnimator.FlipSwitch();
+					switchActivatedEvent.RaiseEvent(switchId);
 
 						SoundManager.FindSoundManager().PlaySound(switchType.activationSound);
 				}

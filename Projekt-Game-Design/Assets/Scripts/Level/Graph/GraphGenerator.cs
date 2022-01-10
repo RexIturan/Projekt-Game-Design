@@ -24,7 +24,7 @@ namespace Graph {
         
         public void GenerateGraphFromGrids() {
             characterList = CharacterList.FindInstant();
-						worldObjectList = WorldObjectList.FindWorldObjectList();
+						worldObjectList = WorldObjectList.FindInstant();
             // characterContainer.FillContainer();
             
             graphContainer.basicMovementGraph = new List<NodeGraph>();

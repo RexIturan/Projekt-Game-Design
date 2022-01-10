@@ -119,7 +119,7 @@ namespace QuestSystem.ScriptabelObjects {
 		
 ///// TaskSO Overrides /////////////////////////////////////////////////////////////////////////////
 		
-		protected override TaskType Type { get; } = TaskType.Key_Press;
+		public override TaskType Type { get; } = TaskType.Key_Press;
 
 		public override string BaseName { get; } = "KeyPress";
 

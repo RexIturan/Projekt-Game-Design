@@ -25,7 +25,7 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 
 ///// TaskSO Overrides /////////////////////////////////////////////////////////////////////////////
-		protected override TaskType Type { get; } = TaskType.Composite; 
+		public override TaskType Type { get; } = TaskType.Composite; 
 		public override string BaseName { get; } = "Composite";
 		
 		public override bool IsDone() {

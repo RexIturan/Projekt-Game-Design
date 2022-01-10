@@ -31,6 +31,14 @@
 
 .instructionField-label{
     font-size: var(--font-size);
+    width: 80%;
+    flex-wrap: wrap;
+    white-space: normal;
+}
+
+.instructionField-stateLabel{
+    font-size: var(--font-size);
+    
 }
 
 .instructionField-active{

@@ -95,7 +95,7 @@ namespace UI.Components.QuestSystem {
 		private void SetInstructions(TaskPanel taskPanel, List<TaskSO> tasks) {
 			taskPanel.instructionList.Clear();
 
-			if ( tasks[0].type == TaskType.Composite ) {
+			if ( tasks[0].Type == TaskType.Composite ) {
 				for ( int i = 1; i < tasks.Count; i++ ) {
 					TryAddInstructionWrapper(taskPanel, tasks, i);
 				}	
@@ -106,7 +106,7 @@ namespace UI.Components.QuestSystem {
 		}
 
 		private void TryAddInstructionWrapper(TaskPanel taskPanel, List<TaskSO> tasks, int index) {
-			if(tasks[index] == null || tasks[index].type == TaskType.Read_Text)
+			if(tasks[index] == null || tasks[index].Type == TaskType.Read_Text)
 				return;
 			
 			var uiInstructionWrapper = CreateInstructionWrapper(tasks, index);

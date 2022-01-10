@@ -121,6 +121,8 @@ namespace QuestSystem.ScriptabelObjects {
 		
 ///// Editor Functions /////////////////////////////////////////////////////////////////////////////		
 		
+// #define UNITY_EDITOR
+
 		#region Editor Only
 #if UNITY_EDITOR
 		
@@ -176,6 +178,10 @@ namespace QuestSystem.ScriptabelObjects {
 			int objIdx = 0;
 			foreach ( var t in tasks ) {
 				if ( t.task != null ) {
+
+					if(objIdx >= objects.Length)
+						break;
+
 					var task = objects[objIdx] as TaskSO;
 
 					if ( t.task != task) {

@@ -104,11 +104,11 @@
         {
         "switchId": 0,
         "switchTypeId": 0,
-	"gridPos": {
-          "x": 4,
-          "y": 1,
-          "z": 2
-      	}
+        "gridPos": {
+              "x": 4,
+              "y": 1,
+              "z": 2
+            }
         },
         {
         "switchId": 1,
