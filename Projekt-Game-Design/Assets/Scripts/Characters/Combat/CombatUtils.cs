@@ -84,7 +84,7 @@ namespace Combat
 
 						// world objects
 						//
-						WorldObjectList worldObjectList = WorldObjectList.FindWorldObjectList();
+						WorldObjectList worldObjectList = WorldObjectList.FindInstant();
 						if(worldObjectList && targetTypes.HasFlag(AbilityTarget.Neutral))
 						{
 								foreach(GameObject doorObj in worldObjectList.doors)

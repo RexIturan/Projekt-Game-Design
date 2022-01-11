@@ -26,6 +26,6 @@ public class ItemContainerSO : ScriptableObject {
 	}
 
 	private void OnValidate() {
-		// UpdateItemList();
+		UpdateItemList();
 	}
 }

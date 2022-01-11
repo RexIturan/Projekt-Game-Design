@@ -134,7 +134,7 @@ public class OverlayUIController : MonoBehaviour {
 		foreach ( var ability in abilities ) {
 
 			// new AvtionBar
-			var id = ability.abilityID;
+			var id = ability.id;
 			var args = new Object[] { id };
 
 			void AbilityCallback(object[] args) {

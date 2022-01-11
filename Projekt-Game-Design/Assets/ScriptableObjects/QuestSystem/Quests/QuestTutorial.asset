@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7649197984379599530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fef674ff9f249c495b70cd21278df43, type: 3}
+  m_Name: 4_ItemEquipped_new Task
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: 
+    description: 
+    instructions: equip item
+  item: {fileID: 11400000, guid: 5af18ceaeab735d4a942216ebf69cd64, type: 2}
+  inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
+--- !u!114 &-6268152724891483530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
+  m_Name: 0_KeyPress_any_camera
+  m_EditorClassIdentifier: 
+  active: 1
+  done: 0
+  textTextBody:
+    title: any_camera
+    description: no Description any_camera
+    instructions: Press [W] OR [A] OR [S] OR [D]
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  actionName: MoveCamera
+  mapName: Camera
+  compositeName: 
+  actionNames: []
+--- !u!114 &-5385852539285543383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573a10252b9e457d91b0719bb28e0568, type: 3}
+  m_Name: 3_ItemInInventory_get Item
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: 
+    description: 
+    instructions: get item
+  item: {fileID: 11400000, guid: 5af18ceaeab735d4a942216ebf69cd64, type: 2}
+  inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecda0ff7e794b0d8929230fb03c1044, type: 3}
+  m_Name: QuestTutorial
+  m_EditorClassIdentifier: 
+  description: 
+  available: 0
+  active: 1
+  finished: 0
+  repeatable: 0
+  prerequisits: []
+  currentTaskIndex: 0
+  nextTaskIndex: 0
+  tasks:
+  - name: any_camera
+    type: 0
+    task: {fileID: -6268152724891483530}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+  - name: new Task
+    type: 1
+    task: {fileID: 4996187089100691172}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+  - name: Move Selected
+    type: 2
+    task: {fileID: 7272605633836887984}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+  - name: get Item
+    type: 3
+    task: {fileID: -5385852539285543383}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+  - name: new Task
+    type: 4
+    task: {fileID: -7649197984379599530}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+  - name: new Task
+    type: 6
+    task: {fileID: 3615984569340738119}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 237
+--- !u!114 &3615984569340738119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: febf331e49584c09a7889b1afa49297a, type: 3}
+  m_Name: 5_SwitchActive_new Task
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: activate switch
+    description: activate switch
+    instructions: activate switch
+  switchId: 0
+--- !u!114 &4996187089100691172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 1_ReadText_new Task
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Read This Text
+    description: Read This Text
+    instructions: 
+--- !u!114 &7272605633836887984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056743f4be01493596f254546d95b334, type: 3}
+  m_Name: 2_AbilitySelected_Move Selected
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Move Selected
+    description: Move Selected
+    instructions: Select the Move Ability
+  ability: {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}

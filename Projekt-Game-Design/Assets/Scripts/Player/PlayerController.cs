@@ -56,7 +56,7 @@ namespace Player {
 			
 			//get Lists
 			characterList = CharacterList.FindInstant();
-			worldObjectList = WorldObjectList.FindWorldObjectList();
+			worldObjectList = WorldObjectList.FindInstant();
 		}
 
 		private void OnDisable() {

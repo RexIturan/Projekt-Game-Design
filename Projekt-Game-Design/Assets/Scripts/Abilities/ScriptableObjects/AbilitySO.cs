@@ -7,6 +7,8 @@ using UOP1.StateMachine.ScriptableObjects;
 [CreateAssetMenu(fileName = "NewAbility", menuName = "Ability/new Ability")]
 public class AbilitySO : ScriptableObject
 {
+		public int id;
+	
     public Sprite icon;
     public string description;
 		public CharacterAnimation Animation;
@@ -20,7 +22,6 @@ public class AbilitySO : ScriptableObject
     public TileProperties conditions; // restrictions for target in regards of the tiles between
     public int costs; 
     public TargetedEffect [] targetedEffects;
-    public int abilityID;
 
     public List<StateActionSO> selectedActions;
     public List<StateActionSO> executingActions;

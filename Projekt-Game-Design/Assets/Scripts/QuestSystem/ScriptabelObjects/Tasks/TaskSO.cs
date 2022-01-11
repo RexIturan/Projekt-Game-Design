@@ -13,40 +13,18 @@ namespace QuestSystem.ScriptabelObjects {
 
 	public enum TaskType {
 		Key_Press,
-		Event_Raised,
-		Item_Equipping,
-		Item_Collection,
-		Object_Selected,
-		Char_At_Pos,
-		Enemy_Dead,
-		Round_Timer,
-		Composite
+		Read_Text,
+		Ability_Selected,
+		Item_In_Inventory,
+		Item_Equipped,
+		Composite,
+		Switch_Active,
+		// Event_Raised,
+		// Object_Selected,
+		// Char_At_Pos,
+		// Enemy_Dead,
+		// Round_Timer,
 	}
-	
-	// public enum TaskConditionScope {
-	// 	local,
-	// 	global
-	// }
-	
-	// [Serializable]
-	// public struct TaskCondition {
-	// 	
-	// 	public TaskConditionType type;
-	// 	public bool fulfilled;
-	// }
-	
-	// [Serializable]
-	// public class TaskWrapper {
-	// 	public string name;
-	// 	public bool done;
-	// 	public int count;
-	// 	public int[] intArgs;
-	// 	public float[] floatArgs;
-	// 	public string[] stringArgs;
-	// 	public GameObject[] objArgs;
-	// 	public TaskConditionScope scope;
-	// 	public TaskSO task;
-	// }
 	
 	[Serializable]
 	public class Task_Wrapper {
@@ -54,11 +32,12 @@ namespace QuestSystem.ScriptabelObjects {
 		public TaskType type;
 		public TaskSO task;
 
+// #define UNITY_EDITOR
 #if UNITY_EDITOR
 		public bool UpdateTaskType(QuestSO quest) {
 
 			if ( task != null ) {
-				if (task.type == type) {
+				if (task.Type == type) {
 					return false;	
 				}
 			}
@@ -80,7 +59,26 @@ namespace QuestSystem.ScriptabelObjects {
 				case TaskType.Composite:
 					task = ScriptableObject.CreateInstance<Task_Composite_SO>();
 					break;
+				
+				case TaskType.Ability_Selected:
+					task = ScriptableObject.CreateInstance<Task_AbilitySelected_SO>();
+					break;
+				
+				case TaskType.Item_In_Inventory:
+					task = ScriptableObject.CreateInstance<Task_ItemInInventory_SO>();
+					break;
+
+				case TaskType.Item_Equipped:
+					task = ScriptableObject.CreateInstance<Task_ItemEquipped_SO>();
+					break;
+
+				case TaskType.Switch_Active:
+					task = ScriptableObject.CreateInstance<Task_SwitchActive_SO>();
+					break;
+
+				case TaskType.Read_Text:
 				default:
+					task = ScriptableObject.CreateInstance<Task_ReadText_SO>();
 					break;
 			}
 
@@ -103,12 +101,12 @@ namespace QuestSystem.ScriptabelObjects {
 
 		public bool active;
 		public bool done;
-		public TaskType type;
 		public TaskTextBody textTextBody;
 		
 		//todo public -> [SerializeField] protected
 		// public TaskCondition condition;
-		
+
+		public abstract TaskType Type { get; }
 		public abstract string BaseName { get; }
 		
 		public abstract bool IsDone();

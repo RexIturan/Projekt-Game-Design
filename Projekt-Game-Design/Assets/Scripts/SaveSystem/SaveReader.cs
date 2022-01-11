@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Characters;
 using Grid;
 using Level.Grid.ItemGrid;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 using WorldObjects;
+using Item = Level.Grid.ItemGrid.Item;
 
 namespace SaveSystem {
 	public class SaveReader {
@@ -117,6 +119,13 @@ namespace SaveSystem {
 			}
 		}
 		
+		private void ReadItems(List<Item_Save> saveItems, GridContainerSO gridContaier) {
+			foreach ( var saveItem in saveItems ) {
+				Vector2Int pos = _gridData.GetGridPos2DFromGridPos3D(saveItem.gridPos);
+				gridContaier.items[saveItem.gridPos.y].GetGridObject(pos).SetId(saveItem.id);
+			}
+		}
+		
 		#endregion
 		
 /////////////////////////////////////// Public Functions ///////////////////////////////////////////
@@ -152,7 +161,10 @@ namespace SaveSystem {
 			ReadInventory(save.inventory, _inventory);
 
 			ReadEquipmentInventory(save.equipmentInventory, _inventory);
+			
+			ReadItems(save.items, _gridContaier);
 		}
+
 
 		#endregion
 	}

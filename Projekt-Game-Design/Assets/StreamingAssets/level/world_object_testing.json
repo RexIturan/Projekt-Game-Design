@@ -130,40 +130,40 @@
         {
         "switchId": 0,
         "switchTypeId": 0,
-	"gridPos": {
-          "x": 4,
-          "y": 1,
-          "z": 2
-      	},
+        "gridPos": {
+            "x": 4,
+            "y": 1,
+            "z": 2
+            },
         "orientation": {
-        "x": 0,
-        "y": 0,
-        "z": 1
-        }
+            "x": 0,
+            "y": 0,
+            "z": 1
+            }
         },
         {
         "switchId": 1,
         "switchTypeId": 0,
-	"gridPos": {
-          "x": 4,
-          "y": 1,
-          "z": 0
-      	},
+        "gridPos": {
+            "x": 4,
+            "y": 1,
+            "z": 0
+            },
         "orientation": {
-        "x": 0,
-        "y": 0,
-        "z": 1
-        }
+            "x": 0,
+            "y": 0,
+            "z": 1
+            }
         }
       ],
     "junks": [
       {
         "junkTypeId": 0,
-	"gridPos": {
-          "x": 1,
-          "y": 1,
-          "z": 0
-      	},
+        "gridPos": {
+              "x": 1,
+              "y": 1,
+              "z": 0
+            },
         "orientation": {
         "x": 0,
         "y": 0,
@@ -195,6 +195,7 @@
             "itemIds": [-1, -1, -1, -1, -1]
         }
     ],
+    "items": [],
     "tileGrids": [
       {
         "width": 7,

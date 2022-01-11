@@ -39,6 +39,16 @@
             9
         ]
     },
+    "items": [
+      {
+        "id": 5,
+        "gridPos": {
+          "x": 1,
+          "y": 1,
+          "z": 4
+        }
+      }
+    ],
     "equipmentInventory": [
         {
             "size": 5,

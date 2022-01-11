@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: 1_KeyPress_camera-down
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
-  type: 0
+  done: 1
   textTextBody:
     title: Press [S][Arrow Down]
     description: TODO
@@ -38,7 +37,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   done: 1
-  type: 0
   textTextBody:
     title: Press [W][Arrow Up]
     description: TODO
@@ -61,8 +59,7 @@ MonoBehaviour:
   m_Name: 4_KeyPress_left
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
-  type: 0
+  done: 1
   textTextBody:
     title: Press [A][Arrow Left]
     description: TODO
@@ -85,8 +82,7 @@ MonoBehaviour:
   m_Name: 3_KeyPress_right
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
-  type: 0
+  done: 1
   textTextBody:
     title: Press [D][Arrow Right]
     description: TODO
@@ -110,44 +106,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   available: 0
-  active: 1
-  finished: 0
+  active: 0
+  finished: 1
   repeatable: 0
   prerequisits: []
-  currentTaskIndex: 0
-  nextTaskIndex: 0
+  currentTaskIndex: 5
+  nextTaskIndex: 5
   tasks:
   - name: camera-up
     type: 0
     task: {fileID: -7736040180520264606}
-    showProperty: 1
-    button: '-'
-    drawerHeight: 327
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
   - name: camera-down
     type: 0
     task: {fileID: -8467908750364111612}
-    showProperty: 1
-    button: '-'
-    drawerHeight: 327
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
   - name: right - left
-    type: 8
-    task: {fileID: 6261651919942083205}
-    showProperty: 1
-    button: '-'
-    drawerHeight: 327
+    type: 5
+    task: {fileID: 5026653192202650259}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
   - name: right
     type: 0
     task: {fileID: -3254571590361733681}
-    showProperty: 1
-    button: '-'
-    drawerHeight: 327
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
   - name: left
     type: 0
     task: {fileID: -4576197144052662707}
-    showProperty: 1
-    button: '-'
-    drawerHeight: 327
---- !u!114 &6261651919942083205
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+--- !u!114 &5026653192202650259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,11 +157,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   done: 0
-  type: 8
   textTextBody:
-    title: Composite Description
-    description: TODO
-    instructions: Press A And D
+    title: 
+    description: 
+    instructions: 
   count: 0
   subTasks:
   - {fileID: -3254571590361733681}

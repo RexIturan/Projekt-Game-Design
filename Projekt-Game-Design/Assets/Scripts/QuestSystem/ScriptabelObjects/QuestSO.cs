@@ -37,7 +37,7 @@ namespace QuestSystem.ScriptabelObjects {
 			}
 		}
 
-		public bool Available => available;
+		public bool IsAvailable => available;
 		public bool IsDone => finished;
 		public bool IsActive => active;
 
@@ -78,10 +78,6 @@ namespace QuestSystem.ScriptabelObjects {
 				}
 			}
 			
-			available = HasPrerequisitesSatisfied() &&
-			            !active &&
-			            ( ( repeatable && finished ) || !finished );
-
 			finished = true;
 			for ( int i = 0; i < tasks.Count; i++ ) {
 				if ( !tasks[i].task.IsDone() ) {
@@ -89,11 +85,20 @@ namespace QuestSystem.ScriptabelObjects {
 				}
 			}
 		}
+
+		public void UpdateAvailability() {
+			available = HasPrerequisitesSatisfied() &&
+			            !active &&
+			            ( ( repeatable && finished ) || !finished );
+		}
 		
 		public bool HasPrerequisitesSatisfied() {
 			bool satisfied = true;
 			for ( int i = 0; i < prerequisits.Count; i++ ) {
-				if (prerequisits[i] != null && !prerequisits[i].finished ) {
+				if(prerequisits[i] == null)
+					continue;
+				
+				if (!prerequisits[i].IsDone || prerequisits[i].IsActive ) {
 					satisfied = false;
 				}
 			}
@@ -116,6 +121,8 @@ namespace QuestSystem.ScriptabelObjects {
 		
 ///// Editor Functions /////////////////////////////////////////////////////////////////////////////		
 		
+// #define UNITY_EDITOR
+
 		#region Editor Only
 #if UNITY_EDITOR
 		
@@ -171,6 +178,10 @@ namespace QuestSystem.ScriptabelObjects {
 			int objIdx = 0;
 			foreach ( var t in tasks ) {
 				if ( t.task != null ) {
+
+					if(objIdx >= objects.Length)
+						break;
+
 					var task = objects[objIdx] as TaskSO;
 
 					if ( t.task != task) {

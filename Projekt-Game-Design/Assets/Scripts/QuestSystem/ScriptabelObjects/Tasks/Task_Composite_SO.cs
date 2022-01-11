@@ -25,6 +25,7 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 
 ///// TaskSO Overrides /////////////////////////////////////////////////////////////////////////////
+		public override TaskType Type { get; } = TaskType.Composite; 
 		public override string BaseName { get; } = "Composite";
 		
 		public override bool IsDone() {
@@ -52,7 +53,6 @@ namespace QuestSystem.ScriptabelObjects {
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
 		
 		private void Awake() {
-			type = TaskType.Composite;
 			subTasks = new List<TaskSO>();
 		}
 	}

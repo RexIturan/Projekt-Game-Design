@@ -24,6 +24,30 @@
       }
     ],
     "enemies": [],
+    "doors": [],
+    "switches": [
+      {
+        "switchId": 0,
+        "switchTypeId": 0,
+        "gridPos": {
+          "x": 4,
+          "y": 1,
+          "z": 2
+        }
+      }
+    ],
+    "junks": [
+      {
+        "junkTypeId": 0,
+        "gridPos": {
+          "x": 1,
+          "y": 1,
+          "z": 0
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      }
+    ],
     "inventory": {
       "size": 3,
       "itemIds": [
@@ -36,6 +60,16 @@
       {
         "size": 7,
         "itemIds": [-1, -1, -1, -1, -1]
+      }
+    ],
+    "items": [
+        {
+        "id": 5,
+        "gridPos": {
+          "x": 1,
+          "y": 1,
+          "z": 4
+        }
       }
     ],
     "tileGrids": [

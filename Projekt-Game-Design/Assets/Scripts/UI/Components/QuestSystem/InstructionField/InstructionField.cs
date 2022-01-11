@@ -28,6 +28,7 @@ namespace UI.Components.QuestSystem {
 		private static readonly string activeLabelSuffix = "active-label";
 		private static readonly string failedLabelSuffix = "failed-label";
 		private static readonly string labelSuffix = "label";
+		private static readonly string stateLabelSuffix = "stateLabel";
 		
 		private static readonly string defaultStyleSheet = "UI/instructionField";
 ///// PRIVATE VARIABLES ////////////////////////////////////////////////////////////////////////////
@@ -103,7 +104,7 @@ namespace UI.Components.QuestSystem {
 				ref stateLabel,
 				"StateLabel",
 				"active",
-				labelSuffix);
+				stateLabelSuffix);
 			
 			container.Add(instructionLabel);
 			container.Add(stateLabel);
