@@ -39,7 +39,6 @@ namespace Characters {
 					hostile.Add(Faction.Enemy);
 					break;
 				case Faction.Enemy:
-					hostile.Add(Faction.Friendly);
 					hostile.Add(Faction.Player);
 					break;
 				default:

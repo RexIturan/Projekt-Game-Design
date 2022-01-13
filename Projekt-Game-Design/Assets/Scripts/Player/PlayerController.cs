@@ -69,7 +69,9 @@ namespace Player {
 		}
 
 		private void Update() {
-			if(!menuOpened) { 
+			if ( inputCache.IsMouseOverUI ) return;
+			if ( menuOpened ) return;
+			
 			//InputCache? || MousePosition
 			//  get mouse pos in grid
 			//  get mouse clicked (left, right)
@@ -148,7 +150,6 @@ namespace Player {
 					selectedPlayerCharacter.Deselect();
 					selectedPlayerCharacter = null;
 				}
-			}
 			}
 		}
 

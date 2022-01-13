@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: BasicHeal
   m_EditorClassIdentifier: 
+  id: 2
   icon: {fileID: 21300000, guid: 7867d1e210ac6224fb128b9ba2e6c293, type: 3}
   description: 'Heals a dude or yourself. Costs: 1'
   Animation: 10
   activationSound: slash_01
+  projectilePrefab: {fileID: 0}
+  projectileLivingTime: 0
   repeated: 0
   damaging: 0
   targets: 3
@@ -33,10 +36,10 @@ MonoBehaviour:
     targets: 3
     targetIsCenter: 1
     area:
+      stringPattern: '[x]'
       rows:
       - line: 01
       anchor: {x: 0, y: 0}
-  abilityID: 2
   selectedActions:
   - {fileID: 11400000, guid: 91a528d44b0383848a019fbc0509b9f9, type: 2}
   - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}

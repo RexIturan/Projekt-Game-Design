@@ -46,7 +46,10 @@ namespace Combat
 					
 					// add self
 					if ( targetTypes.HasFlag(AbilityTarget.Self)) {
-						targets.Add(attacker.gameObject.GetComponent<Targetable>());
+						var selfTarget = attacker.gameObject.GetComponent<Targetable>();
+						if (! targets.Contains(selfTarget)) {
+							targets.Add(selfTarget);	
+						}
 					}
 
 					targets = GetTargetsWithPositions(targets, targetPositons);
