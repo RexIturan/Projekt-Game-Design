@@ -31,7 +31,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     public void Initialize() {
 	    //stats
 	    _statistics.StatusValues.InitValues(playerSpawnData.overrideStatusValues);
-			_statistics.SetFaction(Faction.Player);
+			_statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
 	    
 	    //movement Position
 	    _movementController.movementPointsPerEnergy = playerType.movementPointsPerEnergy;
@@ -44,6 +44,8 @@ public class PlayerCharacterSC : MonoBehaviour {
 			_modelController.Initialize();
 			_modelController.SetStandardHead(playerType.headModel);
 			_modelController.SetStandardBody(playerType.bodyModel);
+			
+			_modelController.SetFactionMaterial(_statistics.Faction);
 	    
 	    //Equipment
 	    _equipmentController.playerID = playerSpawnData.equipmentID;
@@ -62,6 +64,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 		{
 				active = true;
 				_statistics.SetFaction(Faction.Player);
+				_modelController.SetFactionMaterial(_statistics.Faction);
 
 				CharacterList characters = CharacterList.FindInstant();
 				characters.friendlyContainer.Remove(gameObject);

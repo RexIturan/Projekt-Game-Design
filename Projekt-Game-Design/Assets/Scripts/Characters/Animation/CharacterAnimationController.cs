@@ -21,7 +21,7 @@ public class CharacterAnimationController : MonoBehaviour {
 	private CharacterEquipmentController equipmentController;
 
 	// for armor
-	private CharacterBodyController bodyController;
+	private CharacterModelController characterModelController;
 
 	// Start is called before the first frame update
 	void Start() {
@@ -32,7 +32,7 @@ public class CharacterAnimationController : MonoBehaviour {
 
 		stanceController = gameObject.GetComponentInChildren<CharacterStanceController>();
 		equipmentController = gameObject.GetComponentInChildren<CharacterEquipmentController>();
-		bodyController = gameObject.GetComponentInChildren<CharacterBodyController>();
+		characterModelController = gameObject.GetComponentInChildren<CharacterModelController>();
 	}
 
 	// Update is called once per frame
@@ -112,14 +112,14 @@ public class CharacterAnimationController : MonoBehaviour {
 	  if(!equipmentController)
 		  equipmentController = gameObject.GetComponentInChildren<CharacterEquipmentController>();
 
-	  if(!bodyController )
-		  bodyController = gameObject.GetComponentInChildren<CharacterBodyController>();
+	  if(!characterModelController )
+		  characterModelController = gameObject.GetComponentInChildren<CharacterModelController>();
 
 		if(position.Equals(EquipmentPosition.LEFT) || position.Equals(EquipmentPosition.RIGHT) || position.Equals(EquipmentPosition.SHIELD)) { 
 			equipmentController.ChangeEquipment(position, newMesh);
 		}
 		else if (position.Equals(EquipmentPosition.HEAD) || position.Equals(EquipmentPosition.BODY)) { 
-			bodyController.ChangeEquipment(position, newMesh);
+			characterModelController.ChangeEquipment(position, newMesh);
 		}
 	}
 
@@ -138,17 +138,17 @@ public class CharacterAnimationController : MonoBehaviour {
 	}
 
 	public void SetStandardHead(Mesh mesh) {
-	  if(!bodyController )
-		  bodyController = gameObject.GetComponentInChildren<CharacterBodyController>();
+	  if(!characterModelController )
+		  characterModelController = gameObject.GetComponentInChildren<CharacterModelController>();
 
-		bodyController.SetStandardHead(mesh);
+		characterModelController.SetStandardHead(mesh);
 	}
 
 	public void SetStandardBody(Mesh mesh) {
-	  if(!bodyController )
-		  bodyController = gameObject.GetComponentInChildren<CharacterBodyController>();
+	  if(!characterModelController )
+		  characterModelController = gameObject.GetComponentInChildren<CharacterModelController>();
 
-		bodyController.SetStandardBody(mesh);
+		characterModelController.SetStandardBody(mesh);
 	}
 
 	public static float TimeUntilHit(CharacterAnimation animation) {

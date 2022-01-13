@@ -118,6 +118,9 @@ namespace UI.Components.ActionButton {
 			if ( imageData != null ) {
 				actionImage.style.backgroundImage = Background.FromSprite(imageData);	
 			}
+			else {
+				actionImage.style.backgroundImage = null;
+			}
 		}
 
 		public void SetMapping(string newMapping) {

@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4698d5b4504003896fd6e3b3ee7a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indicatorPrefab: {fileID: 6582437868443278874, guid: 25315a51e20401d4880334b83df97990, type: 3}
   isSelected: 0
 --- !u!114 &975126722347142498
 MonoBehaviour:
@@ -181,9 +182,11 @@ MonoBehaviour:
   doorId: 0
   doorType: {fileID: 0}
   open: 0
+  broken: 0
   locked: 0
   keyIds: 
   switchIds: 
   triggerIds: 
   remainingSwitches: 
   remainingTrigger: 
+  orientation: {x: 0, y: 0, z: 0}

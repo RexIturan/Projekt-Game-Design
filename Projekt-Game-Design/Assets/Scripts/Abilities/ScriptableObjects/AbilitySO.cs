@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Ability;
+using Ability.ScriptableObjects;
 using Level.Grid;
+using UnityEditor;
 using UOP1.StateMachine.ScriptableObjects;
 
 [CreateAssetMenu(fileName = "NewAbility", menuName = "Ability/new Ability")]
@@ -34,4 +36,20 @@ public class AbilitySO : ScriptableObject
 		    effect.area.InitFromStringPattern();
 	    }
     }
+    
+#if UNITY_EDITOR
+    private void OnEnable() {
+	    var abilityContainerGuid = AssetDatabase.FindAssets($"t:{nameof(AbilityContainerSO)}");
+
+	    foreach ( var containerGuid in abilityContainerGuid ) {
+		    var containerPath = AssetDatabase.GUIDToAssetPath(containerGuid);
+		    var abilityContainer = AssetDatabase.LoadAssetAtPath<AbilityContainerSO>(containerPath);
+			    
+		    if ( !abilityContainer.abilities.Contains(this) ) {
+			    abilityContainer.abilities.Add(this);
+			    abilityContainer.UpdateItemList();
+		    }  
+	    }
+    }
+#endif
 }

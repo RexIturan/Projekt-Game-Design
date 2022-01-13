@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Characters;
 using Characters.Movement;
 using Combat;
@@ -34,15 +35,89 @@ namespace Player {
 		[SerializeField] private InputCache inputCache;
 		[SerializeField] private GridDataSO gridData;
 
+		//drawer
 		[SerializeField] private CursorDrawer cursorDrawer;
 
 		[SerializeField] private Selectable selectedPlayerCharacter;
-				
 		[SerializeField] private Targetable target;
 
+///// Private Variable
 		private CharacterList characterList; 
 		private WorldObjectList worldObjectList;
 		
+///// Properties
+
+		public bool HasSelected => Selected != null;
+		public Selectable Selected => selectedPlayerCharacter;
+
+///// Private Functions
+
+		private void ActivatePlayerAtPos(Vector3Int gridPos) {
+			List<PlayerCharacterSC> playersToActivate = new List<PlayerCharacterSC>();
+
+			foreach ( var npcObj in characterList.friendlyContainer ) {
+				PlayerCharacterSC playerSC = npcObj.GetComponent<PlayerCharacterSC>();
+				if(playerSC && npcObj.GetComponent<GridTransform>().gridPosition.Equals(gridPos))
+					playersToActivate.Add(playerSC);
+			}
+
+			foreach ( PlayerCharacterSC player in playersToActivate )
+			  player.Activate();
+		}
+
+		private Selectable GetPlayerAtPos(Vector3Int gridPos) {
+
+			foreach ( var playerCharObj in characterList.playerContainer ) {
+				var gridTransform = playerCharObj.GetComponent<GridTransform>();
+				if ( gridTransform.gridPosition.Equals(gridPos) ) {
+					return playerCharObj.GetComponent<Selectable>();
+				}
+			}
+			return null;
+		}
+		
+		// gets player or enemy character targetable component with grid position
+		private Targetable GetTargetAtPos(Vector3Int gridPos) {
+			var targetableObjects = Targetable.GetAllInstances();
+
+		  foreach( var targetable in targetableObjects)
+			{
+				if( targetable != null && targetable.GetGridPosition().Equals(gridPos))
+					return targetable;
+			}
+			return null;
+    }
+
+		private void ClearTargetCache() {
+			target = null;
+		}
+
+		private void HandleMenuOpened() {
+			// Debug.Log("Menu opened. Disabling input. ");
+			menuOpened = true;
+		}
+
+		private void HandleMenuClosed() {
+			// Debug.Log("Menu closed. Enabling input. ");
+			menuOpened = false;
+		}
+
+		private void HandleAbilitySelected() {
+			abilitySelected = true;
+		}
+
+		private void HandleAbilityDeselected() {
+			abilitySelected = false;
+		}
+
+		public static PlayerController FindInstance() {
+			return FindObjectOfType<PlayerController>();
+		}
+		
+///// Public Functions
+
+		///// Monobehaviour Functions
+	
 		private void Awake() {
 			abilitySelected = false;
 			menuOpened = false;
@@ -87,12 +162,10 @@ namespace Player {
 			
 			if ( gridData.IsIn3DGridBounds(inputCache.cursor.abovePos.gridPos) ) {
 			  // player activation
-				//
 				if ( inputCache.leftButton.started )
 					ActivatePlayerAtPos(inputCache.cursor.abovePos.gridPos);
 
 				// selection
-				//
 				Selectable selectable = GetPlayerAtPos(inputCache.cursor.abovePos.gridPos);
 				
 				if ( selectable ) {
@@ -151,70 +224,6 @@ namespace Player {
 					selectedPlayerCharacter = null;
 				}
 			}
-		}
-
-		private void ActivatePlayerAtPos(Vector3Int gridPos) {
-			List<PlayerCharacterSC> playersToActivate = new List<PlayerCharacterSC>();
-
-			foreach ( var npcObj in characterList.friendlyContainer ) {
-				PlayerCharacterSC playerSC = npcObj.GetComponent<PlayerCharacterSC>();
-				if(playerSC && npcObj.GetComponent<GridTransform>().gridPosition.Equals(gridPos))
-					playersToActivate.Add(playerSC);
-			}
-
-			foreach ( PlayerCharacterSC player in playersToActivate )
-			  player.Activate();
-		}
-
-		private Selectable GetPlayerAtPos(Vector3Int gridPos) {
-
-			foreach ( var playerCharObj in characterList.playerContainer ) {
-				var gridTransform = playerCharObj.GetComponent<GridTransform>();
-				if ( gridTransform.gridPosition.Equals(gridPos) ) {
-					return playerCharObj.GetComponent<Selectable>();
-				}
-			}
-			return null;
-		}
-		
-		// gets player or enemy character targetable component with grid position
-		// todo: add world objects if they are targetable too!
-		private Targetable GetTargetAtPos(Vector3Int gridPos) { 
-			List<GameObject> targetableObjects = new List<GameObject>();
-			targetableObjects.AddRange(characterList.playerContainer);
-			targetableObjects.AddRange(characterList.enemyContainer);
-			targetableObjects.AddRange(worldObjectList.doors);
-			targetableObjects.AddRange(worldObjectList.junks);
-
-		  foreach( GameObject targetObj in targetableObjects)
-			{
-				Targetable objTarget = targetObj.GetComponent<Targetable>();
-				if( objTarget != null && objTarget.GetGridPosition().Equals(gridPos))
-					return objTarget;
-			}
-			return null;
-    }
-
-		private void ClearTargetCache() {
-			target = null;
-		}
-
-		private void HandleMenuOpened() {
-			// Debug.Log("Menu opened. Disabling input. ");
-			menuOpened = true;
-		}
-
-		private void HandleMenuClosed() {
-			// Debug.Log("Menu closed. Enabling input. ");
-			menuOpened = false;
-		}
-
-		private void HandleAbilitySelected() {
-			abilitySelected = true;
-		}
-
-		private void HandleAbilityDeselected() {
-			abilitySelected = false;
 		}
 	}
 }

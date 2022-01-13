@@ -35,3 +35,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e5db0e3232b56214c99a1aa26c1ff5c8, type: 2}
   - {fileID: 2100000, guid: 36e1437c834acb24e8e2c557b371a33c, type: 2}
   - {fileID: 0}
+  factionMaterial:
+  - faction: 1
+    material: {fileID: 2100000, guid: 41fa25b4c7194e145b94fcbefe63b3a1, type: 2}
+  - faction: 4
+    material: {fileID: 2100000, guid: ff13dae070b5f41499ee2ced0ee5c5d2, type: 2}
+  - faction: 2
+    material: {fileID: 2100000, guid: a2e76941eb8ac734195b509949af023f, type: 2}
+  - faction: 3
+    material: {fileID: 2100000, guid: e7725c4508c59b443a0ce4a844369ae8, type: 2}

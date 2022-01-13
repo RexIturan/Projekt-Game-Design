@@ -3,11 +3,22 @@ using UnityEngine;
 /**
  * changes body and head meshes etc.
  */
-public class CharacterBodyController : MonoBehaviour
+public class CharacterModelController : MonoBehaviour
 {
 	public Mesh standardHead;
 	public Mesh standardBody;
 
+	[SerializeField] private SkinnedMeshRenderer HeadMesh;
+	[SerializeField] private SkinnedMeshRenderer BodyMesh;
+
+	public void SetHeadMaterial(Material material) {
+		HeadMesh.material = material;
+	}
+
+	public void SetBodyMaterial(Material material) {
+		BodyMesh.material = material;
+	}
+	
 	public void ChangeEquipment(EquipmentPosition position, Mesh newArmorPiece)
 	{
 		SkinnedMeshRenderer[] meshes = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();

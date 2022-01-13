@@ -21,6 +21,17 @@
           "y": 1,
           "z": 3
         }
+      },
+      {
+        "active": false,
+        "plyerTypeId": 0,
+        "plyerSpawnDataId": 0,
+        "equipmentInventoryId": 1,
+        "pos": {
+          "x": 10,
+          "y": 1,
+          "z": 3
+        }
       }
     ],
     "enemies": [

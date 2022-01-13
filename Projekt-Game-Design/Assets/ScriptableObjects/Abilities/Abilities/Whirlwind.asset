@@ -15,8 +15,10 @@ MonoBehaviour:
   id: 4
   icon: {fileID: 21300000, guid: af9b087a7d6c93746be627e69fa01ec5, type: 3}
   description: 'Machtvoller Donut! '
-  Animation: 11
+  Animation: 10
   activationSound: slash_01
+  projectilePrefab: {fileID: 0}
+  timeUntilDamage: 0.5
   repeated: 0
   damaging: 1
   targets: 1

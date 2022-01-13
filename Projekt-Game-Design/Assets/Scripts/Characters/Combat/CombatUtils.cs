@@ -52,7 +52,7 @@ namespace Combat
 						}
 					}
 
-					targets = GetTargetsWithPositions(targets, targetPositons);
+					targets = Targetable.GetTargetsWithPositions(targets, targetPositons);
 					
 					return targets;
 				}
@@ -61,13 +61,13 @@ namespace Combat
 
 					List<Targetable> targets = GetAllTargetables().ToList();
 					targets = GetTargetsWithFaction(targets, factions);
-					targets = GetTargetsWithPositions(targets, positions);
+					targets = Targetable.GetTargetsWithPositions(targets, positions);
 
 					return targets;
 				}
 				
 				private static Targetable[] GetAllTargetables() {
-					return GetTilesWithinRangeSO.FindObjectsOfType<Targetable>();
+					return Targetable.GetAllInstances();
 				}
 				
 				private static List<Targetable> GetTargetsWithFaction(
@@ -81,15 +81,7 @@ namespace Combat
 					});
 				}
 
-				private static List<Targetable> GetTargetsWithPositions(
-					List<Targetable> targetables, List<Vector3Int> targetPositons) {
-
-					return targetables.FindAll(target => { 
-						var gridTransform = target.GetComponent<GridTransform>();
-						if(gridTransform is null) return false;
-						return targetPositons.Contains(gridTransform.gridPosition);
-					});
-				}
+				
 				
 
 				/**

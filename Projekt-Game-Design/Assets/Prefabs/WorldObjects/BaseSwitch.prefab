@@ -392,6 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4698d5b4504003896fd6e3b3ee7a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indicatorPrefab: {fileID: 6582437868443278874, guid: 25315a51e20401d4880334b83df97990, type: 3}
   isSelected: 0
 --- !u!114 &6144435644420208162
 MonoBehaviour:
@@ -411,6 +412,7 @@ MonoBehaviour:
   switchId: 0
   switchType: {fileID: 0}
   activated: 0
+  orientation: {x: 0, y: 0, z: 0}
 --- !u!114 &1179756913273468689
 MonoBehaviour:
   m_ObjectHideFlags: 0

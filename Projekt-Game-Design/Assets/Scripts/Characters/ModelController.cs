@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Characters {
 	public class ModelController : MonoBehaviour {
 		//old init
 		// public PlayerTypeSO playerType;
+
+		[SerializeField] private CharacterVisualsContainerSO visualsContainerSO;
 		
 		//todo get equiped items and show them 
 		//todo wrap in scriptable object
@@ -22,12 +25,15 @@ namespace Characters {
 		public WeaponPositionType weaponRightPosition;
 		
 		//control model
+		private GameObject model;
+		private CharacterModelController characterModelController;
 		public CharacterAnimationController animationController;
 		
 		public void Initialize() {
 			//init model
-			var charModel = Instantiate(prefab, this.transform);
-			animationController = charModel.GetComponent<CharacterAnimationController>();
+			model = Instantiate(prefab, this.transform);
+			characterModelController = model.GetComponentInChildren<CharacterModelController>();
+			animationController = model.GetComponent<CharacterAnimationController>();
 		}
 		
 		public CharacterAnimationController GetAnimationController() {
@@ -65,6 +71,14 @@ namespace Characters {
 
 		public void SetStandardBody(Mesh mesh) {
 			animationController.SetStandardBody(mesh);
+		}
+
+		public void SetFactionMaterial(Faction faction) {
+
+			var mapping = visualsContainerSO.factionMaterial.Find(mapping => mapping.faction == faction);
+			
+			characterModelController.SetHeadMaterial(mapping.material);
+			characterModelController.SetBodyMaterial(mapping.material);
 		}
 	}
 }

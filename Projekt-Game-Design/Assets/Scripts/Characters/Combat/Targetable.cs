@@ -1,4 +1,5 @@
-﻿using Characters;
+﻿using System.Collections.Generic;
+using Characters;
 using UnityEngine;
 
 namespace Combat {
@@ -28,6 +29,20 @@ namespace Combat {
 
 		public Vector3Int GetGridPosition() {
 			return gridTransform.gridPosition;
+		}
+		
+		public static Targetable[] GetAllInstances() {
+			return FindObjectsOfType<Targetable>();
+		}
+		
+		public static List<Targetable> GetTargetsWithPositions(
+			List<Targetable> targetables, List<Vector3Int> targetPositons) {
+
+			return targetables.FindAll(target => { 
+				var gridTransform = target.GetComponent<GridTransform>();
+				if(gridTransform is null) return false;
+				return targetPositons.Contains(gridTransform.gridPosition);
+			});
 		}
 	}
 }

@@ -22,10 +22,11 @@ namespace QuestSystem.ScriptabelObjects {
 		Switch_Active,
 		Enemy_Kill,
 		Enemy_Dead,
+		Char_Selected,
+		Object_Selected,
 		// Event_Raised,
 		// Object_Selected,
 		// Char_At_Pos,
-		// Enemy_Dead,
 		// Round_Timer,
 	}
 	
@@ -85,6 +86,14 @@ namespace QuestSystem.ScriptabelObjects {
 				
 				case TaskType.Enemy_Dead:
 					task = ScriptableObject.CreateInstance<Task_Enemy_Dead_SO>();
+					break;
+				
+				case TaskType.Char_Selected:
+					task = ScriptableObject.CreateInstance<Task_Char_Selected_SO>();
+					break;
+				
+				case TaskType.Object_Selected:
+					task = ScriptableObject.CreateInstance<Task_Object_Selected_SO>();
 					break;
 
 				case TaskType.Read_Text:

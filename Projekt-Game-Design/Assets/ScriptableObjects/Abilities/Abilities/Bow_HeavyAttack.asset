@@ -10,35 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
-  m_Name: BasicRanged
+  m_Name: Bow_HeavyAttack
   m_EditorClassIdentifier: 
-  id: 2
-  icon: {fileID: 21300000, guid: 9889ee4a1b03ca248996a9e1e676dd8d, type: 3}
-  description: 'A ranged attack with much range (8). Costs: 2'
+  id: 8
+  icon: {fileID: 21300000, guid: fc0c17461a169f848a4961d2bc887f0a, type: 3}
+  description: 
   Animation: 6
-  activationSound: slash_01
+  activationSound: 
   projectilePrefab: {fileID: 1194966964175767583, guid: 5b3f54d4a571a4c4e8d4122580f21dd2, type: 3}
-  timeUntilDamage: 0
-  repeated: 0
+  timeUntilDamage: 1
+  repeated: 1
   damaging: 1
-  targets: 20
+  targets: 4
   moveToTarget: 0
-  range: 3
-  conditions: 0
-  costs: 2
+  range: 10
+  conditions: 8
+  costs: 5
   targetedEffects:
   - effect:
-      type: 2
-      baseDamage: 3
+      type: 1
+      baseDamage: 5
       strengthBonus: 0
-      dexterityBonus: 0.8
+      dexterityBonus: 1
       intelligenceBonus: 0
     targets: 20
     targetIsCenter: 1
     area:
       stringPattern: '[x]'
-      rows:
-      - line: 01
+      rows: []
       anchor: {x: 0, y: 0}
   selectedActions:
   - {fileID: 11400000, guid: 91a528d44b0383848a019fbc0509b9f9, type: 2}

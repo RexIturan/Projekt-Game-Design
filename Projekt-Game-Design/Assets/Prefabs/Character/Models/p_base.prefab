@@ -859,6 +859,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   standardHead: {fileID: 0}
   standardBody: {fileID: 0}
+  HeadMesh: {fileID: 5596965302870594955}
+  BodyMesh: {fileID: 2575409168715726627}
 --- !u!1 &1540321254706905937
 GameObject:
   m_ObjectHideFlags: 0
