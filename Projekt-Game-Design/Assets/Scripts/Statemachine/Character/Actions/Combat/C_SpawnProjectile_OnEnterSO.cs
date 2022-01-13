@@ -53,7 +53,7 @@ public class C_SpawnProjectile_OnEnter : StateAction {
 			start += Vector3.up * START_HEIGHT;
 			end += Vector3.up * START_HEIGHT;
 
-			_createProjectileEvent.RaiseEvent(start, end, ability.projectileLivingTime, ability.projectilePrefab);
+			_createProjectileEvent.RaiseEvent(start, end, ability.timeUntilDamage, ability.projectilePrefab);
 		}
 	}
 }

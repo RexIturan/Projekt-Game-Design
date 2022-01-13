@@ -41,8 +41,6 @@ namespace Visual
 						if( portion > 1.0f )
 								portion = 1.0f;
 
-						Debug.Log("Portion: " + portion);
-
 						// linear position of the projectile right now
 						Vector3 position = start + portion * ( end - start );
 

@@ -18,7 +18,7 @@ MonoBehaviour:
   Animation: 8
   activationSound: slash_01
   projectilePrefab: {fileID: 1194966964175767583, guid: 5b3f54d4a571a4c4e8d4122580f21dd2, type: 3}
-  projectileLivingTime: 0.5
+  timeUntilDamage: 0.5
   repeated: 0
   damaging: 1
   targets: 20
