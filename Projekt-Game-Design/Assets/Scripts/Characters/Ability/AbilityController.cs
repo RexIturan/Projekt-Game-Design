@@ -21,6 +21,8 @@ namespace Characters.Ability {
 		public bool abilityConfirmed;
 		public bool abilityExecuted;
 		
+		public bool damageInflicted;
+		
 		public int SelectedAbilityID {
 			get => abilityID;
 			set => abilityID = value;

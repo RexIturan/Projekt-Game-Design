@@ -150,4 +150,24 @@ public class CharacterAnimationController : MonoBehaviour {
 
 		bodyController.SetStandardBody(mesh);
 	}
+
+	public static float TimeUntilHit(CharacterAnimation animation) {
+		float time = 0;
+				switch ( animation )
+				{
+						case CharacterAnimation.ATTACK_STING:
+								time = 0.15f;
+								break;
+						case CharacterAnimation.ATTACK_SINGLE_R:
+								time = 0.2f;
+								break;
+						case CharacterAnimation.CAST_A:
+								time = 0.3f;
+								break;
+						case CharacterAnimation.CAST_B:
+								time = 0.5f;
+								break;
+				}
+				return time;
+		}
 }

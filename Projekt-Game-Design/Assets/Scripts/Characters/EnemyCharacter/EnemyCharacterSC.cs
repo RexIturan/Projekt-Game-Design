@@ -52,6 +52,7 @@ public class EnemyCharacterSC : MonoBehaviour
 				//Abilities
 				_abilityController.RefreshAbilities();
 				_abilityController.BaseAbilities = enemyType.basicAbilities;
+				_abilityController.damageInflicted = true;
 
 				//model
 				_modelController.prefab = enemyType.modelPrefab;

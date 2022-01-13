@@ -10,12 +10,20 @@ namespace Ability.ScriptableObjects {
 		public void InitAbilities() {
 			Debug.Log("Initialising Abilities");
 			foreach ( AbilitySO ability in abilities ) {
+				// pattern initialisation
+				//
 				foreach ( TargetedEffect effect in ability.targetedEffects ) {
 					if ( effect.area != null && !effect.area.IsValid() ) {
 						Debug.LogError("Ability " + ability.id +
 						               " Effect has had invalid pattern! Setting to single target. ");
 						effect.area.SetSingleTarget();
 					}
+				}
+
+				// timing initialisation
+				//
+				if(!ability.projectilePrefab) {
+					ability.timeUntilDamage = CharacterAnimationController.TimeUntilHit(ability.Animation);
 				}
 			}
 		}
