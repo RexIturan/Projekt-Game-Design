@@ -6,7 +6,7 @@ using Util;
 
 namespace Events.ScriptableObjects
 {
-		[CreateAssetMenu(menuName = "Events/DrawTargetTilesEventChannelSO")]
+		[CreateAssetMenu(menuName = "Events/Level/DrawTargetTilesEventChannelSO")]
 		public class DrawTargetTilesEventChannelSO : EventChannelBaseSO
 		{
 				public event Action<List<PathNode>, List<PathNode>, List<PathNode>, bool> OnEventRaised;

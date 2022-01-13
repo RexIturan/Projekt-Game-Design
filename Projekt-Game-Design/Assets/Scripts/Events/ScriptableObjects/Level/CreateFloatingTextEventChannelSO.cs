@@ -9,7 +9,7 @@ namespace Events.ScriptableObjects
 	/// makes floating text spawner spawn a floating text message
 	/// </summary>
     // TODO rename
-    [CreateAssetMenu(menuName = "Events/CreateFloatingTextEventChannel")]
+    [CreateAssetMenu(menuName = "Events/Visual/CreateFloatingTextEventChannel")]
     public class CreateFloatingTextEventChannelSO : EventChannelBaseSO
     {
         public event Action<String, Vector3, Color> OnEventRaised;
