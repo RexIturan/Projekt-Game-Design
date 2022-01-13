@@ -14,6 +14,8 @@ public class AbilitySO : ScriptableObject
     public string description;
 		public CharacterAnimation Animation;
 		public string activationSound;
+		public GameObject projectilePrefab;
+		public float projectileLivingTime;
 		public bool repeated;
 		public bool damaging;
 
