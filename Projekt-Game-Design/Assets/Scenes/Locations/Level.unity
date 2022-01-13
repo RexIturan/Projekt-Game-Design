@@ -902,6 +902,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 512017045}
     m_Modifications:
+    - target: {fileID: 1112942784057711956, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
+      propertyPath: previewPatternTile
+      value: 
+      objectReference: {fileID: 11400000, guid: a207a9ddce05b9149be37688adec5bd3, type: 2}
     - target: {fileID: 1112942784057711957, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
       propertyPath: m_Name
       value: PathfindingController

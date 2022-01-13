@@ -123,25 +123,19 @@ namespace QuestSystem.ScriptabelObjects {
 
 		public override string BaseName { get; } = "KeyPress";
 
-		public override bool IsDone() {
-			return done;
-		}
-
 		public override void ResetTask() {
-			done = false;
-			active = false;
+			base.ResetTask();
 			Cleanup();
 		}
 
 		public override void StartTask() {
-			Debug.Log($"Start Task {this.name}");
-			active = true;
+			base.StartTask();
 			Setup();
 		}
-		
+
 		public override void StopTask() {
+			base.StopTask();
 			Cleanup();
-			active = false;
 		}
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////		

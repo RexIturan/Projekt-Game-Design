@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: CleavingAtt
   m_EditorClassIdentifier: 
+  id: 7
   icon: {fileID: 21300000, guid: c7fa96ac0520f7e44af4c02d9401f93d, type: 3}
   description: Attacks all enemies in a line
   Animation: 9
@@ -33,12 +34,12 @@ MonoBehaviour:
     targets: 20
     targetIsCenter: 1
     area:
+      stringPattern: x[x]x
       rows:
       - line: 01
       - line: 01
       - line: 01
-      anchor: {x: 0, y: 1}
-  abilityID: 7
+      anchor: {x: 1, y: 0}
   selectedActions:
   - {fileID: 11400000, guid: ae2b28614c9f55c429539a655c859735, type: 2}
   - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}

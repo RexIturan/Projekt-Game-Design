@@ -54,8 +54,8 @@ namespace Characters {
           var enemyGridTransform = obj.GetComponent<GridTransform>();
 					enemySC.enemyType = type;
 					enemySC.enemySpawnData = spawnData;
-					enemyGridTransform.gridPosition = enemySave.pos;
 					enemySC.Initialize();
+					enemyGridTransform.gridPosition = enemySave.pos;
 					_characterList.enemyContainer.Add(enemySC.gameObject);
 				}
 			}

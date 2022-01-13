@@ -12,9 +12,9 @@ namespace Events.ScriptableObjects
     [CreateAssetMenu(menuName = "Events/Level/DrawPatternEventChannel")]
     public class DrawPatternEventChannelSO : EventChannelBaseSO
     {
-        public event Action<Vector3Int, bool[][], Vector2Int> OnEventRaised;
+        public event Action<Vector3Int, bool[,], Vector2Int> OnEventRaised;
 
-        public void RaiseEvent(Vector3Int patternOrigin, bool[][] pattern, Vector2Int anchor)
+        public void RaiseEvent(Vector3Int patternOrigin, bool[,] pattern, Vector2Int anchor)
         {
             if (OnEventRaised != null)
                 OnEventRaised.Invoke(patternOrigin, pattern, anchor);

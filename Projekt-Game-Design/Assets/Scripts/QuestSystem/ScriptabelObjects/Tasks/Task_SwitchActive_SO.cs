@@ -9,6 +9,7 @@ namespace QuestSystem.ScriptabelObjects {
 		
 		public override TaskType Type { get; } = TaskType.Switch_Active;
 		public override string BaseName { get; } = "SwitchActive";
+		
 		public override bool IsDone() {
 			if ( active ) {
 				done = false;
@@ -27,18 +28,9 @@ namespace QuestSystem.ScriptabelObjects {
 			return done;
 		}
 
-		public override void ResetTask() {
-			done = false;
-			active = false;
-		}
-
 		public override void StartTask() {
+			base.StartTask();
 			_worldObjectList = WorldObjectList.FindInstant();
-			active = true;
-		}
-
-		public override void StopTask() {
-			active = false;
 		}
 	}
 }

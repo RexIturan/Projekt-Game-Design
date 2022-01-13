@@ -9,6 +9,7 @@ namespace QuestSystem.ScriptabelObjects {
 	[CreateAssetMenu(fileName = "NewQuest", menuName = "Quest/new Quest", order = 0)]
 	public class QuestSO : ScriptableObject {
 		[TextArea][SerializeField] private string description;
+		[SerializeField] private bool disabled;
 		[SerializeField] private bool available;
 		[SerializeField] private bool active;
 		[SerializeField] private bool finished;
@@ -20,7 +21,7 @@ namespace QuestSystem.ScriptabelObjects {
 		//tasks
 		[SerializeField] private int currentTaskIndex;
 		[SerializeField] private int nextTaskIndex;
-		[SerializeField] private List<Task_Wrapper> tasks;
+		[SerializeField] private List<Task_Wrapper> tasks = new List<Task_Wrapper>();
 
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
@@ -37,6 +38,7 @@ namespace QuestSystem.ScriptabelObjects {
 			}
 		}
 
+		public bool IsDisabled => disabled;
 		public bool IsAvailable => available;
 		public bool IsDone => finished;
 		public bool IsActive => active;
@@ -88,7 +90,8 @@ namespace QuestSystem.ScriptabelObjects {
 
 		public void UpdateAvailability() {
 			available = HasPrerequisitesSatisfied() &&
-			            !active &&
+			            !active && 
+			            !IsDisabled &&
 			            ( ( repeatable && finished ) || !finished );
 		}
 		
@@ -309,6 +312,10 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 
 		public void AddNewTask() {
+			// if(tasks == null){
+			// 	InitTasks();
+			// }
+
 			TaskSO task = null;
 			task = ScriptableObject.CreateInstance<Task_KeyPress_SO>();
 			task.name = "Task_KeyPress_SO" + tasks.Count;

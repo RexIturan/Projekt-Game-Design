@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using QuestSystem.ScriptabelObjects;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -195,6 +196,18 @@ namespace UI.Components.QuestSystem {
 
 			InstructionName = name;
 			State = state;
+			
+			BuildComponent();
+			UpdateComponent();
+		}
+		
+		public InstructionField(TaskInfo taskInfo) {
+
+			InstructionName = taskInfo.text;
+			State = taskInfo.failed ? InstructionState.Failed : InstructionState.Active;
+			State = taskInfo.done ? InstructionState.Done : InstructionState.Active;
+			
+			//todo add range, show range
 			
 			BuildComponent();
 			UpdateComponent();

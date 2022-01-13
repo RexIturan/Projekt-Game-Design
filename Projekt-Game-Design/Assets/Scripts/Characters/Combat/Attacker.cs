@@ -48,17 +48,17 @@ namespace Combat {
 			
 			// if the attacker faces the x-axis, the angle should be below 45 degrees
 			if(angle < 45)
-				return 0;
+				return 1;
 			// if the attacker faces the z-axis, the angle from the x-axis should be between 45 and 135 degrees
 			else if (angle < 45 + 90) {
 				if(vec.z <= 0)
-					return 3;
+					return 4;
 				else
-					return 1;
+					return 2;
 			}
 			// if the angle is greater than 135 degrees, the attacker faces negative x-axis, two rotations necessary
 			else
-				return 2;
+				return 3;
     }
 	}
 }

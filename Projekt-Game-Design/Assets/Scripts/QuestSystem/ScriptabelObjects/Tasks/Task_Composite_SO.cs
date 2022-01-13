@@ -35,18 +35,17 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 
 		public override void ResetTask() {
+			base.ResetTask();
 			subTasks.ForEach(task => task.ResetTask());
-			done = false;
-			active = false;
 		}
 
 		public override void StartTask() {
-			active = true;
+			base.StartTask();
 			subTasks.ForEach(task => task.StartTask());
 		}
 
 		public override void StopTask() {
-			active = false;
+			base.StopTask();
 			subTasks.ForEach(task => task.StopTask());
 		}
 		

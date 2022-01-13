@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
+using Util.Types;
 
 namespace QuestSystem.ScriptabelObjects {
 	[Serializable]
@@ -19,6 +20,8 @@ namespace QuestSystem.ScriptabelObjects {
 		Item_Equipped,
 		Composite,
 		Switch_Active,
+		Enemy_Kill,
+		Enemy_Dead,
 		// Event_Raised,
 		// Object_Selected,
 		// Char_At_Pos,
@@ -76,6 +79,14 @@ namespace QuestSystem.ScriptabelObjects {
 					task = ScriptableObject.CreateInstance<Task_SwitchActive_SO>();
 					break;
 
+				case TaskType.Enemy_Kill:
+					task = ScriptableObject.CreateInstance<Task_Enemy_Kill_SO>();
+					break;
+				
+				case TaskType.Enemy_Dead:
+					task = ScriptableObject.CreateInstance<Task_Enemy_Dead_SO>();
+					break;
+
 				case TaskType.Read_Text:
 				default:
 					task = ScriptableObject.CreateInstance<Task_ReadText_SO>();
@@ -96,6 +107,15 @@ namespace QuestSystem.ScriptabelObjects {
 		[SerializeField] private float drawerHeight;
 	}
 	
+	public struct TaskInfo {
+		public bool active;
+		public bool done;
+		public bool failed;
+		public bool showStatus;
+		public string text;
+		public RangedInt status;
+	}
+	
 	public abstract class TaskSO : ScriptableObject {
 		protected readonly string baseName = "Task_SO";
 
@@ -108,10 +128,34 @@ namespace QuestSystem.ScriptabelObjects {
 
 		public abstract TaskType Type { get; }
 		public abstract string BaseName { get; }
+
+		public virtual bool IsDone() {
+			return done;
+		}
+
+		public virtual void ResetTask() {
+			done = false;
+			active = false;
+		}
+
+		public virtual void StartTask() {
+			Debug.Log($"Start Task {this.name}");
+			active = true;
+		}
+
+		public virtual void StopTask() {
+			active = false;
+		}
 		
-		public abstract bool IsDone();
-		public abstract void ResetTask();
-		public abstract void StartTask();
-		public abstract void StopTask();
+		public virtual TaskInfo GetInfo() {
+			return new TaskInfo {
+				done = this.done,
+				failed = false,
+				active = this.active,
+				text = textTextBody.instructions,
+				showStatus = false,
+				status = new RangedInt(0, 1, this.done ? 1: 0)
+			};
+		}
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Ability;
@@ -25,4 +26,10 @@ public class AbilitySO : ScriptableObject
 
     public List<StateActionSO> selectedActions;
     public List<StateActionSO> executingActions;
+
+    private void OnValidate() {
+	    foreach ( var effect in targetedEffects ) {
+		    effect.area.InitFromStringPattern();
+	    }
+    }
 }

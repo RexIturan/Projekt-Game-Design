@@ -60,6 +60,8 @@ public class C_InflictDamage_OnEnter : StateAction {
 
   		Color damageColor;
 
+      //todo healing shouldnt be negative damage in itself
+      //todo negative damage can exist, healing should be handled differently 
   		if ( damage > 0 )
 	  		damageColor = Color.red;
 	  	else if ( damage < 0 )
@@ -70,10 +72,15 @@ public class C_InflictDamage_OnEnter : StateAction {
 			Vector3Int targetPos = _attacker.GetTargetPosition();
 
 			// rotations of pattern depending on the angle the attacker is facing
+			//todo get rotation from targetpos and attacker pos
 			int rotations = _attacker.GetRotationsToTarget(targetPos);
- 
-  		HashSet<Targetable> targets = CombatUtils.FindAllTargets(targetPos, 
-					targetedEffect.area.GetPattern(rotations), targetedEffect.area.GetAnchor(rotations), _attacker, targetedEffect.targets);
+
+			List<Targetable> targets = CombatUtils.FindAllTargets(
+				targetedEffect.area.GetTargetedTiles(targetPos, rotations),
+				_attacker, targetedEffect.targets);
+			
+  		// HashSet<Targetable> targets = CombatUtils.FindAllTargets(targetPos, 
+				// 	targetedEffect.area.GetPattern(rotations), targetedEffect.area.GetAnchor(rotations), _attacker, targetedEffect.targets);
 
   		foreach(Targetable target in targets) { 
 				Debug.Log("Target in range. Dealing damage/healing. ");

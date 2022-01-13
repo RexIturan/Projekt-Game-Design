@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using QuestSystem.ScriptabelObjects;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -76,7 +78,7 @@ namespace UI.Components.QuestSystem {
 
 ///// PROPERTIES ///////////////////////////////////////////////////////////////////////////////////
 
-		public List<InstructionWrapper> instructionList;
+		public List<TaskInfo> instructionList;
 		public string Title;
 		public string Description;
 
@@ -300,8 +302,8 @@ namespace UI.Components.QuestSystem {
 				SetVisibility(instructionContainer, true);
 			}
 			
-			foreach ( var i in instructionList ) {
-				var instruction = new InstructionField(i.text, i.state);
+			foreach ( var info in instructionList ) {
+				var instruction = new InstructionField(info);
 				instructions.Add(instruction);
 				instructionContainer.Add(instruction);
 			}
@@ -377,7 +379,7 @@ namespace UI.Components.QuestSystem {
 
 		public TaskPanel(string title, string description) {
 			instructions = new List<InstructionField>();
-			instructionList = new List<InstructionWrapper>();
+			instructionList = new List<TaskInfo>();
 
 			Title = title;
 			Description = description;

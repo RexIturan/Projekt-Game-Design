@@ -109,16 +109,7 @@ namespace UI.Components.QuestSystem {
 			if(tasks[index] == null || tasks[index].Type == TaskType.Read_Text)
 				return;
 			
-			var uiInstructionWrapper = CreateInstructionWrapper(tasks, index);
-			taskPanel.instructionList.Add(uiInstructionWrapper);
-		}
-		
-		private InstructionWrapper CreateInstructionWrapper(List<TaskSO> tasks, int index) {
-			var task = tasks[index];
-			return new InstructionWrapper {
-				state = task.done ? InstructionState.Done : InstructionState.Active,
-				text = task.textTextBody.instructions, 
-			};
+			taskPanel.instructionList.Add(tasks[index].GetInfo());
 		}
 		
 ///// Button Callbacks /////////////////////////////////////////////////////////////////////////////

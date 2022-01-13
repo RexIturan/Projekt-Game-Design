@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6510218915823903733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67494d20553b42cd9cc786c94203ba1d, type: 3}
+  m_Name: 1_EnemyDead_dead 2
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: dead 2
+    description: 
+    instructions: Dead 2 Enemys
+  neededCount: 2
+  enemyType: {fileID: 0}
+--- !u!114 &-3354562417951219185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec412340c6c43eaa15380deaa8521da, type: 3}
+  m_Name: 0_EnemyKill_kill 1
+  m_EditorClassIdentifier: 
+  active: 1
+  done: 0
+  textTextBody:
+    title: kill 1
+    description: 
+    instructions: Kill 1 Enemy
+  neededCount: 1
+  enemyType: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecda0ff7e794b0d8929230fb03c1044, type: 3}
+  m_Name: FightQuest
+  m_EditorClassIdentifier: 
+  description: 
+  disabled: 0
+  available: 0
+  active: 1
+  finished: 0
+  repeatable: 0
+  prerequisits: []
+  currentTaskIndex: 0
+  nextTaskIndex: 0
+  tasks:
+  - name: kill 1
+    type: 7
+    task: {fileID: -3354562417951219185}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 255
+  - name: dead 2
+    type: 8
+    task: {fileID: -6510218915823903733}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 255

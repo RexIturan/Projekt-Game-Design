@@ -4,15 +4,14 @@ using UnityEngine;
 namespace QuestSystem.ScriptabelObjects {
 	public class Task_AbilitySelected_SO : TaskSO {
 		
-		public override TaskType Type { get; } = TaskType.Ability_Selected;
-		public override string BaseName { get; } = "AbilitySelected";
-
 		[SerializeField] private AbilitySO ability;
 		
 		private CharacterList characterList;
 		
-		public override bool IsDone() {
+		public override TaskType Type { get; } = TaskType.Ability_Selected;
+		public override string BaseName { get; } = "AbilitySelected";
 
+		public override bool IsDone() {
 			if ( active ) {
 				done = false;
 				if ( characterList != null ) {
@@ -39,19 +38,9 @@ namespace QuestSystem.ScriptabelObjects {
 			return done;
 		}
 
-		public override void ResetTask() {
-			done = false;
-			active = false;
-		}
-
 		public override void StartTask() {
-			Debug.Log($"Start Task {this.name}");
+			base.StartTask();
 			characterList = CharacterList.FindInstant();
-			active = true;
-		}
-
-		public override void StopTask() {
-			active = false;
 		}
 	}
 }

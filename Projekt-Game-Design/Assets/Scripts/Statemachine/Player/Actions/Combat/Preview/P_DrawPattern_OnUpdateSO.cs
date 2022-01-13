@@ -47,27 +47,33 @@ public class P_DrawPattern_OnUpdate : StateAction {
 
 	public override void OnUpdate() {
 		Vector3Int mousePos = _inputCache.cursor.abovePos.gridPos;
+		
+		
+		//todo this is more complicated then it should be
 		if(!_isDrawn || !_lastDrawnGridPos.Equals(mousePos)) { 
 			bool isInRange = false;
 			
 			for(int i = 0; !isInRange && i < _attacker.tilesInRange.Count; i++) { 
 		    if(_attacker.tilesInRange[i].pos.Equals(mousePos)) {
 					isInRange = true;
-
-					AbilitySO ability = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
-
-					int rotations = _attacker.GetRotationsToTarget(mousePos);
-
-					_drawPatternEC.RaiseEvent(mousePos, 
-							ability.targetedEffects[0].area.GetPattern(rotations), 
-							ability.targetedEffects[0].area.GetAnchor(rotations));
-
-					_isDrawn = true;
-					_lastDrawnGridPos = mousePos;
 				}
       }
 
-			if(!isInRange) {
+			if ( isInRange ) {
+				AbilitySO ability = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
+
+				int rotations = _attacker.GetRotationsToTarget(mousePos);
+
+				Debug.Log($"{rotations} {ability.targetedEffects[0].area.GetRotatedAnchor(rotations)}");
+				
+				_drawPatternEC.RaiseEvent(mousePos, 
+					ability.targetedEffects[0].area.GetRotatedPattern(rotations), 
+					ability.targetedEffects[0].area.GetRotatedAnchor(rotations));
+
+				_isDrawn = true;
+				_lastDrawnGridPos = mousePos;
+				
+			} else {
 				_clearPatternEC.RaiseEvent();
 				_isDrawn = false;
 			}

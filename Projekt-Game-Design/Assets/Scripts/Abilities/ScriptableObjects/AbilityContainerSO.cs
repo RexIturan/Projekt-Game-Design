@@ -11,7 +11,7 @@ namespace Ability.ScriptableObjects {
 			Debug.Log("Initialising Abilities");
 			foreach ( AbilitySO ability in abilities ) {
 				foreach ( TargetedEffect effect in ability.targetedEffects ) {
-					if ( effect.area != null && !effect.area.Init() ) {
+					if ( effect.area != null && !effect.area.IsValid() ) {
 						Debug.LogError("Ability " + ability.id +
 						               " Effect has had invalid pattern! Setting to single target. ");
 						effect.area.SetSingleTarget();

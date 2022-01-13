@@ -2,6 +2,8 @@ using Ability;
 using Characters;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Statemachine.Enemy.Actions;
 using UnityEngine;
 using WorldObjects;
 
@@ -27,6 +29,66 @@ namespace Combat
 						return effectDamage;
 				}
 
+				public static List<Targetable> FindAllTargets(
+					List<Vector3Int> targetPositons,
+					Attacker attacker, AbilityTarget targetTypes) {
+					List<Targetable> targets = new List<Targetable>();
+					
+					// characters
+					CharacterList characterList = CharacterList.FindInstant();
+					if ( characterList is null ) return targets;
+						
+					Faction attackerFaction = attacker.gameObject.GetComponent<Statistics>().GetFaction();
+
+					List<Faction> factions = targetTypes.GetTargetedFactions(attackerFaction);
+
+					targets.AddRange(GetTargets(factions, targetPositons));
+					
+					// add self
+					if ( targetTypes.HasFlag(AbilityTarget.Self)) {
+						targets.Add(attacker.gameObject.GetComponent<Targetable>());
+					}
+
+					targets = GetTargetsWithPositions(targets, targetPositons);
+					
+					return targets;
+				}
+
+				private static List<Targetable> GetTargets(List<Faction> factions, List<Vector3Int> positions) {
+
+					List<Targetable> targets = GetAllTargetables().ToList();
+					targets = GetTargetsWithFaction(targets, factions);
+					targets = GetTargetsWithPositions(targets, positions);
+
+					return targets;
+				}
+				
+				private static Targetable[] GetAllTargetables() {
+					return GetTilesWithinRangeSO.FindObjectsOfType<Targetable>();
+				}
+				
+				private static List<Targetable> GetTargetsWithFaction(
+					List<Targetable> targetables, List<Faction> targetedFactions) {
+					
+					return targetables.FindAll(target => {
+						var stats = target.GetComponent<Statistics>();
+						if(stats is null) return false;
+
+						return targetedFactions.Contains(stats.Faction);
+					});
+				}
+
+				private static List<Targetable> GetTargetsWithPositions(
+					List<Targetable> targetables, List<Vector3Int> targetPositons) {
+
+					return targetables.FindAll(target => { 
+						var gridTransform = target.GetComponent<GridTransform>();
+						if(gridTransform is null) return false;
+						return targetPositons.Contains(gridTransform.gridPosition);
+					});
+				}
+				
+
 				/**
 				 * Finds all characters/world objects, that are appliable to the ability target type 
 				 * and that are within the pattern at given position
@@ -39,39 +101,37 @@ namespace Combat
 						Attacker attacker, AbilityTarget targetTypes)
 				{
 						HashSet<Targetable> targets = new HashSet<Targetable>();
-
 						HashSet<Targetable> possibleTargets = new HashSet<Targetable>();
+						// List<Vector3Int> targetPos = new List<Vector3Int>();
 
 						// characters
-						//
 						CharacterList characterList = CharacterList.FindInstant();
-						if ( characterList )
-						{
-								Faction attackerFaction = attacker.gameObject.GetComponent<Statistics>().GetFaction();
+						if ( characterList is null ) return targets;
+						
+						Faction attackerFaction = attacker.gameObject.GetComponent<Statistics>().GetFaction();
 
-								// cases in which player characters are targeted
-								if(attackerFaction.Equals(Faction.Player) && targetTypes.HasFlag(AbilityTarget.Ally) || 
-										attackerFaction.Equals(Faction.Enemy) && targetTypes.HasFlag(AbilityTarget.Enemy))
+						// cases in which player characters are targeted
+						if(attackerFaction.Equals(Faction.Player) && targetTypes.HasFlag(AbilityTarget.Ally) || 
+								attackerFaction.Equals(Faction.Enemy) && targetTypes.HasFlag(AbilityTarget.Enemy))
+						{
+								foreach(GameObject player in characterList.playerContainer)
 								{
-										foreach(GameObject player in characterList.playerContainer)
+										if(!player.Equals(attacker.gameObject))
 										{
-												if(!player.Equals(attacker.gameObject))
-												{
-														possibleTargets.Add(player.GetComponent<Targetable>());
-												}
+												possibleTargets.Add(player.GetComponent<Targetable>());
 										}
 								}
+						}
 
-								// cases in which enemy characters are targeted
-								if ( attackerFaction.Equals(Faction.Player) && targetTypes.HasFlag(AbilityTarget.Enemy) ||
-										attackerFaction.Equals(Faction.Enemy) && targetTypes.HasFlag(AbilityTarget.Ally) )
+						// cases in which enemy characters are targeted
+						if ( attackerFaction.Equals(Faction.Player) && targetTypes.HasFlag(AbilityTarget.Enemy) ||
+								attackerFaction.Equals(Faction.Enemy) && targetTypes.HasFlag(AbilityTarget.Ally) )
+						{
+								foreach ( GameObject enemy in characterList.enemyContainer )
 								{
-										foreach ( GameObject enemy in characterList.enemyContainer )
+										if ( !enemy.Equals(attacker.gameObject) )
 										{
-												if ( !enemy.Equals(attacker.gameObject) )
-												{
-														possibleTargets.Add(enemy.GetComponent<Targetable>());
-												}
+												possibleTargets.Add(enemy.GetComponent<Targetable>());
 										}
 								}
 						}

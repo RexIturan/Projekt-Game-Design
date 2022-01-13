@@ -12,6 +12,7 @@ namespace Characters {
 		//property -> getter
 		public StatusValues StatusValues => stats;
 
+		public Faction Faction => faction;
 		// getter und setter faction
 		public Faction GetFaction() { return faction; }
 		public void SetFaction(Faction faction) { this.faction = faction; }

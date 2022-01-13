@@ -1,5 +1,6 @@
 namespace Ability
 {
+		//todo could be scriptable object
     // types for damage/healing
     [System.Serializable]
     public enum DamageType

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: Meteor
   m_EditorClassIdentifier: 
+  id: 5
   icon: {fileID: 21300000, guid: a37a6dbf0d1c69f49aa65149190a0066, type: 3}
   description: Meteor
   Animation: 10
@@ -33,12 +34,16 @@ MonoBehaviour:
     targets: 23
     targetIsCenter: 1
     area:
+      stringPattern: '- x -
+
+        x[x]x
+
+        - x -'
       rows:
       - line: 000100
       - line: 010101
       - line: 000100
       anchor: {x: 1, y: 1}
-  abilityID: 5
   selectedActions:
   - {fileID: 11400000, guid: 91a528d44b0383848a019fbc0509b9f9, type: 2}
   - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}

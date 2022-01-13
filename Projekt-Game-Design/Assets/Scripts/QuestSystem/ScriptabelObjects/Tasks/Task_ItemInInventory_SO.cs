@@ -26,19 +26,5 @@ namespace QuestSystem.ScriptabelObjects {
 
 			return done;
 		}
-
-		public override void ResetTask() {
-			done = false;
-			active = false;
-		}
-
-		public override void StartTask() {
-			Debug.Log($"Start Task {this.name}");
-			active = true;
-		}
-
-		public override void StopTask() {
-			active = false;
-		}
 	}
 }

@@ -10,7 +10,8 @@
         "Unity.ResourceManager",
         "FogOfWar",
         "Unity.Animation.Rigging",
-        "UnityEditor.UIElementsModule"
+        "UnityEditor.UIElementsModule",
+        "GDP01.Util"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

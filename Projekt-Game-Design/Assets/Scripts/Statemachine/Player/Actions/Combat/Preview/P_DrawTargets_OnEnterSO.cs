@@ -40,7 +40,7 @@ public class P_DrawTargets_OnEnter : StateAction {
 
 	public override void OnStateEnter() {
 		CharacterList characters = CharacterList.FindInstant();
-		WorldObjectList worldObjects = WorldObjectList.FindWorldObjectList();
+		WorldObjectList worldObjects = WorldObjectList.FindInstant();
 
 		List<PathNode> allies = new List<PathNode>();
 		List<PathNode> neutrals = new List<PathNode>();
