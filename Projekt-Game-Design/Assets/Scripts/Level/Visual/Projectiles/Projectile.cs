@@ -10,6 +10,7 @@ namespace Visual
 				public float timeEnd = 1;
 				public Vector3 start;
 				public Vector3 end;
+				[SerializeField] private bool onlyFall;
 				[SerializeField] private float height;
 				[SerializeField] private Vector3 lastPos;
 
@@ -44,13 +45,22 @@ namespace Visual
 						// linear position of the projectile right now
 						Vector3 position = start + portion * ( end - start );
 
-						// y-position gain due to parable form:
-						// y = (a(x - b)2 + 1) c | a: factor; b: offset on x-Axis (portion); c: height
-						// x = 0 => y = 0 
-						// x = 0.5 => y = c
-						// x = 1 => y = 0
-						// => y = (-4*(x - 0.5)2 + 1) c
-						position += Vector3.up * ( -4 * Mathf.Pow(portion - 0.5f, 2) + 1 ) * height;
+						if ( onlyFall )
+						{
+								// x = 0 => y = height
+								// x = 1 => y = 0
+								// => y = (1 - (x)2) * height
+								position += Vector3.up * (1 - Mathf.Pow(portion, 2)) * height;
+						}
+						else {
+								// y-position gain due to parable form:
+								// y = (a(x - b)2 + 1) c | a: factor; b: offset on x-Axis (portion); c: height
+								// x = 0 => y = 0 
+								// x = 0.5 => y = c
+								// x = 1 => y = 0
+								// => y = (-4*(x - 0.5)2 + 1) c
+								position += Vector3.up * ( -4 * Mathf.Pow(portion - 0.5f, 2) + 1 ) * height;
+						}
 
 						return position;
 				}

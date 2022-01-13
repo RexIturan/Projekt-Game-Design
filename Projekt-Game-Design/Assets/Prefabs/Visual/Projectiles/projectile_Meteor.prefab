@@ -129,5 +129,6 @@ MonoBehaviour:
   timeEnd: 0
   start: {x: 0, y: 0, z: 0}
   end: {x: 0, y: 0, z: 0}
+  onlyFall: 1
   height: 10
   lastPos: {x: 0, y: 0, z: 0}
