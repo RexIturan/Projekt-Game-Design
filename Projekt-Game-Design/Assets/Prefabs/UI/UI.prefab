@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7814138535658991270}
   - component: {fileID: 7814138535500672982}
   - component: {fileID: 2002235054}
+  - component: {fileID: 6993759869762517711}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -66,6 +67,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setGameOverlayVisibilityEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
   setTurnIndicatorVisibilityEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
+  EquipEvent: {fileID: 0}
+  UnequipEvent: {fileID: 0}
   playerDeselectedEC: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
   playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
@@ -149,3 +152,18 @@ MonoBehaviour:
   setInventoryVisibilityEC: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
   uiToggleMenuEC: {fileID: 11400000, guid: 9444ec8e72a59b64d934049dd28bcc23, type: 2}
   uiToggleScreenEC: {fileID: 11400000, guid: 3025db6f6dc502840aaa52fac7ac2a90, type: 2}
+--- !u!114 &6993759869762517711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814138535658991292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01eecfb1390847769b06691925d1b98d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 7814138535658991293}
+  mouseOverUI_EC: {fileID: 11400000, guid: 2649fdca3d5737645a304d044086dbd7, type: 2}
+  onSceneReady_EC: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}

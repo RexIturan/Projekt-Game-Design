@@ -225,6 +225,10 @@ public class OverlayUIController : MonoBehaviour {
 		SetTurnIndicatorVisibility(value);
 	}
 	
+	private void HandleEndTurn(Faction faction) {
+		UpdateActionBar();
+	}
+	
 ///// Public Functions	////////////////////////////////////////////////////////////////////////////
 
 ///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
@@ -249,12 +253,20 @@ public class OverlayUIController : MonoBehaviour {
 		setTurnIndicatorVisibilityEC.OnEventRaised += HandleSetTurnIndicatorVisibilityEC;
 		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
+
+		//todo updating ui when turn changes -> handle otherwise
+		endTurnEC.OnEventRaised += HandleEndTurn;
 	}
+
+	
 
 	private void OnDisable() {
 		setGameOverlayVisibilityEC.OnEventRaised -= HandleSetGameOverlayVisibilityEC;
 		setTurnIndicatorVisibilityEC.OnEventRaised -= HandleSetTurnIndicatorVisibilityEC;
 		playerSelectedEC.OnEventRaised -= HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised -= HandlePlayerDeselected;
+		
+		//todo updating ui when turn changes -> handle otherwise
+		endTurnEC.OnEventRaised -= HandleEndTurn;
 	}
 }

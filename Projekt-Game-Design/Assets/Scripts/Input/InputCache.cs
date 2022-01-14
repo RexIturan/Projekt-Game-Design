@@ -152,7 +152,7 @@ namespace Input {
 			if ( over ) {
 				_overUICount++;
 				_mouseIsOverUI = true;
-				Debug.Log($"InputCache > SetMouseOverUI:\nInc ++ ref: {_overUICount} value: {IsMouseOverUI}" );
+				// Debug.Log($"InputCache > SetMouseOverUI:\nInc ++ ref: {_overUICount} value: {IsMouseOverUI}" );
 			}
 			else {
 				_overUICount--;

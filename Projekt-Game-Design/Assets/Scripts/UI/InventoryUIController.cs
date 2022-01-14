@@ -543,6 +543,8 @@ public class InventoryUIController : MonoBehaviour {
 		// _ghostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
 		_ghostIcon.RegisterCallback<PointerUpEvent>(OnPointerUp);
 		
+		SetInventoryVisibility(false);
+		
 		InitializeInventory();
 		InitializeEquipmentInventory();
 

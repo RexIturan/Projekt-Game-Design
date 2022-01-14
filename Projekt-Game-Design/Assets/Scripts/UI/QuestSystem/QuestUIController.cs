@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using QuestSystem.ScriptabelObjects;
+﻿using QuestSystem.ScriptabelObjects;
 using UI.Components.QuestSystem;
 using UnityEngine;
 using UnityEngine.UIElements;

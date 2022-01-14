@@ -3,7 +3,7 @@
     <ui:Template name="SaveScreen" src="SaveScreen.uxml" />
     <ui:Template name="SettingsContainer" src="SettingsContainer.uxml" />
     <Style src="Styles/UI_Classes.uss" />
-    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-direction: row;">
+    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-direction: row; position: absolute; width: 100%; height: 100%;">
         <ui:VisualElement name="SideBar" picking-mode="Ignore" style="width: 30%;">
             <ui:Button text="Resume Game" display-tooltip-when-elided="true" name="ResumeButton" class="Button" />
             <ui:Button text="Save Game" display-tooltip-when-elided="true" name="SaveButton" class="Button" style="height: 16%; display: none;" />
