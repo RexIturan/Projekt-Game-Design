@@ -34,13 +34,11 @@ namespace WorldObjects
 					activated = !activated;
 				}
 
-				public void Awake()
-				{
+				public void Awake() {
 						updateWorldObjectEvent.OnEventRaised += UpdateSwitch;
 				}
 
-				public void OnDestroy()
-				{
+				public void OnDestroy() {
 						updateWorldObjectEvent.OnEventRaised -= UpdateSwitch;
 				}
 
@@ -64,18 +62,14 @@ namespace WorldObjects
 				}
 
 				// activates switch if conditions are met
-				public void UpdateSwitch()
-				{
-						if ( !activated )
-						{
+				public void UpdateSwitch() {
+						if ( !activated ) {
 								CharacterList characters = CharacterList.FindInstant();
 								bool playerInRange = false;
-								foreach ( GameObject player in characters.playerContainer )
-								{
+								foreach ( GameObject player in characters.playerContainer ) {
 										Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
 										Vector3Int switchPos = gameObject.GetComponent<GridTransform>().gridPosition;
-										if ( Vector3Int.Distance(playerPos, switchPos) < ( float )switchType.range + EPSILON )
-										{
+										if ( Vector3Int.Distance(playerPos, switchPos) < ( float )switchType.range + EPSILON ) {
 												playerInRange = true;
 										}
 								}
@@ -85,13 +79,12 @@ namespace WorldObjects
 						}
 				}
 
-				private void SwitchActivated()
-				{
+				private void SwitchActivated() {
 					activated = true;
 					switchAnimator.FlipSwitch();
 					switchActivatedEvent.RaiseEvent(switchId);
 
-						SoundManager.FindSoundManager().PlaySound(switchType.activationSound);
+					SoundManager.FindSoundManager().PlaySound(switchType.activationSound);
 				}
 		}
 }

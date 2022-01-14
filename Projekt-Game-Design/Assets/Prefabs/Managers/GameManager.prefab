@@ -63,21 +63,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
+  triggerDefeatEC: {fileID: 11400000, guid: 737a96b0278c36b4880712610f7b8d96, type: 2}
+  triggerVictoryEC: {fileID: 11400000, guid: dba5723c0c774e942b1f9888c6013e47, type: 2}
   setTurnIndicatorVisibilityEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
   tacticsData: {fileID: 11400000, guid: 5d053a97eac47be4d8da941f3a2772c7, type: 2}
+  saveManagerData: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
+  levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}
+  onSceneReady: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}
+  locationsToLoad:
+  - {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
+  showLoadScreen: 1
+  saveSystem: {fileID: 0}
   evaluated: 1
   shouldExit: 0
   exited: 0
   initializedGame: 0
   initializedTactics: 0
   isInTacticsMode: 0
-  gameOver: 0
-  saveManagerData: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
-  loadGameFromPath: {fileID: 11400000, guid: 6732e004d1f990b4381b9ebd3cffdcba, type: 2}
-  levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}
-  onSceneReady: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}
-  loadLocationEC: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
-  locationsToLoad:
-  - {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
-  showLoadScreen: 1
-  saveSystem: {fileID: 0}
+  defeat: 0
+  victory: 0

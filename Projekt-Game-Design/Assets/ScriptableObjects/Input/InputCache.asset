@@ -16,14 +16,15 @@ MonoBehaviour:
   cursorDebug:
     showGridCenterPos: 1
     showMousePos: 1
+  _overUICount: 0
   cursor:
     selectedPos:
-      mousePosition: {x: -2.5618343, y: 0.5, z: 7.4078712}
-      tilePos: {x: 0, y: 0, z: 10}
-      tileCenter: {x: 0.5, y: 0, z: 10.5}
-      gridPos: {x: 0, y: 0, z: 10}
+      mousePosition: {x: 3.5530996, y: 0.5, z: 12.751339}
+      tilePos: {x: 3, y: 0, z: 12}
+      tileCenter: {x: 3.5, y: 0, z: 12.5}
+      gridPos: {x: 11, y: 0, z: 18}
     abovePos:
-      mousePosition: {x: -2.5618343, y: 0.5, z: 7.4078712}
-      tilePos: {x: 0, y: 0, z: 10}
-      tileCenter: {x: 0.5, y: 0, z: 10.5}
-      gridPos: {x: 0, y: 0, z: 10}
+      mousePosition: {x: 3.5530996, y: 1.5, z: 12.751339}
+      tilePos: {x: 3, y: 1, z: 12}
+      tileCenter: {x: 3.5, y: 1, z: 12.5}
+      gridPos: {x: 11, y: 1, z: 18}

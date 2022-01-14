@@ -17,6 +17,8 @@ MonoBehaviour:
   description: Attacks all enemies in a line
   Animation: 9
   activationSound: slash_01
+  projectilePrefab: {fileID: 0}
+  timeUntilDamage: 0.2
   repeated: 0
   damaging: 1
   targets: 30
@@ -36,9 +38,7 @@ MonoBehaviour:
     area:
       stringPattern: x[x]x
       rows:
-      - line: 01
-      - line: 01
-      - line: 01
+      - line: 010101
       anchor: {x: 1, y: 0}
   selectedActions:
   - {fileID: 11400000, guid: ae2b28614c9f55c429539a655c859735, type: 2}

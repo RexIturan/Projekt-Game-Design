@@ -15,6 +15,8 @@ public class OverlayUIController : MonoBehaviour {
 	[Header("Receiving Events On")] 
 	[SerializeField] private BoolEventChannelSO setGameOverlayVisibilityEC;
 	[SerializeField] private BoolEventChannelSO setTurnIndicatorVisibilityEC;
+	[SerializeField] private IntIntEquipmentPositionEquipEventChannelSO EquipEvent;
+	[SerializeField] private IntEquipmentPositionUnequipEventChannelSO UnequipEvent;
 	// [SerializeField] private BoolEventChannelSO visibilityInventoryEventChannel;
 
 	// Action Menu
@@ -150,8 +152,34 @@ public class OverlayUIController : MonoBehaviour {
 		_actionBar.SetVisibility(true);
 	}
 
-///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
+	private void UpdateActionBar() {
+		if(_selectedPlayer is {}) {
+			FlushAbilityListIcons();
+			List<AbilitySO> abilities =
+				new List<AbilitySO>(_selectedPlayer.GetComponent<AbilityController>().Abilities);
+			int counter = 0;
+
+			foreach ( var ability in abilities ) {
+
+				// new AvtionBar
+				var id = ability.id;
+				var args = new Object[] { id };
+
+				void AbilityCallback(object[] args) {
+					Debug.Log($"AbilityCallback {args[0]}");
+					_callBackAction(( int )args[0]);
+				}
+
+				_actionBar.actionButtons[counter++]
+					.BindAction(AbilityCallback, args, ability.icon, ability.name);
+			}
+
+			RefreshStats(_selectedPlayer);
+			//TODO: Hier die Stats einbauen, für den ausgewählten Spieler
+		}
+	}
 	
+///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
 
 	private void HandleEndTurnUI() {
 		endTurnEC.RaiseEvent(Faction.Player);
@@ -161,7 +189,6 @@ public class OverlayUIController : MonoBehaviour {
 	// 	SetGameOverlayVisibility(!value);
 	// }
 	
-	// todo(vincent) -> show character stats
 	/// <summary>
 	/// HandlePlayerSelected
 	/// </summary>
@@ -169,36 +196,15 @@ public class OverlayUIController : MonoBehaviour {
 	/// <param name="callBackAction">callback to call when a action ist clicked</param>
 	private void HandlePlayerSelected(GameObject player, Action<int> callBackAction) {
 		_selectedPlayer = player;
-
+		_callBackAction = callBackAction;
+		
 		// Anzeigen der notwendigen Komponenten
 		ShowActionMenu();
 		ShowPlayerViewContainer();
-
-		_callBackAction = callBackAction;
-		FlushAbilityListIcons();
-		List<AbilitySO> abilities =
-			new List<AbilitySO>(player.GetComponent<AbilityController>().Abilities);
-		int counter = 0;
-
-		foreach ( var ability in abilities ) {
-
-			// new AvtionBar
-			var id = ability.id;
-			var args = new Object[] { id };
-
-			void AbilityCallback(object[] args) {
-				Debug.Log($"AbilityCallback {args[0]}");
-				_callBackAction(( int )args[0]);
-			}
-
-			_actionBar.actionButtons[counter++]
-				.BindAction(AbilityCallback, args, ability.icon, ability.name);
-		}
-
-		RefreshStats(player);
-		//TODO: Hier die Stats einbauen, für den ausgewählten Spieler
+		
+		UpdateActionBar();
 	}
-	
+
 	private void HandleOpenMenuButton() {
 		uiToggleMenuEC.RaiseEvent();
 	}
@@ -212,6 +218,7 @@ public class OverlayUIController : MonoBehaviour {
 
 	private void HandleSetGameOverlayVisibilityEC(bool value) {
 		SetGameOverlayVisibility(value);
+		UpdateActionBar();
 	}
 
 	private void HandleSetTurnIndicatorVisibilityEC(bool value) {
@@ -238,8 +245,6 @@ public class OverlayUIController : MonoBehaviour {
 	}
 
 	private void Awake() {
-		// setMenuVisibilityEC.OnEventRaised += HandleOtherScreensOpened;
-		// visibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
 		setGameOverlayVisibilityEC.OnEventRaised += HandleSetGameOverlayVisibilityEC;
 		setTurnIndicatorVisibilityEC.OnEventRaised += HandleSetTurnIndicatorVisibilityEC;
 		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
@@ -247,9 +252,6 @@ public class OverlayUIController : MonoBehaviour {
 	}
 
 	private void OnDisable() {
-		// setMenuVisibilityEC.OnEventRaised -= HandleOtherScreensOpened;
-		// visibilityInventoryEventChannel.OnEventRaised -= HandleOtherScreensOpened;
-		
 		setGameOverlayVisibilityEC.OnEventRaised -= HandleSetGameOverlayVisibilityEC;
 		setTurnIndicatorVisibilityEC.OnEventRaised -= HandleSetTurnIndicatorVisibilityEC;
 		playerSelectedEC.OnEventRaised -= HandlePlayerSelected;

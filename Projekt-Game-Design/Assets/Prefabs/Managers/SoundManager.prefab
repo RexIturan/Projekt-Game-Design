@@ -46,7 +46,7 @@ MonoBehaviour:
   sounds:
   - name: MainMenuMusic
     clip: {fileID: 8300000, guid: 710ac392b362f2340a53c704b2e0c291, type: 3}
-    volume: 0.02
+    volume: 0
   - name: activation_01
     clip: {fileID: 8300000, guid: 3383742ad2e74ec44bf338fee1c508ef, type: 3}
     volume: 0.1

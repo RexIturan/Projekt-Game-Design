@@ -37,7 +37,8 @@ MonoBehaviour:
     targetIsCenter: 1
     area:
       stringPattern: '[x]'
-      rows: []
+      rows:
+      - line: 01
       anchor: {x: 0, y: 0}
   selectedActions:
   - {fileID: 11400000, guid: 91a528d44b0383848a019fbc0509b9f9, type: 2}

@@ -16,6 +16,7 @@ public class RaiseSelectedEventSO : StateActionSO {
 
 public class RaiseSelectedEvent : StateAction {
 	private GameObject _gameObject;
+	private StateMachine _stateMachine;
 	private GameObjActionEventChannelSO _selectNewPlayer;
 
 	private AbilityController _abilityController;
@@ -27,6 +28,7 @@ public class RaiseSelectedEvent : StateAction {
 	public override void OnUpdate() { }
 
 	public override void Awake(StateMachine stateMachine) {
+		_stateMachine = stateMachine;
 		_gameObject = stateMachine.gameObject;
 		Debug.Log($"Awake raiseSelectedEvent {this}");
 		_abilityController = stateMachine.gameObject.GetComponent<AbilityController>();
@@ -35,15 +37,24 @@ public class RaiseSelectedEvent : StateAction {
 	//TODO: Muss geändert werden
 	private void AbilityCallback(int value) {
 		Debug.Log("Es wurde die Ability mit der ID: " + value + " gedrückt.");
-		if ( !_abilityController.abilitySelected ) {
+
+		int lastId = _abilityController.SelectedAbilityID;
+
+		// deselect old ability
+		_abilityController.abilitySelected = false;
+		_abilityController.SelectedAbilityID = -1;
+		_abilityController.LastSelectedAbilityID = -1;
+
+		// select new ability if it wasn't the old one
+		// will be done next update
+		if ( lastId != value ) {
+			_stateMachine.TransitionManually();
+
 			_abilityController.abilitySelected = true;
 			_abilityController.SelectedAbilityID = value;
 			_abilityController.LastSelectedAbilityID = value;
-		}
-		else {
-			_abilityController.abilitySelected = false;
-			_abilityController.SelectedAbilityID = -1;
-			_abilityController.LastSelectedAbilityID = -1;
+						
+			_stateMachine.TransitionManually();
 		}
 	}
 

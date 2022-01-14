@@ -37,7 +37,7 @@
                 "y": 0,
                 "z": 0
                 },
-		"open": false,
+		"open": true,
 		"keyIds": [],
 		"switchIds": [],
 		"triggerIds": [],
@@ -72,11 +72,11 @@
         	"y": 1,
         	"z": 3
       		},
-                "orientation": {
-                "x": -1,
-                "y": 0,
-                "z": 0
-                },
+            "orientation": {
+            "x": -1,
+            "y": 0,
+            "z": 0
+            },
 		"open": false,
 		"keyIds": [],
 		"switchIds": [0],

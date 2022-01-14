@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecda0ff7e794b0d8929230fb03c1044, type: 3}
+  m_Name: QuestTutorial 1
+  m_EditorClassIdentifier: 
+  description: 
+  disabled: 0
+  available: 0
+  active: 0
+  finished: 0
+  repeatable: 0
+  prerequisits: []
+  currentTaskIndex: 0
+  nextTaskIndex: 0
+  tasks:
+  - name: new Task
+    type: 10
+    task: {fileID: 8709501404988040065}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+--- !u!114 &8709501404988040065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de00e8eb765c4100af9f56c3efe0307c, type: 3}
+  m_Name: 0_ObjectSelected_new Task
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: 
+    description: 
+    instructions: 
