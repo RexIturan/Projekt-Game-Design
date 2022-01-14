@@ -11,8 +11,7 @@ using UnityEngine.UIElements;
 
 public class InventoryUIController : MonoBehaviour {
 	
-	// tab stuff
-	//
+	// tab Categories
 	//Für das Inventar
 	public enum InventoryTab {
 		None,
@@ -42,6 +41,7 @@ public class InventoryUIController : MonoBehaviour {
 
 	[Header("Sending Events On")]
 	// OutputChannel zwischen den Inventaren
+	//todo shorter names?
 	[SerializeField] private IntIntEquipmentPositionEquipEventChannelSO EquipEvent;
 	[SerializeField] private IntEquipmentPositionUnequipEventChannelSO UnequipEvent;
 	[SerializeField] private VoidEventChannelSO menuOpenedEvent;
