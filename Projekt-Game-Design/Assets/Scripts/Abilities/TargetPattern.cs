@@ -39,10 +39,10 @@ namespace Ability {
 		public bool IsValid() {
 			bool isValid = true;
 
-			isValid &= rows != null;
-			isValid &= rows.Length > 0;
-			isValid &= rows[0] != null;
-			isValid &= rows[0].line != null;
+			isValid = isValid && rows != null;
+			isValid = isValid && rows.Length > 0;
+			isValid = isValid && rows[0] != null;
+			isValid = isValid && rows[0].line != null;
 
 			width = -1;
 			if ( isValid ) {
