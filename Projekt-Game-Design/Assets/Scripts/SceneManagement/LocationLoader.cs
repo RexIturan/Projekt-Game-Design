@@ -7,17 +7,24 @@ namespace SceneManagement {
 		[Header("Sending Events On")] 
 		[SerializeField] private VoidEventChannelSO enableLoadingScreenInputEC;
 		[SerializeField] private VoidEventChannelSO fov_PlayerCharViewUpdateEC;
-
 		[SerializeField] private VoidEventChannelSO enableGampleyInputEC;
 
 		[Header("Recieving Events On")]
-		[SerializeField]
-		private VoidEventChannelSO onSceneReady;
+		[SerializeField] private VoidEventChannelSO onSceneReady;
 		
+		[Header("Initialization Settings")]
 		[SerializeField] private bool initializeFromSave;
 		[SerializeField] private string initializeLevelName;
+
+///// Pivate Variables /////////////////////////////////////////////////////////////////////////////		
 		// get at runtime
 		private SaveManager _saveManager;
+
+///// Pivate Function //////////////////////////////////////////////////////////////////////////////		
+
+		
+
+///// Unity Function ///////////////////////////////////////////////////////////////////////////////
 
 		private void Awake() {
 			onSceneReady.OnEventRaised += LoadLocationData;

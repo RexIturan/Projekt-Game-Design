@@ -168,6 +168,7 @@ namespace UI.Components.QuestSystem {
 
 				var quest = Quests[i];
 
+				//todo set false?
 				taskPanels[i].SetVisibility(true);
 				if ( quest is { } ) {
 					taskPanels[i].SetVisibility(quest.IsActive);

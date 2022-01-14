@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4284373040448921599}
   - component: {fileID: 4474951415148567956}
   - component: {fileID: 1363089168}
+  - component: {fileID: 6243888046473227220}
   m_Layer: 0
   m_Name: SaveManager
   m_TagString: Untagged
@@ -53,9 +54,9 @@ MonoBehaviour:
   gridContainer: {fileID: 11400000, guid: cf77658e9fdf6c24193f76cce7d45bff, type: 2}
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   characterList: {fileID: 0}
-  equipmentContainer: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
   characterInitializer: {fileID: 1363089168}
+  worldObjectInitialiser: {fileID: 6243888046473227220}
   itemContainerSO: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
   testLevel:
   - m_AssetGUID: 
@@ -80,3 +81,18 @@ MonoBehaviour:
   enemyParent: {fileID: 0}
   enemyDataContainerSO: {fileID: 11400000, guid: 193267e50774c3a4aa842d7941f463d9, type: 2}
   playerDataContainerSo: {fileID: 11400000, guid: c9dd19647e8a08443a455a408c7818f1, type: 2}
+--- !u!114 &6243888046473227220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187340983742418651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4f37d6ab8307d45a44d87e033fc7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorContainer: {fileID: 11400000, guid: 9c9e1505ca630dc468131be2225d7281, type: 2}
+  switchContainer: {fileID: 11400000, guid: 78f822e7e41f18f44a7e171d99fd7241, type: 2}
+  junkContainer: {fileID: 11400000, guid: 7919583d454054a4c8cad24c1c3dae54, type: 2}

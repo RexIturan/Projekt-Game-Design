@@ -44,9 +44,8 @@ namespace Audio
 						}
 				}
 
-				public static SoundManager FindSoundManager()
-				{
-						return GameObject.Find("SoundManager").GetComponent<SoundManager>();
+				public static SoundManager FindSoundManager() {
+					return FindObjectOfType<SoundManager>();
 				}
 		}
 }
