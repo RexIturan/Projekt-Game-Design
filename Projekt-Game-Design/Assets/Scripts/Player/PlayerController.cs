@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Characters;
+using Characters.Ability;
 using Characters.Movement;
 using Combat;
 using Events.ScriptableObjects;
@@ -220,8 +221,14 @@ namespace Player {
 
 			// deselecting
 			//
-			if ( inputCache.rightButton.started ) {
-				if ( selectedPlayerCharacter is { } ) {
+			if ( inputCache.rightButton.started && selectedPlayerCharacter ) {
+				AbilityController abilityController = selectedPlayerCharacter.GetComponent<AbilityController>();
+				if ( abilityController.abilitySelected ) {
+					abilityController.abilitySelected = false;
+					abilityController.SelectedAbilityID = -1;
+					abilityController.LastSelectedAbilityID = -1;
+				}
+				else {
 					selectedPlayerCharacter.Deselect();
 					selectedPlayerCharacter = null;
 				}

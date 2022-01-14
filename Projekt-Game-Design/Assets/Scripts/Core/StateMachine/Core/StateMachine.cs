@@ -95,5 +95,10 @@ namespace UOP1.StateMachine
 			_currentState = transitionState;
 			_currentState.OnStateEnter();
 		}
+
+		public void TransitionManually() {
+			if (_currentState.TryGetTransition(out var transitionState))
+				Transition(transitionState);
+		}
 	}
 }
