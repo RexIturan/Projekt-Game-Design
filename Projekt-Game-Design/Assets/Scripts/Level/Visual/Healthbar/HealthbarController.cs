@@ -26,15 +26,22 @@ namespace Visual.Healthbar {
 			_slider.maxValue = max;
 			_slider.value = value;
 		}
-
+		
+		private void SetFillColor() {
+			image.color = _color;
+		}
+		
 		private IEnumerator HideAfterDelay(float waitTime) {
-			while(true){
-				yield return new WaitForSeconds(waitTime);
-				Hide();
-			}
+			yield return new WaitForSeconds(waitTime);
+			Hide();
 		}
 		
 ///// Public Functions
+
+		public void SetColor(Color color) {
+			_color = color;
+			SetFillColor();
+		}
 
 		public void StartHideAfterDelay() {
 			StartCoroutine(nameof(HideAfterDelay), 1.0F);
@@ -70,7 +77,8 @@ namespace Visual.Healthbar {
 		}
 
 		private void OnValidate() {
-			image.color = _color;
+			SetFillColor();
 		}
+
 	}
 }

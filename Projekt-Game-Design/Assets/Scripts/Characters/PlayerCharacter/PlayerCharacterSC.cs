@@ -6,6 +6,7 @@ using Characters.PlayerCharacter.ScriptableObjects;
 using Combat;
 using SaveSystem.SaveFormats;
 using UnityEngine;
+using Visual.Healthbar;
 
 
 /// <summary>
@@ -28,6 +29,12 @@ public class PlayerCharacterSC : MonoBehaviour {
     [SerializeField] private EquipmentController _equipmentController;
     [SerializeField] private AbilityController _abilityController;
     [SerializeField] private ModelController _modelController;
+
+    [SerializeField] private HealthbarController _healthbarController;
+
+    //todo move to some central location
+    [SerializeField] private Color playerColor;
+    [SerializeField] private Color friendlyColor;
     
     public void Initialize() {
 	    //stats
@@ -55,6 +62,8 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    _abilityController.BaseAbilities = playerType.basicAbilities;
 	    _abilityController.LastSelectedAbilityID = -1;
 	    _abilityController.damageInflicted = true;
+	    
+	    _healthbarController.SetColor(_statistics.Faction == Faction.Player ? playerColor : friendlyColor);
     }
     
     public void InitializeFromSave(PlayerCharacter_Save playerCharacterSave) {
@@ -73,6 +82,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 				active = true;
 				_statistics.SetFaction(Faction.Player);
 				_modelController.SetFactionMaterial(_statistics.Faction);
+				_healthbarController.SetColor(playerColor);
 
 				CharacterList characters = CharacterList.FindInstant();
 				characters.friendlyContainer.Remove(gameObject);
