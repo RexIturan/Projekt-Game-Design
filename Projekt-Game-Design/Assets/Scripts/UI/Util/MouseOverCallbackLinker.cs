@@ -19,13 +19,13 @@ namespace UI.Util {
 		
 		private void MouseExitCallback(MouseOutEvent outEvent) {
 			mouseOverUI_EC.RaiseEvent(false);
-			// Debug.Log($"Exit\n{outEvent.target}");
+			Debug.Log($"Exit\n{outEvent.target}");
 		}
 
 		private void MouseEnterCallback(MouseOverEvent enterEvent) {
 			//todo do something with the event
 			mouseOverUI_EC.RaiseEvent(true);
-			// Debug.Log($"Enter\n{enterEvent.target}");
+			Debug.Log($"Enter\n{enterEvent.target}");
 		}
 
 		private void SetupMouseOverCallback(VisualElement element) {
@@ -59,7 +59,7 @@ namespace UI.Util {
 			_elementsWithCallback.Clear();
 		}
 
-		#region MyRegion
+		#region Unity Monobehaviour
 
 		private void Awake() {
 			_elementsWithCallback = new List<VisualElement>();

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7814138535658991265}
   - component: {fileID: 7814138535658991270}
   - component: {fileID: 7814138535500672982}
+  - component: {fileID: 2002235054}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -63,14 +64,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20445f88bf8c6524b945ae9b716e278d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showGameOverlayEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
-  showTurnIndicatorEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
-  visibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
+  setGameOverlayVisibilityEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  setTurnIndicatorVisibilityEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
   playerDeselectedEC: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
   playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
-  visibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  uiToggleMenuEC: {fileID: 11400000, guid: 9444ec8e72a59b64d934049dd28bcc23, type: 2}
 --- !u!114 &7814138535658991265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,16 +85,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryItems: []
   equipmentInventoryItems: []
-  itemContainer: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
   inventoryItemQuantity: 28
-  visibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
-  visibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
+  setGameOverlayVisibilityEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  setMenuVisibilityEC: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  setInventoryVisibilityEC: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
   playerDeselectedEC: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
   playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
   enableInventoryInput: {fileID: 11400000, guid: 6f2cf282820633f41a7bde9dc75b3af9, type: 2}
   changeInventoryTab: {fileID: 11400000, guid: c0c391df13a8ed149a1fcb343bb20c4d, type: 2}
-  visibilityGameOverlayEventChannel: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
   EquipEvent: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
   UnequipEvent: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
   menuOpenedEvent: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
@@ -114,12 +113,11 @@ MonoBehaviour:
   menuToLoad:
   - {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
   loadMenuEC: {fileID: 11400000, guid: d4f619ca60109054faab02a134bbbf02, type: 2}
-  visibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
-  visibilityInventoryEventChannel: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
+  SetMenuVisibilityEC: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  uiToggleMenuEC: {fileID: 11400000, guid: 9444ec8e72a59b64d934049dd28bcc23, type: 2}
   enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
   menuOpenedEvent: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
   menuClosedEvent: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
-  visibilityGameOverlayEventChannel: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
 --- !u!114 &7814138535500672982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,3 +132,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 7814138535658991293}
   questContainer: {fileID: 11400000, guid: 65a51bfc297041f4788c7db5608fe983, type: 2}
+--- !u!114 &2002235054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814138535658991292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56e500bc934476f886e15b5b1201f46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetMenuVisibilityEC: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  setGameOverlayVisibilityEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  setInventoryVisibilityEC: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
+  uiToggleMenuEC: {fileID: 11400000, guid: 9444ec8e72a59b64d934049dd28bcc23, type: 2}
+  uiToggleScreenEC: {fileID: 11400000, guid: 3025db6f6dc502840aaa52fac7ac2a90, type: 2}

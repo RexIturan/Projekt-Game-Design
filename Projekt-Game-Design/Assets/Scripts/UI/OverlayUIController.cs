@@ -12,24 +12,25 @@ using Object = System.Object;
 
 
 public class OverlayUIController : MonoBehaviour {
-	[Header("Receiving Events On")] [SerializeField]
-	private BoolEventChannelSO showGameOverlayEC;
-
-	[SerializeField] private BoolEventChannelSO showTurnIndicatorEC;
-	[SerializeField] private BoolEventChannelSO visibilityInventoryEventChannel;
+	[Header("Receiving Events On")] 
+	[SerializeField] private BoolEventChannelSO setGameOverlayVisibilityEC;
+	[SerializeField] private BoolEventChannelSO setTurnIndicatorVisibilityEC;
+	// [SerializeField] private BoolEventChannelSO visibilityInventoryEventChannel;
 
 	// Action Menu
 	[SerializeField] private GameObjEventChannelSO playerDeselectedEC;
 	[SerializeField] private GameObjActionEventChannelSO playerSelectedEC;
 
-	[Header("Sending Events On")] [SerializeField]
-	private VoidEventChannelSO enableGamplayInput;
-
+	[Header("Sending Events On")] 
+	[SerializeField] private VoidEventChannelSO enableGamplayInput;
 	[SerializeField] private EFactionEventChannelSO endTurnEC;
+	[SerializeField] private VoidEventChannelSO uiToggleMenuEC;
 
 	[Header("Sending and Receiving Events On")] [SerializeField]
-	private BoolEventChannelSO visibilityMenuEventChannel;
+	// private BoolEventChannelSO setMenuVisibilityEC;
 
+///// Private Variables ////////////////////////////////////////////////////////////////////////////	
+	
 	// Für die UI Elemente
 	private VisualElement _overlayContainer;
 
@@ -47,41 +48,16 @@ public class OverlayUIController : MonoBehaviour {
 	// Callbackfunktion für die Abilitys
 	private Action<int> _callBackAction;
 
+///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
-	private void Awake() {
-		// Holen des UXML Trees, zum getten der einzelnen Komponenten
-		var root = GetComponent<UIDocument>().rootVisualElement;
-		_actionBar = root.Q<ActionBar>("ActionBar");
-		_overlayContainer = root.Q<VisualElement>("OverlayContainer");
-		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
-		_turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
-
-		_overlayContainer.Q<Button>("IngameMenuButton").clicked += ShowMenu;
-		_overlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
-
-		visibilityMenuEventChannel.OnEventRaised += HandleOtherScreensOpened;
-		visibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
-		showGameOverlayEC.OnEventRaised += SetGameOverlayVisibility;
-		showTurnIndicatorEC.OnEventRaised += SetTurnIndicatorVisibility;
-		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
-		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
-
-		
-		_actionBar.SetVisibility(false);
-		_characterStatusValuePanel.SetViibility(false);
-	}
-
-	private void HandleEndTurnUI() {
-		endTurnEC.RaiseEvent(Faction.Player);
-	}
-
-	void SetTurnIndicatorVisibility(bool show) {
+	private void SetTurnIndicatorVisibility(bool show) {
 		//todo fix this
 		// _turnIndicator.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
 	}
-
-	void SetGameOverlayVisibility(bool value) {
+	
+	private void SetGameOverlayVisibility(bool value) {
 		if ( value ) {
+			//todo move outside of here
 			enableGamplayInput.RaiseEvent();
 			_overlayContainer.style.display = DisplayStyle.Flex;
 		}
@@ -89,17 +65,13 @@ public class OverlayUIController : MonoBehaviour {
 			_overlayContainer.style.display = DisplayStyle.None;
 		}
 	}
-
-	void HandleOtherScreensOpened(bool value) {
-		SetGameOverlayVisibility(false);
-	}
-
-	void FlushAbilityListIcons() {
+	
+	private void FlushAbilityListIcons() {
 		foreach ( var button in _actionBar.actionButtons ) {
 			button.UnbindAction();
 		}
 	}
-
+	
 	//todo use for tooltip 
 	// void CallBackMouseEnterAbility(MouseEnterEvent evt, string description) {
 	//     Label text = _overlayContainer.Q<Label>("AbilityDescription");
@@ -111,14 +83,91 @@ public class OverlayUIController : MonoBehaviour {
 	//     Label text = _overlayContainer.Q<Label>("AbilityDescription");
 	//     text.style.display = DisplayStyle.None;
 	// }
+	
+	
+	
+	//todo move to own class
+	private void RefreshStats(GameObject obj) {
+	
+		var charIcon = _characterStatusValuePanel.CharIcon;
+		
+		var healthBar = _characterStatusValuePanel.HealthBar;
+		var energyBar = _characterStatusValuePanel.EnergyBar;
+		var armorBar = _characterStatusValuePanel.ArmorBar;
+	
+		var strengthField = _characterStatusValuePanel.StrengthField;
+		var dexterityField = _characterStatusValuePanel.DexterityField;
+		var intelligenceField = _characterStatusValuePanel.IntelligenceField;
+		var movementField = _characterStatusValuePanel.MovementField;
+		var visionField = _characterStatusValuePanel.VisionField;
+		
+		var statistics = obj.GetComponent<Statistics>();
+		var chracterStats = statistics.StatusValues;
+	
+		charIcon.CharacterName = statistics.DisplayName;
+		charIcon.Level = chracterStats.Level.value;
+		charIcon.Image = statistics.DisplayImage; 
+		charIcon.UpdateComponent();
+		
+		healthBar.Max = chracterStats.HitPoints.max;
+		healthBar.Value = chracterStats.HitPoints.value;
+		healthBar.UpdateComponent();
+	
+		energyBar.Max = chracterStats.Energy.max;
+		energyBar.Value = chracterStats.Energy.value;
+		energyBar.UpdateComponent();
+	
+		armorBar.Max = chracterStats.Armor.max;
+		armorBar.Value = chracterStats.Armor.value;
+		armorBar.UpdateComponent();
+		
+		strengthField.Value = chracterStats.Strength.value;
+		strengthField.UpdateComponents();
+		
+		dexterityField.Value = chracterStats.Dexterity.value;
+		dexterityField.UpdateComponents();
+		
+		intelligenceField.Value = chracterStats.Intelligence.value;
+		intelligenceField.UpdateComponents();
+	
+		movementField.Value = chracterStats.MovementRange.value;
+		movementField.UpdateComponents();
+		
+		visionField.Value = chracterStats.ViewDistance.value;
+		visionField.UpdateComponents();
+	}
+	
+	
+	private void ShowPlayerViewContainer() {
+		_characterStatusValuePanel.SetViibility(true);
+	}
+	
+	private void HidePlayerViewContainer() {
+		_characterStatusValuePanel.SetViibility(false);
+	}
+	
+	private void ShowActionMenu() {
+		_actionBar.SetVisibility(true);
+	}
 
+///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
+	
+
+	private void HandleEndTurnUI() {
+		endTurnEC.RaiseEvent(Faction.Player);
+	}
+	
+	// private void HandleOtherScreensOpened(bool value) {
+	// 	SetGameOverlayVisibility(!value);
+	// }
+	
 	// todo(vincent) -> show character stats
 	/// <summary>
 	/// HandlePlayerSelected
 	/// </summary>
 	/// <param name="player">player Character Game Object</param>
 	/// <param name="callBackAction">callback to call when a action ist clicked</param>
-	void HandlePlayerSelected(GameObject player, Action<int> callBackAction) {
+	private void HandlePlayerSelected(GameObject player, Action<int> callBackAction) {
 		_selectedPlayer = player;
 
 		// Anzeigen der notwendigen Komponenten
@@ -149,77 +198,61 @@ public class OverlayUIController : MonoBehaviour {
 		RefreshStats(player);
 		//TODO: Hier die Stats einbauen, für den ausgewählten Spieler
 	}
-
-	void RefreshStats(GameObject obj) {
-	//todo move to own class
-		var charIcon = _characterStatusValuePanel.CharIcon;
-		
-		var healthBar = _characterStatusValuePanel.HealthBar;
-		var energyBar = _characterStatusValuePanel.EnergyBar;
-		var armorBar = _characterStatusValuePanel.ArmorBar;
-
-		var strengthField = _characterStatusValuePanel.StrengthField;
-		var dexterityField = _characterStatusValuePanel.DexterityField;
-		var intelligenceField = _characterStatusValuePanel.IntelligenceField;
-		var movementField = _characterStatusValuePanel.MovementField;
-		var visionField = _characterStatusValuePanel.VisionField;
-		
-		var statistics = obj.GetComponent<Statistics>();
-		var chracterStats = statistics.StatusValues;
-
-		charIcon.CharacterName = statistics.DisplayName;
-		charIcon.Level = chracterStats.Level.value;
-		charIcon.Image = statistics.DisplayImage; 
-		charIcon.UpdateComponent();
-		
-		healthBar.Max = chracterStats.HitPoints.max;
-		healthBar.Value = chracterStats.HitPoints.value;
-		healthBar.UpdateComponent();
-
-		energyBar.Max = chracterStats.Energy.max;
-		energyBar.Value = chracterStats.Energy.value;
-		energyBar.UpdateComponent();
-
-		armorBar.Max = chracterStats.Armor.max;
-		armorBar.Value = chracterStats.Armor.value;
-		armorBar.UpdateComponent();
-		
-		strengthField.Value = chracterStats.Strength.value;
-		strengthField.UpdateComponents();
-		
-		dexterityField.Value = chracterStats.Dexterity.value;
-		dexterityField.UpdateComponents();
-		
-		intelligenceField.Value = chracterStats.Intelligence.value;
-		intelligenceField.UpdateComponents();
-
-		movementField.Value = chracterStats.MovementRange.value;
-		movementField.UpdateComponents();
-		
-		visionField.Value = chracterStats.ViewDistance.value;
-		visionField.UpdateComponents();
+	
+	private void HandleOpenMenuButton() {
+		uiToggleMenuEC.RaiseEvent();
 	}
 
-	void ShowMenu() {
-		visibilityMenuEventChannel.RaiseEvent(true);
-	}
-
-	void HandlePlayerDeselected(GameObject obj) {
+	private void HandlePlayerDeselected(GameObject obj) {
 		if(obj == _selectedPlayer) { 
 			_actionBar.SetVisibility(false);
 			_characterStatusValuePanel.SetViibility(false);
 		}
 	}
 
-	void ShowPlayerViewContainer() {
-		_characterStatusValuePanel.SetViibility(true);
+	private void HandleSetGameOverlayVisibilityEC(bool value) {
+		SetGameOverlayVisibility(value);
 	}
 
-	void HidePlayerViewContainer() {
+	private void HandleSetTurnIndicatorVisibilityEC(bool value) {
+		SetTurnIndicatorVisibility(value);
+	}
+	
+///// Public Functions	////////////////////////////////////////////////////////////////////////////
+
+///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
+
+	private void Start() {
+		// Holen des UXML Trees, zum getten der einzelnen Komponenten
+		var root = GetComponent<UIDocument>().rootVisualElement;
+		_actionBar = root.Q<ActionBar>("ActionBar");
+		_overlayContainer = root.Q<VisualElement>("OverlayContainer");
+		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
+		_turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
+
+		_overlayContainer.Q<Button>("IngameMenuButton").clicked += HandleOpenMenuButton;
+		_overlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
+		
+		_actionBar.SetVisibility(false);
 		_characterStatusValuePanel.SetViibility(false);
 	}
 
-	void ShowActionMenu() {
-		_actionBar.SetVisibility(true);
+	private void Awake() {
+		// setMenuVisibilityEC.OnEventRaised += HandleOtherScreensOpened;
+		// visibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
+		setGameOverlayVisibilityEC.OnEventRaised += HandleSetGameOverlayVisibilityEC;
+		setTurnIndicatorVisibilityEC.OnEventRaised += HandleSetTurnIndicatorVisibilityEC;
+		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
+		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
+	}
+
+	private void OnDisable() {
+		// setMenuVisibilityEC.OnEventRaised -= HandleOtherScreensOpened;
+		// visibilityInventoryEventChannel.OnEventRaised -= HandleOtherScreensOpened;
+		
+		setGameOverlayVisibilityEC.OnEventRaised -= HandleSetGameOverlayVisibilityEC;
+		setTurnIndicatorVisibilityEC.OnEventRaised -= HandleSetTurnIndicatorVisibilityEC;
+		playerSelectedEC.OnEventRaised -= HandlePlayerSelected;
+		playerDeselectedEC.OnEventRaised -= HandlePlayerDeselected;
 	}
 }

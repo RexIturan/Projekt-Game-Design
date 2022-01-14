@@ -38,6 +38,23 @@ namespace Characters.Movement {
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////		
 
+		private GameObject model;
+
+///// Private Functions
+ 
+		private void RotateModel() {
+			// Rotate character to facing position smoothly
+			Quaternion target = Quaternion.Euler(0, facingDirection, 0);
+			Transform t = model.transform;
+			//
+			t.rotation = Quaternion.RotateTowards(
+				t.rotation,
+				target,
+				Time.deltaTime * rotationSpeed);
+		}
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		#region Monobehaviour
 
 		private void Start() {
@@ -51,9 +68,14 @@ namespace Characters.Movement {
 			
 			// set position of gameobject   
 			position = gameObject.transform.position;
+			model = GetComponent<ModelController>().Model;
 		}
 
 		private void FixedUpdate() {
+			//TODO move the hole object
+			
+			//TODO rotate just the model
+			
 			// Move character to position smoothly 
 			var newPos = 
 				Vector3.MoveTowards(
@@ -62,14 +84,8 @@ namespace Characters.Movement {
 					maxDistanceDelta:moveSpeed * Time.deltaTime);
 			
 			transform.position = newPos;
-			
-			// Rotate character to facing position smoothly
-			Quaternion target = Quaternion.Euler(0, facingDirection, 0);
-			//
-			transform.rotation = Quaternion.RotateTowards(
-				transform.rotation,
-				target,
-				Time.deltaTime * rotationSpeed);
+
+			RotateModel();
 		}
 
 		#endregion

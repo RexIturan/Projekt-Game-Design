@@ -25,15 +25,15 @@ namespace Characters {
 		public WeaponPositionType weaponRightPosition;
 		
 		//control model
-		private GameObject model;
+		public GameObject Model { get; private set; }
 		private CharacterModelController characterModelController;
 		public CharacterAnimationController animationController;
 		
 		public void Initialize() {
 			//init model
-			model = Instantiate(prefab, this.transform);
-			characterModelController = model.GetComponentInChildren<CharacterModelController>();
-			animationController = model.GetComponent<CharacterAnimationController>();
+			Model = Instantiate(prefab, this.transform);
+			characterModelController = Model.GetComponentInChildren<CharacterModelController>();
+			animationController = Model.GetComponent<CharacterAnimationController>();
 		}
 		
 		public CharacterAnimationController GetAnimationController() {

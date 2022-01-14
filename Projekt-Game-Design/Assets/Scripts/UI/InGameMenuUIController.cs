@@ -1,133 +1,151 @@
+using System;
 using Events.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class InGameMenuUIController : MonoBehaviour {
-    
-	
+	// In Game Menu Screens 
+	private enum MenuScreenContent {
+		None,
+		LoadScreen,
+		SaveScreen,
+		SettingsScreen
+	}
+
 	[Header("Loading settings")] 
 	[SerializeField] private GameSceneSO[] menuToLoad;
 	[SerializeField] private LoadEventChannelSO loadMenuEC;
+
+	[Header("Receiving Events On")] 
+	[SerializeField] private BoolEventChannelSO SetMenuVisibilityEC;
+
+	[Header("Sending Events On")]
+	// [SerializeField] private BoolEventChannelSO SetGameOverlayVisibilityEC;
+	[SerializeField] private VoidEventChannelSO uiToggleMenuEC;
+	//todo move to ui cache v-----------------------------------v
+	[SerializeField] private VoidEventChannelSO enableMenuInput;
+	[SerializeField] private VoidEventChannelSO menuOpenedEvent;
+	[SerializeField] private VoidEventChannelSO menuClosedEvent;
 	
+
+///// Private Variables	////////////////////////////////////////////////////////////////////////////
 	private VisualElement _inGameMenuContainer;
+	
+///// Private Functions	////////////////////////////////////////////////////////////////////////////
 
-    [Header("Receiving Events On")] [SerializeField]
-    private BoolEventChannelSO visibilityMenuEventChannel;
+	//todo refactor
+	private void MenuScreenContentManager(MenuScreenContent menuScreen) {
+		// Einzelne Screens getten
+		VisualElement saveScreen = _inGameMenuContainer.Q<VisualElement>("SaveScreen");
+		VisualElement loadScreen = _inGameMenuContainer.Q<VisualElement>("LoadScreen");
+		VisualElement settingsScreen = _inGameMenuContainer.Q<VisualElement>("SettingsContainer");
 
-    [SerializeField] private BoolEventChannelSO visibilityInventoryEventChannel;
+		switch ( menuScreen ) {
+			case MenuScreenContent.LoadScreen:
+				// todo(vincent) GUI refactor 
+				loadScreen.style.display = DisplayStyle.Flex;
+				// Ausblenden aller anderen Screens
+				settingsScreen.style.display = DisplayStyle.None;
+				saveScreen.style.display = DisplayStyle.None;
+				break;
+			case MenuScreenContent.SaveScreen:
+				saveScreen.style.display = DisplayStyle.Flex;
+				// Ausblenden aller anderen Screens
+				settingsScreen.style.display = DisplayStyle.None;
+				loadScreen.style.display = DisplayStyle.None;
+				break;
+			case MenuScreenContent.SettingsScreen:
+				settingsScreen.style.display = DisplayStyle.Flex;
+				// Ausblenden aller anderen Screens
+				saveScreen.style.display = DisplayStyle.None;
+				loadScreen.style.display = DisplayStyle.None;
+				break;
+			case MenuScreenContent.None:
+				settingsScreen.style.display = DisplayStyle.None;
+				saveScreen.style.display = DisplayStyle.None;
+				loadScreen.style.display = DisplayStyle.None;
+				break;
+		}
+	}
 
-    [Header("Sending Events On")] [SerializeField]
-    private VoidEventChannelSO enableMenuInput;
-		[SerializeField] private VoidEventChannelSO menuOpenedEvent;
-		[SerializeField] private VoidEventChannelSO menuClosedEvent;
+	void MainMenuButtonPressed() {
+		// load Scene
+		loadMenuEC.RaiseEvent(menuToLoad, true);
+	}
 
-    [Header("Sending and Receiving Events On")] [SerializeField]
-    private BoolEventChannelSO visibilityGameOverlayEventChannel;
+	void QuitGame() {
+		// Spiel beenden
+		Application.Quit();
+	}
 
-    // In Game Menu Screens 
-    private enum MenuScreenContent {
-        None,
-        LoadScreen,
-        SaveScreen,
-        SettingsScreen
-    }
+	private void SetMenuVisibility(bool menuVisible) {
+		if ( menuVisible ) {
+			_inGameMenuContainer.style.display = DisplayStyle.Flex;
+		}
+		else {
+			_inGameMenuContainer.style.display = DisplayStyle.None;
+		}
+	}
+	
+	void HideMenu() {
+		SetMenuVisibility(false);
+	}
 
-    private void Start() {
-        // Holen des UXML Trees, zum getten der einzelnen Komponenten
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        _inGameMenuContainer = root.Q<VisualElement>("IngameMenu");
-        _inGameMenuContainer.Q<Button>("SaveButton").clicked += ShowSaveScreen;
-        _inGameMenuContainer.Q<Button>("OptionsButton").clicked += ShowOptionsScreen;
-        _inGameMenuContainer.Q<Button>("LoadButton").clicked += ShowLoadScreen;
+///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
 
-        _inGameMenuContainer.Q<Button>("ResumeButton").clicked += HideMenu;
-        _inGameMenuContainer.Q<Button>("QuitButton").clicked += QuitGame;
+	private void HandleMenuToggleEvent(bool value) {
+		SetMenuVisibility(value);
+		
+		if ( value ) {
+			menuOpenedEvent.RaiseEvent();
+			enableMenuInput.RaiseEvent();
+		}
+		else {
+			//todo maybe Ui statecache??
+			menuClosedEvent.RaiseEvent();
+		}
+	}
 
-        _inGameMenuContainer.Q<Button>("MainMenuButton").clicked += MainMenuButtonPressed;
-    }
+	private void HandleResumeButton() {
+		uiToggleMenuEC.RaiseEvent();
+	}
 
-    void HideMenu() {
-        visibilityGameOverlayEventChannel.RaiseEvent(true);
-    }
+	private void ShowSaveScreen() {
+		MenuScreenContentManager(MenuScreenContent.SaveScreen);
+	}
 
-    private void Awake() {
-        visibilityMenuEventChannel.OnEventRaised += HandleGameOverlay;
-        visibilityInventoryEventChannel.OnEventRaised += HandleOtherScreensOpened;
-        visibilityGameOverlayEventChannel.OnEventRaised += HandleOtherScreensOpened;
-    }
+	private void ShowLoadScreen() {
+		MenuScreenContentManager(MenuScreenContent.LoadScreen);
+	}
 
-    void HandleGameOverlay(bool value) {
-        if (value) {
-						menuOpenedEvent.RaiseEvent();
-            enableMenuInput.RaiseEvent();
-            _inGameMenuContainer.style.display = DisplayStyle.Flex;
-        }
-        else {
-						menuClosedEvent.RaiseEvent();
-            _inGameMenuContainer.style.display = DisplayStyle.None;
-            //HideMenu();
-        }
-    }
+	private void ShowOptionsScreen() {
+		MenuScreenContentManager(MenuScreenContent.SettingsScreen);
+	}
 
-    void HandleOtherScreensOpened(bool value) {
-        HandleGameOverlay(false);
-    }
+///// Public Functions	////////////////////////////////////////////////////////////////////////////
 
-    void ShowSaveScreen() {
-        MenuScreenContentManager(MenuScreenContent.SaveScreen);
-    }
+///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
 
-    void ShowLoadScreen() {
-        MenuScreenContentManager(MenuScreenContent.LoadScreen);
-    }
+	private void Awake() {
+		SetMenuVisibilityEC.OnEventRaised += HandleMenuToggleEvent;
+	}
 
-    void ShowOptionsScreen() {
-        MenuScreenContentManager(MenuScreenContent.SettingsScreen);
-    }
+	private void OnDisable() {
+		SetMenuVisibilityEC.OnEventRaised -= HandleMenuToggleEvent;
+	}
 
-    // todo(vincent) refactor
-    void MenuScreenContentManager(MenuScreenContent menuScreen) {
-        // Einzelne Screens getten
-        VisualElement saveScreen = _inGameMenuContainer.Q<VisualElement>("SaveScreen");
-        VisualElement loadScreen = _inGameMenuContainer.Q<VisualElement>("LoadScreen");
-        VisualElement settingsScreen = _inGameMenuContainer.Q<VisualElement>("SettingsContainer");
+	private void Start() {
+		// Holen des UXML Trees, zum getten der einzelnen Komponenten
+		var root = GetComponent<UIDocument>().rootVisualElement;
+		_inGameMenuContainer = root.Q<VisualElement>("IngameMenu");
+		_inGameMenuContainer.Q<Button>("SaveButton").clicked += ShowSaveScreen;
+		_inGameMenuContainer.Q<Button>("OptionsButton").clicked += ShowOptionsScreen;
+		_inGameMenuContainer.Q<Button>("LoadButton").clicked += ShowLoadScreen;
 
-        switch (menuScreen) {
-            case MenuScreenContent.LoadScreen:
-	            // todo(vincent) GUI refactor 
-                loadScreen.style.display = DisplayStyle.Flex;
-                // Ausblenden aller anderen Screens
-                settingsScreen.style.display = DisplayStyle.None;
-                saveScreen.style.display = DisplayStyle.None;
-                break;
-            case MenuScreenContent.SaveScreen:
-                saveScreen.style.display = DisplayStyle.Flex;
-                // Ausblenden aller anderen Screens
-                settingsScreen.style.display = DisplayStyle.None;
-                loadScreen.style.display = DisplayStyle.None;
-                break;
-            case MenuScreenContent.SettingsScreen:
-                settingsScreen.style.display = DisplayStyle.Flex;
-                // Ausblenden aller anderen Screens
-                saveScreen.style.display = DisplayStyle.None;
-                loadScreen.style.display = DisplayStyle.None;
-                break;
-            case MenuScreenContent.None:
-	            settingsScreen.style.display = DisplayStyle.None;
-	            saveScreen.style.display = DisplayStyle.None;
-	            loadScreen.style.display = DisplayStyle.None;
-	            break;
-        }
-    }
+		_inGameMenuContainer.Q<Button>("ResumeButton").clicked += HandleResumeButton;
+		_inGameMenuContainer.Q<Button>("QuitButton").clicked += QuitGame;
 
-    void MainMenuButtonPressed() {
-        // load Scene
-        loadMenuEC.RaiseEvent(menuToLoad, true);
-    }
-
-    void QuitGame() {
-        // Spiel beenden
-        Application.Quit();
-    }
+		_inGameMenuContainer.Q<Button>("MainMenuButton").clicked += MainMenuButtonPressed;
+	}
 }

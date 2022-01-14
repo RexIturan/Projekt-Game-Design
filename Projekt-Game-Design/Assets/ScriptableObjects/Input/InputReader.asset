@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a176189cfeaed4283280e44af42626, type: 3}
   m_Name: InputReader
   m_EditorClassIdentifier: 
-  visibilityMenu: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
-  visibilityInventory: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
-  visibilityGameOverlay: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  uiToggleMenuEC: {fileID: 11400000, guid: 9444ec8e72a59b64d934049dd28bcc23, type: 2}
+  uiToggleScreenEC: {fileID: 11400000, guid: 3025db6f6dc502840aaa52fac7ac2a90, type: 2}
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
   setLevelEditorModeEC: {fileID: 11400000, guid: 9d4a76d0eeb24bf49ae35e7d82abeb87, type: 2}
   enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}

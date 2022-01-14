@@ -40,8 +40,13 @@ namespace UI.QuestSystem {
 		}
 
 		private void Update() {
-			taskContainer.Quests = questContainer.activeQuests;
-			taskContainer.UpdateComponent();
+			if ( taskContainer != null ) {
+				taskContainer.Quests = questContainer.activeQuests;
+				taskContainer.UpdateComponent();
+			}
+			else {
+				taskContainer = uiDocument.rootVisualElement.Q<TaskContainer>();
+			}
 		}
 	}
 }

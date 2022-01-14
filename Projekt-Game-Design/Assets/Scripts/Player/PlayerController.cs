@@ -92,13 +92,15 @@ namespace Player {
 			target = null;
 		}
 
+		
+		//todo move to ui cache
 		private void HandleMenuOpened() {
-			// Debug.Log("Menu opened. Disabling input. ");
+			Debug.Log("Menu opened. Disabling input. ");
 			menuOpened = true;
 		}
 
 		private void HandleMenuClosed() {
-			// Debug.Log("Menu closed. Enabling input. ");
+			Debug.Log("Menu closed. Enabling input. ");
 			menuOpened = false;
 		}
 
@@ -144,7 +146,7 @@ namespace Player {
 		}
 
 		private void Update() {
-			if ( inputCache.IsMouseOverUI ) return;
+			// if ( inputCache.IsMouseOverUI ) return;
 			if ( menuOpened ) return;
 			
 			//InputCache? || MousePosition

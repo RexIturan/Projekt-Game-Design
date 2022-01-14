@@ -2,6 +2,7 @@
 using Characters;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using UI.Gameplay;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -13,9 +14,8 @@ namespace Input {
 		GameInput.IInventoryActions, GameInput.ILoadingScreenActions {
 		// todo rework event channels: move and rename them 
 		[Header("Sending Events On")] 
-		[SerializeField] private BoolEventChannelSO visibilityMenu;
-		[SerializeField] private BoolEventChannelSO visibilityInventory;
-		[SerializeField] private BoolEventChannelSO visibilityGameOverlay;
+		[SerializeField] private VoidEventChannelSO uiToggleMenuEC;
+		[SerializeField] private ScreenEventChannelSO uiToggleScreenEC;
 		[SerializeField] private EFactionEventChannelSO endTurnEC;
 		[SerializeField] private IntEventChannelSO setLevelEditorModeEC;
 
@@ -102,10 +102,11 @@ namespace Input {
 		public void EnableGameplayInput() {
 			// Debug.Log("enable Gameplay Input");
 			_gameInput.LoadingScreen.Disable();
+			_gameInput.Inventory.Disable();
 			_gameInput.Menu.Disable();
 
-			_gameInput.LevelEditor.Enable();
-			_gameInput.PathfindingDebug.Enable();
+			// _gameInput.LevelEditor.Enable();
+			// _gameInput.PathfindingDebug.Enable();
 			_gameInput.Gameplay.Enable();
 			_gameInput.Camera.Enable();
 		}
@@ -132,6 +133,7 @@ namespace Input {
 			_gameInput.Camera.Disable();
 			_gameInput.PathfindingDebug.Disable();
 			_gameInput.LoadingScreen.Disable();
+			_gameInput.Inventory.Disable();
 
 			_gameInput.Menu.Enable();
 		}
@@ -152,6 +154,7 @@ namespace Input {
 			_gameInput.Menu.Disable();
 			_gameInput.PathfindingDebug.Disable();
 			_gameInput.LoadingScreen.Disable();
+			_gameInput.Inventory.Disable();
 		}
 
 		#endregion
@@ -167,13 +170,15 @@ namespace Input {
 
 		public void OnMenu(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				visibilityMenu.RaiseEvent(true);
+				uiToggleMenuEC.RaiseEvent();
 			}
 		}
 
 		public void OnInventory(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				visibilityInventory.RaiseEvent(true);
+				uiToggleScreenEC.RaiseEvent(GameplayScreen.Inventory);
+				// SetMenuVisibilityEC.RaiseEvent(false);
+				// SetGameOverlayVisibilityEC.RaiseEvent(false);
 			}
 		}
 
@@ -219,8 +224,9 @@ namespace Input {
 		public void OnCancel(InputAction.CallbackContext context) {
 			// TODO menuCancelEvent
 			if ( context.phase == InputActionPhase.Performed ) {
-				visibilityGameOverlay.RaiseEvent(true);
-				visibilityMenu.RaiseEvent(false);
+				// SetInventoryVisibilityEC.RaiseEvent(false);
+				uiToggleMenuEC.RaiseEvent();				
+				//todo visibilityGameOverlayEventChannel
 			}
 		}
 
@@ -231,7 +237,7 @@ namespace Input {
 		public void OnCancelInventory(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
 				Debug.Log("onCancel");
-				visibilityGameOverlay.RaiseEvent(true);
+				uiToggleScreenEC.RaiseEvent(GameplayScreen.Inventory);
 			}
 		}
 
@@ -282,6 +288,7 @@ namespace Input {
 
 		#region Level Editor
 
+		//todo use enum flag?
 		public void OnSelect(InputAction.CallbackContext context) {
 			setLevelEditorModeEC.RaiseEvent(0);
 		}

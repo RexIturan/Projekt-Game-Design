@@ -225,13 +225,13 @@ namespace Ability {
 				}
 			}
 
-			PrintPattern(pattern);
-			PrintPattern(RotatePattern(pattern, true));
-			Debug.Log(RotateAnchor(pattern, anchor, true));
-			PrintPattern(FlipPattern(pattern, true));
-			Debug.Log(FlipAnchor(pattern, anchor, true));
-			PrintPattern(RotatePattern(pattern, false));
-			Debug.Log(RotateAnchor(pattern, anchor, false));
+			// PrintPattern(pattern);
+			// PrintPattern(RotatePattern(pattern, true));
+			// Debug.Log(RotateAnchor(pattern, anchor, true));
+			// PrintPattern(FlipPattern(pattern, true));
+			// Debug.Log(FlipAnchor(pattern, anchor, true));
+			// PrintPattern(RotatePattern(pattern, false));
+			// Debug.Log(RotateAnchor(pattern, anchor, false));
 			pattern = FlipPattern(pattern, false);
 			return true;
 		}

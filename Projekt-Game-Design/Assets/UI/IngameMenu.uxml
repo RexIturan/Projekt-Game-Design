@@ -6,9 +6,9 @@
     <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement name="SideBar" style="width: 30%;">
             <ui:Button text="Resume Game" display-tooltip-when-elided="true" name="ResumeButton" class="Button" />
-            <ui:Button text="Save Game" display-tooltip-when-elided="true" name="SaveButton" class="Button" style="height: 16%;" />
-            <ui:Button text="Load Game" display-tooltip-when-elided="true" name="LoadButton" class="Button" style="height: 16%;" />
-            <ui:Button text="Options" display-tooltip-when-elided="true" name="OptionsButton" class="Button" style="height: 16%;" />
+            <ui:Button text="Save Game" display-tooltip-when-elided="true" name="SaveButton" class="Button" style="height: 16%; display: none;" />
+            <ui:Button text="Load Game" display-tooltip-when-elided="true" name="LoadButton" class="Button" style="height: 16%; display: none;" />
+            <ui:Button text="Options" display-tooltip-when-elided="true" name="OptionsButton" class="Button" style="height: 16%; display: none;" />
             <ui:Button text="Back to Menu" display-tooltip-when-elided="true" name="MainMenuButton" class="Button" style="height: 16%;" />
             <ui:Button text="Quit Game" display-tooltip-when-elided="true" name="QuitButton" class="Button" style="height: 16%;" />
         </ui:VisualElement>
