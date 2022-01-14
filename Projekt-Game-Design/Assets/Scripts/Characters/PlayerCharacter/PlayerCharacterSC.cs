@@ -4,6 +4,7 @@ using Characters.Equipment;
 using Characters.Movement;
 using Characters.PlayerCharacter.ScriptableObjects;
 using Combat;
+using SaveSystem.SaveFormats;
 using UnityEngine;
 
 
@@ -31,7 +32,7 @@ public class PlayerCharacterSC : MonoBehaviour {
     public void Initialize() {
 	    //stats
 	    _statistics.StatusValues.InitValues(playerSpawnData.overrideStatusValues);
-			_statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
+	    _statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
 	    
 	    //movement Position
 	    _movementController.movementPointsPerEnergy = playerType.movementPointsPerEnergy;
@@ -41,19 +42,26 @@ public class PlayerCharacterSC : MonoBehaviour {
 
 	    //model
 	    _modelController.prefab = playerType.modelPrefab;
-			_modelController.Initialize();
-			_modelController.SetStandardHead(playerType.headModel);
-			_modelController.SetStandardBody(playerType.bodyModel);
+	    _modelController.Initialize();
+	    _modelController.SetStandardHead(playerType.headModel);
+	    _modelController.SetStandardBody(playerType.bodyModel);
 			
-			_modelController.SetFactionMaterial(_statistics.Faction);
+	    _modelController.SetFactionMaterial(_statistics.Faction);
 	    
 	    //Equipment
-	    _equipmentController.playerID = playerSpawnData.equipmentID;
+	    _equipmentController.equipmentID = playerSpawnData.equipmentID;
 	    
 	    //Abilities
 	    _abilityController.BaseAbilities = playerType.basicAbilities;
-			_abilityController.LastSelectedAbilityID = -1;
-			_abilityController.damageInflicted = true;
+	    _abilityController.LastSelectedAbilityID = -1;
+	    _abilityController.damageInflicted = true;
+    }
+    
+    public void InitializeFromSave(PlayerCharacter_Save playerCharacterSave) {
+	    Initialize();
+	    active = playerCharacterSave.active;
+	    _gridTransform.gridPosition = playerCharacterSave.pos;
+	    _equipmentController.equipmentID = playerCharacterSave.equipmentInventoryId;
     }
 
 		public void Start() {

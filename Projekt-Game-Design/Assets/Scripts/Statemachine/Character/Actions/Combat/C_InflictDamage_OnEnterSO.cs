@@ -84,13 +84,15 @@ public class C_InflictDamage_OnEnter : StateAction {
 				// HashSet<Targetable> targets = CombatUtils.FindAllTargets(targetPos, 
 					// 	targetedEffect.area.GetPattern(rotations), targetedEffect.area.GetAnchor(rotations), _attacker, targetedEffect.targets);
 
-				foreach(Targetable target in targets) { 
-					Debug.Log("Target in range. Dealing damage/healing. ");
-  				target.ReceivesDamage(damage);
+				foreach(Targetable target in targets) {
+					if ( target.IsAlive ) {
+						Debug.Log("Target in range. Dealing damage/healing. ");
+						target.ReceivesDamage(damage);
 
-  				_createTextEC.RaiseEvent(Mathf.Abs(damage).ToString(),
-	  			target.gameObject.transform.position + Vector3.up,
-					damageColor);
+						_createTextEC.RaiseEvent(Mathf.Abs(damage).ToString(),
+							target.gameObject.transform.position + Vector3.up,
+							damageColor);	
+					}
   			}
 			}
 

@@ -182,7 +182,7 @@ public class InventoryUIController : MonoBehaviour {
 		PlayerCharacterSC currPlayer = characterList.playerContainer[_currentPlayerSelected]
 			.GetComponent<PlayerCharacterSC>();
 
-		int playerID = currPlayer.GetComponent<EquipmentController>().playerID;
+		int playerID = currPlayer.GetComponent<EquipmentController>().equipmentID;
 
 		if ( inventory.equipmentInventories[playerID].weaponLeft) {
 			weaponLeft.HoldItem(inventory.equipmentInventories[playerID].weaponLeft);

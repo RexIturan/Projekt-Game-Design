@@ -7,7 +7,8 @@ namespace Characters.Equipment
 		public class EquipmentController : MonoBehaviour
 		{
 				[SerializeField] private InventorySO inventory;
-				public int playerID;
+				//todo -> player id??
+				public int equipmentID;
 
 				// the position in the equipment inventory
 				// it is the item that grants the ability
@@ -70,9 +71,9 @@ namespace Characters.Equipment
 										itemRightHand = GetWeaponRight();
 								}
 
-								ItemSO itemHead = inventory.equipmentInventories[playerID].headArmor;
-								ItemSO itemBody = inventory.equipmentInventories[playerID].bodyArmor;
-								ItemSO itemShield = inventory.equipmentInventories[playerID].shield;
+								ItemSO itemHead = inventory.equipmentInventories[equipmentID].headArmor;
+								ItemSO itemBody = inventory.equipmentInventories[equipmentID].bodyArmor;
+								ItemSO itemShield = inventory.equipmentInventories[equipmentID].shield;
 
 								modelController.SetMeshLeft(itemLeftHand ? itemLeftHand.mesh : null);
 								modelController.SetMeshRight(itemRightHand ? itemRightHand.mesh : null);
@@ -101,11 +102,11 @@ namespace Characters.Equipment
 				{
 						List<WeaponSO> items = new List<WeaponSO>();
 
-						WeaponSO item = inventory.equipmentInventories[playerID].weaponLeft;
+						WeaponSO item = inventory.equipmentInventories[equipmentID].weaponLeft;
 						if ( item )
 								items.Add(item);
 
-						item = inventory.equipmentInventories[playerID].weaponRight;
+						item = inventory.equipmentInventories[equipmentID].weaponRight;
 						if ( item )
 								items.Add(item);
 
@@ -117,7 +118,7 @@ namespace Characters.Equipment
 				 */
 				public WeaponSO GetWeaponLeft()
 				{
-						return inventory.equipmentInventories[playerID].weaponLeft;
+						return inventory.equipmentInventories[equipmentID].weaponLeft;
 				}
 				
 				/**
@@ -125,7 +126,7 @@ namespace Characters.Equipment
 				 */
 				public WeaponSO GetWeaponRight()
 				{
-						return inventory.equipmentInventories[playerID].weaponRight;
+						return inventory.equipmentInventories[equipmentID].weaponRight;
 				}
 
 				/**

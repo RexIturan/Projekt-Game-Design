@@ -5,6 +5,7 @@ using Characters.EnemyCharacter.ScriptableObjects;
 using Characters.Equipment;
 using Characters.Movement;
 using Combat;
+using SaveSystem.SaveFormats;
 using UnityEngine;
 
 /// <summary><c>Enemy State Container</c> Script to attached to each enemy</summary>
@@ -36,35 +37,40 @@ public class EnemyCharacterSC : MonoBehaviour
 
 		public void Initialize()
 		{
-				//stats
-				_statistics.StatusValues.InitValues(enemySpawnData.overrideStatusValues);
-				_statistics.SetFaction(Faction.Enemy);
+			//stats
+			_statistics.StatusValues.InitValues(enemySpawnData.overrideStatusValues);
+			_statistics.SetFaction(Faction.Enemy);
 
-				//movement Position
-				_movementController.movementPointsPerEnergy = enemyType.movementPointsPerEnergy;
+			//movement Position
+			_movementController.movementPointsPerEnergy = enemyType.movementPointsPerEnergy;
 
-				//Grid Position
-				_gridTransform.gridPosition = enemySpawnData.gridPos;
+			//Grid Position
+			_gridTransform.gridPosition = enemySpawnData.gridPos;
 
-				// Equipment
-				// maybe later
+			// Equipment
+			// maybe later
 
-				//Abilities
-				_abilityController.RefreshAbilities();
-				_abilityController.BaseAbilities = enemyType.basicAbilities;
-				_abilityController.damageInflicted = true;
+			//Abilities
+			_abilityController.RefreshAbilities();
+			_abilityController.BaseAbilities = enemyType.basicAbilities;
+			_abilityController.damageInflicted = true;
 
-				//model
-				_modelController.prefab = enemyType.modelPrefab;
-				_modelController.Initialize();
-				_modelController.SetStandardHead(enemyType.headModel);
-				_modelController.SetStandardBody(enemyType.bodyModel);
-				_modelController.SetMeshHead(null);
-				_modelController.SetMeshBody(null);
+			//model
+			_modelController.prefab = enemyType.modelPrefab;
+			_modelController.Initialize();
+			_modelController.SetStandardHead(enemyType.headModel);
+			_modelController.SetStandardBody(enemyType.bodyModel);
+			_modelController.SetMeshHead(null);
+			_modelController.SetMeshBody(null);
 
-				//ai
-				behavior = enemyType.behaviour;
-				_aIController.SetBehavior(behavior);
+			//ai
+			behavior = enemyType.behaviour;
+			_aIController.SetBehavior(behavior);
+		}
+		
+		public void InitializeFromSave(Enemy_Save enemySave) {
+			Initialize();
+			_gridTransform.gridPosition = enemySave.pos;
 		}
 }
 

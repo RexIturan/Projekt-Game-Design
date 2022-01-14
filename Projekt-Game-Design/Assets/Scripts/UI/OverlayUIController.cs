@@ -161,7 +161,6 @@ public class OverlayUIController : MonoBehaviour {
 	// 	SetGameOverlayVisibility(!value);
 	// }
 	
-	// todo(vincent) -> show character stats
 	/// <summary>
 	/// HandlePlayerSelected
 	/// </summary>

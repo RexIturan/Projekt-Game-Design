@@ -17,6 +17,9 @@ namespace Combat {
 
 		[SerializeField] private Statistics statistics;
 		[SerializeField] private GridTransform gridTransform;
+		
+		public bool IsAlive => !IsDead;
+		public bool IsDead => statistics.StatusValues.HitPoints.IsMin();
 
 		public void Initialise() {
 			statistics = gameObject.GetComponent<Statistics>();
