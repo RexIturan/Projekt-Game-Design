@@ -9,7 +9,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New PlayerType", menuName = "Character/PlayerType")]
 public class PlayerTypeSO : ScriptableObject {
 	public int id;
-
+	public Sprite icon;
+	
 	//base prefab
 	public GameObject prefab;
 	public GameObject modelPrefab;
@@ -20,6 +21,7 @@ public class PlayerTypeSO : ScriptableObject {
 	public List<StatusValue> baseStatusValues;
 	//todo save somewhere else
 	public int movementPointsPerEnergy;
+	public int movementCostPerTile = 1;
 
 	//equipment
 	public int startingEquipmentID;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Characters;
 using Characters.Ability;
+using Characters.Movement;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
 using UI.Components;
@@ -106,6 +107,7 @@ public class OverlayUIController : MonoBehaviour {
 		
 		var statistics = obj.GetComponent<Statistics>();
 		var chracterStats = statistics.StatusValues;
+		MovementController movementController = statistics.GetComponent<MovementController>();
 	
 		charIcon.CharacterName = statistics.DisplayName;
 		charIcon.Level = chracterStats.Level.value;
@@ -133,7 +135,7 @@ public class OverlayUIController : MonoBehaviour {
 		intelligenceField.Value = chracterStats.Intelligence.value;
 		intelligenceField.UpdateComponents();
 	
-		movementField.Value = chracterStats.MovementRange.value;
+		movementField.Value = movementController.GetMaxTileMoveDistance();
 		movementField.UpdateComponents();
 		
 		visionField.Value = chracterStats.ViewDistance.value;

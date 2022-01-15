@@ -27,6 +27,7 @@ namespace Characters.Movement {
 		//todo settings OR stat value??
 		//todo should be in tile distance
 		public int movementPointsPerEnergy = 20; // Standardwert 20
+		public int movementCostPerTile = 2; // Standardwert 20
 
 		//pathfinding cache
 		public List<PathNode> reachableTiles;
@@ -93,11 +94,15 @@ namespace Characters.Movement {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		public int GetEnergyUseUpFromMovement() {
-			return Mathf.CeilToInt(( float )movementTarget.dist / movementPointsPerEnergy);
+			return Mathf.CeilToInt(( float )movementTarget.dist / movementPointsPerEnergy) * movementCostPerTile;
 		}
-
+		
 		public int GetMaxMoveDistance() {
-			return statistics.StatusValues.GetValue(StatusType.Energy).value * movementPointsPerEnergy;
+			return statistics.StatusValues.GetValue(StatusType.Energy).value / movementCostPerTile * movementPointsPerEnergy;
+		}
+		
+		public int GetMaxTileMoveDistance() {
+			return statistics.StatusValues.GetValue(StatusType.Energy).value / movementCostPerTile;
 		}
 
 		public void FaceMovingDirection() {

@@ -131,10 +131,11 @@ namespace FieldOfView {
 						
 						foreach ( var playerObj in playerList ) {
 							var gridTransform = playerObj.GetComponent<GridTransform>();
+							var statistics = playerObj.GetComponent<Statistics>();
 							var pos = gridTransform.gridPosition;
 								
 							InitFieldOfViewAdam();
-							_fieldOfViewAdam.Compute(gridData.GetGridPos2DFromGridPos3D(pos), rangeAdam);
+							_fieldOfViewAdam.Compute(gridData.GetGridPos2DFromGridPos3D(pos), statistics.StatusValues.ViewDistance.value);
 							AddVisionToTilemap();
 						}
 					}

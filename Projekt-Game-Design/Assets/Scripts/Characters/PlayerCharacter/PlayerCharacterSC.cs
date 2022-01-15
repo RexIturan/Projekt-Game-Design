@@ -44,9 +44,11 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    //stats
 	    _statistics.StatusValues.InitValues(playerType.baseStatusValues);
 			_statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
+			_statistics.DisplayImage = playerType.icon;
 	    
 	    //movement Position
 	    _movementController.movementPointsPerEnergy = playerType.movementPointsPerEnergy;
+	    _movementController.movementCostPerTile = playerType.movementCostPerTile;
 
 	    //Grid Position
 	    _gridTransform.gridPosition = Vector3Int.zero;
@@ -56,7 +58,6 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    _modelController.Initialize();
 	    _modelController.SetStandardHead(playerType.headModel);
 	    _modelController.SetStandardBody(playerType.bodyModel);
-			
 	    _modelController.SetFactionMaterial(_statistics.Faction);
 	    
 	    //Equipment
