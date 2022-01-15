@@ -30,4 +30,5 @@ public class EnemyTypeSO : ScriptableObject {
 
 	// ability
 	public AbilitySO[] basicAbilities; // actions at all time available
+	public ItemSO weapon;
 }

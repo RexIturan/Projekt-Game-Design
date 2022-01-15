@@ -62,6 +62,8 @@ public class EnemyCharacterSC : MonoBehaviour
 			_modelController.SetStandardBody(enemyType.bodyModel);
 			_modelController.SetMeshHead(null);
 			_modelController.SetMeshBody(null);
+			_modelController.SetMeshRight(enemyType.weapon != null ? enemyType.weapon.mesh : null);
+			_modelController.SetMeshLeft(null);
 
 			//ai
 			behavior = enemyType.behaviour;

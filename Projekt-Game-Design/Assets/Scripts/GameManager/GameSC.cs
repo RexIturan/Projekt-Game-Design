@@ -85,7 +85,7 @@ namespace GameManager {
                 Debug.Log($"You can only end the Turn, when its your Turn.\nTurn: {tacticsData.turnNum}");
             }
             
-            newTurnEC.RaiseEvent(faction);
+            // newTurnEC.RaiseEvent(faction);
         }
 
         public void UpdateOverlay(Faction faction) {

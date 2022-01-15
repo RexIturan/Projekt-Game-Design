@@ -45,3 +45,4 @@ MonoBehaviour:
   basicAbilities:
   - {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}
   - {fileID: 11400000, guid: 653425107135eac4f95c90db962300e7, type: 2}
+  weapon: {fileID: 11400000, guid: 4e3ae39bd9b95854ab4c55c1d90db993, type: 2}
