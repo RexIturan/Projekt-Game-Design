@@ -29,6 +29,11 @@ MonoBehaviour:
     _value: 0
     _max: 5
     _min: 0
+  - _name: View Distance
+    _type: 8
+    _value: 10
+    _max: 10
+    _min: 0
   movementPointsPerEnergy: 20
   drops:
     maxGold: 1

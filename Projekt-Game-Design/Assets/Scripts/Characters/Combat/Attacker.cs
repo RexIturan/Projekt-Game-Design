@@ -13,6 +13,7 @@ namespace Combat {
 		[SerializeField] private List<Vector3Int> tileInRangeOfTarget;
 		//todo propertys
 		public List<PathNode> tilesInRange;
+		public List<PathNode> visibleTiles;
 		public bool waitForAttackToFinish = false;
 	
 		public float attackRange;

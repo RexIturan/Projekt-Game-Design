@@ -48,9 +48,9 @@ namespace SaveSystem {
 			gridContaier.InitGrids(gridData);
 			
 			var saveTileGridSave = save.tileGrids;
-			var saveItemGridSave = save.itemGrids;
-			var saveCharacterGridSave = save.characterGrids;
-			var saveObjectGridSave = save.objectGrids;
+			// var saveItemGridSave = save.itemGrids;
+			// var saveCharacterGridSave = save.characterGrids;
+			// var saveObjectGridSave = save.objectGrids;
 
 			var layers = gridData.Height;
 
@@ -60,20 +60,20 @@ namespace SaveSystem {
 				gridContaier.tileGrids.AddRange(saveTileGridSave);	
 			}
 			
-			if (saveItemGridSave.Count == layers && 
-			    saveCharacterGridSave.Count == layers && 
-			    saveObjectGridSave.Count == layers) {
-				
-				for ( int i = 0; i < layers; i++ ) {
-					// init item grid
-					gridContaier.items[i] = saveItemGridSave[i];
-					// inti character grid
-					gridContaier.characters[i] = saveCharacterGridSave[i];
-					// init object grid
-					gridContaier.objects[i] = saveObjectGridSave[i];
-				}
-				
-			}
+			// if (saveItemGridSave.Count == layers && 
+			//     saveCharacterGridSave.Count == layers && 
+			//     saveObjectGridSave.Count == layers) {
+			// 	
+			// 	for ( int i = 0; i < layers; i++ ) {
+			// 		// init item grid
+			// 		gridContaier.items[i] = saveItemGridSave[i];
+			// 		// inti character grid
+			// 		gridContaier.characters[i] = saveCharacterGridSave[i];
+			// 		// init object grid
+			// 		gridContaier.objects[i] = saveObjectGridSave[i];
+			// 	}
+			// 	
+			// }
 		}
 		
 		private void ReadInventory(Inventory_Save saveInventory, InventorySO inventory) {

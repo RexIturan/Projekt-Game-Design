@@ -109,7 +109,7 @@ namespace QuestSystem.ScriptabelObjects {
 			var controlPath = context.control.name;
 			if ( context.performed && MatchesBindingControls(controlPath, bindingControls)) {
 				this.done = true;
-				Debug.Log(controlPath + $"#\n{compositeName}");
+				// Debug.Log(controlPath + $"#\n{compositeName}");
 			}
 		}
 		

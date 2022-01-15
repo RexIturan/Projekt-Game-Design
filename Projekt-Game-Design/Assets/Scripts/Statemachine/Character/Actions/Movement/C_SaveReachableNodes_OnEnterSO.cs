@@ -38,6 +38,7 @@ public class C_SaveReachableNodes_OnEnter : StateAction {
 	}
 
 	public void SaveToStateContainer(List<PathNode> reachableTiles) {
+		//todo refactor  
 		// remove the position of the player from the list
 		int index = 0;
 		while(index < reachableTiles.Count && !reachableTiles[index].pos.Equals(_gridTransform.gridPosition))

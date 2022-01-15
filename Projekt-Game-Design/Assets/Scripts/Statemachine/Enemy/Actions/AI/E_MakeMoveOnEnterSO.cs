@@ -9,6 +9,7 @@ using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
 using Characters.EnemyCharacter;
 using Characters.Ability;
+using Combat;
 
 [CreateAssetMenu(fileName = "e_MakeMoveOnEnter", menuName = "State Machines/Actions/Enemy/e_MakeMoveOnEnter")]
 public class E_MakeMoveOnEnterSO : StateActionSO {
@@ -16,6 +17,8 @@ public class E_MakeMoveOnEnterSO : StateActionSO {
 }
 
 public class E_MakeMoveOnEnter : StateAction {
+		private Attacker _attacker;
+		private Statistics statistics;
     private EnemyCharacterSC _enemySC;
 		private AIController _aiController;
 		private AbilityController _abilityController;
@@ -29,6 +32,8 @@ public class E_MakeMoveOnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void Awake(StateMachine stateMachine) {
+	    statistics = stateMachine.gameObject.GetComponent<Statistics>();
+	    _attacker = stateMachine.gameObject.GetComponent<Attacker>();
         _enemySC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
         _behavior = _enemySC.behavior;
 				_aiController = stateMachine.gameObject.GetComponent<AIController>();
@@ -43,8 +48,10 @@ public class E_MakeMoveOnEnter : StateAction {
 				else
 				{
 						_abilityController.RefreshAbilities();
-
-						_aiController.TargetClosestPlayer();
+						
+						
+						_aiController.TargetClosestVisiblePlayer(_attacker.visibleTiles);
+						// _aiController.TargetClosestPlayer();
 						if ( !_aiController.aiTarget )
 								Skip();
 						else

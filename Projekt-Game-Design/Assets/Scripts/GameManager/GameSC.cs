@@ -5,6 +5,7 @@ using SaveSystem;
 using SaveSystem.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
+using UOP1.StateMachine;
 
 namespace GameManager {
     public class GameSC : MonoBehaviour {
@@ -34,7 +35,8 @@ namespace GameManager {
         public SaveManager saveSystem;
         private bool _hasSaveData = false;
         
-        [Header("StateMachine")] 
+        [Header("StateMachine")]
+        public bool reload;
         public bool evaluated;
         // structure
         public bool shouldExit;
@@ -124,6 +126,16 @@ namespace GameManager {
 				private void HandleTriggerVictory()
 				{
 						victory = true;
+				}
+
+				public void ResetState() {
+					reload = true;
+					//todo i hope this works
+					saveManagerData.loaded = false;
+					saveManagerData.saved = false;
+					saveManagerData.inputLoad = false;
+					saveManagerData.inputSave = false;
+					saveManagerData.inputNewGame = false;
 				}
 		}
 }

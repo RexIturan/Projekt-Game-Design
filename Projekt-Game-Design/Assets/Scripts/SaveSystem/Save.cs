@@ -21,9 +21,9 @@ namespace SaveSystem {
 		public List<Inventory_Save> equipmentInventory;
 		public List<Quest_Save> quests;
 		public List<TileGrid> tileGrids;
-		public List<ItemGrid> itemGrids;
-		public List<CharacterGrid> characterGrids;
-		public List<ObjectGrid> objectGrids;
+		// public List<ItemGrid> itemGrids;
+		// public List<CharacterGrid> characterGrids;
+		// public List<ObjectGrid> objectGrids;
 
 		public Save() {
 			inventory = new Inventory_Save();
@@ -37,9 +37,9 @@ namespace SaveSystem {
 			junks = new List<Junk_Save>();
 			items = new List<Item_Save>();
 			tileGrids = new List<TileGrid>();
-			itemGrids = new List<ItemGrid>();
-			characterGrids = new List<CharacterGrid>();
-			objectGrids = new List<ObjectGrid>();
+			// itemGrids = new List<ItemGrid>();
+			// characterGrids = new List<CharacterGrid>();
+			// objectGrids = new List<ObjectGrid>();
 		}
 
 		public string ToJson() {
@@ -59,9 +59,9 @@ namespace SaveSystem {
 			switches.Clear();
 			junks.Clear();
 			tileGrids.Clear();
-			itemGrids.Clear();
-			characterGrids.Clear();
-			objectGrids.Clear();
+			// itemGrids.Clear();
+			// characterGrids.Clear();
+			// objectGrids.Clear();
 			gridDataSave = new GridData_Save();
 			inventory = new Inventory_Save();
 			quests.Clear();

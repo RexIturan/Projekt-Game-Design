@@ -26,6 +26,7 @@ public class C_SaveTilesInRange_OnEnterSO : StateActionSO {
 public class C_SaveTilesInRange_OnEnter : StateAction {
 	private const int CostsPerTile = 20;
 
+	private Statistics statistics;
 	private Attacker _attacker;
 	private AbilityController _abilityController;
 	private GridTransform _gridTransform;
@@ -41,19 +42,34 @@ public class C_SaveTilesInRange_OnEnter : StateAction {
 	public override void OnUpdate() { }
 
 	public override void Awake(StateMachine stateMachine) {
+		statistics = stateMachine.gameObject.GetComponent<Statistics>();
 		_abilityController = stateMachine.gameObject.GetComponent<AbilityController>();
 		_attacker = stateMachine.gameObject.GetComponent<Attacker>();
 		_gridTransform = stateMachine.gameObject.GetComponent<GridTransform>();
 	}
 
 	public override void OnStateEnter() {
-			fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition,
-			( _abilityContainer.abilities[_abilityController.SelectedAbilityID].range ),
-			TileProperties.ShootTrough,
-			SaveToStateContainer);
+		//todo redo
+		int index = 1;
+		if ( _abilityController.SelectedAbilityID >= 0 ) {
+			index = _abilityController.SelectedAbilityID;
+		}
+		fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition,
+		( _abilityContainer.abilities[index].range ),
+		TileProperties.ShootTrough,
+		SaveToStateContainer);
+		
+		fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition,
+			statistics.StatusValues.ViewDistance.value,
+			TileProperties.Opaque | TileProperties.Solid,
+			SaveVisibleTilesToStateContainer);
 	}
 
 	public void SaveToStateContainer(bool[,] tilesInRange) {
 		_attacker.tilesInRange = FieldOfViewController.VisibleTilesToPathNodeList(tilesInRange);
+	}
+	
+	public void SaveVisibleTilesToStateContainer(bool[,] visibleTiles) {
+		_attacker.visibleTiles = FieldOfViewController.VisibleTilesToPathNodeList(visibleTiles);
 	}
 }

@@ -1,5 +1,6 @@
 using System;
 using Events.ScriptableObjects;
+using GameManager;
 using SaveSystem;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
@@ -76,6 +77,8 @@ public class InGameMenuUIController : MonoBehaviour {
 	}
 
 	void MainMenuButtonPressed() {
+		//todo fix game flow
+		FindObjectOfType<GameSC>().ResetState();
 		// load Scene
 		loadMenuEC.RaiseEvent(menuToLoad, true);
 	}
@@ -165,19 +168,24 @@ public class InGameMenuUIController : MonoBehaviour {
 		var saveButton = _inGameMenuContainer.Q<Button>("SaveButton");
 		var optionsButton = _inGameMenuContainer.Q<Button>("OptionsButton");
 		var loadButton = _inGameMenuContainer.Q<Button>("LoadButton");
+		var backToMenuButton = _inGameMenuContainer.Q<Button>("MainMenuButton");
 		saveButton.clicked += HandleSave;
 		optionsButton.clicked += ShowOptionsScreen;
 		loadButton.clicked += HandleLoad;
+		backToMenuButton.clicked += MainMenuButtonPressed;
 
 		_inGameMenuContainer.Q<Button>("ResumeButton").clicked += HandleResumeButton;
 		_inGameMenuContainer.Q<Button>("QuitButton").clicked += QuitGame;
 
-		_inGameMenuContainer.Q<Button>("MainMenuButton").clicked += MainMenuButtonPressed;
+
+		
 
 		SetElementVisibility(saveButton, showSaveLevel);
-			//todo doesnt work for now!
-		SetElementVisibility(loadButton, false);
+		
 		SetElementVisibility(optionsButton, showOptionsLevel);
+		//todo doesnt work for now!
+		SetElementVisibility(loadButton, false);
+		SetElementVisibility(backToMenuButton, false);
 		
 		HideMenu();
 	}

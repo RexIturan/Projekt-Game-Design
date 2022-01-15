@@ -10,6 +10,7 @@ using Level.Grid;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Util;
 
@@ -77,6 +78,14 @@ namespace Characters.EnemyCharacter
 				public void TargetClosestPlayer()
 				{
 						pathfindingQueryEvent.RaiseEvent(_gridTransform.gridPosition, behavior.rangeOfInterestMovement, SaveClosestPlayerAsTarget);
+				}
+
+				public void TargetClosestVisiblePlayer(List<PathNode> visibleTiles) {
+					pathfindingQueryEvent.RaiseEvent(_gridTransform.gridPosition, behavior.rangeOfInterestMovement,
+						list => {
+							var visibleTargetsInRange = list.FindAll(node => visibleTiles.Any(pathNode => pathNode.pos == node.pos));
+							SaveClosestPlayerAsTarget(visibleTargetsInRange);
+						});
 				}
 
 				private void SaveClosestPlayerAsTarget(List<PathNode> pathNodes)
