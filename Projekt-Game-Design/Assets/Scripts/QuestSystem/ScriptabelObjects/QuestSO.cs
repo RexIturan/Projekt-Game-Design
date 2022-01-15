@@ -22,6 +22,7 @@ namespace QuestSystem.ScriptabelObjects {
 		[SerializeField] private List<QuestSO> prerequisits;
 		
 		//tasks
+		public int overrideTaskIndex;
 		public int currentTaskIndex;
 		[SerializeField] private int nextTaskIndex;
 		[SerializeField] private List<Task_Wrapper> tasks = new List<Task_Wrapper>();
@@ -46,12 +47,16 @@ namespace QuestSystem.ScriptabelObjects {
 		public bool IsDone => finished;
 		public bool IsActive => active;
 
-
 		private bool IsOverridden => overrideAvailable && !finished;
 		
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////
 
+		public void Finish() {
+			this.finished = true;
+		}
+
 		public void Activate() {
+			currentTaskIndex = overrideTaskIndex;
 			active = true;
 			tasks[currentTaskIndex].task.StartTask();
 		}
@@ -126,6 +131,13 @@ namespace QuestSystem.ScriptabelObjects {
 
 			if ( this.IsDone ) {
 				this.active = false;
+			}
+		}
+
+		public void FulfillPrerequisites() {
+			foreach ( var quest in prerequisits ) {
+				quest.Finish();
+				quest.FulfillPrerequisites();
 			}
 		}
 		

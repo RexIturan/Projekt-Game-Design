@@ -16,12 +16,12 @@
             "active": true,
             "plyerTypeId": 0,
             "pos": {
-                "x": 7,
+                "x": 4,
                 "y": 1,
-                "z": 7
+                "z": 3
             },
             "hitpoints": 100,
-            "energy": 21
+            "energy": 23
         },
         {
             "id": 1,
@@ -41,7 +41,7 @@
     "switches": [
         {
             "switchId": 0,
-            "activated": false,
+            "activated": true,
             "switchTypeId": 0,
             "gridPos": {
                 "x": 4,
@@ -74,7 +74,7 @@
     ],
     "items": [],
     "inventory": {
-        "size": 10,
+        "size": 11,
         "itemIds": [
             0,
             1,
@@ -82,7 +82,6 @@
             3,
             4,
             5,
-            6,
             7,
             8,
             9
@@ -95,7 +94,7 @@
                 -1,
                 -1,
                 -1,
-                -1,
+                6,
                 -1
             ]
         },
@@ -111,16 +110,6 @@
         }
     ],
     "quests": [
-        {
-            "questId": 2,
-            "active": true,
-            "currentTaskIndex": 1
-        },
-        {
-            "questId": 1,
-            "active": true,
-            "currentTaskIndex": 2
-        },
         {
             "questId": 2,
             "active": true,

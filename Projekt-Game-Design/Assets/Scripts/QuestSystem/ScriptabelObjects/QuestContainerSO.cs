@@ -11,16 +11,19 @@ namespace QuestSystem.ScriptabelObjects {
 		public List<QuestSO> activeQuests = new List<QuestSO>();
 
 		public void Initialise(List<Quest_Save> quests) {
-			activeQuests = new List<QuestSO>();
+			ResetQuests();
 			foreach(Quest_Save questSave in quests) {
 				QuestSO quest = allQuests[questSave.questId];
-				
-				if(questSave.active)
-					quest.Activate();
 
-				quest.currentTaskIndex = questSave.currentTaskIndex;
+				quest.overrideTaskIndex = questSave.currentTaskIndex;
+			}
 
-				activeQuests.Add(quest);
+			foreach ( Quest_Save questSave in quests ) {
+				if ( questSave.active ) {
+					QuestSO quest = allQuests[questSave.questId];
+					quest.FulfillPrerequisites();
+					// activeQuests.Add(quest);
+				}
 			}
 		}
 

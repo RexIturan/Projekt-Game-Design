@@ -37,22 +37,19 @@ public class PlayerCharacterSC : MonoBehaviour {
     [SerializeField] private Color playerColor;
     [SerializeField] private Color friendlyColor;
     
-    public void Initialize(PlayerCharacter_Save saveData) {
-			id = saveData.id;
-			active = saveData.active;
+    public void Initialize() {
+			id = -1;
+			active = false;
 
 	    //stats
 	    _statistics.StatusValues.InitValues(playerType.baseStatusValues);
 			_statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
-
-			_statistics.StatusValues.HitPoints.value = saveData.hitpoints;
-			_statistics.StatusValues.Energy.value = saveData.energy;
 	    
 	    //movement Position
 	    _movementController.movementPointsPerEnergy = playerType.movementPointsPerEnergy;
 
 	    //Grid Position
-	    _gridTransform.gridPosition = saveData.pos;
+	    _gridTransform.gridPosition = Vector3Int.zero;
 
 	    //model
 	    _modelController.prefab = playerType.modelPrefab;
@@ -63,7 +60,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    _modelController.SetFactionMaterial(_statistics.Faction);
 	    
 	    //Equipment
-	    _equipmentController.playerID = saveData.id; // playerSpawnData.equipmentID;
+	    _equipmentController.equipmentID = 0; // playerSpawnData.equipmentID;
 	    
 	    //Abilities
 	    _abilityController.BaseAbilities = playerType.basicAbilities;
@@ -73,11 +70,17 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    _healthbarController.SetColor(_statistics.Faction == Faction.Player ? playerColor : friendlyColor);
     }
     
-    public void InitializeFromSave(PlayerCharacter_Save playerCharacterSave) {
+    public void InitializeFromSave(PlayerCharacter_Save saveData) {
 	    Initialize();
-	    active = playerCharacterSave.active;
-	    _gridTransform.gridPosition = playerCharacterSave.pos;
-	    _equipmentController.equipmentID = playerCharacterSave.equipmentInventoryId;
+	    id = saveData.id;
+	    active = saveData.active;
+	    _statistics.StatusValues.HitPoints.value = saveData.hitpoints;
+	    _statistics.StatusValues.Energy.value = saveData.energy;
+	    _gridTransform.gridPosition = saveData.pos;
+	    _equipmentController.equipmentID = saveData.id;
+	    
+	    _statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
+	    _modelController.SetFactionMaterial(_statistics.Faction);
     }
 
 		public void Start() {

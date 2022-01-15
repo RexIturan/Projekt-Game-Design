@@ -32,7 +32,7 @@ namespace Characters {
 					var obj = Instantiate(type.prefab, playerParent, true);
 					var playerSC = obj.GetComponent<PlayerCharacterSC>();
 					playerSC.playerType = type;
-					playerSC.Initialize(playerSave);
+					playerSC.InitializeFromSave(playerSave);
 
 					if (playerSC.active)
 						_characterList.playerContainer.Add(playerSC.gameObject);
@@ -47,7 +47,7 @@ namespace Characters {
 					var enemySC = obj.GetComponent<EnemyCharacterSC>();
           var enemyGridTransform = obj.GetComponent<GridTransform>();
 					enemySC.enemyType = type;
-					enemySC.Initialize(enemySave);
+					enemySC.InitializeFromSave(enemySave);
 					_characterList.enemyContainer.Add(enemySC.gameObject);
 				}
 			}

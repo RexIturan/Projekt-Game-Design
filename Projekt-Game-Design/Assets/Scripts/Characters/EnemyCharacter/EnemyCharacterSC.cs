@@ -35,21 +35,17 @@ public class EnemyCharacterSC : MonoBehaviour
 		public bool noTargetFound;
 		public bool rangeChecked;
 
-		public void Initialize(Enemy_Save saveData)
+		public void Initialize()
 		{
 				//stats
 				_statistics.SetFaction(Faction.Enemy);
 				_statistics.StatusValues.InitValues(enemyType.baseStatusValues);
 
-				_statistics.StatusValues.HitPoints.value = saveData.hitpoints;
-				_statistics.StatusValues.Energy.value = saveData.energy;
-
-
 			//movement Position
 			_movementController.movementPointsPerEnergy = enemyType.movementPointsPerEnergy;
 
 				//Grid Position
-				_gridTransform.gridPosition = saveData.pos;
+				_gridTransform.gridPosition = Vector3Int.zero;
 
 			// Equipment
 			// maybe later
@@ -72,9 +68,10 @@ public class EnemyCharacterSC : MonoBehaviour
 			_aIController.SetBehavior(behavior);
 		}
 		
-		public void InitializeFromSave(Enemy_Save enemySave) {
+		public void InitializeFromSave(Enemy_Save saveData) {
 			Initialize();
-			_gridTransform.gridPosition = enemySave.pos;
+			_statistics.StatusValues.HitPoints.value = saveData.hitpoints;
+			_statistics.StatusValues.Energy.value = saveData.energy;
+			_gridTransform.gridPosition = saveData.pos;
 		}
 }
-
