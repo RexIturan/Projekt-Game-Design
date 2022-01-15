@@ -135,6 +135,10 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
+      propertyPath: newTurnEC
+      value: 
+      objectReference: {fileID: 11400000, guid: 3a28845fa87e62b47abeaf01656a2806, type: 2}
+    - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
       propertyPath: saveSystem
       value: 
       objectReference: {fileID: 1363089166}

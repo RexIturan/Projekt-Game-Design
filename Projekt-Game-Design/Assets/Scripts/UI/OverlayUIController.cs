@@ -26,6 +26,7 @@ public class OverlayUIController : MonoBehaviour {
 	[Header("Sending Events On")] 
 	[SerializeField] private VoidEventChannelSO enableGamplayInput;
 	[SerializeField] private EFactionEventChannelSO endTurnEC;
+	[SerializeField] private EFactionEventChannelSO newTurnEC;
 	[SerializeField] private VoidEventChannelSO uiToggleMenuEC;
 
 	[Header("Sending and Receiving Events On")] [SerializeField]
@@ -255,7 +256,7 @@ public class OverlayUIController : MonoBehaviour {
 		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
 
 		//todo updating ui when turn changes -> handle otherwise
-		endTurnEC.OnEventRaised += HandleEndTurn;
+		newTurnEC.OnEventRaised += HandleEndTurn;
 	}
 
 	
@@ -267,6 +268,6 @@ public class OverlayUIController : MonoBehaviour {
 		playerDeselectedEC.OnEventRaised -= HandlePlayerDeselected;
 		
 		//todo updating ui when turn changes -> handle otherwise
-		endTurnEC.OnEventRaised -= HandleEndTurn;
+		newTurnEC.OnEventRaised -= HandleEndTurn;
 	}
 }

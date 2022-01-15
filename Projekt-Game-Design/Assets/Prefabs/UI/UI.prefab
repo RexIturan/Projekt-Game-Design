@@ -67,12 +67,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setGameOverlayVisibilityEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
   setTurnIndicatorVisibilityEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
-  EquipEvent: {fileID: 0}
-  UnequipEvent: {fileID: 0}
+  EquipEvent: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
+  UnequipEvent: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
   playerDeselectedEC: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
   playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
+  newTurnEC: {fileID: 11400000, guid: 3a28845fa87e62b47abeaf01656a2806, type: 2}
   uiToggleMenuEC: {fileID: 11400000, guid: 9444ec8e72a59b64d934049dd28bcc23, type: 2}
 --- !u!114 &7814138535658991265
 MonoBehaviour:

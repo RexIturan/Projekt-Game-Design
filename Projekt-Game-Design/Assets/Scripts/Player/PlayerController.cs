@@ -119,6 +119,14 @@ namespace Player {
 		
 ///// Public Functions
 
+		public void DeselectSelectedCharacter() {
+			selectedPlayerCharacter.Deselect();
+		}
+
+		public void SelectSelectedCharacter() {
+			selectedPlayerCharacter.Select();
+		}
+		
 		///// Monobehaviour Functions
 	
 		private void Awake() {
@@ -187,9 +195,10 @@ namespace Player {
 				if ( inputCache.leftButton.started && !abilitySelected) {
 					if ( selectable ) {
 						if (selectedPlayerCharacter) {
-							selectedPlayerCharacter.Deselect();
+							DeselectSelectedCharacter();
 						}
 						selectedPlayerCharacter = selectable.gameObject.GetComponent<Selectable>();
+						SelectSelectedCharacter();
 						selectedPlayerCharacter.Select();
 					}
 				}
