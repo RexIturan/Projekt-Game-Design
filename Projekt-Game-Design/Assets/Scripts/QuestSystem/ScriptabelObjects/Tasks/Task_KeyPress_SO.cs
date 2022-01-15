@@ -114,7 +114,7 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 		
 		private void Cleanup() {
-			if ( active is { } ) {
+			if ( action is { } ) {
 				action.performed -= Callback;	
 			}
 		}
