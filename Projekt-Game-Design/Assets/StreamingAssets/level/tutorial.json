@@ -22,8 +22,42 @@
       },
       "hitpoints": 1000000,
       "energy": 1000000
-    }],
+    },
+    {
+      "id": 1,
+      "active": false,
+      "plyerTypeId": 0,
+      "pos": {
+        "x": 27,
+        "y": 1,
+        "z": 22
+      },
+      "hitpoints": 1000000,
+      "energy": 1000000
+    }
+
+  ],
   "enemies": [
+    {
+      "enemyTypeId": 2,
+      "pos": {
+        "x": 31,
+        "y": 1,
+        "z": 45
+      },
+      "hitpoints": 1000000,
+      "energy": 0
+    },
+    {
+      "enemyTypeId": 2,
+      "pos": {
+        "x": 41,
+        "y": 1,
+        "z": 33
+      },
+      "hitpoints": 1000000,
+      "energy": 0
+    },
     {
       "enemyTypeId": 0,
       "pos": {
@@ -138,7 +172,7 @@
         "y": 0,
         "z": 0
       },
-      "open": false,
+      "open": true,
       "keyIds": [],
       "switchIds": [],
       "triggerIds": [],
@@ -160,9 +194,9 @@
       },
       "open": false,
       "keyIds": [],
-      "switchIds": [ 0 ],
+      "switchIds": [0],
       "triggerIds": [],
-      "remainingSwitchIds": [],
+      "remainingSwitchIds": [0],
       "remainingTriggerIds": [],
       "currentHitPoints": 100
     },
@@ -180,9 +214,9 @@
       },
       "open": false,
       "keyIds": [],
-      "switchIds": [],
+      "switchIds": [1],
       "triggerIds": [],
-      "remainingSwitchIds": [],
+      "remainingSwitchIds": [1],
       "remainingTriggerIds": [],
       "currentHitPoints": 100
     },
@@ -200,9 +234,9 @@
       },
       "open": false,
       "keyIds": [],
-      "switchIds": [],
+      "switchIds": [1],
       "triggerIds": [],
-      "remainingSwitchIds": [],
+      "remainingSwitchIds": [1],
       "remainingTriggerIds": [],
       "currentHitPoints": 100
     },
@@ -220,9 +254,9 @@
       },
       "open": false,
       "keyIds": [],
-      "switchIds": [],
+      "switchIds": [2],
       "triggerIds": [],
-      "remainingSwitchIds": [],
+      "remainingSwitchIds": [2],
       "remainingTriggerIds": [],
       "currentHitPoints": 100
     },
@@ -240,9 +274,9 @@
       },
       "open": false,
       "keyIds": [],
-      "switchIds": [],
+      "switchIds": [2],
       "triggerIds": [],
-      "remainingSwitchIds": [],
+      "remainingSwitchIds": [2],
       "remainingTriggerIds": [],
       "currentHitPoints": 100
     }
@@ -277,17 +311,54 @@
         "y": 0,
         "z": 1
       }
+    },
+    {
+      "switchId": 2,
+      "activated": false,
+      "switchTypeId": 0,
+      "gridPos": {
+        "x": 29,
+        "y": 1,
+        "z": 8
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      }
     }
   ],
   "junks": [],
-  "items": [],
+  "items": [
+    {
+      "id": 1,
+      "gridPos": {
+        "x": 41,
+        "y": 1,
+        "z": 44
+      }
+    },
+    {
+      "id": 2,
+      "gridPos": {
+        "x": 41,
+        "y": 1,
+        "z": 42
+      }
+    },
+    {
+      "id": 4,
+      "gridPos": {
+        "x": 41,
+        "y": 1,
+        "z": 40
+      }
+    }
+
+  ],
   "inventory": {
-    "size": 3,
-    "itemIds": [
-      1,
-      4,
-      0
-    ]
+    "size": 0,
+    "itemIds": []
   },
   "equipmentInventory": [
     {
@@ -295,6 +366,16 @@
       "itemIds": [
         -1,
         -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    {
+      "size": 5,
+      "itemIds": [
+        0,
+        0,
         -1,
         -1,
         -1
