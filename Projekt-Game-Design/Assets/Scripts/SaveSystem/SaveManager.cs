@@ -61,13 +61,11 @@ namespace SaveSystem {
 		// writes the current level data into the save object
 		private Save WriteLevelDataToSave() {
 			_saveObject.Clear();
+						
+			CharacterList characterList = CharacterList.FindInstant();
+			WorldObjectList worldObjectList = WorldObjectList.FindInstant();
 
-			//todo move somewhere else
-			var characters = GameObject.Find("Characters");
-			if ( characters ) {
-				characterList = characters.GetComponent<CharacterList>();
-				_saveWriter.SetRuntimeReferences(characterList);
-			} 
+			_saveWriter.SetRuntimeReferences(characterList, worldObjectList);
 			
 			_saveObject = _saveWriter.WirteLevelToSave();
 			return _saveObject;
@@ -111,7 +109,11 @@ namespace SaveSystem {
 		// save Obejct for game  
 		
 		public void SaveGame(int value) {
-			throw new NotImplementedException();
+			String checkpointFile = "checkpoint_" + value;
+
+			FileManager.DeleteFile(checkpointFile);
+
+			SaveLevel(checkpointFile);
 		}
 
 		#endregion
@@ -119,7 +121,10 @@ namespace SaveSystem {
 		#region Load Game
 
 		public void LoadGame(int value) {
-			throw new NotImplementedException();
+			String checkpointFile = "checkpoint_" + value;
+
+			if(LoadLevel(checkpointFile))
+				InitializeLevel();
 		}
 
 		#endregion

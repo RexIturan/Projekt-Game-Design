@@ -25,14 +25,14 @@ namespace WorldObjects
 				public bool open;
 				[SerializeField] private bool broken;
 				public bool locked;
-				[SerializeField] private List<int> keyIds;
-				[SerializeField] private List<int> switchIds;
-				[SerializeField] private List<int> triggerIds;
+				public List<int> keyIds;
+				public List<int> switchIds;
+				public List<int> triggerIds;
 
-				[SerializeField] private List<int> remainingSwitches;
-				[SerializeField] private List<int> remainingTrigger;
+				public List<int> remainingSwitches;
+				public List<int> remainingTrigger;
 
-				[SerializeField] private Vector3 orientation;
+				public Vector3 orientation;
 
 				public void Initialise(Door_Save saveData, DoorTypeSO doorType)
 				{

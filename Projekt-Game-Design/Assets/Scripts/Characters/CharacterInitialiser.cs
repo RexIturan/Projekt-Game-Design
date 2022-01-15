@@ -30,15 +30,12 @@ namespace Characters {
 				// throw new System.NotImplementedException();
 				foreach ( var playerSave in saveDataPlayers ) {
 					var type = playerDataContainerSo.playerTypes[playerSave.plyerTypeId];
-					var spawnData = playerDataContainerSo.playerSpawnData[playerSave.plyerSpawnDataId];
+					// var spawnData = playerDataContainerSo.playerSpawnData[playerSave.plyerSpawnDataId];
 					var obj = Instantiate(type.prefab, playerParent, true);
 					var playerSC = obj.GetComponent<PlayerCharacterSC>();
-					var playerGridTransform = obj.GetComponent<GridTransform>();
-					playerSC.active = playerSave.active;
 					playerSC.playerType = type;
-					playerSC.playerSpawnData = spawnData;
-					playerSC.Initialize();
-					playerGridTransform.gridPosition = playerSave.pos;
+					// playerSC.playerSpawnData = spawnData;
+					playerSC.Initialize(playerSave);
 
 					if (playerSC.active)
 						_characterList.playerContainer.Add(playerSC.gameObject);
@@ -48,14 +45,13 @@ namespace Characters {
 
 				foreach ( var enemySave in saveDataEnemys ) {
 					var type = enemyDataContainerSO.enemyTypes[enemySave.enemyTypeId];
-					var spawnData = enemyDataContainerSO.enemySpawnData[enemySave.enemySpawnDataId];
+					// var spawnData = enemyDataContainerSO.enemySpawnData[enemySave.enemySpawnDataId];
 					var obj = Instantiate(type.prefab, enemyParent, true);
 					var enemySC = obj.GetComponent<EnemyCharacterSC>();
           var enemyGridTransform = obj.GetComponent<GridTransform>();
 					enemySC.enemyType = type;
-					enemySC.enemySpawnData = spawnData;
-					enemySC.Initialize();
-					enemyGridTransform.gridPosition = enemySave.pos;
+					// enemySC.enemySpawnData = spawnData;
+					enemySC.Initialize(enemySave);
 					_characterList.enemyContainer.Add(enemySC.gameObject);
 				}
 			}

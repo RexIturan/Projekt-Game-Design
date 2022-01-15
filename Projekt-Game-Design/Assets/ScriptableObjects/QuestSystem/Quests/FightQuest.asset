@@ -67,10 +67,10 @@ MonoBehaviour:
     task: {fileID: -3354562417951219185}
     showProperty: 1
     button: '-'
-    drawerHeight: 255
+    drawerHeight: 113
   - name: dead 2
     type: 8
     task: {fileID: -6510218915823903733}
     showProperty: 1
     button: '-'
-    drawerHeight: 255
+    drawerHeight: 113

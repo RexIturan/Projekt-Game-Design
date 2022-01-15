@@ -19,7 +19,7 @@ namespace QuestSystem.ScriptabelObjects {
 		[SerializeField] private List<QuestSO> prerequisits;
 		
 		//tasks
-		[SerializeField] private int currentTaskIndex;
+		public int currentTaskIndex;
 		[SerializeField] private int nextTaskIndex;
 		[SerializeField] private List<Task_Wrapper> tasks = new List<Task_Wrapper>();
 

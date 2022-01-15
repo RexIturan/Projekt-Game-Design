@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64743ed75ac98d04b8c6dde8ee5423c6, type: 3}
   m_Name: WoodenDoor
   m_EditorClassIdentifier: 
-  id: 0
+  id: 2
   prefab: {fileID: 5962490239412866605, guid: 35739eaf6b6810840a0b07a69a004ae0, type: 3}
   model: {fileID: 477475561137574740, guid: f1fd36ea81fe1af4c9c8f81381da9b68, type: 3}
   doorName: Wooden Door

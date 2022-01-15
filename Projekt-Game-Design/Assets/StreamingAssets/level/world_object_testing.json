@@ -12,15 +12,16 @@
     },
     "players": [
       {
+            "id": 0,
             "active": true,
             "plyerTypeId": 0,
-            "plyerSpawnDataId": 0,
-            "equipmentInventoryId": 0,
             "pos": {
                 "x": 1,
                 "y": 1,
                 "z": 1
-            }
+            },
+            "hitpoints": 100,
+            "energy": 100
       }
       ],
     "enemies": [],

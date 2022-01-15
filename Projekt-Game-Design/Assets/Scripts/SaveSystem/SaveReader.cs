@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Characters;
 using Grid;
 using Level.Grid.ItemGrid;
+using QuestSystem.ScriptabelObjects;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 using WorldObjects;
@@ -19,6 +20,9 @@ namespace SaveSystem {
 
 		// inventorys
 		private readonly InventorySO _inventory;
+
+		// quests
+		private readonly QuestContainerSO _questContainer;
 
 		// dictionarys
 		private ItemContainerSO _itemContainerSo;
@@ -124,6 +128,10 @@ namespace SaveSystem {
 				Vector2Int pos = _gridData.GetGridPos2DFromGridPos3D(saveItem.gridPos);
 				gridContaier.items[saveItem.gridPos.y].GetGridObject(pos).SetId(saveItem.id);
 			}
+		}
+
+		private void ReadQuests() {
+			questcontainer;
 		}
 		
 		#endregion

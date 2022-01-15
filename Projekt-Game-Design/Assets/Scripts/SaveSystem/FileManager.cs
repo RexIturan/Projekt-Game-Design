@@ -103,6 +103,14 @@ namespace SaveSystem {
 			return File.Exists(fullpath);
 		}
 
+		public static void DeleteFile(string filename) {
+			var fullFilename = GetFullFilename(filename);			
+			var directory = GetSaveDirectory();
+			var fullpath = Path.Combine(directory, fullFilename);
+
+			File.Delete(fullpath);
+		}
+
 		public static bool WriteToFile(string fileName, string fileContents) {
 			var fullPath = NextAvailableFilename(GetFullPath(fileName));
 

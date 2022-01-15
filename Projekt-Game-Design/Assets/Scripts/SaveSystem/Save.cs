@@ -19,6 +19,7 @@ namespace SaveSystem {
 		public List<Item_Save> items;
 		public Inventory_Save inventory;
 		public List<Inventory_Save> equipmentInventory;
+		public List<Quest_Save> quests;
 		public List<TileGrid> tileGrids;
 		public List<ItemGrid> itemGrids;
 		public List<CharacterGrid> characterGrids;
@@ -27,6 +28,7 @@ namespace SaveSystem {
 		public Save() {
 			inventory = new Inventory_Save();
 			equipmentInventory = new List<Inventory_Save>();
+			quests = new List<Quest_Save>();
 			gridDataSave = new GridData_Save();
 			players = new List<PlayerCharacter_Save>();
 			enemies = new List<Enemy_Save>();
@@ -62,6 +64,7 @@ namespace SaveSystem {
 			objectGrids.Clear();
 			gridDataSave = new GridData_Save();
 			inventory = new Inventory_Save();
+			quests.Clear();
 		}
 	}
 }
