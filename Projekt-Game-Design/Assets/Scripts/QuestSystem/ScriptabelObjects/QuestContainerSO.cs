@@ -10,6 +10,8 @@ namespace QuestSystem.ScriptabelObjects {
 		public List<QuestSO> allQuests = new List<QuestSO>();
 		public List<QuestSO> activeQuests = new List<QuestSO>();
 
+		
+		//todo move to savesystem?
 		public void Initialise(List<Quest_Save> quests) {
 			ResetQuests();
 			foreach(Quest_Save questSave in quests) {

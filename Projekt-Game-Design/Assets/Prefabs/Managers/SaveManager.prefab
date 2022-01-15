@@ -65,6 +65,11 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   saveManagerData: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
+  defaultGameFilename: tutorial
+  GameSaveFilename: tutorial
+  loadLocation: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
+  locationsToLoad:
+  - {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
   showDebugMessage: 1
 --- !u!114 &1363089168
 MonoBehaviour:

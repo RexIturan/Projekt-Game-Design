@@ -9,7 +9,7 @@
             <ui:Button text="Load Level" display-tooltip-when-elided="true" name="loadLevelButton" class="Button_Layout" />
             <ui:Button text="Load Test Level" display-tooltip-when-elided="true" name="loadTestLevelButton" class="Button_Layout" />
             <ui:Button text="Level Editor" display-tooltip-when-elided="true" name="LevelEditorButton" class="Button_Layout" />
-            <ui:Button text="Settings" display-tooltip-when-elided="true" name="settingsButton" class="Button_Layout" />
+            <ui:Button text="Settings" display-tooltip-when-elided="true" name="settingsButton" class="Button_Layout" style="visibility: hidden;" />
             <ui:Button text="Exit" display-tooltip-when-elided="true" name="exitButton" class="Button_Layout" />
         </ui:VisualElement>
         <ui:Instance template="LoadScreen" name="LoadScreen" style="display: none; flex-grow: 1; width: 100%; height: 100%;" />

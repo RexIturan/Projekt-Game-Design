@@ -302,6 +302,10 @@ MonoBehaviour:
   loadLocationEC: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
   levelEditor:
   - {fileID: 11400000, guid: d911fb750a0cffe4c8ea93da07f28943, type: 2}
+  loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
+  showOptions: 0
+  showLevelEditor: 0
+  showTestLevel: 1
 --- !u!1 &1194277225
 GameObject:
   m_ObjectHideFlags: 0
