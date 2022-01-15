@@ -85,7 +85,7 @@ namespace WorldObjects
 						UpdateDoor();
 						
 						if ( open ) {
-							DoorOpened();
+							OpenDoor();
 						}
 				}
 
@@ -181,8 +181,8 @@ namespace WorldObjects
 														}
 												}
 
-												if ( playerInRange )
-														DoorOpened();
+												if ( playerInRange || switchIds.Count > 0)
+														OpenDoor();
 										}
 								}
 						}
@@ -197,7 +197,7 @@ namespace WorldObjects
 						SoundManager.FindSoundManager().PlaySound(doorType.destructionSound);
 				}
 
-				private void DoorOpened()
+				private void OpenDoor()
 				{
 						slidingDoorController.OpenDoor();
 						open = true;
