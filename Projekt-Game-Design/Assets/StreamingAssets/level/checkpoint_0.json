@@ -16,7 +16,19 @@
             "active": true,
             "plyerTypeId": 0,
             "pos": {
-                "x": 3,
+                "x": 7,
+                "y": 1,
+                "z": 7
+            },
+            "hitpoints": 100,
+            "energy": 21
+        },
+        {
+            "id": 1,
+            "active": false,
+            "plyerTypeId": 0,
+            "pos": {
+                "x": 10,
                 "y": 1,
                 "z": 3
             },
@@ -24,28 +36,7 @@
             "energy": 30
         }
     ],
-    "enemies": [
-        {
-            "enemyTypeId": 0,
-            "pos": {
-                "x": 5,
-                "y": 1,
-                "z": 5
-            },
-            "hitpoints": 30,
-            "energy": 5
-        },
-        {
-            "enemyTypeId": 0,
-            "pos": {
-                "x": 8,
-                "y": 1,
-                "z": 8
-            },
-            "hitpoints": 30,
-            "energy": 5
-        }
-    ],
+    "enemies": [],
     "doors": [],
     "switches": [
         {
@@ -83,7 +74,7 @@
     ],
     "items": [],
     "inventory": {
-        "size": 12,
+        "size": 10,
         "itemIds": [
             0,
             1,
@@ -117,6 +108,23 @@
                 -1,
                 -1
             ]
+        }
+    ],
+    "quests": [
+        {
+            "questId": 2,
+            "active": true,
+            "currentTaskIndex": 1
+        },
+        {
+            "questId": 1,
+            "active": true,
+            "currentTaskIndex": 2
+        },
+        {
+            "questId": 2,
+            "active": true,
+            "currentTaskIndex": 1
         }
     ],
     "tileGrids": [
@@ -6784,7 +6792,7 @@
                     "id": -1
                 },
                 {
-                    "id": -1
+                    "id": 1
                 },
                 {
                     "id": -1

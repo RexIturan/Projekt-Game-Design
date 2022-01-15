@@ -8,6 +8,8 @@ using UnityEditor;
 namespace QuestSystem.ScriptabelObjects {
 	[CreateAssetMenu(fileName = "NewQuest", menuName = "Quest/new Quest", order = 0)]
 	public class QuestSO : ScriptableObject {
+		public int questId;
+
 		[TextArea][SerializeField] private string description;
 		[SerializeField] private bool disabled;
 		[SerializeField] private bool available;

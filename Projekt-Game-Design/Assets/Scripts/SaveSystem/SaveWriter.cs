@@ -5,6 +5,7 @@ using Grid;
 using Level.Grid.CharacterGrid;
 using Level.Grid.ItemGrid;
 using Level.Grid.ObjectGrid;
+using QuestSystem.ScriptabelObjects;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 using WorldObjects;
@@ -24,11 +25,14 @@ namespace SaveSystem {
 		// inventorys
 		private readonly InventorySO _inventory;
 
+		// quests
+		private readonly QuestContainerSO _questContainer;
+
 //////////////////////////////////// Local Functions ///////////////////////////////////////////////
 
-		#region Local Functions
+				#region Local Functions
 
-		private GridData_Save GetGridDataSaveData(GridDataSO gridData) {
+				private GridData_Save GetGridDataSaveData(GridDataSO gridData) {
 			GridData_Save gridDataSave = new GridData_Save {
 				height = gridData.Height,
 				width = gridData.Width,
@@ -83,8 +87,12 @@ namespace SaveSystem {
 		private List<PlayerCharacter_Save> GetPlayerSaveData(CharacterList characterList) {
 			List<PlayerCharacter_Save> playerChars = new List<PlayerCharacter_Save>();
 
+			List<GameObject> allPlayers = new List<GameObject>();
+			allPlayers.AddRange(characterList.playerContainer);
+			allPlayers.AddRange(characterList.friendlyContainer);
+
 			if ( characterList ) {
-				foreach ( var player in characterList.playerContainer ) {
+				foreach ( var player in allPlayers ) {
 					var playerCharacterSc = player.GetComponent<PlayerCharacterSC>();
 					var pcGridTransform = player.GetComponent<GridTransform>();
 					var playerStatistics = player.GetComponent<Statistics>();
@@ -106,6 +114,10 @@ namespace SaveSystem {
 
 		private List<Enemy_Save> GetEnemySaveData(CharacterList characterList) {
 			List<Enemy_Save> enemyChars = new List<Enemy_Save>();
+						
+			List<GameObject> allEnemies = new List<GameObject>();
+			allEnemies.AddRange(characterList.enemyContainer);
+			allEnemies.AddRange(characterList.deadEnemies);
 
 			if ( characterList ) {
 				foreach ( var enemy in characterList.enemyContainer ) {
@@ -225,6 +237,21 @@ namespace SaveSystem {
 			return equipmentInventorys;
 		}
 
+		private List<Quest_Save> GetQuestSaveData(QuestContainerSO questContainer) {
+			List<Quest_Save> quests = new List<Quest_Save>();
+			
+			foreach(QuestSO quest in questContainer.activeQuests) {
+				quests.Add(new Quest_Save()
+				{
+					questId = quest.questId,
+					active = quest.IsActive,
+					currentTaskIndex = quest.currentTaskIndex
+				});
+			}
+			
+			return quests;
+		}
+
 		#endregion
 
 /////////////////////////////////////// Public Functions ///////////////////////////////////////////
@@ -234,11 +261,13 @@ namespace SaveSystem {
 		public SaveWriter(
 			GridContainerSO gridContaier, 
 			GridDataSO gridData,
-			InventorySO inventory) {
+			InventorySO inventory,
+			QuestContainerSO questContainer) {
 
 			_gridContaier = gridContaier;
 			_globalGridData = gridData;
 			_inventory = inventory;
+			_questContainer = questContainer;
 		}
 
 		public void SetRuntimeReferences(CharacterList characterList, WorldObjectList worldObjectList) {
@@ -250,6 +279,7 @@ namespace SaveSystem {
 			Save save = new Save {
 				inventory = GetInventorySaveData(_inventory),
 				equipmentInventory = GetEquipmentInventorySaveData(_inventory),
+				quests = GetQuestSaveData(_questContainer),
 				gridDataSave = GetGridDataSaveData(_globalGridData),
 				players = GetPlayerSaveData(_characterList),
 				enemies = GetEnemySaveData(_characterList),

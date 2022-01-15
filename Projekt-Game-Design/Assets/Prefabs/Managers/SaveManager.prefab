@@ -53,9 +53,10 @@ MonoBehaviour:
   gridContainer: {fileID: 11400000, guid: cf77658e9fdf6c24193f76cce7d45bff, type: 2}
   globalGridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   characterList: {fileID: 0}
-  equipmentContainer: {fileID: 11400000, guid: bb393058c340b35499a8d7fb7da419c8, type: 2}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
+  questContainer: {fileID: 11400000, guid: 65a51bfc297041f4788c7db5608fe983, type: 2}
   characterInitializer: {fileID: 1363089168}
+  worldObjectInitialiser: {fileID: 0}
   itemContainerSO: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
   testLevel:
   - m_AssetGUID: 

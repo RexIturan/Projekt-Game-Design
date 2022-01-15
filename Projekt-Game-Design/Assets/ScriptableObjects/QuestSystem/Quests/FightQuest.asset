@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67494d20553b42cd9cc786c94203ba1d, type: 3}
   m_Name: 1_EnemyDead_dead 2
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   done: 0
   textTextBody:
     title: dead 2
@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ecda0ff7e794b0d8929230fb03c1044, type: 3}
   m_Name: FightQuest
   m_EditorClassIdentifier: 
+  questId: 2
   description: 
   disabled: 0
   available: 0
@@ -59,7 +60,7 @@ MonoBehaviour:
   finished: 0
   repeatable: 0
   prerequisits: []
-  currentTaskIndex: 0
+  currentTaskIndex: 1
   nextTaskIndex: 0
   tasks:
   - name: kill 1

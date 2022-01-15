@@ -130,8 +130,8 @@ namespace SaveSystem {
 			}
 		}
 
-		private void ReadQuests() {
-			questcontainer;
+		private void ReadQuests(List<Quest_Save> saveQuests, QuestContainerSO questContainer) {
+			questContainer.Initialise(saveQuests);
 		}
 		
 		#endregion
@@ -143,11 +143,13 @@ namespace SaveSystem {
 			GridContainerSO gridContaier, 
 			GridDataSO gridData,
 			InventorySO inventory,
+			QuestContainerSO questContainer,
 			ItemContainerSO itemContainerSO) {
 			
 			_gridContaier = gridContaier;
 			_gridData = gridData;
 			_inventory = inventory;
+			_questContainer = questContainer;
 			_itemContainerSo = itemContainerSO;
 		}
 
@@ -171,6 +173,8 @@ namespace SaveSystem {
 			ReadEquipmentInventory(save.equipmentInventory, _inventory);
 			
 			ReadItems(save.items, _gridContaier);
+
+			ReadQuests(save.quests, _questContainer);
 		}
 
 

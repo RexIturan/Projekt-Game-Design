@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ecda0ff7e794b0d8929230fb03c1044, type: 3}
   m_Name: QuestTutorial
   m_EditorClassIdentifier: 
+  questId: 0
   description: 
   disabled: 1
   available: 0

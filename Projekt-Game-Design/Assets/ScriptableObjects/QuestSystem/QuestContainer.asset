@@ -18,3 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0847722a9ce71b44095e7f97f5270587, type: 2}
   activeQuests:
   - {fileID: 11400000, guid: 0847722a9ce71b44095e7f97f5270587, type: 2}
+  - {fileID: 11400000, guid: de3217a16db257d4e871d437aab56bf6, type: 2}
+  - {fileID: 11400000, guid: 0847722a9ce71b44095e7f97f5270587, type: 2}
