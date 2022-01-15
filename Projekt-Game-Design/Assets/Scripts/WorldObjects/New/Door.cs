@@ -114,16 +114,20 @@ namespace WorldObjects
 
 				private void HandleSwitchActivatedEvent(int switchId)
 				{
-						remainingSwitches.Remove(switchId);
-						slidingDoorController.OpenLock();
-						UpdateDoor();
+						if (switchIds.Contains(switchId) ) {
+							remainingSwitches.Remove(switchId);
+							slidingDoorController.OpenLock();
+							UpdateDoor();
+						}
 				}
 
 				private void HandleTriggerActivatedEvent(int triggerId)
 				{
+					if (switchIds.Contains(triggerId) ) {
 						remainingTrigger.Remove(triggerId);
 						slidingDoorController.OpenLock();
 						UpdateDoor();
+					}
 				}
 
 				/**
@@ -153,7 +157,7 @@ namespace WorldObjects
 														hasAllKeys = false;
 										}
 
-										hasAllKeys = keyIds.All(i => inventory.playerInventory.Any(item => item.id == i));
+										// hasAllKeys = keyIds.All(i => inventory.playerInventory.Any(item => item.id == i));
 
 										if ( hasAllKeys && remainingSwitches.Count == 0 && remainingTrigger.Count == 0 )
 												locked = false;
