@@ -49,6 +49,34 @@ MonoBehaviour:
     m_Address: Assets/Scenes/Testing/char_test.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 891f0019db915a047b7c73cd718e11ad
+    m_Address: Assets/Art/Material/Door
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 29a2065bdc4737c4b8a8ce13507f6dbf
+    m_Address: Assets/Art/Material/Indicators
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1a281f5fdacc83c4995816b0e32d98f2
+    m_Address: Assets/Art/Material/LevelEditor/Standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5f7ee377175686a4db223f1b0ca10bb9
+    m_Address: Assets/Art/Material/Switch
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6eba58dcb01ddee4090e39beb9114b49
+    m_Address: Assets/Art/Models/projectiles
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6082d617f44154347b44281e2b1fbbe0
+    m_Address: Assets/Art/Models/worldObjects
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9c56b19399b4f984ab07d8bff29a4c70
+    m_Address: Assets/Art/Sprites
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
   m_SchemaSet:
