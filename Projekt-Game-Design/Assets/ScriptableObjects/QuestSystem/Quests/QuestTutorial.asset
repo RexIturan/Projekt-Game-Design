@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7649197984379599530
+--- !u!114 &-9054603195764581581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fef674ff9f249c495b70cd21278df43, type: 3}
-  m_Name: 4_ItemEquipped_new Task
+  m_Name: 7_ItemEquipped_new Task
   m_EditorClassIdentifier: 
   active: 0
   done: 0
@@ -20,7 +20,7 @@ MonoBehaviour:
     instructions: equip item
   item: {fileID: 11400000, guid: 5af18ceaeab735d4a942216ebf69cd64, type: 2}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
---- !u!114 &-6268152724891483530
+--- !u!114 &-7059458980979354602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29,21 +29,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
-  m_Name: 0_KeyPress_any_camera
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 3_ReadText_End Turn
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   done: 0
   textTextBody:
-    title: any_camera
-    description: no Description any_camera
-    instructions: Press [W] OR [A] OR [S] OR [D]
-  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
-  actionName: MoveCamera
-  mapName: Camera
-  compositeName: 
-  actionNames: []
---- !u!114 &-5385852539285543383
+    title: Ending your Turn
+    description: It seems you haven't gotten away free of injuries. When you run
+      out of movement points, click "End Turn" to rest up and keep going!
+    instructions: 
+--- !u!114 &-4343022958855784444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,16 +49,130 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 573a10252b9e457d91b0719bb28e0568, type: 3}
-  m_Name: 3_ItemInInventory_get Item
+  m_Name: 5_ItemInInventory_get Item
   m_EditorClassIdentifier: 
   active: 0
   done: 0
   textTextBody:
-    title: 
-    description: 
-    instructions: get item
-  item: {fileID: 11400000, guid: 5af18ceaeab735d4a942216ebf69cd64, type: 2}
+    title: Gear!
+    description: As you approach this next room, you spot weapons leaning against
+      the wall across from you. Foreign in design, you marvel at the craftsmanship,
+      the likes of which you have never seen. Just what have you gotten yourself
+      into?
+    instructions: Walk on top of an Item to pick it up.
+  item: {fileID: 11400000, guid: a64ffcb2741f33c428e1d99165ba48ec, type: 2}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
+--- !u!114 &-3854722035668380972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056743f4be01493596f254546d95b334, type: 3}
+  m_Name: 2_AbilitySelected_Move Selected
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Always keep moving!
+    description: There! A gap in the stone wall. Time to go and investigate further
+      - who knows where this leads?
+    instructions: Click on your character, then select the Move Ability to move towards
+      the exit,
+  ability: {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}
+--- !u!114 &-3735899129815562772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056743f4be01493596f254546d95b334, type: 3}
+  m_Name: 4_AbilitySelected_Attacks
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: The best Defense...
+    description: Distant noises echo through the caves, from barks and yowls to voices
+      in an unknown language, leaving little room for interpretation. Shivering,
+      you ready your fists for what may be to come...
+    instructions: Click your character and select your basic attack. Feel free to
+      practice on the immobile dummy.
+  ability: {fileID: 11400000, guid: 653425107135eac4f95c90db962300e7, type: 2}
+--- !u!114 &-2771925548147884300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
+  m_Name: 6_KeyPress_Equipping Items
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Taking Inventory
+    description: As you take stock of your newly "aquired" gear, you hear voices
+      close by. Beyond the door, heavy footfalls and cruel laughter echo through
+      the chamber. You clench your weapons tighter and set out in search of your
+      companions once more...
+    instructions: Press [I] to open your Party Inventory. Drag an Item from the Inventory
+      on the right to an eqipment slot on the left to equip it. Your ability bar
+      updates with new Abilities!
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  actionName: Inventory
+  mapName: Gameplay
+  compositeName: 
+  actionNames: []
+--- !u!114 &-2491737206781118806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: febf331e49584c09a7889b1afa49297a, type: 3}
+  m_Name: 8_SwitchActive_new Task
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: activate switch
+    description: activate switch
+    instructions: activate switch
+  switchId: 0
+--- !u!114 &-1719969869884776391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 0_ReadText_new Task
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Oh no!
+    description: You've woken up in a dark, damp room roughly hewn into slick stone.
+      Above you, you can see a faint light as it shines through a small crack in
+      the natural ceiling, far out of reach. Where are you? What happened to your
+      companions?
+    instructions: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,45 +196,63 @@ MonoBehaviour:
   prerequisits: []
   overrideTaskIndex: 0
   currentTaskIndex: 0
-  nextTaskIndex: 0
+  nextTaskIndex: 1
   tasks:
-  - name: any_camera
-    type: 0
-    task: {fileID: -6268152724891483530}
+  - name: new Task
+    type: 1
+    task: {fileID: -1719969869884776391}
     showProperty: 0
     button: '|'
     drawerHeight: 23
-  - name: new Task
-    type: 1
-    task: {fileID: 4996187089100691172}
+  - name: any_camera
+    type: 0
+    task: {fileID: 6205288092212109317}
     showProperty: 0
     button: '|'
     drawerHeight: 23
   - name: Move Selected
     type: 2
-    task: {fileID: 7272605633836887984}
+    task: {fileID: -3854722035668380972}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+  - name: End Turn
+    type: 1
+    task: {fileID: -7059458980979354602}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+  - name: Attacks
+    type: 2
+    task: {fileID: -3735899129815562772}
     showProperty: 0
     button: '|'
     drawerHeight: 23
   - name: get Item
     type: 3
-    task: {fileID: -5385852539285543383}
+    task: {fileID: -4343022958855784444}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+  - name: Equipping Items
+    type: 0
+    task: {fileID: -2771925548147884300}
     showProperty: 0
     button: '|'
     drawerHeight: 23
   - name: new Task
     type: 4
-    task: {fileID: -7649197984379599530}
+    task: {fileID: -9054603195764581581}
     showProperty: 0
     button: '|'
     drawerHeight: 23
   - name: new Task
     type: 6
-    task: {fileID: 3615984569340738119}
+    task: {fileID: -2491737206781118806}
     showProperty: 0
     button: '|'
     drawerHeight: 23
---- !u!114 &3615984569340738119
+--- !u!114 &6205288092212109317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,50 +261,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: febf331e49584c09a7889b1afa49297a, type: 3}
-  m_Name: 5_SwitchActive_new Task
+  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
+  m_Name: 1_KeyPress_any_camera
   m_EditorClassIdentifier: 
   active: 0
   done: 0
   textTextBody:
-    title: activate switch
-    description: activate switch
-    instructions: activate switch
-  switchId: 0
---- !u!114 &4996187089100691172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
-  m_Name: 1_ReadText_new Task
-  m_EditorClassIdentifier: 
-  active: 0
-  done: 0
-  textTextBody:
-    title: Read This Text
-    description: Read This Text
-    instructions: 
---- !u!114 &7272605633836887984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 056743f4be01493596f254546d95b334, type: 3}
-  m_Name: 2_AbilitySelected_Move Selected
-  m_EditorClassIdentifier: 
-  active: 0
-  done: 0
-  textTextBody:
-    title: Move Selected
-    description: Move Selected
-    instructions: Select the Move Ability
-  ability: {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}
+    title: Look around!
+    description: Let's look around for any clues of your companions. They might be
+      nearby!
+    instructions: Press [W], [A], [S] OR [D] to move your camera. Rotate it with
+      [Q] and [E].
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  actionName: MoveCamera
+  mapName: Camera
+  compositeName: 
+  actionNames: []
