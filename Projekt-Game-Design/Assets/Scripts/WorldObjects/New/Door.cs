@@ -5,6 +5,7 @@ using Events.ScriptableObjects;
 using SaveSystem.SaveFormats;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using WorldObjects.Doors;
 
@@ -81,7 +82,9 @@ namespace WorldObjects
 							}
 						}
 
-						if ( remainingSwitches.Count == 0 || open) {
+						UpdateDoor();
+						
+						if ( open ) {
 							DoorOpened();
 						}
 				}
@@ -150,6 +153,8 @@ namespace WorldObjects
 														hasAllKeys = false;
 										}
 
+										hasAllKeys = keyIds.All(i => inventory.playerInventory.Any(item => item.id == i));
+
 										if ( hasAllKeys && remainingSwitches.Count == 0 && remainingTrigger.Count == 0 )
 												locked = false;
 										
@@ -181,7 +186,7 @@ namespace WorldObjects
 
 				private void DoorDestroyed()
 				{
-					slidingDoorController.OpenDoor();
+						slidingDoorController.OpenDoor();
 						open = true;
 						broken = true;
 

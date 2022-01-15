@@ -55,10 +55,10 @@
                 "orientation": {
                 "x": 0,
                 "y": 0,
-                "z": 1
+                "z": -1
                 },
 		"open": false,
-		"keyIds": [7],
+		"keyIds": [9],
 		"switchIds": [],
 		"triggerIds": [],
 		"remainingSwitchIds": [],
@@ -119,9 +119,9 @@
                 },
 		"open": false,
 		"keyIds": [],
-		"switchIds": [-1],
+		"switchIds": [],
 		"triggerIds": [],
-		"remainingSwitchIds": [-1],
+		"remainingSwitchIds": [],
 		"remainingTriggerIds": [],
 		"currentHitPoints": 10
       }
@@ -195,7 +195,16 @@
             "itemIds": [-1, -1, -1, -1, -1]
         }
     ],
-    "items": [],
+    "items": [
+      {
+        "id": 9,
+        "gridPos": {
+          "x": 1,
+          "y": 1,
+          "z": 4
+        }
+      }
+    ],
     "tileGrids": [
       {
         "width": 7,
@@ -1029,7 +1038,7 @@
             "id": -1
           },
           {
-            "id": 7
+            "id": -1
           },
           {
             "id": -1
