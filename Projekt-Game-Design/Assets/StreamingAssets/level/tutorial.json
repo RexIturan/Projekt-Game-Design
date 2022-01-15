@@ -12,70 +12,77 @@
   },
   "players": [
     {
+      "id": 0,
       "active": true,
       "plyerTypeId": 0,
-      "plyerSpawnDataId": 0,
-      "equipmentInventoryId": 0,
       "pos": {
         "x": 6,
         "y": 1,
         "z": 23
-      }
+      },
+      "hitpoints": 1000000,
+      "energy": 1000000
     }],
   "enemies": [
     {
       "enemyTypeId": 0,
-      "enemySpawnDataId": 0,
       "pos": {
         "x": 34,
         "y": 1,
         "z": 19
-      }
+      },
+      "hitpoints": 1000000,
+      "energy": 1000000
     },
     {
       "enemyTypeId": 0,
-      "enemySpawnDataId": 0,
       "pos": {
         "x": 32,
         "y": 1,
         "z": 7
-      }
+      },
+      "hitpoints": 1000000,
+      "energy": 1000000
     },
     {
       "enemyTypeId": 1,
-      "enemySpawnDataId": 0,
       "pos": {
         "x": 31,
         "y": 1,
         "z": 5
-      }
+      },
+      "hitpoints": 1000000,
+      "energy": 1000000
     },
     {
       "enemyTypeId": 0,
-      "enemySpawnDataId": 0,
       "pos": {
         "x": 17,
         "y": 1,
         "z": 8
-      }
+      },
+      "hitpoints": 1000000,
+      "energy": 1000000
     },
     {
       "enemyTypeId": 0,
-      "enemySpawnDataId": 0,
       "pos": {
         "x": 18,
         "y": 1,
         "z": 9
-      }
+      },
+      "hitpoints": 1000000,
+      "energy": 1000000
     },
     {
       "enemyTypeId": 1,
-      "enemySpawnDataId": 0,
       "pos": {
         "x": 16,
         "y": 1,
         "z": 14
-      }
+      },
+      "hitpoints": 1000000,
+      "energy": 1000000
     }
   ],
   "doors": [
@@ -243,6 +250,7 @@
   "switches": [
     {
       "switchId": 0,
+      "activated": false,
       "switchTypeId": 0,
       "gridPos": {
         "x": 33,
@@ -257,6 +265,7 @@
     },
     {
       "switchId": 1,
+      "activated": false,
       "switchTypeId": 0,
       "gridPos": {
         "x": 36,
