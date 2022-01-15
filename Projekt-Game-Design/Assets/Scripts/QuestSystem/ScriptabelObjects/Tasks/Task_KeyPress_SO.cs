@@ -114,7 +114,9 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 		
 		private void Cleanup() {
-			action.performed -= Callback;
+			if ( active is { } ) {
+				action.performed -= Callback;	
+			}
 		}
 		
 ///// TaskSO Overrides /////////////////////////////////////////////////////////////////////////////
