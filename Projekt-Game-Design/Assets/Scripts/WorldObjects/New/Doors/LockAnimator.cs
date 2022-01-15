@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace WorldObjects.Doors {
-	public class LockAnimator : MonoBehaviour {
+	public class LockAnimator : IKeyAnimator {
 		[SerializeField] private Transform lockModel;
 		[SerializeField] private MeshRenderer meshRenderer;
 		
@@ -15,13 +15,16 @@ namespace WorldObjects.Doors {
 		public Vector3 startPos;
 		public bool openRight;
 		
-		public bool IsOpen => isOpen;
-		
+		public override bool IsOpen {
+			get => isOpen;
+			set => isOpen = value;
+		}
+
 		public void OpenLock() {
 			AnimationTween().Play();
 		}
 		
-		public Tween AnimationTween() {
+		public override Tween AnimationTween() {
 			var targetPos = startPos;
 			targetPos += openRight ? moveDistance : -moveDistance;
 			return lockModel.DOLocalMove(targetPos, moveCycleLength)
@@ -32,7 +35,7 @@ namespace WorldObjects.Doors {
 				}).Pause();
 		}
 
-		public void Reset() {
+		public override void Reset() {
 			lockModel.localPosition = startPos;
 			isOpen = false;
 			meshRenderer.material = inctiveMaterial;

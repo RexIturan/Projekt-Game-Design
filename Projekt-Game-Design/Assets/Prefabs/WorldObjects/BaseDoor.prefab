@@ -31,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 3583023217580764056}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -190,3 +191,89 @@ MonoBehaviour:
   remainingSwitches: 
   remainingTrigger: 
   orientation: {x: 0, y: 0, z: 0}
+  slidingDoorController: {fileID: 6705516044291092098}
+--- !u!1001 &7147527496984553934
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2861852753429330148}
+    m_Modifications:
+    - target: {fileID: -4737829468968663220, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: _type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4737829468968663220, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: lockCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7062639111785340739, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_Name
+      value: SlidingDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7559884720883577158, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bd7c47c479cb3d641b7a8ef470d06340, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+--- !u!4 &3583023217580764056 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5947120690774213206, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+  m_PrefabInstance: {fileID: 7147527496984553934}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6705516044291092098 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4737829468968663220, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
+  m_PrefabInstance: {fileID: 7147527496984553934}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dccfff8d7164c64819c37563fb44aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

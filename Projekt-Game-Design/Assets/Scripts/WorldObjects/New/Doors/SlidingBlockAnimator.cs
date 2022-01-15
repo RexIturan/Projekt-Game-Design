@@ -6,7 +6,7 @@ namespace WorldObjects.Doors {
 	public class SlidingBlockAnimator : MonoBehaviour {
 		[SerializeField] private Transform doorModel;
 		
-		[SerializeField] private Vector3 startPos;
+		public Vector3 startPos;
 		[SerializeField] private Vector3 moveDistance;
 		[SerializeField] private float moveCycleLength;
 		[SerializeField] private Ease moveEase = Ease.Linear;
@@ -16,10 +16,14 @@ namespace WorldObjects.Doors {
 		}
 		
 		public Tween AnimationTween() {
-			doorModel.localPosition = startPos;
+			return GetAnimation(doorModel);
+		}
+
+		public Tween GetAnimation(Transform transform) {
+			transform.localPosition = startPos;
 			
 			var targetPos = startPos + moveDistance;
-			return doorModel.DOLocalMove(targetPos, moveCycleLength)
+			return transform.DOLocalMove(targetPos, moveCycleLength)
 				.SetEase(moveEase)
 				.OnComplete(() => {
 					//do stuff -> maybe callback um das pathfinding zu updaten?

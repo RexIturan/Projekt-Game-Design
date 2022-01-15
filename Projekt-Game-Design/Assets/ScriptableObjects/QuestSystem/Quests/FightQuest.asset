@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67494d20553b42cd9cc786c94203ba1d, type: 3}
   m_Name: 1_EnemyDead_dead 2
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   done: 0
   textTextBody:
     title: dead 2
@@ -32,7 +32,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec412340c6c43eaa15380deaa8521da, type: 3}
   m_Name: 0_EnemyKill_kill 1
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   done: 0
   textTextBody:
     title: kill 1
@@ -58,8 +58,9 @@ MonoBehaviour:
   active: 1
   finished: 0
   repeatable: 0
-  prerequisits: []
-  currentTaskIndex: 0
+  prerequisits:
+  - {fileID: 11400000, guid: de3217a16db257d4e871d437aab56bf6, type: 2}
+  currentTaskIndex: 1
   nextTaskIndex: 0
   tasks:
   - name: kill 1
