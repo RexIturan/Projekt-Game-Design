@@ -27,11 +27,8 @@ public class G_TriggerDefeatOnPlayerDeath_OnUpdate : StateAction
 
 		public override void OnUpdate()
 		{
-				if ( !characterList )
-				{
-						GameObject characterListGameObject = GameObject.Find("Characters");
-						if ( characterListGameObject )
-								characterList = characterListGameObject.GetComponent<CharacterList>();
+				if ( !characterList ) {
+					characterList = CharacterList.FindInstant();
 				}
 				if( characterList )
 				{

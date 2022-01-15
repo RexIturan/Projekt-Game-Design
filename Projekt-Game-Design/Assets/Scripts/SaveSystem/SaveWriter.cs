@@ -287,9 +287,9 @@ namespace SaveSystem {
 				switches = GetSwitchesSaveData(_worldObjectList),
 				junks = GetJunksSaveData(_worldObjectList),
 				tileGrids = GetTileGridSaveData(_gridContaier),
-				itemGrids = GetItemGridSaveData(_gridContaier),
-				characterGrids = GetCharacterGridSaveData(_gridContaier),
-				objectGrids = GetObjectGridSaveData(_gridContaier)
+				// itemGrids = GetItemGridSaveData(_gridContaier),
+				// characterGrids = GetCharacterGridSaveData(_gridContaier),
+				// objectGrids = GetObjectGridSaveData(_gridContaier)
 			};
 
 			return save;

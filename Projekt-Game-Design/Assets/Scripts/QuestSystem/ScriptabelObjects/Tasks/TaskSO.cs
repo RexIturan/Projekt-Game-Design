@@ -148,7 +148,7 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 
 		public virtual void StartTask() {
-			Debug.Log($"Start Task {this.name}");
+			// Debug.Log($"Start Task {this.name}");
 			active = true;
 		}
 

@@ -121,6 +121,11 @@ MonoBehaviour:
   enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
   menuOpenedEvent: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
   menuClosedEvent: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
+  saveGame: {fileID: 11400000, guid: 8b9215eb7abdda1449c4fcad7e8131d2, type: 2}
+  loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
+  showLoadLevel: 1
+  showSaveLevel: 1
+  showOptionsLevel: 0
 --- !u!114 &7814138535500672982
 MonoBehaviour:
   m_ObjectHideFlags: 0

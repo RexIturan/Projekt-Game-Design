@@ -29,6 +29,7 @@ public class SceneLoader : MonoBehaviour {
 		new List<AsyncOperationHandle<SceneInstance>>();
 
 	private AsyncOperationHandle<SceneInstance> _gameplayManagerLoadingOpHandle;
+	private AsyncOperationHandle<SceneInstance> _unloadOpHandle;
 
 	//Parameters coming from scene loading requests
 	private GameSceneSO[] _scenesToLoad;
@@ -104,16 +105,28 @@ public class SceneLoader : MonoBehaviour {
 	/// In both Location and Menu loading, this function takes care of removing previously loaded temporary scenes.
 	/// </summary>
 	private void UnloadPreviousScenes() {
+		//todo better unloading
 		Debug.Log("SceneLoader > UnloadPreviousScenes:\nStart unload Previous Scene");
 
+		bool sceneUnloading = false;
 		for ( int i = 0; i < _currentlyLoadedScenes.Length; i++ ) {
+			sceneUnloading = true;
+			_unloadOpHandle = _currentlyLoadedScenes[i].sceneReference.UnLoadScene();
 			// Addressables.UnloadSceneAsync(_currentlyLoadedScenes[i].sceneReference.OperationHandle);
-			_currentlyLoadedScenes[i].sceneReference.UnLoadScene().Completed += (handle) => {
+			_unloadOpHandle.Completed += (handle) => {
 				Debug.Log("SceneLoader > UnloadPreviousScenes\n unloaded previous scene");
 			};
 		}
 
-		LoadNewScenes();
+		if ( sceneUnloading ) {
+			_unloadOpHandle.Completed += handle => {
+				sceneUnloading = false;
+				LoadNewScenes();
+			};	
+		}
+		else {
+			LoadNewScenes();
+		}
 	}
 
 	/// <summary>

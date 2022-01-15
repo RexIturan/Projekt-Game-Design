@@ -190,12 +190,14 @@ namespace FieldOfView {
 				
 				// TODO: move to somewhere else I guess?
 				// TODO: add third dimension to visibility and also this function
-				public static List<PathNode> VisibleTilesToPathNodeList(bool[,] visibleTiles)
-				{
+				public static List<PathNode> VisibleTilesToPathNodeList(bool[,] visibleTiles) {
+					int width = visibleTiles.GetLength(0);
+					int height = visibleTiles.GetLength(1);
+					
 						List<PathNode> tilesInRange = new List<PathNode>();
-						for ( int x = 0; x < visibleTiles.GetLength(0); x++ )
+						for ( int x = 0; x < width; x++ )
 						{
-								for ( int y = 0; y < visibleTiles.GetLength(1); y++ )
+								for ( int y = 0; y < height; y++ )
 								{
 										if ( visibleTiles[x, y] )
 										{

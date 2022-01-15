@@ -255,10 +255,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlidingDoor
       objectReference: {fileID: 0}
-    - target: {fileID: 7559884720883577158, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: bd7c47c479cb3d641b7a8ef470d06340, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfd2813f68a7227408de083d7f9aee5c, type: 3}
 --- !u!4 &3583023217580764056 stripped

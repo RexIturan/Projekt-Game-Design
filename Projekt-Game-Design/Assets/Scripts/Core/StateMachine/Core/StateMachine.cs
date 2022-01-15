@@ -17,10 +17,12 @@ namespace UOP1.StateMachine
 
 		private readonly Dictionary<Type, Component> _cachedComponents = new Dictionary<Type, Component>();
 		internal State _currentState;
+		internal State _firstState;
 
 		private void Awake()
 		{
-			_currentState = _transitionTableSO.GetInitialState(this);
+			_firstState = _transitionTableSO.GetInitialState(this);
+			_currentState = _firstState;
 #if UNITY_EDITOR
 			_debugger.Awake(this);
 #endif
@@ -99,6 +101,11 @@ namespace UOP1.StateMachine
 		public void TransitionManually() {
 			if (_currentState.TryGetTransition(out var transitionState))
 				Transition(transitionState);
+		}
+
+		public void Reset() {
+			_currentState = _firstState;
+			_currentState.OnStateEnter();
 		}
 	}
 }
