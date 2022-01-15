@@ -58,9 +58,9 @@ namespace LevelEditor {
 		[SerializeField] private EditType mode = EditType.Paint;
 		[SerializeField] private EditLayer editMode = EditLayer.Terrain;
 		[SerializeField] private Faction characterFaction = Faction.Player;
-		[SerializeField] private PlayerSpawnDataSO playerSpawnDataSO;
+		// [SerializeField] private PlayerSpawnDataSO playerSpawnDataSO;
 		[SerializeField] private PlayerTypeSO playerTypeSO;
-		[SerializeField] private EnemySpawnDataSO enemySpawnDataSO;
+		// [SerializeField] private EnemySpawnDataSO enemySpawnDataSO;
 		[SerializeField] private EnemyTypeSO enemyTypeSO;
 		[SerializeField] private TileTypeSO selectedTileType;
 
@@ -296,10 +296,10 @@ namespace LevelEditor {
 					
 					case EditLayer.Character:
 						if ( characterFaction == Faction.Player ) {
-							gridController.AddPlayerCharacterAt(_clickedAbovePos[0], Faction.Player, playerSpawnDataSO, playerTypeSO);	
+							gridController.AddPlayerCharacterAt(_clickedAbovePos[0], Faction.Player, playerTypeSO);	
 						}
 						else {
-							gridController.AddEnemyCharacterAt(_clickedAbovePos[0], Faction.Player, enemySpawnDataSO, enemyTypeSO);
+							gridController.AddEnemyCharacterAt(_clickedAbovePos[0], Faction.Player, enemyTypeSO);
 						}
 						break;
 				}

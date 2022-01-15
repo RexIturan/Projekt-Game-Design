@@ -29,8 +29,9 @@ public class CharacterSC : MonoBehaviour {
 
 	#region Init Enemy
 
+	// ??
 	public EnemyTypeSO enemyType;
-	public EnemySpawnDataSO enemySpawnData;
+	// public EnemySpawnDataSO enemySpawnData;
 
 	#endregion
 

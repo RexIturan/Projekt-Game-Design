@@ -4,6 +4,7 @@ using System.IO;
 using Characters;
 using Events.ScriptableObjects;
 using Grid;
+using QuestSystem.ScriptabelObjects;
 using SaveSystem.SaveFormats;
 using SaveSystem.ScriptableObjects;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace SaveSystem {
 		[SerializeField] private GridDataSO globalGridData;
 		public CharacterList characterList;
 		public InventorySO inventory;
+		public QuestContainerSO questContainer;
 		public CharacterInitialiser characterInitializer;
 		public WorldObjectInitialiser worldObjectInitialiser;
 		[SerializeField] private ItemContainerSO itemContainerSO;
@@ -61,13 +63,11 @@ namespace SaveSystem {
 		// writes the current level data into the save object
 		private Save WriteLevelDataToSave() {
 			_saveObject.Clear();
+						
+			CharacterList characterList = CharacterList.FindInstant();
+			WorldObjectList worldObjectList = WorldObjectList.FindInstant();
 
-			//todo move somewhere else
-			var characters = GameObject.Find("Characters");
-			if ( characters ) {
-				characterList = characters.GetComponent<CharacterList>();
-				_saveWriter.SetRuntimeReferences(characterList);
-			} 
+			_saveWriter.SetRuntimeReferences(characterList, worldObjectList);
 			
 			_saveObject = _saveWriter.WirteLevelToSave();
 			return _saveObject;
@@ -92,10 +92,10 @@ namespace SaveSystem {
 
 		private void Start() {
 			// setup save Writer
-			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory);
+			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, questContainer);
 
 			// setup save Reader
-			_saveReader = new SaveReader(gridContainer, globalGridData, inventory, itemContainerSO);
+			_saveReader = new SaveReader(gridContainer, globalGridData, inventory, questContainer, itemContainerSO);
 		}
 
 		#endregion
@@ -111,7 +111,11 @@ namespace SaveSystem {
 		// save Obejct for game  
 		
 		public void SaveGame(int value) {
-			throw new NotImplementedException();
+			String checkpointFile = "checkpoint_" + value;
+
+			FileManager.DeleteFile(checkpointFile);
+
+			SaveLevel(checkpointFile);
 		}
 
 		#endregion
@@ -119,7 +123,10 @@ namespace SaveSystem {
 		#region Load Game
 
 		public void LoadGame(int value) {
-			throw new NotImplementedException();
+			String checkpointFile = "checkpoint_" + value;
+
+			if(LoadLevel(checkpointFile))
+				InitializeLevel();
 		}
 
 		#endregion

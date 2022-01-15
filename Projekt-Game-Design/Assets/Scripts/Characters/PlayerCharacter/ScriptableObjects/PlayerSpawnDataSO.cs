@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿/*
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Characters.PlayerCharacter.ScriptableObjects {
@@ -15,3 +16,4 @@ namespace Characters.PlayerCharacter.ScriptableObjects {
         public Sprite profilePicture;
     }
 }
+*/

@@ -15,12 +15,13 @@ using Visual.Healthbar;
 /// </summary> 
 [System.Serializable]
 public class PlayerCharacterSC : MonoBehaviour {
+		public int id;
 		public bool active;
 
     [Header("Basic Stats")]
     // Base stats
     public PlayerTypeSO playerType;
-    public PlayerSpawnDataSO playerSpawnData;
+    // public PlayerSpawnDataSO playerSpawnData;
 
     [SerializeField] private Statistics _statistics;
     [SerializeField] private GridTransform _gridTransform;
@@ -36,16 +37,22 @@ public class PlayerCharacterSC : MonoBehaviour {
     [SerializeField] private Color playerColor;
     [SerializeField] private Color friendlyColor;
     
-    public void Initialize() {
+    public void Initialize(PlayerCharacter_Save saveData) {
+			id = saveData.id;
+			active = saveData.active;
+
 	    //stats
-	    _statistics.StatusValues.InitValues(playerSpawnData.overrideStatusValues);
-	    _statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
+	    _statistics.StatusValues.InitValues(playerType.baseStatusValues);
+			_statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
+
+			_statistics.StatusValues.HitPoints.value = saveData.hitpoints;
+			_statistics.StatusValues.Energy.value = saveData.energy;
 	    
 	    //movement Position
 	    _movementController.movementPointsPerEnergy = playerType.movementPointsPerEnergy;
 
 	    //Grid Position
-	    _gridTransform.gridPosition = playerSpawnData.gridPos;
+	    _gridTransform.gridPosition = saveData.pos;
 
 	    //model
 	    _modelController.prefab = playerType.modelPrefab;
@@ -56,7 +63,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    _modelController.SetFactionMaterial(_statistics.Faction);
 	    
 	    //Equipment
-	    _equipmentController.equipmentID = playerSpawnData.equipmentID;
+	    _equipmentController.playerID = saveData.id; // playerSpawnData.equipmentID;
 	    
 	    //Abilities
 	    _abilityController.BaseAbilities = playerType.basicAbilities;

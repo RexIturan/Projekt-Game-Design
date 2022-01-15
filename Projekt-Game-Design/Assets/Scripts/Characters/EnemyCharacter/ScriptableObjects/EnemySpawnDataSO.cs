@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿/*
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Characters.EnemyCharacter.ScriptableObjects {
@@ -17,3 +18,4 @@ namespace Characters.EnemyCharacter.ScriptableObjects {
 				public Sprite profilePicture;
 		}
 }
+*/

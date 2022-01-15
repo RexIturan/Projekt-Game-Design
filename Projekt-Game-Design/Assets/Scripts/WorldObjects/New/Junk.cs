@@ -22,7 +22,7 @@ namespace WorldObjects
 				// public int junkId;
 				public JunkTypeSO junkType;
 
-				[SerializeField] private Vector3 orientation;
+				public Vector3 orientation;
 
 				public void Initialise(Junk_Save saveData, JunkTypeSO junkType)
 				{

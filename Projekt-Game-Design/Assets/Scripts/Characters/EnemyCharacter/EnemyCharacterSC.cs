@@ -15,7 +15,7 @@ public class EnemyCharacterSC : MonoBehaviour
 		[Header("Basic Stats")]
 		// Base stats
 		public EnemyTypeSO enemyType;
-		public EnemySpawnDataSO enemySpawnData;
+		// public EnemySpawnDataSO enemySpawnData;
 		public EnemyBehaviorSO behavior;
 
 		[SerializeField] private Statistics _statistics;
@@ -35,17 +35,21 @@ public class EnemyCharacterSC : MonoBehaviour
 		public bool noTargetFound;
 		public bool rangeChecked;
 
-		public void Initialize()
+		public void Initialize(Enemy_Save saveData)
 		{
-			//stats
-			_statistics.StatusValues.InitValues(enemySpawnData.overrideStatusValues);
-			_statistics.SetFaction(Faction.Enemy);
+				//stats
+				_statistics.SetFaction(Faction.Enemy);
+				_statistics.StatusValues.InitValues(enemyType.baseStatusValues);
+
+				_statistics.StatusValues.HitPoints.value = saveData.hitpoints;
+				_statistics.StatusValues.Energy.value = saveData.energy;
+
 
 			//movement Position
 			_movementController.movementPointsPerEnergy = enemyType.movementPointsPerEnergy;
 
-			//Grid Position
-			_gridTransform.gridPosition = enemySpawnData.gridPos;
+				//Grid Position
+				_gridTransform.gridPosition = saveData.pos;
 
 			// Equipment
 			// maybe later

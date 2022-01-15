@@ -110,12 +110,11 @@ namespace Grid {
 		// 	AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction);
 		// }
 		
-		public void AddEnemyCharacterAt(Vector3 pos, Faction faction, EnemySpawnDataSO enemySpawnDataSO, EnemyTypeSO enemyTypeSO) {
-			
+		public void AddEnemyCharacterAt(Vector3 pos, Faction faction, EnemyTypeSO enemyTypeSO) {
 			AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction, null, null);
 		}
 		
-		public void AddPlayerCharacterAt(Vector3 pos, Faction faction, PlayerSpawnDataSO playerSpawnDataSO, PlayerTypeSO playerTypeSO) {
+		public void AddPlayerCharacterAt(Vector3 pos, Faction faction, PlayerTypeSO playerTypeSO) {
 			AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction, null, null);
 		}
 		

@@ -5,7 +5,10 @@ using Grid;
 using Level.Grid.CharacterGrid;
 using Level.Grid.ItemGrid;
 using Level.Grid.ObjectGrid;
+using QuestSystem.ScriptabelObjects;
 using SaveSystem.SaveFormats;
+using UnityEngine;
+using WorldObjects;
 
 namespace SaveSystem {
 	public class SaveWriter {
@@ -16,14 +19,20 @@ namespace SaveSystem {
 		// character
 		private CharacterList _characterList;
 
+		// world objects
+		private WorldObjectList _worldObjectList;
+
 		// inventorys
 		private readonly InventorySO _inventory;
 
+		// quests
+		private readonly QuestContainerSO _questContainer;
+
 //////////////////////////////////// Local Functions ///////////////////////////////////////////////
 
-		#region Local Functions
+				#region Local Functions
 
-		private GridData_Save GetGridDataSaveData(GridDataSO gridData) {
+				private GridData_Save GetGridDataSaveData(GridDataSO gridData) {
 			GridData_Save gridDataSave = new GridData_Save {
 				height = gridData.Height,
 				width = gridData.Width,
@@ -78,16 +87,24 @@ namespace SaveSystem {
 		private List<PlayerCharacter_Save> GetPlayerSaveData(CharacterList characterList) {
 			List<PlayerCharacter_Save> playerChars = new List<PlayerCharacter_Save>();
 
+			List<GameObject> allPlayers = new List<GameObject>();
+			allPlayers.AddRange(characterList.playerContainer);
+			allPlayers.AddRange(characterList.friendlyContainer);
+
 			if ( characterList ) {
-				foreach ( var player in characterList.playerContainer ) {
+				foreach ( var player in allPlayers ) {
 					var playerCharacterSc = player.GetComponent<PlayerCharacterSC>();
 					var pcGridTransform = player.GetComponent<GridTransform>();
+					var playerStatistics = player.GetComponent<Statistics>();
 					
 					playerChars.Add(
 						new PlayerCharacter_Save() {
+							id = playerCharacterSc.id,
+							active = playerCharacterSc.active,
 							plyerTypeId = playerCharacterSc.playerType.id,
-							plyerSpawnDataId = playerCharacterSc.playerSpawnData.id,
-							pos = pcGridTransform.gridPosition
+							pos = pcGridTransform.gridPosition,
+							hitpoints = playerStatistics.StatusValues.HitPoints.value,
+							energy = playerStatistics.StatusValues.Energy.value
 						});
 				}	
 			}
@@ -97,21 +114,95 @@ namespace SaveSystem {
 
 		private List<Enemy_Save> GetEnemySaveData(CharacterList characterList) {
 			List<Enemy_Save> enemyChars = new List<Enemy_Save>();
+						
+			List<GameObject> allEnemies = new List<GameObject>();
+			allEnemies.AddRange(characterList.enemyContainer);
+			allEnemies.AddRange(characterList.deadEnemies);
 
 			if ( characterList ) {
-				foreach ( var enemy in characterList.playerContainer ) {
+				foreach ( var enemy in characterList.enemyContainer ) {
 					var enemySC = enemy.GetComponent<EnemyCharacterSC>();
 					var enemyGridTransform = enemy.GetComponent<GridTransform>();
+					var enemyStatistics = enemy.GetComponent<Statistics>();
+
 					enemyChars.Add(
 						new Enemy_Save() {
 							enemyTypeId = enemySC.enemyType.id,
-							enemySpawnDataId = enemySC.enemySpawnData.id,
-							pos = enemyGridTransform.gridPosition
+							pos = enemyGridTransform.gridPosition,
+							hitpoints = enemyStatistics.StatusValues.HitPoints.value,
+							energy = enemyStatistics.StatusValues.Energy.value,
 						});
 				}	
 			}
 			
 			return enemyChars;
+		}
+
+		private List<Door_Save> GetDoorsSaveData(WorldObjectList worldObjectList) {
+			List<Door_Save> doors = new List<Door_Save>();
+			
+			foreach(GameObject doorObj in worldObjectList.doors) {
+				Door doorComp = doorObj.GetComponent<Door>();
+				GridTransform doorTrans = doorObj.GetComponent<GridTransform>();
+				Statistics doorStats = doorObj.GetComponent<Statistics>();
+
+				doors.Add(new Door_Save()
+				{
+					doorTypeId = doorComp.doorType.id,
+					gridPos = doorTrans.gridPosition,
+					orientation = doorComp.orientation,
+					open = doorComp.open,
+					keyIds = doorComp.keyIds,
+					switchIds = doorComp.switchIds,
+					triggerIds = doorComp.triggerIds,
+					remainingSwitchIds = doorComp.remainingSwitches,
+					remainingTriggerIds = doorComp.remainingTrigger,
+					currentHitPoints =  doorStats.StatusValues.HitPoints.value
+				});
+			}
+
+			return doors;
+		}
+
+		private List<Switch_Save> GetSwitchesSaveData(WorldObjectList worldObjectList) {
+			List<Switch_Save> switches = new List<Switch_Save>();
+			
+			foreach(GameObject switchObj in worldObjectList.switches) {
+				SwitchComponent switchComp = switchObj.GetComponent<SwitchComponent>();
+				GridTransform switchTrans = switchObj.GetComponent<GridTransform>();
+
+				switches.Add(new Switch_Save()
+				{
+					switchId = switchComp.switchId,
+					activated = switchComp.IsActivated,
+					switchTypeId = switchComp.switchType.id,
+					gridPos = switchTrans.gridPosition,
+					orientation = switchComp.orientation
+				});
+			}
+
+			return switches;
+		}
+
+		private List<Junk_Save> GetJunksSaveData(WorldObjectList worldObjectList) {
+			List<Junk_Save> junks = new List<Junk_Save>();
+			
+			foreach(GameObject junkObj in worldObjectList.junks) {
+				Junk junkComp = junkObj.GetComponent<Junk>();
+				GridTransform junkTrans = junkObj.GetComponent<GridTransform>();
+				Statistics junkStats = junkObj.GetComponent<Statistics>();
+
+				junks.Add(new Junk_Save()
+				{
+					junkTypeId = junkComp.junkType.id,
+					gridPos = junkTrans.gridPosition,
+					orientation = junkComp.orientation,
+					broken = junkComp.broken,
+					currentHitPoints = junkStats.StatusValues.HitPoints.value
+				});
+			}
+
+			return junks;
 		}
 
 		private Inventory_Save GetInventorySaveData(InventorySO inventory) {
@@ -146,6 +237,21 @@ namespace SaveSystem {
 			return equipmentInventorys;
 		}
 
+		private List<Quest_Save> GetQuestSaveData(QuestContainerSO questContainer) {
+			List<Quest_Save> quests = new List<Quest_Save>();
+			
+			foreach(QuestSO quest in questContainer.activeQuests) {
+				quests.Add(new Quest_Save()
+				{
+					questId = quest.questId,
+					active = quest.IsActive,
+					currentTaskIndex = quest.currentTaskIndex
+				});
+			}
+			
+			return quests;
+		}
+
 		#endregion
 
 /////////////////////////////////////// Public Functions ///////////////////////////////////////////
@@ -155,28 +261,35 @@ namespace SaveSystem {
 		public SaveWriter(
 			GridContainerSO gridContaier, 
 			GridDataSO gridData,
-			InventorySO inventory) {
+			InventorySO inventory,
+			QuestContainerSO questContainer) {
 
 			_gridContaier = gridContaier;
 			_globalGridData = gridData;
 			_inventory = inventory;
+			_questContainer = questContainer;
 		}
 
-		public void SetRuntimeReferences(CharacterList characterList) {
+		public void SetRuntimeReferences(CharacterList characterList, WorldObjectList worldObjectList) {
 			_characterList = characterList;
+			_worldObjectList = worldObjectList;
 		}
 		
 		public Save WirteLevelToSave() {
 			Save save = new Save {
+				inventory = GetInventorySaveData(_inventory),
+				equipmentInventory = GetEquipmentInventorySaveData(_inventory),
+				quests = GetQuestSaveData(_questContainer),
 				gridDataSave = GetGridDataSaveData(_globalGridData),
+				players = GetPlayerSaveData(_characterList),
+				enemies = GetEnemySaveData(_characterList),
+				doors = GetDoorsSaveData(_worldObjectList),
+				switches = GetSwitchesSaveData(_worldObjectList),
+				junks = GetJunksSaveData(_worldObjectList),
 				tileGrids = GetTileGridSaveData(_gridContaier),
 				itemGrids = GetItemGridSaveData(_gridContaier),
 				characterGrids = GetCharacterGridSaveData(_gridContaier),
-				objectGrids = GetObjectGridSaveData(_gridContaier),
-				players = GetPlayerSaveData(_characterList),
-				enemies = GetEnemySaveData(_characterList),
-				inventory = GetInventorySaveData(_inventory),
-				equipmentInventory = GetEquipmentInventorySaveData(_inventory)
+				objectGrids = GetObjectGridSaveData(_gridContaier)
 			};
 
 			return save;

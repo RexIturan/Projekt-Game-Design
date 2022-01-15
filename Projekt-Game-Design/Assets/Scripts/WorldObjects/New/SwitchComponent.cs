@@ -24,7 +24,7 @@ namespace WorldObjects
 				public int switchId;
 				public SwitchTypeSO switchType;
 				[SerializeField] private bool activated;
-				[SerializeField] private Vector3 orientation;
+				public Vector3 orientation;
 				
 				public bool IsActivated {
 					get { return activated; }
@@ -54,6 +54,9 @@ namespace WorldObjects
 						// Instantiate(switchType.model, transform);
 
 						gameObject.GetComponent<GridTransform>().gridPosition = switch_Save.gridPos;
+
+						if ( switch_Save.activated )
+								SwitchActivated();
 				}
 
 				private void InitialiseOrientation()

@@ -5,7 +5,7 @@ namespace Characters.EnemyCharacter.ScriptableObjects {
     [CreateAssetMenu(fileName = "New EnemyDataContainerSO", menuName = "Character/EnemyDataContianerSO")]
     public class EnemyDataContainerSO : ScriptableObject {
         public List<EnemyTypeSO> enemyTypes;
-        public List<EnemySpawnDataSO> enemySpawnData;
+				public List<EnemyBehaviorSO> enemyBehaviours;
 				// maybe add one for behavior later on
     }
 }

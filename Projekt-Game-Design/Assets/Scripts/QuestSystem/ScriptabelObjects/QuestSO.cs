@@ -8,6 +8,8 @@ using UnityEditor;
 namespace QuestSystem.ScriptabelObjects {
 	[CreateAssetMenu(fileName = "NewQuest", menuName = "Quest/new Quest", order = 0)]
 	public class QuestSO : ScriptableObject {
+		public int questId;
+
 		[TextArea][SerializeField] private string description;
 		[SerializeField] private bool overrideAvailable;
 		[SerializeField] private bool disabled;
@@ -20,7 +22,7 @@ namespace QuestSystem.ScriptabelObjects {
 		[SerializeField] private List<QuestSO> prerequisits;
 		
 		//tasks
-		[SerializeField] private int currentTaskIndex;
+		public int currentTaskIndex;
 		[SerializeField] private int nextTaskIndex;
 		[SerializeField] private List<Task_Wrapper> tasks = new List<Task_Wrapper>();
 

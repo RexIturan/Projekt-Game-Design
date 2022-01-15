@@ -8,6 +8,7 @@ namespace SaveSystem.SaveFormats
 		public class Switch_Save
 		{
 				public int switchId;
+				public bool activated;
 				public int switchTypeId;
 				public Vector3Int gridPos;
 				public Vector3 orientation;

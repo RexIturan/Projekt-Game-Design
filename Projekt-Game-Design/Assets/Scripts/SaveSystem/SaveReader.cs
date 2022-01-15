@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Characters;
 using Grid;
 using Level.Grid.ItemGrid;
+using QuestSystem.ScriptabelObjects;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 using WorldObjects;
@@ -19,6 +20,9 @@ namespace SaveSystem {
 
 		// inventorys
 		private readonly InventorySO _inventory;
+
+		// quests
+		private readonly QuestContainerSO _questContainer;
 
 		// dictionarys
 		private ItemContainerSO _itemContainerSo;
@@ -139,6 +143,10 @@ namespace SaveSystem {
 				gridContaier.items[saveItem.gridPos.y].GetGridObject(pos).SetId(saveItem.id);
 			}
 		}
+
+		private void ReadQuests(List<Quest_Save> saveQuests, QuestContainerSO questContainer) {
+			questContainer.Initialise(saveQuests);
+		}
 		
 		#endregion
 		
@@ -149,11 +157,13 @@ namespace SaveSystem {
 			GridContainerSO gridContaier, 
 			GridDataSO gridData,
 			InventorySO inventory,
+			QuestContainerSO questContainer,
 			ItemContainerSO itemContainerSO) {
 			
 			_gridContaier = gridContaier;
 			_gridData = gridData;
 			_inventory = inventory;
+			_questContainer = questContainer;
 			_itemContainerSo = itemContainerSO;
 		}
 
@@ -177,6 +187,8 @@ namespace SaveSystem {
 			ReadEquipmentInventory(save.equipmentInventory, _inventory);
 			
 			ReadItems(save.items, _gridContaier);
+
+			ReadQuests(save.quests, _questContainer);
 		}
 
 

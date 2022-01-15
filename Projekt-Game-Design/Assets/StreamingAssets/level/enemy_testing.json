@@ -12,44 +12,48 @@
     },
     "players": [
       {
+            "id": 0,
             "active": true,
             "plyerTypeId": 0,
-            "plyerSpawnDataId": 0,
-            "equipmentInventoryId": 0,
             "pos": {
                 "x": 1,
                 "y": 1,
                 "z": 1
-            }
+            },
+            "hitpoints": 100,
+            "energy": 100
       }
       ],
     "enemies": [
       {
             "enemyTypeId": 0,
-            "enemySpawnDataId": 0,
             "pos": {
                 "x": 3,
                 "y": 1,
                 "z": 3
-            }
+            },
+            "hitpoints": 100,
+            "energy": 100
       },
       {
             "enemyTypeId": 0,
-            "enemySpawnDataId": 1,
             "pos": {
                 "x": 4,
                 "y": 1,
-                "z": 5
-            }
+                "z": 4
+            },
+            "hitpoints": 100,
+            "energy": 100
       },
       {
             "enemyTypeId": 1,
-            "enemySpawnDataId": 2,
             "pos": {
                 "x": 4,
                 "y": 1,
                 "z": 5
-            }
+            },
+            "hitpoints": 100,
+            "energy": 100
       }
       ],
     "inventory": {

@@ -11,7 +11,8 @@
         "FogOfWar",
         "Unity.Animation.Rigging",
         "UnityEditor.UIElementsModule",
-        "GDP01.Util"
+        "GDP01.Util",
+        "GDP01.QuestSystem.Editor"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
