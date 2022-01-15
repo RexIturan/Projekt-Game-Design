@@ -82,7 +82,7 @@ namespace SaveSystem {
 		private void ReadInventory(Inventory_Save saveInventory, InventorySO inventory) {
 			inventory.playerInventory.Clear();
 			foreach (var itemID in saveInventory.itemIds) {
-				//todo inventory should just have indices
+				//inventory has just indices
 				inventory.playerInventory.Add(_itemContainerSo.itemList[itemID]);    
 			}
 		}
@@ -93,7 +93,7 @@ namespace SaveSystem {
 			
 			foreach (var equipmentInventory in saveEquipmentInventory) {
 				InventorySO.Equipment equipment = new InventorySO.Equipment();
-				
+				//todo move to Equipment.Init from save or so 
 				if(equipmentInventory.itemIds[0] >= 0)
 					equipment.weaponLeft = (WeaponSO) _itemContainerSo.itemList[equipmentInventory.itemIds[0]];
 				else
@@ -121,6 +121,20 @@ namespace SaveSystem {
 									
 				inventory.equipmentInventories.Add(equipment);
 			}
+			
+			//todo rethink this -> do here, maybe get initialised chars as parameter?
+			var characterList = CharacterList.FindInstant();
+			if ( characterList is { } ) {
+				var playerCharNum = characterList.playerContainer.Count +
+				                    characterList.friendlyContainer.Count;
+				var equipmentInvCount = inventory.equipmentInventories.Count;
+				if ( equipmentInvCount < playerCharNum) {
+					for ( int i = 0; i < playerCharNum - equipmentInvCount; i++ ) {
+						inventory.equipmentInventories.Add(new InventorySO.Equipment());
+					}
+				}
+			}
+			
 		}
 		
 		private void ReadItems(List<Item_Save> saveItems, GridContainerSO gridContaier) {

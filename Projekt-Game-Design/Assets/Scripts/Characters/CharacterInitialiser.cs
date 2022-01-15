@@ -15,11 +15,9 @@ namespace Characters {
 
 		public void Initialise(List<PlayerCharacter_Save> saveDataPlayers,
 			List<Enemy_Save> saveDataEnemys) {
-			var characters = GameObject.Find("Characters");
+			_characterList = CharacterList.FindInstant();
 
-			if ( characters ) {
-				_characterList = characters.GetComponent<CharacterList>();
-
+			if ( _characterList ) {
 				_characterList.enemyContainer.Clear();
 				_characterList.playerContainer.Clear();
 
@@ -34,7 +32,6 @@ namespace Characters {
 					var obj = Instantiate(type.prefab, playerParent, true);
 					var playerSC = obj.GetComponent<PlayerCharacterSC>();
 					playerSC.playerType = type;
-					// playerSC.playerSpawnData = spawnData;
 					playerSC.Initialize(playerSave);
 
 					if (playerSC.active)
@@ -50,7 +47,6 @@ namespace Characters {
 					var enemySC = obj.GetComponent<EnemyCharacterSC>();
           var enemyGridTransform = obj.GetComponent<GridTransform>();
 					enemySC.enemyType = type;
-					// enemySC.enemySpawnData = spawnData;
 					enemySC.Initialize(enemySave);
 					_characterList.enemyContainer.Add(enemySC.gameObject);
 				}

@@ -147,7 +147,8 @@ namespace Player {
 		}
 
 		private void Update() {
-			// if ( inputCache.IsMouseOverUI ) return;
+			if ( inputCache.IsMouseOverUI ) return;
+			//todo(vincent) i maybe destroyed this
 			if ( menuOpened ) return;
 			
 			//InputCache? || MousePosition

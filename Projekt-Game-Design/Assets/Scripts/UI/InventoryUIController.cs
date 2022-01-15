@@ -11,8 +11,7 @@ using UnityEngine.UIElements;
 
 public class InventoryUIController : MonoBehaviour {
 	
-	// tab stuff
-	//
+	// tab Categories
 	//Für das Inventar
 	public enum InventoryTab {
 		None,
@@ -42,6 +41,7 @@ public class InventoryUIController : MonoBehaviour {
 
 	[Header("Sending Events On")]
 	// OutputChannel zwischen den Inventaren
+	//todo shorter names?
 	[SerializeField] private IntIntEquipmentPositionEquipEventChannelSO EquipEvent;
 	[SerializeField] private IntEquipmentPositionUnequipEventChannelSO UnequipEvent;
 	[SerializeField] private VoidEventChannelSO menuOpenedEvent;
@@ -182,7 +182,7 @@ public class InventoryUIController : MonoBehaviour {
 		PlayerCharacterSC currPlayer = characterList.playerContainer[_currentPlayerSelected]
 			.GetComponent<PlayerCharacterSC>();
 
-		int playerID = currPlayer.GetComponent<EquipmentController>().playerID;
+		int playerID = currPlayer.GetComponent<EquipmentController>().equipmentID;
 
 		if ( inventory.equipmentInventories[playerID].weaponLeft) {
 			weaponLeft.HoldItem(inventory.equipmentInventories[playerID].weaponLeft);
@@ -542,6 +542,8 @@ public class InventoryUIController : MonoBehaviour {
 		// Callbacks fürs draggen
 		// _ghostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
 		_ghostIcon.RegisterCallback<PointerUpEvent>(OnPointerUp);
+		
+		SetInventoryVisibility(false);
 		
 		InitializeInventory();
 		InitializeEquipmentInventory();

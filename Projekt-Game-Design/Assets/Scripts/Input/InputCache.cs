@@ -56,7 +56,7 @@ namespace Input {
 		
 /////////////////////////////////////// Local Variables ////////////////////////////////////////////
 
-		private int _overUICount = 0;
+		[SerializeField] private int _overUICount = 0;
 		private bool _mouseIsOverUI = false;
 
 		
@@ -94,6 +94,7 @@ namespace Input {
 		}
 
 		private void OnEnable() {
+			_overUICount = 0;
 			mouseOverChangedEC.OnEventRaised += SetMouseOverUI;
 		}
 
@@ -160,7 +161,7 @@ namespace Input {
 				}
 				if ( _overUICount < 0 ) {
 					_overUICount = 0;
-					Debug.LogError("InputCache > SetMouseOverUI \n too much Elements want to disable");
+					// Debug.LogError("InputCache > SetMouseOverUI \n too much Elements want to disable");
 				}
 				// Debug.Log($"InputCache > SetMouseOverUI:\nDec -- ref: {_overUICount} value: {IsMouseOverUI}" );
 			}

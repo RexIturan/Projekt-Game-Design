@@ -147,5 +147,7 @@ public class InGameMenuUIController : MonoBehaviour {
 		_inGameMenuContainer.Q<Button>("QuitButton").clicked += QuitGame;
 
 		_inGameMenuContainer.Q<Button>("MainMenuButton").clicked += MainMenuButtonPressed;
+
+		HideMenu();
 	}
 }

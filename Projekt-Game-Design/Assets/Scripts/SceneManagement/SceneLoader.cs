@@ -19,9 +19,8 @@ public class SceneLoader : MonoBehaviour {
 
 	[SerializeField] private LoadEventChannelSO loadMenu;
 
-	[Header("Broadcasting on")] [SerializeField]
-	private BoolEventChannelSO toggleLoadingScreen;
-
+	[Header("Broadcasting on")] 
+	[SerializeField] private BoolEventChannelSO toggleLoadingScreen;
 	[SerializeField] private VoidEventChannelSO enableLoadingScreenInput;
 	[SerializeField] private VoidEventChannelSO onSceneReady;
 
@@ -179,8 +178,6 @@ public class SceneLoader : MonoBehaviour {
 		//All the scenes have been loaded, so we assume the first in the array is ready to become the active scene
 		Scene s = ( _loadingOperationHandles[0].Result ).Scene;
 		SceneManager.SetActiveScene(s);
-
-		// LightProbes.TetrahedralizeAsync();
 
 		onSceneReady.RaiseEvent();
 	}

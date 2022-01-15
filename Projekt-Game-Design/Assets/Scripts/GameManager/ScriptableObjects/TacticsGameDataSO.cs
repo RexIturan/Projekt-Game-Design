@@ -14,6 +14,7 @@ public class TacticsGameDataSO : ScriptableObject {
 
     public void GoToNextTurn() {
         turnNum++;
+        //todo use stack for order
         currentPlayerIndex = ((currentPlayerIndex +1 >= turnOrder.Count) ? 0 : currentPlayerIndex +1);
         currentPlayer = turnOrder[currentPlayerIndex];
     }

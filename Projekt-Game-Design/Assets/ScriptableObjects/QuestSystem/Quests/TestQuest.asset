@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
-  m_Name: 4_KeyPress_left
+  m_Name: 4_1_KeyPress_left
   m_EditorClassIdentifier: 
   active: 0
   done: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
-  m_Name: 3_KeyPress_right
+  m_Name: 3_0_KeyPress_right
   m_EditorClassIdentifier: 
   active: 0
   done: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
     title: 
     description: 
     instructions: 
-  count: 0
+  count: 2
   subTasks:
   - {fileID: -3254571590361733681}
   - {fileID: -4576197144052662707}

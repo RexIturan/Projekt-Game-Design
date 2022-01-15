@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Characters;
 using UnityEngine;
+using Visual.Healthbar;
 
 namespace Combat {
 	//todo Targatsble Or Damageable
@@ -17,6 +18,9 @@ namespace Combat {
 
 		[SerializeField] private Statistics statistics;
 		[SerializeField] private GridTransform gridTransform;
+		
+		public bool IsAlive => !IsDead;
+		public bool IsDead => statistics.StatusValues.HitPoints.IsMin();
 
 		public void Initialise() {
 			statistics = gameObject.GetComponent<Statistics>();
@@ -25,6 +29,12 @@ namespace Combat {
 		
 		public void ReceivesDamage(int damage) {
 			statistics.StatusValues.HitPoints.Decrease(damage);
+			
+			if ( IsDead ) {
+				var healthbar = GetComponentInChildren<HealthbarController>();
+				healthbar.UpdateVisuals();
+				healthbar.StartHideAfterDelay();	
+			}
 		}
 
 		public Vector3Int GetGridPosition() {

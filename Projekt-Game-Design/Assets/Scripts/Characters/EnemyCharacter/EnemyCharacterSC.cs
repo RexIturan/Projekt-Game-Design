@@ -44,31 +44,37 @@ public class EnemyCharacterSC : MonoBehaviour
 				_statistics.StatusValues.HitPoints.value = saveData.hitpoints;
 				_statistics.StatusValues.Energy.value = saveData.energy;
 
-				//movement Position
-				_movementController.movementPointsPerEnergy = enemyType.movementPointsPerEnergy;
+
+			//movement Position
+			_movementController.movementPointsPerEnergy = enemyType.movementPointsPerEnergy;
 
 				//Grid Position
 				_gridTransform.gridPosition = saveData.pos;
 
-				// Equipment
-				// maybe later
+			// Equipment
+			// maybe later
 
-				//Abilities
-				_abilityController.RefreshAbilities();
-				_abilityController.BaseAbilities = enemyType.basicAbilities;
-				_abilityController.damageInflicted = true;
+			//Abilities
+			_abilityController.RefreshAbilities();
+			_abilityController.BaseAbilities = enemyType.basicAbilities;
+			_abilityController.damageInflicted = true;
 
-				//model
-				_modelController.prefab = enemyType.modelPrefab;
-				_modelController.Initialize();
-				_modelController.SetStandardHead(enemyType.headModel);
-				_modelController.SetStandardBody(enemyType.bodyModel);
-				_modelController.SetMeshHead(null);
-				_modelController.SetMeshBody(null);
+			//model
+			_modelController.prefab = enemyType.modelPrefab;
+			_modelController.Initialize();
+			_modelController.SetStandardHead(enemyType.headModel);
+			_modelController.SetStandardBody(enemyType.bodyModel);
+			_modelController.SetMeshHead(null);
+			_modelController.SetMeshBody(null);
 
-				//ai
-				behavior = enemyType.behaviour;
-				_aIController.SetBehavior(behavior);
+			//ai
+			behavior = enemyType.behaviour;
+			_aIController.SetBehavior(behavior);
+		}
+		
+		public void InitializeFromSave(Enemy_Save enemySave) {
+			Initialize();
+			_gridTransform.gridPosition = enemySave.pos;
 		}
 }
 

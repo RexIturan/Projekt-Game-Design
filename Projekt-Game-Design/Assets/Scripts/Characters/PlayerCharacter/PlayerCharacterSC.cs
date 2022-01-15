@@ -6,6 +6,7 @@ using Characters.PlayerCharacter.ScriptableObjects;
 using Combat;
 using SaveSystem.SaveFormats;
 using UnityEngine;
+using Visual.Healthbar;
 
 
 /// <summary>
@@ -29,6 +30,12 @@ public class PlayerCharacterSC : MonoBehaviour {
     [SerializeField] private EquipmentController _equipmentController;
     [SerializeField] private AbilityController _abilityController;
     [SerializeField] private ModelController _modelController;
+
+    [SerializeField] private HealthbarController _healthbarController;
+
+    //todo move to some central location
+    [SerializeField] private Color playerColor;
+    [SerializeField] private Color friendlyColor;
     
     public void Initialize(PlayerCharacter_Save saveData) {
 			id = saveData.id;
@@ -49,19 +56,28 @@ public class PlayerCharacterSC : MonoBehaviour {
 
 	    //model
 	    _modelController.prefab = playerType.modelPrefab;
-			_modelController.Initialize();
-			_modelController.SetStandardHead(playerType.headModel);
-			_modelController.SetStandardBody(playerType.bodyModel);
+	    _modelController.Initialize();
+	    _modelController.SetStandardHead(playerType.headModel);
+	    _modelController.SetStandardBody(playerType.bodyModel);
 			
-			_modelController.SetFactionMaterial(_statistics.Faction);
+	    _modelController.SetFactionMaterial(_statistics.Faction);
 	    
 	    //Equipment
 	    _equipmentController.playerID = saveData.id; // playerSpawnData.equipmentID;
 	    
 	    //Abilities
 	    _abilityController.BaseAbilities = playerType.basicAbilities;
-			_abilityController.LastSelectedAbilityID = -1;
-			_abilityController.damageInflicted = true;
+	    _abilityController.LastSelectedAbilityID = -1;
+	    _abilityController.damageInflicted = true;
+	    
+	    _healthbarController.SetColor(_statistics.Faction == Faction.Player ? playerColor : friendlyColor);
+    }
+    
+    public void InitializeFromSave(PlayerCharacter_Save playerCharacterSave) {
+	    Initialize();
+	    active = playerCharacterSave.active;
+	    _gridTransform.gridPosition = playerCharacterSave.pos;
+	    _equipmentController.equipmentID = playerCharacterSave.equipmentInventoryId;
     }
 
 		public void Start() {
@@ -73,6 +89,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 				active = true;
 				_statistics.SetFaction(Faction.Player);
 				_modelController.SetFactionMaterial(_statistics.Faction);
+				_healthbarController.SetColor(playerColor);
 
 				CharacterList characters = CharacterList.FindInstant();
 				characters.friendlyContainer.Remove(gameObject);
