@@ -9,6 +9,7 @@ namespace QuestSystem.ScriptabelObjects {
 	[CreateAssetMenu(fileName = "NewQuest", menuName = "Quest/new Quest", order = 0)]
 	public class QuestSO : ScriptableObject {
 		[TextArea][SerializeField] private string description;
+		[SerializeField] private bool overrideAvailable;
 		[SerializeField] private bool disabled;
 		[SerializeField] private bool available;
 		[SerializeField] private bool active;
@@ -89,7 +90,7 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 
 		public void UpdateAvailability() {
-			available = HasPrerequisitesSatisfied() &&
+			available = overrideAvailable || HasPrerequisitesSatisfied() &&
 			            !active && 
 			            !IsDisabled &&
 			            ( ( repeatable && finished ) || !finished );
