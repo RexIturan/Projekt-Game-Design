@@ -18,18 +18,18 @@ MonoBehaviour:
   Animation: 10
   activationSound: slash_01
   projectilePrefab: {fileID: 0}
-  timeUntilDamage: 0.5
+  timeUntilDamage: 0.3
   repeated: 0
   damaging: 1
   targets: 1
   moveToTarget: 0
   range: 0
   conditions: 0
-  costs: 1
+  costs: 8
   targetedEffects:
   - effect:
       type: 1
-      baseDamage: 6
+      baseDamage: 8
       strengthBonus: 0.52
       dexterityBonus: 0
       intelligenceBonus: 0

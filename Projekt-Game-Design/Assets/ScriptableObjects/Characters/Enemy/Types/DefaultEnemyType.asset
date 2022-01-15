@@ -27,7 +27,7 @@ MonoBehaviour:
   - _name: Base Energy
     _type: 4
     _value: 0
-    _max: 5
+    _max: 20
     _min: 0
   - _name: View Distance
     _type: 8

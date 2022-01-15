@@ -25,11 +25,11 @@ MonoBehaviour:
   moveToTarget: 0
   range: 5
   conditions: 0
-  costs: 2
+  costs: 30
   targetedEffects:
   - effect:
       type: 1
-      baseDamage: 100
+      baseDamage: 25
       strengthBonus: 0.52
       dexterityBonus: 0
       intelligenceBonus: 0

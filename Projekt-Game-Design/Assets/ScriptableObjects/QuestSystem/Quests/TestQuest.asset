@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
   m_Name: 4_1_KeyPress_left
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   done: 0
   textTextBody:
     title: Press [A][Arrow Left]
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
   m_Name: 3_0_KeyPress_right
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   done: 0
   textTextBody:
     title: Press [D][Arrow Right]
@@ -107,14 +107,14 @@ MonoBehaviour:
   questId: 1
   description: 
   overrideAvailable: 0
-  disabled: 0
+  disabled: 1
   available: 0
-  active: 1
+  active: 0
   finished: 0
   repeatable: 0
   prerequisits: []
   overrideTaskIndex: 2
-  currentTaskIndex: 2
+  currentTaskIndex: 0
   nextTaskIndex: 0
   tasks:
   - name: camera-up
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf8303fb84b400a8821a24348d133d5, type: 3}
   m_Name: 2_Composite_right - left
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   done: 0
   textTextBody:
     title: 

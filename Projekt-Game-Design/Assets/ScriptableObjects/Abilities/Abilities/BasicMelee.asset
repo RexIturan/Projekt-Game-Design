@@ -17,13 +17,15 @@ MonoBehaviour:
   description: 'Einfacher Nahkampf. Kosten: 1'
   Animation: 8
   activationSound: slash_01
+  projectilePrefab: {fileID: 0}
+  timeUntilDamage: 0.15
   repeated: 1
   damaging: 1
   targets: 20
   moveToTarget: 0
   range: 1
   conditions: 0
-  costs: 1
+  costs: 8
   targetedEffects:
   - effect:
       type: 1

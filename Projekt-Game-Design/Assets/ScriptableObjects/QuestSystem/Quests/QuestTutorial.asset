@@ -34,11 +34,12 @@ MonoBehaviour:
   active: 0
   done: 0
   textTextBody:
-    title: 
-    description: 
-    instructions: 
-  neededCount: 0
-  enemyType: {fileID: 0}
+    title: Dangers ahead...
+    description: Ahead, you hear rapid footfalls of others. More enemies? Your companions?
+      Time to find out.
+    instructions: 'Find your companions. Slay the remaining enemies. '
+  neededCount: 1
+  enemyType: {fileID: 11400000, guid: 1e39128114910f6479d38d0413d19eb0, type: 2}
 --- !u!114 &-4343022958855784444
 MonoBehaviour:
   m_ObjectHideFlags: 0
