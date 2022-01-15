@@ -5,7 +5,9 @@ using Events.ScriptableObjects;
 using SaveSystem.SaveFormats;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using WorldObjects.Doors;
 
 namespace WorldObjects
 {
@@ -34,6 +36,8 @@ namespace WorldObjects
 
 				public Vector3 orientation;
 
+				[SerializeField] private SlidingDoorController slidingDoorController;
+
 				public void Initialise(Door_Save saveData, DoorTypeSO doorType)
 				{
 						this.doorType = doorType;
@@ -50,7 +54,7 @@ namespace WorldObjects
 								targetable.Initialise();
 						}
 
-						Instantiate(doorType.model, transform);
+						// Instantiate(doorType.model, transform);
 
 						gameObject.GetComponent<GridTransform>().gridPosition = saveData.gridPos;
 
@@ -64,6 +68,25 @@ namespace WorldObjects
 						triggerIds = saveData.triggerIds;
 						remainingSwitches = saveData.remainingSwitchIds;
 						remainingTrigger = saveData.remainingTriggerIds;
+
+						if ( keyIds.Count > 0 ) {
+							slidingDoorController.InitValues(DoorType.Key, keyIds.Count);
+						} else if ( switchIds.Count > 0 ) {
+							slidingDoorController.InitValues(DoorType.Switch, switchIds.Count);
+						}
+
+						if ( remainingSwitches.Count < switchIds.Count ) {
+							var activeSwitches = switchIds.Count - remainingSwitches.Count;
+							for ( int i = 0; i < activeSwitches; i++ ) {
+								slidingDoorController.OpenLock();
+							}
+						}
+
+						UpdateDoor();
+						
+						if ( open ) {
+							DoorOpened();
+						}
 				}
 
 				// causes the model's front face to go into the direction 
@@ -92,12 +115,14 @@ namespace WorldObjects
 				private void HandleSwitchActivatedEvent(int switchId)
 				{
 						remainingSwitches.Remove(switchId);
+						slidingDoorController.OpenLock();
 						UpdateDoor();
 				}
 
 				private void HandleTriggerActivatedEvent(int triggerId)
 				{
 						remainingTrigger.Remove(triggerId);
+						slidingDoorController.OpenLock();
 						UpdateDoor();
 				}
 
@@ -128,9 +153,11 @@ namespace WorldObjects
 														hasAllKeys = false;
 										}
 
+										hasAllKeys = keyIds.All(i => inventory.playerInventory.Any(item => item.id == i));
+
 										if ( hasAllKeys && remainingSwitches.Count == 0 && remainingTrigger.Count == 0 )
 												locked = false;
-
+										
 										if ( !locked )
 										{
 												CharacterList characters = CharacterList.FindInstant();
@@ -159,6 +186,7 @@ namespace WorldObjects
 
 				private void DoorDestroyed()
 				{
+						slidingDoorController.OpenDoor();
 						open = true;
 						broken = true;
 
@@ -167,6 +195,7 @@ namespace WorldObjects
 
 				private void DoorOpened()
 				{
+						slidingDoorController.OpenDoor();
 						open = true;
 
 						SoundManager.FindSoundManager().PlaySound(doorType.openingSound);

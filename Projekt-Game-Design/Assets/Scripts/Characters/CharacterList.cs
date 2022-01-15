@@ -15,7 +15,7 @@ public class CharacterList : MonoBehaviour
 		[SerializeField] public List<GameObject> deadEnemies;
 
     public static CharacterList FindInstant() {
-	    return GameObject.Find("Characters").GetComponent<CharacterList>();
+	    return FindObjectOfType<CharacterList>();
     }
 
     public int GetDeapEnemyCount(EnemyTypeSO enemyType) {

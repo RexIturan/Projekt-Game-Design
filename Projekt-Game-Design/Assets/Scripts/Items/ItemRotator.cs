@@ -8,7 +8,7 @@ namespace Items {
 
 		[SerializeField] private float rotationCycleLength = 2;
 		[SerializeField] private float moveCycleDuration = 2;
-		[SerializeField] private Ease moveEsse = Ease.InOutBounce;
+		[SerializeField] private Ease moveEase = Ease.InOutBounce;
 		[SerializeField] private float moveHeight = 0.1f;
 		
 		private void Start() {
@@ -21,7 +21,7 @@ namespace Items {
 				.SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
 
 			itemModel.DOMoveY(moveHeight + currentPosition.y, moveCycleDuration * 0.5f, false).SetLoops(-1, LoopType.Yoyo)
-				.SetEase(moveEsse);
+				.SetEase(moveEase);
 
 			// itemModel.transform.DOLocalRotate(
 			// 		new Vector3(0, 360, 0), 

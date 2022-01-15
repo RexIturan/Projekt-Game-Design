@@ -45,8 +45,7 @@ namespace QuestSystem.ScriptabelObjects {
 						activeQuests.Add(quest);
 						quest.Activate();
 					}
-				}
-				else {
+				} else {
 					quest.UpdateQuestState();
 					if ( !quest.IsActive ) {
 						activeQuests.Remove(quest);
