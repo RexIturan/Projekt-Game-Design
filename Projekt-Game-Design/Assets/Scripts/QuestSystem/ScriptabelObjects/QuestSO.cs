@@ -44,6 +44,9 @@ namespace QuestSystem.ScriptabelObjects {
 		public bool IsDone => finished;
 		public bool IsActive => active;
 
+
+		private bool IsOverridden => overrideAvailable && !finished;
+		
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////
 
 		public void Activate() {
@@ -90,7 +93,8 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 
 		public void UpdateAvailability() {
-			available = overrideAvailable || HasPrerequisitesSatisfied() &&
+			available = IsOverridden ||
+			            HasPrerequisitesSatisfied() &&
 			            !active && 
 			            !IsDisabled &&
 			            ( ( repeatable && finished ) || !finished );
