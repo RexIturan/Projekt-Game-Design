@@ -10,6 +10,15 @@ public class CheckPointManager : MonoBehaviour
 		[SerializeField] private IntEventChannelSO saveGame;
 		[SerializeField] private IntEventChannelSO loadGame;
 
+
+		public void SaveGame() {
+			saveGame.RaiseEvent(0);
+		}
+		
+		public void LoadGame() {
+			loadGame.RaiseEvent(0);
+		}
+		
 		private void Update()
 		{
 				if(saveState)

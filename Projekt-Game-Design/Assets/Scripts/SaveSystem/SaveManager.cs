@@ -7,6 +7,7 @@ using Grid;
 using QuestSystem.ScriptabelObjects;
 using SaveSystem.SaveFormats;
 using SaveSystem.ScriptableObjects;
+using SceneManagement.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -35,7 +36,6 @@ namespace SaveSystem {
 		public WorldObjectInitialiser worldObjectInitialiser;
 		[SerializeField] private ItemContainerSO itemContainerSO;
 
-
 	//load level from textasset
 		[Header("Test Level Data")] 
 		public List<AssetReference> testLevel;
@@ -45,6 +45,13 @@ namespace SaveSystem {
 		//save manager state: is something loaded and so on
 		public SaveManagerDataSO saveManagerData;
 		[SerializeField] private readonly string defaultLevelFilename = "test_level";
+		[SerializeField] private string defaultGameFilename = "tutorial";
+		
+		[Header("Sending Events On")]
+		[SerializeField] private LoadEventChannelSO loadLocation;
+		[Header("Location Scene To Load")]
+		[SerializeField] private GameSceneSO[] locationsToLoad;
+		
 		[Header("Debug Settings")] [SerializeField]
 		private bool showDebugMessage;
 		
@@ -111,11 +118,11 @@ namespace SaveSystem {
 		// save Obejct for game  
 		
 		public void SaveGame(int value) {
-			String checkpointFile = "checkpoint_" + value;
-
-			FileManager.DeleteFile(checkpointFile);
-
-			SaveLevel(checkpointFile);
+			//todo fix
+			String checkpointFile = defaultGameFilename;
+			checkpointFile += "0";
+			
+			SaveLevelWithOverride(checkpointFile);
 		}
 
 		#endregion
@@ -123,10 +130,26 @@ namespace SaveSystem {
 		#region Load Game
 
 		public void LoadGame(int value) {
-			String checkpointFile = "checkpoint_" + value;
+			//todo fix
+			
+			String checkpointFile = defaultGameFilename;
+			checkpointFile += value > 0 ? "0" : "";
 
-			if(LoadLevel(checkpointFile))
-				InitializeLevel();
+			try {
+				bool loaded = LoadLevel(checkpointFile);
+				        
+				if ( loaded ) {
+					loadLocation.RaiseEvent(locationsToLoad, false, true);
+					saveManagerData.inputLoad = true;
+					saveManagerData.loaded = true;
+				}
+			}
+			catch ( Exception e ) {
+				// Debug.Log($"Could not load level: {filename}, with Exeption: {e}");
+				//todo does this work?
+				Console.WriteLine($"Could not load level: {checkpointFile}, with Exeption: {e}");
+				throw;
+			}
 		}
 
 		#endregion
@@ -138,6 +161,11 @@ namespace SaveSystem {
 		// saves a seperate level
 		//todo SaveObject for Level
 
+		public bool SaveLevelWithOverride(string saveName) {
+			FileManager.DeleteFile(saveName);
+			return SaveLevel(saveName); 
+		}
+		
 		public bool SaveLevel(string saveName) {
 			//todo refactor code duplication
 			var filename = saveName;
