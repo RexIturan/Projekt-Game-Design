@@ -1,25 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9054603195764581581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fef674ff9f249c495b70cd21278df43, type: 3}
-  m_Name: 7_ItemEquipped_new Task
-  m_EditorClassIdentifier: 
-  active: 0
-  done: 0
-  textTextBody:
-    title: 
-    description: 
-    instructions: equip item
-  item: {fileID: 11400000, guid: 5af18ceaeab735d4a942216ebf69cd64, type: 2}
-  inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
 --- !u!114 &-7059458980979354602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39,6 +19,26 @@ MonoBehaviour:
     description: It seems you haven't gotten away free of injuries. When you run
       out of movement points, click "End Turn" to rest up and keep going!
     instructions: 
+--- !u!114 &-7054447371978620007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67494d20553b42cd9cc786c94203ba1d, type: 3}
+  m_Name: 9_EnemyDead_new Task
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: 
+    description: 
+    instructions: 
+  neededCount: 0
+  enemyType: {fileID: 0}
 --- !u!114 &-4343022958855784444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,14 +143,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: febf331e49584c09a7889b1afa49297a, type: 3}
-  m_Name: 8_SwitchActive_new Task
+  m_Name: 7_SwitchActive_switches
   m_EditorClassIdentifier: 
   active: 0
   done: 0
   textTextBody:
-    title: activate switch
-    description: activate switch
-    instructions: activate switch
+    title: Switches!
+    description: The voices behind the door are as loud as ever, but the door is
+      blocked. The nearby switch might be the solution...
+    instructions: Walk next to the switch to activate it.
   switchId: 0
 --- !u!114 &-1719969869884776391
 MonoBehaviour:
@@ -168,10 +169,10 @@ MonoBehaviour:
   done: 1
   textTextBody:
     title: Oh no!
-    description: You've woken up in a dark, damp room roughly hewn into slick stone.
-      Above you, you can see a faint light as it shines through a small crack in
-      the natural ceiling, far out of reach. Where are you? What happened to your
-      companions?
+    description: You've woken up in a dark, damp room roughly hewn into the slick
+      stone of a cave. Above you, you can see a faint light as it shines through
+      a small crack in the natural ceiling, far out of reach. Where are you? What
+      happened to your companions?
     instructions: 
 --- !u!114 &11400000
 MonoBehaviour:
@@ -240,15 +241,21 @@ MonoBehaviour:
     showProperty: 0
     button: '|'
     drawerHeight: 23
-  - name: new Task
-    type: 4
-    task: {fileID: -9054603195764581581}
+  - name: switches
+    type: 6
+    task: {fileID: -2491737206781118806}
+    showProperty: 0
+    button: '|'
+    drawerHeight: 23
+  - name: combat
+    type: 7
+    task: {fileID: 7006193137403604127}
     showProperty: 0
     button: '|'
     drawerHeight: 23
   - name: new Task
-    type: 6
-    task: {fileID: -2491737206781118806}
+    type: 8
+    task: {fileID: -7054447371978620007}
     showProperty: 0
     button: '|'
     drawerHeight: 23
@@ -277,3 +284,26 @@ MonoBehaviour:
   mapName: Camera
   compositeName: 
   actionNames: []
+--- !u!114 &7006193137403604127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec412340c6c43eaa15380deaa8521da, type: 3}
+  m_Name: 8_EnemyKill_combat
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Ambush!
+    description: As the door grinds heavily in its hinges, an armored figure whirls
+      around and stares at you in confusion. The standoff lasts just a heartbeat
+      until the figure charces at you, fists bared and growling!
+    instructions: Defend yourself! Use your Abilties to defeat the enemy and flip
+      the switch to open the next doors.
+  neededCount: 1
+  enemyType: {fileID: 11400000, guid: c491683a0b68f934db35972bd4517070, type: 2}

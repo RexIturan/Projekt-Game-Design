@@ -194,9 +194,9 @@
       },
       "open": false,
       "keyIds": [],
-      "switchIds": [ 0 ],
+      "switchIds": [0],
       "triggerIds": [],
-      "remainingSwitchIds": [],
+      "remainingSwitchIds": [0],
       "remainingTriggerIds": [],
       "currentHitPoints": 100
     },
@@ -214,9 +214,9 @@
       },
       "open": false,
       "keyIds": [],
-      "switchIds": [],
+      "switchIds": [1],
       "triggerIds": [],
-      "remainingSwitchIds": [],
+      "remainingSwitchIds": [1],
       "remainingTriggerIds": [],
       "currentHitPoints": 100
     },
@@ -234,9 +234,9 @@
       },
       "open": false,
       "keyIds": [],
-      "switchIds": [],
+      "switchIds": [1],
       "triggerIds": [],
-      "remainingSwitchIds": [],
+      "remainingSwitchIds": [1],
       "remainingTriggerIds": [],
       "currentHitPoints": 100
     },
@@ -254,9 +254,9 @@
       },
       "open": false,
       "keyIds": [],
-      "switchIds": [],
+      "switchIds": [2],
       "triggerIds": [],
-      "remainingSwitchIds": [],
+      "remainingSwitchIds": [2],
       "remainingTriggerIds": [],
       "currentHitPoints": 100
     },
@@ -274,9 +274,9 @@
       },
       "open": false,
       "keyIds": [],
-      "switchIds": [],
+      "switchIds": [2],
       "triggerIds": [],
-      "remainingSwitchIds": [],
+      "remainingSwitchIds": [2],
       "remainingTriggerIds": [],
       "currentHitPoints": 100
     }
@@ -305,6 +305,21 @@
         "x": 36,
         "y": 1,
         "z": 18
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      }
+    },
+    {
+      "switchId": 2,
+      "activated": false,
+      "switchTypeId": 0,
+      "gridPos": {
+        "x": 29,
+        "y": 1,
+        "z": 8
       },
       "orientation": {
         "x": 0,
