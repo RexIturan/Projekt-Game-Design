@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -106,10 +107,18 @@ namespace QuestSystem.ScriptabelObjects {
 		}
 
 		private void Callback(InputAction.CallbackContext context) {
-			var controlPath = context.control.name;
-			if ( context.performed && MatchesBindingControls(controlPath, bindingControls)) {
-				this.done = true;
-				// Debug.Log(controlPath + $"#\n{compositeName}");
+			// var bindings = GetBindingControls(context.action, compositeName);
+			// 	= context.action.bindings.ToArray().ToList()
+			// 	.Any(binding => bindingControls.Any(s => s == binding.ToDisplayString()));
+			if ( compositeName.Equals("") ) {
+				this.done = true;	
+			}
+			else {
+				var controlPath = context.control.name;
+				if ( context.performed && MatchesBindingControls(controlPath, bindingControls)) {
+					this.done = true;
+					Debug.Log(controlPath + $"#\n{compositeName}");
+				}	
 			}
 		}
 		
@@ -139,25 +148,29 @@ namespace QuestSystem.ScriptabelObjects {
 			base.StopTask();
 			Cleanup();
 		}
+
+		public void GetAllInputActionNames() {
+			if(inputReader is null)
+				return;
+			
+			actionNames = new List<InputActionInfoWrapper>();
+			
+			var gameInput = inputReader.GameInput;
+			foreach ( var inputAction in gameInput ) {
+				actionNames.Add(new InputActionInfoWrapper {
+						name = inputAction.name,
+						map = inputAction.actionMap.name,
+						id = inputAction.id.ToString(),
+						bindingName = GetBindingNames(inputAction.bindings)
+					}
+				);
+			}
+		}
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////		
 		
 		private void OnEnable() {
-			// if(inputReader is null)
-			// 	return;
-			//
-			// actionNames = new List<InputActionInfoWrapper>();
-			//
-			// var gameInput = inputReader.GameInput;
-			// foreach ( var inputAction in gameInput ) {
-			// 	actionNames.Add(new InputActionInfoWrapper {
-			// 			name = inputAction.name,
-			// 			map = inputAction.actionMap.name,
-			// 			id = inputAction.id.ToString(),
-			// 			bindingName = GetBindingNames(inputAction.bindings)
-			// 		}
-			// 	);
-			// }
+			// GetAllInputActionNames();
 		}
 		
 		private void OnValidate() {

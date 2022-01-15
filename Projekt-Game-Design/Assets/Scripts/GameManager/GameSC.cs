@@ -11,6 +11,7 @@ namespace GameManager {
     public class GameSC : MonoBehaviour {
         [Header("Receiving Events On")]
 				[SerializeField] private EFactionEventChannelSO endTurnEC;
+        [SerializeField] private EFactionEventChannelSO newTurnEC;
 				[SerializeField] private VoidEventChannelSO triggerDefeatEC;
 				[SerializeField] private VoidEventChannelSO triggerVictoryEC;
 
@@ -83,6 +84,12 @@ namespace GameManager {
             else {
                 Debug.Log($"You can only end the Turn, when its your Turn.\nTurn: {tacticsData.turnNum}");
             }
+            
+            newTurnEC.RaiseEvent(faction);
+        }
+
+        public void UpdateOverlay(Faction faction) {
+	        newTurnEC.RaiseEvent(faction);
         }
         
         public void LoadLocationLevel() {

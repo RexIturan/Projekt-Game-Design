@@ -59,6 +59,13 @@ namespace QuestSystem.ScriptabelObjects {
 			currentTaskIndex = overrideTaskIndex;
 			active = true;
 			tasks[currentTaskIndex].task.StartTask();
+			
+			//override when quest geladen wurde
+			if ( overrideTaskIndex > 0 ) {
+				for ( int i = 0; i < overrideTaskIndex; i++ ) {
+					tasks[i].task.done = true;
+				}
+			}
 		}
 
 		public void Reset() {
@@ -105,6 +112,7 @@ namespace QuestSystem.ScriptabelObjects {
 			            !active && 
 			            !IsDisabled &&
 			            ( ( repeatable && finished ) || !finished );
+			
 		}
 		
 		public bool HasPrerequisitesSatisfied() {

@@ -521,6 +521,7 @@ public class InventoryUIController : MonoBehaviour {
 
 	// refresh menu and select first in container
 	private void HandlePlayerDeselected(GameObject player) {
+		//todo ????
 		_selectedPlayerStatistics = player.GetComponent<Statistics>();
 		RefreshStats(player);
 	}
