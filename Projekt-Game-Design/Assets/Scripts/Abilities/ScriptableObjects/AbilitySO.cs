@@ -31,25 +31,30 @@ public class AbilitySO : ScriptableObject
     public List<StateActionSO> selectedActions;
     public List<StateActionSO> executingActions;
 
-    private void OnValidate() {
+    private void OnEnable() {
 	    foreach ( var effect in targetedEffects ) {
 		    effect.area.InitFromStringPattern();
 	    }
     }
     
-#if UNITY_EDITOR
-    private void OnEnable() {
-	    var abilityContainerGuid = AssetDatabase.FindAssets($"t:{nameof(AbilityContainerSO)}");
-
-	    foreach ( var containerGuid in abilityContainerGuid ) {
-		    var containerPath = AssetDatabase.GUIDToAssetPath(containerGuid);
-		    var abilityContainer = AssetDatabase.LoadAssetAtPath<AbilityContainerSO>(containerPath);
-			    
-		    if ( !abilityContainer.abilities.Contains(this) ) {
-			    abilityContainer.abilities.Add(this);
-			    abilityContainer.UpdateItemList();
-		    }  
+// #if UNITY_EDITOR
+    private void OnValidate() {
+	    foreach ( var effect in targetedEffects ) {
+		    effect.area.InitFromStringPattern();
 	    }
     }
-#endif
+//     private void OnEnable() {
+// 	    var abilityContainerGuid = AssetDatabase.FindAssets($"t:{nameof(AbilityContainerSO)}");
+//
+// 	    foreach ( var containerGuid in abilityContainerGuid ) {
+// 		    var containerPath = AssetDatabase.GUIDToAssetPath(containerGuid);
+// 		    var abilityContainer = AssetDatabase.LoadAssetAtPath<AbilityContainerSO>(containerPath);
+// 			    
+// 		    if ( !abilityContainer.abilities.Contains(this) ) {
+// 			    abilityContainer.abilities.Add(this);
+// 			    abilityContainer.UpdateItemList();
+// 		    }  
+// 	    }
+//     }
+// #endif
 }

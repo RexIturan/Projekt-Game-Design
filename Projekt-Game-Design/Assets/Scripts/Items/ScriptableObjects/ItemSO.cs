@@ -28,19 +28,19 @@ public class ItemSO : ScriptableObject {
 		 */
 		public virtual bool ValidForPosition(EquipmentPosition equipmentPosition) { return false; }
 
-#if UNITY_EDITOR
-    private void OnEnable() {
-			var itemContainers = AssetDatabase.FindAssets($"t:{nameof(ItemContainerSO)}");
-
-			foreach ( var containerGuid in itemContainers ) {
-				var containerPath = AssetDatabase.GUIDToAssetPath(containerGuid);
-				var itemContainer = AssetDatabase.LoadAssetAtPath<ItemContainerSO>(containerPath);
-			    
-				if ( !itemContainer.itemList.Contains(this) ) {
-					itemContainer.itemList.Add(this);
-					itemContainer.UpdateItemList();
-				}  
-			}
-    }
-#endif
+// #if UNITY_EDITOR
+//     private void OnEnable() {
+// 			var itemContainers = AssetDatabase.FindAssets($"t:{nameof(ItemContainerSO)}");
+//
+// 			foreach ( var containerGuid in itemContainers ) {
+// 				var containerPath = AssetDatabase.GUIDToAssetPath(containerGuid);
+// 				var itemContainer = AssetDatabase.LoadAssetAtPath<ItemContainerSO>(containerPath);
+// 			    
+// 				if ( !itemContainer.itemList.Contains(this) ) {
+// 					itemContainer.itemList.Add(this);
+// 					itemContainer.UpdateItemList();
+// 				}  
+// 			}
+//     }
+// #endif
 }
