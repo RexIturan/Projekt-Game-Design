@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1_KeyPress_camera-down
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
+  done: 1
   textTextBody:
     title: Press [S][Arrow Down]
     description: TODO
@@ -36,7 +36,7 @@ MonoBehaviour:
   m_Name: 0_KeyPress_camera-up
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
+  done: 1
   textTextBody:
     title: Press [W][Arrow Up]
     description: TODO
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 4_1_KeyPress_left
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
+  done: 1
   textTextBody:
     title: Press [A][Arrow Left]
     description: TODO
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 3_0_KeyPress_right
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
+  done: 1
   textTextBody:
     title: Press [D][Arrow Right]
     description: TODO
@@ -106,13 +106,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   disabled: 1
-  available: 0
-  active: 0
-  finished: 0
+  available: 1
+  active: 1
+  finished: 1
   repeatable: 0
   prerequisits: []
-  currentTaskIndex: 0
-  nextTaskIndex: 0
+  currentTaskIndex: 5
+  nextTaskIndex: 5
   tasks:
   - name: camera-up
     type: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 2_Composite_right - left
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
+  done: 1
   textTextBody:
     title: 
     description: 

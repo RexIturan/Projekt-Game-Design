@@ -8,18 +8,34 @@ namespace WorldObjects.Doors {
 		
 		[SerializeField] private Material activeMaterial;
 		[SerializeField] private Material inctiveMaterial;
-		
-		[SerializeField] private Vector3 startPos;
+
 		[SerializeField] private Vector3 moveDistance;
 		[SerializeField] private float moveCycleLength;
-		[SerializeField] private bool openRight;
-
+		[SerializeField] private bool isOpen = false;
+		public Vector3 startPos;
+		public bool openRight;
+		
+		public bool IsOpen => isOpen;
+		
 		public void OpenLock() {
+			AnimationTween().Play();
+		}
+		
+		public Tween AnimationTween() {
 			var targetPos = startPos;
 			targetPos += openRight ? moveDistance : -moveDistance;
-			lockModel.DOLocalMove(targetPos, moveCycleLength)
+			return lockModel.DOLocalMove(targetPos, moveCycleLength)
 				.SetEase(Ease.Linear)
-				.OnComplete(() => { meshRenderer.material = activeMaterial;});
+				.OnComplete(() => {
+					meshRenderer.material = activeMaterial;
+					isOpen = true;
+				}).Pause();
+		}
+
+		public void Reset() {
+			lockModel.localPosition = startPos;
+			isOpen = false;
+			meshRenderer.material = inctiveMaterial;
 		}
 	}
 }
