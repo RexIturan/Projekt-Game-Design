@@ -143,7 +143,7 @@ public class MainMenuUIController : MonoBehaviour
         SetElementVisibility(_levelEditorButton, showLevelEditor);
 
         //todo refactor & remove magic string
-        if ( !FileManager.FileExists("tutorial1") ) {
+        if ( !FileManager.FileExists("tutorial0") ) {
 	        SetElementVisibility(_loadLevelButton, false);
         }
         

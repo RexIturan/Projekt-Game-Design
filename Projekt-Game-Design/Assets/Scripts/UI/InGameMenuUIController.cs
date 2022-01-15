@@ -1,5 +1,6 @@
 using System;
 using Events.ScriptableObjects;
+using SaveSystem;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -27,7 +28,12 @@ public class InGameMenuUIController : MonoBehaviour {
 	[SerializeField] private VoidEventChannelSO enableMenuInput;
 	[SerializeField] private VoidEventChannelSO menuOpenedEvent;
 	[SerializeField] private VoidEventChannelSO menuClosedEvent;
-	
+
+	[SerializeField] private IntEventChannelSO saveGame;
+	[SerializeField] private IntEventChannelSO loadGame;
+	[SerializeField] private bool showLoadLevel;
+	[SerializeField] private bool showSaveLevel;
+	[SerializeField] private bool showOptionsLevel;
 
 ///// Private Variables	////////////////////////////////////////////////////////////////////////////
 	private VisualElement _inGameMenuContainer;
@@ -92,6 +98,10 @@ public class InGameMenuUIController : MonoBehaviour {
 		SetMenuVisibility(false);
 	}
 
+	private void SetElementVisibility(VisualElement element, bool visible) {
+		element.style.visibility = visible ? new StyleEnum<Visibility>(Visibility.Visible) : new StyleEnum<Visibility>(Visibility.Hidden);
+	}
+	
 ///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
 
 	private void HandleMenuToggleEvent(bool value) {
@@ -122,7 +132,20 @@ public class InGameMenuUIController : MonoBehaviour {
 	private void ShowOptionsScreen() {
 		MenuScreenContentManager(MenuScreenContent.SettingsScreen);
 	}
+	
+	private void HandleLoad() {
+		if ( !FileManager.FileExists("tutorial1") ) {
+			loadGame.RaiseEvent(1);
+		}
+		else {
+			loadGame.RaiseEvent(0);
+		}
+	}
 
+	private void HandleSave() {
+		saveGame.RaiseEvent(0);
+	}
+	
 ///// Public Functions	////////////////////////////////////////////////////////////////////////////
 
 ///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
@@ -139,15 +162,24 @@ public class InGameMenuUIController : MonoBehaviour {
 		// Holen des UXML Trees, zum getten der einzelnen Komponenten
 		var root = GetComponent<UIDocument>().rootVisualElement;
 		_inGameMenuContainer = root.Q<VisualElement>("IngameMenu");
-		_inGameMenuContainer.Q<Button>("SaveButton").clicked += ShowSaveScreen;
-		_inGameMenuContainer.Q<Button>("OptionsButton").clicked += ShowOptionsScreen;
-		_inGameMenuContainer.Q<Button>("LoadButton").clicked += ShowLoadScreen;
+		var saveButton = _inGameMenuContainer.Q<Button>("SaveButton");
+		var optionsButton = _inGameMenuContainer.Q<Button>("OptionsButton");
+		var loadButton = _inGameMenuContainer.Q<Button>("LoadButton");
+		saveButton.clicked += HandleSave;
+		optionsButton.clicked += ShowOptionsScreen;
+		loadButton.clicked += HandleLoad;
 
 		_inGameMenuContainer.Q<Button>("ResumeButton").clicked += HandleResumeButton;
 		_inGameMenuContainer.Q<Button>("QuitButton").clicked += QuitGame;
 
 		_inGameMenuContainer.Q<Button>("MainMenuButton").clicked += MainMenuButtonPressed;
 
+		SetElementVisibility(saveButton, showSaveLevel);
+			//todo doesnt work for now!
+		SetElementVisibility(loadButton, false);
+		SetElementVisibility(optionsButton, showOptionsLevel);
+		
 		HideMenu();
 	}
+
 }
