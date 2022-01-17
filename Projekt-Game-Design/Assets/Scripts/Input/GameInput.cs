@@ -57,6 +57,86 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectAbility_1"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d7abaad-7467-4764-9e8a-4dd0d079ac0d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectAbility_2"",
+                    ""type"": ""Button"",
+                    ""id"": ""96759fd7-32cf-4182-a8d0-0dbb07ea41f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectAbility_3"",
+                    ""type"": ""Button"",
+                    ""id"": ""7083ba25-ce31-44d5-81c5-b5fe00c19a1b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectAbility_4"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e669e36-64af-426b-99e4-79137e6c7e2f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectAbility_5"",
+                    ""type"": ""Button"",
+                    ""id"": ""56d68a15-d394-4450-b6d8-ce0af7b33628"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectAbility_6"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e5b2553-ea98-4c38-93cc-6d842d3799cb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectAbility_7"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3a3f65c-57a7-4c14-9633-0345e18be06e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectAbility_8"",
+                    ""type"": ""Button"",
+                    ""id"": ""f9374130-9019-4c76-8bc4-3c52fa1a8fda"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectAbility_9"",
+                    ""type"": ""Button"",
+                    ""id"": ""17065a47-3c67-458c-87b3-1ae46f5c29b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectAbility_0"",
+                    ""type"": ""Button"",
+                    ""id"": ""6765738c-7c8d-4272-8413-0efd945dfbc2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -112,6 +192,116 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Help"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b05e1310-85bf-4ab8-9e26-e3af2b68fd93"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectAbility_1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""512fba3d-e08a-41ed-be75-f8fdf64cae5c"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectAbility_2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0bd1c7d-b6d6-4541-a3ab-c5f98f7d6a21"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectAbility_3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5835e803-c209-4453-a265-6f58d333c758"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectAbility_4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f06bc0f3-00d4-4b4d-a20c-6e627ab08c9a"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectAbility_5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d3ff16b-17f1-4f91-81f3-eb5e3444cdf2"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectAbility_6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0563b8f1-fdea-4ba2-b418-6a2ea0225db1"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectAbility_7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8df83850-43bd-48b5-bee0-a522f926aa2d"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectAbility_8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2dfbe8a-7eda-4670-b7ff-8e469ca44cd4"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectAbility_9"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5bfffa2b-b24a-4b2f-8536-0d33870c8279"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectAbility_0"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -726,6 +916,16 @@ public class @GameInput : IInputActionCollection, IDisposable
         m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
         m_Gameplay_MouseClicked = m_Gameplay.FindAction("MouseClicked", throwIfNotFound: true);
         m_Gameplay_Help = m_Gameplay.FindAction("Help", throwIfNotFound: true);
+        m_Gameplay_SelectAbility_1 = m_Gameplay.FindAction("SelectAbility_1", throwIfNotFound: true);
+        m_Gameplay_SelectAbility_2 = m_Gameplay.FindAction("SelectAbility_2", throwIfNotFound: true);
+        m_Gameplay_SelectAbility_3 = m_Gameplay.FindAction("SelectAbility_3", throwIfNotFound: true);
+        m_Gameplay_SelectAbility_4 = m_Gameplay.FindAction("SelectAbility_4", throwIfNotFound: true);
+        m_Gameplay_SelectAbility_5 = m_Gameplay.FindAction("SelectAbility_5", throwIfNotFound: true);
+        m_Gameplay_SelectAbility_6 = m_Gameplay.FindAction("SelectAbility_6", throwIfNotFound: true);
+        m_Gameplay_SelectAbility_7 = m_Gameplay.FindAction("SelectAbility_7", throwIfNotFound: true);
+        m_Gameplay_SelectAbility_8 = m_Gameplay.FindAction("SelectAbility_8", throwIfNotFound: true);
+        m_Gameplay_SelectAbility_9 = m_Gameplay.FindAction("SelectAbility_9", throwIfNotFound: true);
+        m_Gameplay_SelectAbility_0 = m_Gameplay.FindAction("SelectAbility_0", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_CancelInventory = m_Inventory.FindAction("CancelInventory", throwIfNotFound: true);
@@ -812,6 +1012,16 @@ public class @GameInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Inventory;
     private readonly InputAction m_Gameplay_MouseClicked;
     private readonly InputAction m_Gameplay_Help;
+    private readonly InputAction m_Gameplay_SelectAbility_1;
+    private readonly InputAction m_Gameplay_SelectAbility_2;
+    private readonly InputAction m_Gameplay_SelectAbility_3;
+    private readonly InputAction m_Gameplay_SelectAbility_4;
+    private readonly InputAction m_Gameplay_SelectAbility_5;
+    private readonly InputAction m_Gameplay_SelectAbility_6;
+    private readonly InputAction m_Gameplay_SelectAbility_7;
+    private readonly InputAction m_Gameplay_SelectAbility_8;
+    private readonly InputAction m_Gameplay_SelectAbility_9;
+    private readonly InputAction m_Gameplay_SelectAbility_0;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -821,6 +1031,16 @@ public class @GameInput : IInputActionCollection, IDisposable
         public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
         public InputAction @MouseClicked => m_Wrapper.m_Gameplay_MouseClicked;
         public InputAction @Help => m_Wrapper.m_Gameplay_Help;
+        public InputAction @SelectAbility_1 => m_Wrapper.m_Gameplay_SelectAbility_1;
+        public InputAction @SelectAbility_2 => m_Wrapper.m_Gameplay_SelectAbility_2;
+        public InputAction @SelectAbility_3 => m_Wrapper.m_Gameplay_SelectAbility_3;
+        public InputAction @SelectAbility_4 => m_Wrapper.m_Gameplay_SelectAbility_4;
+        public InputAction @SelectAbility_5 => m_Wrapper.m_Gameplay_SelectAbility_5;
+        public InputAction @SelectAbility_6 => m_Wrapper.m_Gameplay_SelectAbility_6;
+        public InputAction @SelectAbility_7 => m_Wrapper.m_Gameplay_SelectAbility_7;
+        public InputAction @SelectAbility_8 => m_Wrapper.m_Gameplay_SelectAbility_8;
+        public InputAction @SelectAbility_9 => m_Wrapper.m_Gameplay_SelectAbility_9;
+        public InputAction @SelectAbility_0 => m_Wrapper.m_Gameplay_SelectAbility_0;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -845,6 +1065,36 @@ public class @GameInput : IInputActionCollection, IDisposable
                 @Help.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHelp;
                 @Help.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHelp;
                 @Help.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHelp;
+                @SelectAbility_1.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_1;
+                @SelectAbility_1.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_1;
+                @SelectAbility_1.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_1;
+                @SelectAbility_2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_2;
+                @SelectAbility_2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_2;
+                @SelectAbility_2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_2;
+                @SelectAbility_3.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_3;
+                @SelectAbility_3.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_3;
+                @SelectAbility_3.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_3;
+                @SelectAbility_4.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_4;
+                @SelectAbility_4.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_4;
+                @SelectAbility_4.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_4;
+                @SelectAbility_5.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_5;
+                @SelectAbility_5.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_5;
+                @SelectAbility_5.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_5;
+                @SelectAbility_6.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_6;
+                @SelectAbility_6.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_6;
+                @SelectAbility_6.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_6;
+                @SelectAbility_7.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_7;
+                @SelectAbility_7.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_7;
+                @SelectAbility_7.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_7;
+                @SelectAbility_8.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_8;
+                @SelectAbility_8.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_8;
+                @SelectAbility_8.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_8;
+                @SelectAbility_9.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_9;
+                @SelectAbility_9.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_9;
+                @SelectAbility_9.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_9;
+                @SelectAbility_0.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_0;
+                @SelectAbility_0.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_0;
+                @SelectAbility_0.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSelectAbility_0;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -864,6 +1114,36 @@ public class @GameInput : IInputActionCollection, IDisposable
                 @Help.started += instance.OnHelp;
                 @Help.performed += instance.OnHelp;
                 @Help.canceled += instance.OnHelp;
+                @SelectAbility_1.started += instance.OnSelectAbility_1;
+                @SelectAbility_1.performed += instance.OnSelectAbility_1;
+                @SelectAbility_1.canceled += instance.OnSelectAbility_1;
+                @SelectAbility_2.started += instance.OnSelectAbility_2;
+                @SelectAbility_2.performed += instance.OnSelectAbility_2;
+                @SelectAbility_2.canceled += instance.OnSelectAbility_2;
+                @SelectAbility_3.started += instance.OnSelectAbility_3;
+                @SelectAbility_3.performed += instance.OnSelectAbility_3;
+                @SelectAbility_3.canceled += instance.OnSelectAbility_3;
+                @SelectAbility_4.started += instance.OnSelectAbility_4;
+                @SelectAbility_4.performed += instance.OnSelectAbility_4;
+                @SelectAbility_4.canceled += instance.OnSelectAbility_4;
+                @SelectAbility_5.started += instance.OnSelectAbility_5;
+                @SelectAbility_5.performed += instance.OnSelectAbility_5;
+                @SelectAbility_5.canceled += instance.OnSelectAbility_5;
+                @SelectAbility_6.started += instance.OnSelectAbility_6;
+                @SelectAbility_6.performed += instance.OnSelectAbility_6;
+                @SelectAbility_6.canceled += instance.OnSelectAbility_6;
+                @SelectAbility_7.started += instance.OnSelectAbility_7;
+                @SelectAbility_7.performed += instance.OnSelectAbility_7;
+                @SelectAbility_7.canceled += instance.OnSelectAbility_7;
+                @SelectAbility_8.started += instance.OnSelectAbility_8;
+                @SelectAbility_8.performed += instance.OnSelectAbility_8;
+                @SelectAbility_8.canceled += instance.OnSelectAbility_8;
+                @SelectAbility_9.started += instance.OnSelectAbility_9;
+                @SelectAbility_9.performed += instance.OnSelectAbility_9;
+                @SelectAbility_9.canceled += instance.OnSelectAbility_9;
+                @SelectAbility_0.started += instance.OnSelectAbility_0;
+                @SelectAbility_0.performed += instance.OnSelectAbility_0;
+                @SelectAbility_0.canceled += instance.OnSelectAbility_0;
             }
         }
     }
@@ -1194,6 +1474,16 @@ public class @GameInput : IInputActionCollection, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnMouseClicked(InputAction.CallbackContext context);
         void OnHelp(InputAction.CallbackContext context);
+        void OnSelectAbility_1(InputAction.CallbackContext context);
+        void OnSelectAbility_2(InputAction.CallbackContext context);
+        void OnSelectAbility_3(InputAction.CallbackContext context);
+        void OnSelectAbility_4(InputAction.CallbackContext context);
+        void OnSelectAbility_5(InputAction.CallbackContext context);
+        void OnSelectAbility_6(InputAction.CallbackContext context);
+        void OnSelectAbility_7(InputAction.CallbackContext context);
+        void OnSelectAbility_8(InputAction.CallbackContext context);
+        void OnSelectAbility_9(InputAction.CallbackContext context);
+        void OnSelectAbility_0(InputAction.CallbackContext context);
     }
     public interface IInventoryActions
     {

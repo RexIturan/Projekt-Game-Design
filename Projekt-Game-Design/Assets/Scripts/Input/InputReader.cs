@@ -31,6 +31,7 @@ namespace Input {
 		// public event UnityAction menuEvent = delegate { };
 		public event UnityAction EndTurnEvent = delegate { };
 		public event Action HelpEvent = delegate { };
+		public event Action<int> SelectAbilityEvent = delegate { };
 
 		public event UnityAction MouseClicked = delegate { };
 
@@ -191,6 +192,46 @@ namespace Input {
 			if ( context.phase == InputActionPhase.Performed ) {
 				HelpEvent.Invoke();	
 			}
+		}
+
+		public void OnSelectAbility_1(InputAction.CallbackContext context) {
+			SelectAbilityEvent.Invoke(1);
+		}
+
+		public void OnSelectAbility_2(InputAction.CallbackContext context) {
+			SelectAbilityEvent.Invoke(2);
+		}
+
+		public void OnSelectAbility_3(InputAction.CallbackContext context) {
+			SelectAbilityEvent.Invoke(3);
+		}
+
+		public void OnSelectAbility_4(InputAction.CallbackContext context) {
+			SelectAbilityEvent.Invoke(4);
+		}
+
+		public void OnSelectAbility_5(InputAction.CallbackContext context) {
+			SelectAbilityEvent.Invoke(5);
+		}
+
+		public void OnSelectAbility_6(InputAction.CallbackContext context) {
+			SelectAbilityEvent.Invoke(6);
+		}
+
+		public void OnSelectAbility_7(InputAction.CallbackContext context) {
+			SelectAbilityEvent.Invoke(7);
+		}
+
+		public void OnSelectAbility_8(InputAction.CallbackContext context) {
+			SelectAbilityEvent.Invoke(8);
+		}
+
+		public void OnSelectAbility_9(InputAction.CallbackContext context) {
+			SelectAbilityEvent.Invoke(9);
+		}
+
+		public void OnSelectAbility_0(InputAction.CallbackContext context) {
+			SelectAbilityEvent.Invoke(0);
 		}
 
 		#endregion

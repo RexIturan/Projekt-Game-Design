@@ -75,6 +75,7 @@ MonoBehaviour:
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
   newTurnEC: {fileID: 11400000, guid: 3a28845fa87e62b47abeaf01656a2806, type: 2}
   uiToggleMenuEC: {fileID: 11400000, guid: 9444ec8e72a59b64d934049dd28bcc23, type: 2}
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
 --- !u!114 &7814138535658991265
 MonoBehaviour:
   m_ObjectHideFlags: 0

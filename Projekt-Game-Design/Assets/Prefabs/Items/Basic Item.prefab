@@ -188,5 +188,5 @@ MonoBehaviour:
   itemModel: {fileID: 2429313877357441043}
   rotationCycleLength: 6
   moveCycleDuration: 5
-  moveEsse: 35
+  moveEase: 4
   moveHeight: 0.2

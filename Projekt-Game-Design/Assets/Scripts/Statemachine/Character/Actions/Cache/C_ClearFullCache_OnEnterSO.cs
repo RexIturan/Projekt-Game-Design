@@ -29,6 +29,7 @@ public class C_ClearFullCache_OnEnter : StateAction
 
 	public override void OnStateEnter() { 
 		_abilityController.SelectedAbilityID = -1;
+		_abilityController.LastSelectedAbilityID = -1;
 		_abilityController.abilitySelected = false;
 		_abilityController.abilityConfirmed = false;
 		_abilityController.abilityExecuted = false;

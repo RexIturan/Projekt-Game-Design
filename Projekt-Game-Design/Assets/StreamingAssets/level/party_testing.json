@@ -12,39 +12,41 @@
     },
     "players": [
       {
-            "active": true,
-            "plyerTypeId": 0,
-            "plyerSpawnDataId": 0,
-            "equipmentInventoryId": 0,
-            "pos": {
-                "x": 1,
-                "y": 1,
-                "z": 1
-            }
+        "id": 0,
+        "active": true,
+        "plyerTypeId": 0,
+        "pos": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "hitpoints": 1000000,
+        "energy": 1000000
+      },{
+        "id": 1,
+        "active": true,
+        "plyerTypeId": 0,
+        "pos": {
+          "x": 2,
+          "y": 1,
+          "z": 1
+        },
+        "hitpoints": 1000000,
+        "energy": 1000000
       },
       {
-            "active": true,
-            "plyerTypeId": 0,
-            "plyerSpawnDataId": 1,
-            "equipmentInventoryId": 0,
-            "pos": {
-                "x": 2,
-                "y": 1,
-                "z": 1
-            }
-      },
-      {
-            "active": false,
-            "plyerTypeId": 0,
-            "plyerSpawnDataId": 2,
-            "equipmentInventoryId": 0,
-            "pos": {
-                "x": 4,
-                "y": 1,
-                "z": 1
-            }
+        "id": 2,
+        "active": false,
+        "plyerTypeId": 0,
+        "pos": {
+          "x": 3,
+          "y": 1,
+          "z": 1
+        },
+        "hitpoints": 1000000,
+        "energy": 1000000
       }
-      ],
+    ],
     "enemies": [
       {
             "enemyTypeId": 0,

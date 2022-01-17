@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitionTableSO: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
   _debugger:
-    debugTransitions: 0
+    debugTransitions: 1
     appendConditionsInfo: 1
     appendActionsInfo: 1
     currentState: 
@@ -216,6 +216,7 @@ MonoBehaviour:
   groundTargetSet: 0
   tileInRangeOfTarget: []
   tilesInRange: []
+  visibleTiles: []
   waitForAttackToFinish: 0
   attackRange: 0
   attackDamage: 0
@@ -239,6 +240,7 @@ MonoBehaviour:
   position: {x: 0, y: 0, z: 0}
   facingDirection: 0
   movementPointsPerEnergy: 0
+  movementCostPerTile: 2
   reachableTiles: []
   movementTarget:
     pos: {x: 0, y: 0, z: 0}
@@ -320,9 +322,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61beff83ece1f2c41869fecfa859320d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   active: 0
   playerType: {fileID: 0}
-  playerSpawnData: {fileID: 0}
   _statistics: {fileID: 2212653873986084095}
   _gridTransform: {fileID: 6601210392787000488}
   _attacker: {fileID: 2212653873986084080}

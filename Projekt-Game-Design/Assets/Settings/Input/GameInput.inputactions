@@ -44,6 +44,86 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "SelectAbility_1",
+                    "type": "Button",
+                    "id": "3d7abaad-7467-4764-9e8a-4dd0d079ac0d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectAbility_2",
+                    "type": "Button",
+                    "id": "96759fd7-32cf-4182-a8d0-0dbb07ea41f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectAbility_3",
+                    "type": "Button",
+                    "id": "7083ba25-ce31-44d5-81c5-b5fe00c19a1b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectAbility_4",
+                    "type": "Button",
+                    "id": "8e669e36-64af-426b-99e4-79137e6c7e2f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectAbility_5",
+                    "type": "Button",
+                    "id": "56d68a15-d394-4450-b6d8-ce0af7b33628",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectAbility_6",
+                    "type": "Button",
+                    "id": "5e5b2553-ea98-4c38-93cc-6d842d3799cb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectAbility_7",
+                    "type": "Button",
+                    "id": "c3a3f65c-57a7-4c14-9633-0345e18be06e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectAbility_8",
+                    "type": "Button",
+                    "id": "f9374130-9019-4c76-8bc4-3c52fa1a8fda",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectAbility_9",
+                    "type": "Button",
+                    "id": "17065a47-3c67-458c-87b3-1ae46f5c29b3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectAbility_0",
+                    "type": "Button",
+                    "id": "6765738c-7c8d-4272-8413-0efd945dfbc2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -99,6 +179,116 @@
                     "processors": "",
                     "groups": "",
                     "action": "Help",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b05e1310-85bf-4ab8-9e26-e3af2b68fd93",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectAbility_1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "512fba3d-e08a-41ed-be75-f8fdf64cae5c",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectAbility_2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0bd1c7d-b6d6-4541-a3ab-c5f98f7d6a21",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectAbility_3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5835e803-c209-4453-a265-6f58d333c758",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectAbility_4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f06bc0f3-00d4-4b4d-a20c-6e627ab08c9a",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectAbility_5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d3ff16b-17f1-4f91-81f3-eb5e3444cdf2",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectAbility_6",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0563b8f1-fdea-4ba2-b418-6a2ea0225db1",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectAbility_7",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8df83850-43bd-48b5-bee0-a522f926aa2d",
+                    "path": "<Keyboard>/8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectAbility_8",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d2dfbe8a-7eda-4670-b7ff-8e469ca44cd4",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectAbility_9",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5bfffa2b-b24a-4b2f-8536-0d33870c8279",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectAbility_0",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

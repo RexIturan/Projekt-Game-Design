@@ -5,6 +5,7 @@ using Characters.Ability;
 using Characters.Movement;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using Input;
 using UI.Components;
 using UI.Components.Character;
 using UnityEngine;
@@ -30,8 +31,10 @@ public class OverlayUIController : MonoBehaviour {
 	[SerializeField] private EFactionEventChannelSO newTurnEC;
 	[SerializeField] private VoidEventChannelSO uiToggleMenuEC;
 
-	[Header("Sending and Receiving Events On")] [SerializeField]
+	// [Header("Sending and Receiving Events On")] [SerializeField]
 	// private BoolEventChannelSO setMenuVisibilityEC;
+
+	[SerializeField] private InputReader inputReader;
 
 ///// Private Variables ////////////////////////////////////////////////////////////////////////////	
 	
@@ -231,6 +234,12 @@ public class OverlayUIController : MonoBehaviour {
 	private void HandleEndTurn(Faction faction) {
 		UpdateActionBar();
 	}
+
+	private void HandleSelectAbility(int value) {
+		//if player selected
+		//value in range
+		//todo 0-9 input ability 
+	}
 	
 ///// Public Functions	////////////////////////////////////////////////////////////////////////////
 
@@ -259,6 +268,7 @@ public class OverlayUIController : MonoBehaviour {
 
 		//todo updating ui when turn changes -> handle otherwise
 		newTurnEC.OnEventRaised += HandleEndTurn;
+		inputReader.SelectAbilityEvent += HandleSelectAbility;
 	}
 
 	
@@ -271,5 +281,6 @@ public class OverlayUIController : MonoBehaviour {
 		
 		//todo updating ui when turn changes -> handle otherwise
 		newTurnEC.OnEventRaised -= HandleEndTurn;
+		inputReader.SelectAbilityEvent -= HandleSelectAbility;
 	}
 }
