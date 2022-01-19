@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "com.mischief.markdownviewer": "https://github.com/gwaredd/UnityMarkdownViewer.git",
+    "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
+    "com.unity.2d.tilemap.extras": "1.8.1-preview",
     "com.unity.addressables": "1.19.6",
     "com.unity.animation.rigging": "1.0.3",
     "com.unity.collab-proxy": "1.7.1",

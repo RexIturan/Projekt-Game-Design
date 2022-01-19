@@ -1,0 +1,19 @@
+{
+    "name": "RuleTile3d.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:cbdf09464b6b87745be748a67e5a21a0",
+        "GUID:6f20df26cfa147e49fc261921a279c99"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
