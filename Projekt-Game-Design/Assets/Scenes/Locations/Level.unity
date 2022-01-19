@@ -360,6 +360,7 @@ Transform:
   - {fileID: 920827328}
   - {fileID: 3672561659345632339}
   - {fileID: 626402418}
+  - {fileID: 1043659621}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -947,6 +948,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1112942784057711958, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
   m_PrefabInstance: {fileID: 942750922}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1043659620
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 237854951}
+    m_Modifications:
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522562071569947235, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+      propertyPath: m_Name
+      value: FogOfWar URP
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+--- !u!4 &1043659621 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5522562071569947232, guid: 961c0882747f2524e897b9b428cc1b1d, type: 3}
+  m_PrefabInstance: {fileID: 1043659620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1460470176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,6 +1341,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3395719334091564563, guid: 1f4cf23e13f904f4ca259f5b2c3104d8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 137575dfeb59b3046b7f3152ccf32f95, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f4cf23e13f904f4ca259f5b2c3104d8, type: 3}
 --- !u!4 &2067563373 stripped
@@ -1553,7 +1620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3672561659905499288, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3672561659905499289, guid: aef65687e09683447a757e0d0244f77f, type: 3}
       propertyPath: m_RootOrder
