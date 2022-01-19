@@ -11,6 +11,8 @@ namespace Grid {
 		[SerializeField] private int width; //world x
 		[SerializeField] private int height; //world y
 		[SerializeField] private int depth; //world z
+		//todo use?
+		// [SerializeField] private Vector3Int size;
 		[SerializeField] private float cellSize;
 
 		//offset to word space
