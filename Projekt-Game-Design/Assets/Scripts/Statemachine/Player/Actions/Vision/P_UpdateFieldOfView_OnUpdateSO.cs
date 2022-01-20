@@ -1,13 +1,10 @@
-﻿using Events.ScriptableObjects;
-using System.Collections.Generic;
-using Characters;
+﻿using Characters;
 using Characters.Movement;
+using Characters.Types;
 using Grid;
-using Player;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
-using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
 
 

@@ -1,8 +1,6 @@
-using Ability;
 using Ability.ScriptableObjects;
-using Characters;
-using Characters.Ability;
-using Combat;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -39,7 +37,7 @@ public class C_HasValidGroundTarget : Condition
 				if ( _abilityController.SelectedAbilityID < 0 )
 						return false;
 
-				bool groundIsValid = _abilityContainer.abilities[_abilityController.SelectedAbilityID].targets.HasFlag(AbilityTarget.Ground);
+				bool groundIsValid = _abilityContainer.abilities[_abilityController.SelectedAbilityID].targets.HasFlag(TargetRelationship.Ground);
 
 				bool isInRange = false;
 				foreach(PathNode tile in _attacker.tilesInRange)

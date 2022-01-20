@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace QuestSystem.Editor {
+namespace GDP01.QuestSystem.Editor {
 	[CustomPropertyDrawer(typeof(Task_Wrapper))]
 	public class TaskWrapperPropertyDrawer : PropertyDrawer {
 		// bool showProperty = false;

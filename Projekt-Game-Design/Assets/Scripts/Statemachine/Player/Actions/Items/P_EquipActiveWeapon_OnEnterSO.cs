@@ -3,8 +3,7 @@ using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
 using Characters;
-using Characters.Ability;
-using Characters.Equipment;
+using GDP01.Characters.Component;
 
 [CreateAssetMenu(fileName = "p_EquipActiveWeapon_OnEnter",
 	menuName = "State Machines/Actions/Player/Equip Active Weapon On Enter")]

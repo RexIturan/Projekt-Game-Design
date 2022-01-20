@@ -1,0 +1,21 @@
+{
+    "name": "GDP01.QuestSystem",
+    "rootNamespace": "GDP01",
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:a54c87882c40425fbad861037a0f62e4",
+        "GUID:0a130d9f974bdcd4da38c8eff1609a16",
+        "GUID:a46fa3f8826f4e5408526f4eeccb2e6a",
+        "GUID:0d7bba5758dc5f14bb41acd540497ad0",
+        "GUID:c2b44f240aa4f8547a57229d8d964c30"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

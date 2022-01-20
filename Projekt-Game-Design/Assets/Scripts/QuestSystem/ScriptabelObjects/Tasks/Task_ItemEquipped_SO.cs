@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Characters.Equipment.ScriptableObjects;
+using UnityEngine;
 
 namespace QuestSystem.ScriptabelObjects {
 	public class Task_ItemEquipped_SO : TaskSO {
@@ -6,11 +7,11 @@ namespace QuestSystem.ScriptabelObjects {
 		public override string BaseName { get; } = "ItemEquipped";
 		
 		[SerializeField] private ItemSO item;
-		[SerializeField] private InventorySO inventory;
+		[SerializeField] private EquipmentContainerSO equipmentContainer;
 		
 		public override bool IsDone() {
 			if ( active ) {
-				var equipmentInventories = inventory.equipmentInventories;
+				var equipmentInventories = equipmentContainer.equipmentSheets;
 				done = false;
 				foreach ( var equipInv in equipmentInventories ) {
 					var equipArray = equipInv.EquipmentToArray();

@@ -5,7 +5,9 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "GDP01",
-        "GDP01.Util"
+        "GDP01.Util",
+        "GDP01.Util.GenericGrid",
+        "GDP01.Gameplay.Types"
     ],
     "includePlatforms": [
         "Editor"

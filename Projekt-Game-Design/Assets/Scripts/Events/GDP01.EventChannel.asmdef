@@ -1,0 +1,14 @@
+{
+    "name": "GDP01.EventChannel",
+    "rootNamespace": "GDP01.EventChannel",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

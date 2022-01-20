@@ -69,7 +69,7 @@ namespace DefaultNamespace.Camera {
         {
             Vector3 pos = transform.position;
 
-            Vector2 mousePos =Mouse.current.position.ReadValue();
+            Vector2 mousePos = Mouse.current.position.ReadValue();
 
             bool outOfScreen = mousePos.y > Screen.height || mousePos.y < 0 || mousePos.x > Screen.width ||
                                mousePos.x < 0;

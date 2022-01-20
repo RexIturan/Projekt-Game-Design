@@ -1,7 +1,5 @@
-﻿using Ability.ScriptableObjects;
-using Audio;
-using Characters;
-using Characters.Ability;
+﻿using Audio;
+using GDP01.Characters.Component;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -21,7 +19,7 @@ public class C_PlayAbilitySound_OnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void OnStateEnter() {
-				SoundManager.FindSoundManager().PlaySound(_abilityController.GetSelectedAbility().activationSound);
+				AudioManager.FindSoundManager().PlaySound(_abilityController.GetSelectedAbility().activationSound);
     }
 
     public override void OnStateExit() { }

@@ -1,9 +1,10 @@
 using Ability;
 using Characters;
-using Characters.Ability;
 using Combat;
 using Events.ScriptableObjects;
 using System.Collections.Generic;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -54,13 +55,13 @@ public class P_DrawTargets_OnEnter : StateAction {
 		//
 		foreach(PathNode tile in _attacker.tilesInRange) {
 			// self
-			if (ability.targets.HasFlag(AbilityTarget.Self) && 
+			if (ability.targets.HasFlag(TargetRelationship.Self) && 
 					tile.pos.Equals(_gridTransform.gridPosition)) {
 				allies.Add(tile);
 			}
 
 			// allies
-			if (ability.targets.HasFlag(AbilityTarget.Ally)) {
+			if (ability.targets.HasFlag(TargetRelationship.Ally)) {
 				bool allyTarget = false;
 				
 				foreach(GameObject player in characters.playerContainer) {
@@ -75,7 +76,7 @@ public class P_DrawTargets_OnEnter : StateAction {
 			}
 
 			// neutrals
-			if (ability.targets.HasFlag(AbilityTarget.Neutral)) {
+			if (ability.targets.HasFlag(TargetRelationship.Neutral)) {
 				bool neutralTarget = false;
 				
 				List<GameObject> neutralObjects = new List<GameObject>();
@@ -93,7 +94,7 @@ public class P_DrawTargets_OnEnter : StateAction {
 			}
 			
 			// enemy
-			if (ability.targets.HasFlag(AbilityTarget.Enemy)) {
+			if (ability.targets.HasFlag(TargetRelationship.Enemy)) {
 				bool enemyTarget = false;
 				
 				foreach(GameObject enemy in characters.enemyContainer) {

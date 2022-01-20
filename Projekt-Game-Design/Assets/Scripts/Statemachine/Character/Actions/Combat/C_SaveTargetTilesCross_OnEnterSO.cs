@@ -1,7 +1,5 @@
 using Ability.ScriptableObjects;
 using Characters;
-using Characters.Ability;
-using Combat;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -9,6 +7,8 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 using Events.ScriptableObjects.FieldOfView;
 using Level.Grid;
 using FieldOfView;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
 
 [CreateAssetMenu(fileName = "c_SaveTargetTilesCross_OnEnter", menuName = "State Machines/Actions/Character/Save Target Tiles Cross On Enter")]
 public class C_SaveTargetTilesCross_OnEnterSO : StateActionSO

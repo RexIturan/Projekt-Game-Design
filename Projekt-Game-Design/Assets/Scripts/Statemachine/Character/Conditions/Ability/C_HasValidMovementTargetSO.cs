@@ -1,9 +1,6 @@
-using Ability;
 using Ability.ScriptableObjects;
-using Characters;
-using Characters.Ability;
 using Characters.Movement;
-using Combat;
+using GDP01.Characters.Component;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;

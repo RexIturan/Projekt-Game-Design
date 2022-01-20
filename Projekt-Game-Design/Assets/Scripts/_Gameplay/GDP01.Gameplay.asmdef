@@ -1,0 +1,28 @@
+{
+    "name": "GDP01.Gameplay",
+    "rootNamespace": "GDP01.Gameplay",
+    "references": [
+        "GUID:784148ec08432ab4a974dd364656dae9",
+        "GUID:d8d86edead9285548a0b5203ad54c5e3",
+        "GUID:a46fa3f8826f4e5408526f4eeccb2e6a",
+        "GUID:046a1ff012bfb824f8b2ea98ff61abce",
+        "GUID:d7babcb93ee6a6b40b8bd6cceb6a5550",
+        "GUID:36df2ff674f0e1f49b86937cf018cc7f",
+        "GUID:1686690f1ac79d041817b02ce51bc834",
+        "GUID:a54c87882c40425fbad861037a0f62e4",
+        "GUID:bd4d88f6695cbba4095968043b9ed903",
+        "GUID:0a130d9f974bdcd4da38c8eff1609a16",
+        "GUID:c2b44f240aa4f8547a57229d8d964c30",
+        "GUID:94275906457a3954c8ad05e7f168bb08",
+        "GUID:baa041ce2e085934585027d1602f72e9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

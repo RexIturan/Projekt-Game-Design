@@ -1,0 +1,17 @@
+{
+    "name": "GDP01.Gameplay.EventChannels",
+    "rootNamespace": "GDP01.Gameplay.EventChannels",
+    "references": [
+        "GUID:bd4d88f6695cbba4095968043b9ed903",
+        "GUID:a46fa3f8826f4e5408526f4eeccb2e6a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

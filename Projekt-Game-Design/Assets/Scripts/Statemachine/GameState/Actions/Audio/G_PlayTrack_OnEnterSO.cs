@@ -24,7 +24,7 @@ public class G_PlayTrack_OnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void OnStateEnter() {
-				SoundManager.FindSoundManager().PlaySound(soundName);
+				AudioManager.FindSoundManager().PlaySound(soundName);
     }
 
     public override void OnStateExit() { }

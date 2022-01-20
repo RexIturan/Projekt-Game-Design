@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Characters;
+using Characters.Equipment.ScriptableObjects;
 using Events.ScriptableObjects;
 using Grid;
 using QuestSystem.ScriptabelObjects;
-using SaveSystem.SaveFormats;
 using SaveSystem.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
@@ -35,6 +34,7 @@ namespace SaveSystem {
 		public CharacterInitialiser characterInitializer;
 		public WorldObjectInitialiser worldObjectInitialiser;
 		[SerializeField] private ItemContainerSO itemContainerSO;
+		[SerializeField] private EquipmentContainerSO equipmentContainer;
 
 	//load level from textasset
 		[Header("Test Level Data")] 
@@ -99,10 +99,10 @@ namespace SaveSystem {
 
 		private void Start() {
 			// setup save Writer
-			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, questContainer);
+			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, equipmentContainer, questContainer);
 
 			// setup save Reader
-			_saveReader = new SaveReader(gridContainer, globalGridData, inventory, questContainer, itemContainerSO);
+			_saveReader = new SaveReader(gridContainer, globalGridData, inventory, questContainer, itemContainerSO, equipmentContainer);
 		}
 
 		#endregion

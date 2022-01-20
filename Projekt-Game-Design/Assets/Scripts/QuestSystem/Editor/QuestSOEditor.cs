@@ -1,10 +1,8 @@
 ﻿using QuestSystem.ScriptabelObjects;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
-using static UnityEditor.EditorGUILayout;
 
-namespace QuestSystem.Editor {
+namespace GDP01.QuestSystem.Editor {
 	[CustomEditor(typeof(QuestSO))]
 	public class QuestSOEditor : UnityEditor.Editor {
 		

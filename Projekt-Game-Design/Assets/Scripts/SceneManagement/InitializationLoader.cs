@@ -1,4 +1,3 @@
-using Events.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

@@ -12,35 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a61ead88b01a0704a9f45e2aef1ed2c6, type: 3}
   m_Name: CharVisualsContainer
   m_EditorClassIdentifier: 
-  headsReference:
-  - name: basic
-    mesh: {fileID: -512814852588796520, guid: a9b97bb237d970d479610c06205b120d, type: 3}
-  - name: 
-    mesh: {fileID: 8392748973520690599, guid: a9b97bb237d970d479610c06205b120d, type: 3}
-  - name: 
-    mesh: {fileID: -1474500078929651110, guid: a9b97bb237d970d479610c06205b120d, type: 3}
-  bodysReference:
-  - name: basic
-    mesh: {fileID: 8347488232688724282, guid: 2bcdc85eb13225944b79da3eef396cde, type: 3}
-  - name: 
-    mesh: {fileID: 7013652014927938104, guid: 889239fa076ea1e4e8b867940678820e, type: 3}
-  charMaterial:
-  - {fileID: 2100000, guid: e7725c4508c59b443a0ce4a844369ae8, type: 2}
-  - {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
-  - {fileID: 2100000, guid: 41fa25b4c7194e145b94fcbefe63b3a1, type: 2}
-  - {fileID: 2100000, guid: 205fdaaeeefc6bc45919266d9a22a237, type: 2}
-  - {fileID: 2100000, guid: 205fdaaeeefc6bc45919266d9a22a237, type: 2}
-  - {fileID: 2100000, guid: ff13dae070b5f41499ee2ced0ee5c5d2, type: 2}
-  - {fileID: 2100000, guid: a2e76941eb8ac734195b509949af023f, type: 2}
-  - {fileID: 2100000, guid: e5db0e3232b56214c99a1aa26c1ff5c8, type: 2}
-  - {fileID: 2100000, guid: 36e1437c834acb24e8e2c557b371a33c, type: 2}
-  - {fileID: 0}
-  factionMaterial:
+  compositeMaterials:
+  - matColor: 0
+    material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
+  - matColor: 1
+    material: {fileID: 2100000, guid: 2a8bb75c7a388f84c97bea7614dc0123, type: 2}
+  - matColor: 2
+    material: {fileID: 2100000, guid: afcf74c9d28da724b9ed74097742bcd2, type: 2}
+  - matColor: 3
+    material: {fileID: 2100000, guid: 2e94d6a09fa4f89448cc158da882bf11, type: 2}
+  - matColor: 4
+    material: {fileID: 2100000, guid: 63d5d82768249414eb5ab82bade3632f, type: 2}
+  - matColor: 5
+    material: {fileID: 2100000, guid: 444b3c5c2d9f6c8449c77ac39d09792a, type: 2}
+  - matColor: 6
+    material: {fileID: 2100000, guid: 39897e1cf2f50d84ba899365c86c9d33, type: 2}
+  - matColor: 7
+    material: {fileID: 2100000, guid: a95a70f1061eb1f4db9274e54c76afeb, type: 2}
+  factionMaterials:
   - faction: 1
-    material: {fileID: 2100000, guid: 41fa25b4c7194e145b94fcbefe63b3a1, type: 2}
-  - faction: 4
-    material: {fileID: 2100000, guid: ff13dae070b5f41499ee2ced0ee5c5d2, type: 2}
+    matColor: 1
   - faction: 2
-    material: {fileID: 2100000, guid: a2e76941eb8ac734195b509949af023f, type: 2}
+    matColor: 4
+  - faction: 4
+    matColor: 7
   - faction: 3
-    material: {fileID: 2100000, guid: e7725c4508c59b443a0ce4a844369ae8, type: 2}
+    matColor: 6

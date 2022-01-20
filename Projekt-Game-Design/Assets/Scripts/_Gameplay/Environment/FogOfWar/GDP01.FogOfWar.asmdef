@@ -1,0 +1,14 @@
+{
+    "name": "GDP01.FogOfWar",
+    "rootNamespace": "GDP01.FogOfWar",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

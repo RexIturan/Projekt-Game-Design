@@ -1,4 +1,5 @@
 ﻿using Characters;
+using GDP01.Player.Player;
 using Player;
 
 namespace QuestSystem.ScriptabelObjects {

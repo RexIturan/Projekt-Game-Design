@@ -1,7 +1,8 @@
-﻿using UnityEditor;
+﻿using QuestSystem;
+using UnityEditor;
 using UnityEngine;
 
-namespace QuestSystem.Editor {
+namespace GDP01.QuestSystem.Editor {
 	[CustomEditor(typeof(QuestManager))]
 	public class QuestManagerEditor : UnityEditor.Editor {
 		public override void OnInspectorGUI() {

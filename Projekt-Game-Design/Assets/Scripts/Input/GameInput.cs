@@ -1,5 +1,4 @@
 // GENERATED AUTOMATICALLY FROM 'Assets/Settings/Input/GameInput.inputactions'
-
 using System;
 using System.Collections;
 using System.Collections.Generic;

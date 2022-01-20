@@ -1,0 +1,25 @@
+{
+    "name": "GDP01.SaveSystem",
+    "rootNamespace": "GDP01.SaveSystem",
+    "references": [
+        "GUID:84651a3751eca9349aac36a66bba901b",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:1686690f1ac79d041817b02ce51bc834",
+        "GUID:0a130d9f974bdcd4da38c8eff1609a16",
+        "GUID:bd4d88f6695cbba4095968043b9ed903",
+        "GUID:63f03fbf76d7d724daf34a656a424d34",
+        "GUID:a46fa3f8826f4e5408526f4eeccb2e6a",
+        "GUID:0d7bba5758dc5f14bb41acd540497ad0",
+        "GUID:841b43910935cb34dbaf7254db209e3d",
+        "GUID:08a65659543cc7441a1677f652290219"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

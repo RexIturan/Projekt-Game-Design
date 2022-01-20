@@ -1,11 +1,10 @@
-using Characters;
+using Characters.Types;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
 using SaveSystem;
 using SaveSystem.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
-using UOP1.StateMachine;
 
 namespace GameManager {
     public class GameSC : MonoBehaviour {

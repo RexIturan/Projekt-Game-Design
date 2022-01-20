@@ -1,8 +1,9 @@
-using Ability;
 using Ability.ScriptableObjects;
 using Characters;
-using Characters.Ability;
+using Characters.Types;
 using Combat;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -58,23 +59,23 @@ public class C_HasValidTarget : Condition
 						// Debug.Log("Target Faction: " + targetFaction.ToString());
 						// Debug.Log("Attacker Faction: " + attackerFaction.ToString());
 
-						if ( ability.targets.HasFlag(AbilityTarget.Neutral) &&
+						if ( ability.targets.HasFlag(TargetRelationship.Neutral) &&
 								targetFaction.Equals(Faction.Neutral))
 						{
 								targetRelationshipValid = true;
 						}
-						if ( ability.targets.HasFlag(AbilityTarget.Self) )
+						if ( ability.targets.HasFlag(TargetRelationship.Self) )
 						{
 								if ( _attacker.gameObject == _target.gameObject )
 										targetRelationshipValid = true;
 						}
-						if ( ability.targets.HasFlag(AbilityTarget.Ally) )
+						if ( ability.targets.HasFlag(TargetRelationship.Ally) )
 						{
 								if ( attackerFaction.Equals(targetFaction) &&
 										 _attacker.gameObject != _target.gameObject )
 										targetRelationshipValid = true;
 						}
-						if ( ability.targets.HasFlag(AbilityTarget.Enemy) )
+						if ( ability.targets.HasFlag(TargetRelationship.Enemy) )
 						{
 								// only valid if the attacker is enemy and target is player
 								// of if attacker is player and target is enemy

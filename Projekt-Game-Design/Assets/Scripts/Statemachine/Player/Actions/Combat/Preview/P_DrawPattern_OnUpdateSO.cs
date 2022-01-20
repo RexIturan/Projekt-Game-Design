@@ -1,7 +1,7 @@
 using Ability.ScriptableObjects;
-using Characters.Ability;
-using Combat;
 using Events.ScriptableObjects;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
 using Input;
 using UnityEngine;
 using UOP1.StateMachine;

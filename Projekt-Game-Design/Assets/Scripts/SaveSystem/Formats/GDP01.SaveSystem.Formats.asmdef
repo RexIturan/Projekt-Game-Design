@@ -1,0 +1,14 @@
+{
+    "name": "GDP01.SaveSystem.Formats",
+    "rootNamespace": "GDP01.SaveSystem.Formats",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

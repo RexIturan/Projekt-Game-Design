@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Characters;
+using Characters.Types;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New_TacticsGameData", menuName = "GameManager/New TacticsGameData")]

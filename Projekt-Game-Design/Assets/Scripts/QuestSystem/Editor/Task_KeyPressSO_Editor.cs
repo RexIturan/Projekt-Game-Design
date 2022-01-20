@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace QuestSystem.Editor {
+namespace GDP01.QuestSystem.Editor {
 	[CustomEditor(typeof(Task_KeyPress_SO))]
 	public class Task_KeyPressSO_Editor : UnityEditor.Editor {
 		public override void OnInspectorGUI() {
