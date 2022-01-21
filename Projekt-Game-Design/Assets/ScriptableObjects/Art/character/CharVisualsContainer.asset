@@ -23,7 +23,7 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: c40101fb007c9174e9d24bea9b42c7eb, type: 2}
   - matColor: 4
     material: {fileID: 2100000, guid: 2e94d6a09fa4f89448cc158da882bf11, type: 2}
-  - matColor: 2
+  - matColor: 5
     material: {fileID: 2100000, guid: afcf74c9d28da724b9ed74097742bcd2, type: 2}
   - matColor: 6
     material: {fileID: 2100000, guid: 9666f946cb4770d4cb1276694816adc1, type: 2}

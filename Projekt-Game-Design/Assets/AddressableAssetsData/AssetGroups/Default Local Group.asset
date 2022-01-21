@@ -17,20 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 3f77664488fffe24b8349ec20b4f0cd1
   m_SerializeEntries:
-  - m_GUID: b5821c0c90e6f8044a2f1ed32296f05e
-    m_Address: Assets/Art/Material/Player_mat.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 572e879cdd5e13043b2c0c7ac4198acf
     m_Address: Assets/Art/Material/FOV_mat.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: bc9f5c3fce407d040934535c1eeaadc2
     m_Address: Assets/Art/Material/TileMesh_mat.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 4c738b82dfe095844b75e6bf35a4fd57
-    m_Address: Assets/Art/Material/Enemy_mat.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: b442d63fc4f688c42b0926627f5f5bd4
