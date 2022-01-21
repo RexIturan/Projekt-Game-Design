@@ -7,8 +7,11 @@ using UnityEngine;
 public enum EMaterialColor {
 	Black,
 	Blue,
-	DarkGreen,
+	DarkBlue,
+	Brown,
 	Green,
+	DarkGreen,
+	Purple,
 	Red,
 	Tan,
 	White,

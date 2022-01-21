@@ -1357,7 +1357,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 9e8ac34d4666994408fb000d989a84c4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e5db0e3232b56214c99a1aa26c1ff5c8, type: 2}
+      objectReference: {fileID: 2100000, guid: 2a8bb75c7a388f84c97bea7614dc0123, type: 2}
     - target: {fileID: -5754084199372789682, guid: 9e8ac34d4666994408fb000d989a84c4, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1702,7 +1702,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 44a78e32357ef734bbb1553d4ad48322, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e5db0e3232b56214c99a1aa26c1ff5c8, type: 2}
+      objectReference: {fileID: 2100000, guid: 2a8bb75c7a388f84c97bea7614dc0123, type: 2}
     - target: {fileID: 919132149155446097, guid: 44a78e32357ef734bbb1553d4ad48322, type: 3}
       propertyPath: m_Name
       value: SM_shield_12
@@ -1850,7 +1850,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 14884095c0627db45bcadc031f95a2a8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e5db0e3232b56214c99a1aa26c1ff5c8, type: 2}
+      objectReference: {fileID: 2100000, guid: 2a8bb75c7a388f84c97bea7614dc0123, type: 2}
     - target: {fileID: -5754084199372789682, guid: 14884095c0627db45bcadc031f95a2a8, type: 3}
       propertyPath: m_Mesh
       value: 
