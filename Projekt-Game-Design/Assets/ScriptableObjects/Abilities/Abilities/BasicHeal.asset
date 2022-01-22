@@ -19,7 +19,7 @@ MonoBehaviour:
   activationSound: slash_01
   projectilePrefab: {fileID: 0}
   timeUntilDamage: 0.3
-  repeated: 0
+  repeated: 1
   damaging: 0
   targets: 3
   moveToTarget: 0
