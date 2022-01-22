@@ -1,28 +1,33 @@
 ﻿using Ability.ScriptableObjects;
 using System.Collections.Generic;
+using Characters;
 using Characters.Equipment;
 using UnityEngine;
 
 namespace GDP01.Characters.Component {
+	[RequireComponent(typeof(Statistics))]
 	public class AbilityController : MonoBehaviour {
 		[SerializeField] private int abilityID;
 		[SerializeField] private int lastAbilityID;
 		[SerializeField] private AbilitySO[] baseAbilities;
 		[SerializeField] private AbilityContainerSO abilityContainer;
+		[SerializeField] private Statistics _statistics;
 		
 		public AbilitySO[] Abilities;
 		public AbilitySO[] BaseAbilities {
 			get => baseAbilities;
 			set => baseAbilities = value;
 		}
-				
+
+		// todo should be properties?
 		//state
 		public bool abilitySelected;
 		public bool abilityConfirmed;
 		public bool abilityExecuted;
-		
 		public bool damageInflicted;
 		
+///// Properties ///////////////////////////////////////////////////////////////////////////////////
+	
 		public int SelectedAbilityID {
 			get => abilityID;
 			set => abilityID = value;
@@ -33,6 +38,8 @@ namespace GDP01.Characters.Component {
 			set => lastAbilityID = value;
 		}
 
+///// Public Functions /////////////////////////////////////////////////////////////////////////////		
+		
 		public AbilitySO GetSelectedAbility() {
 			return SelectedAbilityID > -1 ? abilityContainer.abilities[SelectedAbilityID] : null;
 		}
@@ -52,6 +59,14 @@ namespace GDP01.Characters.Component {
 			}
 
 			Abilities = currentAbilities.ToArray();
+		}
+
+		public bool IsAbilityAvailable(int id) {
+			return IsAbilityAvailable(abilityContainer.abilities[SelectedAbilityID]);
+		}
+		
+		public bool IsAbilityAvailable(AbilitySO ability) {
+			return _statistics.StatusValues.Energy.value >= ability.costs;
 		}
 	}
 }

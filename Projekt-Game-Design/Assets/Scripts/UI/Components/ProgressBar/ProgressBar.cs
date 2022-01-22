@@ -35,8 +35,6 @@ namespace UI.Components {
 		// remove color
 		// background color
 
-		private bool showText = false;
-		
 		private int min;
 		private int max;
 		private int value;
@@ -123,6 +121,8 @@ namespace UI.Components {
 			}
 		} 
 		
+///// PUBLIC FUNCTIONS  ////////////////////////////////////////////////////////////////////////////
+
 		private void BuildComponents() {
 			this.name = "ProgressBar";
 

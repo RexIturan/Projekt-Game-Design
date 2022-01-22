@@ -1,14 +1,4 @@
-﻿:root {
-    --icon-border-color: white;
-    --name-text-color: white;
-    --level-background-color: #a7a7a7;
-    --level-text-color: white;
-    --name-font-size: 20px;
-    --level-font-size: 18px;
-    --icon-border-hover-color: #00aeff;
-}
-
-.characterIcon {
+﻿.characterIcon {
     
 }
 

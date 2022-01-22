@@ -237,7 +237,6 @@ MonoBehaviour:
   gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   moveSpeed: 5
   rotationSpeed: 360
-  position: {x: 0, y: 0, z: 0}
   facingDirection: 0
   movementPointsPerEnergy: 0
   movementCostPerTile: 2
@@ -266,6 +265,7 @@ MonoBehaviour:
   lastAbilityID: 0
   baseAbilities: []
   abilityContainer: {fileID: 11400000, guid: 636fde585deb2974e93548838daccee6, type: 2}
+  _statistics: {fileID: 2212653873986084095}
   Abilities: []
   abilitySelected: 0
   abilityConfirmed: 0
@@ -301,7 +301,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualsContainerSO: {fileID: 11400000, guid: ac876b79df144bf4aba6695e200065a3, type: 2}
   prefab: {fileID: 8839921088689484587, guid: 3bc60f3f9e3f61b4cb1586783afde6b0, type: 3}
-  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
   weaponLeft: {fileID: 0}
   weaponRight: {fileID: 0}
   headArmor: {fileID: 0}

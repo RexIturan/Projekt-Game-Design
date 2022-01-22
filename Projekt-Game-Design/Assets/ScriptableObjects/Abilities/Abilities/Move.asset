@@ -12,18 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: Move
   m_EditorClassIdentifier: 
+  id: 0
   icon: {fileID: 21300000, guid: 9a0eb45eaedcb804f9f2016fbf9296d0, type: 3}
   description: move to target pos
   Animation: 5
   activationSound: 
+  projectilePrefab: {fileID: 0}
+  timeUntilDamage: 0
   repeated: 1
+  damaging: 0
   targets: 24
   moveToTarget: 1
   range: 0
   conditions: 1
-  costs: 0
+  costs: 2
   targetedEffects: []
-  abilityID: 0
   selectedActions:
   - {fileID: 11400000, guid: dc79f1f8601c7714991200007604a816, type: 2}
   - {fileID: 11400000, guid: 5eeee1affae48bc4b8b3424a918e952a, type: 2}

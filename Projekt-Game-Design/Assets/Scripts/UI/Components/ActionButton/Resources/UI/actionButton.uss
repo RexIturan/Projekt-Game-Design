@@ -1,0 +1,59 @@
+.action-button {
+    width: 100px;
+    padding: 0;
+    margin: 5px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-button-button:focus {
+    border-color: var(--focus-border-color);
+}
+
+.action-button-button:hover {
+    border-color: var(--hover-border-color);
+}
+
+.action-button-button:disabled {
+    border-color: var(--disabled-border-color);
+}
+
+.action-button-button {
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    width: 100px;
+    padding: 0;
+    margin: 0;
+    border-width: 5px;
+    border-radius: 5px;
+}
+
+.action-button-image {
+    width: 100%;
+    height: 100%;
+    /*background-image: resource('Assets/Art/Sprites/UI/move.png');*/
+}
+
+.action-button-top-container {
+    width: 100%;
+    align-items: flex-end;
+}
+
+.action-button-mapping {
+    color: var(--name-label-text-color);
+    background-color: var(--name-label-background-color);
+    margin: 0;
+}
+
+.action-button-name {
+    color: var(--mapping-label-text-color);
+    background-color: var(--mapping-label-background-color);
+    width: 100%;
+    margin: 0;
+    margin-bottom: 4px;
+    -unity-text-align: upper-center;
+    flex-wrap: wrap;
+    white-space: normal;
+}
+

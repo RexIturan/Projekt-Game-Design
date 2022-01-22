@@ -17,12 +17,12 @@ public class RaiseSelectedEventSO : StateActionSO {
 public class RaiseSelectedEvent : StateAction {
 	private GameObject _gameObject;
 	private StateMachine _stateMachine;
-	private GameObjActionEventChannelSO _selectNewPlayer;
+	private GameObjActionEventChannelSO _selectPlayerEC;
 
 	private AbilityController _abilityController;
 
-	public RaiseSelectedEvent(GameObjActionEventChannelSO gameObjEventChannel) {
-		_selectNewPlayer = gameObjEventChannel;
+	public RaiseSelectedEvent(GameObjActionEventChannelSO selectPlayerEventChannel) {
+		_selectPlayerEC = selectPlayerEventChannel;
 	}
 
 	public override void OnUpdate() { }
@@ -60,6 +60,6 @@ public class RaiseSelectedEvent : StateAction {
 
 	public override void OnStateEnter() {
 	  _abilityController.RefreshAbilities();
-		_selectNewPlayer.RaiseEvent(_gameObject, AbilityCallback);
+		_selectPlayerEC.RaiseEvent(_gameObject, AbilityCallback);
 	}
 }

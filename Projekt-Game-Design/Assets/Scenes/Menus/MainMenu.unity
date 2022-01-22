@@ -305,7 +305,7 @@ MonoBehaviour:
   loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
   showOptions: 0
   showLevelEditor: 0
-  showTestLevel: 0
+  showTestLevel: 1
 --- !u!1 &1194277225
 GameObject:
   m_ObjectHideFlags: 0

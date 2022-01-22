@@ -53,14 +53,6 @@ MonoBehaviour:
     m_Address: Assets/UI Toolkit/PanelSettings.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 7082954141e3ccc43bc3b217cf12e2e0
-    m_Address: Packages/com.unity.ui/Shaders/UIE-RuntimeWorld.shader
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 1e5f18a346ed454418f93aa7eaf55791
-    m_Address: Packages/com.unity.ui/Shaders/UIE-Runtime.shader
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 0ec786244fa6d1349b0ad47ea29947f7
     m_Address: Assets/UI/InventoryOverlay.uxml
     m_ReadOnly: 0
@@ -73,16 +65,8 @@ MonoBehaviour:
     m_Address: Assets/UI/Inventory/styles/inventory.uss
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 5af24a746b199d945b2aea0b3b50e409
-    m_Address: Packages/com.unity.ui/PackageResources/InputSystem/UIToolkitInputActions.inputactions
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 16076d8503cfcc849a63de1023db868e
     m_Address: Assets/UI/Stats/strength.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 662b00f569c02f84bbc426d4c41ceb5e
-    m_Address: Packages/com.unity.ui/Shaders/UIE-AtlasBlit.shader
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 2727d8462e1b04e4fbbdcb31cf2b0a62

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Characters;
-using Characters.Equipment;
 using Characters.Equipment.ScriptableObjects;
 using Events.ScriptableObjects;
 using GDP01.Characters.Component;

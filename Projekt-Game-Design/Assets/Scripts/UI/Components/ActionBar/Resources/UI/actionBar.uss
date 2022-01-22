@@ -1,13 +1,18 @@
 :root{
     --border-color: #343434;
     --background-color: #5e5e5e;
+    
+    --name-label-background-color: white;
+    --name-label-text-color: black;
+    
+    --mapping-label-background-color: white;
+    --mapping-label-text-color: black;
 }
 
 .action-bar {
     position: relative;
-    flex-grow: 1;
-    display: flex;
-    width: 100%;
+    /*flex-grow: 1;*/
+    /*display: flex;*/
     height: 100%;
     justify-content: flex-end;
 }
@@ -25,57 +30,6 @@
     padding: 5px;
     border-width: 5px;
     border-radius: 5px;
-}
-
-.action-button {
-    width: 100px;
-    padding: 0;
-    margin: 5px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.action-button-button:hover {
-    border-color: blue;
-}
-
-.action-button-button {
-    align-items: center;
-    justify-content: space-between;
-    height: 100px;
-    width: 100px;
-    padding: 0;
-    margin: 0;
-    border-width: 5px;
-    border-radius: 5px;
-}
-
-.action-button-image {
-    width: 100%;
-    height: 100%;
-    /*background-image: resource('Assets/Art/Sprites/UI/move.png');*/
-}
-
-.action-button-top-container {
-    width: 100%;
-    align-items: flex-end;
-}
-
-.action-button-mapping {
-    color: black;
-    background-color: white;
-    margin: 0;
-}
-
-.action-button-name {
-    color: black;
-    background-color: white;
-    width: 100%;
-    margin: 0;
-    margin-bottom: 4px;
-    -unity-text-align: upper-center;
-    flex-wrap: wrap;
-    white-space: normal;
 }
 
 .left {

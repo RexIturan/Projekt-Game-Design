@@ -6,11 +6,12 @@ using Characters.Types;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
 using GDP01.Characters.Component;
+using GDP01.UI.Components;
 using Input;
-using UI.Components;
 using UI.Components.Character;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Util.Extensions;
 using Object = System.Object;
 
 public class OverlayUIController : MonoBehaviour {
@@ -19,11 +20,9 @@ public class OverlayUIController : MonoBehaviour {
 	[SerializeField] private BoolEventChannelSO setTurnIndicatorVisibilityEC;
 	[SerializeField] private EquipItemEC_SO EquipEvent;
 	[SerializeField] private UnequipItemEC_SO UnequipEvent;
-	// [SerializeField] private BoolEventChannelSO visibilityInventoryEventChannel;
-
-	// Action Menu
 	[SerializeField] private GameObjEventChannelSO playerDeselectedEC;
 	[SerializeField] private GameObjActionEventChannelSO playerSelectedEC;
+	[SerializeField] private VoidEventChannelSO abilityExecutedEC;
 
 	[Header("Sending Events On")] 
 	[SerializeField] private VoidEventChannelSO enableGamplayInput;
@@ -73,10 +72,8 @@ public class OverlayUIController : MonoBehaviour {
 		}
 	}
 	
-	private void FlushAbilityListIcons() {
-		foreach ( var button in _actionBar.actionButtons ) {
-			button.UnbindAction();
-		}
+	private void FlushAbilityCallbacks() {
+		_actionBar.ResetActionButtons();
 	}
 	
 	//todo use for tooltip 
@@ -154,32 +151,69 @@ public class OverlayUIController : MonoBehaviour {
 		_characterStatusValuePanel.SetViibility(false);
 	}
 	
-	private void ShowActionMenu() {
+	private void ShowActionBar() {
 		_actionBar.SetVisibility(true);
 	}
 
+	//todo(vincent) move to action bar controller
 	private void UpdateActionBar() {
 		if(_selectedPlayer is {}) {
-			FlushAbilityListIcons();
+			FlushAbilityCallbacks();
+
+			var abilityController = _selectedPlayer.GetComponent<AbilityController>();
 			List<AbilitySO> abilities =
-				new List<AbilitySO>(_selectedPlayer.GetComponent<AbilityController>().Abilities);
+				new List<AbilitySO>(abilityController.Abilities);
 			int counter = 0;
 
-			foreach ( var ability in abilities ) {
+			//disable buttons
+			// _actionBar.actionButtons.ForEach(actionButton => actionButton.Button.SetEnabled(false));
 
-				// new AvtionBar
-				var id = ability.id;
-				var args = new Object[] { id };
+			for ( int i = 0; i < _actionBar.actionButtons.Count; i++ ) {
+				var actionButton = _actionBar.actionButtons[i];
+				if ( abilities.IsValidIndex(i) ) {
+					// actionButton.Button.focusable = true;
+					actionButton.Button.SetEnabled(true);
+					
+					var ability = abilities[i];
+					var id = ability.id;
+					var args = new Object[] { id };
 
-				void AbilityCallback(object[] args) {
-					Debug.Log($"AbilityCallback {args[0]}");
-					_callBackAction(( int )args[0]);
+					void AbilityCallback(object[] args) {
+						Debug.Log($"AbilityCallback {args[0]}");
+						_callBackAction(( int )args[0]);
+					}
+
+					if ( !abilityController.IsAbilityAvailable(ability) ) {
+						actionButton.Button.SetEnabled(false);	
+					}
+					actionButton.SetupActionButton(ability.icon, ability.name);
+					actionButton.BindOnClickedAction(AbilityCallback, args);
 				}
-
-				_actionBar.actionButtons[counter++]
-					.BindAction(AbilityCallback, args, ability.icon, ability.name);
+				else {
+					// actionButton.Button.focusable = false;
+					actionButton.Button.SetEnabled(false);
+				}
 			}
-
+			//
+			// foreach ( var ability in abilities ) {
+			//
+			// 	// new AvtionBar
+			// 	var id = ability.id;
+			// 	var args = new Object[] { id };
+			//
+			// 	void AbilityCallback(object[] args) {
+			// 		Debug.Log($"AbilityCallback {args[0]}");
+			// 		_callBackAction(( int )args[0]);
+			// 	}
+			//
+			// 	var actionButton = _actionBar.actionButtons[counter++];
+			// 	if ( abilityController.IsAbilityAvailable(ability) ) {
+			// 		actionButton.Button.SetEnabled(true);	
+			// 	}
+			// 	actionButton.SetupActionButton(ability.icon, ability.name);
+			// 	actionButton.BindOnClickedAction(AbilityCallback, args);
+			// }
+			
 			RefreshStats(_selectedPlayer);
 			//TODO: Hier die Stats einbauen, für den ausgewählten Spieler
 		}
@@ -199,16 +233,16 @@ public class OverlayUIController : MonoBehaviour {
 	/// HandlePlayerSelected
 	/// </summary>
 	/// <param name="player">player Character Game Object</param>
-	/// <param name="callBackAction">callback to call when a action ist clicked</param>
-	private void HandlePlayerSelected(GameObject player, Action<int> callBackAction) {
+	/// <param name="selectAction">callback to call when a action ist clicked</param>
+	private void HandlePlayerSelected(GameObject player, Action<int> selectAction) {
 		_selectedPlayer = player;
-		_callBackAction = callBackAction;
-		
-		// Anzeigen der notwendigen Komponenten
-		ShowActionMenu();
-		ShowPlayerViewContainer();
+		_callBackAction = selectAction;
 		
 		UpdateActionBar();
+		
+		// Anzeigen der notwendigen Komponenten
+		ShowActionBar();
+		ShowPlayerViewContainer();
 	}
 
 	private void HandleOpenMenuButton() {
@@ -218,6 +252,7 @@ public class OverlayUIController : MonoBehaviour {
 	private void HandlePlayerDeselected(GameObject obj) {
 		if(obj == _selectedPlayer) { 
 			_actionBar.SetVisibility(false);
+			
 			_characterStatusValuePanel.SetViibility(false);
 		}
 	}
@@ -241,6 +276,10 @@ public class OverlayUIController : MonoBehaviour {
 		//todo 0-9 input ability 
 	}
 	
+	private void HandleAbilityExecuted() {
+		UpdateActionBar();
+	}
+	
 ///// Public Functions	////////////////////////////////////////////////////////////////////////////
 
 ///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
@@ -260,9 +299,11 @@ public class OverlayUIController : MonoBehaviour {
 		_characterStatusValuePanel.SetViibility(false);
 	}
 
-	private void Awake() {
+	private void OnEnable() {
 		setGameOverlayVisibilityEC.OnEventRaised += HandleSetGameOverlayVisibilityEC;
 		setTurnIndicatorVisibilityEC.OnEventRaised += HandleSetTurnIndicatorVisibilityEC;
+
+		abilityExecutedEC.OnEventRaised += HandleAbilityExecuted;
 		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
 

@@ -216,6 +216,7 @@ MonoBehaviour:
   groundTargetSet: 0
   tileInRangeOfTarget: []
   tilesInRange: []
+  visibleTiles: []
   waitForAttackToFinish: 0
   attackRange: 0
   attackDamage: 0
@@ -236,9 +237,9 @@ MonoBehaviour:
   gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   moveSpeed: 5
   rotationSpeed: 360
-  position: {x: 0, y: 0, z: 0}
   facingDirection: 0
   movementPointsPerEnergy: 0
+  movementCostPerTile: 2
   reachableTiles: []
   movementTarget:
     pos: {x: 0, y: 0, z: 0}
@@ -264,6 +265,7 @@ MonoBehaviour:
   lastAbilityID: 0
   baseAbilities: []
   abilityContainer: {fileID: 11400000, guid: 636fde585deb2974e93548838daccee6, type: 2}
+  _statistics: {fileID: 2212653873986084095}
   Abilities: []
   abilitySelected: 0
   abilityConfirmed: 0
@@ -283,7 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualsContainerSO: {fileID: 0}
   prefab: {fileID: 8839921088689484587, guid: 40de477da2fde4445bb9e2932cfa69c8, type: 3}
-  material: {fileID: 2100000, guid: a2e76941eb8ac734195b509949af023f, type: 2}
   weaponLeft: {fileID: 0}
   weaponRight: {fileID: 0}
   headArmor: {fileID: 0}
@@ -343,7 +344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: {fileID: 0}
-  enemySpawnData: {fileID: 0}
   behavior: {fileID: 11400000, guid: 1f2adb223990b1f458c58b0569d99fbf, type: 2}
   _statistics: {fileID: 2212653873986084095}
   _gridTransform: {fileID: 6601210392787000488}

@@ -1,3 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <UI.Components.ActionBar Orientation="Bottom" ActionBarLayout="Vertical" Action-Bar-Layout="Horizontal" number-of-actions="10" Show-Names="true" />
+    <UI.Controller.IgnoreFocusEvents tabindex="100" picking-mode="Ignore" style="position: absolute; width: 100%; height: 100%;" />
+    <GDP01.UI.Components.ActionBar name="ActionBar" number-of-actions="10" picking-mode="Ignore" style="height: auto;" />
 </ui:UXML>
