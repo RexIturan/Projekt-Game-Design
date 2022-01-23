@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GDP01.Input.Input.Types;
 using UI.Components.ActionButton;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -46,6 +47,8 @@ namespace GDP01.UI.Components {
 		// logic settings
 		public int actionCount { get; set; }
 		public List<string> Mappings { get; set; }
+		//mapping of ActionbuttonInputId -> actionbuttonIdx
+		public Dictionary<ActionButtonInputId, int> KeyMappings { get; set; }
 		public List<Action<Action>> ButtonCLickActions { get; set; }
 
 		
@@ -61,10 +64,6 @@ namespace GDP01.UI.Components {
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////		
 
 		private void BuildComponent() {
-			this.name = "ActionBar";
-
-			StyleSheet style = Resources.Load<StyleSheet>(defaultStyleSheet);
-			this.styleSheets.Add(style);
 
 			this.AddToClassList(actionBarClassName);
 			this.RemoveFromClassList(leftClassName);
@@ -87,43 +86,40 @@ namespace GDP01.UI.Components {
 			this.Add(container);
 		}
 		
-		private void HandleActionSelected(int selection, ActionButton actionButton) {
-			if ( selection == actionButton.Id ) {
-				// Debug.Log(index);
-				
-
-				var controller = actionButton.Button.focusController; 
-				if ( controller is {} && controller.focusedElement == actionButton.Button) {
-					// actionButton.Button.Blur();
-				}
-				else {
-					actionButton.Button.Focus();
-				}
+		private void HandleActionSelected(ActionButton actionButton) {
+			var controller = actionButton.Button.focusController; 
+			if ( controller is {} && controller.focusedElement == actionButton.Button) {
+				// actionButton.Button.Blur();
+			}
+			else {
+				actionButton.Button.Focus();
 			}
 		}
 
-		private void HandleActionClicked(int selection, ActionButton actionButton) {
-			if ( selection == actionButton.Id ) {
+		private void HandleActionClicked(ActionButton actionButton) {
 				// var navEvent = new NavigationSubmitEvent();
 				// navEvent.target = actionButton.Button;
 				// this.SendEvent(navEvent);
 
 				//todo maybe change the behaviour so the ability would be repeatable?
-				HandleActionSelected(selection, actionButton);
-			}
+				HandleActionSelected(actionButton);
 		}
 
 ///// PUBLIC FUNCTIONS  ////////////////////////////////////////////////////////////////////////////
 
 		public void SelectActionButton(int index) {
-			if ( actionButtons.IsValidIndex(index) ) {
-				HandleActionSelected(index, actionButtons[index]);
+			if(KeyMappings.ContainsKey(( ActionButtonInputId )index)) {
+				if ( actionButtons.IsValidIndex(KeyMappings[( ActionButtonInputId )index]) ) {
+					HandleActionSelected(actionButtons[KeyMappings[( ActionButtonInputId )index]]);
+				}	
 			}
 		}
 
 		public void ClickActionButton(int index) {
-			if ( actionButtons.IsValidIndex(index) ) {
-				HandleActionClicked(index, actionButtons[index]);
+			if(KeyMappings.ContainsKey(( ActionButtonInputId )index)) {
+				if ( actionButtons.IsValidIndex(KeyMappings[( ActionButtonInputId )index]) ) {
+					HandleActionClicked(actionButtons[KeyMappings[( ActionButtonInputId )index]]);
+				}	
 			}
 		}
 
@@ -135,6 +131,24 @@ namespace GDP01.UI.Components {
 				for ( int i = 0; i < missingMappings; i++ ) {
 					//todo better placeholder
 					Mappings.Add("-");
+				}
+			}
+			
+			//fill keymappings if they arnt full
+			if ( KeyMappings.Count < actionCount ) {
+				for ( int i = 0; i < actionCount; i++ ) {
+					if ( !KeyMappings.ContainsValue(i) ) {
+						if ( !KeyMappings.ContainsKey(( ActionButtonInputId )i) ) {
+							KeyMappings.Add((ActionButtonInputId) i, i);	
+						}
+						else {
+							foreach ( var value in Enum.GetValues(typeof(ActionButtonInputId)) ) {
+								if(!KeyMappings.ContainsKey(( ActionButtonInputId )value)) {
+									KeyMappings.Add((ActionButtonInputId) value, i);
+								}
+							}														
+						}
+					}
 				}
 			}
 			
@@ -269,8 +283,6 @@ namespace GDP01.UI.Components {
 					element.actionLayout = layout.GetValueFromBag(bag, cc);
 					element.orientation = orientation.GetValueFromBag(bag, cc);
 					element.showNames = showNames.GetValueFromBag(bag, cc);
-
-					
 					
 					element.BuildComponent();
 					element.UpdateComponent();
@@ -278,30 +290,18 @@ namespace GDP01.UI.Components {
 			}
 		}
 
-		//todo init through code
 		public ActionBar() {
 			this.actionButtons = new List<ActionButton>();
 			this.ButtonCLickActions = new List<Action<Action>>();
 			Mappings = new List<string>();
+			KeyMappings = new Dictionary<ActionButtonInputId, int>();
+			
+			this.name = "ActionBar";
+			StyleSheet style = Resources.Load<StyleSheet>(defaultStyleSheet);
+			this.styleSheets.Add(style);
 			
 			BuildComponent();
 			UpdateComponent();
-			
-			
-		}
-
-		protected override void ExecuteDefaultAction(EventBase evt) {
-			if ( evt is PointerDownEvent pEvt ) {
-				if ( pEvt.button == 0 && focusController?.focusedElement is GroupedButton ) {
-					Debug.Log("action bar, is this the right position?");					
-				}
-				else {
-					base.ExecuteDefaultAction(evt);	
-				}
-			}
-			else {
-				base.ExecuteDefaultAction(evt);	
-			}
 		}
 	}
 }

@@ -46,6 +46,8 @@ namespace Characters.Movement {
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
 		private void Move() {
+			//todo enter exit cell/tile EC here?
+			
 			// Move character to position smoothly
 			var newPos = 
 				Vector3.MoveTowards(

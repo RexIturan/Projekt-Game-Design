@@ -1029,6 +1029,7 @@ GameObject:
   - component: {fileID: 2055213539}
   - component: {fileID: 2055213538}
   - component: {fileID: 2055213540}
+  - component: {fileID: 2055213541}
   m_Layer: 0
   m_Name: LevelEditor GUI
   m_TagString: Untagged
@@ -1099,6 +1100,22 @@ MonoBehaviour:
   uiDocument: {fileID: 2055213539}
   mouseOverUI_EC: {fileID: 11400000, guid: 2649fdca3d5737645a304d044086dbd7, type: 2}
   onSceneReady_EC: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}
+--- !u!114 &2055213541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055213536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586fe41f9fd44f7897ee18e6ccf8f2b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 2055213539}
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  numOfActionsLeft: 5
+  numOfActionsRight: 5
 --- !u!1 &2093532304
 GameObject:
   m_ObjectHideFlags: 0

@@ -75,7 +75,7 @@ MonoBehaviour:
   playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
   abilityConfirmedEC: {fileID: 11400000, guid: c8d63aaeb201f314499176fcc285dcfa, type: 2}
   abilityExecutedEC: {fileID: 11400000, guid: e2abec9137f95984980d057a99f5946e, type: 2}
-  targetChangedEC: {fileID: 11400000, guid: 979f87c1efc47c840a2ac61dbac3b1d5, type: 2}
+  previewChangedEC: {fileID: 11400000, guid: bbea0bd10948d3748ac7308a0f8e9a8a, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
   newTurnEC: {fileID: 11400000, guid: 3a28845fa87e62b47abeaf01656a2806, type: 2}

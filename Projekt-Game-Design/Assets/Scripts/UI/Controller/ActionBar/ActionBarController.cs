@@ -102,14 +102,9 @@ namespace UI.Controller {
 				if ( evt.button == 0 ) {
 					//do stuff
 					
-					
-					// evt.PreventFocusChange();
 					evt.StopImmediatePropagation();
 					evt.StopPropagation();
 					evt.PreventDefault();
-					// evt.Dispose();
-					// evt.PreventDefault();
-					// evt.StopPropagation();
 				}
 			}
 		}

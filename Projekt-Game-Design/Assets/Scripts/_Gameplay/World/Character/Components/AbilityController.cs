@@ -116,6 +116,7 @@ namespace GDP01.Characters.Component {
 				cost += movementController.GetEnergyUseUpFromMovement();
 			}
 			cost += ability.costs;
+			Debug.Log($"{cost}\n{movementController.PreviewPath?.AllToString()}");
 			return cost;
 		}
 		

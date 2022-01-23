@@ -2,6 +2,7 @@
 using Characters.Types;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using GDP01.Input.Input.Types;
 using UI.Gameplay.Types;
 using UnityEngine;
 using UnityEngine.Events;
@@ -196,61 +197,61 @@ namespace Input {
 
 		public void OnSelectAbility_1(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				SelectAbilityEvent.Invoke(0);	
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_1);	
 			}
 		}
 
 		public void OnSelectAbility_2(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				SelectAbilityEvent.Invoke(1);	
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_2);	
 			}
 		}
 
 		public void OnSelectAbility_3(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				SelectAbilityEvent.Invoke(2);	
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_3);	
 			}
 		}
 
 		public void OnSelectAbility_4(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				SelectAbilityEvent.Invoke(3);	
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_4);	
 			}
 		}
 
 		public void OnSelectAbility_5(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				SelectAbilityEvent.Invoke(4);	
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_5);	
 			}
 		}
 
 		public void OnSelectAbility_6(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				SelectAbilityEvent.Invoke(5);	
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_6);	
 			}
 		}
 
 		public void OnSelectAbility_7(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				SelectAbilityEvent.Invoke(6);	
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_7);	
 			}
 		}
 
 		public void OnSelectAbility_8(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				SelectAbilityEvent.Invoke(7);	
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_8);	
 			}
 		}
 
 		public void OnSelectAbility_9(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				SelectAbilityEvent.Invoke(8);	
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_9);
 			}
 		}
 
 		public void OnSelectAbility_10(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				SelectAbilityEvent.Invoke(9);	
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_10);
 			}
 		}
 

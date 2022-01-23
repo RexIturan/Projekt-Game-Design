@@ -25,7 +25,8 @@ public class OverlayUIController : MonoBehaviour {
 	
 	[SerializeField] private VoidEventChannelSO abilityConfirmedEC;
 	[SerializeField] private VoidEventChannelSO abilityExecutedEC;
-	[SerializeField] private Vector3IntEventChannelSO targetChangedEC;
+	[SerializeField] private VoidEventChannelSO previewChangedEC;
+	// [SerializeField] private Vector3IntEventChannelSO targetChangedEC;
 
 	[Header("Sending Events On")] 
 	[SerializeField] private VoidEventChannelSO enableGamplayInput;
@@ -229,6 +230,7 @@ public class OverlayUIController : MonoBehaviour {
 	}
 	
 	private void UpdateEnergyPreview() {
+		
 		if ( _selectedPlayer is { } ) {
 			var abilityController = _selectedPlayer.GetComponent<AbilityController>();
 			if ( abilityController.IsAbilitySelected ) {
@@ -246,7 +248,7 @@ public class OverlayUIController : MonoBehaviour {
 	}
 	
 	private void UnbindEnergyChangeToCharPanel() {
-		var statistics = _selectedPlayer.GetComponent<Statistics>();
+		var statistics = _selectedPlayer?.GetComponent<Statistics>();
 		if ( statistics is { } ) {
 			statistics.StatusValues.Energy.OnValueChanged -= UpdateStats;	
 		}
@@ -318,7 +320,7 @@ public class OverlayUIController : MonoBehaviour {
 		ClearPreviewEnergy();
 	}
 	
-	private void HandleTargetChanged(Vector3Int obj) {
+	private void HandlePreviewChanged() {
 		UpdateEnergyPreview();
 	}
 
@@ -355,7 +357,7 @@ public class OverlayUIController : MonoBehaviour {
 
 		abilityConfirmedEC.OnEventRaised += HandleAbilityConfirmed;
 		abilityExecutedEC.OnEventRaised += HandleAbilityExecuted;
-		targetChangedEC.OnEventRaised += HandleTargetChanged;
+		previewChangedEC.OnEventRaised += HandlePreviewChanged;
 		
 		//todo updating ui when turn changes -> handle otherwise
 		newTurnEC.OnEventRaised += HandleEndTurn;
@@ -370,7 +372,7 @@ public class OverlayUIController : MonoBehaviour {
 		
 		abilityConfirmedEC.OnEventRaised -= HandleAbilityConfirmed;
 		abilityExecutedEC.OnEventRaised -= HandleAbilityExecuted;
-		targetChangedEC.OnEventRaised -= HandleTargetChanged;
+		previewChangedEC.OnEventRaised -= HandlePreviewChanged;
 		
 		//todo updating ui when turn changes -> handle otherwise
 		newTurnEC.OnEventRaised -= HandleEndTurn;
