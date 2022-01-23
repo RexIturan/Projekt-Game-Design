@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Grid;
 using UnityEngine;
 using Util;
@@ -30,16 +31,31 @@ namespace Characters.Movement {
 		public List<PathNode> reachableTiles;
 		public PathNode movementTarget;
 
+///// Properties ///////////////////////////////////////////////////////////////////////////////////		
+		
 		//todo animation? 
 		public bool MovementDone { get; set; } = true;
+		public List<PathNode> PreviewPath { get; set; }
+
 		[SerializeField] private bool isMoving = false;
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////		
 
 		private GameObject model;
 
-///// Private Functions
- 
+///// Private Functions ////////////////////////////////////////////////////////////////////////////
+
+		private void Move() {
+			// Move character to position smoothly
+			var newPos = 
+				Vector3.MoveTowards(
+					current: transform.position, 
+					target:gridData.GetWorldPosFromGridPos(gridTransform.gridPosition), 
+					maxDistanceDelta:moveSpeed * Time.deltaTime);
+			
+			transform.position = newPos;
+		}
+
 		private void RotateModel() {
 			// Rotate character to facing position smoothly
 			Quaternion target = Quaternion.Euler(0, facingDirection, 0);
@@ -69,18 +85,8 @@ namespace Characters.Movement {
 		}
 
 		private void FixedUpdate() {
-			//TODO move the hole object
-			
-			//TODO rotate just the model
-			
-			// Move character to position smoothly 
-			var newPos = 
-				Vector3.MoveTowards(
-					current: transform.position, 
-					target:gridData.GetWorldPosFromGridPos(gridTransform.gridPosition), 
-					maxDistanceDelta:moveSpeed * Time.deltaTime);
-			
-			transform.position = newPos;
+ 
+			Move();
 
 			RotateModel();
 		}
@@ -90,15 +96,32 @@ namespace Characters.Movement {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		public int GetEnergyUseUpFromMovement() {
-			return Mathf.CeilToInt(( float )movementTarget.dist / movementPointsPerEnergy) * movementCostPerTile;
+			if ( movementTarget is {} ) {
+				return GetEnergyUseUpFromMovement(movementTarget);	
+			}
+			else if( PreviewPath is {} ) {
+				var last = PreviewPath.LastOrDefault(); 
+				if ( last != null ) {
+					return GetEnergyUseUpFromMovement(last);
+				} 
+			}
+
+			return 0;
+		}
+		
+		public int GetEnergyUseUpFromMovement(PathNode node) {
+			if ( node is {} ) {
+				return Mathf.CeilToInt(( float )node.dist / movementPointsPerEnergy) * movementCostPerTile;	
+			}
+			return 0;
 		}
 		
 		public int GetMaxMoveDistance() {
-			return statistics.StatusValues.GetValue(StatusType.Energy).value / movementCostPerTile * movementPointsPerEnergy;
+			return statistics.StatusValues.GetValue(StatusType.Energy).Value / movementCostPerTile * movementPointsPerEnergy;
 		}
 		
 		public int GetMaxTileMoveDistance() {
-			return statistics.StatusValues.GetValue(StatusType.Energy).value / movementCostPerTile;
+			return statistics.StatusValues.GetValue(StatusType.Energy).Value / movementCostPerTile;
 		}
 
 		public void FaceMovingDirection() {

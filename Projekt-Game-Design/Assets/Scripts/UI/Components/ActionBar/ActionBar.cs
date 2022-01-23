@@ -151,16 +151,19 @@ namespace GDP01.UI.Components {
 				};
 				actionButton.UpdateComponent();
 				actionButton.SetupActionButton(null, "callback");
-				actionButton.BindOnClickedAction((args) => {
+				actionButton.BindOnClickedAction(
+					(args) => {
 					
-					var str = "";
-					foreach ( var obj in args ) {
-						str += obj + " ";
-					}
+						var str = "";
+						foreach ( var obj in args ) {
+							str += obj + " ";
+						}
 
-					Debug.Log(str);
-					
-				}, new System.Object[] { "Button Pressed", actionButton.Mapping });
+						Debug.Log(str);
+					}, 
+					Debug.Log,
+				new System.Object[] { "Button Pressed", actionButton.Mapping });
+			
 				this.actionButtons.Add(actionButton);
 				buttonContainer.Add(actionButton);
 				

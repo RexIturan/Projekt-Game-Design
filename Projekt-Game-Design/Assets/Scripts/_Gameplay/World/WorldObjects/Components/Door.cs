@@ -61,8 +61,8 @@ namespace WorldObjects
 						gameObject.GetComponent<GridTransform>().gridPosition = saveData.gridPos;
 
 						Statistics stats = gameObject.GetComponent<Statistics>();
-						stats.StatusValues.HitPoints.max = doorType.hitPoints;
-						stats.StatusValues.HitPoints.value = saveData.currentHitPoints;
+						stats.StatusValues.HitPoints.Max = doorType.hitPoints;
+						stats.StatusValues.HitPoints.Value = saveData.currentHitPoints;
 						stats.SetFaction(Faction.Neutral);
 
 						keyIds = saveData.keyIds;

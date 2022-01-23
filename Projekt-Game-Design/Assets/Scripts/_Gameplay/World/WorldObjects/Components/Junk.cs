@@ -41,8 +41,8 @@ namespace WorldObjects
 						gameObject.GetComponent<GridTransform>().gridPosition = saveData.gridPos;
 
 						Statistics stats = gameObject.GetComponent<Statistics>();
-						stats.StatusValues.HitPoints.max = junkType.hitPoints;
-						stats.StatusValues.HitPoints.value = saveData.currentHitPoints;
+						stats.StatusValues.HitPoints.Max = junkType.hitPoints;
+						stats.StatusValues.HitPoints.Value = saveData.currentHitPoints;
 						stats.SetFaction(Faction.Neutral);
 				}
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Util.Extensions;
 
 namespace Ability.ScriptableObjects {
 	[CreateAssetMenu(fileName = "newAbilityContainerSO", menuName = "Ability/Ability Container",
@@ -7,6 +8,25 @@ namespace Ability.ScriptableObjects {
 	public class AbilityContainerSO : ScriptableObject {
 		public List<AbilitySO> abilities;
 
+		private void UpdateItemList() {
+			//todo remove magic
+			for ( int i = 0; i < abilities.Count; ) {
+				if ( abilities[i] == null ) {
+					abilities.RemoveAt(i);
+				}
+				else {
+					abilities[i].id = i;
+					i++;
+				}
+			}
+		}
+
+		private void OnValidate() {
+			UpdateItemList();
+		}
+
+///// Public Functions /////////////////////////////////////////////////////////////////////////////		
+		
 		public void InitAbilities() {
 			Debug.Log("Initialising Abilities");
 			foreach ( AbilitySO ability in abilities ) {
@@ -28,21 +48,8 @@ namespace Ability.ScriptableObjects {
 			}
 		}
 
-		public void UpdateItemList() {
-			//todo remove magic
-			for ( int i = 0; i < abilities.Count; ) {
-				if ( abilities[i] == null ) {
-					abilities.RemoveAt(i);
-				}
-				else {
-					abilities[i].id = i;
-					i++;
-				}
-			}
-		}
-
-		private void OnValidate() {
-			UpdateItemList();
+		public AbilitySO TryGetAbility(int id) {
+			return abilities.IsValidIndex(id) ? abilities[id] : null;
 		}
 	}
 }

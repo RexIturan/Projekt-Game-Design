@@ -20,8 +20,8 @@
           "y": 1,
           "z": 2
         },
-        "hitpoints": 10,
-        "energy": 10
+        "hitpoints": 100,
+        "energy": 100
       }
       ],
     "enemies": [],

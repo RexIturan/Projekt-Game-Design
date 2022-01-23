@@ -28,7 +28,7 @@ public class P_ReselectAbility_OnEnter : StateAction {
 		AbilitySO lastAbility = _abilityController.GetLastSelectedAbility();
 
 		if(lastAbility && lastAbility.repeated) {
-			if( _statistics.StatusValues.Energy.value >= lastAbility.costs ) { 
+			if( _statistics.StatusValues.Energy.Value >= lastAbility.costs ) { 
 				_abilityController.SelectedAbilityID = _abilityController.LastSelectedAbilityID;
 				_abilityController.abilitySelected = true;
 			}

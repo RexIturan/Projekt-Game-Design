@@ -57,7 +57,7 @@ public class C_SaveTilesInRange_OnEnter : StateAction {
 		SaveToStateContainer);
 		
 		fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition,
-			statistics.StatusValues.ViewDistance.value,
+			statistics.StatusValues.ViewDistance.Value,
 			TileProperties.Opaque | TileProperties.Solid,
 			SaveVisibleTilesToStateContainer);
 	}

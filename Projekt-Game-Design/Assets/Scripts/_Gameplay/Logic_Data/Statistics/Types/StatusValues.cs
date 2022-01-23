@@ -81,7 +81,7 @@ namespace Characters {
 
 		public void InitValues(List<StatusValue> values) {
 			foreach ( var value in values ) {
-				SetValue(value.type, value);
+				SetValue(value.Type, value);
 			}
 		}
 		

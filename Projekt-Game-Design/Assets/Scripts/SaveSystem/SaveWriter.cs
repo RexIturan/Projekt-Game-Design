@@ -105,8 +105,8 @@ namespace SaveSystem {
 							active = playerCharacterSc.active,
 							plyerTypeId = playerCharacterSc.playerType.id,
 							pos = pcGridTransform.gridPosition,
-							hitpoints = playerStatistics.StatusValues.HitPoints.value,
-							energy = playerStatistics.StatusValues.Energy.value
+							hitpoints = playerStatistics.StatusValues.HitPoints.Value,
+							energy = playerStatistics.StatusValues.Energy.Value
 						});
 				}
 			}
@@ -131,8 +131,8 @@ namespace SaveSystem {
 						new Enemy_Save() {
 							enemyTypeId = enemySC.enemyType.id,
 							pos = enemyGridTransform.gridPosition,
-							hitpoints = enemyStatistics.StatusValues.HitPoints.value,
-							energy = enemyStatistics.StatusValues.Energy.value,
+							hitpoints = enemyStatistics.StatusValues.HitPoints.Value,
+							energy = enemyStatistics.StatusValues.Energy.Value,
 						});
 				}
 			}
@@ -158,7 +158,7 @@ namespace SaveSystem {
 					triggerIds = doorComp.triggerIds,
 					remainingSwitchIds = doorComp.remainingSwitches,
 					remainingTriggerIds = doorComp.remainingTrigger,
-					currentHitPoints = doorStats.StatusValues.HitPoints.value
+					currentHitPoints = doorStats.StatusValues.HitPoints.Value
 				});
 			}
 
@@ -197,7 +197,7 @@ namespace SaveSystem {
 					gridPos = junkTrans.gridPosition,
 					orientation = junkComp.orientation,
 					broken = junkComp.broken,
-					currentHitPoints = junkStats.StatusValues.HitPoints.value
+					currentHitPoints = junkStats.StatusValues.HitPoints.Value
 				});
 			}
 

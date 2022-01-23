@@ -16,9 +16,9 @@ namespace Combat
 				public static int CalculateDamage(Effect effect, StatusValues stats)
 				{
 						int effectDamage = effect.baseDamage +
-															 ( int )( effect.strengthBonus * stats.Strength.value ) +
-															 ( int )( effect.dexterityBonus * stats.Dexterity.value ) +
-															 ( int )( effect.intelligenceBonus * stats.Intelligence.value );
+															 ( int )( effect.strengthBonus * stats.Strength.Value ) +
+															 ( int )( effect.dexterityBonus * stats.Dexterity.Value ) +
+															 ( int )( effect.intelligenceBonus * stats.Intelligence.Value );
 
 						if ( effect.type == DamageType.Healing )
 								effectDamage *= -1;

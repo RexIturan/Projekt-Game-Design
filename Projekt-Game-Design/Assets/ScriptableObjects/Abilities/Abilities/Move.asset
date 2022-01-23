@@ -25,7 +25,7 @@ MonoBehaviour:
   moveToTarget: 1
   range: 0
   conditions: 1
-  costs: 2
+  costs: 0
   targetedEffects: []
   selectedActions:
   - {fileID: 11400000, guid: dc79f1f8601c7714991200007604a816, type: 2}

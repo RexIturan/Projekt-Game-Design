@@ -68,35 +68,35 @@ namespace Characters {
 			switch (modifier._operation) {
 				case Operation.Add:
 					if ( ( modifier._affectValues & AffectValuetype.Min ) != 0 ) {
-						statusValue.min += ( int ) modValue;
+						statusValue.Min += ( int ) modValue;
 					}
 					if ( ( modifier._affectValues & AffectValuetype.Max ) != 0 ) {
-						statusValue.max += ( int ) modValue;
+						statusValue.Max += ( int ) modValue;
 					}
 					if ( ( modifier._affectValues & AffectValuetype.Value ) != 0 ) {
-						statusValue.value += ( int ) modValue;
+						statusValue.Value += ( int ) modValue;
 					}
 					break;
 				case Operation.Multiply:
 					if ( ( modifier._affectValues & AffectValuetype.Min ) != 0 ) {
-						statusValue.min *= ( int ) modValue;
+						statusValue.Min *= ( int ) modValue;
 					}
 					if ( ( modifier._affectValues & AffectValuetype.Max ) != 0 ) {
-						statusValue.max *= ( int ) modValue;
+						statusValue.Max *= ( int ) modValue;
 					}
 					if ( ( modifier._affectValues & AffectValuetype.Value ) != 0 ) {
-						statusValue.value *= ( int ) modValue;
+						statusValue.Value *= ( int ) modValue;
 					}
 					break;
 				case Operation.Replace:
 					if ( ( modifier._affectValues & AffectValuetype.Min ) != 0 ) {
-						statusValue.min = ( int ) modValue;
+						statusValue.Min = ( int ) modValue;
 					}
 					if ( ( modifier._affectValues & AffectValuetype.Max ) != 0 ) {
-						statusValue.max = ( int ) modValue;
+						statusValue.Max = ( int ) modValue;
 					}
 					if ( ( modifier._affectValues & AffectValuetype.Value ) != 0 ) {
-						statusValue.value = ( int ) modValue;
+						statusValue.Value = ( int ) modValue;
 					}
 					break;
 			}

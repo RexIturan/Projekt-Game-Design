@@ -146,7 +146,7 @@ public class InventoryUIController : MonoBehaviour {
 				icon.name += $"-{stats.DisplayImage}";
 				icon.CharacterName = stats.DisplayName;
 				icon.Image = stats.DisplayImage;
-				icon.Level = stats.StatusValues.Level.value;
+				icon.Level = stats.StatusValues.Level.Value;
 				icon.SetHoverOnButton(true);
 				icon.UpdateComponent();
 				
@@ -220,35 +220,35 @@ public class InventoryUIController : MonoBehaviour {
 		var chracterStats = statistics.StatusValues;
 
 		charIcon.CharacterName = statistics.DisplayName;
-		charIcon.Level = chracterStats.Level.value;
+		charIcon.Level = chracterStats.Level.Value;
 		charIcon.Image = statistics.DisplayImage; 
 		charIcon.UpdateComponent();
 		
-		healthBar.Max = chracterStats.HitPoints.max;
-		healthBar.Value = chracterStats.HitPoints.value;
+		healthBar.Max = chracterStats.HitPoints.Max;
+		healthBar.Value = chracterStats.HitPoints.Value;
 		healthBar.UpdateComponent();
 
-		energyBar.Max = chracterStats.Energy.max;
-		energyBar.Value = chracterStats.Energy.value;
+		energyBar.Max = chracterStats.Energy.Max;
+		energyBar.Value = chracterStats.Energy.Value;
 		energyBar.UpdateComponent();
 
-		armorBar.Max = chracterStats.Armor.max;
-		armorBar.Value = chracterStats.Armor.value;
+		armorBar.Max = chracterStats.Armor.Max;
+		armorBar.Value = chracterStats.Armor.Value;
 		armorBar.UpdateComponent();
 		
-		strengthField.Value = chracterStats.Strength.value;
+		strengthField.Value = chracterStats.Strength.Value;
 		strengthField.UpdateComponents();
 		
-		dexterityField.Value = chracterStats.Dexterity.value;
+		dexterityField.Value = chracterStats.Dexterity.Value;
 		dexterityField.UpdateComponents();
 		
-		intelligenceField.Value = chracterStats.Intelligence.value;
+		intelligenceField.Value = chracterStats.Intelligence.Value;
 		intelligenceField.UpdateComponents();
 
-		movementField.Value = chracterStats.MovementRange.value;
+		movementField.Value = chracterStats.MovementRange.Value;
 		movementField.UpdateComponents();
 		
-		visionField.Value = chracterStats.ViewDistance.value;
+		visionField.Value = chracterStats.ViewDistance.Value;
 		visionField.UpdateComponents();
 	}
 

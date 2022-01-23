@@ -73,7 +73,9 @@ MonoBehaviour:
   UnequipEvent: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
   playerDeselectedEC: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
   playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
+  abilityConfirmedEC: {fileID: 11400000, guid: c8d63aaeb201f314499176fcc285dcfa, type: 2}
   abilityExecutedEC: {fileID: 11400000, guid: e2abec9137f95984980d057a99f5946e, type: 2}
+  targetChangedEC: {fileID: 11400000, guid: 979f87c1efc47c840a2ac61dbac3b1d5, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
   newTurnEC: {fileID: 11400000, guid: 3a28845fa87e62b47abeaf01656a2806, type: 2}
@@ -201,7 +203,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7814138535658991292}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a26a8f5542c44d57a45bb1271ff7443c, type: 3}
   m_Name: 

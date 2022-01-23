@@ -192,7 +192,7 @@ namespace Characters.EnemyCharacter
 
 				private bool IsAffordable(AbilitySO ability)
 				{
-						return _statistics.StatusValues.Energy.value >= ability.costs;
+						return _statistics.StatusValues.Energy.Value >= ability.costs;
 				}
 
 				// copied from HasValidTargetSO

@@ -139,6 +139,7 @@ namespace Pathfinding {
 						int distance = 0;
 						foreach ( PathNode node in path )
 						{
+							//todo why do we set the distance to 20 ??
 								node.dist = distance;
 								distance += 20;
 						}

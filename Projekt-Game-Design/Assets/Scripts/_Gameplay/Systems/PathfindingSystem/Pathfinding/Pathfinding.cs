@@ -160,6 +160,12 @@ namespace Pathfinding {
             return null;
         }
 
+        /// <summary>
+        /// CalculatePath walks the path from the end node up through its parents and returns each
+        /// in the correct order
+        /// </summary>
+        /// <param name="endNode"></param>
+        /// <returns>Path from the Start Position to the End Position</returns>
         public List<PathNode> CalculatePath(PathNode endNode) {
             List<PathNode> path = new List<PathNode>();
             path.Add(endNode);

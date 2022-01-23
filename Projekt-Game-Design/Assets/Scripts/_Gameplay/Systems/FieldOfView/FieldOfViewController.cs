@@ -136,7 +136,7 @@ namespace FieldOfView {
 							var pos = gridTransform.gridPosition;
 								
 							InitFieldOfViewAdam();
-							_fieldOfViewAdam.Compute(gridData.GetGridPos2DFromGridPos3D(pos), statistics.StatusValues.ViewDistance.value);
+							_fieldOfViewAdam.Compute(gridData.GetGridPos2DFromGridPos3D(pos), statistics.StatusValues.ViewDistance.Value);
 							AddVisionToTilemap();
 						}
 					}

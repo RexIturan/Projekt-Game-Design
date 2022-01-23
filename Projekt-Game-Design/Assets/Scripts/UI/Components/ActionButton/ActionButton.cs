@@ -26,7 +26,8 @@ namespace UI.Components.ActionButton {
 		private static readonly string defaultStyleSheet = "UI/actionButton";
 ///// PRIVATE VARIABLES ////////////////////////////////////////////////////////////////////////////
 
-		private Action callback;
+		private Action onFocusCallback;
+		private Action onBlurCallback;
 		
 ///// UI ELEMENTS //////////////////////////////////////////////////////////////////////////////////
 
@@ -94,11 +95,11 @@ namespace UI.Components.ActionButton {
 		}
 
 		private void HandleFocus(EventBase evt) {
-			callback();
+			onFocusCallback();
 		}
 		
 		private void HandleBlur(EventBase evt) {
-			Debug.Log("Unselect action");
+			onBlurCallback();
 		}
 		
 ///// PUBLIC FUNCTIONS /////////////////////////////////////////////////////////////////////////////
@@ -117,8 +118,10 @@ namespace UI.Components.ActionButton {
 			nameLabel.SetStyleDisplayVisibility(ShowName);
 		}
 		
-		public void BindOnClickedAction(Action<object[]> actionCallback, object[] args) {
-			this.callback = () => actionCallback(args);
+		public void BindOnClickedAction(Action<object[]> onFocus, Action<object[]> onBlur, object[] args) {
+			onFocusCallback = () => onFocus(args);
+			onBlurCallback = () => onBlur(args);
+			
 			// button.clicked += this.callback;
 			button.RegisterCallback<FocusEvent>(HandleFocus);
 			button.RegisterCallback<BlurEvent>(HandleBlur);
@@ -128,7 +131,8 @@ namespace UI.Components.ActionButton {
 			// button.clicked -= this.callback;
 			button.UnregisterCallback<FocusEvent>(HandleFocus);
 			button.UnregisterCallback<BlurEvent>(HandleBlur);
-			this.callback = null;
+			onFocusCallback = null;
+			onBlurCallback = null;
 		}
 
 		public void SetupActionButton(Sprite image, string text) {

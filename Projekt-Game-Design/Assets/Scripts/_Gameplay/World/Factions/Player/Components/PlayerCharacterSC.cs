@@ -76,8 +76,8 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    Initialize();
 	    id = saveData.id;
 	    active = saveData.active;
-	    _statistics.StatusValues.HitPoints.value = saveData.hitpoints;
-	    _statistics.StatusValues.Energy.value = saveData.energy;
+	    _statistics.StatusValues.HitPoints.Value = saveData.hitpoints;
+	    _statistics.StatusValues.Energy.Value = saveData.energy;
 	    _gridTransform.gridPosition = saveData.pos;
 	    _equipmentController.equipmentID = saveData.id;
 	    

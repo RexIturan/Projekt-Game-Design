@@ -22,7 +22,10 @@ public class OverlayUIController : MonoBehaviour {
 	[SerializeField] private UnequipItemEC_SO UnequipEvent;
 	[SerializeField] private GameObjEventChannelSO playerDeselectedEC;
 	[SerializeField] private GameObjActionEventChannelSO playerSelectedEC;
+	
+	[SerializeField] private VoidEventChannelSO abilityConfirmedEC;
 	[SerializeField] private VoidEventChannelSO abilityExecutedEC;
+	[SerializeField] private Vector3IntEventChannelSO targetChangedEC;
 
 	[Header("Sending Events On")] 
 	[SerializeField] private VoidEventChannelSO enableGamplayInput;
@@ -87,12 +90,15 @@ public class OverlayUIController : MonoBehaviour {
 	//     Label text = _overlayContainer.Q<Label>("AbilityDescription");
 	//     text.style.display = DisplayStyle.None;
 	// }
-	
-	
-	
+
+
+	private void UpdateStats() {
+		UpdateStats(_selectedPlayer);
+	}
+
 	//todo move to own class
-	private void RefreshStats(GameObject obj) {
-	
+	private void UpdateStats(GameObject obj) {
+
 		var charIcon = _characterStatusValuePanel.CharIcon;
 		
 		var healthBar = _characterStatusValuePanel.HealthBar;
@@ -110,35 +116,35 @@ public class OverlayUIController : MonoBehaviour {
 		MovementController movementController = statistics.GetComponent<MovementController>();
 	
 		charIcon.CharacterName = statistics.DisplayName;
-		charIcon.Level = chracterStats.Level.value;
+		charIcon.Level = chracterStats.Level.Value;
 		charIcon.Image = statistics.DisplayImage; 
 		charIcon.UpdateComponent();
 		
-		healthBar.Max = chracterStats.HitPoints.max;
-		healthBar.Value = chracterStats.HitPoints.value;
+		healthBar.Max = chracterStats.HitPoints.Max;
+		healthBar.Value = chracterStats.HitPoints.Value;
 		healthBar.UpdateComponent();
 	
-		energyBar.Max = chracterStats.Energy.max;
-		energyBar.Value = chracterStats.Energy.value;
+		energyBar.Max = chracterStats.Energy.Max;
+		energyBar.Value = chracterStats.Energy.Value;
 		energyBar.UpdateComponent();
 	
-		armorBar.Max = chracterStats.Armor.max;
-		armorBar.Value = chracterStats.Armor.value;
+		armorBar.Max = chracterStats.Armor.Max;
+		armorBar.Value = chracterStats.Armor.Value;
 		armorBar.UpdateComponent();
 		
-		strengthField.Value = chracterStats.Strength.value;
+		strengthField.Value = chracterStats.Strength.Value;
 		strengthField.UpdateComponents();
 		
-		dexterityField.Value = chracterStats.Dexterity.value;
+		dexterityField.Value = chracterStats.Dexterity.Value;
 		dexterityField.UpdateComponents();
 		
-		intelligenceField.Value = chracterStats.Intelligence.value;
+		intelligenceField.Value = chracterStats.Intelligence.Value;
 		intelligenceField.UpdateComponents();
 	
 		movementField.Value = movementController.GetMaxTileMoveDistance();
 		movementField.UpdateComponents();
 		
-		visionField.Value = chracterStats.ViewDistance.value;
+		visionField.Value = chracterStats.ViewDistance.Value;
 		visionField.UpdateComponents();
 	}
 	
@@ -176,46 +182,73 @@ public class OverlayUIController : MonoBehaviour {
 					
 					var ability = abilities[i];
 					var id = ability.id;
-					var args = new Object[] { id };
+					var arguments = new Object[] { id, ability, abilityController };
 
-					void AbilityCallback(object[] args) {
-						Debug.Log($"AbilityCallback {args[0]}");
+					void OnFocusCallback(object[] args) {
+						Debug.Log($"OnFocusCallback {args[0]}");
 						_callBackAction(( int )args[0]);
+						PreviewEnergy((AbilitySO)args[1], (AbilityController)args[2]);
+					}
+					
+					void OnBlurCallback(object[] args) {
+						Debug.Log($"OnBlurCallback {args[0]}");
+						ClearPreviewEnergy();
 					}
 
 					if ( !abilityController.IsAbilityAvailable(ability) ) {
 						actionButton.Button.SetEnabled(false);	
 					}
 					actionButton.SetupActionButton(ability.icon, ability.name);
-					actionButton.BindOnClickedAction(AbilityCallback, args);
+					actionButton.BindOnClickedAction(OnFocusCallback, OnBlurCallback, arguments);
 				}
 				else {
 					// actionButton.Button.focusable = false;
 					actionButton.Button.SetEnabled(false);
 				}
 			}
-			//
-			// foreach ( var ability in abilities ) {
-			//
-			// 	// new AvtionBar
-			// 	var id = ability.id;
-			// 	var args = new Object[] { id };
-			//
-			// 	void AbilityCallback(object[] args) {
-			// 		Debug.Log($"AbilityCallback {args[0]}");
-			// 		_callBackAction(( int )args[0]);
-			// 	}
-			//
-			// 	var actionButton = _actionBar.actionButtons[counter++];
-			// 	if ( abilityController.IsAbilityAvailable(ability) ) {
-			// 		actionButton.Button.SetEnabled(true);	
-			// 	}
-			// 	actionButton.SetupActionButton(ability.icon, ability.name);
-			// 	actionButton.BindOnClickedAction(AbilityCallback, args);
-			// }
 			
-			RefreshStats(_selectedPlayer);
+			UpdateStats(_selectedPlayer);
 			//TODO: Hier die Stats einbauen, für den ausgewählten Spieler
+		}
+	}
+
+	private void ClearPreviewEnergy() {
+		_characterStatusValuePanel.EnergyBar.ShowChange = false;
+		_characterStatusValuePanel.EnergyBar.UpdateComponent();
+	}
+	
+	private void PreviewEnergy(AbilitySO ability, AbilityController abilityController) {
+		// todo calculate abilitycost somewhere else
+		var energyCost = abilityController.GetCurrentAbilityCost(ability);
+		if ( energyCost < 0 ) {
+			Debug.Log($"{energyCost}");	
+		}
+		_characterStatusValuePanel.EnergyBar.ChangeValue = -energyCost;
+		_characterStatusValuePanel.EnergyBar.ShowChange = true;
+		_characterStatusValuePanel.EnergyBar.UpdateComponent();
+	}
+	
+	private void UpdateEnergyPreview() {
+		if ( _selectedPlayer is { } ) {
+			var abilityController = _selectedPlayer.GetComponent<AbilityController>();
+			if ( abilityController.IsAbilitySelected ) {
+				PreviewEnergy(abilityController.SelectedAbility, abilityController);
+			}
+			else {
+				ClearPreviewEnergy();
+			}
+		}
+	}
+	
+	private void BindEnergyChangeToCharPanel() {
+		var statistics = _selectedPlayer.GetComponent<Statistics>();
+		statistics.StatusValues.Energy.OnValueChanged += UpdateStats;
+	}
+	
+	private void UnbindEnergyChangeToCharPanel() {
+		var statistics = _selectedPlayer.GetComponent<Statistics>();
+		if ( statistics is { } ) {
+			statistics.StatusValues.Energy.OnValueChanged -= UpdateStats;	
 		}
 	}
 	
@@ -237,7 +270,9 @@ public class OverlayUIController : MonoBehaviour {
 	private void HandlePlayerSelected(GameObject player, Action<int> selectAction) {
 		_selectedPlayer = player;
 		_callBackAction = selectAction;
-		
+
+		BindEnergyChangeToCharPanel();
+
 		UpdateActionBar();
 		
 		// Anzeigen der notwendigen Komponenten
@@ -250,6 +285,8 @@ public class OverlayUIController : MonoBehaviour {
 	}
 
 	private void HandlePlayerDeselected(GameObject obj) {
+		UnbindEnergyChangeToCharPanel();
+		
 		if(obj == _selectedPlayer) { 
 			_actionBar.SetVisibility(false);
 			
@@ -278,6 +315,16 @@ public class OverlayUIController : MonoBehaviour {
 	
 	private void HandleAbilityExecuted() {
 		UpdateActionBar();
+		ClearPreviewEnergy();
+	}
+	
+	private void HandleTargetChanged(Vector3Int obj) {
+		UpdateEnergyPreview();
+	}
+
+	private void HandleAbilityConfirmed() {
+		//clear Preview
+		ClearPreviewEnergy();
 	}
 	
 ///// Public Functions	////////////////////////////////////////////////////////////////////////////
@@ -303,10 +350,13 @@ public class OverlayUIController : MonoBehaviour {
 		setGameOverlayVisibilityEC.OnEventRaised += HandleSetGameOverlayVisibilityEC;
 		setTurnIndicatorVisibilityEC.OnEventRaised += HandleSetTurnIndicatorVisibilityEC;
 
-		abilityExecutedEC.OnEventRaised += HandleAbilityExecuted;
 		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
 
+		abilityConfirmedEC.OnEventRaised += HandleAbilityConfirmed;
+		abilityExecutedEC.OnEventRaised += HandleAbilityExecuted;
+		targetChangedEC.OnEventRaised += HandleTargetChanged;
+		
 		//todo updating ui when turn changes -> handle otherwise
 		newTurnEC.OnEventRaised += HandleEndTurn;
 		inputReader.SelectAbilityEvent += HandleSelectAbility;
@@ -317,6 +367,10 @@ public class OverlayUIController : MonoBehaviour {
 		setTurnIndicatorVisibilityEC.OnEventRaised -= HandleSetTurnIndicatorVisibilityEC;
 		playerSelectedEC.OnEventRaised -= HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised -= HandlePlayerDeselected;
+		
+		abilityConfirmedEC.OnEventRaised -= HandleAbilityConfirmed;
+		abilityExecutedEC.OnEventRaised -= HandleAbilityExecuted;
+		targetChangedEC.OnEventRaised -= HandleTargetChanged;
 		
 		//todo updating ui when turn changes -> handle otherwise
 		newTurnEC.OnEventRaised -= HandleEndTurn;

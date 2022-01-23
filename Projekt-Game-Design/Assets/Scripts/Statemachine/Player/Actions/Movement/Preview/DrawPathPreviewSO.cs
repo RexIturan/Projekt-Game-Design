@@ -4,6 +4,7 @@ using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
 using System.Collections.Generic;
+using System.Linq;
 using Characters;
 using Characters.Movement;
 using Util;
@@ -35,7 +36,8 @@ public class DrawPathPreview : StateAction {
 	private MovementController _movementController;
 	private GridTransform _gridTransform;
 
-	private Vector3Int lastDrawnGridPos;
+	private Vector3Int lastValidGridPos;
+	private Vector3Int lastCursorPos;
 	private bool isDrawn;
 
 	//Constructor
@@ -56,39 +58,59 @@ public class DrawPathPreview : StateAction {
 	}
 
 	public override void OnUpdate() {
-		bool isReachable = false;
 		List<PathNode> tiles = _movementController.reachableTiles;
+		Vector3Int cursorPos = inputCache.cursor.abovePos.gridPos;
 
-		Vector3Int abovePos = inputCache.cursor.abovePos.gridPos;
+		if (!lastCursorPos.Equals(cursorPos)) {
+			lastCursorPos = cursorPos;
+			var tile = tiles.SingleOrDefault(node => node.pos.Equals(cursorPos)); 
+			if(tile != null) {
+				if ( !isDrawn || !lastValidGridPos.Equals(cursorPos) ) {
+					Vector3Int startNode = _gridTransform.gridPosition;
+					Vector3Int endNode = tile.pos;
 
-		for ( int i = 0; i < tiles.Count && !isReachable; i++ ) {
-			if ( tiles[i].pos.Equals(abovePos) ) {
-				isReachable = true;
-
-				// only draw path if it wasn't already
-				if(isDrawn == false || !tiles[i].Equals(lastDrawnGridPos)) { 
-		  		Vector3Int startNode = _gridTransform.gridPosition;
-	  			Vector3Int endNode = tiles[i].pos;
-
-  				_pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, DrawPath);
+					_pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, DrawPath);
 
 					isDrawn = true;
-					lastDrawnGridPos = tiles[i].pos;
+					lastValidGridPos = tile.pos;
 				}
 			}
+			else {
+				_clearPathEvent.RaiseEvent();
+				isDrawn = false;
+			}
 		}
+		
+		// for ( int i = 0; i < tiles.Count && !isReachable; i++ ) {
+		// 	if ( tiles[i].pos.Equals(cursorPos) ) {
+		// 		isReachable = true;
+		//
+		// 		// only draw path if it wasn't already
+		// 		if(isDrawn == false || !tiles[i].Equals(lastDrawnGridPos)) { 
+		//   		Vector3Int startNode = _gridTransform.gridPosition;
+	 //  			Vector3Int endNode = tiles[i].pos;
+		//
+  // 				_pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, DrawPath);
+		//
+		// 			isDrawn = true;
+		// 			lastDrawnGridPos = tiles[i].pos;
+		// 		}
+		// 	}
+		// }
 
-		if ( !isReachable ) { 
-			_clearPathEvent.RaiseEvent();
-			isDrawn = false;
-		}
+		
 	}
 
-	public override void OnStateEnter() { }
+	public override void OnStateEnter() {
+		lastCursorPos = new Vector3Int(-1,-1,-1);
+		lastValidGridPos = new Vector3Int(-1,-1,-1);
+		isDrawn = false;
+	}
 
 	public override void OnStateExit() { }
 
 	private void DrawPath(List<PathNode> nodes) {
 		_drawPathEvent.RaiseEvent(nodes);
+		_movementController.PreviewPath = nodes;
 	}
 }
