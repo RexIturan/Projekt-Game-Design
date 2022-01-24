@@ -35,13 +35,7 @@ MonoBehaviour:
     _max: 10
     _min: 0
   movementPointsPerEnergy: 20
-  drops:
-    maxGold: 1
-    minGold: 1
-    experience: 1
-    itemDropList:
-    - itemID: 1
-      probability: 0.5
+  lootTable: {fileID: 11400000, guid: f4a0947ed87b03c4ebd1eb5b8e4f15ff, type: 2}
   basicAbilities:
   - {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}
   - {fileID: 11400000, guid: 653425107135eac4f95c90db962300e7, type: 2}

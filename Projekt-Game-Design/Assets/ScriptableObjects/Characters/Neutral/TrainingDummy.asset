@@ -30,9 +30,6 @@ MonoBehaviour:
     _max: 999
     _min: 0
   movementPointsPerEnergy: 0
-  drops:
-    maxGold: 0
-    minGold: 0
-    experience: 0
-    itemDropList: []
+  lootTable: {fileID: 11400000, guid: f3bc15142a4a9814fa51e37858254a21, type: 2}
   basicAbilities: []
+  weapon: {fileID: 0}

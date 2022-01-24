@@ -84,16 +84,9 @@ namespace UI.Controller {
 			_actionBar.UpdateComponent();
 			inputReader.SelectAbilityEvent += _actionBar.ClickActionButton;
 
-			// _actionBar.RegisterCallback<PointerDownEvent>(evt => {
-			// 	Debug.Log(evt);
-			// });
-
 			//todo move to panel override or so
 			var panel = uiDocument.rootVisualElement.hierarchy.parent;
 			panel.RegisterCallback<PointerDownEvent>(HandlePanelPointerDownEvent);
-
-			// panel.focusController.
-			// var p = uiDocument.rootVisualElement.hierarchy.parent as IPanel;
 		}
 
 		private void HandlePanelPointerDownEvent(PointerDownEvent evt) {
@@ -101,7 +94,6 @@ namespace UI.Controller {
 				Debug.Log(evt.button);
 				if ( evt.button == 0 ) {
 					//do stuff
-					
 					evt.StopImmediatePropagation();
 					evt.StopPropagation();
 					evt.PreventDefault();
@@ -112,41 +104,10 @@ namespace UI.Controller {
 		private void OnEnable() {
 			//todo player selected
 			//todo player deselect
-			
-			// inputReader.SelectAbilityEvent += _actionBar.ClickActionButton;
 		}
 
 		private void OnDisable() {
 			inputReader.SelectAbilityEvent -= _actionBar.ClickActionButton;
-		}
-	}
-	
-	public static class EventBaseExtension{
-		public static void PreventFocusChange(this EventBase evt) {
-			// if ( evt.target is VisualElement e ) {
-			// 	
-			// }
-			// evt.target = null;
-		}
-	}
-
-	public class IgnoreFocusEvents : VisualElement {
-		public new class UxmlFactory : UxmlFactory<IgnoreFocusEvents, UxmlTraits> { }
-		public new class UxmlTraits : VisualElement.UxmlTraits { }
-
-		protected override void ExecuteDefaultAction(EventBase evt) {
-			// Debug.Log("?");			
-			if ( evt is PointerDownEvent pEvt ) {
-				if ( pEvt.button == 0 && focusController?.focusedElement is GroupedButton ) {
-					Debug.Log("action bar, is this the right position?");					
-				}
-				else {
-					base.ExecuteDefaultAction(evt);	
-				}
-			}
-			else {
-				base.ExecuteDefaultAction(evt);	
-			}
 		}
 	}
 }

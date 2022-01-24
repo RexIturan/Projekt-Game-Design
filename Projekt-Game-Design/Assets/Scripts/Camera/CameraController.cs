@@ -1,13 +1,11 @@
 ﻿using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 using Util.ScriptableObjects;
 
 namespace DefaultNamespace.Camera {
 	public class CameraController : MonoBehaviour {
 		[SerializeField] private InputCache inputCache;
-
 		[SerializeField] private InputReader inputReader;
 		[SerializeField] private FloatReference movementSpeed;
 		[SerializeField] private FloatReference zoomSpeed;
@@ -16,7 +14,6 @@ namespace DefaultNamespace.Camera {
 		[SerializeField] private int minZoom;
 		[SerializeField] private int maxZoom;
 		[SerializeField] private bool edgeScroll;
-
 
 		public Transform cameraTransform;
 		private Vector2 _inputVector;
@@ -37,9 +34,8 @@ namespace DefaultNamespace.Camera {
 		}
 
 		private void Update() {
-			if ( !Application.isFocused )
+			if ( !Application.isFocused || inputCache.IsMouseOutsideWindow() )
 				return;
-
 
 			if ( _inputVector.y != 0 || _inputVector.x != 0 ) {
 				var camTransform = transform;

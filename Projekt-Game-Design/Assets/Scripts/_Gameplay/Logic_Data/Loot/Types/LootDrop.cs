@@ -3,9 +3,13 @@ using System.Collections.Generic;
 
 namespace GDP01.Loot.Types {
 	[Serializable]
-	public struct LootDrop {
+	public class LootDrop {
 		public List<ItemSO> items;
 		public int gold;
 		public int experience;
+
+		public LootDrop() {
+			items = new List<ItemSO>();
+		}
 	}
 }

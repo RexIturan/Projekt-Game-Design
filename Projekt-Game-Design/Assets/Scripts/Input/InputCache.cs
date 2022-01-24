@@ -165,6 +165,7 @@ namespace Input {
 			}
 		}
 
+		//todo rename?
 		//todo move to mouse input class??
 		//calculates if mouse is outside of the window
 		public bool IsMouseOutsideWindow() {

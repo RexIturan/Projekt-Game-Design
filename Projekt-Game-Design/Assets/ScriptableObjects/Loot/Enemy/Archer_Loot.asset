@@ -18,12 +18,12 @@ MonoBehaviour:
     - type: 1
       item: {fileID: 11400000, guid: cc7bce70626d15f42bb9da09b013eca2, type: 2}
       weight: 1
-      dropRate: 0.5
+      dropRate: 1
       dropAmount: {x: 0, y: 0, z: 0, w: 0}
       propertyHeight: 114
     - type: 0
       item: {fileID: 0}
-      weight: 1
-      dropRate: 0.5
+      weight: 0
+      dropRate: 0
       dropAmount: {x: 0, y: 0, z: 0, w: 0}
       propertyHeight: 92
