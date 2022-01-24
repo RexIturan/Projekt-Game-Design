@@ -56,8 +56,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090678773647796919}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2429313877357441043}
@@ -111,7 +111,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090678773647796919}
-  m_Mesh: {fileID: -199876931841826122, guid: 2bcdc85eb13225944b79da3eef396cde, type: 3}
+  m_Mesh: {fileID: 5076832188769910695, guid: b7f52afb97ae75b45b1ac0f48cd23d50, type: 3}
 --- !u!1 &8238772793520087123
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,8 +171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4350a6e7aa916f643b14450623a22d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSO: {fileID: 11400000, guid: 5c756448dfd126546b29ba349f477fc1, type: 2}
+  itemSO: {fileID: 11400000, guid: b3246b02ab1d7414182bb91ea545e06b, type: 2}
   modelTransform: {fileID: 8211786999615408900}
+  _armorRotationOffset: {x: -90, y: 0, z: 0}
+  _armorPositionOffset: {x: 0, y: 0, z: 0}
+  _defaultRotationOffset: {x: 0, y: 0, z: 0}
+  _defaultPositionOffset: {x: 0, y: 0.25, z: 0}
 --- !u!114 &475642740
 MonoBehaviour:
   m_ObjectHideFlags: 0

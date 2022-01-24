@@ -1,5 +1,6 @@
 using Characters;
 using System.Collections.Generic;
+using GDP01.Loot.ScriptableObjects;
 using UnityEngine;
 
 /// <summary>
@@ -23,9 +24,8 @@ public class EnemyTypeSO : ScriptableObject {
 	public int movementPointsPerEnergy;
 
 	//equipment
-  public LootTable drops;
-	// maybe we want to display what weapon an enemy has (and may drop) when they are clicked 
-	// ... but not now
+  // public LootTable drops;
+  public LootTableSO lootTable;
 	// public ScriptableObject item; // standard equipped Item 
 
 	// ability

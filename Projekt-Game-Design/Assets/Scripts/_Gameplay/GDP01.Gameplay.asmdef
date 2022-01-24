@@ -1,6 +1,6 @@
 {
     "name": "GDP01.Gameplay",
-    "rootNamespace": "GDP01.Gameplay",
+    "rootNamespace": "GDP01",
     "references": [
         "GUID:784148ec08432ab4a974dd364656dae9",
         "GUID:d8d86edead9285548a0b5203ad54c5e3",

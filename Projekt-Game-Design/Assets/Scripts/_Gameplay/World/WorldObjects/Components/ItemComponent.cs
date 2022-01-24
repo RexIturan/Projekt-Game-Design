@@ -10,10 +10,11 @@ public class ItemComponent : MonoBehaviour {
     
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
-    private Vector3 _armorRotationOffset = new Vector3(-90, 0, 0);
-    private Vector3 _armorPositionOffset = new Vector3(0, 0, 0);
-    private Vector3 _defaultRotationOffset = new Vector3(0, 0, -90);
-    private Vector3 _defaultPositionOffset = new Vector3(0, 0.25f, 0);
+    //todo make available from unity
+    [SerializeField] private Vector3 _armorRotationOffset = new Vector3(-90, 0, 0);
+    [SerializeField] private Vector3 _armorPositionOffset = new Vector3(0, 0, 0);
+    [SerializeField] private Vector3 _defaultRotationOffset = new Vector3(0, 0, 0);
+    [SerializeField] private Vector3 _defaultPositionOffset = new Vector3(0, 0.25f, 0);
     
     private void Awake() {
 	    _meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
@@ -48,6 +49,10 @@ public class ItemComponent : MonoBehaviour {
     }
 
     public void Reset() {
+	    InitItem(itemSO);
+    }
+
+    private void OnValidate() {
 	    InitItem(itemSO);
     }
 }

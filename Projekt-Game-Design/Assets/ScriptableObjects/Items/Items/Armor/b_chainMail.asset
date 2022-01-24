@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cbe02d75c3f33428c79dc907f05b54, type: 3}
   m_Name: b_chainMail
   m_EditorClassIdentifier: 
-  id: 4
+  id: 6
   icon: {fileID: 21300000, guid: 95cb7efae24bfc142af1e43420931a4a, type: 3}
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
   mesh: {fileID: -199876931841826122, guid: 2bcdc85eb13225944b79da3eef396cde, type: 3}
-  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
+  material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
   goldValue: 0
   rarity: 0
   type: 0

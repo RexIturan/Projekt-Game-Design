@@ -14,10 +14,10 @@ namespace Items {
 		private void Start() {
 
 			var currentPosition = itemModel.position;
-			var currentRotation = itemModel.rotation.eulerAngles;
+			var currentRotation = itemModel.localRotation.eulerAngles;
 			
 			itemModel
-				.DORotate(new Vector3(0, 360	, 0) + currentRotation, rotationCycleLength * 0.5f, RotateMode.FastBeyond360)
+				.DOLocalRotate(new Vector3(0, 360	, 0) + currentRotation, rotationCycleLength * 0.5f, RotateMode.FastBeyond360)
 				.SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
 
 			itemModel.DOMoveY(moveHeight + currentPosition.y, moveCycleDuration * 0.5f, false).SetLoops(-1, LoopType.Yoyo)

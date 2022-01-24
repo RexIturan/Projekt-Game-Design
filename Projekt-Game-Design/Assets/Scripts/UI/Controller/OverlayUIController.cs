@@ -336,7 +336,7 @@ public class OverlayUIController : MonoBehaviour {
 	private void Start() {
 		// Holen des UXML Trees, zum getten der einzelnen Komponenten
 		var root = GetComponent<UIDocument>().rootVisualElement;
-		_actionBar = root.Q<ActionBar>("ActionBar");
+		_actionBar = root.Q<ActionBar>();
 		_overlayContainer = root.Q<VisualElement>("OverlayContainer");
 		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
 		_turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
