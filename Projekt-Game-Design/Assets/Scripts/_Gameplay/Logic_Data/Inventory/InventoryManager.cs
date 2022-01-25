@@ -19,13 +19,13 @@ public class InventoryManager : MonoBehaviour {
 	[SerializeField] private UnequipItemEC_SO unequipItemEC;
 	[SerializeField] private IntEventChannelSO itemPickupEventChannel;
 
-	private void Awake() {
+	private void OnEnable() {
 		equipItemEC.OnEventRaised += EquipItem;
 		unequipItemEC.OnEventRaised += UnequipItem;
 		itemPickupEventChannel.OnEventRaised += PickupItem;
 	}
 
-	private void OnDestroy() {
+	private void OnDisable() {
 		equipItemEC.OnEventRaised -= EquipItem;
 		unequipItemEC.OnEventRaised -= UnequipItem;
 		itemPickupEventChannel.OnEventRaised -= PickupItem;
@@ -43,6 +43,8 @@ public class InventoryManager : MonoBehaviour {
 		if(former)
 			inventory.playerInventory.Add(former);
 
+		Debug.Log("Unequip");
+		
 		RefreshAllEquipments();
 	}
 
@@ -59,6 +61,8 @@ public class InventoryManager : MonoBehaviour {
 				inventory.playerInventory.Add(equippedItem);
 			}
 
+			Debug.Log("Equip");
+			
 			RefreshAllEquipments();
 		}
 		else
@@ -70,8 +74,7 @@ public class InventoryManager : MonoBehaviour {
 		//todo dont use characters + controller
 		CharacterList characterList = FindObjectOfType<CharacterList>();
 		if ( characterList ) {
-			foreach ( GameObject player in characterList.playerContainer)
-			{
+			foreach ( GameObject player in characterList.playerContainer) {
 				player.GetComponent<EquipmentController>().RefreshEquipment();
 			}
 		}

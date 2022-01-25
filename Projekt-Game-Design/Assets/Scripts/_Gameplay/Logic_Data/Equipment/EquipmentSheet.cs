@@ -94,35 +94,35 @@ namespace GDP01.Equipment {
 			
 			switch ( equipmentPosition ) {
 				case EquipmentPosition.RIGHT:
-					if ( item is WeaponSO left ) {
-						weaponLeft = left;
-					}
-
-					break;
-				case EquipmentPosition.LEFT:
 					if ( item is WeaponSO right ) {
 						weaponRight = right;
 					}
-
 					break;
+				
+				case EquipmentPosition.LEFT:
+					if ( item is WeaponSO left ) {
+						weaponLeft = left;
+					}
+					break;
+				
 				case EquipmentPosition.HEAD:
 					if ( item is HeadArmorSO head ) {
 						headArmor = head;
 					}
-
 					break;
+				
 				case EquipmentPosition.BODY:
 					if ( item is BodyArmorSO body ) {
 						bodyArmor = body;
 					}
-
 					break;
+				
 				case EquipmentPosition.SHIELD:
 					if ( item is ShieldSO shield ) {
 						this.shield = shield;
 					}
-
 					break;
+				
 				default:
 					break;
 			}

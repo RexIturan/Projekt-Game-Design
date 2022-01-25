@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SceneManagement.ScriptableObjects;
 using UnityEditor;
 using UnityEngine;
@@ -28,6 +29,13 @@ namespace Editor.SceneSelector {
 		}
 
 		private void OnEnable() {
+			if ( _storage == null || _storage.items.Count == 0 || _storage.items.Any(item => item == null)) {
+				_storage = new Storage();
+				EditorPrefs.SetString(KPreferencesKey, "");	
+			}
+			
+			titleContent.text = "Scene Selector";
+			
 			wantsMouseMove = true;
 			LoadStorage();
 			PopulateItems();
@@ -52,7 +60,7 @@ namespace Editor.SceneSelector {
 				DrawItems();
 				_windowScrollPosition = scrollScope.scrollPosition;
 			}
-
+			
 			if ( GUILayout.Button("Reset list") ) {
 				//Force deletion of the storage
 				_storage = new Storage();

@@ -298,7 +298,7 @@ namespace Input {
 
 		public void OnCancelInventory(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				Debug.Log("onCancel");
+				// Debug.Log("onCancel");
 				uiToggleScreenEC.RaiseEvent(GameplayScreen.Inventory);
 			}
 		}

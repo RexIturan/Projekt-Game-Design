@@ -91,12 +91,11 @@ namespace UI.Controller {
 
 		private void HandlePanelPointerDownEvent(PointerDownEvent evt) {
 			if ( preventDeselectOnLeftClick ) {
-				Debug.Log(evt.button);
 				if ( evt.button == 0 ) {
 					//do stuff
-					evt.StopImmediatePropagation();
-					evt.StopPropagation();
-					evt.PreventDefault();
+					// evt.StopImmediatePropagation();
+					// evt.StopPropagation();
+					// evt.PreventDefault();
 				}
 			}
 		}

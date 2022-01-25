@@ -38,7 +38,8 @@ namespace Combat {
 			if ( healthbarController is { } ) {
 				var hitPoints = statistics.StatusValues.HitPoints;
 				//todo unsubscribe somewhere ?
-				hitPoints.OnValueChanged += () => healthbarController.UpdateVisuals(hitPoints.GetAsRangedInt()); 
+				hitPoints.OnValueChanged += () => healthbarController.UpdateVisuals(hitPoints.GetAsRangedInt());
+				healthbarController.UpdateVisuals(hitPoints.GetAsRangedInt());
 			}
 		}
 		

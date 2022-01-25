@@ -1,12 +1,12 @@
 using Characters;
 using Characters.EnemyCharacter;
 using Characters.Movement;
-using Characters.Types;
 using Combat;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
 using SaveSystem.SaveFormats;
 using UnityEngine;
+using static Characters.Types.Faction;
 
 /// <summary><c>Enemy State Container</c> Script to attached to each enemy</summary>
 [System.Serializable]
@@ -39,7 +39,7 @@ public class EnemyCharacterSC : MonoBehaviour
 		public void Initialize()
 		{
 				//stats
-				_statistics.SetFaction(Faction.Enemy);
+				_statistics.SetFaction(Enemy);
 				_statistics.StatusValues.InitValues(enemyType.baseStatusValues);
 
 			//movement Position
@@ -61,10 +61,16 @@ public class EnemyCharacterSC : MonoBehaviour
 			_modelController.Initialize();
 			_modelController.SetStandardHead(enemyType.headModel);
 			_modelController.SetStandardBody(enemyType.bodyModel);
-			_modelController.SetMeshHead(null);
-			_modelController.SetMeshBody(null);
-			_modelController.SetMeshRight(enemyType.weapon != null ? enemyType.weapon.mesh : null);
-			_modelController.SetMeshLeft(null);
+			_modelController.SetMeshHead(enemyType.headModel);
+			_modelController.SetMeshBody(enemyType.bodyModel);
+			if ( enemyType.weapon != null ) {
+				_modelController.SetMeshRight(enemyType.weapon.mesh, enemyType.weapon.material);
+			}
+			else {
+				_modelController.SetMeshRight(null, null);
+			}
+			_modelController.SetMeshLeft(null, null);
+			_modelController.SetFactionMaterial(Enemy);
 
 			//targetable
 			_targetable.Initialise();

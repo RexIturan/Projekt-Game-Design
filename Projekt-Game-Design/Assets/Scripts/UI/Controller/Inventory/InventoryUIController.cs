@@ -35,8 +35,8 @@ public class InventoryUIController : MonoBehaviour {
 	[Header("Sending Events On")]
 	// OutputChannel zwischen den Inventaren
 	//todo shorter names?
-	[SerializeField] private EquipItemEC_SO EquipEvent;
-	[SerializeField] private UnequipItemEC_SO UnequipEvent;
+	[SerializeField] private EquipItemEC_SO EquipItemEC;
+	[SerializeField] private UnequipItemEC_SO UnequipItemEC;
 	[SerializeField] private VoidEventChannelSO menuOpenedEvent;
 	[SerializeField] private VoidEventChannelSO menuClosedEvent;
 
@@ -306,7 +306,6 @@ public class InventoryUIController : MonoBehaviour {
 		}
 
 		//Check to see if they are dropping the ghost icon over any slots.
-		//
 		List<InventorySlot> slots = new List<InventorySlot>();
 		slots.AddRange(inventoryItems);
 		slots.AddRange(equipmentInventoryItems);
@@ -331,27 +330,26 @@ public class InventoryUIController : MonoBehaviour {
 				else
 					_originalSlot.DropItem();
 			}
+			
 			//	2. original slot is equipment, target is player inventory: 
 			//		If target slot wields an item, check if swap is possible:
 			//		If not, do nothing. Else if it's possible, swap items
 			//		If target slot wields no item, just unequip original
-			else if (_originalSlot.userData != null && _originalSlot.userData is EquipmentPosition && 
-								targetSlot.userData == null) {
-				EquipmentPosition originalPos = (EquipmentPosition)_originalSlot.userData;
-
+			else if (_originalSlot.userData is EquipmentPosition pos && targetSlot.userData == null) {
+				
 				if(!targetItem) { 
-					UnequipEvent.RaiseEvent(_currentPlayerSelected, originalPos);
+					UnequipItemEC.RaiseEvent(_currentPlayerSelected, pos);
 					targetSlot.HoldItem(originalItem);
 					_originalSlot.DropItem();
 				}
-				else if(targetItem.ValidForPosition(originalPos)) { 
-					EquipEvent.RaiseEvent(targetItem.id, _currentPlayerSelected, originalPos);
+				else if(targetItem.ValidForPosition(pos)) { 
+					EquipItemEC.RaiseEvent(targetItem.id, _currentPlayerSelected, pos);
 					targetSlot.HoldItem(originalItem);
 					_originalSlot.HoldItem(targetItem);
 				}
 				else { 
 					Debug.LogWarning("The item " + targetItem.id + 
-							" you want to swap is not valid for the item slot (" + originalPos + ")! ");
+							" you want to swap is not valid for the item slot (" + pos + ")! ");
 				}
 			}
 			//	3. original slot is in player inventory, target is equipment:
@@ -362,7 +360,7 @@ public class InventoryUIController : MonoBehaviour {
 				EquipmentPosition targetPos = (EquipmentPosition) targetSlot.userData;
 
 				if(originalItem.ValidForPosition(targetPos)) { 
-					EquipEvent.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
+					EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
 					targetSlot.HoldItem(originalItem);
 					
 					if(targetItem)
@@ -384,21 +382,21 @@ public class InventoryUIController : MonoBehaviour {
 				if(originalItem.ValidForPosition(targetPos)) { 
 					if(targetItem) { 
 						if(targetItem.ValidForPosition(originalPos)) { 
-							UnequipEvent.RaiseEvent(_currentPlayerSelected, originalPos);
-							UnequipEvent.RaiseEvent(_currentPlayerSelected, targetPos);
+							UnequipItemEC.RaiseEvent(_currentPlayerSelected, originalPos);
+							UnequipItemEC.RaiseEvent(_currentPlayerSelected, targetPos);
 
-							EquipEvent.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
+							EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
 							targetSlot.HoldItem(originalItem);
 
-							EquipEvent.RaiseEvent(targetItem.id, _currentPlayerSelected, originalPos);
+							EquipItemEC.RaiseEvent(targetItem.id, _currentPlayerSelected, originalPos);
 							_originalSlot.HoldItem(targetItem);
 						}
 						else
 							Debug.LogWarning("Item " + originalItem.id + " is not valid for target slot " + targetPos + "! ");
 					}
 					else {  
-						UnequipEvent.RaiseEvent(_currentPlayerSelected, originalPos);
-						EquipEvent.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
+						UnequipItemEC.RaiseEvent(_currentPlayerSelected, originalPos);
+						EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
 						targetSlot.HoldItem(originalItem);
 						
 						_originalSlot.DropItem();

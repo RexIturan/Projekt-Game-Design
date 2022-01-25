@@ -1,6 +1,6 @@
 [System.Serializable]
-public enum EquipmentPosition 
-{
+public enum EquipmentPosition {
+	NONE,
 	LEFT,
 	RIGHT,
 	HEAD,

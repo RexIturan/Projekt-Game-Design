@@ -105,8 +105,8 @@ MonoBehaviour:
   playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
   enableInventoryInput: {fileID: 11400000, guid: 6f2cf282820633f41a7bde9dc75b3af9, type: 2}
   changeInventoryTab: {fileID: 11400000, guid: c0c391df13a8ed149a1fcb343bb20c4d, type: 2}
-  EquipEvent: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
-  UnequipEvent: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
+  EquipItemEC: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
+  UnequipItemEC: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
   menuOpenedEvent: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
   menuClosedEvent: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
 --- !u!114 &7814138535658991270

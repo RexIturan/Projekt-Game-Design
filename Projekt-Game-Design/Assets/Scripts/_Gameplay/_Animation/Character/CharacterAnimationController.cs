@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /**
@@ -108,26 +109,33 @@ public class CharacterAnimationController : MonoBehaviour {
 		stanceController.TakeStance(stance);
 	}
 
-	public void ChangeEquipment(EquipmentPosition position, Mesh newMesh) {
+	public void ChangeEquipment(EquipmentPosition position, Mesh newMesh, Material material) {
 	  if(!equipmentController)
 		  equipmentController = gameObject.GetComponentInChildren<CharacterEquipmentController>();
 
 	  if(!characterModelController )
 		  characterModelController = gameObject.GetComponentInChildren<CharacterModelController>();
 
-		if(position.Equals(EquipmentPosition.LEFT) || position.Equals(EquipmentPosition.RIGHT) || position.Equals(EquipmentPosition.SHIELD)) { 
-			equipmentController.ChangeEquipment(position, newMesh);
-		}
-		else if (position.Equals(EquipmentPosition.HEAD) || position.Equals(EquipmentPosition.BODY)) { 
-			characterModelController.ChangeEquipment(position, newMesh);
-		}
+	  switch ( position ) {
+		  case EquipmentPosition.LEFT:
+		  case EquipmentPosition.RIGHT:
+		  case EquipmentPosition.SHIELD:
+			  equipmentController.ChangeEquipment(position, newMesh, material);
+			  break;
+		  case EquipmentPosition.HEAD:
+		  case EquipmentPosition.BODY:
+			  characterModelController.ChangeEquipment(position, newMesh);
+			  break;
+		  default:
+			  throw new ArgumentOutOfRangeException(nameof(position), position, null);
+	  }
 	}
 
-	public void ChangeWeaponPosition(EquipmentPosition position, WeaponPositionType newPosition) {
+	public void ChangeWeaponPosition(EquipmentPosition position, WeaponPositionType weaponPosition) {
 	  if(!equipmentController)
 		  equipmentController = gameObject.GetComponentInChildren<CharacterEquipmentController>();
 
-		equipmentController.ChangeWeaponPosition(position, newPosition);
+		equipmentController.ChangeWeaponPosition(position, weaponPosition);
 	}
 
 	public void DisableEquipment(EquipmentPosition position, bool disable) {
@@ -155,6 +163,7 @@ public class CharacterAnimationController : MonoBehaviour {
 		float time = 0;
 				switch ( animation )
 				{
+					// todo move this data to animation Data SO ?
 						case CharacterAnimation.ATTACK_STING:
 								time = 0.15f;
 								break;

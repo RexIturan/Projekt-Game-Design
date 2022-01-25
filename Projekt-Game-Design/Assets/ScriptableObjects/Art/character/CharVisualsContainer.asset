@@ -39,8 +39,8 @@ MonoBehaviour:
   - faction: 1
     matColor: 1
   - faction: 2
-    matColor: 4
-  - faction: 4
     matColor: 7
+  - faction: 4
+    matColor: 4
   - faction: 3
-    matColor: 6
+    matColor: 9

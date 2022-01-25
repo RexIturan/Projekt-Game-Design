@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
 
 /**
  * changes body and head meshes etc.
  */
-public class CharacterModelController : MonoBehaviour
-{
-	public Mesh standardHead;
-	public Mesh standardBody;
+public class CharacterModelController : MonoBehaviour {
+	
+	//todo move to charquipmentcointroller or the other way around
+	
+	[SerializeField] private Mesh standardHead;
+	[SerializeField] private Mesh standardBody;
 
 	[SerializeField] private SkinnedMeshRenderer HeadMesh;
 	[SerializeField] private SkinnedMeshRenderer BodyMesh;
@@ -19,35 +22,32 @@ public class CharacterModelController : MonoBehaviour
 		BodyMesh.material = material;
 	}
 	
-	public void ChangeEquipment(EquipmentPosition position, Mesh newArmorPiece)
-	{
-		SkinnedMeshRenderer[] meshes = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
-		string tag = GetTagForEquipmentType(position);
-		
-		foreach ( SkinnedMeshRenderer mesh in meshes )
-		{
-			if ( mesh.tag.Equals(tag) ) { 
-				if(newArmorPiece)
-					mesh.sharedMesh = newArmorPiece;
-				else
-					mesh.sharedMesh = position.Equals(EquipmentPosition.HEAD) ? standardHead : standardBody;
-			}
-		}
-	}
-
-	private string GetTagForEquipmentType(EquipmentPosition equipment)
-	{
-		string tag = "UnknownEquipment";
-		switch ( equipment )
-		{
+	public void ChangeEquipment(EquipmentPosition position, Mesh newArmorPiece) {
+		Mesh newMesh;
+		switch ( position ) {
 			case EquipmentPosition.HEAD:
-				tag = "Equipment/Head";
+				newMesh = newArmorPiece ?? standardHead;
+				HeadMesh.sharedMesh = newMesh;
 				break;
 			case EquipmentPosition.BODY:
-				tag = "Equipment/Body";
+				newMesh = newArmorPiece ?? standardBody;
+				BodyMesh.sharedMesh = newMesh;
 				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(position), position, null);
 		}
-		return tag;
+		// SkinnedMeshRenderer[] meshes = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+		// string tag = GetTagForEquipmentType(position);
+		//
+		// foreach ( SkinnedMeshRenderer mesh in meshes )
+		// {
+		// 	if ( mesh.tag.Equals(tag) ) { 
+		// 		if(newArmorPiece)
+		// 			mesh.sharedMesh = newArmorPiece;
+		// 		else
+		// 			mesh.sharedMesh = position.Equals(EquipmentPosition.HEAD) ? standardHead : standardBody;
+		// 	}
+		// }
 	}
 
 	public void SetStandardHead(Mesh mesh) {

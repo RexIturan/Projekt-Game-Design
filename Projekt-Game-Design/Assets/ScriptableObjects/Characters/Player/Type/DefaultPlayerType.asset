@@ -21,13 +21,8 @@ MonoBehaviour:
   baseStatusValues:
   - _name: HitPoints
     _type: 1
-    _value: 10
-    _max: 40
-    _min: 0
-  - _name: HitPoints
-    _type: 8
-    _value: 10
-    _max: 10
+    _value: 20
+    _max: 20
     _min: 0
   movementPointsPerEnergy: 20
   movementCostPerTile: 2

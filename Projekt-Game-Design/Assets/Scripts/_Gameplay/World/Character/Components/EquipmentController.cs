@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Characters;
 using Characters.Equipment.ScriptableObjects;
+using GDP01._Gameplay.Logic_Data.Equipment.Types;
 using UnityEngine;
+using static EquipmentPosition;
 
 namespace GDP01.Characters.Component {
 		[RequireComponent(typeof(ModelController))]
@@ -14,29 +16,22 @@ namespace GDP01.Characters.Component {
 
 				// the position in the equipment inventory
 				// it is the item that grants the ability
-				[SerializeField] private ActiveEquipmentPosition activeEquipment = 0; 
+				[SerializeField] private EquipmentPosition activeEquipment = NONE; 
 				// the active hand for the ability (animation)
 				// e.g. Cast A uses the left hand, Attack R uses the right hand
-				[SerializeField] private ActiveEquipmentPosition activeHands = 0;
+				[SerializeField] private EquipmentPosition activeHand = NONE;
 
-				//todo move to Equipment/DataTypes
-				[System.Flags, System.Serializable]
-				public enum ActiveEquipmentPosition
-				{
-						LEFT = 1,
-						RIGHT = 2,
+				private ItemSO activeItem;
+				
+				public ItemSO RightWeapon {
+					get { return equipmentContainer.equipmentSheets[equipmentID].GetEquipedItem(RIGHT); }
 				}
-
-				public void Start()
-				{
-						/*
-						inventory.equipmentInventories.Add(new InventorySO.Equipment());
-						playerID = inventory.equipmentInventories.Count - 1;
-						*/
+				
+				public ItemSO LeftWeapon {
+					get { return equipmentContainer.equipmentSheets[equipmentID].GetEquipedItem(LEFT); }
 				}
-
-				public void RefreshEquipment()
-				{
+				
+				public void RefreshEquipment() {
 						// Model-wise
 						RefreshModels();
 						RefreshWeaponPositions();
@@ -47,57 +42,61 @@ namespace GDP01.Characters.Component {
 								abilityController.RefreshAbilities();
 				}
 
-				public void RefreshModels()
-				{
+				public void RefreshModels() {
 						ModelController modelController = gameObject.GetComponent<ModelController>();
-						if ( modelController )
-						{
+						if ( modelController ) {
 								// Find the proper Items for their respective hands
 								//
 								ItemSO itemLeftHand;
 								ItemSO itemRightHand;
 
-
 								// if the active hand is the left, and the active weapon is in the right equipment position
 								// of if the active hand is the right, and the active weapon is in the left equipment position,
 								// swap the hands
-								if(activeHands.Equals(ActiveEquipmentPosition.LEFT) && activeEquipment.Equals(ActiveEquipmentPosition.RIGHT) ||
-										activeHands.Equals(ActiveEquipmentPosition.RIGHT) && activeEquipment.Equals(ActiveEquipmentPosition.LEFT))
-								{
-										itemLeftHand = GetWeaponRight();
-										itemRightHand = GetWeaponLeft();
+								if(activeHand != activeEquipment) {
+										itemLeftHand = RightWeapon;
+										itemRightHand = LeftWeapon;
 								}
-								else
-								{
+								else {
 										// else put the right weapon to the right hand, and the left weapon to the left by default
-										itemLeftHand = GetWeaponLeft();
-										itemRightHand = GetWeaponRight();
+										itemLeftHand = LeftWeapon;
+										itemRightHand = RightWeapon;
 								}
 
 								ItemSO itemHead = equipmentContainer.equipmentSheets[equipmentID].headArmor;
 								ItemSO itemBody = equipmentContainer.equipmentSheets[equipmentID].bodyArmor;
 								ItemSO itemShield = equipmentContainer.equipmentSheets[equipmentID].shield;
 
-								modelController.SetMeshLeft(itemLeftHand ? itemLeftHand.mesh : null);
-								modelController.SetMeshRight(itemRightHand ? itemRightHand.mesh : null);
+								if ( itemLeftHand ) {
+									modelController.SetMeshLeft(itemLeftHand.mesh, itemLeftHand.material);	
+								}
+								else {
+									modelController.SetMeshLeft(null, null);
+								}
+								
+								if ( itemRightHand ) {
+									modelController.SetMeshRight(itemRightHand.mesh, itemRightHand.material);	
+								}
+								else {
+									modelController.SetMeshRight(null, null);
+								}
+								
+								if ( itemShield ) {
+									modelController.SetMeshShield(itemShield.mesh, itemShield.material);	
+								}
+								else {
+									modelController.SetMeshShield(null, null);
+								}
+								
 								modelController.SetMeshHead(itemHead ? itemHead.mesh : null);
 								modelController.SetMeshBody(itemBody ? itemBody.mesh : null);
-								modelController.SetMeshShield(itemShield ? itemShield.mesh : null);
 						}
 				}
 
-				public void RefreshWeaponPositions()
-				{
+				public void RefreshWeaponPositions() {
 						ModelController modelController = gameObject.GetComponent<ModelController>();
-						if ( modelController )
-						{
-								modelController.animationController
-										.ChangeWeaponPosition(EquipmentPosition.LEFT, 
-										activeHands.HasFlag(ActiveEquipmentPosition.LEFT) ? WeaponPositionType.EQUIPPED : WeaponPositionType.BACK_UPWARDS);
-
-								modelController.animationController
-										.ChangeWeaponPosition(EquipmentPosition.RIGHT,
-										activeHands.HasFlag(ActiveEquipmentPosition.RIGHT) ? WeaponPositionType.EQUIPPED : WeaponPositionType.BACK_UPWARDS);
+						if ( modelController ) {
+							modelController.UpdateWeaponPositions(activeHand);
 						}
 				}
 
@@ -134,8 +133,7 @@ namespace GDP01.Characters.Component {
 				 * sets the active weapon(s) to the given side, 
 				 * mostly the item that grants the respective ability
 				 */
-				public void SetActiveWeapon(ActiveEquipmentPosition sides)
-				{
+				public void SetActiveWeapon(EquipmentPosition sides) {
 						activeEquipment = sides;
 				}
 
@@ -143,9 +141,8 @@ namespace GDP01.Characters.Component {
 				 * sets the active hand(s) to given side,
 				 * mostly the hands used for ability's animation
 				 */
-				public void SetActiveHands(ActiveEquipmentPosition sides)
-				{
-						activeHands = sides;
+				public void SetActiveHands(EquipmentPosition sides) {
+						activeHand = sides;
 				}
 		}
 }
