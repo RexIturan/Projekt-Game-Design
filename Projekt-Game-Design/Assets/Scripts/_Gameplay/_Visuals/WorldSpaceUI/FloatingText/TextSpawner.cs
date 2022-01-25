@@ -5,14 +5,19 @@ using TMPro;
 public class TextSpawner : MonoBehaviour {
 	[SerializeField] private GameObject textPrefab;
 	[SerializeField] private CreateFloatingTextEventChannelSO createTextEC;
+	[SerializeField] private Color spawnColor;
+	[SerializeField] private string spawnText;
 
+	public Color SpawnColor => spawnColor;
+	public string SpawnText => spawnText;
+	
 	// Start is called before the first frame update
 	private void Start() {
 		createTextEC.OnEventRaised += SpawnTextMessage;
 	}
 
-	private void SpawnTextMessage(string text, Vector3 position, Color color) {
-		GameObject newText = Instantiate(textPrefab, position, Quaternion.identity);
+	public void SpawnTextMessage(string text, Vector3 position, Color color) {
+		GameObject newText = Instantiate(textPrefab, position, Quaternion.identity, transform);
 
 		TextMeshPro textMeshComponent = newText.GetComponentInChildren<TextMeshPro>();
 
