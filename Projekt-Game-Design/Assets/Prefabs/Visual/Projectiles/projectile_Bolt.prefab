@@ -80,7 +80,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111099012506016840}
-  m_Mesh: {fileID: 2636153235739578338, guid: fd179c9b77e680a4293f9a2879cd9f26, type: 3}
+  m_Mesh: {fileID: -345927832089812503, guid: 09406c71f81974b47bcbbeb0c30fb1ee, type: 3}
 --- !u!1 &1194966964175767583
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4823989552819682225}
   - component: {fileID: 8309471281235247890}
   m_Layer: 0
-  m_Name: projectile_Arrow
+  m_Name: projectile_Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

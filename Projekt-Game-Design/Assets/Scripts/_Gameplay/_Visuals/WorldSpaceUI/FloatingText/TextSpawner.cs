@@ -17,7 +17,8 @@ public class TextSpawner : MonoBehaviour {
 	}
 
 	public void SpawnTextMessage(string text, Vector3 position, Color color) {
-		GameObject newText = Instantiate(textPrefab, position, Quaternion.identity, transform);
+		//todo set parent
+		GameObject newText = Instantiate(textPrefab, position, Quaternion.identity);
 
 		TextMeshPro textMeshComponent = newText.GetComponentInChildren<TextMeshPro>();
 

@@ -31,7 +31,8 @@ public class PlayerCharacterSC : MonoBehaviour {
     [SerializeField] private EquipmentController _equipmentController;
     [SerializeField] private AbilityController _abilityController;
     [SerializeField] private ModelController _modelController;
-
+    [SerializeField] private Targetable _targetable; 
+    
     [SerializeField] private HealthbarController _healthbarController;
 
     //todo move to some central location
@@ -70,6 +71,8 @@ public class PlayerCharacterSC : MonoBehaviour {
 	    _abilityController.damageInflicted = true;
 	    
 	    _healthbarController.SetColor(_statistics.Faction == Faction.Player ? playerColor : friendlyColor);
+	    
+	    _targetable.Initialise();
     }
     
     public void InitializeFromSave(PlayerCharacter_Save saveData) {

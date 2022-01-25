@@ -38,12 +38,12 @@ MonoBehaviour:
     area:
       stringPattern: '- x x x -
 
-        x - - - x
+        x x x x x
 
-        x -[-]- x
+        x x[-]x x
 
         x
-        - - - x
+        x x x x
 
         - x x x -'
       rows:

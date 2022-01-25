@@ -19,7 +19,8 @@ namespace Combat {
 
 		[SerializeField] private Statistics statistics;
 		[SerializeField] private GridTransform gridTransform;
-
+		[SerializeField] private HealthbarController healthbarController; 
+		
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
  	
 		public bool IsAlive => !IsDead;
@@ -33,6 +34,12 @@ namespace Combat {
 		public void Initialise() {
 			statistics = gameObject.GetComponent<Statistics>();
 			gridTransform = gameObject.GetComponent<GridTransform>();
+			
+			if ( healthbarController is { } ) {
+				var hitPoints = statistics.StatusValues.HitPoints;
+				//todo unsubscribe somewhere ?
+				hitPoints.OnValueChanged += () => healthbarController.UpdateVisuals(hitPoints.GetAsRangedInt()); 
+			}
 		}
 		
 		public void ReceivesDamage(int damage) {
@@ -62,5 +69,8 @@ namespace Combat {
 				return targetPositons.Contains(gridTransform.gridPosition);
 			});
 		}
+		
+///// Unity Functions //////////////////////////////////////////////////////////////////////////////
+
 	}
 }

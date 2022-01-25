@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statistics: {fileID: 2212653873986084095}
   gridTransform: {fileID: 6601210392787000488}
+  healthbarController: {fileID: 477349122052976142}
 --- !u!114 &2212653873986084080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161ac52233c1ee542b3a61adf7262ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: {fileID: 0}
+  enemyType: {fileID: 11400000, guid: c491683a0b68f934db35972bd4517070, type: 2}
   behavior: {fileID: 11400000, guid: 1f2adb223990b1f458c58b0569d99fbf, type: 2}
   _statistics: {fileID: 2212653873986084095}
   _gridTransform: {fileID: 6601210392787000488}
@@ -351,6 +352,7 @@ MonoBehaviour:
   _movementController: {fileID: 2212653873986084083}
   _abilityController: {fileID: 2212653873986084082}
   _modelController: {fileID: 2212653873986084085}
+  _targetable: {fileID: 2212653873986084081}
   _aIController: {fileID: 106175245239994627}
   isNextToAct: 0
   isDone: 0
@@ -442,3 +444,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4245671619147244351, guid: 9d9093dd41cfe77418e6c4e6de3e3499, type: 3}
   m_PrefabInstance: {fileID: 5757287450070851398}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &477349122052976142 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5294575175135031624, guid: 9d9093dd41cfe77418e6c4e6de3e3499, type: 3}
+  m_PrefabInstance: {fileID: 5757287450070851398}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c8f8da6d0a4537ab0ee53a528f3fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

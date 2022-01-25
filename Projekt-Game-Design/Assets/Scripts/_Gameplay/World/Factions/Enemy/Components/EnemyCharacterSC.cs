@@ -2,6 +2,7 @@ using Characters;
 using Characters.EnemyCharacter;
 using Characters.Movement;
 using Characters.Types;
+using Combat;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
 using SaveSystem.SaveFormats;
@@ -23,6 +24,7 @@ public class EnemyCharacterSC : MonoBehaviour
 		[SerializeField] private MovementController _movementController;
 		[SerializeField] private AbilityController _abilityController;
 		[SerializeField] private ModelController _modelController;
+		[SerializeField] private Targetable _targetable;
 		[SerializeField] private AIController _aIController;
 
 		[Header("Statemachine")]
@@ -64,6 +66,9 @@ public class EnemyCharacterSC : MonoBehaviour
 			_modelController.SetMeshRight(enemyType.weapon != null ? enemyType.weapon.mesh : null);
 			_modelController.SetMeshLeft(null);
 
+			//targetable
+			_targetable.Initialise();
+			
 			//ai
 			behavior = enemyType.behaviour;
 			_aIController.SetBehavior(behavior);

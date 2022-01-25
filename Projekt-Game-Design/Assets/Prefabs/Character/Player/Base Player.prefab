@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statistics: {fileID: 2212653873986084095}
   gridTransform: {fileID: 6601210392787000488}
+  healthbarController: {fileID: 3041808292664612136}
 --- !u!114 &2212653873986084080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   active: 0
-  playerType: {fileID: 0}
+  playerType: {fileID: 11400000, guid: 5d339fb430d10f341bd2896617aec0a2, type: 2}
   _statistics: {fileID: 2212653873986084095}
   _gridTransform: {fileID: 6601210392787000488}
   _attacker: {fileID: 2212653873986084080}
@@ -331,6 +332,7 @@ MonoBehaviour:
   _equipmentController: {fileID: 1915383006283477928}
   _abilityController: {fileID: 2212653873986084082}
   _modelController: {fileID: 2212653873986084085}
+  _targetable: {fileID: 2212653873986084081}
   _healthbarController: {fileID: 3041808292664612136}
   playerColor: {r: 0.0039215684, g: 0.4713647, b: 0.94509804, a: 1}
   friendlyColor: {r: 0, g: 0.754717, b: 0.28304136, a: 1}
