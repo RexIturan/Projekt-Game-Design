@@ -23,3 +23,8 @@
     --level-font-size: 18px;
     --icon-border-hover-color: #00aeff;
 }
+
+.unity-button:focus{
+    background-color: white;
+    color: black;
+}

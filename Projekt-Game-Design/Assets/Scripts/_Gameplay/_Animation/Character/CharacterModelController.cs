@@ -36,18 +36,6 @@ public class CharacterModelController : MonoBehaviour {
 			default:
 				throw new ArgumentOutOfRangeException(nameof(position), position, null);
 		}
-		// SkinnedMeshRenderer[] meshes = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
-		// string tag = GetTagForEquipmentType(position);
-		//
-		// foreach ( SkinnedMeshRenderer mesh in meshes )
-		// {
-		// 	if ( mesh.tag.Equals(tag) ) { 
-		// 		if(newArmorPiece)
-		// 			mesh.sharedMesh = newArmorPiece;
-		// 		else
-		// 			mesh.sharedMesh = position.Equals(EquipmentPosition.HEAD) ? standardHead : standardBody;
-		// 	}
-		// }
 	}
 
 	public void SetStandardHead(Mesh mesh) {

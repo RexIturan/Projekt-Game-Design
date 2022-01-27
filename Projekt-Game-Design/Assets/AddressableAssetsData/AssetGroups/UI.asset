@@ -17,20 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 0a3e0adb23be45a40ac355cf60bb645c
   m_SerializeEntries:
-  - m_GUID: cf06c9ce71c32d344ba1647f37220971
-    m_Address: Assets/UI/SettingsContainer.uxml
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: db877d20d0978924eb47b450dfdc4a1e
     m_Address: Assets/UI/Styles/LoadGame_SaveGame.uss
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 6ddf6212474c2a84ca2664a443a93551
     m_Address: Assets/UI/Styles/Button_Layout.uss
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: fa7e517b8c5f3044db3f0818d98150ff
-    m_Address: Assets/UI/LoadScreen.uxml
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

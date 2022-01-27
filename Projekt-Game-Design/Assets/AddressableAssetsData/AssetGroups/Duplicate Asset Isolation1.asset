@@ -53,10 +53,6 @@ MonoBehaviour:
     m_Address: Assets/UI Toolkit/PanelSettings.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 0ec786244fa6d1349b0ad47ea29947f7
-    m_Address: Assets/UI/InventoryOverlay.uxml
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 3ce8d744bcd83bd4199fb514241b84d5
     m_Address: Assets/UI Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss
     m_ReadOnly: 0
@@ -69,28 +65,12 @@ MonoBehaviour:
     m_Address: Assets/UI/Stats/strength.png
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 2727d8462e1b04e4fbbdcb31cf2b0a62
-    m_Address: Assets/UI/Images/defaultFace.jpg
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: efde8e3783095f54d86986d1cf9eedf2
     m_Address: Assets/UI/Stats/dexterity.png
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 35c6f5481cb064a40af5e187b40d5498
     m_Address: Assets/UI/Images/ItemSlotBackground.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 9c500d6869208b54daeaad121463d7e6
-    m_Address: Assets/UI/Inventory.uxml
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 15cad3ba14a10824795efb785fddc2c8
-    m_Address: Assets/UI/SaveScreen.uxml
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: c1f074caa600e2f4db291f7f2f7d601b
-    m_Address: Assets/UI/IngameMenu.uxml
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 1416e00b82f995044a8197c891237d8c
@@ -105,16 +85,8 @@ MonoBehaviour:
     m_Address: Assets/UI/Stats/intelligence.png
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: e0e70c4dedcd3084b96439b51c6bbe42
-    m_Address: Assets/UI/PlayerViewContainer.uxml
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 9e45abbdf445f8e4fac2593e39efe3ff
     m_Address: Assets/UI/Stats/movement.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 64ab7daf4a83bdb429be7a57dbf1d64e
-    m_Address: Assets/UI/UI.uxml
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 8fc35dcffc2669141b3123bd98a4d42e

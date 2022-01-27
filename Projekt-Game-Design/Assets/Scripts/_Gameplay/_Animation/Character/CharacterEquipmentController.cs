@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using static EquipmentPosition;
 
-/**
- * attached to equipment game object in character model 
- * to change weapon positions and models/textures
- */
+/// <summary>
+/// attached to equipment game object in character model
+/// to change weapon positions and models/textures
+/// </summary>
 public class CharacterEquipmentController : MonoBehaviour {
-	
+
 	[Serializable]
 	private class ConstraintWrapper {
 		[SerializeField] private MultiParentConstraint constraint;
@@ -87,7 +87,7 @@ public class CharacterEquipmentController : MonoBehaviour {
 
 	public void ChangeWeaponPosition(EquipmentPosition position, WeaponPositionType weaponPosition) {
 		SetWeaponConstraint(position, weaponPosition);
-		
+
 		// MultiParentConstraint[] constraints = gameObject.GetComponentsInChildren<MultiParentConstraint>();
 		// foreach ( MultiParentConstraint constraint in constraints )
 		// {

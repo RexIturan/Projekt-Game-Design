@@ -1,6 +1,5 @@
 [System.Serializable]
-public enum CharacterAnimation
-{
+public enum CharacterAnimation {
 	IDLE,
 	DEATH_A,
 	DEATH_B,

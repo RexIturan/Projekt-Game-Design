@@ -181,7 +181,7 @@ MonoBehaviour:
   switchActivatedEvent: {fileID: 11400000, guid: 447d8770f6205264f9db44ea93ad8822, type: 2}
   triggerActivatedEvent: {fileID: 11400000, guid: 2f9c33c4086a8754280820559e9caac1, type: 2}
   doorId: 0
-  doorType: {fileID: 0}
+  doorType: {fileID: 11400000, guid: a332522f73c0bbf4dbe440e88190b4ed, type: 2}
   open: 0
   broken: 0
   locked: 0

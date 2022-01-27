@@ -170,7 +170,7 @@ public class OverlayUIController : MonoBehaviour {
 			var abilityController = _selectedPlayer.GetComponent<AbilityController>();
 			List<AbilitySO> abilities =
 				new List<AbilitySO>(abilityController.Abilities);
-			int counter = 0;
+			int counter;
 
 			//disable buttons
 			// _actionBar.actionButtons.ForEach(actionButton => actionButton.Button.SetEnabled(false));

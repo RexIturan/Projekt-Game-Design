@@ -14,19 +14,18 @@ namespace SceneManagement.ScriptableObjects {
         /// <summary>
         /// Used by the SceneSelector tool to discern what type of scene it needs to load
         /// </summary>
-        public enum GameSceneType
-        {
-            //Playable scenes
-            Location, //SceneSelector tool will also load PersistentManagers and Gameplay
-            Menu, //SceneSelector tool will also load Gameplay
+        public enum GameSceneType {
+	        //Playable scenes
+          Location, //SceneSelector tool will also load PersistentManagers and Gameplay
+          Menu, //SceneSelector tool will also load Gameplay
 
-            //Special scenes
-            Initialisation,
-            PersistentManagers,
-            Gameplay,
+          //Special scenes
+          Initialisation,
+          PersistentManagers,
+          Gameplay,
 
-            //Work in progress scenes that don't need to be played
-            Art,
+          //Work in progress scenes that don't need to be played
+          Art,
         }
     }
 }

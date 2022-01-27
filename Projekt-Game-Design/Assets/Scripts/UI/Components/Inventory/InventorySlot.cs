@@ -4,7 +4,7 @@ using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 [System.Serializable]
-public class InventorySlot : Button
+public class InventorySlot : VisualElement
 {
     public readonly Image icon;
     public readonly InventorySlotType slotType;
@@ -22,7 +22,7 @@ public class InventorySlot : Button
         AddToClassList("slotContainer");
         RegisterCallback<PointerDownEvent>(OnPointerDown);
         RegisterCallback<MouseDownEvent>(OnPointerDown);
-        clicked += () => Debug.Log("click");//InventoryUIController.StartDrag(Mouse.current.position.ReadValue(), this);
+        // clicked += () => Debug.Log("click");//InventoryUIController.StartDrag(Mouse.current.position.ReadValue(), this);
         slotType = type;
     }
     

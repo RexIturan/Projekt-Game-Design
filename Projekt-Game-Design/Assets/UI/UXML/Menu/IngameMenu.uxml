@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="/Assets/UI/Styles/Button_Layout.uss" />
+    <Style src="/Assets/UI/Styles/UI_Classes.uss" />
+    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-direction: row; position: absolute; width: 100%; height: 100%;">
+        <ui:VisualElement name="SideBar" picking-mode="Ignore" style="width: 30%; flex-direction: column; min-width: 300px;">
+            <ui:Button text="Resume Game" display-tooltip-when-elided="true" name="ResumeButton" class="Button" style="height: 16%;" />
+            <ui:Button text="Save Game" display-tooltip-when-elided="true" name="SaveButton" class="Button" style="height: 16%; display: flex;" />
+            <ui:Button text="Load Game" display-tooltip-when-elided="true" name="LoadButton" class="Button" style="height: 16%; display: flex;" />
+            <ui:Button text="Options" display-tooltip-when-elided="true" name="OptionsButton" class="Button" style="height: 16%; display: flex;" />
+            <ui:Button text="Back to Menu" display-tooltip-when-elided="true" name="MainMenuButton" class="Button" style="height: 16%;" />
+            <ui:Button text="Quit Game" display-tooltip-when-elided="true" name="QuitButton" class="Button" style="height: 16%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ContentContainer" picking-mode="Ignore" style="width: 100%;" />
+    </ui:VisualElement>
+</ui:UXML>
