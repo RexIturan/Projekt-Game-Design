@@ -1,7 +1,7 @@
 {
   "name": "com.unity.ui",
   "displayName": "UI Toolkit",
-  "version": "1.0.0-preview.18",
+  "version": "1.0.0-preview.18-custom",
   "unity": "2020.3",
   "unityRelease": "17f1",
   "keywords": [
