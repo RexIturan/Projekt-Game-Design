@@ -24,7 +24,8 @@ public class G_PlayTrack_OnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void OnStateEnter() {
-				AudioManager.FindSoundManager().PlaySound(soundName);
+	    //todo use event Else this will be a error source
+				// AudioManager.FindSoundManager().PlaySound(soundName);
     }
 
     public override void OnStateExit() { }

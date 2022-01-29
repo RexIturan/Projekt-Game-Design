@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Editor.SceneSelector {
 	public partial class SceneSelector {
 		[Serializable]
-		private class Item {
+		internal class Item {
 			public string guid;
 			public int order = int.MaxValue;
 			public bool isVisible = true;

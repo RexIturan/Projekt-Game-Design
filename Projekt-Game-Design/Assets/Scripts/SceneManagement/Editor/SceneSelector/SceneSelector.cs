@@ -74,10 +74,12 @@ namespace Editor.SceneSelector {
 			SceneType[] typeOrder = new[] {
 				SceneType.Initialisation,
 				SceneType.PersistentManagers,
-				SceneType.Gameplay,
+				SceneType.Control,
+				SceneType.Tactics,
 				SceneType.Menu,
-				SceneType.Location,
 				SceneType.Art,
+				SceneType.UI,
+				SceneType.Test,
 			};
 
 			// draws items
@@ -167,7 +169,6 @@ namespace Editor.SceneSelector {
 
 			_hasEmptyItems = false;
 		}
-
 
 		private void EnsureStyles() {
 			if ( _styles == null ) {

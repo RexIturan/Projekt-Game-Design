@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647e2c050bb945d1a690bdd1b8f47d93, type: 3}
   m_Name: Tactics
   m_EditorClassIdentifier: 
-  _guid: ba5a2b46047cbd740a4c701cbe2f5a72
   description: 
-  sceneType: 4
+  sceneType: 5
   sceneReference:
     m_AssetGUID: 3c22e5fbe2b9ce64f89368739c3b309e
     m_SubObjectName: 

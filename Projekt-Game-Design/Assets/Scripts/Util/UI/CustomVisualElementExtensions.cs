@@ -1,4 +1,6 @@
-﻿using UnityEngine.UIElements;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 namespace GDP01.Util.Util.UI {
 	public static class CustomVisualElementExtensions {
@@ -68,6 +70,22 @@ namespace GDP01.Util.Util.UI {
 
 			foreach ( var suffix in suffixes ) {
 				button.AddToClassList(GetClassNameWithSuffix(baseClass, suffix));
+			}
+		}
+
+		public static void AddAll(this VisualElement root, IEnumerable<VisualElement> elements) {
+			foreach ( var element in elements ) {
+				root.Add(element);
+			}
+		}
+		
+		public static void RemoveAll(this VisualElement root, IEnumerable<VisualElement> elements) {
+			if ( elements is { } ) {
+				foreach ( var element in elements ) {
+					if ( element is { } ) {
+						root.Remove(element);	
+					}
+				}	
 			}
 		}
 	}

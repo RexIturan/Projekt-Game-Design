@@ -46,15 +46,19 @@ namespace GDP01.Player.Player {
 		
 ///// Properties
 
+		private CharacterList CharList => characterList ??= CharacterList.FindInstant();
 		public bool HasSelected => Selected != null;
 		public Selectable Selected => selectedPlayerCharacter;
 
 ///// Private Functions
 
 		private void ActivatePlayerAtPos(Vector3Int gridPos) {
+			if ( CharList is null )
+				return;
+			
 			List<PlayerCharacterSC> playersToActivate = new List<PlayerCharacterSC>();
 
-			foreach ( var npcObj in characterList.friendlyContainer ) {
+			foreach ( var npcObj in CharList.friendlyContainer ) {
 				PlayerCharacterSC playerSC = npcObj.GetComponent<PlayerCharacterSC>();
 				if(playerSC && npcObj.GetComponent<GridTransform>().gridPosition.Equals(gridPos))
 					playersToActivate.Add(playerSC);
@@ -65,8 +69,10 @@ namespace GDP01.Player.Player {
 		}
 
 		private Selectable GetPlayerAtPos(Vector3Int gridPos) {
-
-			foreach ( var playerCharObj in characterList.playerContainer ) {
+			if ( CharList is null )
+				return null;
+			
+			foreach ( var playerCharObj in CharList.playerContainer ) {
 				var gridTransform = playerCharObj.GetComponent<GridTransform>();
 				if ( gridTransform.gridPosition.Equals(gridPos) ) {
 					return playerCharObj.GetComponent<Selectable>();

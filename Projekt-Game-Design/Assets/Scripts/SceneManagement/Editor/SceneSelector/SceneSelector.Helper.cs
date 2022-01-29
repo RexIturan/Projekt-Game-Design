@@ -37,9 +37,11 @@ namespace Editor.SceneSelector {
 			private static readonly Dictionary<Type, Color> KDefaultMarkerColors =
 				new Dictionary<Type, Color>() {
 					{ typeof(PersistentManagersSO), Color.white },
-					{ typeof(GameplaySO), Color.magenta },
-					{ typeof(LocationSO), Color.green },
-					{ typeof(MenuSO), Color.cyan },
+					{ typeof(ControlSceneSO), new Color(0.1f,0.7f, 0.4f) },
+					{ typeof(TacticsSO), new Color(0.9f,0.2f, 0.2f) },
+					{ typeof(MenuSO), new Color(0.25f,0.25f, 1) },
+					{ typeof(UISceneSO), new Color(1,0.5f,0) },
+					{ typeof(TestSceneSO), Color.black },
 				};
 
 			public static void RepaintOnMouseMove(EditorWindow window) {
@@ -80,6 +82,11 @@ namespace Editor.SceneSelector {
 				if ( EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo() ) {
 					EditorSceneManager.OpenScene(
 						AssetDatabase.GetAssetPath(gameSceneSO.sceneReference.editorAsset));
+
+					foreach ( var additionalScene in gameSceneSO.loadAdditional ) {
+						EditorSceneManager.OpenScene(
+							AssetDatabase.GetAssetPath(additionalScene.sceneReference.editorAsset), OpenSceneMode.Additive);
+					}
 				}
 			}
 

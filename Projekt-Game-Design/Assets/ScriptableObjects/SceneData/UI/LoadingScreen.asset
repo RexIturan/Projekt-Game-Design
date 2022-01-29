@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 695b24cb321c43728627fb883cab39ae, type: 3}
-  m_Name: Char_Test
+  m_Script: {fileID: 11500000, guid: addc7aa3c2d84e9ba42a33eaead842c2, type: 3}
+  m_Name: LoadingScreen
   m_EditorClassIdentifier: 
   description: 
-  sceneType: 0
+  sceneType: 6
   sceneReference:
-    m_AssetGUID: 3df446a0300bef942bf97504c5ea2e5e
+    m_AssetGUID: bf5a85af1b3cdc64ba522fa2e5cbaa2e
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Util.Editor.SpritePropertyDrawer {
-	[CustomPropertyDrawer(typeof(Texture2D))]
+	// [CustomPropertyDrawer(typeof(Texture2D))]
 	public class TextureDrawer : PropertyDrawer {
 		
 		private static GUIStyle s_TempStyle = new GUIStyle();

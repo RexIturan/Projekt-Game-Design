@@ -9,8 +9,8 @@ using UnityEngine;
     /// Takes an array of the scenes we want to load and a bool to specify if we want to show a loading screen.
     /// </summary>
     [CreateAssetMenu(menuName = "Events/Load Event Channel")]
-    public class LoadEventChannelSO : EventChannelBaseSO
-    {
+    public class LoadEventChannelSO : EventChannelBaseSO {
+	    
         public event Action<GameSceneSO[], bool, bool> OnLoadingRequested;
 
         public void RaiseEvent(GameSceneSO[] locationsToLoad, bool showLoadingScreen = false, bool closeLoadingScreenOnSceneReady = true)

@@ -227,12 +227,12 @@ namespace SaveSystem {
 				saveManagerData.loaded = true;
 				
 				//todo debug
-				Debug.Log("SaveManager \u27A4 LoadLevel \u27A4 try:\nLevel Loaded");
+				// Debug.Log($"SaveManager \u27A4 LoadLevel \u27A4 try:\n\"{filename}\" Level Loaded");
 				
 				return true;
 			}
 			catch ( Exception e ) {
-				Debug.LogError($"Failed to Load Save Object from Json {e}");
+				Debug.LogError($"Failed to Load Save Object from Json \"{filename}\", with Exception: {e}");
 				return false;
 			}
 
@@ -247,7 +247,8 @@ namespace SaveSystem {
 
 		#region Load Level From TextAsset
 
-		void LoadSaveFromTextAsset(AssetReference assetReference) {
+		//todo does nothing
+		private void LoadSaveFromTextAsset(AssetReference assetReference) {
 			if ( !assetReference.RuntimeKeyIsValid() )
 				return;
 		}
