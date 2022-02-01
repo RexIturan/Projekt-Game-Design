@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GDP01.SceneManagement.EventChannels;
 using GDP01.Util.Util.UI;
 using SaveSystem;
 using SceneManagement.ScriptableObjects;
+using SceneManagement.Types;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Util.Logger;
@@ -29,7 +31,12 @@ namespace GDP01.UI.Controller.SceneLoader {
 			};
 		}
 		
-///// Serialised Fields ////////////////////////////////////////////////////////////////////////////		
+///// Serialised Fields ////////////////////////////////////////////////////////////////////////////
+
+		[Header("New Scene Loading")] 
+		[SerializeField] private SceneLoadingInfoEventChannelSO loadSceneEC;
+		[SerializeField] private SceneLoadingData loadLevelData;
+
 		[Header("Scene EC")] 
 		[SerializeField] private LoadEventChannelSO loadLocationEC;
 		[SerializeField] private GameSceneSO[] sceneToLoad;
@@ -163,8 +170,10 @@ namespace GDP01.UI.Controller.SceneLoader {
 				if ( levelLoaded ) {
 					logger.Log($"\"{filename}\" Loaded");
 					logger.PrintDebugLog();
-					
-					loadLocationEC.RaiseEvent(locationsToLoad, false, true);
+
+					loadLevelData.Name = $" [{filename}]";
+					// loadLocationEC.RaiseEvent(locationsToLoad, false, true);
+					loadSceneEC.RaiseEvent(loadLevelData);
 					// _saveSystem.saveManagerData.inputLoad = true;
 					// _saveSystem.saveManagerData.loaded = true;
 				}
@@ -204,9 +213,6 @@ namespace GDP01.UI.Controller.SceneLoader {
 				CheckSaveFiles(ButtonFilenameDict, _saveSystem);
 			}
 		}
-
-		
-
 
 		private void OnDisable() {
 			if ( elements.buttonContainer.element is { } ) {

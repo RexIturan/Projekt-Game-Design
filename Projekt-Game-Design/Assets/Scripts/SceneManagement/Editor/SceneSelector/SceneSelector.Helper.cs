@@ -38,7 +38,7 @@ namespace Editor.SceneSelector {
 				new Dictionary<Type, Color>() {
 					{ typeof(PersistentManagersSO), Color.white },
 					{ typeof(ControlSceneSO), new Color(0.1f,0.7f, 0.4f) },
-					{ typeof(TacticsSO), new Color(0.9f,0.2f, 0.2f) },
+					{ typeof(TacticsLevelSO), new Color(0.9f,0.2f, 0.2f) },
 					{ typeof(MenuSO), new Color(0.25f,0.25f, 1) },
 					{ typeof(UISceneSO), new Color(1,0.5f,0) },
 					{ typeof(TestSceneSO), Color.black },
@@ -80,13 +80,13 @@ namespace Editor.SceneSelector {
 
 			public static void OpenSceneSafe(GameSceneSO gameSceneSO) {
 				if ( EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo() ) {
-					EditorSceneManager.OpenScene(
-						AssetDatabase.GetAssetPath(gameSceneSO.sceneReference.editorAsset));
-
 					foreach ( var additionalScene in gameSceneSO.loadAdditional ) {
 						EditorSceneManager.OpenScene(
 							AssetDatabase.GetAssetPath(additionalScene.sceneReference.editorAsset), OpenSceneMode.Additive);
 					}
+					
+					EditorSceneManager.OpenScene(
+						AssetDatabase.GetAssetPath(gameSceneSO.sceneReference.editorAsset));
 				}
 			}
 

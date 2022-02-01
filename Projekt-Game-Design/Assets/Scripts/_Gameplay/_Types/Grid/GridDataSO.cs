@@ -7,6 +7,7 @@ namespace Grid {
 	[CreateAssetMenu(fileName = "newGridData", menuName = "Grid/GridData", order = 0)]
 	public class GridDataSO : ScriptableObject {
 
+		[SerializeField] private string levelName;
 		[Header("Data")] 
 		[SerializeField] private int width; //world x
 		[SerializeField] private int height; //world y
@@ -21,6 +22,7 @@ namespace Grid {
 
 		#region Setter / Getter
 
+		public string LevelName => levelName;
 		public int Width => width;
 		public int Height => height;
 		public int Depth => depth;
@@ -43,7 +45,8 @@ namespace Grid {
 			_cellCenter = new Vector3(cellSize, 0, cellSize) * 0.5f;
 		}
 		
-		public void InitFromSaveValues(GridData_Save gridDataSave) {
+		public void InitFromSaveValues(GridData_Save gridDataSave, string filename) {
+			levelName = filename;
 			width = gridDataSave.width;
 			height = gridDataSave.height;
 			depth = gridDataSave.depth;

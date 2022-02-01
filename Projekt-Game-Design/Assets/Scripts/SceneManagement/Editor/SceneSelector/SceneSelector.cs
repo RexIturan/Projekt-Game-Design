@@ -75,7 +75,7 @@ namespace Editor.SceneSelector {
 				SceneType.Initialisation,
 				SceneType.PersistentManagers,
 				SceneType.Control,
-				SceneType.Tactics,
+				SceneType.TacticsLevel,
 				SceneType.Menu,
 				SceneType.Art,
 				SceneType.UI,

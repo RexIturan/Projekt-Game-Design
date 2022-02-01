@@ -35,9 +35,9 @@ namespace SaveSystem {
 //////////////////////////////////// Local Functions ///////////////////////////////////////////////
 		#region Local Functions
 
-		private bool ReadGridData(GridData_Save gridDataSave, GridDataSO gridData) {
+		private bool ReadGridData(Save save, GridDataSO gridData) {
 			
-			gridData.InitFromSaveValues(gridDataSave);
+			gridData.InitFromSaveValues(save.gridDataSave, save.FileName);
 			
 			//todo check if all read date is valid
 			return true;
@@ -153,7 +153,7 @@ namespace SaveSystem {
 		
 		public void ReadSave(Save save) {
 			
-			ReadGridData(save.gridDataSave, _gridData);
+			ReadGridData(save, _gridData);
 			ReadGrid(save, _gridData, _gridContaier);
 
 			// ReadCharacter(save.players, save.enemies);

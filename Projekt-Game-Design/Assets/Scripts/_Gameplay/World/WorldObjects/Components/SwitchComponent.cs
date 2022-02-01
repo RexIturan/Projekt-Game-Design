@@ -87,7 +87,8 @@ namespace WorldObjects
 					switchAnimator.FlipSwitch();
 					switchActivatedEvent.RaiseEvent(switchId);
 
-					AudioManager.FindSoundManager().PlaySound(switchType.activationSound);
+					//todo send event to play a sound
+					AudioManager.FindSoundManager()?.PlaySound(switchType.activationSound);
 				}
 		}
 }

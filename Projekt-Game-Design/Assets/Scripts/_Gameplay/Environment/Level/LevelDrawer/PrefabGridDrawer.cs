@@ -4,8 +4,6 @@ using UnityEngine;
 namespace Visual {
     public class PrefabGridDrawer : MonoBehaviour, IMapDrawer {
 
-        [SerializeField] private Transform parent;
-
         [SerializeField] private GridDataSO globalGridData;
         
         //new
@@ -14,18 +12,9 @@ namespace Visual {
         [SerializeField] private ItemContainerSO itemDictionary;
         
         //item
-        private GameObject[,,] _itemObjects;
         [SerializeField] private GameObject itemParent;
-        
-        //todo fix pls
-        private void Start() {
-	        //setup parent
-	        
-	        
-            ClearPrefabParentChildren();
-            // _prefabObjects = new GameObject[100, 100];
-            _itemObjects = new GameObject[1, 1, 1];
-        }
+        private GameObject[,,] _itemObjects = new GameObject[1, 1, 1];
+
 
         public void RedrawItems() {
 	        //todo
@@ -160,8 +149,8 @@ namespace Visual {
         }
 
         private void ClearPrefabParentChildren() {
-            for (int i = 0; i < parent.childCount; i++) {
-                var obj = parent.GetChild(i).gameObject;
+            for (int i = 0; i < itemParent.transform.childCount; i++) {
+                var obj = itemParent.transform.GetChild(i).gameObject;
                 GameObject.DestroyImmediate(obj);
             }
         }
@@ -176,6 +165,14 @@ namespace Visual {
 
         public void DrawCursorAt(Vector3 pos) {
             throw new System.NotImplementedException();
+        }
+        
+///// Unity Functions //////////////////////////////////////////////////////////////////////////////
+ 
+        //todo fix pls
+        private void Start() {
+	        //setup parent
+	        ClearPrefabParentChildren();
         }
     }
 }

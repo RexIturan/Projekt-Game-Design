@@ -18,6 +18,12 @@ namespace SaveSystem {
 		public List<Quest_Save> quests;
 		public List<TileGrid> tileGrids;
 
+///// Properties ////////////////////////////////////////////////////////////////////////////////
+
+		public string FileName { get; set; }
+		
+///// Properties ////////////////////////////////////////////////////////////////////////////////
+		
 		public Save() {
 			inventory = new Inventory_Save();
 			equipmentInventory = new List<Inventory_Save>();

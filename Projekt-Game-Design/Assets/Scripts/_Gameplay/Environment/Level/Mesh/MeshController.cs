@@ -1,27 +1,44 @@
 ﻿using UnityEngine;
 
 namespace MeshGenerator {
-    public class MeshController : MonoBehaviour {
+	public class MeshController : MonoBehaviour {
+		[Header("Receiving Events On")] [SerializeField]
+		private VoidEventChannelSO updateMeshEC;
 
-        [Header("Receiving Events On")] 
-        [SerializeField] private VoidEventChannelSO updateMeshEC;
+		[Header("Settings")] [SerializeField] private MeshGenerator meshGenerator;
 
-        [Header("Settings")] 
-        [SerializeField] private MeshGenerator meshGenerator;
 
-        private void Awake() {
-            updateMeshEC.OnEventRaised += HandleUpdateMesh;
-        }
+///// Private Functions ////////////////////////////////////////////////////////////////////////////        
 
-        private void OnDisable() {
-            updateMeshEC.OnEventRaised -= HandleUpdateMesh;
-        }
+		private void UpdateMesh() {
+			// Debug.Log("update Mesh");
+			meshGenerator.UpdateTileData();
+			meshGenerator.GenerateMesh();
+			meshGenerator.UpdateMesh();
+		}
 
-        private void HandleUpdateMesh() {
-            // Debug.Log("update Mesh");
-            meshGenerator.UpdateTileData();
-            meshGenerator.GenerateMesh();
-            meshGenerator.UpdateMesh();
-        }
-    }
+///// Callbacks //////////////////////////////////////////////////////////////////////////////////// 
+
+		private void HandleUpdateMesh() {
+			UpdateMesh();
+		}
+
+///// Public Functions /////////////////////////////////////////////////////////////////////////////
+
+#if UNITY_EDITOR
+		public void CreateMesh(){
+			UpdateMesh();
+		}
+#endif
+
+///// Unity Functions //////////////////////////////////////////////////////////////////////////////
+		
+		private void OnEnable() {
+			updateMeshEC.OnEventRaised += HandleUpdateMesh;
+		}
+
+		private void OnDisable() {
+			updateMeshEC.OnEventRaised -= HandleUpdateMesh;
+		}
+	}
 }

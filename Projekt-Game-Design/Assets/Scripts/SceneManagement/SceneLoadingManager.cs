@@ -77,7 +77,7 @@ namespace SceneManagement {
 			action.Invoke();
 		}
 		
-		public static IEnumerator OnHandleAllColplete(
+		public static IEnumerator OnAllHandlesColplete(
 			List<AsyncOperationHandle<SceneInstance>> operationHandles, Action action) {
 
 			foreach ( var operationHandle in operationHandles ) {

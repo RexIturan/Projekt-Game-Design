@@ -205,7 +205,6 @@ MonoBehaviour:
   m_RepeatDelay: 0.5
   m_RepeatRate: 0.05
   m_FallbackOnIMGUIKeyboardEvents: 0
-  m_deselectIfNoTarget: 0
   m_InputActionAsset: {fileID: -944628639613478452, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_NavigateAction: {fileID: 935540050718153318, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_TabAction: {fileID: -3488655766023145074, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
@@ -347,7 +346,6 @@ MonoBehaviour:
   m_RepeatDelay: 0.5
   m_RepeatRate: 0.05
   m_FallbackOnIMGUIKeyboardEvents: 0
-  m_deselectIfNoTarget: 0
   m_InputActionAsset: {fileID: -944628639613478452, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_NavigateAction: {fileID: 935540050718153318, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_TabAction: {fileID: -3488655766023145074, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
@@ -543,7 +541,6 @@ MonoBehaviour:
   m_RepeatDelay: 0.5
   m_RepeatRate: 0.05
   m_FallbackOnIMGUIKeyboardEvents: 0
-  m_deselectIfNoTarget: 0
   m_InputActionAsset: {fileID: -944628639613478452, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_NavigateAction: {fileID: 935540050718153318, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_TabAction: {fileID: -3488655766023145074, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
@@ -600,7 +597,6 @@ MonoBehaviour:
   m_RepeatDelay: 0.5
   m_RepeatRate: 0.05
   m_FallbackOnIMGUIKeyboardEvents: 0
-  m_deselectIfNoTarget: 0
   m_InputActionAsset: {fileID: -944628639613478452, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_NavigateAction: {fileID: 935540050718153318, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_TabAction: {fileID: -3488655766023145074, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
@@ -717,6 +713,7 @@ GameObject:
   - component: {fileID: 816644769}
   - component: {fileID: 816644770}
   - component: {fileID: 816644771}
+  - component: {fileID: 816644772}
   m_Layer: 0
   m_Name: SceneMenu
   m_TagString: Untagged
@@ -780,6 +777,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2512b3f56ad14165b337d65d3a217f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadSceneEC: {fileID: 11400000, guid: 5f3a6f188738cb44b866c9a8cb513f95, type: 2}
+  loadLevelData:
+    mainSceneData: {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
+    dependentScenes:
+    - sceneData: {fileID: 11400000, guid: ba5a2b46047cbd740a4c701cbe2f5a72, type: 2}
+      reset: 0
+    showLoadingScreen: 0
+    closeLoadingScreenOnLoad: 0
+    activateOnLoad: 0
+    dontUnload: 0
   loadLocationEC: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
   sceneToLoad:
   - {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
@@ -789,6 +796,21 @@ MonoBehaviour:
       name: SceneMenuTitleLabel
     buttonContainer:
       name: ButtonList
+--- !u!114 &816644772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816644767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01eecfb1390847769b06691925d1b98d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 816644769}
+  mouseOverUI_EC: {fileID: 11400000, guid: 2649fdca3d5737645a304d044086dbd7, type: 2}
+  onSceneReady_EC: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}
 --- !u!1 &823626602
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,7 +857,6 @@ MonoBehaviour:
   m_RepeatDelay: 0.5
   m_RepeatRate: 0.05
   m_FallbackOnIMGUIKeyboardEvents: 0
-  m_deselectIfNoTarget: 0
   m_InputActionAsset: {fileID: -944628639613478452, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_NavigateAction: {fileID: 935540050718153318, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_TabAction: {fileID: -3488655766023145074, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
@@ -1408,7 +1429,6 @@ MonoBehaviour:
   m_RepeatDelay: 0.5
   m_RepeatRate: 0.05
   m_FallbackOnIMGUIKeyboardEvents: 0
-  m_deselectIfNoTarget: 0
   m_InputActionAsset: {fileID: -944628639613478452, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_NavigateAction: {fileID: 935540050718153318, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_TabAction: {fileID: -3488655766023145074, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
@@ -1465,7 +1485,6 @@ MonoBehaviour:
   m_RepeatDelay: 0.5
   m_RepeatRate: 0.05
   m_FallbackOnIMGUIKeyboardEvents: 0
-  m_deselectIfNoTarget: 0
   m_InputActionAsset: {fileID: -944628639613478452, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
   m_NavigateAction: {fileID: -8784545083839296357, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
   m_TabAction: {fileID: 8583089105167418208, guid: 5af24a746b199d945b2aea0b3b50e409, type: 3}
@@ -1727,7 +1746,6 @@ MonoBehaviour:
   m_RepeatDelay: 0.5
   m_RepeatRate: 0.05
   m_FallbackOnIMGUIKeyboardEvents: 0
-  m_deselectIfNoTarget: 0
   m_InputActionAsset: {fileID: -944628639613478452, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_NavigateAction: {fileID: 935540050718153318, guid: dad3db776c4562240b8bac24250c36f5, type: 3}
   m_TabAction: {fileID: -3488655766023145074, guid: dad3db776c4562240b8bac24250c36f5, type: 3}

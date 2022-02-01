@@ -13,7 +13,19 @@ namespace Visual {
 		
 		[SerializeField] private TileMapDrawer drawer;
 		[SerializeField] private PrefabGridDrawer objectDrawer;
+
+///// Public Functions /////////////////////////////////////////////////////////////////////////////		
 		
+		public void RedrawLevel() {
+			drawer.DrawGrid();
+			if ( objectDrawer ) {
+				objectDrawer.RedrawItems();	
+			}
+			updateMeshEC.RaiseEvent();
+		}
+
+///// Unity Functions //////////////////////////////////////////////////////////////////////////////
+
 		public void Awake() {
 			levelLoaded.OnEventRaised += RedrawLevel;
 			redrawLevelEC.OnEventRaised += RedrawLevel;
@@ -22,14 +34,6 @@ namespace Visual {
 		private void OnDestroy() {
 			levelLoaded.OnEventRaised -= RedrawLevel;
 			redrawLevelEC.OnEventRaised -= RedrawLevel;
-		}
-
-		public void RedrawLevel() {
-			drawer.DrawGrid();
-			if ( objectDrawer ) {
-				objectDrawer.RedrawItems();	
-			}
-			updateMeshEC.RaiseEvent();
 		}
 	}
 }

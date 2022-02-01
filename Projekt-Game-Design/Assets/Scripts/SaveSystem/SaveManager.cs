@@ -44,7 +44,7 @@ namespace SaveSystem {
 		//settings
 		//save manager state: is something loaded and so on
 		public SaveManagerDataSO saveManagerData;
-		[SerializeField] private readonly string defaultLevelFilename = "test_level";
+		[SerializeField] private string defaultLevelFilename = "test_level";
 		[SerializeField] private string defaultGameFilename = "tutorial";
 		
 		[Header("Sending Events On")]
@@ -63,6 +63,11 @@ namespace SaveSystem {
 		private SaveWriter _saveWriter;
 		private SaveReader _saveReader;
 
+///// Properties ///////////////////////////////////////////////////////////////////////////////////
+
+		public SaveReader SaveReader => _saveReader ??= new SaveReader(
+			gridContainer, globalGridData, inventory, questContainer, itemContainerSO, equipmentContainer);
+		
 //////////////////////////////////////// Local Functions ///////////////////////////////////////////
 
 		#region Local Functions
@@ -221,6 +226,7 @@ namespace SaveSystem {
 			try {
 				// write json to save Object
 				_saveObject.LoadFromJson(saveJson);
+				_saveObject.FileName = filename;
 
 				//todo remove and manage otherwise
 				// save manager state
@@ -261,8 +267,8 @@ namespace SaveSystem {
 		/// uses the data from saveData, which is read in beforehand, for example in LoadTextAssetsAsSaves
 		/// </summary>
 		public void InitializeLevel() {
-			_saveReader.SetRuntimeReferences(characterInitializer, worldObjectInitialiser);
-			_saveReader.ReadSave(_saveObject);
+			SaveReader.SetRuntimeReferences(characterInitializer, worldObjectInitialiser);
+			SaveReader.ReadSave(_saveObject);
 
 			saveManagerData.loaded = true;
 			levelLoaded.RaiseEvent();

@@ -18,7 +18,7 @@ namespace SceneManagement.ScriptableObjects {
         /// </summary>
         public enum GameSceneType {
 	        //Playable scenes
-          Tactics, //SceneSelector tool will also load PersistentManagers and Gameplay
+          TacticsLevel, //SceneSelector tool will also load PersistentManagers and Gameplay
           Menu, //SceneSelector tool will also load Gameplay
           Editor,
 

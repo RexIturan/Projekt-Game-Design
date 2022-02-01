@@ -286,6 +286,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameplayScene: {fileID: 11400000, guid: e35cd8d4811081a4f80a80280bf4f60c, type: 2}
+  loadSceneEC: {fileID: 11400000, guid: 5f3a6f188738cb44b866c9a8cb513f95, type: 2}
+  unloadSceneEC: {fileID: 0}
   loadLocation: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
   loadMenu: {fileID: 11400000, guid: d4f619ca60109054faab02a134bbbf02, type: 2}
   toggleLoadingScreen: {fileID: 11400000, guid: 1813d57a6be071c45977e16f33bbbf82, type: 2}
