@@ -1,7 +1,7 @@
-:root{
+:root {
     --circle-color: red;
 }
 
-.circle{
-    --circle-color: #26e029;
+.circle {
+    --circle-color: rgb(38, 224, 41);
 }

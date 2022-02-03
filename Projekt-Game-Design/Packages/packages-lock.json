@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.cyanilux.shadergraph-customlighting": {
+      "version": "https://github.com/Cyanilux/URP_ShaderGraphCustomLighting.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9cc5ad86242878e8e700617d288cf96b1a29ecda"
+    },
+    "com.cyanilux.shadergraph-variables": {
+      "version": "https://github.com/Cyanilux/ShaderGraphVariables.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3dac64bb533a96a8ab4e6372f54b7ab49eb20276"
+    },
     "com.mischief.markdownviewer": {
       "version": "https://github.com/gwaredd/UnityMarkdownViewer.git",
       "depth": 0,
@@ -275,6 +289,16 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.visualeffectgraph": {
+      "version": "10.6.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.shadergraph": "10.6.0",
+        "com.unity.render-pipelines.core": "10.6.0"
+      },
       "url": "https://packages.unity.com"
     },
     "nuget.castle-core": {

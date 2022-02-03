@@ -787,6 +787,7 @@ MonoBehaviour:
     closeLoadingScreenOnLoad: 0
     activateOnLoad: 0
     dontUnload: 0
+    name: 
   loadLocationEC: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
   sceneToLoad:
   - {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
