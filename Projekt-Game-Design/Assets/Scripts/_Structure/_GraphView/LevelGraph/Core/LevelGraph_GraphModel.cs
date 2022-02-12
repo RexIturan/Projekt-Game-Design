@@ -21,6 +21,12 @@ namespace Editor.GraphEditors.StateMachineWrapper.Editor {
 			
 			//TODO Implement
 			
+			if ( startPortModel.NodeModel == compatiblePortModel.NodeModel ) {
+				return false;
+			}
+
+			if ( startPortModel.IsInput() && compatiblePortModel.IsInput() ) return true;
+			
 			return true;
 		}
 		

@@ -1,0 +1,28 @@
+﻿
+/* Custom TypeHandle Connection */
+.ge-port--data-type-connection {
+    --port-color: #3e8838;
+}
+
+.ge-port--data-type-connection .ge-port__icon {
+    display: none;
+}
+
+
+/* Connector */
+.ge-port--data-type-connection .ge-port-connector-part__connector {
+    /*width: 8px;*/
+    /*height: 8px;*/
+    border-radius: 0px;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*border-width: 1px;*/
+}
+
+/* Connector Cap */
+.ge-port--data-type-connection .ge-port-connector-part__cap{
+    /*width: 4px;*/
+    /*height: 4px;*/
+    border-radius: 0px;
+}
+

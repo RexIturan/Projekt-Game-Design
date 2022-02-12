@@ -1,9 +1,12 @@
-﻿using UnityEditor;
+﻿using _Structure._GraphView.LevelGraph.Core;
+using UnityEditor;
 using UnityEditor.GraphToolsFoundation.Overdrive;
 using UnityEngine.GraphToolsFoundation.Overdrive;
 
 namespace Editor.GraphEditors.StateMachineWrapper.Editor {
-	public class Connection { }
+	public class Connection {
+		Connection() { }
+	}
 	
 	public class LevelGraph_Stencil : Stencil {
 		public static readonly string toolName = "Level GraphEditor";
@@ -22,7 +25,7 @@ namespace Editor.GraphEditors.StateMachineWrapper.Editor {
 			IGraphAssetModel graphAssetModel) {
 			return new LevelGraph_BlackboardGraphModel(graphAssetModel);
 		}
-
+		
 		/// <inheritdoc />
 		public override void PopulateBlackboardCreateMenu(string sectionName, GenericMenu menu,
 			CommandDispatcher commandDispatcher) {
@@ -51,6 +54,12 @@ namespace Editor.GraphEditors.StateMachineWrapper.Editor {
 			// 	commandDispatcher.Dispatch(
 			// 		new CreateGraphVariableDeclarationCommand(finalName, true, type));
 			// }
+		}
+		
+		/// <inheritdoc />
+		public override IToolbarProvider GetToolbarProvider() {
+			m_ToolbarProvider ??= new LevelGraph_ToolbarProvider(new []{ MainToolbar.SaveAllButton });
+			return m_ToolbarProvider;
 		}
 	}
 }

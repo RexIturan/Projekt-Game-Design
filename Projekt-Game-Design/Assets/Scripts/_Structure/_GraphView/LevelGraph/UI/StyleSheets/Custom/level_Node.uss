@@ -1,0 +1,60 @@
+﻿:root{
+    --selection-border-radius: 0;
+}
+
+.ge-level-node{}
+
+.ge-level-node .ge-selection-border {
+    flex-grow: 1;
+    border-width: 1px;
+    padding: 1px;
+    border-color: rgba(0,0,0,0);
+    border-radius: 0;
+    margin: -3px;
+    
+/* NEW */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+/* Hide SectionBorder Content */
+.ge-selection-border__content-container {
+    flex-grow: 1;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+
+/* Level Conection Port Container */
+.ge-level-node .ge-level-connection-container-part{
+    min-width: 50px;
+    min-height: 50px;
+    flex-direction: row;
+    /*background-color: red;*/
+}
+
+/* Level Conection Port Container Components */
+.ge-level-node .ge-level-connection-container-part__map{
+    height: 200px;
+    width: 200px;
+    /*flex-grow: 1;*/
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.ge-level-node .ge-level-connection-container-part__left{
+    padding-right: 0;
+}
+
+.ge-level-node .ge-level-connection-container-part__right{
+    padding-left: 0;
+}
+
+/* Content */
+.ge-level-node__content-container{
+    border-width: 1px;
+    border-color: gray;
+    overflow: hidden;
+}

@@ -13,54 +13,55 @@ MonoBehaviour:
   m_Name: playerTTWrapper
   m_EditorClassIdentifier: 
   m_GraphModel:
-    id: 0
+    rid: 0
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: 0
       type: {class: TransitionTable_GraphModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor, asm: StateMachineWrapper}
       data:
         m_AssetModel: {fileID: 11400000}
         m_GraphNodeModels:
-        - id: 1
-        - id: 2
-        - id: 3
-        - id: 4
-        - id: 5
-        - id: 6
-        - id: 7
-        - id: 8
-        - id: 9
-        - id: 10
-        - id: 11
-        - id: 12
-        - id: 13
-        - id: 14
-        - id: 15
-        - id: 16
+        - rid: 1
+        - rid: 2
+        - rid: 3
+        - rid: 4
+        - rid: 5
+        - rid: 6
+        - rid: 7
+        - rid: 8
+        - rid: 9
+        - rid: 10
+        - rid: 11
+        - rid: 12
+        - rid: 13
+        - rid: 14
+        - rid: 15
+        - rid: 16
         m_EdgeModels: []
         m_BadgeModels: []
         m_GraphEdgeModels:
-        - id: 17
-        - id: 18
-        - id: 19
-        - id: 20
-        - id: 21
-        - id: 22
-        - id: 23
-        - id: 24
-        - id: 25
-        - id: 26
-        - id: 27
-        - id: 28
-        - id: 29
-        - id: 30
-        - id: 31
-        - id: 32
-        - id: 33
-        - id: 34
-        - id: 35
-        - id: 36
-        - id: 37
+        - rid: 17
+        - rid: 18
+        - rid: 19
+        - rid: 20
+        - rid: 21
+        - rid: 22
+        - rid: 23
+        - rid: 24
+        - rid: 25
+        - rid: 26
+        - rid: 27
+        - rid: 28
+        - rid: 29
+        - rid: 30
+        - rid: 31
+        - rid: 32
+        - rid: 33
+        - rid: 34
+        - rid: 35
+        - rid: 36
+        - rid: 37
         m_PolymorphicEdgeModels: []
         m_StickyNoteModels: []
         m_GraphStickyNoteModels: []
@@ -72,7 +73,7 @@ MonoBehaviour:
         m_StencilTypeName: Editor.GraphEditors.StateMachineWrapper.Editor.TransitionTable_Stencil,
           StateMachineWrapper, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         linkedTransitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    00000001:
+    - rid: 1
       type: {class: TransitionTableBase_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -89,7 +90,7 @@ MonoBehaviour:
           m_ValueList: []
         m_State: 0
         m_Collapsed: 0
-    00000002:
+    - rid: 2
       type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -109,7 +110,7 @@ MonoBehaviour:
         editable: 0
         stateName: 
         state: {fileID: 11400000, guid: be4d946aa79d95a409bb5fc47dc096e5, type: 2}
-    00000003:
+    - rid: 3
       type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -129,7 +130,7 @@ MonoBehaviour:
         editable: 0
         stateName: 
         state: {fileID: 11400000, guid: 6ebc58835e89fb849b354ba689fdef0f, type: 2}
-    00000004:
+    - rid: 4
       type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -149,7 +150,7 @@ MonoBehaviour:
         editable: 0
         stateName: 
         state: {fileID: 11400000, guid: 77fe47cea700e624ba51077a6c6aab73, type: 2}
-    00000005:
+    - rid: 5
       type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -169,7 +170,7 @@ MonoBehaviour:
         editable: 0
         stateName: 
         state: {fileID: 11400000, guid: fc6b3ab5babdb53498395cea355ab949, type: 2}
-    00000006:
+    - rid: 6
       type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -189,7 +190,7 @@ MonoBehaviour:
         editable: 0
         transitionID: 0
         transitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    00000007:
+    - rid: 7
       type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -209,7 +210,7 @@ MonoBehaviour:
         editable: 0
         stateName: 
         state: {fileID: 11400000, guid: 58579454d02c3b14cb748f680b7831f4, type: 2}
-    00000008:
+    - rid: 8
       type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -229,7 +230,7 @@ MonoBehaviour:
         editable: 0
         transitionID: 0
         transitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    00000009:
+    - rid: 9
       type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -249,7 +250,7 @@ MonoBehaviour:
         editable: 0
         transitionID: 1
         transitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    0000000A:
+    - rid: 10
       type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -269,7 +270,7 @@ MonoBehaviour:
         editable: 0
         transitionID: 1
         transitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    0000000B:
+    - rid: 11
       type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -289,7 +290,7 @@ MonoBehaviour:
         editable: 0
         transitionID: 1
         transitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    0000000C:
+    - rid: 12
       type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -299,7 +300,7 @@ MonoBehaviour:
         m_Color: {r: 0, g: 0, b: 0, a: 0}
         m_HasUserColor: 0
         m_Version: 1
-        m_Position: {x: 500, y: 500}
+        m_Position: {x: 499.99997, y: 726.5}
         m_Title: Transition
         m_InputConstantsById:
           m_KeyList: []
@@ -309,7 +310,7 @@ MonoBehaviour:
         editable: 0
         transitionID: 2
         transitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    0000000D:
+    - rid: 13
       type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -319,7 +320,7 @@ MonoBehaviour:
         m_Color: {r: 0, g: 0, b: 0, a: 0}
         m_HasUserColor: 0
         m_Version: 1
-        m_Position: {x: 500, y: 750}
+        m_Position: {x: 500.00003, y: 1165.5002}
         m_Title: Transition
         m_InputConstantsById:
           m_KeyList: []
@@ -329,7 +330,7 @@ MonoBehaviour:
         editable: 0
         transitionID: 2
         transitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    0000000E:
+    - rid: 14
       type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -339,7 +340,7 @@ MonoBehaviour:
         m_Color: {r: 0, g: 0, b: 0, a: 0}
         m_HasUserColor: 0
         m_Version: 1
-        m_Position: {x: 500, y: 1000}
+        m_Position: {x: 500.00003, y: 1598.0001}
         m_Title: Transition
         m_InputConstantsById:
           m_KeyList: []
@@ -349,7 +350,7 @@ MonoBehaviour:
         editable: 0
         transitionID: 2
         transitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    0000000F:
+    - rid: 15
       type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -359,7 +360,7 @@ MonoBehaviour:
         m_Color: {r: 0, g: 0, b: 0, a: 0}
         m_HasUserColor: 0
         m_Version: 1
-        m_Position: {x: 750, y: 500}
+        m_Position: {x: 756, y: 666.5}
         m_Title: Transition
         m_InputConstantsById:
           m_KeyList: []
@@ -369,7 +370,7 @@ MonoBehaviour:
         editable: 0
         transitionID: 3
         transitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    00000010:
+    - rid: 16
       type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
       data:
         m_Guid:
@@ -379,7 +380,7 @@ MonoBehaviour:
         m_Color: {r: 0, g: 0, b: 0, a: 0}
         m_HasUserColor: 0
         m_Version: 1
-        m_Position: {x: 750, y: 750}
+        m_Position: {x: 756, y: 1044}
         m_Title: Transition
         m_InputConstantsById:
           m_KeyList: []
@@ -389,7 +390,7 @@ MonoBehaviour:
         editable: 0
         transitionID: 3
         transitionTable: {fileID: 11400000, guid: b93d5c639dca9c547bedd75b04fb77a2, type: 2}
-    00000011:
+    - rid: 17
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -414,7 +415,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000012:
+    - rid: 18
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -439,7 +440,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000013:
+    - rid: 19
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -464,7 +465,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000014:
+    - rid: 20
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -489,7 +490,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000015:
+    - rid: 21
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -514,7 +515,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000016:
+    - rid: 22
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -539,7 +540,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000017:
+    - rid: 23
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -564,7 +565,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000018:
+    - rid: 24
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -589,7 +590,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000019:
+    - rid: 25
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -614,7 +615,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    0000001A:
+    - rid: 26
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -639,7 +640,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    0000001B:
+    - rid: 27
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -664,7 +665,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    0000001C:
+    - rid: 28
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -689,7 +690,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    0000001D:
+    - rid: 29
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -714,7 +715,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    0000001E:
+    - rid: 30
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -739,7 +740,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    0000001F:
+    - rid: 31
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -764,7 +765,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000020:
+    - rid: 32
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -789,7 +790,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000021:
+    - rid: 33
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -814,7 +815,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000022:
+    - rid: 34
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -839,7 +840,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000023:
+    - rid: 35
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -864,7 +865,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000024:
+    - rid: 36
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:
@@ -889,7 +890,7 @@ MonoBehaviour:
         m_EdgeControlPoints: []
         m_EditMode: 0
         m_EdgeLabel: 
-    00000025:
+    - rid: 37
       type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
       data:
         m_Guid:

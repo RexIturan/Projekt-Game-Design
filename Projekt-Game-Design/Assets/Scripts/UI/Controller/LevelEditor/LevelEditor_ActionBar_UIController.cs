@@ -32,7 +32,7 @@ namespace UI {
 		private void Start() {
 
 			//todo remove for
-			inputReader.EnableGameplayInput();
+			// inputReader.EnableGameplayInput();
 			
 			//get action bar
 			_actionBarLeft = uiDocument.rootVisualElement.Q<ActionBar>("ActionBar-Left");

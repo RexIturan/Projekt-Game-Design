@@ -83,6 +83,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Vector1_8fc7db64b7a040a093ecd0c93f9c2f6a: 20
     - _AlphaClip: 0
@@ -97,21 +98,22 @@ Material:
     - _DstBlend: 0
     - _EdgeDepth: -2.95
     - _EnvironmentReflections: 1
-    - _FoamDepth: 0.5
+    - _FoamDepth: -0.15
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Linear: 135.38
-    - _MaxDepth: -0.66
+    - _MaxDepth: 2.65
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Offset: 3.62
+    - _Offset: 2.74
     - _Parallax: 0.005
     - _Quadratic: 0.56
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _Range: 0.92
     - _ReceiveShadows: 1
-    - _Smoothness: 0.6
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -123,9 +125,9 @@ Material:
     - Color_52055d8939c44a9d85d6feccc34aea94: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepColor: {r: 0.052339625, g: 0.0733009, b: 0.1792453, a: 1}
+    - _DeepColor: {r: 0.06666667, g: 0.13001655, b: 0.28235295, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShallowColor: {r: 0, g: 0.78834057, b: 1, a: 0.28235295}
+    - _ShallowColor: {r: 0, g: 0.6945493, b: 1, a: 0.6039216}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3441496502084702070
@@ -140,4 +142,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 4
+  version: 5

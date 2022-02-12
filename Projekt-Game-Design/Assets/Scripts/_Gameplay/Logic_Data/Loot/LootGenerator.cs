@@ -73,7 +73,7 @@ namespace GDP01._Gameplay.Logic_Data.Loot {
 
 			// random roll
 			float rand = Random.Range(0f, 1f) * total;
-			KeyValuePair<float, LootObject> first;
+			KeyValuePair<float, LootObject> first = default;
 			if ( lootSpectrum.Count > 0 ) {
 				first = lootSpectrum.FirstOrDefault(pair => pair.Key > rand);
 				// Debug.Log($"rand: {rand} total{total}, {first.Key} {first.Value.type} {first.Value.item?.name}");	

@@ -1,5 +1,5 @@
 {
-    "m_SGVersion": 2,
+    "m_SGVersion": 3,
     "m_Type": "UnityEditor.ShaderGraph.GraphData",
     "m_ObjectId": "df3488a09d23453ea06d04bdeb70f492",
     "m_Properties": [
@@ -14,6 +14,12 @@
         }
     ],
     "m_Keywords": [],
+    "m_Dropdowns": [],
+    "m_CategoryData": [
+        {
+            "m_Id": "9dd084ab6265491084240081256d71a1"
+        }
+    ],
     "m_Nodes": [
         {
             "m_Id": "6641b614aec4484bb18c21bf76f96b84"
@@ -547,10 +553,11 @@
         "serializedMesh": {
             "m_SerializedMesh": "{\"mesh\":{\"fileID\":10210,\"guid\":\"0000000000000000e000000000000000\",\"type\":0}}",
             "m_Guid": ""
-        }
+        },
+        "preventRotation": false
     },
     "m_Path": "Shader Graphs",
-    "m_ConcretePrecision": 0,
+    "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": ""
@@ -749,9 +756,13 @@
         "m_GuidSerialized": "1d011838-ef6e-444f-8e78-8af7bf5799eb"
     },
     "m_Name": "FloatingColor",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Color_111bd783aec74b18ac0914a5cbe03d66",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -762,6 +773,7 @@
         "b": 0.07075470685958862,
         "a": 1.0
     },
+    "isMainColor": false,
     "m_ColorMode": 0
 }
 
@@ -834,17 +846,23 @@
 }
 
 {
-    "m_SGVersion": 0,
+    "m_SGVersion": 1,
     "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalTarget",
     "m_ObjectId": "17365f1fb9824ab6ab948cc9dd25bd0b",
     "m_ActiveSubTarget": {
         "m_Id": "f80e3ce80b6d4db885fcc24a748f12a2"
     },
+    "m_AllowMaterialOverride": false,
     "m_SurfaceType": 1,
+    "m_ZTestMode": 4,
+    "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_TwoSided": false,
+    "m_RenderFace": 2,
     "m_AlphaClip": true,
-    "m_CustomEditorGUI": ""
+    "m_CastShadows": true,
+    "m_ReceiveShadows": true,
+    "m_CustomEditorGUI": "",
+    "m_SupportVFX": false
 }
 
 {
@@ -1615,7 +1633,7 @@
     "m_Title": "Handle Fog Based On Normal Direction",
     "m_Position": {
         "x": -2142.000244140625,
-        "y": -99.00000762939453
+        "y": -98.99999237060547
     }
 }
 
@@ -2237,6 +2255,24 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "9dd084ab6265491084240081256d71a1",
+    "m_Name": "",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "dbdadb5b3658469aa94956a838a0988b"
+        },
+        {
+            "m_Id": "faec10e148ab4df7bc86812c589d8359"
+        },
+        {
+            "m_Id": "111bd783aec74b18ac0914a5cbe03d66"
+        }
+    ]
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "a003c1224c79426c9d5f414f79665037",
     "m_Id": 1,
@@ -2271,10 +2307,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -693.0,
-            "y": 24.500041961669923,
+            "x": -700.5000610351563,
+            "y": 24.50000762939453,
             "width": 208.0,
-            "height": 302.0000305175781
+            "height": 302.00006103515627
         }
     },
     "m_Slots": [
@@ -2290,7 +2326,7 @@
     ],
     "synonyms": [],
     "m_Precision": 0,
-    "m_PreviewExpanded": false,
+    "m_PreviewExpanded": true,
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
@@ -3092,9 +3128,13 @@
         "m_GuidSerialized": "23a94f2b-f04f-4ee5-85f5-255c00e31fae"
     },
     "m_Name": "FogColor",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Color_dbdadb5b3658469aa94956a838a0988b",
     "m_OverrideReferenceName": "FogColor",
     "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -3105,6 +3145,7 @@
         "b": 0.0,
         "a": 1.0
     },
+    "isMainColor": false,
     "m_ColorMode": 0
 }
 
@@ -3140,7 +3181,9 @@
     },
     "m_SerializedSubGraph": "{\n    \"subGraph\": {\n        \"fileID\": -5475051401550479605,\n        \"guid\": \"96da4816ec09693489940a0521567784\",\n        \"type\": 3\n    }\n}",
     "m_PropertyGuids": [],
-    "m_PropertyIds": []
+    "m_PropertyIds": [],
+    "m_Dropdowns": [],
+    "m_DropdownSelectedEntries": []
 }
 
 {
@@ -3484,9 +3527,13 @@
         "m_GuidSerialized": "07f5d22a-e419-47a2-9e2f-dc0a0ae054bd"
     },
     "m_Name": "MistColor",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Color_faec10e148ab4df7bc86812c589d8359",
     "m_OverrideReferenceName": "MistColor",
     "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -3497,6 +3544,7 @@
         "b": 0.0,
         "a": 0.0
     },
+    "isMainColor": false,
     "m_ColorMode": 0
 }
 

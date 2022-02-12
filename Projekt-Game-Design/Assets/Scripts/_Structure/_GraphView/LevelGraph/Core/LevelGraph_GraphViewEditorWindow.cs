@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
 using _Structure._GraphView.LevelGraph.Core;
+using _Structure._GraphView.LevelGraph.Core.GraphElements.Decorators;
+using _Structure._GraphView.LevelGraph.Core.GraphElements.Factory;
+using _Structure._GraphView.LevelGraph.Core.GraphElements.ModelUI;
+using _Structure._GraphView.LevelGraph.Core.Model;
+using _Structure._GraphView.LevelGraph.UI.Core;
 using UnityEditor;
 using UnityEditor.GraphToolsFoundation.Overdrive;
 using UnityEngine;
@@ -31,15 +36,17 @@ namespace Editor.GraphEditors.StateMachineWrapper.Editor {
 			var button = new Button();
 			button.tooltip = "Toggle Node Inspector";
 			button.clicked += () => {
-				if (inspector.style.display == DisplayStyle.None) {
-					inspector.style.display = DisplayStyle.Flex;    
-				}
-				else {
-					inspector.style.display = DisplayStyle.None;    
-				}
+				// if (inspector.style.display == DisplayStyle.None) {
+				// 	inspector.style.display = DisplayStyle.Flex;    
+				// }
+				// else {
+				// 	inspector.style.display = DisplayStyle.None;    
+				// }
 			};
 			toolbar.Add(button);
 			button.PlaceBehind(optionsButton);
+			
+			
 		}
 
 		/// <inheritdoc />
@@ -48,10 +55,7 @@ namespace Editor.GraphEditors.StateMachineWrapper.Editor {
 			return new LevelGraph_State(GUID, prefs);
 		}
 
-		protected override GraphView CreateGraphView() {
-			return new LevelGraph_GraphView(this, CommandDispatcher, EditorToolName);
-		}
-
+		/// <inheritdoc />
 		protected override BlankPage CreateBlankPage() {
 			var onBoardingProviders = new List<OnboardingProvider>();
 			onBoardingProviders.Add(new LevelGraph_OnboardingProvider());
@@ -59,8 +63,28 @@ namespace Editor.GraphEditors.StateMachineWrapper.Editor {
 			return new BlankPage(CommandDispatcher, onBoardingProviders);
 		}
 
+		/// <inheritdoc />
 		protected override bool CanHandleAssetType(IGraphAssetModel asset) {
 			return asset is LevelGraph_GraphAssetModel;
+		}
+		
+		/// <inheritdoc />
+		protected override GraphView CreateGraphView() {
+			var graphView = new LevelGraph_GraphView(this, CommandDispatcher, EditorToolName);
+			graphView[0].RemoveFromHierarchy();
+			graphView.Insert(0, new SimpleBackground());
+			return graphView;
+		}
+		
+		// Toolbar Override
+		/// <inheritdoc />
+		protected override MainToolbar CreateMainToolbar() {
+			return new SimpleToolbar(CommandDispatcher, GraphView);
+		}
+
+		/// <inheritdoc />
+		protected override ModelInspectorView CreateModelInspectorView() {
+			return null;
 		}
 	}
 }
