@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7744834394702339806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117a02b62d2446808efad8590e520900, type: 3}
+  m_Name: Connector_SO_0
+  m_EditorClassIdentifier: 
+  connectorName: B->A, A->B
+  id: 0
+  levelData: {fileID: 11400000}
+  gridPos: {x: 0, y: 0, z: 0}
+  range: {x: 0, y: 0, z: 0}
+  triggerPositions: []
+  type: -1
+  targets:
+  - {fileID: -4513936671358016178, guid: 860ff18d97d0328448c74313d3acab83, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92f955366c64bb4985ed2263c8521c2, type: 3}
+  m_Name: Level-B
+  m_EditorClassIdentifier: 
+  levelName: Level B
+  scene: {fileID: 11400000, guid: 7aa4a18cfb4f19e4caacca6dff4f341a, type: 2}
+  type: 0
+  gridContainerSO: {fileID: 0}
+  gridDataSO: {fileID: 0}
+  mesh: {fileID: 0}
+  connectors:
+  - {fileID: 772858591927546384}
+--- !u!114 &772858591927546384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117a02b62d2446808efad8590e520900, type: 3}
+  m_Name: Connector_SO_1
+  m_EditorClassIdentifier: 
+  connectorName: B->C, C->B
+  id: 1
+  levelData: {fileID: 11400000}
+  gridPos: {x: 0, y: 0, z: 0}
+  range: {x: 0, y: 0, z: 0}
+  triggerPositions: []
+  type: -1
+  targets:
+  - {fileID: -8706403890368670899, guid: 6a958715813950b49b297befdac2ca19, type: 2}

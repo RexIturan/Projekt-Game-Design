@@ -1,11 +1,12 @@
 {
-    "name": "GDP01.Structure",
+    "name": "GDP01.Testing",
     "rootNamespace": "",
     "references": [
-        "GDP01.EventChannel",
+        "Unity.Addressables",
+        "Unity.ResourceManager",
         "GDP01.SceneManagement.EventChannels",
         "GDP01.SceneManagement.Types",
-        "GDP01.Gameplay.Types"
+        "GDP01.EventChannel"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

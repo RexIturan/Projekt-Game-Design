@@ -5,7 +5,7 @@ namespace SceneManagement.ScriptableObjects {
     /// <summary>
     /// This class contains Settings specific to Locations only
     /// </summary>
-    [CreateAssetMenu(fileName = "NewTacticsSceneData", menuName = "Scene Data/Tactics")]
+    [CreateAssetMenu(fileName = "NewTacticsLevelSceneData", menuName = "Scene Data/TacticsLevel")]
     public class TacticsLevelSO : GameSceneSO {
         // public LocalizedString locationName;
     }

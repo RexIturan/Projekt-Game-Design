@@ -24,6 +24,15 @@ namespace GDP01.Structure {
 		[SerializeField] private List<LevelConnectorSO> connectors;
 		// [SerializeField] private Save gameplaySave;
 
+///// Properties ///////////////////////////////////////////////////////////////////////////////////
+		#region Properties
+
+		public GameSceneSO Scene => scene;
+		public List<LevelConnectorSO> Connectors => connectors;
+
+		#endregion
+		
+		
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////		
 		
 #if UNITY_EDITOR
@@ -31,9 +40,11 @@ namespace GDP01.Structure {
 			// TODO generate name from level name + connector + index
 
 			LevelConnectorSO connector = ScriptableObject.CreateInstance<LevelConnectorSO>();
+			connector.LevelData = this;
 			connector.name = "Connector_SO_" + connectors.Count;
 			connector.Id = connectors.Count;
 			connectors.Add(connector);
+			
 			
 			AssetDatabase.AddObjectToAsset(connector, this);
 			AssetDatabase.SaveAssets();

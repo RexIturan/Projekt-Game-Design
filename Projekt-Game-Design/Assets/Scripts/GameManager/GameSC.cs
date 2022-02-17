@@ -104,7 +104,7 @@ namespace GameManager {
         }
 
         public void LoadGameFromPath() {
-            Debug.Log("GameSC > LoadGameFromPath:\n scene loaded");
+            // Debug.Log("GameSC > LoadGameFromPath:\n Scene Loaded");
             if (_hasSaveData) {
                 Debug.Log("GameSC: load save data");
                 // saveSystem.InitializeLevel();

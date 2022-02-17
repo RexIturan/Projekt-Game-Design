@@ -29,12 +29,13 @@ namespace SceneManagement.Types {
 
 		///// Properties ///////////////////////////////////////////////////////////////////////////////////
 	
-		public GameSceneSO MainSceneData => mainSceneData;
+		public GameSceneSO MainSceneData { get => mainSceneData; set => mainSceneData = value;}
+
 		public List<SceneDataDependencySettings> Dependencies => dependentScenes;
 		public bool ShowLoadingScreen => showLoadingScreen;
 		public bool CloseLoadingScreenOnLoad => closeLoadingScreenOnLoad;
-		public bool ActivateOnLoad => activateOnLoad;
-		public bool DontUnload => dontUnload;
+		public bool ActivateOnLoad { get => activateOnLoad; set => activateOnLoad = value; }
+		public bool DontUnload { get => dontUnload; set => dontUnload = value;}
 		public string Name { get => name; set => name = value; }
 	}
 }

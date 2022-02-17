@@ -80,13 +80,13 @@ namespace Editor.SceneSelector {
 
 			public static void OpenSceneSafe(GameSceneSO gameSceneSO) {
 				if ( EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo() ) {
+					EditorSceneManager.OpenScene(
+						AssetDatabase.GetAssetPath(gameSceneSO.sceneReference.editorAsset));
+					
 					foreach ( var additionalScene in gameSceneSO.loadAdditional ) {
 						EditorSceneManager.OpenScene(
 							AssetDatabase.GetAssetPath(additionalScene.sceneReference.editorAsset), OpenSceneMode.Additive);
 					}
-					
-					EditorSceneManager.OpenScene(
-						AssetDatabase.GetAssetPath(gameSceneSO.sceneReference.editorAsset));
 				}
 			}
 
