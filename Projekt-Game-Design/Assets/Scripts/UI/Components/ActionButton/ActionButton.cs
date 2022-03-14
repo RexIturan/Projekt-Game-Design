@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UI.Components.Tooltip;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -33,6 +34,8 @@ namespace UI.Components.ActionButton {
 		private Button button;
 		private Label nameLabel;
 		private Label mappingLabel;
+
+		private AbilityTooltip actionTooltip;
 		
 		private string GetClassNameWithSuffix(string suffix) {
 			return $"{baseUssClassName}-{suffix}";
@@ -77,7 +80,7 @@ namespace UI.Components.ActionButton {
 			
 			//tooltip
 			//todo tooltip window
-			tooltip = "this is a tooltip";
+			actionTooltip = new AbilityTooltip(this);
 			// this.RegisterCallback<MouseOverEvent>();
 		}
 		
@@ -136,6 +139,9 @@ namespace UI.Components.ActionButton {
 			button.clicked += this.callback;
 			
 			UpdataValues();
+			actionTooltip.UpdateValues(text, "This is a placeholder. You can see it's a placeholder. This means, that this code needs to be reworked. Yes. " + 
+					"The deal is, this function should also require a description, but I don't want to touch too many things. ");
+			actionTooltip.Activate();
 		}
 
 		public void UnbindAction() {
@@ -146,6 +152,7 @@ namespace UI.Components.ActionButton {
 			
 			this.callback = null;
 			UpdataValues();
+			actionTooltip.Deactivate();
 		}
 	}
 }

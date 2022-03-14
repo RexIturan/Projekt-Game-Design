@@ -15,6 +15,8 @@ public class ItemSO : ScriptableObject {
     public GameObject prefab;
     public Mesh mesh;
     public Material material;
+		public new string name;
+		public string description;
 
     // data
     public int goldValue;

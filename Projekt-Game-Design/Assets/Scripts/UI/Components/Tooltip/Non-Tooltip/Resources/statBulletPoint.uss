@@ -1,0 +1,33 @@
+﻿.statBulletPoint {
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+.statBulletPoint {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.statBulletPoint .damage {
+	color: red;
+}
+
+.statBulletPoint .healing {
+	color: rgb(30, 255, 30);
+}
+
+.statBulletPoint .range {
+	color: rgb(255, 30, 255);
+}
+
+.statBulletPoint .costs {
+	color: blue;
+}
+
+.statBulletPoint .defense {
+	color: orange;
+}
+
+.statBulletPoint .goldvalue {
+	color: yellow;
+}
