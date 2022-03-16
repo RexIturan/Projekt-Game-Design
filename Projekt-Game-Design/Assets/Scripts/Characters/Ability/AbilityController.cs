@@ -20,6 +20,8 @@ namespace Characters.Ability {
 		public bool abilitySelected;
 		public bool abilityConfirmed;
 		public bool abilityExecuted;
+		public bool singleTarget; // is set to true, if there is only one proper target for the ability at the moment
+		public Vector3Int singleTargetPos; // is set, if there is only one proper target for the ability at the moment
 		
 		public bool damageInflicted;
 		

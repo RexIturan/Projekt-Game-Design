@@ -226,6 +226,13 @@ namespace Player {
 						if(node.pos.Equals(inputCache.cursor.abovePos.gridPos) )
 						  playerMovementController.movementTarget = node;
 					}
+
+					// if there is only one proper target, choose it as the target
+					AbilityController abilityController = playerAttacker.GetComponent<AbilityController>();
+					if(abilityController.singleTarget) {
+						playerAttacker.SetTarget(Targetable.GetTargetsWithPosition(abilityController.singleTargetPos));
+						playerAttacker.SetGroundTarget(abilityController.singleTargetPos);
+					}
 				}
 			}
 

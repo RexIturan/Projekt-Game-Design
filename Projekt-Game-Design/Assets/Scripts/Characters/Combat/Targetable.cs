@@ -54,5 +54,13 @@ namespace Combat {
 				return targetPositons.Contains(gridTransform.gridPosition);
 			});
 		}
+				
+		public static Targetable GetTargetsWithPosition(Vector3Int targetPositon) {
+			return new List<Targetable>(GetAllInstances()).Find(target => { 
+				var gridTransform = target.GetComponent<GridTransform>();
+				if(gridTransform is null) return false;
+				return targetPositon.Equals(gridTransform.gridPosition);
+			});
+		}
 	}
 }
