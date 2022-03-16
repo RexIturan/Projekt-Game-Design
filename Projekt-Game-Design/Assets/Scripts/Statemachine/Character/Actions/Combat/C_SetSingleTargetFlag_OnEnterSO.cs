@@ -20,14 +20,12 @@ public class C_SetSingleTargetFlag_OnEnterSO : StateActionSO {
 }
 
 public class C_SetSingleTargetFlag_OnEnter : StateAction {
-	private Attacker _attacker;
 	private AbilityController _abilityController;
 
 	public override void OnUpdate() { }
 
 	public override void Awake(StateMachine stateMachine) {
 		_abilityController = stateMachine.gameObject.GetComponent<AbilityController>();
-		_attacker = stateMachine.gameObject.GetComponent<Attacker>();
 	}
 	
 	/// <summary>
@@ -35,26 +33,6 @@ public class C_SetSingleTargetFlag_OnEnter : StateAction {
 	/// if ability only has one proper target at the moment
 	/// </summary>
 	public override void OnStateEnter() {
-		List<Vector3Int> range = PathNode.ConvertPathNodeListToVector3IntList(_attacker.tilesInRange);
-
-		// ability is single target if it either:
-		// targets ground and has one tile in its range or
-		// there is one targetable in its range 
-		if ( _abilityController.GetSelectedAbility().targets.HasFlag(AbilityTarget.Ground) && range.Count == 1 ) { 
-			_abilityController.singleTargetPos = range[0];
-			_abilityController.singleTarget = true;
-		}
-		else {
-			List<Targetable> targetables = CombatUtils.FindAllTargets(range, _attacker, _abilityController.GetSelectedAbility().targets);
-
-			if (!_abilityController.GetSelectedAbility().targets.HasFlag(AbilityTarget.Ground) && targetables.Count == 1) { 
-				_abilityController.singleTargetPos = targetables[0].GetGridPosition();
-				_abilityController.singleTarget = true;
-			}
-			else { 
-				_abilityController.singleTargetPos = Vector3Int.zero;
-				_abilityController.singleTarget = false;
-			}
-		}
+		_abilityController.UpdateSingleTargetFlag();
 	}
 }

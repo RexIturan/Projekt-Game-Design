@@ -1,7 +1,10 @@
-﻿using Ability.ScriptableObjects;
+﻿using Ability;
+using Ability.ScriptableObjects;
 using Characters.Equipment;
+using Combat;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 namespace Characters.Ability {
 	public class AbilityController : MonoBehaviour {
@@ -54,6 +57,35 @@ namespace Characters.Ability {
 			}
 
 			Abilities = currentAbilities.ToArray();
+		}
+		
+		/// <summary>
+		/// Sets single target flag and single target position (vector) 
+		/// depending on whehter or not only one tile can be targeted at the moment. 
+		/// </summary>
+		public void UpdateSingleTargetFlag() { 
+			Attacker attacker = GetComponent<Attacker>();
+			List<Vector3Int> range = PathNode.ConvertPathNodeListToVector3IntList(attacker.tilesInRange);
+
+			// ability is single target if it either:
+			// targets ground and has one tile in its range or
+			// there is one targetable in its range 
+			if ( GetSelectedAbility().targets.HasFlag(AbilityTarget.Ground) && range.Count == 1 ) { 
+				singleTargetPos = range[0];
+				singleTarget = true;
+			}
+			else {
+				List<Targetable> targetables = CombatUtils.FindAllTargets(range, attacker, GetSelectedAbility().targets);
+
+				if (!GetSelectedAbility().targets.HasFlag(AbilityTarget.Ground) && targetables.Count == 1) { 
+					singleTargetPos = targetables[0].GetGridPosition();
+					singleTarget = true;
+				}
+				else { 
+					singleTargetPos = Vector3Int.zero;
+					singleTarget = false;
+				}
+			}
 		}
 	}
 }
