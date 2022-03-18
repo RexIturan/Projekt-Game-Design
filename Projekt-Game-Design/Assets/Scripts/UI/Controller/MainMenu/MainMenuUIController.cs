@@ -24,6 +24,7 @@ public class MainMenuUIController : MonoBehaviour {
 
 	[Header("Sending Event On")] [SerializeField]
 	private IntEventChannelSO loadGame;
+	[SerializeField] private VoidEventChannelSO startGameEC;
 
 	[Header("Button Settings")]
 	[SerializeField] private MainMenuButtonNames buttonNames;
@@ -129,6 +130,9 @@ public class MainMenuUIController : MonoBehaviour {
 		}
 		
 		loadGame.RaiseEvent(0);
+		
+		// todo test timing 
+		startGameEC.RaiseEvent();
 	}
 
 	private void HandleLoadLevel() {

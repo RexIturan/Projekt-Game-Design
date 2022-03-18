@@ -1,0 +1,865 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe2ea03a6c04c4896d3af3d9107a792, type: 3}
+  m_Name: GameTT
+  m_EditorClassIdentifier: 
+  m_GraphModel:
+    rid: 1707975188145766400
+  references:
+    version: 2
+    RefIds:
+    - rid: 1707975188145766400
+      type: {class: TransitionTable_GraphModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor, asm: StateMachineWrapper}
+      data:
+        m_AssetModel: {fileID: 11400000}
+        m_GraphNodeModels:
+        - rid: 1707975188145766401
+        - rid: 1707975188145766402
+        - rid: 1707975188145766403
+        - rid: 1707975188145766404
+        - rid: 1707975188145766405
+        - rid: 1707975188145766406
+        - rid: 1707975188145766407
+        - rid: 1707975188145766408
+        - rid: 1707975188145766409
+        - rid: 1707975188145766410
+        - rid: 1707975188145766411
+        - rid: 1707975188145766412
+        - rid: 1707975188145766413
+        - rid: 1707975188145766414
+        - rid: 1707975188145766415
+        - rid: 1707975188145766416
+        m_EdgeModels: []
+        m_BadgeModels: []
+        m_GraphEdgeModels:
+        - rid: 1707975188145766417
+        - rid: 1707975188145766418
+        - rid: 1707975188145766419
+        - rid: 1707975188145766420
+        - rid: 1707975188145766421
+        - rid: 1707975188145766422
+        - rid: 1707975188145766423
+        - rid: 1707975188145766424
+        - rid: 1707975188145766425
+        - rid: 1707975188145766426
+        - rid: 1707975188145766427
+        - rid: 1707975188145766428
+        - rid: 1707975188145766429
+        - rid: 1707975188145766430
+        - rid: 1707975188145766431
+        - rid: 1707975188145766432
+        - rid: 1707975188145766433
+        - rid: 1707975188145766434
+        - rid: 1707975188145766435
+        m_PolymorphicEdgeModels: []
+        m_StickyNoteModels: []
+        m_GraphStickyNoteModels: []
+        m_PlacematModels: []
+        m_GraphPlacematModels: []
+        m_GraphVariableModels: []
+        m_GraphPortalModels: []
+        m_Name: 
+        m_StencilTypeName: Editor.GraphEditors.StateMachineWrapper.Editor.TransitionTable_Stencil,
+          StateMachineWrapper, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        linkedTransitionTable: {fileID: 11400000, guid: 4ccf0a73dd312d64da92ff61c6ae5cca, type: 2}
+    - rid: 1707975188145766401
+      type: {class: TransitionTableBase_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 17536616855848545416
+          m_Value1: 9065110729192808493
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 0, y: 0}
+        m_Title: GameState_TT
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+    - rid: 1707975188145766402
+      type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 8698463057790537048
+          m_Value1: 3853650262329738311
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 0, y: 100}
+        m_Title: g_MainMenu
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        stateName: 
+        state: {fileID: 11400000, guid: 86ef88931f72fba4d9005221a9a64876, type: 2}
+    - rid: 1707975188145766403
+      type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 12501860111038507284
+          m_Value1: 1405675868202460813
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 250, y: 100}
+        m_Title: g_Game_Initialization
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        stateName: 
+        state: {fileID: 11400000, guid: 6da038aa55fc4cc40a1764eab985d303, type: 2}
+    - rid: 1707975188145766404
+      type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 6521906927116032428
+          m_Value1: 3654849595026488255
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 500, y: 100}
+        m_Title: g_Evaluate
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        stateName: 
+        state: {fileID: 11400000, guid: 40bcad6a272ee144fbec6563cd0f9ce0, type: 2}
+    - rid: 1707975188145766405
+      type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 2719580380527061805
+          m_Value1: 5258281896421826126
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 750, y: 100}
+        m_Title: g_PlayerTurn
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        stateName: 
+        state: {fileID: 11400000, guid: dda56c001685d8345b3ecaacfa9e8098, type: 2}
+    - rid: 1707975188145766406
+      type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 16860903700054717978
+          m_Value1: 819954928530510028
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 1000, y: 100}
+        m_Title: g_EnemyTurn
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        stateName: 
+        state: {fileID: 11400000, guid: 83b15294e5acde849aa041a083883e91, type: 2}
+    - rid: 1707975188145766407
+      type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 3787658643081486320
+          m_Value1: 9774405134208130029
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: -167.00002, y: 500}
+        m_Title: Transition
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        transitionID: 0
+        transitionTable: {fileID: 11400000, guid: 4ccf0a73dd312d64da92ff61c6ae5cca, type: 2}
+    - rid: 1707975188145766408
+      type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 13956664858697754801
+          m_Value1: 2892197107396631822
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: -167.00002, y: 752.00006}
+        m_Title: Transition
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        transitionID: 0
+        transitionTable: {fileID: 11400000, guid: 4ccf0a73dd312d64da92ff61c6ae5cca, type: 2}
+    - rid: 1707975188145766409
+      type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 4268036481242266199
+          m_Value1: 1764413068817088580
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 250, y: 500}
+        m_Title: Transition
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        transitionID: 1
+        transitionTable: {fileID: 11400000, guid: 4ccf0a73dd312d64da92ff61c6ae5cca, type: 2}
+    - rid: 1707975188145766410
+      type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 3478638381731105414
+          m_Value1: 7817933327475482578
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 500, y: 500}
+        m_Title: Transition
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        transitionID: 2
+        transitionTable: {fileID: 11400000, guid: 4ccf0a73dd312d64da92ff61c6ae5cca, type: 2}
+    - rid: 1707975188145766411
+      type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 8750169578124489574
+          m_Value1: 4155538387066826504
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 500, y: 750}
+        m_Title: Transition
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        transitionID: 2
+        transitionTable: {fileID: 11400000, guid: 4ccf0a73dd312d64da92ff61c6ae5cca, type: 2}
+    - rid: 1707975188145766412
+      type: {class: State_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 6405050028990635750
+          m_Value1: 8965826746964834877
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 1250, y: 100}
+        m_Title: g_EndGame
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        stateName: 
+        state: {fileID: 11400000, guid: c8b4c2289f29f92499ba5e9897100bd6, type: 2}
+    - rid: 1707975188145766413
+      type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 11669885583206305662
+          m_Value1: 5070188232537549464
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 500, y: 1000}
+        m_Title: Transition
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        transitionID: 2
+        transitionTable: {fileID: 11400000, guid: 4ccf0a73dd312d64da92ff61c6ae5cca, type: 2}
+    - rid: 1707975188145766414
+      type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 15869251769286477238
+          m_Value1: 32778722573176878
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 750, y: 500}
+        m_Title: Transition
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        transitionID: 3
+        transitionTable: {fileID: 11400000, guid: 4ccf0a73dd312d64da92ff61c6ae5cca, type: 2}
+    - rid: 1707975188145766415
+      type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 17602337408931504815
+          m_Value1: 14253307865008047197
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 750, y: 750}
+        m_Title: Transition
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        transitionID: 3
+        transitionTable: {fileID: 11400000, guid: 4ccf0a73dd312d64da92ff61c6ae5cca, type: 2}
+    - rid: 1707975188145766416
+      type: {class: Transition_NodeModel, ns: Editor.GraphEditors.StateMachineWrapper.Editor.Nodes, asm: StateMachineWrapper}
+      data:
+        m_Guid:
+          m_Value0: 2074632725864304543
+          m_Value1: 2730959793463745857
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_Position: {x: 1000, y: 500}
+        m_Title: Transition
+        m_InputConstantsById:
+          m_KeyList: []
+          m_ValueList: []
+        m_State: 0
+        m_Collapsed: 0
+        editable: 0
+        transitionID: 4
+        transitionTable: {fileID: 11400000, guid: 4ccf0a73dd312d64da92ff61c6ae5cca, type: 2}
+    - rid: 1707975188145766417
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 8130466440582253467
+          m_Value1: 16488987666368950634
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 17536616855848545416
+            m_Value1: 9065110729192808493
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: Initial State
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 8698463057790537048
+            m_Value1: 3853650262329738311
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: In
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766418
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 5296106496227547690
+          m_Value1: 575408034255177835
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 2719580380527061805
+            m_Value1: 5258281896421826126
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: In
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 3787658643081486320
+            m_Value1: 9774405134208130029
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: To State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766419
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 5038118086457401032
+          m_Value1: 6529312935761739882
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 8698463057790537048
+            m_Value1: 3853650262329738311
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: Out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 3787658643081486320
+            m_Value1: 9774405134208130029
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: From State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 1
+    - rid: 1707975188145766420
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 871456462356099548
+          m_Value1: 5676142445856207138
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 12501860111038507284
+            m_Value1: 1405675868202460813
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: In
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 13956664858697754801
+            m_Value1: 2892197107396631822
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: To State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766421
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 17156057814354235747
+          m_Value1: 11836336121962691975
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 8698463057790537048
+            m_Value1: 3853650262329738311
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: Out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 13956664858697754801
+            m_Value1: 2892197107396631822
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: From State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 2
+    - rid: 1707975188145766422
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 2866078423348095340
+          m_Value1: 7817644414630111865
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 6521906927116032428
+            m_Value1: 3654849595026488255
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: In
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 4268036481242266199
+            m_Value1: 1764413068817088580
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: To State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766423
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 4574014390499656610
+          m_Value1: 4240923340173942672
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 12501860111038507284
+            m_Value1: 1405675868202460813
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: Out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 4268036481242266199
+            m_Value1: 1764413068817088580
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: From State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766424
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 15053557737381157275
+          m_Value1: 15037875556208342813
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 2719580380527061805
+            m_Value1: 5258281896421826126
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: In
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 3478638381731105414
+            m_Value1: 7817933327475482578
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: To State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766425
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 13149522595261240371
+          m_Value1: 11666911090600444383
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 6521906927116032428
+            m_Value1: 3654849595026488255
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: Out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 3478638381731105414
+            m_Value1: 7817933327475482578
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: From State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766426
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 4873070842096118605
+          m_Value1: 8432037850345401027
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 16860903700054717978
+            m_Value1: 819954928530510028
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: In
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 8750169578124489574
+            m_Value1: 4155538387066826504
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: To State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766427
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 6165510357870408889
+          m_Value1: 17983361026152692604
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 6521906927116032428
+            m_Value1: 3654849595026488255
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: Out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 8750169578124489574
+            m_Value1: 4155538387066826504
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: From State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766428
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 4026145671447638670
+          m_Value1: 6122017581162261958
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 6405050028990635750
+            m_Value1: 8965826746964834877
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: In
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 11669885583206305662
+            m_Value1: 5070188232537549464
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: To State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766429
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 4643056694894289471
+          m_Value1: 1595081867481927180
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 6521906927116032428
+            m_Value1: 3654849595026488255
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: Out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 11669885583206305662
+            m_Value1: 5070188232537549464
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: From State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766430
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 4948702170249039241
+          m_Value1: 16438138236501000064
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 6521906927116032428
+            m_Value1: 3654849595026488255
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: In
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 15869251769286477238
+            m_Value1: 32778722573176878
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: To State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766431
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 12744440913884950796
+          m_Value1: 8687888940190272834
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 2719580380527061805
+            m_Value1: 5258281896421826126
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: Out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 15869251769286477238
+            m_Value1: 32778722573176878
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: From State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766432
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 213448999786636287
+          m_Value1: 12975203653975660190
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 8698463057790537048
+            m_Value1: 3853650262329738311
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: In
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 17602337408931504815
+            m_Value1: 14253307865008047197
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: To State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766433
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 11363699943545037632
+          m_Value1: 16559906100880049652
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 2719580380527061805
+            m_Value1: 5258281896421826126
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: Out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 17602337408931504815
+            m_Value1: 14253307865008047197
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: From State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766434
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 1087311371839212178
+          m_Value1: 7968061172427668359
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 6521906927116032428
+            m_Value1: 3654849595026488255
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: In
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 2074632725864304543
+            m_Value1: 2730959793463745857
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: To State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 
+    - rid: 1707975188145766435
+      type: {class: EdgeModel, ns: UnityEditor.GraphToolsFoundation.Overdrive.BasicModel, asm: Unity.GraphTools.Foundation.Overdrive.Model}
+      data:
+        m_Guid:
+          m_Value0: 13172704757505660014
+          m_Value1: 13526301220024235294
+        m_AssetModel: {fileID: 11400000}
+        m_Color: {r: 0, g: 0, b: 0, a: 0}
+        m_HasUserColor: 0
+        m_Version: 1
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 16860903700054717978
+            m_Value1: 819954928530510028
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: Out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 2074632725864304543
+            m_Value1: 2730959793463745857
+          m_GraphAssetModel: {fileID: 11400000}
+          m_UniqueId: From State
+        m_EdgeControlPoints: []
+        m_EditMode: 0
+        m_EdgeLabel: 

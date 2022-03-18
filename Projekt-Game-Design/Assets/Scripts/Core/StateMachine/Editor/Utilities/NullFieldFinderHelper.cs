@@ -23,10 +23,10 @@ namespace UOP1.StateMachine.Editor {
 				}
 				
 				if ( transitionTable._transitions[i].ToState != null ) {
-					if ( checkForNullValuesInState(transitionTable._transitions[i].ToState) ) {
-						found = true;
-						nullValues.Add($"transitionItem[{i}] , ToState, Actions");	
-					}	
+					// if ( checkForNullValuesInState(transitionTable._transitions[i].ToState) ) {
+					// 	found = true;
+					// 	nullValues.Add($"transitionItem[{i}] , ToState, Actions");	
+					// }	
 				}
 				else {
 					found = true;

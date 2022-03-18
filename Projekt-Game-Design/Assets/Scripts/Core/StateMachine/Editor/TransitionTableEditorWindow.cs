@@ -109,9 +109,9 @@ namespace UOP1.StateMachine.Editor
 			};
 			listView.bindItem = (element, i) => {
 				( ( Label )element ).text = assets[i].name;
-				if ( NullFieldFinderHelper.checkForNullValues(assets[i]) ) {
-					element.style.color = new StyleColor(Color.red);
-				}
+				// if ( NullFieldFinderHelper.checkForNullValues(assets[i]) ) {
+				// 	element.style.color = new StyleColor(Color.red);
+				// }
 			};
 			listView.selectionType = SelectionType.Single;
 

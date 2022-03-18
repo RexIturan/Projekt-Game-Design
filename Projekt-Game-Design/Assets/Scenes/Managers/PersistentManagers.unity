@@ -142,6 +142,10 @@ PrefabInstance:
       propertyPath: saveSystem
       value: 
       objectReference: {fileID: 1363089166}
+    - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
+      propertyPath: startGameEC
+      value: 
+      objectReference: {fileID: 11400000, guid: e2496553f0221904d9f87281addeec4d, type: 2}
     - target: {fileID: 6182407919942541886, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
       propertyPath: m_RootOrder
       value: 3

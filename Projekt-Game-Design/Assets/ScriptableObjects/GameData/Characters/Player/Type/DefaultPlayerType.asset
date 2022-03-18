@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   active: 1
-  icon: {fileID: 21300000, guid: 2727d8462e1b04e4fbbdcb31cf2b0a62, type: 3}
+  icon: {fileID: 21300000, guid: e2120594bea12424ab1e4cd581bc03dc, type: 3}
   prefab: {fileID: 2212653873986083977, guid: f59f89ef95affd9408aad1fc39215b05, type: 3}
   modelPrefab: {fileID: 8839921088689484587, guid: 3bc60f3f9e3f61b4cb1586783afde6b0, type: 3}
   headModel: {fileID: -512814852588796520, guid: a9b97bb237d970d479610c06205b120d, type: 3}
