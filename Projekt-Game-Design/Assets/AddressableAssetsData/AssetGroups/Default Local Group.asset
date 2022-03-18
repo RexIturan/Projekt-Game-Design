@@ -81,6 +81,54 @@ MonoBehaviour:
     m_Address: DefaultUI
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 9e4a4940416a7a14ab3587f748776020
+    m_Address: Level_A.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: eb69d4eff05817f4a9a82ae971422e32
+    m_Address: Level_B.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6e0b7638d35757843bd46df90a4c02f6
+    m_Address: StartScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fb00f78486e90814aad8308ce12a8034
+    m_Address: Level_C.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c8bf7da4a3154244aa1fe58a573922dd
+    m_Address: GameScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 21079a00fe1a1f641bfae6d4b1c5e00a
+    m_Address: Level_D.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 07e3fa8c05776224fb714990ec0446db
+    m_Address: LevelDataContainerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a2aa22ecb11b5a74998b621d6d957ad0
+    m_Address: CharacterTypeContainerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 06f235e350237cc41b1711487af77bbe
+    m_Address: EquipmentContainerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 894b7bd3f223e6440a05684c434e7780
+    m_Address: InventorySO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9c0103f97c6ccb944b231b864511fe70
+    m_Address: ItemContainerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 26ee19c2addbcf0409508e71a6e34144
+    m_Address: WorldObjectTypeContainerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
   m_SchemaSet:

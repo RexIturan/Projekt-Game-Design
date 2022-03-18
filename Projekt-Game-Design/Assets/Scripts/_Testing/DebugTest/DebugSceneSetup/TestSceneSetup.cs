@@ -28,7 +28,7 @@ namespace DebugTest.DebugSceneSetup {
         }
 
         private void HandleLoadLevel() {
-            saveManagerData.inputLoad = true;
+            // saveManagerData.inputLoad = true;
         }
         
         private void HandleLoadLevel(int value) {

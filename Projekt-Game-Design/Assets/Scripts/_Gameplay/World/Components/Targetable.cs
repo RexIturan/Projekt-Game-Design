@@ -38,8 +38,8 @@ namespace Combat {
 			if ( healthbarController is { } ) {
 				var hitPoints = statistics.StatusValues.HitPoints;
 				//todo unsubscribe somewhere ?
-				hitPoints.OnValueChanged += () => healthbarController.UpdateVisuals(hitPoints.GetAsRangedInt());
-				healthbarController.UpdateVisuals(hitPoints.GetAsRangedInt());
+				hitPoints.OnValueChanged += () => healthbarController.UpdateVisuals(hitPoints);
+				healthbarController.UpdateVisuals(hitPoints);
 			}
 		}
 		
@@ -48,7 +48,7 @@ namespace Combat {
 			
 			if ( IsDead ) {
 				var healthbar = GetComponentInChildren<HealthbarController>();
-				healthbar.UpdateVisuals(statistics.StatusValues.HitPoints.GetAsRangedInt());
+				healthbar.UpdateVisuals(statistics.StatusValues.HitPoints);
 				healthbar.StartHideAfterDelay();	
 			}
 		}
@@ -72,6 +72,6 @@ namespace Combat {
 		}
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
-
+		
 	}
 }

@@ -46,7 +46,7 @@ namespace Characters {
 					var obj = Instantiate(type.prefab, enemyParent, true);
 					var enemySC = obj.GetComponent<EnemyCharacterSC>();
           var enemyGridTransform = obj.GetComponent<GridTransform>();
-					enemySC.enemyType = type;
+					enemySC.Type = type;
 					enemySC.InitializeFromSave(enemySave);
 					_characterList.enemyContainer.Add(enemySC.gameObject);
 				}

@@ -129,7 +129,7 @@ namespace SaveSystem {
 
 					enemyChars.Add(
 						new Enemy_Save() {
-							enemyTypeId = enemySC.enemyType.id,
+							enemyTypeId = enemyChars.Count,
 							pos = enemyGridTransform.gridPosition,
 							hitpoints = enemyStatistics.StatusValues.HitPoints.Value,
 							energy = enemyStatistics.StatusValues.Energy.Value,
@@ -149,15 +149,15 @@ namespace SaveSystem {
 				Statistics doorStats = doorObj.GetComponent<Statistics>();
 
 				doors.Add(new Door_Save() {
-					doorTypeId = doorComp.doorType.id,
+					doorTypeId = doorComp.Type.id,
 					gridPos = doorTrans.gridPosition,
-					orientation = doorComp.orientation,
-					open = doorComp.open,
-					keyIds = doorComp.keyIds,
-					switchIds = doorComp.switchIds,
-					triggerIds = doorComp.triggerIds,
-					remainingSwitchIds = doorComp.remainingSwitches,
-					remainingTriggerIds = doorComp.remainingTrigger,
+					orientation = doorComp.Rotation,
+					open = doorComp.IsOpen,
+					keyIds = doorComp.Keys,
+					switchIds = doorComp.Switches,
+					triggerIds = doorComp.Triggers,
+					remainingSwitchIds = doorComp.RemainingSwitches,
+					remainingTriggerIds = doorComp.RemainingTriggers,
 					currentHitPoints = doorStats.StatusValues.HitPoints.Value
 				});
 			}
@@ -170,14 +170,13 @@ namespace SaveSystem {
 
 			foreach ( GameObject switchObj in worldObjectList.switches ) {
 				SwitchComponent switchComp = switchObj.GetComponent<SwitchComponent>();
-				GridTransform switchTrans = switchObj.GetComponent<GridTransform>();
 
 				switches.Add(new Switch_Save() {
-					switchId = switchComp.switchId,
+					switchId = switchComp.Id,
 					activated = switchComp.IsActivated,
-					switchTypeId = switchComp.switchType.id,
-					gridPos = switchTrans.gridPosition,
-					orientation = switchComp.orientation
+					switchTypeId = switchComp.Type.id,
+					gridPos = switchComp.Position,
+					orientation = switchComp.Rotation
 				});
 			}
 
@@ -218,7 +217,7 @@ namespace SaveSystem {
 		private List<Inventory_Save> GetEquipmentInventorySaveData(EquipmentContainerSO equipmentContainer) {
 			List<Inventory_Save> equipmentInventorys = new List<Inventory_Save>();
 
-			foreach ( var equipmentSheet in equipmentContainer.equipmentSheets ) {
+			foreach ( var equipmentSheet in equipmentContainer.EquipmentSheets ) {
 				if ( equipmentSheet is null )
 					break;
 

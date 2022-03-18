@@ -21,7 +21,7 @@ public class OverlayUIController : MonoBehaviour {
 	[SerializeField] private EquipItemEC_SO EquipEvent;
 	[SerializeField] private UnequipItemEC_SO UnequipEvent;
 	[SerializeField] private GameObjEventChannelSO playerDeselectedEC;
-	[SerializeField] private GameObjActionEventChannelSO playerSelectedEC;
+	[SerializeField] private GameObjActionIntEventChannelSO playerSelectedEC;
 	
 	[SerializeField] private VoidEventChannelSO abilityConfirmedEC;
 	[SerializeField] private VoidEventChannelSO abilityExecutedEC;
@@ -151,11 +151,11 @@ public class OverlayUIController : MonoBehaviour {
 	
 	
 	private void ShowPlayerViewContainer() {
-		_characterStatusValuePanel.SetViibility(true);
+		_characterStatusValuePanel.SetVibility(true);
 	}
 	
 	private void HidePlayerViewContainer() {
-		_characterStatusValuePanel.SetViibility(false);
+		_characterStatusValuePanel.SetVibility(false);
 	}
 	
 	private void ShowActionBar() {
@@ -257,6 +257,8 @@ public class OverlayUIController : MonoBehaviour {
 ///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
 
 	private void HandleEndTurnUI() {
+		Debug.Log("EndTurn Pressed");
+		
 		endTurnEC.RaiseEvent(Faction.Player);
 	}
 	
@@ -292,7 +294,7 @@ public class OverlayUIController : MonoBehaviour {
 		if(obj == _selectedPlayer) { 
 			_actionBar.SetVisibility(false);
 			
-			_characterStatusValuePanel.SetViibility(false);
+			_characterStatusValuePanel.SetVibility(false);
 		}
 	}
 
@@ -341,11 +343,11 @@ public class OverlayUIController : MonoBehaviour {
 		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
 		_turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
 
-		_overlayContainer.Q<Button>("IngameMenuButton").clicked += HandleOpenMenuButton;
+		// _overlayContainer.Q<Button>("IngameMenuButton").clicked += HandleOpenMenuButton;
 		_overlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
 		
-		_actionBar.SetVisibility(false);
-		_characterStatusValuePanel.SetViibility(false);
+		// _actionBar.SetVisibility(false);
+		// _characterStatusValuePanel.SetVibility(false);
 	}
 
 	private void OnEnable() {

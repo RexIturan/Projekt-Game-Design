@@ -134,14 +134,10 @@ namespace GameManager {
 						victory = true;
 				}
 
+				//todo remove
 				public void ResetState() {
 					reload = true;
-					//todo i hope this works
-					saveManagerData.loaded = false;
-					saveManagerData.saved = false;
-					saveManagerData.inputLoad = false;
-					saveManagerData.inputSave = false;
-					saveManagerData.inputNewGame = false;
+					saveManagerData.Reset();
 				}
 		}
 }

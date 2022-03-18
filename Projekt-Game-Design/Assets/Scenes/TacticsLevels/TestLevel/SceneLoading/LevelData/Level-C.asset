@@ -19,8 +19,7 @@ MonoBehaviour:
   range: {x: 0, y: 0, z: 0}
   triggerPositions: []
   type: -1
-  targets:
-  - {fileID: 772858591927546384, guid: 70cc086da82376c4da5ec2127c6e53d0, type: 2}
+  target: {fileID: 772858591927546384, guid: 70cc086da82376c4da5ec2127c6e53d0, type: 2}
 --- !u!114 &-4691609463466680298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,8 +39,7 @@ MonoBehaviour:
   range: {x: 0, y: 0, z: 0}
   triggerPositions: []
   type: -1
-  targets:
-  - {fileID: 235353085484331564, guid: 889aa4f2b13b0e445936b0d0208e0771, type: 2}
+  target: {fileID: 235353085484331564, guid: 889aa4f2b13b0e445936b0d0208e0771, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

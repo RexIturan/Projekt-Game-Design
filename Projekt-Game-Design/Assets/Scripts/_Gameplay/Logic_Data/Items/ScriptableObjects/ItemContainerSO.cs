@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using GDP01._Gameplay.World.Character;
 using UnityEngine;
 using Util.Extensions;
 
@@ -10,6 +12,11 @@ using Util.Extensions;
 [CreateAssetMenu(fileName = "New ItemList", menuName = "Items/ItemList")]
 public class ItemContainerSO : ScriptableObject {
 	[SerializeField] public List<ItemSO> itemList = new List<ItemSO>();
+	[SerializeField] private ItemSO _defaultItem;
+	
+///// Properties ///////////////////////////////////////////////////////////////////////////////////
+	
+	public ItemSO Default => _defaultItem;
 
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////
 
@@ -39,5 +46,13 @@ public class ItemContainerSO : ScriptableObject {
 	
 	private void OnValidate() {
 		UpdateItemList();
+	}
+
+	public ItemSO GetItemTypeByGuid(string guid) {
+		return itemList.FirstOrDefault(item => item.Guid == guid);
+	}
+
+	public ItemSO GetItemTypeByName(string name) {
+		return itemList.FirstOrDefault(item => item.name.Equals(name));
 	}
 }

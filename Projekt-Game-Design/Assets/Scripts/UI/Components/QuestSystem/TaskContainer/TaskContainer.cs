@@ -60,7 +60,6 @@ namespace UI.Components.QuestSystem {
 				"Container", 
 				new []{containerSuffix});
 			
-			
 			InitContainer(
 				ref taskPanelContainer, 
 				"TaskPanelContainer", 

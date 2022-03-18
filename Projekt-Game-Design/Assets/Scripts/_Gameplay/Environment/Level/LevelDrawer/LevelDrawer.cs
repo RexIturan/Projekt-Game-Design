@@ -17,7 +17,7 @@ namespace Visual {
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////		
 		
 		public void RedrawLevel() {
-			drawer.DrawGrid();
+			drawer?.DrawGrid();
 			if ( objectDrawer ) {
 				objectDrawer.RedrawItems();	
 			}

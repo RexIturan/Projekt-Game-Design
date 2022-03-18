@@ -24,7 +24,7 @@ namespace GDP01.Structure {
 			[SerializeField] private Vector3Int range;
 			[SerializeField] private Vector3Int[] triggerPositions;
 			[SerializeField] private ELevelConnectorType type;
-			[SerializeField] private LevelConnectorSO[] targets;
+			[SerializeField] private LevelConnectorSO target;
 
 		#endregion
 
@@ -43,7 +43,7 @@ namespace GDP01.Structure {
 			public Vector3Int Range => range;
 			public Vector3Int[] TriggerPositions => triggerPositions;
 			public ELevelConnectorType Type => type;
-			public LevelConnectorSO[] Targets => targets;
+			public LevelConnectorSO Target => target;
 
 		#endregion
 

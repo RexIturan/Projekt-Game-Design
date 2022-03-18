@@ -31,23 +31,24 @@ public class SaveManagerConditions : Condition
 	protected override bool Statement() {
 		bool statement = false;
 		
+		//todo game state shouldnt now about the save system
 		switch (timing: _timing, action: _action) {
-			case (SaveManagerTiming.Input, Load):
-				statement = _gameSc.saveManagerData.inputLoad;
-				break;
-			case (SaveManagerTiming.Input, NewGame):
-				statement = _gameSc.saveManagerData.inputNewGame;
-				break;
-			case (SaveManagerTiming.Input, Save):
-				statement = _gameSc.saveManagerData.inputSave;
-				break;
-			case (Finished, Save):
-				statement = _gameSc.saveManagerData.saved;
-				break;
-			case (Finished, Load):
-			case (Finished, NewGame):
-				statement = _gameSc.saveManagerData.loaded;
-				break;
+			// case (SaveManagerTiming.Input, Load):
+			// 	statement = _gameSc.saveManagerData.inputLoad;
+			// 	break;
+			// case (SaveManagerTiming.Input, NewGame):
+			// 	statement = _gameSc.saveManagerData.inputNewGame;
+			// 	break;
+			// case (SaveManagerTiming.Input, Save):
+			// 	statement = _gameSc.saveManagerData.inputSave;
+			// 	break;
+			// case (Finished, Save):
+			// 	statement = _gameSc.saveManagerData.saved;
+			// 	break;
+			// case (Finished, Load):
+			// case (Finished, NewGame):
+			// 	statement = _gameSc.saveManagerData.loaded;
+			// 	break;
 		}
 		return statement;
 	}

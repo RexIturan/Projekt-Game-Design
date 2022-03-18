@@ -19,7 +19,7 @@ public class C_PlayAbilitySound_OnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void OnStateEnter() {
-				AudioManager.FindSoundManager().PlaySound(_abilityController.GetSelectedAbility().activationSound);
+				AudioManager.FindSoundManager()?.PlaySound(_abilityController.GetSelectedAbility().activationSound);
     }
 
     public override void OnStateExit() { }

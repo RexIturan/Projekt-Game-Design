@@ -9,7 +9,7 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 	menuName = "State Machines/Actions/Player/RaiseSelectedEvent")]
 public class RaiseSelectedEventSO : StateActionSO {
 	[Header("Sending Events On")] [SerializeField]
-	public GameObjActionEventChannelSO selectNewPlayer;
+	public GameObjActionIntEventChannelSO selectNewPlayer;
 
 	public override StateAction CreateAction() => new RaiseSelectedEvent(selectNewPlayer);
 }
@@ -17,11 +17,11 @@ public class RaiseSelectedEventSO : StateActionSO {
 public class RaiseSelectedEvent : StateAction {
 	private GameObject _gameObject;
 	private StateMachine _stateMachine;
-	private GameObjActionEventChannelSO _selectPlayerEC;
+	private GameObjActionIntEventChannelSO _selectPlayerEC;
 
 	private AbilityController _abilityController;
 
-	public RaiseSelectedEvent(GameObjActionEventChannelSO selectPlayerEventChannel) {
+	public RaiseSelectedEvent(GameObjActionIntEventChannelSO selectPlayerEventChannel) {
 		_selectPlayerEC = selectPlayerEventChannel;
 	}
 

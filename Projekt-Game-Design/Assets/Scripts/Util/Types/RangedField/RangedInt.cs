@@ -1,4 +1,7 @@
-﻿namespace Util.Types {
+﻿using System;
+
+namespace Util.Types {
+	[Serializable]
 	public class RangedInt : RangedField<int> {
 		public RangedInt(int min, int max, int value) : base(min, max, value) { }
 		protected override bool Grater(int value, int other) {

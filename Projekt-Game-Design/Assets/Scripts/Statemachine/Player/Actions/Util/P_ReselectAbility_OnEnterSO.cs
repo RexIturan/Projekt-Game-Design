@@ -15,7 +15,7 @@ public class P_ReselectAbility_OnEnterSO : StateActionSO {
 public class P_ReselectAbility_OnEnter : StateAction {
 	private AbilityController _abilityController;
 	private Statistics _statistics;
-	private readonly GameObjActionEventChannelSO _selectPlayerEC;
+	private readonly GameObjActionIntEventChannelSO _selectPlayerEC;
 
 	public override void OnUpdate() { }
 

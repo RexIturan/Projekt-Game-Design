@@ -19,8 +19,7 @@ MonoBehaviour:
   range: {x: 0, y: 0, z: 0}
   triggerPositions: []
   type: -1
-  targets:
-  - {fileID: -7744834394702339806, guid: 70cc086da82376c4da5ec2127c6e53d0, type: 2}
+  target: {fileID: -7744834394702339806, guid: 70cc086da82376c4da5ec2127c6e53d0, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

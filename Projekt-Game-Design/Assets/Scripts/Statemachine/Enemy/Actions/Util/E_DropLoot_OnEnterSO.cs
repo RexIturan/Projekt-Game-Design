@@ -34,7 +34,7 @@ public class E_DropLoot_OnEnter : StateAction {
 	}
 
 	public override void OnStateEnter() {
-		DropLoot(_redrawLevelEC, _enemy.enemyType.lootTable, _gridTransform.gridPosition);
+		DropLoot(_redrawLevelEC, _enemy.LootTable, _gridTransform.gridPosition);
 	}
 
 	// TODO move to Item Spawner

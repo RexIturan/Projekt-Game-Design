@@ -2,6 +2,7 @@
 using Characters;
 using Characters.Equipment.ScriptableObjects;
 using GDP01._Gameplay.Logic_Data.Equipment.Types;
+using GDP01.Equipment;
 using UnityEngine;
 using static EquipmentPosition;
 
@@ -11,8 +12,28 @@ namespace GDP01.Characters.Component {
 		public class EquipmentController : MonoBehaviour {
 			//todo equipment Container SO
 				[SerializeField] private EquipmentContainerSO equipmentContainer;
-				//todo -> player id??
-				public int equipmentID;
+
+				//index on the equipmentContainer sheet
+				[SerializeField] private int _equipmentID = -1;
+				public int EquipmentID {
+					//todo check if id is valid, error or create new equipment sheet
+					get => _equipmentID;
+
+					set {
+						if(value < 0) Debug.LogError("EquipmentId should be greater then 0");
+						
+						equipmentContainer.UnclaimId(_equipmentID);
+
+						if ( equipmentContainer.IdExists(value) ) {
+							_equipmentID = equipmentContainer.IdClaimed(value) ? equipmentContainer.CreateNewEquipmentSheet() : value;
+						}
+						else {
+							_equipmentID = equipmentContainer.CreateNewEquipmentSheet();
+						}
+						
+						equipmentContainer.ClaimId(_equipmentID);
+					}
+				}
 
 				// the position in the equipment inventory
 				// it is the item that grants the ability
@@ -23,13 +44,11 @@ namespace GDP01.Characters.Component {
 
 				private ItemSO activeItem;
 				
-				public ItemSO RightWeapon {
-					get { return equipmentContainer.equipmentSheets[equipmentID].GetEquipedItem(RIGHT); }
-				}
+				public WeaponSO RightWeapon => 
+					equipmentContainer.GetItemFromEquipment(EquipmentID, RIGHT) as WeaponSO;
 				
-				public ItemSO LeftWeapon {
-					get { return equipmentContainer.equipmentSheets[equipmentID].GetEquipedItem(LEFT); }
-				}
+				public WeaponSO LeftWeapon => 
+					equipmentContainer.GetItemFromEquipment(EquipmentID, LEFT) as WeaponSO;
 				
 				public void RefreshEquipment() {
 						// Model-wise
@@ -63,9 +82,9 @@ namespace GDP01.Characters.Component {
 										itemRightHand = RightWeapon;
 								}
 
-								ItemSO itemHead = equipmentContainer.equipmentSheets[equipmentID].headArmor;
-								ItemSO itemBody = equipmentContainer.equipmentSheets[equipmentID].bodyArmor;
-								ItemSO itemShield = equipmentContainer.equipmentSheets[equipmentID].shield;
+								ItemSO itemHead = equipmentContainer.EquipmentSheets[EquipmentID].headArmor;
+								ItemSO itemBody = equipmentContainer.EquipmentSheets[EquipmentID].bodyArmor;
+								ItemSO itemShield = equipmentContainer.EquipmentSheets[EquipmentID].shield;
 
 								if ( itemLeftHand ) {
 									modelController.SetMeshLeft(itemLeftHand.mesh, itemLeftHand.material);	
@@ -104,29 +123,15 @@ namespace GDP01.Characters.Component {
 				{
 						List<WeaponSO> items = new List<WeaponSO>();
 
-						WeaponSO item = equipmentContainer.equipmentSheets[equipmentID].weaponLeft;
+						WeaponSO item = LeftWeapon;
 						if ( item )
 								items.Add(item);
 
-						item = equipmentContainer.equipmentSheets[equipmentID].weaponRight;
+						item = RightWeapon;
 						if ( item )
 								items.Add(item);
 
 						return items;
-				}
-
-				/**
-				 * returns the weapon equipped in the left position in the equipment
-				 */
-				public WeaponSO GetWeaponLeft() {
-						return equipmentContainer.equipmentSheets[equipmentID].weaponLeft;
-				}
-				
-				/**
-				 * returns the weapon equipped in the right position in the equipment
-				 */
-				public WeaponSO GetWeaponRight() {
-						return equipmentContainer.equipmentSheets[equipmentID].weaponRight;
 				}
 
 				/**

@@ -145,8 +145,8 @@ namespace SaveSystem {
 				        
 				if ( loaded ) {
 					loadLocation.RaiseEvent(locationsToLoad, false, true);
-					saveManagerData.inputLoad = true;
-					saveManagerData.loaded = true;
+					// saveManagerData.inputLoad = true;
+					// saveManagerData.loaded = true;
 				}
 			}
 			catch ( Exception e ) {
@@ -167,11 +167,10 @@ namespace SaveSystem {
 		//todo SaveObject for Level
 
 		public bool SaveLevelWithOverride(string saveName) {
-			FileManager.DeleteFile(saveName);
-			return SaveLevel(saveName); 
+			return SaveLevel(saveName, true); 
 		}
 		
-		public bool SaveLevel(string saveName) {
+		public bool SaveLevel(string saveName, bool overrideFile = false) {
 			//todo refactor code duplication
 			var filename = saveName;
 			if ( filename == "" ) {
@@ -186,12 +185,12 @@ namespace SaveSystem {
 				var saveJson = save.ToJson();
 				
 				// filemanager: write saveObject to savefile
-				bool written = FileManager.WriteToFile(filename, saveJson);
+				bool written = FileManager.WriteToFile(saveJson, filename, overrideFile);
 				
 				if ( written ) {
 					// set savemanager flag
 					//todo idk if we need this, use event instead??
-					saveManagerData.saved = true;
+					// saveManagerData.saved = true;
 					
 					Debug.Log($"SaveManager > SaveLevel > try > written\nLevel Saved{filename}");
 				}
@@ -230,7 +229,7 @@ namespace SaveSystem {
 
 				//todo remove and manage otherwise
 				// save manager state
-				saveManagerData.loaded = true;
+				// saveManagerData.loaded = true;
 				
 				//todo debug
 				// Debug.Log($"SaveManager \u27A4 LoadLevel \u27A4 try:\n\"{filename}\" Level Loaded");
@@ -270,7 +269,7 @@ namespace SaveSystem {
 			SaveReader.SetRuntimeReferences(characterInitializer, worldObjectInitialiser);
 			SaveReader.ReadSave(_saveObject);
 
-			saveManagerData.loaded = true;
+			// saveManagerData.loaded = true;
 			levelLoaded.RaiseEvent();
 		}
 
@@ -346,8 +345,10 @@ namespace SaveSystem {
 			_saveObjects.Clear();
 		}
 
+		//todo remove
 		public bool IsSaveLoaded() {
-			return saveManagerData.loaded;
+			// throw new NotImplementedException();
+			return true;
 		}
 	}
 }

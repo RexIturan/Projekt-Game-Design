@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using WorldObjects;
 
 namespace Items.Editor {
 	[CustomEditor(typeof(ItemComponent))]

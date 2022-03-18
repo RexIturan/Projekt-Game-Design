@@ -90,13 +90,13 @@ namespace SaveSystem {
 		
 		private void ReadEquipmentInventory(List<Inventory_Save> saveEquipmentInventory,
 			EquipmentContainerSO equipmentContainer) {
-			equipmentContainer.equipmentSheets.Clear();
+			equipmentContainer.EquipmentSheets.Clear();
 			
 			foreach (var equipmentSheetSave in saveEquipmentInventory) {
-				var equipment = new EquipmentSheet();
-
+				int id = equipmentContainer.CreateNewEquipmentSheet();
+				var equipment = equipmentContainer.EquipmentSheets[id];
+				
 				equipment.InitialiseFromSave(equipmentSheetSave, _itemContainerSo);
-				equipmentContainer.equipmentSheets.Add(equipment);
 			}
 			
 			//todo rethink this -> do here, maybe get initialised chars as parameter?
@@ -104,10 +104,10 @@ namespace SaveSystem {
 			if ( characterList is { } ) {
 				var playerCharNum = characterList.playerContainer.Count +
 				                    characterList.friendlyContainer.Count;
-				var equipmentInvCount = equipmentContainer.equipmentSheets.Count;
+				var equipmentInvCount = equipmentContainer.EquipmentSheets.Count;
 				if ( equipmentInvCount < playerCharNum) {
 					for ( int i = 0; i < playerCharNum - equipmentInvCount; i++ ) {
-						equipmentContainer.equipmentSheets.Add(new EquipmentSheet());
+						equipmentContainer.CreateNewEquipmentSheet();
 					}
 				}
 			}

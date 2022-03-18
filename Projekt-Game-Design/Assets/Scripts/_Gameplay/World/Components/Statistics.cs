@@ -1,5 +1,7 @@
-﻿using Characters.Types;
+﻿using System;
+using Characters.Types;
 using UnityEngine;
+using Visual.Healthbar;
 
 namespace Characters {
 	//todo move to Character SC ??
@@ -20,14 +22,25 @@ namespace Characters {
 
 		public void RefillEnergy() {
 			// refill energy etc.
-			stats.GetValue(StatusType.Energy).Fill();
+			stats.Energy.Fill();
 		}
 
-    public void RefillAll()
-		{
-			foreach(StatusValue val in stats.GetStatusValues())
-			{
-				val.Fill();
+    public void RefillAll() {
+			foreach(StatusValue stat in stats.GetStatusValues()) {
+				stat.Fill();
+			}
+		}
+    
+///// Unity Function ///////////////////////////////////////////////////////////////////////////////
+
+		//todo is used when status values are changed in the editor, refactor with is dirty flag or so
+		private void OnValidate() {
+			//update healthbar
+			if ( StatusValues.GetStatusValues() is { Length: > 0 } ) {
+				var hitPoints = StatusValues?.HitPoints;
+				if ( hitPoints != null ) {
+					GetComponentInChildren<HealthbarController>().UpdateVisuals(hitPoints);	
+				}	
 			}
 		}
 	}

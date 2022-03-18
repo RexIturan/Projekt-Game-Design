@@ -63,14 +63,14 @@ namespace Visual.Healthbar {
 			// 	Debug.LogError("HealthbarController needs a Statistics Component in its Parent");
 			// }
 
-			image.color = _color;
+			SetFillColor();
 		}
 
 		private void Update() {
 		}
 
 		private void OnValidate() {
-			SetFillColor();
+			// SetFillColor();
 		}
 	}
 }

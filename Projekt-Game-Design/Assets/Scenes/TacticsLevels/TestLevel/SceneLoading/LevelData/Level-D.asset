@@ -39,5 +39,4 @@ MonoBehaviour:
   range: {x: 0, y: 0, z: 0}
   triggerPositions: []
   type: -1
-  targets:
-  - {fileID: -8706403890368670899, guid: 6a958715813950b49b297befdac2ca19, type: 2}
+  target: {fileID: -4691609463466680298, guid: 6a958715813950b49b297befdac2ca19, type: 2}

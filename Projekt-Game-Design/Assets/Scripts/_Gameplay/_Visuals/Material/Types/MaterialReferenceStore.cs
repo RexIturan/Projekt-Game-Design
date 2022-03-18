@@ -55,7 +55,12 @@ public class MaterialReferenceStore : ScriptableObject {
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////
 
 	public Material GetMaterial(Faction faction) {
-		return factionMaterialDict[faction];
+		if ( factionMaterialDict.ContainsKey(faction) ) {
+			return factionMaterialDict[faction];	
+		}
+		else {
+			return default;	
+		}
 	}
 	
 	public Material GetMaterial(EMaterialColor matColor) {

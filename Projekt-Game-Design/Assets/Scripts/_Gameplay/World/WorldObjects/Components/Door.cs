@@ -12,42 +12,63 @@ using WorldObjects.Doors;
 
 namespace WorldObjects
 {
-		public class Door : MonoBehaviour
-		{
+		public partial class Door : WorldObject.Factory<Door, Door.DoorData> {
 				private const float OPENING_DISTANCE = 1.1f;
 
-				//todo refactor this
+				//todo refactor this replace with inventory query event channel
 				[SerializeField] private InventorySO inventory;
 
 				[Header("Receiving Events on:")]
 				[SerializeField] private VoidEventChannelSO updateWorldObjectsEvent;
 				[SerializeField] private IntEventChannelSO switchActivatedEvent;
 				[SerializeField] private IntEventChannelSO triggerActivatedEvent;
-
-				public int doorId;
-				public DoorTypeSO doorType;
-				public bool open;
-				[SerializeField] private bool broken;
-				public bool locked;
-				public List<int> keyIds;
-				public List<int> switchIds;
-				public List<int> triggerIds;
-
-				public List<int> remainingSwitches;
-				public List<int> remainingTrigger;
-
-				public Vector3 orientation;
-
 				[SerializeField] private SlidingDoorController slidingDoorController;
 
-				public void Initialise(Door_Save saveData, DoorTypeSO doorType)
-				{
-						this.doorType = doorType;
-						open = saveData.open;
-						locked = true;
-						broken = false;
+				public new DoorTypeSO Type {
+					get { return ( DoorTypeSO )_type; }
+					set { _type = value; }
+				}
 
-						orientation = saveData.orientation;
+				[SerializeField] private DoorData doorData;
+				
+				public bool Open { get => doorData.open; set => doorData.open = value; }
+				public bool Broken { get => doorData.broken; set => doorData.broken = value; }
+				public bool Locked { get => doorData.locked; set => doorData.locked = value; }
+
+				public List<int> Keys {
+					get => doorData.keyIds; private set => doorData.keyIds = value;
+				}
+				
+				public List<int> Switches { 
+					get => doorData.switchIds; private set => doorData.switchIds = value; 
+				}
+
+				public List<int> Triggers {
+					get => doorData.triggerIds; private set => doorData.triggerIds = value;
+				}
+
+				public List<int> RemainingSwitches {
+					get => doorData.remainingSwitches; 
+					private set => doorData.remainingSwitches = value;
+				}
+
+				public List<int> RemainingTriggers {
+					get => doorData.remainingTrigger; 
+					private set => doorData.remainingTrigger = value;
+				}
+
+				public bool IsOpen => Open;
+				public bool IsBroken => Broken;
+				public bool IsLocked => Locked;
+				
+				public void Initialise(Door_Save saveData, DoorTypeSO doorType) {
+						_type = doorType;
+						
+						doorData.open = saveData.open;
+						doorData.locked = true;
+						doorData.broken = false;
+
+						Rotation = saveData.orientation;
 						InitialiseOrientation();
 
 						if ( doorType.destructable )
@@ -61,24 +82,25 @@ namespace WorldObjects
 						gameObject.GetComponent<GridTransform>().gridPosition = saveData.gridPos;
 
 						Statistics stats = gameObject.GetComponent<Statistics>();
+						stats.StatusValues.InitValues(null);
 						stats.StatusValues.HitPoints.Max = doorType.hitPoints;
 						stats.StatusValues.HitPoints.Value = saveData.currentHitPoints;
 						stats.SetFaction(Faction.Neutral);
 
-						keyIds = saveData.keyIds;
-						switchIds = saveData.switchIds;
-						triggerIds = saveData.triggerIds;
-						remainingSwitches = saveData.remainingSwitchIds;
-						remainingTrigger = saveData.remainingTriggerIds;
+						Keys = saveData.keyIds;
+						Switches = saveData.switchIds;
+						Triggers = saveData.triggerIds;
+						RemainingSwitches = saveData.remainingSwitchIds;
+						RemainingTriggers = saveData.remainingTriggerIds;
 
-						if ( keyIds.Count > 0 ) {
-							slidingDoorController.InitValues(DoorType.Key, keyIds.Count);
-						} else if ( switchIds.Count > 0 ) {
-							slidingDoorController.InitValues(DoorType.Switch, switchIds.Count);
+						if ( Keys.Count > 0 ) {
+							slidingDoorController.InitValues(DoorType.Key, Keys.Count);
+						} else if ( Switches.Count > 0 ) {
+							slidingDoorController.InitValues(DoorType.Switch, Switches.Count);
 						}
 
-						if ( remainingSwitches.Count < switchIds.Count ) {
-							var activeSwitches = switchIds.Count - remainingSwitches.Count;
+						if ( RemainingSwitches.Count < Switches.Count ) {
+							var activeSwitches = Switches.Count - RemainingSwitches.Count;
 							for ( int i = 0; i < activeSwitches; i++ ) {
 								slidingDoorController.OpenLock();
 							}
@@ -86,7 +108,7 @@ namespace WorldObjects
 
 						UpdateDoor();
 						
-						if ( open ) {
+						if ( IsOpen ) {
 							OpenDoor();
 						}
 				}
@@ -97,7 +119,7 @@ namespace WorldObjects
 				// faced towards the positive x-Axis-Vector
 				private void InitialiseOrientation()
 				{
-					gameObject.transform.rotation = Quaternion.LookRotation(orientation);
+					gameObject.transform.rotation = Quaternion.LookRotation(Rotation);
 				}
 
 				public void Awake()
@@ -116,8 +138,8 @@ namespace WorldObjects
 
 				private void HandleSwitchActivatedEvent(int switchId)
 				{
-						if (switchIds.Contains(switchId) ) {
-							remainingSwitches.Remove(switchId);
+						if (Switches.Contains(switchId) ) {
+							RemainingSwitches.Remove(switchId);
 							slidingDoorController.OpenLock();
 							UpdateDoor();
 						}
@@ -125,8 +147,8 @@ namespace WorldObjects
 
 				private void HandleTriggerActivatedEvent(int triggerId)
 				{
-					if (switchIds.Contains(triggerId) ) {
-						remainingTrigger.Remove(triggerId);
+					if (Switches.Contains(triggerId) ) {
+						RemainingSwitches.Remove(triggerId);
 						slidingDoorController.OpenLock();
 						UpdateDoor();
 					}
@@ -138,7 +160,7 @@ namespace WorldObjects
 				 */
 				private void UpdateDoor()
 				{
-						if ( !broken && !open )
+						if ( !IsBroken && !IsOpen )
 						{
 								if ( gameObject.GetComponent<Statistics>().StatusValues.HitPoints.IsMin() )
 								{
@@ -147,7 +169,7 @@ namespace WorldObjects
 								else
 								{
 										bool hasAllKeys = true;
-										foreach ( int keyId in keyIds )
+										foreach ( int keyId in Keys )
 										{
 												bool hasKey = false;
 												foreach ( ItemSO item in inventory.playerInventory )
@@ -161,15 +183,15 @@ namespace WorldObjects
 
 										// hasAllKeys = keyIds.All(i => inventory.playerInventory.Any(item => item.id == i));
 
-										if ( hasAllKeys && remainingSwitches.Count == 0 && remainingTrigger.Count == 0 )
-												locked = false;
+										if ( hasAllKeys && RemainingSwitches.Count == 0 && RemainingTriggers.Count == 0 )
+												Locked = false;
 										
-										if ( !locked )
+										if ( !IsLocked )
 										{
 												CharacterList characters = CharacterList.FindInstant();
 												bool playerInRange = false;
 
-												if ( !doorType.openManually )
+												if ( !Type.openManually )
 														playerInRange = true;
 												else
 												{
@@ -183,7 +205,7 @@ namespace WorldObjects
 														}
 												}
 
-												if ( playerInRange || switchIds.Count > 0)
+												if ( playerInRange || Switches.Count > 0)
 														OpenDoor();
 										}
 								}
@@ -193,18 +215,18 @@ namespace WorldObjects
 				private void DoorDestroyed()
 				{
 						slidingDoorController.OpenDoor();
-						open = true;
-						broken = true;
+						Open = true;
+						Broken = true;
 
-						AudioManager.FindSoundManager().PlaySound(doorType.destructionSound);
+						AudioManager.FindSoundManager()?.PlaySound(Type.destructionSound);
 				}
 
 				private void OpenDoor()
 				{
 						slidingDoorController.OpenDoor();
-						open = true;
+						Open = true;
 
-						AudioManager.FindSoundManager().PlaySound(doorType.openingSound);
+						AudioManager.FindSoundManager()?.PlaySound(Type.openingSound);
 				}
 		}
 }

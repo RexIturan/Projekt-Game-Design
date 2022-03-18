@@ -26,7 +26,7 @@ public class InventoryUIController : MonoBehaviour {
 
 	// Selected events
 	[SerializeField] private GameObjEventChannelSO playerDeselectedEC;
-	[SerializeField] private GameObjActionEventChannelSO playerSelectedEC;
+	[SerializeField] private GameObjActionIntEventChannelSO playerSelectedEC;
 
 	// Inputchannel für das Inventar
 	[SerializeField] private VoidEventChannelSO enableInventoryInput;
@@ -175,9 +175,9 @@ public class InventoryUIController : MonoBehaviour {
 		PlayerCharacterSC currPlayer = characterList.playerContainer[_currentPlayerSelected]
 			.GetComponent<PlayerCharacterSC>();
 
-		int playerID = currPlayer.GetComponent<EquipmentController>().equipmentID;
+		int equipmentID = currPlayer.GetComponent<EquipmentController>().EquipmentID;
 
-		var equipmentSheet = equipmentContainer.equipmentSheets[playerID];
+		var equipmentSheet = equipmentContainer.EquipmentSheets[equipmentID];
 		
 		if ( equipmentSheet.weaponLeft) {
 			weaponLeft.HoldItem(equipmentSheet.weaponLeft);

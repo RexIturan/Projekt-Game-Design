@@ -1,7 +1,9 @@
-using Characters.EnemyCharacter.ScriptableObjects;
+using GDP01._Gameplay.World.Character.Components;
+using GDP01._Gameplay.World.Character.Data;
 using UnityEngine;
 
-public class CharacterSC : MonoBehaviour {
+
+public class CharacterSC : Character<CharacterSC, CharacterData> {
 	
 ////////////////////////////////////////// Character State ////////////////////////////////////
 
@@ -13,10 +15,7 @@ public class CharacterSC : MonoBehaviour {
 
 	#region Enemy State
 
-	public EnemyBehaviorSO behavior;
 
-	// public bool abilitySelected;
-	// public bool abilityExecuted;
 	public bool noTargetFound;
 	public bool rangeChecked;
 
@@ -28,5 +27,14 @@ public class CharacterSC : MonoBehaviour {
 	#endregion
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-	
+
+	public override CharacterData Save() {
+		return new CharacterData();
+	}
+
+	public override void Load(CharacterData data) {
+		Debug.Log("Load CharacterSC");
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 }

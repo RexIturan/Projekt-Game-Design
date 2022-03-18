@@ -1,15 +1,24 @@
-﻿using SaveSystem.SaveFormats;
+﻿using Characters.Equipment.ScriptableObjects;
+using SaveSystem.SaveFormats;
 
 namespace GDP01.Equipment {
 	[System.Serializable]
 	public class EquipmentSheet {
+		//todo these to [serializedField] private -> and public properties
 		public WeaponSO weaponLeft;
 		public WeaponSO weaponRight;
 		public HeadArmorSO headArmor;
 		public BodyArmorSO bodyArmor;
 		public ShieldSO shield;
+		
+		private int _id;
+		public int Id {
+			get { return _id; }
+			private set { _id = value; }
+		}
 
-		public EquipmentSheet() {
+		public EquipmentSheet(int id) {
+			Id = id;
 			weaponLeft = null;
 			weaponRight = null;
 			headArmor = null;
@@ -132,6 +141,14 @@ namespace GDP01.Equipment {
 			var item = GetEquipedItem(equipmentPosition);
 			SetEquipedItem(equipmentPosition, null);
 			return item;
+		}
+
+		public void Init(EquipmentContainerSO.EquipmentSheetData sheet) {
+			weaponLeft  = sheet.weaponLeft?.obj as WeaponSO;
+			weaponRight = sheet.weaponRight?.obj as WeaponSO;
+			headArmor   = sheet.headArmor?.obj as HeadArmorSO;
+			bodyArmor   = sheet.bodyArmor?.obj as BodyArmorSO;
+			shield      = sheet.shield?.obj as ShieldSO;
 		}
 	}
 }

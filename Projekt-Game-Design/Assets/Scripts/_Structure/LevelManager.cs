@@ -1,21 +1,41 @@
-﻿using Events.ScriptableObjects;
+﻿using System;
+using System.Collections;
+using System.Linq;
+using Events.ScriptableObjects;
+// using GDP01._Gameplay.Provider;
 using GDP01.SceneManagement.EventChannels;
+using SaveSystem.V2.Data;
 using SceneManagement.ScriptableObjects;
 using SceneManagement.Types;
 using UnityEngine;
 
 namespace GDP01.Structure {
-	public class LevelManager : MonoBehaviour {
+	public struct LevelManagerData {
+		public LevelDataSO Level { get; set; }
+	}
+	
+	public class LevelManager : MonoBehaviour, ISaveState<LevelManagerData> {
+		public struct ConnectionData {
+			public int id;
+			public string name;
+		}
+		
 		[SerializeField] private LevelDataSO startLevel;
 		[SerializeField] private LevelDataSO currentLevel;
 		[SerializeField] private GameSceneSO startScene;
 		[SerializeField] private GameSceneSO gameScene;
 		
+		[Header("Send Events On")]
 		[SerializeField] private SceneLoadingInfoEventChannelSO loadSceneEC;
 		[SerializeField] private SceneLoadingInfoEventChannelSO unloadSceneEC;
-
-		[SerializeField] private IntEventChannelSO useConnectorEC;
-		// [SerializeField] private 
+		[SerializeField] private VoidEventChannelSO UpdateSaveDataEC;
+		[SerializeField] private VoidEventChannelSO OnSceneReadyEC;
+		
+		[Header("Recieve Events On"), SerializeField] private IntEventChannelSO useConnectorEC;
+		
+		
+		public LevelDataSO CurrentLevel => currentLevel;
+		public string StartLevelName => startLevel.name;
 
 		public void LoadNextLevel() {
 			LevelConnectorSO exit = null;
@@ -26,8 +46,8 @@ namespace GDP01.Structure {
 				}
 			}
 
-			if ( exit is {} && exit.Targets.Length > 0 ) {
-				LoadLevel(exit.Targets[0].LevelData);
+			if ( exit is { } && exit.Target != null ) {
+				LoadLevel(exit.Target.LevelData);
 			}
 		}
 
@@ -40,8 +60,8 @@ namespace GDP01.Structure {
 				}
 			}
 
-			if ( entrance is {} && entrance.Targets.Length > 0 ) {
-				LoadLevel(entrance.Targets[0].LevelData);
+			if ( entrance is {} && entrance.Target != null ) {
+				LoadLevel(entrance.Target.LevelData);
 			}
 		}
 
@@ -66,8 +86,10 @@ namespace GDP01.Structure {
 
 			if ( currentLevel == level ) {
 				Debug.Log(
-					"---------------------------\n" +
-				          "Load Currently Loaded Level");
+					$"---------------------------\n" +
+				          $"Load Currently Loaded Level: {level}");
+				//todo reload level, send load level event to scene loader and reload from there
+				OnSceneReadyEC.RaiseEvent();
 				return;
 			}
 			
@@ -89,11 +111,54 @@ namespace GDP01.Structure {
 			if ( currentLevel is { } ) {
 				LevelConnectorSO connector = currentLevel.Connectors.Find(so => so.Id == id);
 
-				if ( connector is { IsExit: true } && connector.Targets.Length > 0 ) {
-					LoadLevel(connector.Targets[0].LevelData);
+				if ( connector is { IsExit: true } && connector.Target != null ) {
+					//inform all valid chars?
+					
+					LoadLevel(connector.Target.LevelData);
 				}
 			}
 		}
+
+		//todo veralgemeinern -> make generic?
+		// private void LoadLevelAfterUpdateSaveData(LevelDataSO levelData) {
+		// 	void LoadLevelAndUnregister() {
+		// 		LoadLevel(levelData);
+		// 		UpdateSaveDataEC.AfterEventRaised -= LoadLevelAndUnregister;
+		// 	}
+		//
+		// 	UpdateSaveDataEC.AfterEventRaised += LoadLevelAndUnregister;
+		// 	UpdateSaveDataEC.RaiseEvent();
+		// }
+		
+		
+		public ConnectionData GetEnteringLocationData(int connectorId) {
+			LevelConnectorSO connector = currentLevel.Connectors.FirstOrDefault(c => c.Id == connectorId);
+			if ( connector is { } ) {
+				return new ConnectionData {
+					id = connector.Target.Id,
+					name = connector.Target.LevelData.name
+				};	
+			}
+			else {
+				return new ConnectionData();
+			}
+		}
+
+		public bool IsCurrentLevel(string name) {
+			return currentLevel.name.Equals(name);
+		}
+		
+///// Save State ///////////////////////////////////////////////////////////////////////////////////		
+
+		public LevelManagerData Save() {
+			return new LevelManagerData { Level = currentLevel ?? startLevel };
+		}
+
+		public void Load(LevelManagerData data) {
+			LoadLevel(data.Level ? data.Level : startLevel);
+		}
+		
+///// Unity Functions //////////////////////////////////////////////////////////////////////////////
 		
 		private void OnEnable() {
 			//load game save -> save system
@@ -104,7 +169,7 @@ namespace GDP01.Structure {
 			// get current location
 			// load current location
 
-			LoadLevel(startLevel);
+			// LoadLevel(startLevel);
 
 			useConnectorEC.OnEventRaised += HandleUseConnector;
 		}

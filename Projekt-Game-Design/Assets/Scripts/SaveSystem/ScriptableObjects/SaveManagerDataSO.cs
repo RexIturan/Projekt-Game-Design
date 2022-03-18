@@ -3,14 +3,14 @@
 namespace SaveSystem.ScriptableObjects {
     [CreateAssetMenu(fileName = "SaveManagerData", menuName = "Game/SaveManagerData", order = 0)]
     public class SaveManagerDataSO : ScriptableObject {
-        public bool inputLoad;
-        public bool inputSave;
-        public bool inputNewGame;
-        public bool loaded;
-        public bool saved;
+        [SerializeField] private bool inputLoad;
+        [SerializeField] private bool inputSave;
+        [SerializeField] private bool inputNewGame;
+        [SerializeField] private bool loaded;
+        [SerializeField] private bool saved;
 
         // todo remove
-        public string path;
+        [SerializeField] private string path;
         
         public void Reset() {
             inputLoad = false;

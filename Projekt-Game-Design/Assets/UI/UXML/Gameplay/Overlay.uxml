@@ -1,8 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="/Assets/UI/Styles/UI_Classes.uss" />
-    <Style src="/Assets/UI/Styles/Button_Layout.uss" />
+    <Style src="project://database/Assets/UI/Styles/UI_Classes.uss?fileID=7433441132597879392&amp;guid=c12b596b2c1f0734a91f4663ccffebea&amp;type=3#UI_Classes" />
+    <Style src="project://database/Assets/UI/Styles/Button_Layout.uss?fileID=7433441132597879392&amp;guid=6ddf6212474c2a84ca2664a443a93551&amp;type=3#Button_Layout" />
     <ui:VisualElement name="OverlayContainer" picking-mode="Ignore" style="flex-grow: 1; display: flex; position: absolute; width: 100%; height: 100%;">
         <ui:VisualElement name="LeftSidebar" picking-mode="Ignore" style="flex-grow: 0; width: 20%; height: 100%; position: absolute; margin-left: 10px; justify-content: space-between;">
+            <ui:Button text="Button" display-tooltip-when-elided="true" />
             <ui:VisualElement name="PartyContainer" picking-mode="Ignore" style="top: auto; height: 40%; -unity-slice-top: 0; margin-top: 30%; margin-left: 0; margin-right: 0; padding-top: 4%; background-color: rgba(26, 26, 26, 0.43); padding-left: 4%; padding-right: 4%; padding-bottom: 0; visibility: hidden;">
                 <ui:VisualElement name="PlayerOne" class="PlayerPartySelection" style="display: flex;">
                     <ui:VisualElement name="PlayerPicture" class="PlayerPicture" />
@@ -44,7 +45,7 @@
             <UI.Components.Character.CharacterStatusValuePanel name="CharacterStatusValuePanel" style="display: flex;" />
         </ui:VisualElement>
         <GDP01.UI.Components.ActionBar number-of-actions="10" picking-mode="Ignore" name="ActionBar" />
-        <ui:Button display-tooltip-when-elided="true" name="EndTurnButton" focusable="false" class="EndturnButton" style="right: -1px; bottom: -1px; background-color: rgb(178, 178, 178); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-width: 4px; border-right-width: 4px; border-top-width: 4px; border-bottom-width: 4px; position: absolute; border-top-left-radius: 225px; border-bottom-left-radius: 225px; border-top-right-radius: 225px; border-bottom-right-radius: 225px; width: 200px; height: 200px; justify-content: center; align-items: center;">
+        <ui:Button display-tooltip-when-elided="true" name="EndTurnButton" class="EndturnButton" style="right: -1px; bottom: -1px; background-color: rgb(178, 178, 178); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-width: 4px; border-right-width: 4px; border-top-width: 4px; border-bottom-width: 4px; position: absolute; border-top-left-radius: 225px; border-bottom-left-radius: 225px; border-top-right-radius: 225px; border-bottom-right-radius: 225px; width: 200px; height: 200px; justify-content: center; align-items: center;">
             <ui:Label text="END TURN" display-tooltip-when-elided="true" enable-rich-text="false" style="font-size: 27%; margin-right: 0; color: rgb(7, 7, 7); -unity-font-style: bold; height: 33px; width: 118px; display: flex; background-color: rgba(0, 0, 0, 0);" />
             <ui:Label display-tooltip-when-elided="true" name="TurnIndicator" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 14%; display: flex;" />
         </ui:Button>

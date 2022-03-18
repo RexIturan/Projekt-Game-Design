@@ -114,7 +114,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090678773647796919}
-  m_Mesh: {fileID: 5076832188769910695, guid: b7f52afb97ae75b45b1ac0f48cd23d50, type: 3}
+  m_Mesh: {fileID: 5175954674425621859, guid: 67b310252bfacf24199dbb5edd4693f3, type: 3}
 --- !u!1 &8238772793520087123
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4119786567072244756}
   - component: {fileID: 3458906127352860311}
+  - component: {fileID: 1533514152227615297}
   - component: {fileID: 7084610371603930105}
   - component: {fileID: 475642740}
   m_Layer: 0
@@ -163,6 +164,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1533514152227615297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8238772793520087123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a407255e9ed41cca18c9777bb0c7aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridPosition: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
+  gridData: {fileID: 11400000, guid: 3162147cfd81d2942ac3608f2a8e6ab5, type: 2}
 --- !u!114 &7084610371603930105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,12 +191,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4350a6e7aa916f643b14450623a22d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSO: {fileID: 11400000, guid: b3246b02ab1d7414182bb91ea545e06b, type: 2}
+  id: 0
+  _type: {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
+  _gridTransform: {fileID: 1533514152227615297}
   modelTransform: {fileID: 8211786999615408900}
   _armorRotationOffset: {x: -90, y: 0, z: 0}
   _armorPositionOffset: {x: 0, y: 0, z: 0}
   _defaultRotationOffset: {x: 0, y: 0, z: 0}
   _defaultPositionOffset: {x: 0, y: 0.25, z: 0}
+  _itemData:
+    id: -1
+    gridPosition: {x: 0, y: 0, z: 0}
+    gridrotation: {x: 0, y: 0, z: 0}
 --- !u!114 &475642740
 MonoBehaviour:
   m_ObjectHideFlags: 0

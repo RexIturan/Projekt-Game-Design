@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd08611dcd14b7b9f73d6661114ff9f, type: 3}
   m_Name: EquipmentContainerSO
   m_EditorClassIdentifier: 
-  equipmentSheets: []
+  equipmentSheets:
+  - weaponLeft: {fileID: 0}
+    weaponRight: {fileID: 11400000, guid: cc7bce70626d15f42bb9da09b013eca2, type: 2}
+    headArmor: {fileID: 0}
+    bodyArmor: {fileID: 0}
+    shield: {fileID: 0}
+  - weaponLeft: {fileID: 0}
+    weaponRight: {fileID: 11400000, guid: 4e3ae39bd9b95854ab4c55c1d90db993, type: 2}
+    headArmor: {fileID: 11400000, guid: 5ca4359a8b58b644b8d6d4bc8f34b8f8, type: 2}
+    bodyArmor: {fileID: 11400000, guid: 5af18ceaeab735d4a942216ebf69cd64, type: 2}
+    shield: {fileID: 0}
+  - weaponLeft: {fileID: 0}
+    weaponRight: {fileID: 0}
+    headArmor: {fileID: 0}
+    bodyArmor: {fileID: 0}
+    shield: {fileID: 0}
+  - weaponLeft: {fileID: 0}
+    weaponRight: {fileID: 0}
+    headArmor: {fileID: 0}
+    bodyArmor: {fileID: 0}
+    shield: {fileID: 0}

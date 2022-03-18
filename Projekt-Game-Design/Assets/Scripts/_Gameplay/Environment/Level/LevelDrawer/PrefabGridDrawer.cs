@@ -1,5 +1,6 @@
 ﻿using Grid;
 using UnityEngine;
+using WorldObjects;
 
 namespace Visual {
     public class PrefabGridDrawer : MonoBehaviour, IMapDrawer {
@@ -78,19 +79,19 @@ namespace Visual {
 	        itemComponent.InitItem(itemData);
         }
         
-        private void CreateItemGameObject(int id, Vector3 worldPos, Vector3Int gridPos, GameObject[,,] items) {
-	        var itemData = itemDictionary.itemList[id];
-	        var prefab = itemData.prefab;
+        private void CreateItemGameObject(int id, Vector3 worldPos, Vector3Int gridPos, GameObject[,,] itemComponents) {
+	        ItemSO itemType = itemDictionary.itemList[id];
+	        var prefab = itemType.prefab;
 	        var obj = GameObject.Instantiate(
 		        original: prefab, 
 		        position: worldPos,
 		        rotation: Quaternion.identity);
 
 	        obj.transform.SetParent(itemParent.transform);
-	        items[gridPos.x, gridPos.y, gridPos.z] = obj;
-	        ItemComponent item = items[gridPos.x, gridPos.y, gridPos.z].GetComponent<ItemComponent>();
-					item.itemSO = itemData;
-					item.Reset();
+	        itemComponents[gridPos.x, gridPos.y, gridPos.z] = obj;
+	        ItemComponent itemComponent = itemComponents[gridPos.x, gridPos.y, gridPos.z].GetComponent<ItemComponent>();
+					itemComponent.Type = itemType;
+					itemComponent.Reset();
         }
 
         private void RemoveItemGameObject(Vector3Int gridPos, GameObject[,,] items) {

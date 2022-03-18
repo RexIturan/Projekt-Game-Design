@@ -1,0 +1,33 @@
+{
+    "GameData": {
+        "LocationData": {
+            "Name": "Level-B"
+        },
+        "PlayerCharacters": null,
+        "EquipmentContainerData": {
+            "equipmentSheets": []
+        },
+        "InventoryData": {
+            "inventory": []
+        }
+    },
+    "LevelData": {
+        "Level-B": {
+            "Collectabeles": [
+                {
+                    "Position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "Amount": 1,
+                    "Active": false
+                }
+            ],
+            "EnemyCharacterDatas": [],
+            "Doors": [],
+            "Switches": [],
+            "Items": []
+        }
+    }
+}

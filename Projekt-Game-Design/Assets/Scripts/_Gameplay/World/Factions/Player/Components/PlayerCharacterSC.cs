@@ -1,50 +1,64 @@
+using System;
 using Characters;
-using Characters.Movement;
-using Characters.PlayerCharacter.ScriptableObjects;
 using Characters.Types;
-using Combat;
+using FullSerializer;
+using GDP01._Gameplay.World.Character.Components;
+using GDP01._Gameplay.World.Character.Data;
 using GDP01.Characters.Component;
-using GDP01.World.Components;
+using GDP01.Structure;
+using GDP01.Structure.Provider;
 using SaveSystem.SaveFormats;
 using UnityEngine;
-using Visual.Healthbar;
 
 
 /// <summary>
 /// attached to each playable character 
 /// contains relevant data such as stats
 /// </summary> 
-[System.Serializable]
-public class PlayerCharacterSC : MonoBehaviour {
-	public int id;
-	public bool active;
+public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterData> {
 
-	[Header("Basic Stats")]
-	// Base stats
-	public PlayerTypeSO playerType;
-	// public PlayerSpawnDataSO playerSpawnData;
-
-	[SerializeField] private Statistics _statistics;
-	[SerializeField] private GridTransform _gridTransform;
-	[SerializeField] private Attacker _attacker;
-	[SerializeField] private MovementController _movementController;
-	[SerializeField] private EquipmentController _equipmentController;
-	[SerializeField] private AbilityController _abilityController;
-	[SerializeField] private ModelController _modelController;
-	[SerializeField] private Targetable _targetable;
-
-	[SerializeField] private HealthbarController _healthbarController;
+	[SerializeField] public PlayerTypeSO playerType;
 
 	//todo move to some central location
-	[SerializeField] private Color playerColor;
-	[SerializeField] private Color friendlyColor;
+	[SerializeField, fsIgnore] private Color playerColor;
+	[SerializeField, fsIgnore] private Color friendlyColor;
+	[SerializeField] private EquipmentController _equipmentController;
 
-///// Private Functions ////////////////////////////////////////////////////////////////////////////	
+	[SerializeField] private string _locationName = String.Empty;
+	[SerializeField] private bool _enteringNewLocation = false;
+	[SerializeField] private int _connectorID = 0;
 	
+///// Properties ///////////////////////////////////////////////////////////////////////////////////
+	
+	public Statistics Statistics => _statistics;
+	public EquipmentController EquipmentController => _equipmentController;
+	
+	//todo maybe dont use this here
+	private LevelManager LevelManager => StructureProvider.Current.LevelManager;
+	
+	//locationAccess
+	public string LocationName {
+		get => _locationName;
+		set => _locationName = value;
+	}
+	
+	public int ConnectorId {
+		get => _connectorID;
+		set => _connectorID = value;
+	}
+	
+	public bool EnterNewLocation {
+		get => _enteringNewLocation;
+		set => _enteringNewLocation = value;
+	}
+	
+///// Private Functions ////////////////////////////////////////////////////////////////////////////	
+
 	private bool initialized = false;
 
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////	
 	
+	//todo remove
 	public void Initialize() {
 		id = -1;
 		active = false;
@@ -63,18 +77,16 @@ public class PlayerCharacterSC : MonoBehaviour {
 
 		//model
 		_modelController.prefab = playerType.modelPrefab;
-		_modelController.Initialize();
+		_modelController.Initialize(null);
 		_modelController.SetStandardHead(playerType.headModel);
 		_modelController.SetStandardBody(playerType.bodyModel);
 		_modelController.SetFactionMaterial(_statistics.Faction);
 
 		//Equipment
-		_equipmentController.equipmentID = 0; // playerSpawnData.equipmentID;
+		_equipmentController.EquipmentID = -1; // playerSpawnData.equipmentID;
 
 		//Abilities
 		_abilityController.BaseAbilities = playerType.basicAbilities;
-		_abilityController.LastSelectedAbilityID = -1;
-		_abilityController.damageInflicted = true;
 
 		_healthbarController.SetColor(_statistics.Faction == Faction.Player
 			? playerColor
@@ -85,6 +97,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 		initialized = true;
 	}
 
+	//todo remove
 	public void InitializeFromSave(PlayerCharacter_Save saveData) {
 		Initialize();
 		id = saveData.id;
@@ -92,7 +105,7 @@ public class PlayerCharacterSC : MonoBehaviour {
 		_statistics.StatusValues.HitPoints.Value = saveData.hitpoints;
 		_statistics.StatusValues.Energy.Value = saveData.energy;
 		_gridTransform.gridPosition = saveData.pos;
-		_equipmentController.equipmentID = saveData.id;
+		_equipmentController.EquipmentID = saveData.id;
 
 		_statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
 		_modelController.SetFactionMaterial(_statistics.Faction);
@@ -109,14 +122,44 @@ public class PlayerCharacterSC : MonoBehaviour {
 		characters.playerContainer.Add(gameObject);
 	}
 
-///// Unity Function ///////////////////////////////////////////////////////////////////////////////
-	
-	public void Start() {
-		_equipmentController.RefreshEquipment();
+	public override PlayerCharacterData Save() {
+		//todo gather refgerences and transform data
 
-		//for editor purpuse	
-		if ( !initialized ) {
-			Initialize();
-		}
+		PlayerCharacterData data = base.Save();
+
+		// data.LocationName = StructureProvider.Current.LevelManager
+
+		data.LocationName = _locationName = LevelManager.CurrentLevel.name;
+		
+		
+		return data; 
 	}
+
+	public override void Load(PlayerCharacterData data) {
+		// Initialize();
+		base.Load(data);
+		
+		//Equipment
+		_equipmentController.EquipmentID = id;
+		
+		_healthbarController.SetColor(_statistics.Faction == Faction.Player
+			? playerColor
+			: friendlyColor);
+		
+		_statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
+		_modelController.SetFactionMaterial(_statistics.Faction);
+
+		if ( data.LocationName == null || data.LocationName.Equals(String.Empty) ) {
+			data.LocationName = LevelManager.CurrentLevel.name;
+		}
+		else {
+			//todo deactivate char
+		}
+		
+		// Debug.Log("Load PlayerCharacterSC");
+		
+		_equipmentController.RefreshEquipment();
+	}
+	
+///// Unity Function ///////////////////////////////////////////////////////////////////////////////
 }

@@ -49,6 +49,8 @@ namespace Characters {
 		public StatusValue Level {
 			get { return GetValue(StatusType.Level); }
 		}
+
+		public List<StatusValue> Stats => _statusValues;
 		
 //////////////////////////////////////////////////////////////////
 
@@ -57,8 +59,9 @@ namespace Characters {
 
 //////////////////////////////////////////////////////////////////
 
+		//empty StatusValues		
 		public StatusValues() {
-			InitialiseStatusValuesDictionary();
+			// InitialiseStatusValuesDictionary();
 		}
 
 		public void InitialiseStatusValuesDictionary() {
@@ -71,39 +74,48 @@ namespace Characters {
 				_values.Add(( StatusType )types.GetValue(i), i);
 				_statusValues.Add(stat);
 			}
-			
-			// foreach ( var type in types ) {
-			// 	var stat = new StatusValue(( StatusType )type, 0, 0, 0);
-			// 	_values.Add(( StatusType )type, stat);
-			// 	_statusValues.Add(stat);
-			// }
 		}
 
-		public void InitValues(List<StatusValue> values) {
-			foreach ( var value in values ) {
-				SetValue(value.Type, value);
+		public StatusValues InitValues(List<StatusValue> values) {
+			InitialiseStatusValuesDictionary();
+
+			if ( values != null ) {
+				foreach ( var value in values ) {
+					SetValue(value);
+				}	
 			}
+			
+			return this;
 		}
 		
 		// getter setter
-		// uses a deep copy of value and not actually same value TODO: check if this is the expected behavior of function
-		public void SetValue(StatusType type, StatusValue value) {
-			if ( _values.ContainsKey(type) ) {
-				_statusValues[_values[type]] = value.Copy();
-				// _values[type] = value.Copy();	
-			}
-			else {
-				throw new InvalidOperationException();
+		// uses a deep copy of value and not actually same value
+		// TODO: check if this is the expected behavior of function
+		public void SetValue(StatusValue value) {
+
+			if ( value != null ) {
+				if ( _values.ContainsKey(value.Type) ) {
+					_statusValues[_values[value.Type]] = value.Copy();
+				}
+				else {
+					throw new InvalidOperationException();
+				}	
 			}
 		}
 		
 		public StatusValue GetValue(StatusType type) {
-			if ( _values.ContainsKey(type) ) {
-				return _statusValues[_values[type]];
-				// return _values[type];	
+			if ( _values is { } ) {
+				if ( _values.ContainsKey(type) ) {
+					return _statusValues[_values[type]];
+				}
+				else {
+					throw new InvalidOperationException();
+				}	
 			}
 			else {
-				throw new InvalidOperationException();
+				// _values isnt initialised
+				// Debug.LogError("_values isnt initialised");
+				return null;
 			}
 		}
 

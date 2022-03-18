@@ -1,18 +1,24 @@
 using System;
+using GDP01.Util;
+using SaveSystem.V2.Data;
 using UnityEditor;
 using UnityEngine;
+using WorldObjects;
 
 /// <summary>
 /// Item SO
 /// contains info about use, type, stats and looks of a Item 
 /// </summary>
 [CreateAssetMenu(fileName = "New Item", menuName = "Items/Item")]
-public class ItemSO : ScriptableObject {
-    public int id;
+public class ItemSO : WorldObject.TypeSO {
+	
+		public class ItemTypeData : ReferenceData {
+			public new ItemSO obj;
+		}
+	
 
     // art
     public Sprite icon;
-    public GameObject prefab;
     public Mesh mesh;
     public Material material;
 
@@ -43,4 +49,16 @@ public class ItemSO : ScriptableObject {
 			}
     }
 #endif
+
+	public new ItemTypeData ToData() {
+		return new ItemTypeData {
+			guid = this.Guid,
+			name = name,
+			obj = this
+		};
+	}
+
+	public ItemComponent.ItemData ToComponentData() {
+		return base.ToComponentData<ItemComponent.ItemData>();
+	}
 }

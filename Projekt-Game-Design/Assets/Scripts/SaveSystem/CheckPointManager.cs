@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckPointManager : MonoBehaviour
-{
+public class CheckPointManager : MonoBehaviour{
+	
 		[SerializeField] private bool saveState;
 		[SerializeField] private bool loadState;
 		[SerializeField] private IntEventChannelSO saveGame;

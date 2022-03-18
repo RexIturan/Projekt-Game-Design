@@ -28,7 +28,7 @@ public class CharacterList : MonoBehaviour
 			    if ( enemy != null ) {
 				    var component = enemy.GetComponent<EnemyCharacterSC>();
 						
-				    if ( component.enemyType == enemyType ) {
+				    if ( component.Type == enemyType ) {
 					    count++;
 				    }  
 			    }

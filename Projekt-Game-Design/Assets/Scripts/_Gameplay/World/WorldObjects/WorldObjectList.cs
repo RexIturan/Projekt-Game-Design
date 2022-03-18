@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SaveSystem.V2.Data;
 using UnityEngine;
 
 namespace WorldObjects

@@ -81,7 +81,7 @@ namespace Graph {
 
 						foreach ( var door in worldObjectList.doors )
 						{
-								if(!door.GetComponent<Door>().open)
+								if(!door.GetComponent<Door>().IsOpen)
 								{
 										var pos = globalGridData.GetGridPos2DFromGridPos3D(door.GetComponent<GridTransform>().gridPosition);
 										graph.GetGridObject(pos).SetIsWalkable(false);
@@ -90,7 +90,7 @@ namespace Graph {
 
 						foreach ( var switchComponent in worldObjectList.switches )
 						{
-								if(!switchComponent.GetComponent<SwitchComponent>().switchType.walkThrough)
+								if(!switchComponent.GetComponent<SwitchComponent>().Type.walkThrough)
 								{
 										var pos = globalGridData.GetGridPos2DFromGridPos3D(switchComponent.GetComponent<GridTransform>().gridPosition);
 										graph.GetGridObject(pos).SetIsWalkable(false);

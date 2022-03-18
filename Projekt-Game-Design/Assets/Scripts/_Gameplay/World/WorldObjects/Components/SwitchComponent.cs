@@ -1,16 +1,11 @@
 using Audio;
 using Characters;
-using Combat;
 using Events.ScriptableObjects;
 using SaveSystem.SaveFormats;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace WorldObjects
-{
-		public class SwitchComponent : MonoBehaviour
-		{
+namespace WorldObjects {
+		public partial class SwitchComponent : WorldObject.Factory<SwitchComponent, SwitchComponent.SwitchData> {
 				private const float EPSILON = 0.1f;
 
 				[Header("Sending Events on:")]
@@ -21,18 +16,20 @@ namespace WorldObjects
 
 				[SerializeField] private SwitchAnimator switchAnimator;
 				
-				public int switchId;
-				public SwitchTypeSO switchType;
-				[SerializeField] private bool activated;
-				public Vector3 orientation;
+				[SerializeField] protected new SwitchTypeSO _type;
+				public new SwitchTypeSO Type => _type;
 				
-				public bool IsActivated {
-					get { return activated; }
+				[SerializeField] private SwitchData switchData;
+				
+				public float Range => switchData.range;
+
+				public bool Activated {
+					get => switchData.Active;
+					set => switchData.Active = value;
 				}
 				
-				public void ToggleState() {
-					activated = !activated;
-				}
+				public bool IsActivated => Activated;
+				public void ToggleState() => Activated = !Activated;
 
 				public void Awake() {
 						updateWorldObjectEvent.OnEventRaised += UpdateSwitch;
@@ -44,11 +41,11 @@ namespace WorldObjects
 
 				public void Initialise(Switch_Save switch_Save, SwitchTypeSO switchType)
 				{
-						activated = false;
-						this.switchId = switch_Save.switchId;
-						this.switchType = switchType;
+					Activated = false;
+						id = switch_Save.switchId;
+						_type = switchType;
 
-						orientation = switch_Save.orientation;
+						Rotation = switch_Save.orientation;
 						InitialiseOrientation();
 						
 						// Instantiate(switchType.model, transform);
@@ -61,18 +58,18 @@ namespace WorldObjects
 
 				private void InitialiseOrientation()
 				{
-						gameObject.transform.rotation = Quaternion.LookRotation(orientation);
+						gameObject.transform.rotation = Quaternion.LookRotation(Rotation);
 				}
 
 				// activates switch if conditions are met
 				public void UpdateSwitch() {
-						if ( !activated ) {
+						if ( !IsActivated ) {
 								CharacterList characters = CharacterList.FindInstant();
 								bool playerInRange = false;
 								foreach ( GameObject player in characters.playerContainer ) {
 										Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
 										Vector3Int switchPos = gameObject.GetComponent<GridTransform>().gridPosition;
-										if ( Vector3Int.Distance(playerPos, switchPos) < ( float )switchType.range + EPSILON ) {
+										if ( Vector3Int.Distance(playerPos, switchPos) < ( float )Range + EPSILON ) {
 												playerInRange = true;
 										}
 								}
@@ -83,12 +80,12 @@ namespace WorldObjects
 				}
 
 				private void SwitchActivated() {
-					activated = true;
+					Activated = true;
 					switchAnimator.FlipSwitch();
-					switchActivatedEvent.RaiseEvent(switchId);
+					switchActivatedEvent.RaiseEvent(Id);
 
 					//todo send event to play a sound
-					AudioManager.FindSoundManager()?.PlaySound(switchType.activationSound);
+					AudioManager.FindSoundManager()?.PlaySound(Type.activationSound);
 				}
 		}
 }

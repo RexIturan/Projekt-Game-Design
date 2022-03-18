@@ -1,15 +1,13 @@
 {
     "name": "GDP01.UI",
-    "rootNamespace": "GDP01",
+    "rootNamespace": "",
     "references": [
-        "UnityEngine.UIElementsInputSystemModule",
-        "UnityEngine.UIElementsModule",
-        "UnityEditor.UIElementsModule",
         "Unity.Addressables",
         "Unity.InputSystem",
         "GDP01.UI.EventChannels",
         "GDP01.Util.Extensions",
         "GDP01.UI.Types",
+        "GDP01.Util.Types",
         "GDP01.Util.UI",
         "GDP01.Util",
         "GDP01.SceneManagement",
@@ -22,14 +20,15 @@
         "GDP01.Gameplay.Types",
         "GDP01.Gameplay",
         "GDP01.SceneManagement.EventChannels",
-        "GDP01.SceneManagement.Types"
+        "GDP01.SceneManagement.Types",
+        "GDP01.SaveSystem.V2.Types"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

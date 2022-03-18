@@ -1,5 +1,5 @@
-using System.Collections.Generic;
-using Characters;
+using GDP01._Gameplay.World.Character;
+using GDP01._Gameplay.World.Character.Data;
 using UnityEngine;
 
 /// <summary>
@@ -7,25 +7,20 @@ using UnityEngine;
 /// for individual types of players (e.g. warrior, mage)
 /// </summary> 
 [CreateAssetMenu(fileName = "New PlayerType", menuName = "Character/PlayerType")]
-public class PlayerTypeSO : ScriptableObject {
-	public int id;
-	public Sprite icon;
-	
-	//base prefab
-	public GameObject prefab;
-	public GameObject modelPrefab;
-	public Mesh headModel;
-	public Mesh bodyModel;
-
-	//stats
-	public List<StatusValue> baseStatusValues;
-	//todo save somewhere else
-	public int movementPointsPerEnergy;
-	public int movementCostPerTile = 1;
-
+public class PlayerTypeSO : CharacterTypeSO {
 	//equipment
-	public int startingEquipmentID;
-	
-	// ability
-	public AbilitySO[] basicAbilities; // actions at all time available
+	// public int equipmentID;
+
+	// public override T ToData<T>() {
+	// 	return base.ToData<T>();
+	// }
+
+	public new PlayerCharacterData ToData() {
+		PlayerCharacterData playerData = base.ToData<PlayerCharacterData>();
+		
+		// playerData.EquipmentId = equipmentID;
+		playerData.Type = this;
+		
+		return playerData;
+	}
 }

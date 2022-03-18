@@ -150,6 +150,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 842792788}
   m_RootOrder: 3
@@ -170,7 +171,7 @@ MonoBehaviour:
     H\nHelpBox Text can be acessed by a string event channel"
   inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   helpBoxTreeAsset: {fileID: 9197481963319205126, guid: 7007152ed7f32fd448fb935f4472ba12, type: 3}
-  uiDocument: {fileID: 1170638170}
+  uiDocument: {fileID: 0}
   setHelpTextEC: {fileID: 11400000, guid: 359b389c79f78b14baeb26c90242c714, type: 2}
 --- !u!1 &842792787
 GameObject:
@@ -198,6 +199,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1170638171}
   - {fileID: 863252158}
@@ -259,6 +261,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 842792788}
   m_RootOrder: 1
@@ -272,7 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1170638171}
-  - component: {fileID: 1170638170}
+  - component: {fileID: 1170638173}
   - component: {fileID: 1170638172}
   m_Layer: 5
   m_Name: UIDocument
@@ -281,22 +284,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1170638170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170638169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f21c074d86024caca2a0034ce4f53f73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: e23928201c411004b837e5d6c951d062, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 0}
-  m_SortingOrder: 1
 --- !u!4 &1170638171
 Transform:
   m_ObjectHideFlags: 0
@@ -307,6 +294,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 842792788}
   m_RootOrder: 0
@@ -323,9 +311,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01eecfb1390847769b06691925d1b98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiDocument: {fileID: 1170638170}
+  uiDocument: {fileID: 0}
   mouseOverUI_EC: {fileID: 11400000, guid: 2649fdca3d5737645a304d044086dbd7, type: 2}
   onSceneReady_EC: {fileID: 11400000, guid: adc2b2119413a854c95a3275160a618d, type: 2}
+--- !u!114 &1170638173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170638169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 56e2fc8d2b6b03d40a1c7ecf51e46bbb, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 0}
+  m_SortingOrder: 0
 --- !u!1 &1413045654
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +357,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 842792788}
   m_RootOrder: 2
@@ -371,6 +376,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   loadingScreenTreeAsset: {fileID: 9197481963319205126, guid: 2c2dff7b24b8be04681fcd9cdfcb1d91, type: 3}
-  uiDocument: {fileID: 1170638170}
+  uiDocument: {fileID: 0}
   toggleLoadingScreen: {fileID: 11400000, guid: 1813d57a6be071c45977e16f33bbbf82, type: 2}
   enableGamplayInputEC: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}

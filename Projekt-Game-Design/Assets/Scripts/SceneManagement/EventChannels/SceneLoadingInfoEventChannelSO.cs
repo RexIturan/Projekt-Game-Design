@@ -12,9 +12,12 @@ namespace GDP01.SceneManagement.EventChannels {
 	[CreateAssetMenu(menuName = "Events/Scene Management/ new Load Scene Event Channel")]
 	public class SceneLoadingInfoEventChannelSO : EventChannelBaseSO {
 		
+		public event Action<SceneLoadingData> BeforeLoadingRequested;
 		public event Action<SceneLoadingData> OnLoadingRequested;
 
 		public void RaiseEvent(SceneLoadingData sceneLoadingData) {
+			BeforeLoadingRequested?.Invoke(sceneLoadingData);
+			
 			if (OnLoadingRequested != null) {
 				OnLoadingRequested.Invoke(sceneLoadingData);
 			} else {

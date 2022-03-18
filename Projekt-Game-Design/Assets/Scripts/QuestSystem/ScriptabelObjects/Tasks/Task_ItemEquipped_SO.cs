@@ -11,7 +11,7 @@ namespace QuestSystem.ScriptabelObjects {
 		
 		public override bool IsDone() {
 			if ( active ) {
-				var equipmentInventories = equipmentContainer.equipmentSheets;
+				var equipmentInventories = equipmentContainer.EquipmentSheets;
 				done = false;
 				foreach ( var equipInv in equipmentInventories ) {
 					var equipArray = equipInv.EquipmentToArray();

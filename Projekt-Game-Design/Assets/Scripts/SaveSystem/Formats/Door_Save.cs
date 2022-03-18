@@ -4,8 +4,8 @@ using UnityEngine;
 namespace SaveSystem.SaveFormats
 {
 		[System.Serializable]
-		public class Door_Save
-		{
+		public class Door_Save {
+			
 				public int doorTypeId;
 				public Vector3Int gridPos;
 				public Vector3 orientation;

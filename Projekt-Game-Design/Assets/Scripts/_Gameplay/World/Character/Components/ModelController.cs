@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Characters.Types;
 using GDP01._Gameplay.Logic_Data.Equipment.Types;
+using GDP01._Gameplay.World.Character;
 using GDP01.Characters.Component;
 using UnityEngine;
 using static EquipmentPosition;
@@ -32,12 +33,19 @@ namespace Characters {
 		[SerializeField] private CharacterModelController characterModelController;
 		[SerializeField] private CharacterAnimationController animationController;
 		
-		public void Initialize() {
+		public void Initialize(CharacterTypeSO type) {
 			//init model
 			if ( Model is null ) {
 				Model = Instantiate(prefab, this.transform);
 				characterModelController = Model.GetComponentInChildren<CharacterModelController>();
 				animationController = Model.GetComponent<CharacterAnimationController>();
+			}
+
+			if ( type != null ) {
+				SetStandardBody(type.bodyModel);
+				SetStandardHead(type.headModel);
+				SetMeshHead(type.headModel);
+				SetMeshBody(type.bodyModel);	
 			}
 		}
 		

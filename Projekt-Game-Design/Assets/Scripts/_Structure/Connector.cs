@@ -14,9 +14,8 @@ namespace GDP01.Structure {
 
 		private void OnEnable() {
 			for ( int i = 0; i < transform.childCount; i++ ) {
-				Transform child = transform.GetChild(i);
 				if ( Camera.main is {} ) {
-					child.GetComponentInChildren<Canvas>().worldCamera = Camera.main;	
+					GetComponentInChildren<Canvas>().worldCamera = Camera.main;	
 				}
 			}
 		}

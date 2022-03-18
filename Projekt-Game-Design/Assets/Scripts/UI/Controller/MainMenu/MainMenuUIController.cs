@@ -1,8 +1,6 @@
 using System;
 using Events.ScriptableObjects;
 using GDP01.UI;
-using GDP01.UI.Types;
-using SaveSystem;
 using SceneManagement.ScriptableObjects;
 using UnityEngine.UIElements;
 using UnityEngine;
@@ -16,7 +14,6 @@ public struct MainMenuButtonNames {
 	public string levelEditor;
 	public string settings;
 	public string exit;
-	public UnityEvent testAction;
 }
 
 public class MainMenuUIController : MonoBehaviour {
@@ -74,7 +71,7 @@ public class MainMenuUIController : MonoBehaviour {
 
 	private void BindButtons() {
 		var root = GetComponent<UIDocument>().rootVisualElement;
-		BindButton(ref     _startGameButton, root, buttonNames.startGame, HandleStartGameGame);
+		BindButton(ref     _startGameButton, root, buttonNames.startGame, HandleNewGame);
 		BindButton(ref     _loadLevelButton, root, buttonNames.loadLevel, HandleLoadLevel);
 		BindButton(ref _loadTestLevelButton, root, buttonNames.loadTestLevel, HandleTestLevelButton);
 		BindButton(ref   _levelEditorButton, root, buttonNames.levelEditor, HandleLevelEditorButton);
@@ -83,7 +80,7 @@ public class MainMenuUIController : MonoBehaviour {
 	}
 
 	private void UnbindButtons() {
-		UnbindButton(    _startGameButton, HandleStartGameGame);
+		UnbindButton(    _startGameButton, HandleNewGame);
 		UnbindButton(    _loadLevelButton, HandleLoadLevel);
 		UnbindButton(_loadTestLevelButton, HandleLoadLevel);
 		UnbindButton(  _levelEditorButton, HandleLevelEditorButton);
@@ -115,11 +112,6 @@ public class MainMenuUIController : MonoBehaviour {
 	// 	_loadGame.style.display = DisplayStyle.None;
 	// }
 
-	void StartButtonPressed() {
-		// Szene laden
-		// SceneManager.LoadScene("GameDesign");
-	}
-
 	void QuitGame() {
 		
 		//todo send Quit Game Event
@@ -131,12 +123,12 @@ public class MainMenuUIController : MonoBehaviour {
 
 ///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
 
-	private void HandleStartGameGame() {
+	private void HandleNewGame() {
 		if ( showDebugMessages ) {
-			Debug.Log("StartGame Button Pressed");	
+			Debug.Log("New Game Button Pressed");	
 		}
 		
-		// loadGame.RaiseEvent(0);
+		loadGame.RaiseEvent(0);
 	}
 
 	private void HandleLoadLevel() {

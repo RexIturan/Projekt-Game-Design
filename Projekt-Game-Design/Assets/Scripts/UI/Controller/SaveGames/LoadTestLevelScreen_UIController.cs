@@ -91,8 +91,8 @@ namespace UI.SaveGames {
 					        logger.Log("level Loaded");
 					        logger.PrintDebugLog();
 					        loadLocation.RaiseEvent(locationsToLoad, false, true);
-					        _saveSystem.saveManagerData.inputLoad = true;
-					        _saveSystem.saveManagerData.loaded = true;
+					        // _saveSystem.saveManagerData.inputLoad = true;
+					        // _saveSystem.saveManagerData.loaded = true;
 				        }
 			        }
 			        catch ( Exception e ) {
@@ -142,8 +142,8 @@ namespace UI.SaveGames {
                         // Debug.Log($"Load {filename}" );
                         _saveSystem.SetCurrentSaveTo(index);
                         loadLocation.RaiseEvent(locationsToLoad, true, false);
-                        _saveSystem.saveManagerData.inputLoad = true;
-                        _saveSystem.saveManagerData.loaded = true;
+                        // _saveSystem.saveManagerData.inputLoad = true;
+                        // _saveSystem.saveManagerData.loaded = true;
                     };
                 }
                 else {

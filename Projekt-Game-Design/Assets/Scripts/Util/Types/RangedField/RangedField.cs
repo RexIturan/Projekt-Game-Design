@@ -1,22 +1,37 @@
-﻿namespace Util.Types {
-	public abstract class RangedField<T> {
-		private T _min;
-		private T _max;
-		private T _value;
+﻿using System;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
+namespace Util.Types {
+	[Serializable]
+	public abstract class RangedField<T> {
+		[SerializeField] protected string name;
+		[SerializeField] private T _min;
+		[SerializeField] private T _max;
+		[SerializeField] private T _value;
+
+		public event Action OnValueChanged = delegate { };
+		
 		public T Value {
 			get { return _value; }
 			set {
+				T newValue;
+				
 				// value < min
 				if ( Smaller(value, Min) ) {
-					_value = Min;
+					newValue = Min;
 				}
 				//value > max
 				else if( Grater(value, Max)) {
-					_value = Max;
+					newValue = Max;
 				}
 				else {
-					_value = value;
+					newValue = value;
+				}
+
+				if ( !_value.Equals(newValue) ) {
+					ValueChanged();
+					_value = newValue;
 				}
 			}
 		}
@@ -29,10 +44,13 @@
 					Value = Min;
 				}
 				else {
+					T newMax = value;
 					_max = value;
 					if ( Grater(Value, Max) ) {
 						Value = Max;
 					}
+					else if(!newMax.Equals(value))
+						ValueChanged();
 				}
 			}
 		}
@@ -45,10 +63,13 @@
 					Value = Max;
 				}
 				else {
+					T newMin = value;
 					_min = value;
 					if ( Smaller(Value, Min) ) {
 						Value = Min;
 					}
+					else if(!_min.Equals(newMin))
+						ValueChanged();
 				}
 			}
 		}
@@ -56,6 +77,14 @@
 		public bool IsFull => Equal(Value, Max);
 		public bool IsEmpty => Equal(Value, Min);
 
+///// Private Functions ////////////////////////////////////////////////////////////////////////////		
+		
+		private void ValueChanged() {
+			OnValueChanged?.Invoke();
+		}
+
+///// Public Functions /////////////////////////////////////////////////////////////////////////////
+ 
 		public void Fill() {
 			Value = Max;
 		}
