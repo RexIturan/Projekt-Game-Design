@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Util.ScriptableObjects;
+using System;
 
 namespace DefaultNamespace.Camera {
     public class CameraController : MonoBehaviour {
@@ -9,6 +10,7 @@ namespace DefaultNamespace.Camera {
         [SerializeField] private FloatReference movementSpeed;
         [SerializeField] private FloatReference zoomSpeed;
         [SerializeField] private float panSpeed;
+        [SerializeField] private float rotateSpeed;
         [SerializeField] private int panBorderThickness;
         [SerializeField] private int minZoom;
         [SerializeField] private int maxZoom;
@@ -18,13 +20,15 @@ namespace DefaultNamespace.Camera {
         public Transform cameraTransform;
         private Vector2 _inputVector;
         private float _zoomInput;
-      
+        private Quaternion target = Quaternion.Euler(0, 0, 0);
+        
+        private void OnEnable()
+        {
+	        // bind events
+	        inputReader.CameraMoveEvent += HandleCameraMoveEvent;
+	        inputReader.CameraRotateEvent += HandleCameraRotateEvent;
+	        inputReader.CameraZoomEvent += HandleCameraZoomEvent;
 
-        private void OnEnable() {
-            // bind events
-            inputReader.CameraMoveEvent += HandleCameraMoveEvent;
-            inputReader.CameraRotateEvent += HandleCameraRotateEvent;
-            inputReader.CameraZoomEvent += HandleCameraZoomEvent;
         }
 
         private void OnDisable() {
@@ -63,6 +67,10 @@ namespace DefaultNamespace.Camera {
                     cameraTransform.localPosition += pos;
                 }    
             // }
+            
+	            transform.rotation =
+		            Quaternion.Slerp(transform.rotation, target, rotateSpeed * Time.deltaTime);
+            
         }
 
         private void HandleCameraBorder()
@@ -105,8 +113,9 @@ namespace DefaultNamespace.Camera {
             _inputVector = movement;
         }
 
-        private void HandleCameraRotateEvent(float rotate) {
-            transform.rotation *= Quaternion.Euler(0, 45 * -rotate, 0);
+        private void HandleCameraRotateEvent(float rotate)
+        {
+          target *= Quaternion.Euler(0, 45 * -rotate, 0);
         }
         
         private void HandleCameraZoomEvent(float zoom) {
