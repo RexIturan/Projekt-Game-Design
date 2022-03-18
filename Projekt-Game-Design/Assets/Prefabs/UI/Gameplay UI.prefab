@@ -221,6 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3159855196746121964}
   - component: {fileID: 3159855196746121963}
+  - component: {fileID: 8736805522198894672}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -260,6 +261,34 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: d3bdd9860dc9a5548a7625db07cc12f6, type: 3}
   m_SortingOrder: 0
+--- !u!114 &8736805522198894672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159855196746121965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aeaa86373cf5e54c89afc95fa2de18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryItems: []
+  equipmentInventoryItems: []
+  inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
+  equipmentContainer: {fileID: 11400000, guid: 06f235e350237cc41b1711487af77bbe, type: 2}
+  inventoryItemQuantity: 28
+  setGameOverlayVisibilityEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  setMenuVisibilityEC: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  setInventoryVisibilityEC: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
+  playerDeselectedEC: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
+  playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
+  enableInventoryInput: {fileID: 11400000, guid: 6f2cf282820633f41a7bde9dc75b3af9, type: 2}
+  changeInventoryTab: {fileID: 11400000, guid: c0c391df13a8ed149a1fcb343bb20c4d, type: 2}
+  EquipItemEC: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
+  UnequipItemEC: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
+  menuOpenedEvent: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
+  menuClosedEvent: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
 --- !u!1 &3159855197138855706
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3159855197406282495}
   - component: {fileID: 3159855197406282494}
+  - component: {fileID: 2876169678518441711}
   m_Layer: 0
   m_Name: Gameplay UI
   m_TagString: Untagged
@@ -379,7 +409,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3159855197406281984}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -408,6 +438,28 @@ MonoBehaviour:
   - {fileID: 3159855197512313783}
   - {fileID: 3159855197138855704}
   - {fileID: 3159855197389789980}
+--- !u!114 &2876169678518441711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159855197406281984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56e500bc934476f886e15b5b1201f46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetMenuVisibilityEC: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  setGameOverlayVisibilityEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
+  setInventoryVisibilityEC: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
+  uiToggleMenuEC: {fileID: 11400000, guid: 9444ec8e72a59b64d934049dd28bcc23, type: 2}
+  uiToggleScreenEC: {fileID: 11400000, guid: 3025db6f6dc502840aaa52fac7ac2a90, type: 2}
+  screenManager: {fileID: 3159855197406282494}
+  overlayScreen: {fileID: 3159855197422999878}
+  inventoryScreen: {fileID: 3159855197512313783}
+  pauseScreen: {fileID: 3159855197138855704}
+  questScreen: {fileID: 3159855197389789980}
 --- !u!1 &3159855197422999880
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3159855197422999879
 Transform:
   m_ObjectHideFlags: 0
@@ -578,7 +630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3159855197512313784
 Transform:
   m_ObjectHideFlags: 0

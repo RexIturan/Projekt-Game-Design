@@ -1,4 +1,5 @@
 ﻿using Events.ScriptableObjects;
+using GDP01.UI;
 using UI.Gameplay.Types;
 using UnityEngine;
 
@@ -13,6 +14,13 @@ namespace UI.Gameplay {
 		[SerializeField] private VoidEventChannelSO uiToggleMenuEC;
 		[SerializeField] private ScreenEventChannelSO uiToggleScreenEC;
 		
+		[Header("Screen Handeling")] 
+		[SerializeField] private ScreenManager screenManager;
+		[SerializeField] private ScreenController overlayScreen;
+		[SerializeField] private ScreenController inventoryScreen;
+		[SerializeField] private ScreenController pauseScreen;
+		[SerializeField] private ScreenController questScreen;
+		
 ///// Private Variables ////////////////////////////////////////////////////////////////////////////
 
 		private MenuScreen menuScreen;
@@ -20,14 +28,38 @@ namespace UI.Gameplay {
 
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
+		private void SetGameplayScreenVisibility(bool value) {
+			//old
+			// setGameOverlayVisibilityEC.RaiseEvent(value);
+			
+			//new
+			screenManager.SetScreenVisibility(overlayScreen, value);
+		}
+
+		private void SetInventoryScreenVisibility(bool value) {
+			//old
+			// setInventoryVisibilityEC.RaiseEvent(value);
+			
+			//new
+			screenManager.SetScreenVisibility(inventoryScreen, value);
+		}
+
+		private void SetMenuScreenVisibility(bool value) {
+			//old
+			// SetMenuVisibilityEC.RaiseEvent(value);
+			
+			//new
+			screenManager.SetScreenVisibility(pauseScreen, value);
+		}
+
 		private void ToggleGameplayScreen(GameplayScreen screen, bool visible) {
 			switch ( screen ) {
 				case GameplayScreen.Gameplay:
-					setGameOverlayVisibilityEC.RaiseEvent(visible);
+					SetGameplayScreenVisibility(visible);
 					break;
 				
 				case GameplayScreen.Inventory:
-					setInventoryVisibilityEC.RaiseEvent(visible);
+					SetInventoryScreenVisibility(visible);
 					break;
 				default:
 					break;
@@ -48,22 +80,22 @@ namespace UI.Gameplay {
 			EnableGampleyScreen();
 		}
 
-		private void ToggleMenu(bool visible) {
-			SetMenuVisibilityEC.RaiseEvent(visible);
+		private void ShowMenu(bool visible) {
+			SetMenuScreenVisibility(visible);
 		}
 
 		private void TryToggleMenu() {
 			switch ( menuScreen ) {
 				case MenuScreen.None:
 					//Activete pause Menu
-					ToggleMenu(true);
+					ShowMenu(true);
 					DisableGampleyScreen();
 					menuScreen = MenuScreen.PauseMenu;
 					break;
 				
 				case MenuScreen.PauseMenu:
 					//disable pause Menu
-					ToggleMenu(false);
+					ShowMenu(false);
 					EnableGampleyScreen();
 					menuScreen = MenuScreen.None;
 					break;
