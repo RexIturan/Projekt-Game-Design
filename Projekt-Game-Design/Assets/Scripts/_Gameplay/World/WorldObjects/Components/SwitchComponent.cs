@@ -1,6 +1,7 @@
 using Audio;
 using Characters;
 using Events.ScriptableObjects;
+using Events.ScriptableObjects.GameState;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace WorldObjects {
 
 				[Header("Receiving Events on:")]
 				[SerializeField] private VoidEventChannelSO updateWorldObjectEvent;
+				[SerializeField] private PositionGameObjectEventChannelSO onTileEnterEC;
 
 				[SerializeField] private SwitchAnimator switchAnimator;
 				
@@ -33,14 +35,16 @@ namespace WorldObjects {
 
 				public void Awake() {
 						updateWorldObjectEvent.OnEventRaised += UpdateSwitch;
+						// onTileEnterEC.OnEventRaised += (Vector3Int Position, GameObject obj) => UpdateSwitch();
 				}
 
 				public void OnDestroy() {
 						updateWorldObjectEvent.OnEventRaised -= UpdateSwitch;
 				}
 
-				public void Initialise(Switch_Save switch_Save, SwitchTypeSO switchType)
-				{
+				public void Initialise(Switch_Save switch_Save, SwitchTypeSO switchType) {
+					switchData = switchType.ToComponentData();
+					
 					Activated = false;
 						id = switch_Save.switchId;
 						_type = switchType;

@@ -31,6 +31,7 @@ namespace WorldObjects
 		
 					// playerData.EquipmentId = equipmentID;
 					switchData.Type = this;
+					switchData.range = range;
 		
 					return switchData;
 				}
