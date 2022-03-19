@@ -1,7 +1,7 @@
 using Ability.ScriptableObjects;
+using Characters.Ability;
+using Combat;
 using Events.ScriptableObjects;
-using GDP01.Characters.Component;
-using GDP01.World.Components;
 using Input;
 using UnityEngine;
 using UOP1.StateMachine;
@@ -47,14 +47,14 @@ public class P_DrawPattern_OnUpdate : StateAction {
 
 	public override void OnUpdate() {
 		Vector3Int mousePos = _inputCache.cursor.abovePos.gridPos;
-		
+		Vector3Int targetPos = _abilityController.singleTarget ? _abilityController.singleTargetPos : mousePos;
 		
 		//todo this is more complicated then it should be
-		if(!_isDrawn || !_lastDrawnGridPos.Equals(mousePos)) { 
+		if(!_isDrawn || !_lastDrawnGridPos.Equals(targetPos)) { 
 			bool isInRange = false;
 			
 			for(int i = 0; !isInRange && i < _attacker.tilesInRange.Count; i++) { 
-		    if(_attacker.tilesInRange[i].pos.Equals(mousePos)) {
+		    if(_attacker.tilesInRange[i].pos.Equals(targetPos)) {
 					isInRange = true;
 				}
       }
@@ -62,16 +62,16 @@ public class P_DrawPattern_OnUpdate : StateAction {
 			if ( isInRange ) {
 				AbilitySO ability = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
 
-				int rotations = _attacker.GetRotationsToTarget(mousePos);
+				int rotations = _attacker.GetRotationsToTarget(targetPos);
 
 				Debug.Log($"{rotations} {ability.targetedEffects[0].area.GetRotatedAnchor(rotations)}");
 				
-				_drawPatternEC.RaiseEvent(mousePos, 
+				_drawPatternEC.RaiseEvent(targetPos, 
 					ability.targetedEffects[0].area.GetRotatedPattern(rotations), 
 					ability.targetedEffects[0].area.GetRotatedAnchor(rotations));
 
 				_isDrawn = true;
-				_lastDrawnGridPos = mousePos;
+				_lastDrawnGridPos = targetPos;
 				
 			} else {
 				_clearPatternEC.RaiseEvent();

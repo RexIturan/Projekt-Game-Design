@@ -1,9 +1,14 @@
 ﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Characters;
+using Characters.Ability;
 using Characters.Movement;
 using Combat;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
+using Events.ScriptableObjects;
 using Grid;
 using Input;
 using LevelEditor;
@@ -11,6 +16,7 @@ using Player;
 using UnityEngine;
 using Util;
 using WorldObjects;
+using CursorMode = LevelEditor.CursorMode;
 
 namespace GDP01.Player.Player {
 	public class PlayerController : MonoBehaviour {
@@ -229,6 +235,13 @@ namespace GDP01.Player.Player {
 					foreach(PathNode node in playerMovementController.reachableTiles) {
 						if(node.pos.Equals(inputCache.cursor.abovePos.gridPos) )
 						  playerMovementController.movementTarget = node;
+					}
+
+					// if there is only one proper target, choose it as the target
+					AbilityController abilityController = playerAttacker.GetComponent<AbilityController>();
+					if(abilityController.singleTarget) {
+						playerAttacker.SetTarget(Targetable.GetTargetsWithPosition(abilityController.singleTargetPos));
+						playerAttacker.SetGroundTarget(abilityController.singleTargetPos);
 					}
 				}
 			}
