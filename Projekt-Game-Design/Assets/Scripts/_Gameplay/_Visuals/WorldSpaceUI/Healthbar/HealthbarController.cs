@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Characters;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,9 +20,6 @@ namespace Visual.Healthbar {
 		[SerializeField] private Image _previewImage;
 
 		[SerializeField] private float previewValue;
-		
-		//todo dont use statistics directly
-		private Statistics _statistics;
 		
 ///// Private Functions	////////////////////////////////////////////////////////////////////////////
 		private void UpdateText(float value, float max) {
@@ -110,33 +106,19 @@ namespace Visual.Healthbar {
 			float min = rangedInd.Min;
 			float max = rangedInd.Max;
 			float value = rangedInd.Value;
-		public void UpdateVisuals() {
-			float min = _statistics.StatusValues.HitPoints.min;
-			float max = _statistics.StatusValues.HitPoints.max;
-			float value = _statistics.StatusValues.HitPoints.value;
 			
 			UpdateText(value, max);
 			UpdateSlider(min, max, value);
-			UpdatePreviewSlider();
 		}
 		
 ///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
 		private void Awake() {
-			// _statistics = GetComponentInParent<Statistics>();
-			//
-			// if ( _statistics is null ) {
-			// 	Debug.LogError("HealthbarController needs a Statistics Component in its Parent");
-			// }
-
-			SetFillColor();
+			HidePreview();
 			clearPreviewEvent.OnEventRaised += HidePreview;
+		}
 
 		private void OnDestroy() {
 			clearPreviewEvent.OnEventRaised -= HidePreview;
-		}
-
-		private void Update() {
-			UpdateVisuals();
 		}
 
 		private void OnValidate() {

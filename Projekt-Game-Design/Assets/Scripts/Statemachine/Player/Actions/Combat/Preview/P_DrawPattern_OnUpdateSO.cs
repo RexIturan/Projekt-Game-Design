@@ -1,12 +1,12 @@
 using Ability.ScriptableObjects;
-using Characters.Ability;
-using Combat;
 using Events.ScriptableObjects;
 using Input;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
 
 [CreateAssetMenu(fileName = "p_DrawPattern_OnUpdate", menuName = "State Machines/Actions/Player/Draw Pattern On Update")]
 public class P_DrawPattern_OnUpdateSO : StateActionSO {

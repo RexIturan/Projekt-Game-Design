@@ -1,12 +1,8 @@
-using System.Collections.Generic;
-using Characters.Ability;
-using Combat;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
-using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
-using Ability;
+using GDP01.Characters.Component;
 
 /// <summary>
 /// Sets the singleTarget flag in the ability controller 

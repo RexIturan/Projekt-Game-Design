@@ -1,17 +1,16 @@
 using Ability;
-using Ability.ScriptableObjects;
 using Characters;
-using Characters.Ability;
 using Combat;
-using Events.ScriptableObjects;
 using Input;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
-using Visual.Healthbar;
 using StateMachine = UOP1.StateMachine.StateMachine;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
+using Visual.Healthbar;
 
 [CreateAssetMenu(fileName = "p_PreviewDamage_OnUpdate", menuName = "State Machines/Actions/Player/Preview Damage On Update")]
 public class P_PreviewDamage_OnUpdateSO : StateActionSO

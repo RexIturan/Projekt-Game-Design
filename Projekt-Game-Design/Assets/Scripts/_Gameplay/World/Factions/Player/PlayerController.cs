@@ -1,14 +1,9 @@
 ﻿using System.Collections.Generic;
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Characters;
-using Characters.Ability;
 using Characters.Movement;
 using Combat;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
-using Events.ScriptableObjects;
 using Grid;
 using Input;
 using LevelEditor;
@@ -16,7 +11,6 @@ using Player;
 using UnityEngine;
 using Util;
 using WorldObjects;
-using CursorMode = LevelEditor.CursorMode;
 
 namespace GDP01.Player.Player {
 	public class PlayerController : MonoBehaviour {
