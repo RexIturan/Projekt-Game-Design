@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea62004b12663d4cba63c15453d57fb, type: 3}
   m_Name: p_PreviewDamage_OnUpdate
   m_EditorClassIdentifier: 
-  clearPreviewEvent: {fileID: 11400000, guid: e77b0f50e5532044a90c6e33a405aacb, type: 2}
+  clearPreviewEvent: {fileID: 11400000, guid: 338d1a384a2d81e4dbbe169d477f2d09, type: 2}
   inputCache: {fileID: 11400000, guid: 767106d458901634590366e6fae31156, type: 2}
