@@ -1,19 +1,19 @@
+using UI.Components.Tooltip;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 [System.Serializable]
 public class InventorySlot : VisualElement
 {
+		private ItemTooltip itemTooltip;
     public readonly Image icon;
     public readonly InventorySlotType slotType;
     public int inventoryItemID = -1; // ID within Inventory
 		public ItemSO item;
     
-    public InventorySlot() : this(InventorySlotType.EquipmentInventory){}
-    
-    public InventorySlot(InventorySlotType type) {
+    public InventorySlot()
+    {
         //Create a new Image element and add it to the root
         icon = new Image();
         Add(icon);
@@ -21,8 +21,15 @@ public class InventorySlot : VisualElement
         icon.AddToClassList("slotIcon");
         AddToClassList("slotContainer");
         RegisterCallback<PointerDownEvent>(OnPointerDown);
-        RegisterCallback<MouseDownEvent>(OnPointerDown);
-        // clicked += () => Debug.Log("click");//InventoryUIController.StartDrag(Mouse.current.position.ReadValue(), this);
+        slotType = InventorySlotType.EquipmentInventory;
+
+				// initialize tooltip
+				itemTooltip = new ItemTooltip(this);
+				itemTooltip.Deactivate();
+    }
+    
+    public InventorySlot(InventorySlotType type) : this()
+    {
         slotType = type;
     }
     
@@ -31,7 +38,17 @@ public class InventorySlot : VisualElement
 				this.item = item;
         icon.image = item.icon.texture;
         inventoryItemID = item ? item.id : -1;
-        // Debug.Log("Test in HoldItem");
+				// Debug.Log("Test in HoldItem");
+
+				if ( itemTooltip == null )
+						Debug.Log("itemTooltip == null");
+				else if ( item == null )
+						Debug.Log("item == null");
+				else
+				{
+						itemTooltip.UpdateValues(item);
+						itemTooltip.Activate();
+				}
     }
 
     public void DropItem()
@@ -39,33 +56,21 @@ public class InventorySlot : VisualElement
         inventoryItemID = -1;
         icon.image = null;
 				item = null;
+
+			  itemTooltip.Deactivate();
     }
     
-    private void OnPointerDown(EventBase evt) {
-	    Debug.Log("down");
-	    
-	    if ( evt is PointerDownEvent ptr ) {
-		    //Not the left mouse button
-		    if (inventoryItemID == -1 || ptr.button != 0)
-		    {
-			    return;
-		    }
-		    //Clear the image
-		    icon.image = null;
-		    //Start the drag
-		    InventoryUIController.StartDrag(ptr.position, this);
-	    }
-	    if ( evt is MouseDownEvent mde ) {
-		    //Not the left mouse button
-		    if (inventoryItemID == -1 || mde.button != 0)
-		    {
-			    return;
-		    }
-		    //Clear the image
-		    icon.image = null;
-		    //Start the drag
-		    InventoryUIController.StartDrag(mde.mousePosition, this);
-	    }
+    private void OnPointerDown(PointerDownEvent evt)
+    {
+        //Not the left mouse button
+        if (inventoryItemID == -1 || evt.button != 0)
+        {
+            return;
+        }
+        //Clear the image
+        icon.image = null;
+        //Start the drag
+        InventoryUIController.StartDrag(evt.position, this);
     }
 
     public enum InventorySlotType

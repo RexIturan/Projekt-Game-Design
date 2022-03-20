@@ -1,0 +1,24 @@
+﻿.abilityPanel > *{
+	padding: 3px;
+}
+
+.abilityPanelHeader {
+	-unity-font-style: bold;
+	-unity-text-align: middle-center;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.abilityPanel Image {
+	height: 40px;
+	width: 40px;
+}
+
+.abilityPattern {
+	align-self: center;
+}
+
+.abilityPattern Image {
+	height: 20px;
+	width: 20px;
+}

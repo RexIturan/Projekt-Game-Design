@@ -25,8 +25,6 @@ namespace Combat {
  	
 		public bool IsAlive => !IsDead;
 		public bool IsDead => statistics.StatusValues.HitPoints.IsMin();
-
-///// Private Functions ////////////////////////////////////////////////////////////////////////////
 		
 
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////
@@ -73,5 +71,13 @@ namespace Combat {
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
 		
+				
+		public static Targetable GetTargetsWithPosition(Vector3Int targetPositon) {
+			return new List<Targetable>(GetAllInstances()).Find(target => { 
+				var gridTransform = target.GetComponent<GridTransform>();
+				if(gridTransform is null) return false;
+				return targetPositon.Equals(gridTransform.gridPosition);
+			});
+		}
 	}
 }

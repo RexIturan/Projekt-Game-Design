@@ -40,6 +40,9 @@ namespace GDP01.Player.Player {
 		[SerializeField] private Selectable selectedPlayerCharacter;
 		[SerializeField] private Targetable target;
 
+		// time to wait after ability selection to accept targeting input
+		[SerializeField] private float abilityBlockingTime = 0.5f;
+
 ///// Private Variable
 		private CharacterList characterList; 
 		private WorldObjectList worldObjectList;
@@ -209,7 +212,8 @@ namespace GDP01.Player.Player {
 
 				// targeting
 				//
-				if ( inputCache.leftButton.started && selectedPlayerCharacter) {
+				if ( inputCache.leftButton.started && selectedPlayerCharacter && 
+						selectedPlayerCharacter.GetComponent<Timer>().timeSinceTransition > abilityBlockingTime) {
 		  		Attacker playerAttacker = selectedPlayerCharacter.gameObject.GetComponent<Attacker>();
 					if(playerAttacker) {
 						// targetable target
@@ -229,6 +233,13 @@ namespace GDP01.Player.Player {
 					foreach(PathNode node in playerMovementController.reachableTiles) {
 						if(node.pos.Equals(inputCache.cursor.abovePos.gridPos) )
 						  playerMovementController.movementTarget = node;
+					}
+
+					// if there is only one proper target, choose it as the target
+					AbilityController abilityController = playerAttacker.GetComponent<AbilityController>();
+					if(abilityController.singleTarget) {
+						playerAttacker.SetTarget(Targetable.GetTargetsWithPosition(abilityController.singleTargetPos));
+						playerAttacker.SetGroundTarget(abilityController.singleTargetPos);
 					}
 				}
 			}

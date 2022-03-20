@@ -13,7 +13,8 @@
         "GDP01.GameManager",
         "GDP01.SaveSystem",
         "GDP01.Util.Types",
-        "GDP01.Util"
+        "GDP01.Util",
+        "GDP01.Gameplay.Visuals"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

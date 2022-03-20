@@ -1,0 +1,28 @@
+﻿/* for a generic tooltip block */
+.tooltipElement { 
+	position: absolute;
+	align-self: center;
+	width: 200px;
+
+	background-color: black;
+	color: white;
+	padding: 2px;
+	border-color: white;
+	border-width: 3px;
+}
+
+.tooltipHeader {
+	-unity-font-style: bold;
+	-unity-text-align: middle-center;
+	padding-bottom: 3px;
+}
+
+.itemAbilityHeader {
+	padding-top: 3px;
+	-unity-font-style: bold;
+}
+
+.tooltipLayer {
+	width: 100%;
+	height: 100%;
+}

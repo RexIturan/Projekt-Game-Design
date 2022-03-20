@@ -103,5 +103,18 @@ namespace Util {
 				return pos + " -";
 			}
 		}
+
+		/// <summary>
+		/// Converts a list of pathnodes to a list of game grid coordinates. 
+		/// </summary>
+		/// <param name="pathNodes">List that is being converted </param>
+		/// <returns>List of grid coordinates corresponding the pathnodes </returns>
+		public static List<Vector3Int> ConvertPathNodeListToVector3IntList(List<PathNode> pathNodes) {
+			List<Vector3Int> convertedList = new List<Vector3Int>();
+			foreach(PathNode node in pathNodes) {
+				convertedList.Add(node.pos);
+			}
+			return convertedList;
+		}
 	}
 }

@@ -1,0 +1,20 @@
+﻿.itemPanel > *{
+	padding: 3px;
+}
+
+.itemPanelHeader {
+	-unity-font-style: bold;
+	-unity-text-align: middle-center;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.itemPanelAbilities {
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.itemPanel Image {
+	height: 40px;
+	width: 40px;
+}

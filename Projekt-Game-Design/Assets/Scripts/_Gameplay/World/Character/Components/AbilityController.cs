@@ -1,12 +1,11 @@
-﻿using System;
-using Ability.ScriptableObjects;
+﻿using Ability.ScriptableObjects;
 using System.Collections.Generic;
-using System.Linq;
 using Characters;
-using Characters.Equipment;
 using Characters.Movement;
+using Combat;
 using UnityEngine;
-using Util.Extensions;
+using Util;
+using GDP01.World.Components;
 
 namespace GDP01.Characters.Component {
 	[RequireComponent(typeof(MovementController))]
@@ -48,9 +47,12 @@ namespace GDP01.Characters.Component {
 		public bool abilitySelected;
 		public bool abilityConfirmed;
 		public bool abilityExecuted;
-		//todo remove
-		public bool damageInflicted = true;
 
+		public bool singleTarget; // is set to true, if there is only one proper target for the ability at the moment
+		public Vector3Int singleTargetPos; // is set, if there is only one proper target for the ability at the moment
+		
+		public bool damageInflicted;
+		
 		public int SelectedAbilityID {
 			get => abilityID;
 			set => abilityID = value;
@@ -123,6 +125,34 @@ namespace GDP01.Characters.Component {
 		}
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
+
+		/// <summary>
+		/// Sets single target flag and single target position (vector) 
+		/// depending on whehter or not only one tile can be targeted at the moment. 
+		/// </summary>
+		public void UpdateSingleTargetFlag() { 
+			Attacker attacker = GetComponent<Attacker>();
+			List<Vector3Int> range = PathNode.ConvertPathNodeListToVector3IntList(attacker.tilesInRange);
+
+			// ability is single target if it either:
+			// targets ground and has one tile in its range or
+			// there is one targetable in its range 
+			if ( GetSelectedAbility().targets.HasFlag(TargetRelationship.Ground) && range.Count == 1 ) { 
+				singleTargetPos = range[0];
+				singleTarget = true;
+			}
+			else {
+				List<Targetable> targetables = CombatUtils.FindAllTargets(range, attacker, GetSelectedAbility().targets);
+				if (!GetSelectedAbility().targets.HasFlag(TargetRelationship.Ground) && targetables.Count == 1) { 
+					singleTargetPos = targetables[0].GetGridPosition();
+					singleTarget = true;
+				}
+				else { 
+					singleTargetPos = Vector3Int.zero;
+					singleTarget = false;
+				}
+			}
+		}
 
 		private void Start() {
 			damageInflicted = true;
