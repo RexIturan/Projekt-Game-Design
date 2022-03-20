@@ -86,6 +86,11 @@ public class InventoryUIController : MonoBehaviour {
 		}
 	}
 
+	private void CleanInventory() {
+		inventoryItems.Clear();
+		_inventorySlotContainer.Clear();
+	}
+	
 	//todo move to Inventory Component
 	private void InitializeEquipmentInventory() {
 		// Hinzufügen der Item Slots für das Equipment Menü
@@ -112,6 +117,10 @@ public class InventoryUIController : MonoBehaviour {
 		equipmentInventoryItems.Add(equipmentSlot);
 	}
 
+	private void CleanEquipmentSheet() {
+		equipmentInventoryItems.Clear();
+	}
+	
 	/**
 		 * takes all items within the Inventory that are not equipped
 		 * and updates the respective InventorySlots
@@ -135,6 +144,8 @@ public class InventoryUIController : MonoBehaviour {
 	private void UpdatePlayerContainer() {
 		_playerContainer.Clear();
 		characterList = CharacterList.FindInstant(); 
+		
+		if(characterList == null) return;
 		
 		for ( int i = 0; i < characterList.playerContainer.Count; i++ ) {
 			int index = i;
@@ -172,7 +183,7 @@ public class InventoryUIController : MonoBehaviour {
 		InventorySlot bodyArmor = _equipmentInventoryContainer.Q<InventorySlot>("BodyArmor");
 		InventorySlot shield = _equipmentInventoryContainer.Q<InventorySlot>("Shield");
 
-		PlayerCharacterSC currPlayer = characterList.playerContainer[_currentPlayerSelected]
+		PlayerCharacterSC currPlayer = characterList?.playerContainer[_currentPlayerSelected]
 			.GetComponent<PlayerCharacterSC>();
 
 		int equipmentID = currPlayer.GetComponent<EquipmentController>().EquipmentID;
@@ -352,6 +363,7 @@ public class InventoryUIController : MonoBehaviour {
 							" you want to swap is not valid for the item slot (" + pos + ")! ");
 				}
 			}
+			
 			//	3. original slot is in player inventory, target is equipment:
 			//		If original item is not valid for equipment slot, do nothing
 			//		Else, equip original item. Unequip target item if necessary
@@ -371,14 +383,13 @@ public class InventoryUIController : MonoBehaviour {
 				else
 					Debug.LogWarning("Item " + originalItem.id + " is not valid for target slot " + targetPos + "! ");
 			}
+			
 			//	4. original and target slots are equipment:
 			//		Only do anything if the original item is valid for the target slot
 			//		Swap items if necessary
-			else if (_originalSlot.userData != null && _originalSlot.userData is EquipmentPosition &&
-								targetSlot.userData != null && targetSlot.userData is EquipmentPosition) { 
-				EquipmentPosition originalPos = (EquipmentPosition) _originalSlot.userData;
-				EquipmentPosition targetPos = (EquipmentPosition) targetSlot.userData;
-
+			else if (_originalSlot.userData is EquipmentPosition originalPos && 
+			         targetSlot.userData is EquipmentPosition targetPos) {
+				
 				if(originalItem.ValidForPosition(targetPos)) { 
 					if(targetItem) { 
 						if(targetItem.ValidForPosition(originalPos)) { 
@@ -393,8 +404,7 @@ public class InventoryUIController : MonoBehaviour {
 						}
 						else
 							Debug.LogWarning("Item " + originalItem.id + " is not valid for target slot " + targetPos + "! ");
-					}
-					else {  
+					} else {  
 						UnequipItemEC.RaiseEvent(_currentPlayerSelected, originalPos);
 						EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
 						targetSlot.HoldItem(originalItem);
@@ -458,12 +468,73 @@ public class InventoryUIController : MonoBehaviour {
 	*/
 
 	private void SetInventoryVisibility(bool value) {
+		//todo use screen manager
 		_inventoryContainer.style.display = value ? DisplayStyle.Flex : DisplayStyle.None;
+	}
+
+	private void BindElements() {
+		//Store the root from the UI Document component
+		// var root = GetComponent<UIDocument>().rootVisualElement;
+		var root = GetComponent<UIDocument>().rootVisualElement;
+		_inventoryContainer = root;
+		_equipmentInventoryContainer = root.Q<VisualElement>("PlayerEquipmentInventory");
+		_ghostIcon = root.Query<VisualElement>("GhostIcon");
+		_playerContainer = root.Query<VisualElement>("PlayerContainer");
+		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
+		_inventorySlotContainer = root.Q<VisualElement>("InventoryContent");
+		
+		//todo move to drag and drop
+		// Callbacks fürs draggen
+		// _ghostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+		_ghostIcon.RegisterCallback<PointerUpEvent>(OnPointerUp);
+		
+		InitializeInventory();
+		InitializeEquipmentInventory();
+	}
+
+	private void UnbindElements() {
+		
+		CleanInventory();
+		CleanEquipmentSheet();
+		
+		//todo move to drag and drop
+		// Callbacks fürs draggen
+		// _ghostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+		_ghostIcon.UnregisterCallback<PointerUpEvent>(OnPointerUp);
+		
+		_inventoryContainer = null;
+		_equipmentInventoryContainer = null;
+		_ghostIcon = null;
+		_playerContainer = null;
+		_characterStatusValuePanel = null;
+		_inventorySlotContainer = null;
+	}
+
+	private void InitPlayerCharacterSelection() {
+		
+		// initially select first player
+		if ( characterList == null ) {
+			characterList = FindObjectOfType<CharacterList>();
+		}
+
+		characterList = CharacterList.FindInstant();
+
+		// BUG adakdlkah?
+		if ( characterList?.playerContainer?.Count > 0 ) {
+			_selectedPlayerStatistics = characterList.playerContainer[0]?.GetComponent<Statistics>();
+		}
+		else {
+			_selectedPlayerStatistics = null;
+		}
+
+	}
+
+	private void CleanPlayerCharacterSelection() {
+		characterList = null;
+		_selectedPlayerStatistics = null;
 	}
 	
 ///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 	/**
@@ -485,7 +556,7 @@ public class InventoryUIController : MonoBehaviour {
 		if ( enableInventory ) {
 			if(!othersOpened)
 				menuOpenedEvent.RaiseEvent();
-			enableInventoryInput.RaiseEvent();
+			
 		}
 		else {
 			if(!othersOpened)
@@ -523,60 +594,38 @@ public class InventoryUIController : MonoBehaviour {
 
 ///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
 
-	private void Start() {
-		//Store the root from the UI Document component
-		var root = GetComponent<UIDocument>().rootVisualElement;
-		_inventoryContainer = root.Q<VisualElement>("InventoryOverlay");
-		_equipmentInventoryContainer = root.Q<VisualElement>("PlayerEquipmentInventory");
-		_ghostIcon = root.Query<VisualElement>("GhostIcon");
-		_playerContainer = root.Query<VisualElement>("PlayerContainer");
-		_characterStatusValuePanel =
-			_inventoryContainer.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
-		_inventorySlotContainer = root.Q<VisualElement>("InventoryContent");
-		// Callbacks fürs draggen
-		// _ghostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
-		_ghostIcon.RegisterCallback<PointerUpEvent>(OnPointerUp);
-		
-		SetInventoryVisibility(false);
-		
-		InitializeInventory();
-		InitializeEquipmentInventory();
-
-		// initially select first player
-		if ( characterList == null ) {
-			characterList = FindObjectOfType<CharacterList>();
-		}
-
-		characterList = CharacterList.FindInstant();
-
-		// BUG adakdlkah?
-		if ( characterList.playerContainer?.Count > 0 ) {
-			_selectedPlayerStatistics = characterList.playerContainer[0]?.GetComponent<Statistics>();
-		}
-		else {
-			_selectedPlayerStatistics = null;
-		}
+	private void Update() {
+		//todo why??????
+		OnPointerMove();
 	}
 
-	private void Awake() {
-		setInventoryVisibilityEC.OnEventRaised += HandleInventoryOverlay;
+	private void OnEnable() {
+		BindElements();
+		InitPlayerCharacterSelection();
+		
+		HandleInventoryOverlay(true, true);
+		
+		// setInventoryVisibilityEC.OnEventRaised += HandleInventoryOverlay;
 		// setMenuVisibilityEC.OnEventRaised += HandleOtherScreensOpened;
 		// setGameOverlayVisibilityEC.OnEventRaised += HandleOtherScreensOpened;
 		
 		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
 		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
+		
+		enableInventoryInput.RaiseEvent();
 	}
 
 	private void OnDisable() {
-		setInventoryVisibilityEC.OnEventRaised -= HandleInventoryOverlay;
+		HandleInventoryOverlay(false, true);
+		
+		UnbindElements();
+		CleanPlayerCharacterSelection();
+		
+		// setInventoryVisibilityEC.OnEventRaised -= HandleInventoryOverlay;
 		// setMenuVisibilityEC.OnEventRaised -= HandleOtherScreensOpened;
 		// setGameOverlayVisibilityEC.OnEventRaised -= HandleOtherScreensOpened;
 		
 		playerDeselectedEC.OnEventRaised -= HandlePlayerDeselected;
 		playerSelectedEC.OnEventRaised -= HandlePlayerSelected;
-	}
-
-	private void Update() {
-		OnPointerMove();
 	}
 }

@@ -17,6 +17,17 @@ namespace GDP01.Equipment {
 			private set { _id = value; }
 		}
 
+///// Private Functions ////////////////////////////////////////////////////////////////////////////		
+		
+		private void SetEquipmentSlot<T>(ref T slot, ItemSO item) where T : ItemSO {
+			if ( item == null ) slot = null;
+			if ( item is T compatibleItem ) {
+				slot = compatibleItem;
+			}
+		}
+
+///// Public Functions /////////////////////////////////////////////////////////////////////////////		
+		
 		public EquipmentSheet(int id) {
 			Id = id;
 			weaponLeft = null;
@@ -99,37 +110,29 @@ namespace GDP01.Equipment {
 			return item;
 		}
 
+
+		
 		public void SetEquipedItem(EquipmentPosition equipmentPosition, ItemSO item) {
 			
 			switch ( equipmentPosition ) {
 				case EquipmentPosition.RIGHT:
-					if ( item is WeaponSO right ) {
-						weaponRight = right;
-					}
+					SetEquipmentSlot(ref weaponRight, item);
 					break;
 				
 				case EquipmentPosition.LEFT:
-					if ( item is WeaponSO left ) {
-						weaponLeft = left;
-					}
+					SetEquipmentSlot(ref weaponLeft, item);
 					break;
 				
 				case EquipmentPosition.HEAD:
-					if ( item is HeadArmorSO head ) {
-						headArmor = head;
-					}
+					SetEquipmentSlot(ref headArmor, item);
 					break;
 				
 				case EquipmentPosition.BODY:
-					if ( item is BodyArmorSO body ) {
-						bodyArmor = body;
-					}
+					SetEquipmentSlot(ref bodyArmor, item);
 					break;
 				
 				case EquipmentPosition.SHIELD:
-					if ( item is ShieldSO shield ) {
-						this.shield = shield;
-					}
+					SetEquipmentSlot(ref shield, item);
 					break;
 				
 				default:

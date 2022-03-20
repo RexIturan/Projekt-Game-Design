@@ -1,4 +1,5 @@
 using System;
+using Characters;
 using UnityEngine;
 using WorldObjects;
 
@@ -31,9 +32,13 @@ namespace WorldObjects {
 		private void Awake() {
 			_meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
 			_meshFilter = gameObject.GetComponentInChildren<MeshFilter>();
+
+			//todo remove temporary
+			GetComponent<GridTransform>().gridPosition = Vector3Int.FloorToInt(transform.position);
 		}
 
 		public void InitItem(ItemSO itemSO) {
+			
 			_meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
 			_meshFilter = gameObject.GetComponentInChildren<MeshFilter>();
 

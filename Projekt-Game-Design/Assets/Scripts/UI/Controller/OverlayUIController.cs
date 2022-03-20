@@ -253,7 +253,31 @@ public class OverlayUIController : MonoBehaviour {
 			statistics.StatusValues.Energy.OnValueChanged -= UpdateStats;	
 		}
 	}
-	
+
+	private void BindElements() {
+		// Holen des UXML Trees, zum getten der einzelnen Komponenten
+		var root = GetComponent<UIDocument>().rootVisualElement;
+		_actionBar = root.Q<ActionBar>();
+		_overlayContainer = root.Q<VisualElement>("OverlayContainer");
+		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
+		_turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
+
+		// _overlayContainer.Q<Button>("IngameMenuButton").clicked += HandleOpenMenuButton;
+		_overlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
+		
+		// _actionBar.SetVisibility(false);
+		// _characterStatusValuePanel.SetVibility(false);
+	}
+
+	private void UnbindElements() {
+		_overlayContainer.Q<Button>("EndTurnButton").clicked -= HandleEndTurnUI;
+		
+		_actionBar = null;
+		_overlayContainer = null;
+		_characterStatusValuePanel = null;
+		_turnIndicator = null;
+	}
+
 ///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
 
 	private void HandleEndTurnUI() {
@@ -335,22 +359,9 @@ public class OverlayUIController : MonoBehaviour {
 
 ///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
 
-	private void Start() {
-		// Holen des UXML Trees, zum getten der einzelnen Komponenten
-		var root = GetComponent<UIDocument>().rootVisualElement;
-		_actionBar = root.Q<ActionBar>();
-		_overlayContainer = root.Q<VisualElement>("OverlayContainer");
-		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
-		_turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
-
-		// _overlayContainer.Q<Button>("IngameMenuButton").clicked += HandleOpenMenuButton;
-		_overlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
-		
-		// _actionBar.SetVisibility(false);
-		// _characterStatusValuePanel.SetVibility(false);
-	}
-
 	private void OnEnable() {
+		BindElements();
+		
 		setGameOverlayVisibilityEC.OnEventRaised += HandleSetGameOverlayVisibilityEC;
 		setTurnIndicatorVisibilityEC.OnEventRaised += HandleSetTurnIndicatorVisibilityEC;
 
@@ -364,9 +375,14 @@ public class OverlayUIController : MonoBehaviour {
 		//todo updating ui when turn changes -> handle otherwise
 		newTurnEC.OnEventRaised += HandleEndTurn;
 		inputReader.SelectAbilityEvent += HandleSelectAbility;
+		
+		//todo maybe move to ui manager
+		enableGamplayInput.RaiseEvent();
 	}
 
 	private void OnDisable() {
+		UnbindElements();
+		
 		setGameOverlayVisibilityEC.OnEventRaised -= HandleSetGameOverlayVisibilityEC;
 		setTurnIndicatorVisibilityEC.OnEventRaised -= HandleSetTurnIndicatorVisibilityEC;
 		playerSelectedEC.OnEventRaised -= HandlePlayerSelected;

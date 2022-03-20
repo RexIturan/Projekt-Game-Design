@@ -9,6 +9,7 @@ namespace Characters {
 		public Vector3Int gridPosition; // within the grid
 		public Vector3 rotation;
 
+		//TODO get current grid data
 		[SerializeField, fsIgnore] private GridDataSO gridData;
 
 		public void Start() {

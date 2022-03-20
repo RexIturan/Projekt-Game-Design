@@ -149,15 +149,9 @@ public class InGameMenuUIController : MonoBehaviour {
 
 ///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
 
-	private void Awake() {
-		SetMenuVisibilityEC.OnEventRaised += HandleMenuToggleEvent;
-	}
-
-	private void OnDisable() {
-		SetMenuVisibilityEC.OnEventRaised -= HandleMenuToggleEvent;
-	}
-
-	private void Start() {
+	private void OnEnable() {
+		
+		//todo bind elements
 		// Holen des UXML Trees, zum getten der einzelnen Komponenten
 		var root = GetComponent<UIDocument>().rootVisualElement;
 		_inGameMenuContainer = root.Q<VisualElement>("IngameMenu");
@@ -173,9 +167,6 @@ public class InGameMenuUIController : MonoBehaviour {
 		_inGameMenuContainer.Q<Button>("ResumeButton").clicked += HandleResumeButton;
 		_inGameMenuContainer.Q<Button>("QuitButton").clicked += QuitGame;
 
-
-		
-
 		SetElementVisibility(saveButton, showSaveLevel);
 		
 		SetElementVisibility(optionsButton, showOptionsLevel);
@@ -184,6 +175,11 @@ public class InGameMenuUIController : MonoBehaviour {
 		SetElementVisibility(backToMenuButton, false);
 		
 		HideMenu();
+		
+		SetMenuVisibilityEC.OnEventRaised += HandleMenuToggleEvent;
 	}
-
+	
+	private void OnDisable() {
+		SetMenuVisibilityEC.OnEventRaised -= HandleMenuToggleEvent;
+	}
 }

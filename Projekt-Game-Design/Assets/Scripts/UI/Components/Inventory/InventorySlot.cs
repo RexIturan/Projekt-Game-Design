@@ -30,6 +30,8 @@ public class InventorySlot : VisualElement
     
     public InventorySlot(InventorySlotType type) : this()
     {
+        // clicked += () => Debug.Log("click");
+        //InventoryUIController.StartDrag(Mouse.current.position.ReadValue(), this);
         slotType = type;
     }
     

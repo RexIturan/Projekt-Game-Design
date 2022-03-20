@@ -200,7 +200,6 @@ public class MainMenuUIController : MonoBehaviour {
 
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
 
-	// Start is called before the first frame update
 	private void OnEnable() {
 		BindButtons();
 

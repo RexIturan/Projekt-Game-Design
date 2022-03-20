@@ -16,7 +16,7 @@ public class G_StopAllSounds_OnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void OnStateEnter() {
-				AudioManager.FindSoundManager().StopAllSounds();
+				AudioManager.FindSoundManager()?.StopAllSounds();
     }
 
     public override void OnStateExit() { }
