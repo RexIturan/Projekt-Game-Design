@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GDP01.Util.Util.UI;
+using UI.Components.Tooltip;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -35,6 +36,7 @@ namespace UI.Components.ActionButton {
 		private GroupedButton button;
 		private Label nameLabel;
 		private Label mappingLabel;
+		private AbilityTooltip actionTooltip;
 		
 ///// PROPERTIES ///////////////////////////////////////////////////////////////////////////////////
 
@@ -89,9 +91,7 @@ namespace UI.Components.ActionButton {
 			Add( button );
 			
 			//tooltip
-			//todo tooltip window
-			tooltip = "this is a tooltip";
-			// this.RegisterCallback<MouseOverEvent>();
+			actionTooltip = new AbilityTooltip(this);
 		}
 
 		private void HandleFocus(EventBase evt) {
@@ -116,6 +116,10 @@ namespace UI.Components.ActionButton {
 			}
 			
 			nameLabel.SetStyleDisplayVisibility(ShowName);
+
+			actionTooltip.UpdateValues(nameLabel.text, "This is a placeholder. You can see it's a placeholder. This means, that this code needs to be reworked. Yes. " + 
+					"The deal is, this function should also require a description, but I don't want to touch too many things. ");
+			actionTooltip.Activate();
 		}
 		
 		public void BindOnClickedAction(Action<object[]> onFocus, Action<object[]> onBlur, object[] args) {
@@ -133,6 +137,7 @@ namespace UI.Components.ActionButton {
 			button.UnregisterCallback<BlurEvent>(HandleBlur);
 			onFocusCallback = null;
 			onBlurCallback = null;
+			actionTooltip.Deactivate();
 		}
 
 		public void SetupActionButton(Sprite image, string text) {
