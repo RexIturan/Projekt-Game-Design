@@ -125,6 +125,7 @@ namespace GDP01.Characters.Component {
 		}
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
+
 		/// <summary>
 		/// Sets single target flag and single target position (vector) 
 		/// depending on whehter or not only one tile can be targeted at the moment. 
