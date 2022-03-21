@@ -58,13 +58,14 @@ public class P_DrawPattern_OnUpdate : StateAction {
 					isInRange = true;
 				}
       }
+			
+			AbilitySO ability = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
 
-			if ( isInRange ) {
-				AbilitySO ability = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
+			if ( isInRange && ability.targetedEffects != null && ability.targetedEffects.Length > 0) {
 
 				int rotations = _attacker.GetRotationsToTarget(targetPos);
 
-				Debug.Log($"{rotations} {ability.targetedEffects[0].area.GetRotatedAnchor(rotations)}");
+				// Debug.Log($"{rotations} {ability.targetedEffects[0].area.GetRotatedAnchor(rotations)}");
 				
 				_drawPatternEC.RaiseEvent(targetPos, 
 					ability.targetedEffects[0].area.GetRotatedPattern(rotations), 

@@ -14,11 +14,16 @@ namespace Visual.Healthbar {
 		[SerializeField] private Color _color;
 		[SerializeField] private Image image;
 
+		[SerializeField] private GameObject previewBox;
+		[SerializeField] private TextMeshProUGUI _previewText;
+		[SerializeField] private Color plusColor;
+		[SerializeField] private Color minusColor;
+
 		[SerializeField] private RectTransform _previewRect;
 		[SerializeField] private Slider _previewSlider;
 		[SerializeField] private Color _previewColor;
 		[SerializeField] private Image _previewImage;
-
+		
 		[SerializeField] private float previewValue;
 		
 ///// Private Functions	////////////////////////////////////////////////////////////////////////////
@@ -48,6 +53,22 @@ namespace Visual.Healthbar {
 			// or has some offset to the left if the preview value is negative
 			float xPos = _previewRect.rect.width * ( _slider.normalizedValue - (previewValue < 0 ? _previewSlider.normalizedValue : 0));
 			_previewRect.localPosition += Vector3.left * _previewRect.localPosition.x + Vector3.right * xPos;
+		}
+
+		private void UpdatePreviewBox() { 
+			if(previewValue > 0) {
+				previewBox.SetActive(true);
+				_previewText.color = plusColor;
+				_previewText.text = $"+{previewValue}";
+			}
+			else if(previewValue < 0) {
+				previewBox.SetActive(true);
+				_previewText.color = minusColor;
+				_previewText.text = $"{previewValue}";
+			}
+			else {
+				previewBox.SetActive(false);
+			}
 		}
 		
 		private void SetFillColor() {
@@ -92,6 +113,7 @@ namespace Visual.Healthbar {
 		public void SetPreviewValue(float value) {
 			previewValue = value;
 			UpdatePreviewSlider();
+			UpdatePreviewBox();
 		}
 
 		public void StartHideAfterDelay() {
