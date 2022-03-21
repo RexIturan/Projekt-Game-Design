@@ -10,6 +10,7 @@ namespace SceneManagement {
         public GameSceneSO[] locationsToLoad;
         public bool showLoadScreen;
 
+        //todo refactor i dont like that here
         public SaveManager saveSystem;
 
         private bool _hasSaveData;

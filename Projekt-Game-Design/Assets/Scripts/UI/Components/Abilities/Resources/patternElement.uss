@@ -1,0 +1,5 @@
+﻿.patternElement {}
+
+.patternElementRow {
+	flex-direction: row;
+}

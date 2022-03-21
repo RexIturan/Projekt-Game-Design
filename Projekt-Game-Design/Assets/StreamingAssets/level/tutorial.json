@@ -357,8 +357,10 @@
 
   ],
   "inventory": {
-    "size": 0,
-    "itemIds": []
+    "size": 1,
+    "itemIds": [
+      1, 1
+    ]
   },
   "equipmentInventory": [
     {

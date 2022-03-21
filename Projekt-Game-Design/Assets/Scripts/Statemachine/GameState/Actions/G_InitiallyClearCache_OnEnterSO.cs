@@ -1,5 +1,3 @@
-using Characters;
-using Events.ScriptableObjects.GameState;
 using GameManager;
 using UnityEngine;
 using UOP1.StateMachine;

@@ -1,3 +1,7 @@
+:root{
+    --background-image: url('/Assets/Art/Sprites/UI/ItemSlotBackground.png');
+}
+
 .UnclickedTab {
     padding-left: 0;
     padding-right: 0;
@@ -87,7 +91,7 @@
     border-top-color: rgb(48, 48, 48);
     border-bottom-color: rgb(48, 48, 48);
     background-color: rgba(9, 19, 21, 0.44);
-    background-image: url('/Assets/UI/Images/ItemSlotBackground.png');
+    background-image: var(--background-image);
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -107,7 +111,7 @@
     border-top-color: rgb(48, 48, 48);
     border-bottom-color: rgb(48, 48, 48);
     background-color: rgba(255, 255, 255, 0.63);
-    background-image: url('/Assets/UI/Images/ItemSlotBackground.png');
+    background-image: var(--background-image);
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     border-top-right-radius: 3px;

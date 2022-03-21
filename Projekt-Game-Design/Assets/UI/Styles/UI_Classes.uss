@@ -194,22 +194,8 @@
 }
 
 .EndturnButton:hover {
-    position: absolute;
-    bottom: -50px;
-    right: -50px;
-    width: 200px;
-    height: 200px;
     background-color: rgba(255, 255, 255, 0.16);
-    border-top-left-radius: 105px;
-    border-bottom-left-radius: 105px;
-    border-top-right-radius: 105px;
-    border-bottom-right-radius: 105px;
-    justify-content: center;
-    align-items: center;
-    border-left-color: rgba(217, 217, 217, 255);
-    border-right-color: rgba(217, 217, 217, 255);
-    border-top-color: rgba(217, 217, 217, 255);
-    border-bottom-color: rgba(217, 217, 217, 255);
+    border-color: rgb(255, 0, 0);
 }
 
 .EndturnButton {
@@ -219,10 +205,8 @@
     width: 200px;
     height: 200px;
     background-color: rgba(0, 0, 0, 0.16);
-    border-top-left-radius: 125px;
-    border-bottom-left-radius: 125px;
-    border-top-right-radius: 125px;
-    border-bottom-right-radius: 125px;
+    border-color: rgb(0, 0, 0);
+    border-radius: 125px;
     justify-content: center;
     align-items: center;
 }
@@ -266,10 +250,10 @@
     flex-grow: 1;
     font-size: 15px;
     color: rgb(255, 255, 255);
-    border-left-color: rgba(217, 217, 217, 255);
-    border-right-color: rgba(217, 217, 217, 255);
-    border-top-color: rgba(217, 217, 217, 255);
-    border-bottom-color: rgba(217, 217, 217, 255);
+    border-left-color: rgb(217, 217, 217);
+    border-right-color: rgb(217, 217, 217);
+    border-top-color: rgb(217, 217, 217);
+    border-bottom-color: rgb(217, 217, 217);
 }
 
 .ProgressBarExperience {

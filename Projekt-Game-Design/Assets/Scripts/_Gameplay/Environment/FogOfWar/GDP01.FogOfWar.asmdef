@@ -1,0 +1,18 @@
+{
+    "name": "GDP01.FogOfWar",
+    "rootNamespace": "",
+    "references": [
+        "GDP01.Gameplay.Types",
+        "GDP01.Gameplay.EventChannels",
+        "GDP01.EventChannel"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,28 @@
+{
+    "name": "GDP01.Statemachine.Imp",
+    "rootNamespace": "GDP01.Statemachine.Imp",
+    "references": [
+        "UOP1.StateMachine",
+        "GDP01.EventChannel",
+        "GDP01.Input",
+        "GDP01.Gameplay.EventChannels",
+        "GDP01.Gameplay.Animation",
+        "GDP01.Gameplay.Types",
+        "GDP01.Gameplay",
+        "GDP01.Audio",
+        "GDP01.GameManager",
+        "GDP01.SaveSystem",
+        "GDP01.Util.Types",
+        "GDP01.Util",
+        "GDP01.Gameplay.Visuals"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

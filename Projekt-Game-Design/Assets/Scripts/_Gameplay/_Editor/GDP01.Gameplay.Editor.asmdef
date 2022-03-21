@@ -1,0 +1,22 @@
+{
+    "name": "GDP01.Gameplay.Editor",
+    "rootNamespace": "GDP01",
+    "references": [
+        "GUID:0d7bba5758dc5f14bb41acd540497ad0",
+        "GUID:a46fa3f8826f4e5408526f4eeccb2e6a",
+        "GUID:046a1ff012bfb824f8b2ea98ff61abce",
+        "GUID:baa041ce2e085934585027d1602f72e9",
+        "GUID:36df2ff674f0e1f49b86937cf018cc7f"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

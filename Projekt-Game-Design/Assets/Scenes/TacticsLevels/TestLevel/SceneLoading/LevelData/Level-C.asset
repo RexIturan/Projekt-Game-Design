@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8706403890368670899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117a02b62d2446808efad8590e520900, type: 3}
+  m_Name: Connector_SO_0
+  m_EditorClassIdentifier: 
+  connectorName: C->B, B->C
+  id: 0
+  levelData: {fileID: 11400000}
+  gridPos: {x: 0, y: 0, z: 0}
+  range: {x: 0, y: 0, z: 0}
+  triggerPositions: []
+  type: -1
+  target: {fileID: 772858591927546384, guid: 70cc086da82376c4da5ec2127c6e53d0, type: 2}
+--- !u!114 &-4691609463466680298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117a02b62d2446808efad8590e520900, type: 3}
+  m_Name: Connector_SO_1
+  m_EditorClassIdentifier: 
+  connectorName: C->D
+  id: 1
+  levelData: {fileID: 11400000}
+  gridPos: {x: 0, y: 0, z: 0}
+  range: {x: 0, y: 0, z: 0}
+  triggerPositions: []
+  type: -1
+  target: {fileID: 235353085484331564, guid: 889aa4f2b13b0e445936b0d0208e0771, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92f955366c64bb4985ed2263c8521c2, type: 3}
+  m_Name: Level-C
+  m_EditorClassIdentifier: 
+  levelName: Level C
+  scene: {fileID: 11400000, guid: c57d5356c6f22a54bbab2a5232192f4e, type: 2}
+  type: 0
+  gridContainerSO: {fileID: 0}
+  gridDataSO: {fileID: 0}
+  mesh: {fileID: 0}
+  connectors:
+  - {fileID: -8706403890368670899}
+  - {fileID: -4691609463466680298}

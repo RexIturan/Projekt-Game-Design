@@ -1,4 +1,5 @@
 ﻿using Characters;
+using Characters.Types;
 using Events.ScriptableObjects.GameState;
 using UnityEngine;
 using UOP1.StateMachine;

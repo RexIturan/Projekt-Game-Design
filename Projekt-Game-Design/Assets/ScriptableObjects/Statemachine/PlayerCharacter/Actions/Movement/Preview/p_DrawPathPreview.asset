@@ -15,4 +15,5 @@ MonoBehaviour:
   drawPathEvent: {fileID: 11400000, guid: 24e76f8c903214540b6d8bd9b1bf3620, type: 2}
   clearPathEvent: {fileID: 11400000, guid: 2859153d6ff2e4a47b7bbc8f1de406c7, type: 2}
   pathfindingPathQueryEventChannel: {fileID: 11400000, guid: f9d0d9552bf764242b4ca139470b069a, type: 2}
-  inputCache: {fileID: 11400000, guid: 767106d458901634590366e6fae31156, type: 2}
+  previewChangedEC: {fileID: 11400000, guid: bbea0bd10948d3748ac7308a0f8e9a8a, type: 2}
+  targetChangedEC: {fileID: 11400000, guid: 979f87c1efc47c840a2ac61dbac3b1d5, type: 2}

@@ -1,0 +1,23 @@
+{
+    "name": "GDP01.LevelEditor",
+    "rootNamespace": "GDP01.LevelEditor",
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:1686690f1ac79d041817b02ce51bc834",
+        "GUID:d7babcb93ee6a6b40b8bd6cceb6a5550",
+        "GUID:bd4d88f6695cbba4095968043b9ed903",
+        "GUID:c2b44f240aa4f8547a57229d8d964c30",
+        "GUID:0d7bba5758dc5f14bb41acd540497ad0",
+        "GUID:a46fa3f8826f4e5408526f4eeccb2e6a",
+        "GUID:046a1ff012bfb824f8b2ea98ff61abce"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

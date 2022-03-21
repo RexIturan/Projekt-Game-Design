@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61ead88b01a0704a9f45e2aef1ed2c6, type: 3}
+  m_Name: CharVisualsContainer
+  m_EditorClassIdentifier: 
+  compositeMaterials:
+  - matColor: 0
+    material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
+  - matColor: 1
+    material: {fileID: 2100000, guid: 2a8bb75c7a388f84c97bea7614dc0123, type: 2}
+  - matColor: 2
+    material: {fileID: 2100000, guid: 66b03f1d8e008d2438056062f1ce95d2, type: 2}
+  - matColor: 3
+    material: {fileID: 2100000, guid: c40101fb007c9174e9d24bea9b42c7eb, type: 2}
+  - matColor: 4
+    material: {fileID: 2100000, guid: 2e94d6a09fa4f89448cc158da882bf11, type: 2}
+  - matColor: 5
+    material: {fileID: 2100000, guid: afcf74c9d28da724b9ed74097742bcd2, type: 2}
+  - matColor: 6
+    material: {fileID: 2100000, guid: 9666f946cb4770d4cb1276694816adc1, type: 2}
+  - matColor: 7
+    material: {fileID: 2100000, guid: 63d5d82768249414eb5ab82bade3632f, type: 2}
+  - matColor: 8
+    material: {fileID: 2100000, guid: 444b3c5c2d9f6c8449c77ac39d09792a, type: 2}
+  - matColor: 9
+    material: {fileID: 2100000, guid: 39897e1cf2f50d84ba899365c86c9d33, type: 2}
+  - matColor: 10
+    material: {fileID: 2100000, guid: a95a70f1061eb1f4db9274e54c76afeb, type: 2}
+  factionMaterials:
+  - faction: 1
+    matColor: 1
+  - faction: 2
+    matColor: 7
+  - faction: 4
+    matColor: 4
+  - faction: 3
+    matColor: 9
+  - faction: 0
+    matColor: 6

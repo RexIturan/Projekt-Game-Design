@@ -1,0 +1,17 @@
+{
+    "name": "GDP01.Gameplay.EventChannels",
+    "rootNamespace": "",
+    "references": [
+        "GDP01.EventChannel",
+        "GDP01.Gameplay.Types"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

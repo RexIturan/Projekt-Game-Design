@@ -1,17 +1,14 @@
 using Ability.ScriptableObjects;
-using System.Collections.Generic;
 using Characters;
-using Characters.Ability;
-using Combat;
-using Events.ScriptableObjects.Pathfinding;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
-using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
 using Events.ScriptableObjects.FieldOfView;
 using Level.Grid;
 using FieldOfView;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
 
 [CreateAssetMenu(fileName = "c_SaveTilesInRange_OnEnter",
 	menuName = "State Machines/Actions/Character/Save Tiles In Range On Enter")]
@@ -60,7 +57,7 @@ public class C_SaveTilesInRange_OnEnter : StateAction {
 		SaveToStateContainer);
 		
 		fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition,
-			statistics.StatusValues.ViewDistance.value,
+			statistics.StatusValues.ViewDistance.Value,
 			TileProperties.Opaque | TileProperties.Solid,
 			SaveVisibleTilesToStateContainer);
 	}

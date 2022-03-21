@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Inventory" src="project://database/Assets/UI/UXML/Gameplay/Inventory.uxml?fileID=9197481963319205126&amp;guid=1b1f420aa11442a4aa85b53379af35e7&amp;type=3#Inventory" />
+    <Style src="project://database/Assets/UI/Styles/Inventory.uss?fileID=7433441132597879392&amp;guid=8fc35dcffc2669141b3123bd98a4d42e&amp;type=3#Inventory" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row; border-left-color: rgba(0, 0, 0, 0.43); border-right-color: rgba(0, 0, 0, 0.43); border-top-color: rgba(0, 0, 0, 0.43); border-bottom-color: rgba(0, 0, 0, 0.43); background-color: rgba(0, 0, 0, 0.43);">
+        <ui:VisualElement name="Sidebar" style="width: 30%; height: 100%; background-color: rgba(26, 26, 26, 0.6);">
+            <ui:VisualElement name="PlayerContainer" style="flex-grow: 0; width: 100%; align-items: center; justify-content: center; flex-direction: row; height: 100px; visibility: visible;">
+                <ui:VisualElement name="Player1" class="PlayerContainer" />
+                <ui:VisualElement name="Player2" class="PlayerContainer" style="flex-direction: row;" />
+                <ui:VisualElement name="Player3" class="PlayerContainer" style="flex-direction: row;" />
+            </ui:VisualElement>
+            <UI.Components.Character.CharacterStatusValuePanel name="CharacterStatusValuePanel" />
+            <ui:VisualElement name="PlayerEquipmentInventory" style="flex-wrap: wrap; flex-grow: 1; flex-direction: column; justify-content: center; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; align-items: center;">
+                <ui:VisualElement name="Weapons" style="flex-direction: row; justify-content: center;">
+                    <InventorySlot name="WeaponLeft" class="ItemEquipmentContainer" style="-unity-background-image-tint-color: rgb(159, 159, 159); min-width: auto; min-height: auto; width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Art/Sprites/UI/equipmentSlot/halt_L.png?fileID=21300000&amp;guid=90aa514e17a55f643ab05a41f49ea023&amp;type=3#halt_L&apos;);" />
+                    <InventorySlot name="WeaponRight" class="ItemEquipmentContainer" style="-unity-background-image-tint-color: rgb(159, 159, 159); min-width: auto; min-height: auto; max-width: none; width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Art/Sprites/UI/equipmentSlot/halt_R.png?fileID=21300000&amp;guid=ab96ecd76be9e3f498a1fb7b963d5ee3&amp;type=3#halt_R&apos;);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Head" style="flex-direction: row; justify-content: center;">
+                    <InventorySlot name="HeadArmor" class="ItemEquipmentContainer" style="-unity-background-image-tint-color: rgb(159, 159, 159); min-width: auto; min-height: auto; width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Art/Sprites/UI/equipmentSlot/barbute.png?fileID=21300000&amp;guid=1a56ae4ae0794634cb1dd26f27825567&amp;type=3#barbute&apos;);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Body" style="flex-direction: row; justify-content: center;">
+                    <InventorySlot name="BodyArmor" class="ItemEquipmentContainer" style="-unity-background-image-tint-color: rgb(159, 159, 159); min-width: auto; min-height: auto; width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Art/Sprites/UI/equipmentSlot/kevlar.png?fileID=21300000&amp;guid=6ab58a7891ec2ac4eb9f667b78355348&amp;type=3#kevlar&apos;);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Protection" style="flex-direction: row; justify-content: center;">
+                    <InventorySlot name="Shield" class="ItemEquipmentContainer" style="-unity-background-image-tint-color: rgb(159, 159, 159); min-width: auto; min-height: auto; width: 90px; height: 90px; background-image: url(&apos;project://database/Assets/Art/Sprites/UI/equipmentSlot/attached-shield.png?fileID=21300000&amp;guid=0f99929b3e2f250408aa84e7838a01a6&amp;type=3#attached-shield&apos;);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="MainContent" style="height: 100%; width: 100%; padding-left: 5%; padding-right: 5%; padding-top: 5%; padding-bottom: 5%;">
+            <ui:Instance template="Inventory" name="Inventory" style="flex-grow: 1; display: flex;" />
+            <ui:VisualElement name="Content" style="position: relative; flex-grow: 1; width: 100%; height: 100%; display: none;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="GhostIcon" style="position: absolute; width: 50px; height: 50px; display: flex; visibility: hidden;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -17,20 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 3f77664488fffe24b8349ec20b4f0cd1
   m_SerializeEntries:
-  - m_GUID: b5821c0c90e6f8044a2f1ed32296f05e
-    m_Address: Assets/Art/Material/Player_mat.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 572e879cdd5e13043b2c0c7ac4198acf
     m_Address: Assets/Art/Material/FOV_mat.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: bc9f5c3fce407d040934535c1eeaadc2
     m_Address: Assets/Art/Material/TileMesh_mat.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 4c738b82dfe095844b75e6bf35a4fd57
-    m_Address: Assets/Art/Material/Enemy_mat.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: b442d63fc4f688c42b0926627f5f5bd4
@@ -75,6 +67,66 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 9c56b19399b4f984ab07d8bff29a4c70
     m_Address: Assets/Art/Sprites
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5bded207e6044f84bafa1ed6dc0f8126
+    m_Address: Assets/Scenes/Testing/UI/UI-Test.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 89a53624ed3f90f4d888a2219766fa01
+    m_Address: GameplayUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 63abaa077c7fe114186a422ef7029710
+    m_Address: DefaultUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9e4a4940416a7a14ab3587f748776020
+    m_Address: Level_A.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: eb69d4eff05817f4a9a82ae971422e32
+    m_Address: Level_B.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6e0b7638d35757843bd46df90a4c02f6
+    m_Address: StartScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fb00f78486e90814aad8308ce12a8034
+    m_Address: Level_C.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c8bf7da4a3154244aa1fe58a573922dd
+    m_Address: GameScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 21079a00fe1a1f641bfae6d4b1c5e00a
+    m_Address: Level_D.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 07e3fa8c05776224fb714990ec0446db
+    m_Address: LevelDataContainerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a2aa22ecb11b5a74998b621d6d957ad0
+    m_Address: CharacterTypeContainerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 06f235e350237cc41b1711487af77bbe
+    m_Address: EquipmentContainerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 894b7bd3f223e6440a05684c434e7780
+    m_Address: InventorySO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9c0103f97c6ccb944b231b864511fe70
+    m_Address: ItemContainerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 26ee19c2addbcf0409508e71a6e34144
+    m_Address: WorldObjectTypeContainerSO
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

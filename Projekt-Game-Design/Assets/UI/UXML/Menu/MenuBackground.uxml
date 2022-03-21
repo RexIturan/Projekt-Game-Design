@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Background" style="background-image: url(&apos;/Assets/Art/Sprites/UI/bg_menu.jpg&apos;); width: 100%; height: 100%;" />
+</ui:UXML>

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f46c068859298943b82345325e438c7, type: 3}
+  m_Name: h_basicHelmet
+  m_EditorClassIdentifier: 
+  id: 8
+  icon: {fileID: 21300000, guid: 0eeaab8ac838b664384e482a53b91156, type: 3}
+  prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
+  mesh: {fileID: -6197275287432325541, guid: a9b97bb237d970d479610c06205b120d, type: 3}
+  material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
+  goldValue: 0
+  rarity: 0
+  type: 0
+  abilities: []

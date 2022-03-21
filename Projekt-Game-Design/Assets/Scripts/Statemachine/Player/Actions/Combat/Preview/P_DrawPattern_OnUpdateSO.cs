@@ -1,12 +1,12 @@
 using Ability.ScriptableObjects;
-using Characters.Ability;
-using Combat;
 using Events.ScriptableObjects;
 using Input;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
 
 [CreateAssetMenu(fileName = "p_DrawPattern_OnUpdate", menuName = "State Machines/Actions/Player/Draw Pattern On Update")]
 public class P_DrawPattern_OnUpdateSO : StateActionSO {
@@ -47,31 +47,32 @@ public class P_DrawPattern_OnUpdate : StateAction {
 
 	public override void OnUpdate() {
 		Vector3Int mousePos = _inputCache.cursor.abovePos.gridPos;
-		
+		Vector3Int targetPos = _abilityController.singleTarget ? _abilityController.singleTargetPos : mousePos;
 		
 		//todo this is more complicated then it should be
-		if(!_isDrawn || !_lastDrawnGridPos.Equals(mousePos)) { 
+		if(!_isDrawn || !_lastDrawnGridPos.Equals(targetPos)) { 
 			bool isInRange = false;
 			
 			for(int i = 0; !isInRange && i < _attacker.tilesInRange.Count; i++) { 
-		    if(_attacker.tilesInRange[i].pos.Equals(mousePos)) {
+		    if(_attacker.tilesInRange[i].pos.Equals(targetPos)) {
 					isInRange = true;
 				}
       }
+			
+			AbilitySO ability = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
 
-			if ( isInRange ) {
-				AbilitySO ability = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
+			if ( isInRange && ability.targetedEffects != null && ability.targetedEffects.Length > 0) {
 
-				int rotations = _attacker.GetRotationsToTarget(mousePos);
+				int rotations = _attacker.GetRotationsToTarget(targetPos);
 
-				Debug.Log($"{rotations} {ability.targetedEffects[0].area.GetRotatedAnchor(rotations)}");
+				// Debug.Log($"{rotations} {ability.targetedEffects[0].area.GetRotatedAnchor(rotations)}");
 				
-				_drawPatternEC.RaiseEvent(mousePos, 
+				_drawPatternEC.RaiseEvent(targetPos, 
 					ability.targetedEffects[0].area.GetRotatedPattern(rotations), 
 					ability.targetedEffects[0].area.GetRotatedAnchor(rotations));
 
 				_isDrawn = true;
-				_lastDrawnGridPos = mousePos;
+				_lastDrawnGridPos = targetPos;
 				
 			} else {
 				_clearPatternEC.RaiseEvent();

@@ -1,0 +1,17 @@
+{
+    "name": "GDP01.SceneManagement.EventChannels",
+    "rootNamespace": "GDP01",
+    "references": [
+        "GUID:08a65659543cc7441a1677f652290219",
+        "GUID:bd4d88f6695cbba4095968043b9ed903"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

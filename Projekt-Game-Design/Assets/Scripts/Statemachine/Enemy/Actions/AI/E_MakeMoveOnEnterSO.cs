@@ -1,15 +1,12 @@
-using Events.ScriptableObjects;
-using System.Collections.Generic;
 using Characters;
-using Characters.Movement;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using Util;
 using StateMachine = UOP1.StateMachine.StateMachine;
 using Characters.EnemyCharacter;
-using Characters.Ability;
-using Combat;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
 
 [CreateAssetMenu(fileName = "e_MakeMoveOnEnter", menuName = "State Machines/Actions/Enemy/e_MakeMoveOnEnter")]
 public class E_MakeMoveOnEnterSO : StateActionSO {

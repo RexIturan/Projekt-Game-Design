@@ -1,0 +1,21 @@
+{
+    "name": "GDP01.Structure",
+    "rootNamespace": "",
+    "references": [
+        "GDP01.EventChannel",
+        "GDP01.SceneManagement.EventChannels",
+        "GDP01.SceneManagement.Types",
+        "GDP01.Gameplay.Types",
+        "GDP01.SaveSystem.V2.Types",
+        "GDP01.Util.Singleton"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,4 +1,4 @@
-﻿using Characters.Ability;
+﻿using GDP01.Characters.Component;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;

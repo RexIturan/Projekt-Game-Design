@@ -31,7 +31,7 @@ namespace SceneManagement {
 						LoadEventChannel;
 				}
 				else {
-					Debug.Log("EditorColdStartup > Start \ncold startup: persistant managers loaded!");
+					// Debug.Log("EditorColdStartup > Start \ncold startup: persistant managers loaded!");
 					//todo(vincent) destroy this EditorColdStartup
 				}
 			}

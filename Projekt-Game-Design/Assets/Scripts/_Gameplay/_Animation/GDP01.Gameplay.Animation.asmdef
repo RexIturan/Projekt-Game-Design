@@ -1,0 +1,18 @@
+{
+    "name": "GDP01.Gameplay.Animation",
+    "rootNamespace": "GDP01.Gameplay.Animation",
+    "references": [
+        "GUID:7f7d1af65c2641843945d409d28f2e20",
+        "GUID:a46fa3f8826f4e5408526f4eeccb2e6a",
+        "GUID:d8d86edead9285548a0b5203ad54c5e3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

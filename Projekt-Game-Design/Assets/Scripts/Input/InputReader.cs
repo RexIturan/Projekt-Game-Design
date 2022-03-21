@@ -1,8 +1,9 @@
 ﻿using System;
-using Characters;
+using Characters.Types;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
-using UI.Gameplay;
+using GDP01.Input.Input.Types;
+using UI.Gameplay.Types;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -13,7 +14,7 @@ namespace Input {
 		GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions,
 		GameInput.IInventoryActions, GameInput.ILoadingScreenActions {
 		// todo rework event channels: move and rename them 
-		[Header("Sending Events On")] 
+		[Header("Sending Events On")]
 		[SerializeField] private VoidEventChannelSO uiToggleMenuEC;
 		[SerializeField] private ScreenEventChannelSO uiToggleScreenEC;
 		[SerializeField] private EFactionEventChannelSO endTurnEC;
@@ -195,43 +196,63 @@ namespace Input {
 		}
 
 		public void OnSelectAbility_1(InputAction.CallbackContext context) {
-			SelectAbilityEvent.Invoke(1);
+			if ( context.phase == InputActionPhase.Performed ) {
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_1);	
+			}
 		}
 
 		public void OnSelectAbility_2(InputAction.CallbackContext context) {
-			SelectAbilityEvent.Invoke(2);
+			if ( context.phase == InputActionPhase.Performed ) {
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_2);	
+			}
 		}
 
 		public void OnSelectAbility_3(InputAction.CallbackContext context) {
-			SelectAbilityEvent.Invoke(3);
+			if ( context.phase == InputActionPhase.Performed ) {
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_3);	
+			}
 		}
 
 		public void OnSelectAbility_4(InputAction.CallbackContext context) {
-			SelectAbilityEvent.Invoke(4);
+			if ( context.phase == InputActionPhase.Performed ) {
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_4);	
+			}
 		}
 
 		public void OnSelectAbility_5(InputAction.CallbackContext context) {
-			SelectAbilityEvent.Invoke(5);
+			if ( context.phase == InputActionPhase.Performed ) {
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_5);	
+			}
 		}
 
 		public void OnSelectAbility_6(InputAction.CallbackContext context) {
-			SelectAbilityEvent.Invoke(6);
+			if ( context.phase == InputActionPhase.Performed ) {
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_6);	
+			}
 		}
 
 		public void OnSelectAbility_7(InputAction.CallbackContext context) {
-			SelectAbilityEvent.Invoke(7);
+			if ( context.phase == InputActionPhase.Performed ) {
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_7);	
+			}
 		}
 
 		public void OnSelectAbility_8(InputAction.CallbackContext context) {
-			SelectAbilityEvent.Invoke(8);
+			if ( context.phase == InputActionPhase.Performed ) {
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_8);	
+			}
 		}
 
 		public void OnSelectAbility_9(InputAction.CallbackContext context) {
-			SelectAbilityEvent.Invoke(9);
+			if ( context.phase == InputActionPhase.Performed ) {
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_9);
+			}
 		}
 
-		public void OnSelectAbility_0(InputAction.CallbackContext context) {
-			SelectAbilityEvent.Invoke(0);
+		public void OnSelectAbility_10(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed ) {
+				SelectAbilityEvent.Invoke((int)ActionButtonInputId.Action_10);
+			}
 		}
 
 		#endregion
@@ -277,7 +298,7 @@ namespace Input {
 
 		public void OnCancelInventory(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
-				Debug.Log("onCancel");
+				// Debug.Log("onCancel");
 				uiToggleScreenEC.RaiseEvent(GameplayScreen.Inventory);
 			}
 		}

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Characters;
+using Characters.Equipment.ScriptableObjects;
 using Events.ScriptableObjects;
 using Grid;
 using QuestSystem.ScriptabelObjects;
-using SaveSystem.SaveFormats;
 using SaveSystem.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
@@ -35,6 +34,7 @@ namespace SaveSystem {
 		public CharacterInitialiser characterInitializer;
 		public WorldObjectInitialiser worldObjectInitialiser;
 		[SerializeField] private ItemContainerSO itemContainerSO;
+		[SerializeField] private EquipmentContainerSO equipmentContainer;
 
 	//load level from textasset
 		[Header("Test Level Data")] 
@@ -44,7 +44,7 @@ namespace SaveSystem {
 		//settings
 		//save manager state: is something loaded and so on
 		public SaveManagerDataSO saveManagerData;
-		[SerializeField] private readonly string defaultLevelFilename = "test_level";
+		[SerializeField] private string defaultLevelFilename = "test_level";
 		[SerializeField] private string defaultGameFilename = "tutorial";
 		
 		[Header("Sending Events On")]
@@ -63,6 +63,11 @@ namespace SaveSystem {
 		private SaveWriter _saveWriter;
 		private SaveReader _saveReader;
 
+///// Properties ///////////////////////////////////////////////////////////////////////////////////
+
+		public SaveReader SaveReader => _saveReader ??= new SaveReader(
+			gridContainer, globalGridData, inventory, questContainer, itemContainerSO, equipmentContainer);
+		
 //////////////////////////////////////// Local Functions ///////////////////////////////////////////
 
 		#region Local Functions
@@ -99,10 +104,10 @@ namespace SaveSystem {
 
 		private void Start() {
 			// setup save Writer
-			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, questContainer);
+			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, equipmentContainer, questContainer);
 
 			// setup save Reader
-			_saveReader = new SaveReader(gridContainer, globalGridData, inventory, questContainer, itemContainerSO);
+			_saveReader = new SaveReader(gridContainer, globalGridData, inventory, questContainer, itemContainerSO, equipmentContainer);
 		}
 
 		#endregion
@@ -140,8 +145,8 @@ namespace SaveSystem {
 				        
 				if ( loaded ) {
 					loadLocation.RaiseEvent(locationsToLoad, false, true);
-					saveManagerData.inputLoad = true;
-					saveManagerData.loaded = true;
+					// saveManagerData.inputLoad = true;
+					// saveManagerData.loaded = true;
 				}
 			}
 			catch ( Exception e ) {
@@ -162,11 +167,10 @@ namespace SaveSystem {
 		//todo SaveObject for Level
 
 		public bool SaveLevelWithOverride(string saveName) {
-			FileManager.DeleteFile(saveName);
-			return SaveLevel(saveName); 
+			return SaveLevel(saveName, true); 
 		}
 		
-		public bool SaveLevel(string saveName) {
+		public bool SaveLevel(string saveName, bool overrideFile = false) {
 			//todo refactor code duplication
 			var filename = saveName;
 			if ( filename == "" ) {
@@ -181,12 +185,12 @@ namespace SaveSystem {
 				var saveJson = save.ToJson();
 				
 				// filemanager: write saveObject to savefile
-				bool written = FileManager.WriteToFile(filename, saveJson);
+				bool written = FileManager.WriteToFile(saveJson, filename, overrideFile);
 				
 				if ( written ) {
 					// set savemanager flag
 					//todo idk if we need this, use event instead??
-					saveManagerData.saved = true;
+					// saveManagerData.saved = true;
 					
 					Debug.Log($"SaveManager > SaveLevel > try > written\nLevel Saved{filename}");
 				}
@@ -221,18 +225,19 @@ namespace SaveSystem {
 			try {
 				// write json to save Object
 				_saveObject.LoadFromJson(saveJson);
+				_saveObject.FileName = filename;
 
 				//todo remove and manage otherwise
 				// save manager state
-				saveManagerData.loaded = true;
+				// saveManagerData.loaded = true;
 				
 				//todo debug
-				Debug.Log("SaveManager \u27A4 LoadLevel \u27A4 try:\nLevel Loaded");
+				// Debug.Log($"SaveManager \u27A4 LoadLevel \u27A4 try:\n\"{filename}\" Level Loaded");
 				
 				return true;
 			}
 			catch ( Exception e ) {
-				Debug.LogError($"Failed to Load Save Object from Json {e}");
+				Debug.LogError($"Failed to Load Save Object from Json \"{filename}\", with Exception: {e}");
 				return false;
 			}
 
@@ -247,7 +252,8 @@ namespace SaveSystem {
 
 		#region Load Level From TextAsset
 
-		void LoadSaveFromTextAsset(AssetReference assetReference) {
+		//todo does nothing
+		private void LoadSaveFromTextAsset(AssetReference assetReference) {
 			if ( !assetReference.RuntimeKeyIsValid() )
 				return;
 		}
@@ -260,10 +266,10 @@ namespace SaveSystem {
 		/// uses the data from saveData, which is read in beforehand, for example in LoadTextAssetsAsSaves
 		/// </summary>
 		public void InitializeLevel() {
-			_saveReader.SetRuntimeReferences(characterInitializer, worldObjectInitialiser);
-			_saveReader.ReadSave(_saveObject);
+			SaveReader.SetRuntimeReferences(characterInitializer, worldObjectInitialiser);
+			SaveReader.ReadSave(_saveObject);
 
-			saveManagerData.loaded = true;
+			// saveManagerData.loaded = true;
 			levelLoaded.RaiseEvent();
 		}
 
@@ -339,8 +345,10 @@ namespace SaveSystem {
 			_saveObjects.Clear();
 		}
 
+		//todo remove
 		public bool IsSaveLoaded() {
-			return saveManagerData.loaded;
+			// throw new NotImplementedException();
+			return true;
 		}
 	}
 }

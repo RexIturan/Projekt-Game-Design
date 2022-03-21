@@ -1,0 +1,22 @@
+{
+    "name": "GDP01.SceneManagement",
+    "rootNamespace": "GDP01",
+    "references": [
+        "GUID:84651a3751eca9349aac36a66bba901b",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:d7babcb93ee6a6b40b8bd6cceb6a5550",
+        "GUID:bd4d88f6695cbba4095968043b9ed903",
+        "GUID:55a703282c6fb1b44be30d5981192602",
+        "GUID:08a65659543cc7441a1677f652290219",
+        "GUID:841b43910935cb34dbaf7254db209e3d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

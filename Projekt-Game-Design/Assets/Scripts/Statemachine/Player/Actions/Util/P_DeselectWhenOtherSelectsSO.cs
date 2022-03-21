@@ -10,17 +10,17 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 	menuName = "State Machines/Actions/Player/Deselect When Other Selects")]
 public class P_DeselectWhenOtherSelectsSO : StateActionSO {
 	[Header("Sending Events On")] [SerializeField]
-	public GameObjActionEventChannelSO selectNewPlayer;
+	public GameObjActionIntEventChannelSO selectNewPlayer;
 
 	public override StateAction CreateAction() => new P_DeselectWhenOtherSelects(selectNewPlayer);
 }
 
 public class P_DeselectWhenOtherSelects : StateAction {
 	private GameObject _gameObject;
-	private readonly GameObjActionEventChannelSO _selectNewPlayer;
+	private readonly GameObjActionIntEventChannelSO _selectPlayerEC;
 
-	public P_DeselectWhenOtherSelects(GameObjActionEventChannelSO gameObjEventChannel) {
-		_selectNewPlayer = gameObjEventChannel;
+	public P_DeselectWhenOtherSelects(GameObjActionIntEventChannelSO selectPlayerEC) {
+		_selectPlayerEC = selectPlayerEC;
 	}
 
 	public override void OnUpdate() { }
@@ -30,7 +30,7 @@ public class P_DeselectWhenOtherSelects : StateAction {
 	}
 
 	public override void OnStateEnter() {
-		_selectNewPlayer.OnEventRaised += DeselectSelf;
+		_selectPlayerEC.OnEventRaised += DeselectSelf;
 	}
 
 	private void DeselectSelf(GameObject selectedPlayer, Action<int> callback) {

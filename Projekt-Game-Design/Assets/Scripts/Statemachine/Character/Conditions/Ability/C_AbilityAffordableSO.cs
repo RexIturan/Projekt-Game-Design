@@ -1,6 +1,6 @@
 using Ability.ScriptableObjects;
 using Characters;
-using Characters.Ability;
+using GDP01.Characters.Component;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -30,8 +30,7 @@ public class C_AbilityAffordable : Condition {
 	}
 
 	protected override bool Statement() {
-		return _statistics.StatusValues.Energy.value >=
-		       _abilityContainer.abilities[_abilityController.SelectedAbilityID].costs;
+		return _abilityController.IsAbilityAvailable(_abilityController.SelectedAbilityID);
 	}
 
 	public override void OnStateEnter() { }

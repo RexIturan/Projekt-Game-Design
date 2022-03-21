@@ -1,5 +1,5 @@
-using Characters.Ability;
 using Events.ScriptableObjects;
+using GDP01.Characters.Component;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -9,7 +9,7 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 	menuName = "State Machines/Actions/Player/RaiseSelectedEvent")]
 public class RaiseSelectedEventSO : StateActionSO {
 	[Header("Sending Events On")] [SerializeField]
-	public GameObjActionEventChannelSO selectNewPlayer;
+	public GameObjActionIntEventChannelSO selectNewPlayer;
 
 	public override StateAction CreateAction() => new RaiseSelectedEvent(selectNewPlayer);
 }
@@ -17,12 +17,12 @@ public class RaiseSelectedEventSO : StateActionSO {
 public class RaiseSelectedEvent : StateAction {
 	private GameObject _gameObject;
 	private StateMachine _stateMachine;
-	private GameObjActionEventChannelSO _selectNewPlayer;
+	private GameObjActionIntEventChannelSO _selectPlayerEC;
 
 	private AbilityController _abilityController;
 
-	public RaiseSelectedEvent(GameObjActionEventChannelSO gameObjEventChannel) {
-		_selectNewPlayer = gameObjEventChannel;
+	public RaiseSelectedEvent(GameObjActionIntEventChannelSO selectPlayerEventChannel) {
+		_selectPlayerEC = selectPlayerEventChannel;
 	}
 
 	public override void OnUpdate() { }
@@ -30,11 +30,11 @@ public class RaiseSelectedEvent : StateAction {
 	public override void Awake(StateMachine stateMachine) {
 		_stateMachine = stateMachine;
 		_gameObject = stateMachine.gameObject;
-		Debug.Log($"Awake raiseSelectedEvent {this}");
+		// Debug.Log($"Awake raiseSelectedEvent {this}");
 		_abilityController = stateMachine.gameObject.GetComponent<AbilityController>();
 	}
 
-	//TODO: Muss geändert werden
+	//TODO: Muss geaendert werden
 	private void AbilityCallback(int value) {
 		Debug.Log("Es wurde die Ability mit der ID: " + value + " gedrückt.");
 
@@ -60,6 +60,6 @@ public class RaiseSelectedEvent : StateAction {
 
 	public override void OnStateEnter() {
 	  _abilityController.RefreshAbilities();
-		_selectNewPlayer.RaiseEvent(_gameObject, AbilityCallback);
+		_selectPlayerEC.RaiseEvent(_gameObject, AbilityCallback);
 	}
 }

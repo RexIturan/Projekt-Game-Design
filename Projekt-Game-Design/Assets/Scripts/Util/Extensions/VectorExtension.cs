@@ -44,5 +44,15 @@ namespace Util.Extensions {
 		        x: Mathf.Abs(vector2Int.x), 
 		        y: Mathf.Abs(vector2Int.y));
         }
+
+
+        public static Vector2 ZWInt(this Vector4 vec4) {
+	        return new Vector2(vec4.z, vec4.w);
+        }
+
+        public static void SetZW(ref this Vector4 vec4, Vector2 vec2) {
+	        vec4.z = vec2.x;
+	        vec4.w = vec2.y;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Characters;
+﻿using Characters.Types;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;

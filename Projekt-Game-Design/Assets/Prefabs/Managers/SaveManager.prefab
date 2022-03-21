@@ -59,14 +59,10 @@ MonoBehaviour:
   characterInitializer: {fileID: 1363089168}
   worldObjectInitialiser: {fileID: 6243888046473227220}
   itemContainerSO: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
-  testLevel:
-  - m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  equipmentContainer: {fileID: 11400000, guid: 06f235e350237cc41b1711487af77bbe, type: 2}
+  testLevel: []
   saveManagerData: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
   defaultGameFilename: tutorial
-  GameSaveFilename: tutorial
   loadLocation: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
   locationsToLoad:
   - {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}

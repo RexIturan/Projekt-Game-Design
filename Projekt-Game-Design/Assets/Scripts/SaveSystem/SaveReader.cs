@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 using Characters;
+using Characters.Equipment.ScriptableObjects;
+using GDP01.Equipment;
 using Grid;
 using QuestSystem.ScriptabelObjects;
 using SaveSystem.SaveFormats;
@@ -17,6 +20,7 @@ namespace SaveSystem {
 
 		// inventorys
 		private readonly InventorySO _inventory;
+		private readonly EquipmentContainerSO _equipmentContainer;
 
 		// quests
 		private readonly QuestContainerSO _questContainer;
@@ -31,9 +35,9 @@ namespace SaveSystem {
 //////////////////////////////////// Local Functions ///////////////////////////////////////////////
 		#region Local Functions
 
-		private bool ReadGridData(GridData_Save gridDataSave, GridDataSO gridData) {
+		private bool ReadGridData(Save save, GridDataSO gridData) {
 			
-			gridData.InitFromSaveValues(gridDataSave);
+			gridData.InitFromSaveValues(save.gridDataSave, save.FileName);
 			
 			//todo check if all read date is valid
 			return true;
@@ -85,38 +89,14 @@ namespace SaveSystem {
 		}
 		
 		private void ReadEquipmentInventory(List<Inventory_Save> saveEquipmentInventory,
-			InventorySO inventory) {
-			inventory.equipmentInventories.Clear();
+			EquipmentContainerSO equipmentContainer) {
+			equipmentContainer.EquipmentSheets.Clear();
 			
-			foreach (var equipmentInventory in saveEquipmentInventory) {
-				InventorySO.Equipment equipment = new InventorySO.Equipment();
-				//todo move to Equipment.Init from save or so 
-				if(equipmentInventory.itemIds[0] >= 0)
-					equipment.weaponLeft = (WeaponSO) _itemContainerSo.itemList[equipmentInventory.itemIds[0]];
-				else
-					equipment.weaponLeft = null;
-
-				if(equipmentInventory.itemIds[1] >= 0)
-					equipment.weaponRight = (WeaponSO) _itemContainerSo.itemList[equipmentInventory.itemIds[1]];
-				else
-					equipment.weaponRight = null;
-
-				if(equipmentInventory.itemIds[2] >= 0)
-					equipment.headArmor = (HeadArmorSO) _itemContainerSo.itemList[equipmentInventory.itemIds[2]];
-				else
-					equipment.headArmor = null;
-
-				if(equipmentInventory.itemIds[3] >= 0)
-					equipment.bodyArmor = (BodyArmorSO) _itemContainerSo.itemList[equipmentInventory.itemIds[3]];
-				else
-					equipment.bodyArmor = null;
-
-				if(equipmentInventory.itemIds[4] >= 0)
-					equipment.shield = (ShieldSO) _itemContainerSo.itemList[equipmentInventory.itemIds[4]];
-				else
-					equipment.shield = null;
-									
-				inventory.equipmentInventories.Add(equipment);
+			foreach (var equipmentSheetSave in saveEquipmentInventory) {
+				int id = equipmentContainer.CreateNewEquipmentSheet();
+				var equipment = equipmentContainer.EquipmentSheets[id];
+				
+				equipment.InitialiseFromSave(equipmentSheetSave, _itemContainerSo);
 			}
 			
 			//todo rethink this -> do here, maybe get initialised chars as parameter?
@@ -124,14 +104,13 @@ namespace SaveSystem {
 			if ( characterList is { } ) {
 				var playerCharNum = characterList.playerContainer.Count +
 				                    characterList.friendlyContainer.Count;
-				var equipmentInvCount = inventory.equipmentInventories.Count;
+				var equipmentInvCount = equipmentContainer.EquipmentSheets.Count;
 				if ( equipmentInvCount < playerCharNum) {
 					for ( int i = 0; i < playerCharNum - equipmentInvCount; i++ ) {
-						inventory.equipmentInventories.Add(new InventorySO.Equipment());
+						equipmentContainer.CreateNewEquipmentSheet();
 					}
 				}
 			}
-			
 		}
 		
 		private void ReadItems(List<Item_Save> saveItems, GridContainerSO gridContaier) {
@@ -155,11 +134,13 @@ namespace SaveSystem {
 			GridDataSO gridData,
 			InventorySO inventory,
 			QuestContainerSO questContainer,
-			ItemContainerSO itemContainerSO) {
+			ItemContainerSO itemContainerSO,
+			EquipmentContainerSO equipmentContainer) {
 			
 			_gridContaier = gridContaier;
 			_gridData = gridData;
 			_inventory = inventory;
+			_equipmentContainer = equipmentContainer;
 			_questContainer = questContainer;
 			_itemContainerSo = itemContainerSO;
 		}
@@ -172,7 +153,7 @@ namespace SaveSystem {
 		
 		public void ReadSave(Save save) {
 			
-			ReadGridData(save.gridDataSave, _gridData);
+			ReadGridData(save, _gridData);
 			ReadGrid(save, _gridData, _gridContaier);
 
 			// ReadCharacter(save.players, save.enemies);
@@ -181,7 +162,7 @@ namespace SaveSystem {
 
 			ReadInventory(save.inventory, _inventory);
 
-			ReadEquipmentInventory(save.equipmentInventory, _inventory);
+			ReadEquipmentInventory(save.equipmentInventory, _equipmentContainer);
 			
 			ReadItems(save.items, _gridContaier);
 

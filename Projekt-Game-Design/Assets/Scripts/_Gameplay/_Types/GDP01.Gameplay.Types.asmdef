@@ -1,0 +1,22 @@
+{
+    "name": "GDP01.Gameplay.Types",
+    "rootNamespace": "GDP01",
+    "references": [
+        "GUID:1686690f1ac79d041817b02ce51bc834",
+        "GUID:36df2ff674f0e1f49b86937cf018cc7f",
+        "GUID:0a130d9f974bdcd4da38c8eff1609a16",
+        "GUID:a54c87882c40425fbad861037a0f62e4",
+        "GUID:d7babcb93ee6a6b40b8bd6cceb6a5550",
+        "GUID:492128e87ad8c8c46881bae254fb2544",
+        "GUID:a60645a19da598b4bac99856b14a74e3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

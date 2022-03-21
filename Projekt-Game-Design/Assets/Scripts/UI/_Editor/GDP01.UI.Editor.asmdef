@@ -1,0 +1,20 @@
+{
+    "name": "GDP01.UI.Editor",
+    "rootNamespace": "GDP01",
+    "references": [
+        "GUID:1f7940d9f4447744c9d70944a7cc1f32",
+        "GUID:591e8144ad81585438ee191cdeba8b37",
+        "GUID:6006e3e14ff85f749b697af3e469dd3f"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

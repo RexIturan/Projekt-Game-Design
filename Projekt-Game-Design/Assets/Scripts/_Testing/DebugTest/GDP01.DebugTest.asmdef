@@ -1,0 +1,18 @@
+{
+    "name": "GDP01.DebugTest",
+    "rootNamespace": "",
+    "references": [
+        "GUID:bd4d88f6695cbba4095968043b9ed903",
+        "GUID:55a703282c6fb1b44be30d5981192602",
+        "GUID:0cd67cc6da8bc264ab92af71099ee328"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

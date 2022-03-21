@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
+  m_Name: BasicHeal
+  m_EditorClassIdentifier: 
+  id: 3
+  icon: {fileID: 21300000, guid: 7867d1e210ac6224fb128b9ba2e6c293, type: 3}
+  description: 'Heals a dude or yourself. Costs: 1'
+  Animation: 10
+  activationSound: slash_01
+  projectilePrefab: {fileID: 0}
+  timeUntilDamage: 0.3
+  repeated: 1
+  damaging: 0
+  targets: 3
+  moveToTarget: 0
+  range: 4
+  conditions: 0
+  costs: 6
+  targetedEffects:
+  - effect:
+      type: 0
+      baseDamage: 3
+      strengthBonus: 0
+      dexterityBonus: 0
+      intelligenceBonus: 0.8
+    targets: 3
+    targetIsCenter: 1
+    area:
+      stringPattern: '[x]'
+      rows:
+      - line: 01
+      anchor: {x: 0, y: 0}
+  selectedActions:
+  - {fileID: 11400000, guid: 91a528d44b0383848a019fbc0509b9f9, type: 2}
+  - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}
+  - {fileID: 11400000, guid: 8d5abf5e064648d46a86187da80dd12b, type: 2}
+  executingActions:
+  - {fileID: 11400000, guid: 45027094d4b799243a3cfa555ca9d099, type: 2}
+  - {fileID: 11400000, guid: c6ff258bc012f104f99ecc63e4a53f6f, type: 2}
+  - {fileID: 11400000, guid: b76cc6e520aa25f49bbdd9b7a6ee82fc, type: 2}
+  - {fileID: 11400000, guid: 744ff87b44f31794eb710429547ab1be, type: 2}

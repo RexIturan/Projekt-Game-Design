@@ -33,6 +33,10 @@ MonoBehaviour:
     m_Address: Assets/ScriptableObjects/Statemachine
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 4d3643d9384ea8a4db56006cbf094dc7
+    m_Address: InputReader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
   m_SchemaSet:

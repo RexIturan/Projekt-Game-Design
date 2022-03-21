@@ -1,0 +1,19 @@
+{
+    "name": "GDP01.Structure.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GDP01.Structure",
+        "GDP01.Structure.Types"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

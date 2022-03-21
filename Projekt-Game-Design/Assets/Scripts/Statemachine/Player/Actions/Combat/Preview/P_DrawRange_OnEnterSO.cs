@@ -1,5 +1,6 @@
 using Combat;
 using Events.ScriptableObjects;
+using GDP01.World.Components;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;

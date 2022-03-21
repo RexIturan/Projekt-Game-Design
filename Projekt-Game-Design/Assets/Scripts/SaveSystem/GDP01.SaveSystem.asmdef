@@ -1,0 +1,27 @@
+{
+    "name": "GDP01.SaveSystem",
+    "rootNamespace": "",
+    "references": [
+        "Unity.ResourceManager",
+        "Unity.Addressables",
+        "GDP01.Util",
+        "GDP01.Util.Types",
+        "GDP01.Util.GenericGrid",
+        "GDP01.SaveSystem.Formats",
+        "GDP01.EventChannel",
+        "GDP01.QuestSystem",
+        "GDP01.Gameplay.Types",
+        "GDP01.Gameplay",
+        "GDP01.SceneManagement.EventChannels",
+        "GDP01.SceneManagement.Types"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

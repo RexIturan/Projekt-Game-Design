@@ -1,18 +1,18 @@
 {
     "name": "GDP01",
-    "rootNamespace": "",
+    "rootNamespace": "GDP01",
     "references": [
         "Unity.InputSystem",
         "Unity.TextMeshPro",
         "UnityEngine.UIElementsModule",
-        "UOP1.StateMachine",
         "Unity.Addressables",
         "Unity.ResourceManager",
         "FogOfWar",
         "Unity.Animation.Rigging",
         "UnityEditor.UIElementsModule",
+        "UOP1.StateMachine",
         "GDP01.Util",
-        "GDP01.QuestSystem.Editor"
+        "GDP01.Util.Types"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -6,34 +6,29 @@ namespace SaveSystem {
 	public static class FileManager {
 
 		private static string numberPattern = " ({0})";
-		private static string fileExtension = ".json";
-		private static string levelDirectory = "level";
+		private static string jsonFileExtension = ".json";
+		private const string levelDirectory = "level";
 		
 //////////////////////////////////////// Local Functions ///////////////////////////////////////////
 
 		private static string GetSaveDirectory() {
-			// var persistantPath = Application.persistentDataPath;
-			// var streamingAssets = Application.streamingAssetsPath;
-			// var dataAssetPath = Application.dataPath;
-			
-			return Path.Combine(Application.streamingAssetsPath, levelDirectory);
+			//todo -> Application.persistentDataPath
+			return Application.streamingAssetsPath;
+		}
+		
+		private static string GetSaveDirectory(string subDirectory) {
+			return Path.Combine(GetSaveDirectory(), subDirectory);
 		}
 
 		private static string GetFullFilename(string filename) {
-			return String.Concat(filename, fileExtension); 
+			return String.Concat(filename, jsonFileExtension); 
 		}
 		
-		/// <summary>
-		/// Get Full Path inseide the streaming Assets Folder 
-		/// 
-		/// </summary>
-		/// <param name="fileName"></param>
-		/// <returns></returns>
-		private static string GetFullPath(string fileName) {
-			var fullFilename = GetFullFilename(fileName);			
-			var directory = GetSaveDirectory();
+		private static string GetFullPath(string fileName, string subDirectory) {
+			var fullFilename = GetFullFilename(fileName);
+			var directory = GetSaveDirectory(subDirectory); 
 			
-			return  Path.Combine(directory, fullFilename);
+			return Path.Combine(directory, fullFilename);
 		}
 
 		//https://stackoverflow.com/questions/1078003/c-how-would-you-make-a-unique-filename-by-adding-a-number
@@ -82,9 +77,9 @@ namespace SaveSystem {
 		
 //////////////////////////////////////// Public Functions //////////////////////////////////////////
 
-		public static string[] GetFileNames() {
-			var directory = GetSaveDirectory();
-			var filesPaths = Directory.GetFiles(directory, $"*{fileExtension}");
+		public static string[] GetFileNames(string subDirectory = levelDirectory) {
+			var directory = GetSaveDirectory(subDirectory);
+			var filesPaths = Directory.GetFiles(directory, $"*{jsonFileExtension}");
 
 			string[] fileNames = new string[filesPaths.Length];
 
@@ -95,24 +90,21 @@ namespace SaveSystem {
 			return fileNames;
 		}
 
-		public static bool FileExists(string filename) {
-			var fullFilename = GetFullFilename(filename);			
-			var directory = GetSaveDirectory();
-			var fullpath = Path.Combine(directory, fullFilename);
+		public static bool FileExists(string filename, string subDirectory = levelDirectory) {
+			var fullpath = GetFullPath(filename, subDirectory);
 			
 			return File.Exists(fullpath);
 		}
 
-		public static void DeleteFile(string filename) {
-			var fullFilename = GetFullFilename(filename);			
-			var directory = GetSaveDirectory();
-			var fullpath = Path.Combine(directory, fullFilename);
+		public static void DeleteFile(string filename, string subDirectory = levelDirectory) {
+			var fullpath = GetFullPath(filename, subDirectory);
 
 			File.Delete(fullpath);
 		}
 
-		public static bool WriteToFile(string fileName, string fileContents) {
-			var fullPath = NextAvailableFilename(GetFullPath(fileName));
+		public static bool WriteToFile(string fileContents, string fileName, bool overrideFile = false, string subDirectory = levelDirectory) {
+			var path = GetFullPath(fileName, subDirectory);
+			var fullPath = overrideFile ? path : NextAvailableFilename(path);
 
 			try {
 				File.WriteAllText(fullPath, fileContents);
@@ -124,8 +116,10 @@ namespace SaveSystem {
 			}
 		}
 
-		public static bool ReadFromFile(string fileName, out string result) {
-			var fullPath = GetFullPath(fileName);
+		public static bool ReadFromFile(string fileName, out string result, string directory = levelDirectory) {
+			//todo check if it exists first?
+			
+			var fullPath = GetFullPath(fileName, directory);
 
 			try {
 				result = File.ReadAllText(fullPath);
@@ -138,9 +132,9 @@ namespace SaveSystem {
 			}
 		}
 
-		public static bool MoveFile(string fileName, string newFileName) {
-			var fullPath = GetFullPath(fileName);
-			var newFullPath = NextAvailableFilename(GetFullPath(newFileName));
+		public static bool MoveFile(string fileName, string newFileName, string directory = levelDirectory, string newDirectory = levelDirectory) {
+			var fullPath = GetFullPath(fileName, directory);
+			var newFullPath = NextAvailableFilename(GetFullPath(newFileName, newDirectory));
 
 			try {
 				if ( File.Exists(newFullPath) ) {
@@ -156,7 +150,5 @@ namespace SaveSystem {
 
 			return true;
 		}
-
-		
 	}
 }

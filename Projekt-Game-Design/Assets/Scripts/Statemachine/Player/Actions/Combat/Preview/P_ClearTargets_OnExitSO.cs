@@ -1,12 +1,6 @@
-using Ability.ScriptableObjects;
-using Characters.Ability;
-using Combat;
-using Events.ScriptableObjects;
-using Input;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
-using StateMachine = UOP1.StateMachine.StateMachine;
 
 [CreateAssetMenu(fileName = "p_ClearTargets_OnExitSO", menuName = "State Machines/Actions/Player/Clear Targets On Exit")]
 public class P_ClearTargets_OnExitSO : StateActionSO {

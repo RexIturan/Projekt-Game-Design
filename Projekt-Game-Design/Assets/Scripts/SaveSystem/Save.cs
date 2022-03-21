@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
-using Characters;
 using Grid;
-using Level.Grid.CharacterGrid;
-using Level.Grid.ItemGrid;
-using Level.Grid.ObjectGrid;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 
@@ -21,10 +17,13 @@ namespace SaveSystem {
 		public List<Inventory_Save> equipmentInventory;
 		public List<Quest_Save> quests;
 		public List<TileGrid> tileGrids;
-		// public List<ItemGrid> itemGrids;
-		// public List<CharacterGrid> characterGrids;
-		// public List<ObjectGrid> objectGrids;
 
+///// Properties ////////////////////////////////////////////////////////////////////////////////
+
+		public string FileName { get; set; }
+		
+///// Properties ////////////////////////////////////////////////////////////////////////////////
+		
 		public Save() {
 			inventory = new Inventory_Save();
 			equipmentInventory = new List<Inventory_Save>();
@@ -37,9 +36,6 @@ namespace SaveSystem {
 			junks = new List<Junk_Save>();
 			items = new List<Item_Save>();
 			tileGrids = new List<TileGrid>();
-			// itemGrids = new List<ItemGrid>();
-			// characterGrids = new List<CharacterGrid>();
-			// objectGrids = new List<ObjectGrid>();
 		}
 
 		public string ToJson() {
@@ -59,9 +55,6 @@ namespace SaveSystem {
 			switches.Clear();
 			junks.Clear();
 			tileGrids.Clear();
-			// itemGrids.Clear();
-			// characterGrids.Clear();
-			// objectGrids.Clear();
 			gridDataSave = new GridData_Save();
 			inventory = new Inventory_Save();
 			quests.Clear();

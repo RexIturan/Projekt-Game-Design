@@ -19,7 +19,8 @@ public class InitializedTacticsMode : Condition
 	}
 
 	protected override bool Statement() {
-		return _gameSc.initializedTactics;
+		// return _gameSc.initializedTactics;
+		return true;
 	}
 	
 	public override void OnStateEnter()

@@ -1,0 +1,18 @@
+{
+    "name": "GDP01.QuestSystem.Editor",
+    "rootNamespace": "GDP01",
+    "references": [
+        "GUID:63f03fbf76d7d724daf34a656a424d34"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

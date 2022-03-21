@@ -1,12 +1,10 @@
 using Events.ScriptableObjects;
-using System;
-using Player;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
-using Characters.Ability;
 using Characters;
+using GDP01.Characters.Component;
 
 [CreateAssetMenu(fileName = "p_ReselectAbility_OnEnter",
 	menuName = "State Machines/Actions/Player/Reselect Ability On Enter")]
@@ -17,7 +15,7 @@ public class P_ReselectAbility_OnEnterSO : StateActionSO {
 public class P_ReselectAbility_OnEnter : StateAction {
 	private AbilityController _abilityController;
 	private Statistics _statistics;
-	private readonly GameObjActionEventChannelSO _selectNewPlayer;
+	private readonly GameObjActionIntEventChannelSO _selectPlayerEC;
 
 	public override void OnUpdate() { }
 
@@ -30,7 +28,7 @@ public class P_ReselectAbility_OnEnter : StateAction {
 		AbilitySO lastAbility = _abilityController.GetLastSelectedAbility();
 
 		if(lastAbility && lastAbility.repeated) {
-			if( _statistics.StatusValues.Energy.value >= lastAbility.costs ) { 
+			if( _statistics.StatusValues.Energy.Value >= lastAbility.costs ) { 
 				_abilityController.SelectedAbilityID = _abilityController.LastSelectedAbilityID;
 				_abilityController.abilitySelected = true;
 			}

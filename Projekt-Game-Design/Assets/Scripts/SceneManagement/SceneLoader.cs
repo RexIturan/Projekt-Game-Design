@@ -1,22 +1,58 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Events.ScriptableObjects;
+using GDP01.SceneManagement.EventChannels;
+using SceneManagement;
 using SceneManagement.ScriptableObjects;
+using SceneManagement.Types;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using static SceneManagement.SceneLoadingManager;
 
 /// <summary>
 /// This class manages the scene loading and unloading.
+/// Runtime Component, can acess the scene state and alter it
 /// </summary>
 public class SceneLoader : MonoBehaviour {
+	
+	[Serializable]
+	private class SceneDataOperationHandleMapping {
+		public AsyncOperationHandle<SceneInstance> operationHandle;
+		public GameSceneSO sceneData;
+	}
+
+	[Serializable]
+	private struct LoadingQueueElement {
+		public List<SceneDataOperationHandleMapping> data;
+	}
+	
+	[Serializable]
+	private class SceneCache {
+		public List<SceneDataOperationHandleMapping> persistant = new List<SceneDataOperationHandleMapping>();
+		public List<SceneDataOperationHandleMapping> ui = new List<SceneDataOperationHandleMapping>();
+		public List<SceneDataOperationHandleMapping> main = new List<SceneDataOperationHandleMapping>();
+		public List<LoadingQueueElement> loadingQueue = new List<LoadingQueueElement>();
+		
+		
+		public AsyncOperationHandle<SceneInstance> gameplay;
+		public List<AsyncOperationHandle<SceneInstance>> level;
+	}
+	
+///// Serialized Variables //////////////////////////////////////////////////////////////////////////
+	
 	[SerializeField] private GameSceneSO gameplayScene;
 
-	[Header("Load Events")] [SerializeField]
-	private LoadEventChannelSO loadLocation;
-
+	[Header("Load Events")] 
+	[SerializeField] private SceneLoadingInfoEventChannelSO loadSceneEC;
+	[SerializeField] private SceneLoadingInfoEventChannelSO unloadSceneEC;
+	
+	[Header("Load Events")] 
+	[SerializeField] private LoadEventChannelSO loadLocation;
 	[SerializeField] private LoadEventChannelSO loadMenu;
 
 	[Header("Broadcasting on")] 
@@ -24,65 +60,76 @@ public class SceneLoader : MonoBehaviour {
 	[SerializeField] private VoidEventChannelSO enableLoadingScreenInput;
 	[SerializeField] private VoidEventChannelSO onSceneReady;
 
+///// Private Variable /////////////////////////////////////////////////////////////////////////////
 
-	private readonly List<AsyncOperationHandle<SceneInstance>> _loadingOperationHandles =
+	private List<AsyncOperationHandle<SceneInstance>> _loadingOperationHandles =
 		new List<AsyncOperationHandle<SceneInstance>>();
 
-	private AsyncOperationHandle<SceneInstance> _gameplayManagerLoadingOpHandle;
-	private AsyncOperationHandle<SceneInstance> _unloadOpHandle;
+	// private AsyncOperationHandle<SceneInstance> _gameplayManagerLoadingOpHandle;
+	// private AsyncOperationHandle<SceneInstance> _unloadOpHandle;
 
+	private GameSceneSO[] _currentlyLoadedScenes = new GameSceneSO[] { };
+
+	// private SceneInstance _gameplayManagerSceneInstance;
+
+	
+	//scene cache
+	[SerializeField] private SceneCache _sceneCache = new SceneCache();
+	
+	
 	//Parameters coming from scene loading requests
 	private GameSceneSO[] _scenesToLoad;
-	private GameSceneSO[] _currentlyLoadedScenes = new GameSceneSO[] { };
 	private bool _showLoadingScreen;
 	private bool _closeLoadingScreenOnSceneReady;
 
-	private SceneInstance _gameplayManagerSceneInstance;
-
-	private void OnEnable() {
-		loadLocation.OnLoadingRequested += LoadLocation;
-		loadMenu.OnLoadingRequested += LoadMenu;
-	}
-
-	private void OnDisable() {
-		loadLocation.OnLoadingRequested -= LoadLocation;
-		loadMenu.OnLoadingRequested -= LoadMenu;
-	}
-
+///// Private Functions ////////////////////////////////////////////////////////////////////////////
+	
 	/// <summary>
 	/// This function loads the location scenes passed as array parameter
 	/// </summary>
 	private void LoadLocation(GameSceneSO[] locationsToLoad, bool showLoadingScreen,
 		bool closeLoadingScreenOnSceneReady) {
+		
 		_scenesToLoad = locationsToLoad;
 		_showLoadingScreen = showLoadingScreen;
 		_closeLoadingScreenOnSceneReady = closeLoadingScreenOnSceneReady;
-
+		
 		//In case we are coming from the main menu, we need to load the persistent Gameplay manager scene first
-		// ReSharper disable once ConditionIsAlwaysTrueOrFalse
-		if ( _gameplayManagerSceneInstance.Scene == null
-		     || !_gameplayManagerSceneInstance.Scene.isLoaded ) {
-			//todo timeout condition??
-			StartCoroutine(ProcessGameplaySceneLoading());
+		if ( !IsSceneLoaded(_sceneCache.gameplay) ) {
+			// }
+			// if ( _gameplayManagerSceneInstance is { Scene: null }
+			//      || !_gameplayManagerSceneInstance.Scene.isLoaded ) {
+ 			ProcessGameplaySceneLoading();
 		}
 		else {
 			UnloadPreviousScenes();
 		}
 	}
 
-	private IEnumerator ProcessGameplaySceneLoading() {
-		_gameplayManagerLoadingOpHandle =
-			gameplayScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive);
+	private void ProcessGameplaySceneLoading() {
+		_sceneCache.gameplay = StartLoadingScene(gameplayScene.sceneReference, true, true);
 
-		while ( _gameplayManagerLoadingOpHandle.Status != AsyncOperationStatus.Succeeded ) {
-			// Debug.Log("SceneLoader#ProcessGameplaySceneLoading#WhileLoop Load Gameplay Scene");
-			//todo timeout condition??
-			yield return null;
-		}
+		_sceneCache.gameplay.Completed += handle => UnloadPreviousScenes();
+		//OR
+		//StartCoroutine(OnLoadingDone(_gameplayManagerLoadingOpHandle, UnloadPreviousScenes));
 
-		_gameplayManagerSceneInstance = _gameplayManagerLoadingOpHandle.Result;
+		
+		
+		///// OLD /////
+		
+		// gameplayScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive);
 
-		UnloadPreviousScenes();
+		// yield return OnLoadingDone(_gameplayManagerLoadingOpHandle, UnloadPreviousScenes);
+
+		// while ( _gameplayManagerLoadingOpHandle.Status != AsyncOperationStatus.Succeeded ) {
+		// 	// Debug.Log("SceneLoader#ProcessGameplaySceneLoading#WhileLoop Load Gameplay Scene");
+		// 	//todo timeout condition??
+		// 	yield return null;
+		// }
+		//
+		// _gameplayManagerSceneInstance = _gameplayManagerLoadingOpHandle.Result;
+		//
+		// UnloadPreviousScenes();
 	}
 
 	/// <summary>
@@ -90,13 +137,19 @@ public class SceneLoader : MonoBehaviour {
 	/// </summary>
 	private void LoadMenu(GameSceneSO[] menusToLoad, bool showLoadingScreen,
 		bool closeLoadingScreenOnSceneReady) {
+		
 		_scenesToLoad = menusToLoad;
 		_showLoadingScreen = showLoadingScreen;
 		_closeLoadingScreenOnSceneReady = closeLoadingScreenOnSceneReady;
 
 		//In case we are coming from a Location back to the main menu, we need to get rid of the persistent Gameplay manager scene
-		if ( _gameplayManagerSceneInstance.Scene is { isLoaded: true } )
-			Addressables.UnloadSceneAsync(_gameplayManagerLoadingOpHandle);
+		// if ( _gameplayManagerSceneInstance.Scene is { isLoaded: true } )
+		// 	StartUnloadScene(_gameplayManagerLoadingOpHandle);
+			// Addressables.UnloadSceneAsync(_gameplayManagerLoadingOpHandle);
+		
+			
+		if(IsSceneLoaded(_sceneCache.gameplay))
+			StartUnloadScene(_sceneCache.gameplay);
 
 		UnloadPreviousScenes();
 	}
@@ -108,25 +161,37 @@ public class SceneLoader : MonoBehaviour {
 		//todo better unloading
 		Debug.Log("SceneLoader > UnloadPreviousScenes:\nStart unload Previous Scene");
 
-		bool sceneUnloading = false;
-		for ( int i = 0; i < _currentlyLoadedScenes.Length; i++ ) {
-			sceneUnloading = true;
-			_unloadOpHandle = _currentlyLoadedScenes[i].sceneReference.UnLoadScene();
-			// Addressables.UnloadSceneAsync(_currentlyLoadedScenes[i].sceneReference.OperationHandle);
-			_unloadOpHandle.Completed += (handle) => {
-				Debug.Log("SceneLoader > UnloadPreviousScenes\n unloaded previous scene");
-			};
-		}
-
-		if ( sceneUnloading ) {
-			_unloadOpHandle.Completed += handle => {
-				sceneUnloading = false;
-				LoadNewScenes();
-			};	
+		if ( _sceneCache.level is { } ) {
+			var unloadingHandles = StartUnloadingScenes(_sceneCache.level);
+			StartCoroutine(OnAllHandlesColplete(unloadingHandles, LoadNewScenes));
 		}
 		else {
 			LoadNewScenes();
 		}
+		
+		//
+		// bool scenesUnloading = false;
+		// for ( int i = 0; i < _currentlyLoadedScenes.Length; i++ ) {
+		// 	scenesUnloading = true;
+		// 	_unloadOpHandle = _currentlyLoadedScenes[i].sceneReference.UnLoadScene();
+		// 	// Addressables.UnloadSceneAsync(_currentlyLoadedScenes[i].sceneReference.OperationHandle);
+		// 	_unloadOpHandle.Completed += (handle) => {
+		// 		Debug.Log("SceneLoader > UnloadPreviousScenes\n unloaded previous scene");
+		// 	};
+		// }
+
+		// if ( scenesUnloading ) {
+		// 	if ( unloadingHandles.All(handle => handle.IsDone) ) {
+		// 		
+		// 	}
+		// 	_unloadOpHandle.Completed += handle => {
+		// 		scenesUnloading = false;
+		// 		LoadNewScenes();
+		// 	};	
+		// }
+		// else {
+		// 	LoadNewScenes();
+		// }
 	}
 
 	/// <summary>
@@ -140,35 +205,43 @@ public class SceneLoader : MonoBehaviour {
 		}
 
 		_loadingOperationHandles.Clear();
-		//Build the array of handles of the temporary scenes to load
-		for ( int i = 0; i < _scenesToLoad.Length; i++ ) {
-			_loadingOperationHandles.Add(_scenesToLoad[i].sceneReference
-				.LoadSceneAsync(LoadSceneMode.Additive, true, 0));
-		}
+		_loadingOperationHandles = StartLoadingScenes(
+				_scenesToLoad.Select(so => so.sceneReference).ToList(), true);
 
-		StartCoroutine(LoadingProcess());
+		StartCoroutine(OnAllHandlesColplete(_loadingOperationHandles, LoadingProcess));
+		
+		//Build the array of handles of the temporary scenes to load
+		// for ( int i = 0; i < _scenesToLoad.Length; i++ ) {
+		// 	_loadingOperationHandles.Add(_scenesToLoad[i].sceneReference
+		// 		.LoadSceneAsync(LoadSceneMode.Additive, true, 0));
+		// }
+
+		// StartCoroutine(LoadingProcess());
 	}
 
-	private IEnumerator LoadingProcess() {
-		bool done = _loadingOperationHandles.Count == 0;
+	private void LoadingProcess() {
+		// bool done = _loadingOperationHandles.Count == 0;
 
 		//todo timeout for this function
 		//This while will exit when all scenes requested have been unloaded
-		while ( !done ) {
-			// Debug.Log("SceneLoader#LoadingProcess#WhileLoop");
+		// while ( !done ) {
+		// 	// Debug.Log("SceneLoader#LoadingProcess#WhileLoop");
+		//
+		// 	for ( int i = 0; i < _loadingOperationHandles.Count; ++i ) {
+		// 		if ( _loadingOperationHandles[i].Status != AsyncOperationStatus.Succeeded ) {
+		// 			done = false;
+		// 			break;
+		// 		}
+		// 		else {
+		// 			done = true;
+		// 		}
+		// 	}
+		//
+		// 	yield return null;
+		// }
 
-			for ( int i = 0; i < _loadingOperationHandles.Count; ++i ) {
-				if ( _loadingOperationHandles[i].Status != AsyncOperationStatus.Succeeded ) {
-					break;
-				}
-				else {
-					done = true;
-				}
-			}
-
-			yield return null;
-		}
-
+		_sceneCache.level = _loadingOperationHandles;
+		
 		//Save loaded scenes (to be unloaded at next load request)
 		_currentlyLoadedScenes = _scenesToLoad;
 		SetActiveScene();
@@ -200,4 +273,217 @@ public class SceneLoader : MonoBehaviour {
 	//     Application.Quit();
 	//     Debug.Log("Exit!");
 	// }
+
+	private void ActivateNewScene(Scene scene) {
+		SceneManager.SetActiveScene(scene);
+		onSceneReady.RaiseEvent();
+	}
+
+	private void SwitchCurrentScenes() {
+		if ( _sceneCache.loadingQueue?.Count > 0) {
+			_sceneCache.main.Clear();
+			var element = _sceneCache.loadingQueue.Last();
+			_sceneCache.main = element.data;
+			_sceneCache.loadingQueue.Remove(element);
+
+			StringBuilder sb = new StringBuilder();
+			_sceneCache.main.ForEach(mapping => sb.Append(mapping.sceneData.name));
+			
+			Debug.Log($"New Main: \n{sb}");
+		}
+	}
+
+	private List<AsyncOperationHandle<SceneInstance>> UnloadCurrentScenes(List<SceneDataOperationHandleMapping> currentScenes) {
+		return SceneLoadingManager.StartUnloadingScenes(
+			currentScenes.Select(mapping => mapping.operationHandle).ToList()
+			);
+	}
+
+	private AsyncOperationHandle<SceneInstance> LoadScene(SceneLoadingData loadingData) {
+		GameSceneSO sceneDataToLoad = loadingData.MainSceneData;
+		
+		//start loading
+		var opHandle = StartLoadingScene(sceneDataToLoad.sceneReference, true,
+			loadingData.ActivateOnLoad);
+		
+		SceneDataOperationHandleMapping mapping = new SceneDataOperationHandleMapping {
+			operationHandle = opHandle,
+			sceneData = sceneDataToLoad
+		};
+		
+		if ( loadingData.DontUnload ) {
+			_sceneCache.persistant.Add(mapping);
+		} else if ( sceneDataToLoad is TacticsLevelSO || sceneDataToLoad is MenuSO ) {
+			_sceneCache.loadingQueue.Insert(0, new LoadingQueueElement {
+				data = new List<SceneDataOperationHandleMapping>{ mapping }
+			});
+		}
+
+		return opHandle;
+	}
+	
+	private AsyncOperationHandle<SceneInstance> UnloadScene(SceneDataOperationHandleMapping mapping) {
+		//start loading
+		return StartUnloadScene(mapping.operationHandle);
+	}
+
+	private void LoadDependencies(List<SceneLoadingData.SceneDataDependencySettings> dependencies) {
+		foreach ( var dependency in dependencies ) {
+			var sceneData = dependency.sceneData;
+
+			//check dependencies
+			var foundScene = FindScneIfLoaded(sceneData);
+			
+			if ( !SceneIsLoaded(foundScene)) {
+				//load dependency
+				LoadDependency(sceneData);
+			}
+			else {
+				//todo reset
+				//foundScene.reset ??
+			}
+		}
+	}
+
+	private void LoadDependency(GameSceneSO sceneData) {
+		SceneDataOperationHandleMapping mapping = new SceneDataOperationHandleMapping {
+			operationHandle = SceneLoadingManager.StartLoadingScene(sceneData.sceneReference, true, true),
+			sceneData = sceneData
+		};
+		
+		if ( sceneData is UISceneSO ) {
+			_sceneCache.ui.Add( mapping );
+		}
+		else if ( sceneData is PersistentManagersSO ) {
+			_sceneCache.persistant.Add( mapping );
+		}
+		else if ( sceneData is ControlSceneSO ) {
+			_sceneCache.persistant.Add( mapping );
+		}
+	}
+
+	private bool SceneIsLoaded(SceneDataOperationHandleMapping foundScene) {
+		return foundScene is {} && foundScene.operationHandle.IsValid() &&
+		       foundScene is {
+			operationHandle:
+			{
+				Status: AsyncOperationStatus.Succeeded, Result: {
+					Scene: { isLoaded: true }
+				}
+			}
+		};
+	}
+
+	private SceneDataOperationHandleMapping FindScneIfLoaded(GameSceneSO gameSceneSO) {
+		return _sceneCache.persistant.FirstOrDefault(mapping => mapping.sceneData.Equals(gameSceneSO)) ??
+		            _sceneCache.ui.FirstOrDefault(mapping => mapping.sceneData.Equals(gameSceneSO));
+	}
+
+	private AsyncOperationHandle<SceneInstance> LoadNewScene(SceneLoadingData loadingData) {
+		Debug.Log($"Try Loading Scene:\n{loadingData.MainSceneData.name}");
+		
+		//load main scene
+		var loadingHandle = LoadScene(loadingData);
+
+		//wait for activation
+		//swap scenes after new scene is loaded
+		loadingHandle.Completed += handle => {
+			//todo own flag or so
+			if ( !loadingData.DontUnload ) {
+				SwitchCurrentScenes();
+				//activate new main scene
+				ActivateNewScene(handle.Result.Scene);
+			}
+			else {
+				//todo invoke new scene ready -> Activation Button ready or so
+			}
+		};
+		return loadingHandle;
+	}
+	
+///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
+
+	private void HandleLoadScene(SceneLoadingData loadingData) {
+		
+		
+		//todo check if loading Data is valid
+		
+		//todo reload scene
+		// scene already loaded?
+		if ( _sceneCache.loadingQueue.Any(
+			    element => element.data.Any(
+				    mapping => mapping.sceneData == loadingData.MainSceneData))) {
+			Debug.Log($"Scene Already Loading:\n{loadingData.MainSceneData.name}");
+			return;
+		} 
+		if(_sceneCache.main.Any(mapping => mapping.sceneData == loadingData.MainSceneData)) {
+			Debug.Log($"Scene Already Loaded:\n{loadingData.MainSceneData.name}");
+			return;
+		}
+		
+		if ( loadingData.Dependencies?.Count > 0 ) {
+			LoadDependencies(loadingData.Dependencies);
+		}
+		
+		//load main scene as dependency if, it shouldnt be unloaded
+		if ( loadingData.DontUnload ) {
+			LoadNewScene(loadingData);
+			return;
+		}
+
+		if ( _sceneCache.main is { Count: > 0 } ) {
+			//unload current
+			var unloadHandles = UnloadCurrentScenes(_sceneCache.main);
+
+			StartCoroutine(OnAllHandlesColplete(unloadHandles, () => {
+				LoadNewScene(loadingData);
+			}));
+		}
+		else {
+			var currentActiveScene = SceneManager.GetActiveScene();
+			AsyncOperation unloadHandle = SceneManager.UnloadSceneAsync(currentActiveScene);
+			unloadHandle.completed += operation => {
+				LoadNewScene(loadingData);	
+			};
+		}
+	}
+
+	private void HandleUnloadScene(SceneLoadingData loadingData) {
+		GameSceneSO sceneData = loadingData.MainSceneData;
+
+		SceneDataOperationHandleMapping mapping = null;
+		
+		if ( sceneData is UISceneSO ) {
+			mapping = _sceneCache.ui.Find(handleMapping => handleMapping.sceneData == sceneData);
+			_sceneCache.ui.Remove(mapping);
+		}
+		else if ( sceneData is PersistentManagersSO ) {
+			mapping = _sceneCache.persistant.Find(handleMapping => handleMapping.sceneData == sceneData);
+			_sceneCache.persistant.Remove(mapping);
+		}
+		else if ( sceneData is ControlSceneSO ) {
+			mapping = _sceneCache.persistant.Find(handleMapping => handleMapping.sceneData == sceneData);
+			_sceneCache.persistant.Remove(mapping);
+		}
+
+		UnloadScene(mapping);
+	}
+	
+	///// Unity Functions //////////////////////////////////////////////////////////////////////////////	
+	
+	private void OnEnable() {
+		loadLocation.OnLoadingRequested += LoadLocation;
+		loadMenu.OnLoadingRequested += LoadMenu;
+		
+		loadSceneEC.OnLoadingRequested += HandleLoadScene;
+		unloadSceneEC.OnLoadingRequested += HandleUnloadScene;
+	}
+
+	private void OnDisable() {
+		loadLocation.OnLoadingRequested -= LoadLocation;
+		loadMenu.OnLoadingRequested -= LoadMenu;
+		
+		loadSceneEC.OnLoadingRequested -= HandleLoadScene;
+		unloadSceneEC.OnLoadingRequested -= HandleUnloadScene;
+	}
 }

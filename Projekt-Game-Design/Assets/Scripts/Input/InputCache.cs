@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Events.ScriptableObjects;
 using Grid;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
 using Util;
 
 namespace Input {
@@ -167,6 +165,7 @@ namespace Input {
 			}
 		}
 
+		//todo rename?
 		//todo move to mouse input class??
 		//calculates if mouse is outside of the window
 		public bool IsMouseOutsideWindow() {

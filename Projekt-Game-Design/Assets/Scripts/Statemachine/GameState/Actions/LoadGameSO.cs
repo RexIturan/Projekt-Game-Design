@@ -24,7 +24,7 @@ public class LoadGame : StateAction
 	
 	public override void OnStateEnter()
 	{
-		_gameSc.LoadLocationLevel();
+		// _gameSc.LoadLocationLevel();
 	}
 	
 	public override void OnStateExit()

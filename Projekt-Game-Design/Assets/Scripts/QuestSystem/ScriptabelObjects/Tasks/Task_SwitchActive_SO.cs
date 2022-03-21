@@ -17,7 +17,7 @@ namespace QuestSystem.ScriptabelObjects {
 					foreach ( var switchObj in _worldObjectList.switches ) {
 						var component = switchObj.GetComponent<SwitchComponent>();
 						if ( component is {} ) {
-							if ( component.IsActivated && component.switchId == switchId ) {
+							if ( component.IsActivated && component.Id == switchId ) {
 								done = true;
 							}
 						}

@@ -1,0 +1,339 @@
+{
+    "GameData": {
+        "LocationData": {
+            "Name": "Level-D"
+        },
+        "PlayerCharacters": [
+            {
+                "Id": 0,
+                "Name": "No-Name",
+                "Active": true,
+                "GridPosition": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "Type": {
+                    "Name": "DefaultPlayerType",
+                    "Guid": "5d339fb430d10f341bd2896617aec0a2",
+                    "$type": "PlayerTypeSO",
+                    "$id": "5"
+                },
+                "StatsOverride": {
+                    "HitPoints": {
+                        "Value": 2
+                    }
+                },
+                "Entering": false,
+                "LocationName": "Level-D"
+            },
+            {
+                "Id": 1,
+                "Name": "No-Name",
+                "Active": true,
+                "GridPosition": {
+                    "x": 1,
+                    "y": 0,
+                    "z": 0
+                },
+                "Type": {
+                    "$ref": "5"
+                },
+                "StatsOverride": null,
+                "Entering": false,
+                "LocationName": "Level-D"
+            },
+            {
+                "Id": 2,
+                "Name": "No-Name",
+                "Active": true,
+                "GridPosition": {
+                    "x": -1,
+                    "y": 0,
+                    "z": -1
+                },
+                "Type": {
+                    "$ref": "5"
+                },
+                "StatsOverride": {
+                    "HitPoints": {
+                        "Value": 8
+                    }
+                },
+                "Entering": false,
+                "LocationName": "Level-D"
+            },
+            {
+                "Id": 3,
+                "Name": "No-Name",
+                "Active": true,
+                "GridPosition": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "Type": {
+                    "$ref": "5"
+                },
+                "StatsOverride": null,
+                "Entering": false,
+                "LocationName": "Level-C"
+            }
+        ],
+        "EquipmentContainerData": {
+            "equipmentSheets": [
+                {
+                    "weaponLeft": null,
+                    "weaponRight": {
+                        "Name": "w_longbow",
+                        "Guid": "cc7bce70626d15f42bb9da09b013eca2"
+                    },
+                    "headArmor": null,
+                    "bodyArmor": null,
+                    "shield": null
+                },
+                {
+                    "weaponLeft": null,
+                    "weaponRight": {
+                        "Name": "w_sword",
+                        "Guid": "4e3ae39bd9b95854ab4c55c1d90db993"
+                    },
+                    "headArmor": {
+                        "Name": "h_strongHelmet",
+                        "Guid": "5ca4359a8b58b644b8d6d4bc8f34b8f8"
+                    },
+                    "bodyArmor": {
+                        "Name": "b_mythrilVest",
+                        "Guid": "5af18ceaeab735d4a942216ebf69cd64"
+                    },
+                    "shield": null
+                },
+                {
+                    "weaponLeft": null,
+                    "weaponRight": null,
+                    "headArmor": null,
+                    "bodyArmor": null,
+                    "shield": null
+                },
+                {
+                    "weaponLeft": null,
+                    "weaponRight": null,
+                    "headArmor": null,
+                    "bodyArmor": null,
+                    "shield": null
+                }
+            ]
+        },
+        "InventoryData": {
+            "inventory": [
+                {
+                    "Name": "w_hammer",
+                    "Guid": "67a9ec7fd48b38d458783f0ce375304a"
+                },
+                null,
+                {
+                    "Name": "w_hammer",
+                    "Guid": "67a9ec7fd48b38d458783f0ce375304a"
+                }
+            ]
+        }
+    },
+    "LevelData": {
+        "Level-B": {
+            "Collectabeles": [
+                {
+                    "Position": {
+                        "x": 3.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "Amount": 1,
+                    "Active": true
+                },
+                {
+                    "Position": {
+                        "x": 1.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "Amount": 1,
+                    "Active": false
+                },
+                {
+                    "Position": {
+                        "x": 2.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "Amount": 1,
+                    "Active": false
+                }
+            ],
+            "EnemyCharacterDatas": [],
+            "Doors": [],
+            "Switches": [],
+            "Items": [
+                {
+                    "_type": {
+                        "Guid": "4659d52d798315241a03658f7e537d8e"
+                    },
+                    "id": 0,
+                    "gridPosition": {
+                        "x": 2,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "_type": {
+                        "Guid": "4659d52d798315241a03658f7e537d8e"
+                    },
+                    "id": 1,
+                    "gridPosition": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                }
+            ]
+        },
+        "Level-D": {
+            "Collectabeles": null,
+            "EnemyCharacterDatas": [
+                {
+                    "Id": 0,
+                    "Name": "No-Name",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 3,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "Type": {
+                        "Name": "Enemy_Soldier",
+                        "Guid": "c491683a0b68f934db35972bd4517070",
+                        "$type": "EnemyTypeSO",
+                        "$id": "35"
+                    },
+                    "StatsOverride": {
+                        "HitPoints": {
+                            "Value": 10
+                        }
+                    }
+                }
+            ],
+            "Doors": [],
+            "Switches": [
+                {
+                    "active": false,
+                    "range": 1,
+                    "_type": {
+                        "Name": "BasicSwitch",
+                        "Guid": "46777157b1b0dbf4ab5805399f03302a"
+                    },
+                    "id": 0,
+                    "gridPosition": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                }
+            ],
+            "Items": []
+        },
+        "Level-C": {
+            "Collectabeles": null,
+            "EnemyCharacterDatas": [
+                {
+                    "Id": 0,
+                    "Name": "No-Name",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 2
+                    },
+                    "Type": {
+                        "$ref": "35"
+                    },
+                    "StatsOverride": {
+                        "HitPoints": {
+                            "Max": 10,
+                            "Value": 10
+                        },
+                        "Energy": {
+                            "Max": 0,
+                            "Value": 0
+                        },
+                        "ViewDistance": {
+                            "Max": 0,
+                            "Value": 0
+                        }
+                    }
+                },
+                {
+                    "Id": 1,
+                    "Name": "No-Name",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 2,
+                        "y": 0,
+                        "z": 2
+                    },
+                    "Type": {
+                        "$ref": "35"
+                    },
+                    "StatsOverride": {
+                        "HitPoints": {
+                            "Max": 10,
+                            "Value": 10
+                        },
+                        "Energy": {
+                            "Max": 0,
+                            "Value": 0
+                        },
+                        "ViewDistance": {
+                            "Max": 0,
+                            "Value": 0
+                        }
+                    }
+                }
+            ],
+            "Doors": [],
+            "Switches": [],
+            "Items": [
+                {
+                    "_type": {
+                        "Guid": "4659d52d798315241a03658f7e537d8e"
+                    },
+                    "id": 0,
+                    "gridPosition": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -145,7 +145,7 @@ namespace UI.Components.Character {
 			//todo
 		}
 
-		public void SetViibility(bool visibility) {
+		public void SetVibility(bool visibility) {
 			if ( visibility ) {
 				this.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);				
 			}

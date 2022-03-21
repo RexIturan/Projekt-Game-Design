@@ -1,0 +1,30 @@
+@import url("unity-theme://default");
+
+:root {
+    --border-color: #343434;
+    --background-color: rgba(94, 94, 94, 1);
+    
+    
+    /* Char Status Value Panel */
+    --charPanel-background-color: rgba(94, 94, 94, 0.53);
+    
+    
+    /* Action Button */
+    --focus-border-color: rgba(0, 0, 255, 1);
+    --hover-border-color: #3b3bf1;
+    --disabled-border-color: #202020;
+
+    /* Char Icon */
+    --icon-border-color: #FFFFFF;
+    --name-text-color: #FFFFFF;
+    --level-background-color: #a7a7a7;
+    --level-text-color: #FFFFFF;
+    --name-font-size: 20px;
+    --level-font-size: 18px;
+    --icon-border-hover-color: #00aeff;
+}
+
+.unity-button:focus{
+    background-color: white;
+    color: black;
+}

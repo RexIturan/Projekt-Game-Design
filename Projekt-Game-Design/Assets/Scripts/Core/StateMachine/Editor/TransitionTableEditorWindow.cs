@@ -78,7 +78,8 @@ namespace UOP1.StateMachine.Editor
 		private void OnLostFocus()
 		{
 			ListView listView = rootVisualElement.Q<ListView>(className: "table-list");
-			listView.onSelectionChanged -= OnListSelectionChanged;
+			// listView.onSelectionChanged -= OnListSelectionChanged;
+			listView.onSelectionChange -= OnListSelectionChanged;
 		}
 
 		private void Update() {
@@ -108,36 +109,39 @@ namespace UOP1.StateMachine.Editor
 			};
 			listView.bindItem = (element, i) => {
 				( ( Label )element ).text = assets[i].name;
-				if ( NullFieldFinderHelper.checkForNullValues(assets[i]) ) {
-					element.style.color = new StyleColor(Color.red);
-				}
+				// if ( NullFieldFinderHelper.checkForNullValues(assets[i]) ) {
+				// 	element.style.color = new StyleColor(Color.red);
+				// }
 			};
 			listView.selectionType = SelectionType.Single;
 
-			listView.onSelectionChanged -= OnListSelectionChanged;
-			listView.onSelectionChanged += OnListSelectionChanged;
+			listView.onSelectionChange -= OnListSelectionChanged;
+			listView.onSelectionChange += OnListSelectionChanged;
 
 			if (_transitionTableEditor && _transitionTableEditor.target)
 				listView.selectedIndex = System.Array.IndexOf(assets, _transitionTableEditor.target);
 		}
 
-		private void OnListSelectionChanged(List<object> list)
+		private void OnListSelectionChanged(IEnumerable<object> enumerable)
 		{
 			IMGUIContainer editor = rootVisualElement.Q<IMGUIContainer>(className: "table-editor");
 			editor.onGUIHandler = null;
+			if ( enumerable is List<object> list ) {
+				if (list.Count == 0)
+					return;
 
-			if (list.Count == 0)
-				return;
-
-			var table = (TransitionTableSO)list[0];
-			if (table == null)
-				return;
-
-			if (_transitionTableEditor == null)
-				_transitionTableEditor = UnityEditor.Editor.CreateEditor(table, typeof(TransitionTableEditor));
-			else if (_transitionTableEditor.target != table)
-				UnityEditor.Editor.CreateCachedEditor(table, typeof(TransitionTableEditor), ref _transitionTableEditor);
-
+				var table = (TransitionTableSO)list[0];
+				if (table == null)
+					return;
+				
+				if (_transitionTableEditor == null)
+					_transitionTableEditor = UnityEditor.Editor.CreateEditor(table, typeof(TransitionTableEditor));
+				else if (_transitionTableEditor.target != table)
+					UnityEditor.Editor.CreateCachedEditor(table, typeof(TransitionTableEditor), ref _transitionTableEditor);
+			}
+			
+			//todo move this in the if as well?
+			
 			editor.onGUIHandler = () =>
 			{
 				if (!_transitionTableEditor.target)

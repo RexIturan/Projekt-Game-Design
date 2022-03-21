@@ -1,0 +1,5 @@
+﻿.ge-sub-window {
+    width: 100px;
+    height: 400px;
+    background-color: azure;
+}

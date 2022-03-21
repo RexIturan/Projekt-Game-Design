@@ -31,6 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3583023217580764056}
   m_Father: {fileID: 0}
@@ -65,76 +66,76 @@ MonoBehaviour:
   DisplayImage: {fileID: 0}
   stats:
     _statusValues:
-    - _name: None
+    - name: 
+      _min: 0
+      _max: 0
+      _value: 0
       _type: 0
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: HitPoints
+      _max: 0
+      _value: 0
       _type: 1
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: HitPointRegeneration
+      _max: 0
+      _value: 0
       _type: 2
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: TemporeryHitPoints
+      _max: 0
+      _value: 0
       _type: 3
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: Energy
+      _max: 0
+      _value: 0
       _type: 4
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: EnergyRegeneration
+      _max: 0
+      _value: 0
       _type: 5
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: Armor
+      _max: 0
+      _value: 0
       _type: 6
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: MovementRange
+      _max: 0
+      _value: 0
       _type: 7
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: ViewDistance
+      _max: 0
+      _value: 0
       _type: 8
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: Strength
+      _max: 0
+      _value: 0
       _type: 9
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: Dexterity
+      _max: 0
+      _value: 0
       _type: 10
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: Intelligence
+      _max: 0
+      _value: 0
       _type: 11
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: Level
+      _max: 0
+      _value: 0
       _type: 12
-      _value: 0
-      _max: 0
+    - name: 
       _min: 0
-    - _name: Experience
+      _max: 0
+      _value: 0
       _type: 13
-      _value: 0
-      _max: 0
-      _min: 0
   faction: 0
 --- !u!114 &1641406335026457172
 MonoBehaviour:
@@ -149,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridPosition: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
   gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
 --- !u!114 &3675022155374443427
 MonoBehaviour:
@@ -176,22 +178,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0001d8a9ff46e47a278900bead939e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
+  _type: {fileID: 11400000, guid: a332522f73c0bbf4dbe440e88190b4ed, type: 2}
+  _gridTransform: {fileID: 1641406335026457172}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
   updateWorldObjectsEvent: {fileID: 11400000, guid: 43cbd7484c763514587e57c1e45ea0fa, type: 2}
   switchActivatedEvent: {fileID: 11400000, guid: 447d8770f6205264f9db44ea93ad8822, type: 2}
   triggerActivatedEvent: {fileID: 11400000, guid: 2f9c33c4086a8754280820559e9caac1, type: 2}
-  doorId: 0
-  doorType: {fileID: 0}
-  open: 0
-  broken: 0
-  locked: 0
-  keyIds: 
-  switchIds: 
-  triggerIds: 
-  remainingSwitches: 
-  remainingTrigger: 
-  orientation: {x: 0, y: 0, z: 0}
   slidingDoorController: {fileID: 6705516044291092098}
+  _type: {fileID: 11400000, guid: a332522f73c0bbf4dbe440e88190b4ed, type: 2}
+  doorData:
+    _type: {fileID: 0}
+    type: {fileID: 0}
+    open: 0
+    broken: 0
+    locked: 0
+    keyIds: 
+    switchIds: 
+    triggerIds: 
+    remainingSwitches: 
+    remainingTrigger: 
 --- !u!1001 &7147527496984553934
 PrefabInstance:
   m_ObjectHideFlags: 0

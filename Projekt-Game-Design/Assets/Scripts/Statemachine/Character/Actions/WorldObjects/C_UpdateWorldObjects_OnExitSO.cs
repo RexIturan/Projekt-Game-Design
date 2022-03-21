@@ -1,6 +1,3 @@
-using Characters.Ability;
-using Events.ScriptableObjects;
-using Player;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;

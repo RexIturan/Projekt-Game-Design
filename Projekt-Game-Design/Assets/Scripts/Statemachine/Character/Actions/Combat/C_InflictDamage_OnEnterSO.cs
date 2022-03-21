@@ -1,11 +1,11 @@
 using Ability;
 using Ability.ScriptableObjects;
 using Characters;
-using Characters.Ability;
 using Combat;
 using Events.ScriptableObjects;
 using System.Collections.Generic;
-// using UnityEditorInternal;
+using GDP01.Characters.Component;
+using GDP01.World.Components;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;

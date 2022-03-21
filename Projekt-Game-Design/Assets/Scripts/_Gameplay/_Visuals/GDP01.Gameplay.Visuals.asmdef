@@ -1,0 +1,23 @@
+{
+    "name": "GDP01.Gameplay.Visuals",
+    "rootNamespace": "GDP01",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:1686690f1ac79d041817b02ce51bc834",
+        "GUID:36df2ff674f0e1f49b86937cf018cc7f",
+        "GUID:a54c87882c40425fbad861037a0f62e4",
+        "GUID:bd4d88f6695cbba4095968043b9ed903",
+        "GUID:d8d86edead9285548a0b5203ad54c5e3",
+        "GUID:a46fa3f8826f4e5408526f4eeccb2e6a",
+        "GUID:c2b44f240aa4f8547a57229d8d964c30"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

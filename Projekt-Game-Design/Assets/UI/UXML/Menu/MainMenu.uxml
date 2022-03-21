@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/Button_Layout.uss?fileID=7433441132597879392&amp;guid=6ddf6212474c2a84ca2664a443a93551&amp;type=3#Button_Layout" />
+    <ui:VisualElement name="MenuContainer" style="align-items: center; justify-content: center; background-image: none; display: flex; width: 100%; height: 100%; position: absolute;">
+        <ui:VisualElement name="menuContainer" style="background-color: rgba(0, 0, 0, 0.43); height: 60%; width: 388px; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; justify-content: center; align-items: center; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); display: flex;">
+            <ui:Label text="Main Menu" display-tooltip-when-elided="true" name="MainMenu_Title" style="font-size: 31px; -unity-font-style: bold; color: rgb(255, 255, 255); position: absolute; top: 30px;" />
+            <ui:Button text="New Game" display-tooltip-when-elided="true" name="StartButton" class="Button_Layout" style="margin-top: 19px;" />
+            <ui:Button text="Load Level" display-tooltip-when-elided="true" name="LoadLevelButton" class="Button_Layout" />
+            <ui:Button text="Load Test Level" display-tooltip-when-elided="true" name="LoadTestLevelButton" class="Button_Layout" />
+            <ui:Button text="Level Editor" display-tooltip-when-elided="true" name="LevelEditorButton" class="Button_Layout" />
+            <ui:Button text="Settings" display-tooltip-when-elided="true" name="SettingsButton" class="Button_Layout" style="visibility: visible;" />
+            <ui:Button text="Exit" display-tooltip-when-elided="true" name="ExitButton" class="Button_Layout" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
