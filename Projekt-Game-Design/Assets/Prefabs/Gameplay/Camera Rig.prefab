@@ -226,6 +226,7 @@ MonoBehaviour:
     constantValue: 10
     variable: {fileID: 0}
   panSpeed: 20
+  rotateSpeed: 10
   panBorderThickness: 20
   minZoom: 5
   maxZoom: 100
