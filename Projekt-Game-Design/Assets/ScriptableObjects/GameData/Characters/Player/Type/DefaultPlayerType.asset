@@ -22,8 +22,8 @@ MonoBehaviour:
   baseStatusValues:
   - name: Hit Points
     _min: 0
-    _max: 10
-    _value: 10
+    _max: 30
+    _value: 30
     _type: 1
   - name: Energy
     _min: 0

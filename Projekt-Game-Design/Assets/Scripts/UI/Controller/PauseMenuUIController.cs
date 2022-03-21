@@ -1,10 +1,11 @@
 using Events.ScriptableObjects;
+using GDP01.UI;
 using SaveSystem;
 using SceneManagement.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class InGameMenuUIController : MonoBehaviour {
+public class PauseMenuUIController : MonoBehaviour {
 	// In Game Menu Screens 
 	private enum MenuScreenContent {
 		None,
@@ -34,17 +35,70 @@ public class InGameMenuUIController : MonoBehaviour {
 	[SerializeField] private bool showSaveLevel;
 	[SerializeField] private bool showOptionsLevel;
 
+	// screenmanager reference
+	[Header("Screen Handeling")] 
+	[SerializeField] private ScreenManager screenManager;
+	
 ///// Private Variables	////////////////////////////////////////////////////////////////////////////
-	private VisualElement _inGameMenuContainer;
+	private VisualElement _pauseMenuContainer;
+	
+	private Button _saveButton;
+	private Button _optionsButton;
+	private Button _loadButton;
+	private Button _backToMenuButton;
+	private Button _quitButton;
+	private Button _resumeButton;
 	
 ///// Private Functions	////////////////////////////////////////////////////////////////////////////
+
+	private void BindElements() {
+		
+		// Holen des UXML Trees, zum getten der einzelnen Komponenten
+		_pauseMenuContainer = GetComponent<UIDocument>().rootVisualElement;
+		_saveButton = _pauseMenuContainer.Q<Button>("SaveButton");
+		_optionsButton = _pauseMenuContainer.Q<Button>("OptionsButton");
+		_loadButton = _pauseMenuContainer.Q<Button>("LoadButton");
+		_backToMenuButton = _pauseMenuContainer.Q<Button>("MainMenuButton");
+		_resumeButton = _pauseMenuContainer.Q<Button>("ResumeButton");
+		_quitButton = _pauseMenuContainer.Q<Button>("QuitButton");
+		
+		_saveButton.clicked += HandleSave;
+		_optionsButton.clicked += ShowOptionsScreen;
+		_loadButton.clicked += HandleLoad;
+		_backToMenuButton.clicked += MainMenuButtonPressed;
+		_resumeButton.clicked += HandleResumeButton;
+		_quitButton.clicked += HandleQuitGame;
+
+		SetElementVisibility(_saveButton, showSaveLevel);
+		
+		SetElementVisibility(_optionsButton, showOptionsLevel);
+		//todo doesnt work for now!
+		SetElementVisibility(_loadButton, false);
+		SetElementVisibility(_backToMenuButton, false);
+	}
+
+	private void UnbindElements() {
+		_saveButton.clicked -= HandleSave;
+		_optionsButton.clicked -= ShowOptionsScreen;
+		_loadButton.clicked -= HandleLoad;
+		_backToMenuButton.clicked -= MainMenuButtonPressed;
+		_resumeButton.clicked -= HandleResumeButton;
+		_quitButton.clicked -= HandleQuitGame;
+		
+		_saveButton = null;
+		_optionsButton = null;
+		_loadButton = null;
+		_backToMenuButton = null;
+		_resumeButton = null;
+		_quitButton = null;
+	}
 
 	//todo refactor
 	private void MenuScreenContentManager(MenuScreenContent menuScreen) {
 		// Einzelne Screens getten
-		VisualElement saveScreen = _inGameMenuContainer.Q<VisualElement>("SaveScreen");
-		VisualElement loadScreen = _inGameMenuContainer.Q<VisualElement>("LoadScreen");
-		VisualElement settingsScreen = _inGameMenuContainer.Q<VisualElement>("SettingsContainer");
+		VisualElement saveScreen = _pauseMenuContainer.Q<VisualElement>("SaveScreen");
+		VisualElement loadScreen = _pauseMenuContainer.Q<VisualElement>("LoadScreen");
+		VisualElement settingsScreen = _pauseMenuContainer.Q<VisualElement>("SettingsContainer");
 
 		switch ( menuScreen ) {
 			case MenuScreenContent.LoadScreen:
@@ -77,19 +131,23 @@ public class InGameMenuUIController : MonoBehaviour {
 	void MainMenuButtonPressed() {
 		// load Scene
 		loadMenuEC.RaiseEvent(menuToLoad, true);
+		
+		//todo new scene loading
 	}
 
 	void QuitGame() {
 		// Spiel beenden
 		Application.Quit();
+		
+		//todo quitgame event channel
 	}
 
 	private void SetMenuVisibility(bool menuVisible) {
 		if ( menuVisible ) {
-			_inGameMenuContainer.style.display = DisplayStyle.Flex;
+			_pauseMenuContainer.style.display = DisplayStyle.Flex;
 		}
 		else {
-			_inGameMenuContainer.style.display = DisplayStyle.None;
+			_pauseMenuContainer.style.display = DisplayStyle.None;
 		}
 	}
 	
@@ -145,41 +203,24 @@ public class InGameMenuUIController : MonoBehaviour {
 		saveGame.RaiseEvent(0);
 	}
 	
+	void HandleQuitGame() {
+		QuitGame();
+	}
+	
 ///// Public Functions	////////////////////////////////////////////////////////////////////////////
 
 ///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
 
 	private void OnEnable() {
-		
-		//todo bind elements
-		// Holen des UXML Trees, zum getten der einzelnen Komponenten
-		var root = GetComponent<UIDocument>().rootVisualElement;
-		_inGameMenuContainer = root.Q<VisualElement>("IngameMenu");
-		var saveButton = _inGameMenuContainer.Q<Button>("SaveButton");
-		var optionsButton = _inGameMenuContainer.Q<Button>("OptionsButton");
-		var loadButton = _inGameMenuContainer.Q<Button>("LoadButton");
-		var backToMenuButton = _inGameMenuContainer.Q<Button>("MainMenuButton");
-		saveButton.clicked += HandleSave;
-		optionsButton.clicked += ShowOptionsScreen;
-		loadButton.clicked += HandleLoad;
-		backToMenuButton.clicked += MainMenuButtonPressed;
-
-		_inGameMenuContainer.Q<Button>("ResumeButton").clicked += HandleResumeButton;
-		_inGameMenuContainer.Q<Button>("QuitButton").clicked += QuitGame;
-
-		SetElementVisibility(saveButton, showSaveLevel);
-		
-		SetElementVisibility(optionsButton, showOptionsLevel);
-		//todo doesnt work for now!
-		SetElementVisibility(loadButton, false);
-		SetElementVisibility(backToMenuButton, false);
-		
-		HideMenu();
+		BindElements();
+		// HideMenu();
 		
 		SetMenuVisibilityEC.OnEventRaised += HandleMenuToggleEvent;
 	}
 	
 	private void OnDisable() {
 		SetMenuVisibilityEC.OnEventRaised -= HandleMenuToggleEvent;
+		
+		UnbindElements();
 	}
 }

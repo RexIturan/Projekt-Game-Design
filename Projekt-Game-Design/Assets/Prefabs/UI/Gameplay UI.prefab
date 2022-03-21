@@ -106,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3159855196280221219}
   - component: {fileID: 3159855196280221218}
+  - component: {fileID: 45448881925068769}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -144,6 +145,32 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 061bc186ec48e8c4182a56f051342514, type: 3}
   m_SortingOrder: 0
+--- !u!114 &45448881925068769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159855196280221220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fe446a5bcbd7848a1985a8b484332f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuToLoad:
+  - {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
+  loadMenuEC: {fileID: 11400000, guid: d4f619ca60109054faab02a134bbbf02, type: 2}
+  SetMenuVisibilityEC: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
+  uiToggleMenuEC: {fileID: 11400000, guid: 9444ec8e72a59b64d934049dd28bcc23, type: 2}
+  enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
+  menuOpenedEvent: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
+  menuClosedEvent: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
+  saveGame: {fileID: 11400000, guid: 8b9215eb7abdda1449c4fcad7e8131d2, type: 2}
+  loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
+  showLoadLevel: 0
+  showSaveLevel: 0
+  showOptionsLevel: 0
+  screenManager: {fileID: 3159855197406282494}
 --- !u!1 &3159855196337437988
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,7 +626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3159855197502036353
 Transform:
   m_ObjectHideFlags: 0
