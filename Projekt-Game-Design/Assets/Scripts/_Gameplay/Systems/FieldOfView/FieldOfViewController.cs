@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Characters;
+using Combat;
 using Events.ScriptableObjects.FieldOfView;
 using Grid;
 using Level.Grid;
@@ -22,6 +23,9 @@ namespace FieldOfView {
 				[SerializeField] private FOVCrossQueryEventChannelSO fieldOfViewCrossQueryEventChannel;
 				[SerializeField] private VoidEventChannelSO fov_PlayerCharViewUpdateEC;
 
+				[Header("Sending Event On"), SerializeField]
+				private FOV_ViewEventChannelSO updatePlayerViewEC;
+				
 				// fov algorithms
 				private FieldOfView_Adam _fieldOfViewAdam;
         // private FieldOfView _fieldOfView;
@@ -36,7 +40,7 @@ namespace FieldOfView {
         private bool[,] _visible;
         
 
-        public void Awake() {
+        public void OnEnable() {
             // _fieldOfView = InitFieldOfView();
             fov_PlayerCharViewUpdateEC.OnEventRaised += GeneratePlayerCharacterVision;
             fieldOfViewQueryEventChannel.OnEventRaised += HandleQueryEvent;
@@ -124,6 +128,8 @@ namespace FieldOfView {
 					//todo should work on list<pos, range> 
 					var charList = CharacterList.FindInstant();
 
+					bool[,] playerVision = new bool[gridData.Width, gridData.Depth];
+					
 					if ( charList != null ) {
 						var playerList = charList.playerContainer;
 
@@ -131,24 +137,44 @@ namespace FieldOfView {
 						viewTilemap.transform.position = gridData.OriginPosition;
 						
 						foreach ( var playerObj in playerList ) {
-							var gridTransform = playerObj.GetComponent<GridTransform>();
-							var statistics = playerObj.GetComponent<Statistics>();
-							var pos = gridTransform.gridPosition;
-								
-							InitFieldOfViewAdam();
-							_fieldOfViewAdam.Compute(gridData.GetGridPos2DFromGridPos3D(pos), statistics.StatusValues.ViewDistance.Value);
-							AddVisionToTilemap();
+							var target = playerObj.GetComponent<Targetable>();
+							if ( target is { IsAlive: true }) {
+								var gridTransform = playerObj.GetComponent<GridTransform>();
+								var statistics = playerObj.GetComponent<Statistics>();	
+								var pos = gridTransform.gridPosition;
+								InitFieldOfViewAdam();
+							
+								_fieldOfViewAdam.Compute(gridData.GetGridPos2DFromGridPos3D(pos), statistics.StatusValues.ViewDistance.Value);
+							
+								UniteVision(playerVision, _visible);
+							}
 						}
 					}
+
+					AddVisionToTilemap(playerVision);
+					updatePlayerViewEC.RaiseEvent(playerVision);
 				}
 
-				private void AddVisionToTilemap() {
+				private void UniteVision(bool[,] source, bool[,] newVision) {
+					var width = gridData.Width;
+					var depth = gridData.Depth;
+					
+					for ( int z = 0; z < depth; z++ ) {
+						for ( int x = 0; x < width; x++ ) {
+							if ( newVision[x, z] ) {
+								source[x, z] = true;
+							}
+						}
+					}
+				} 
+				
+				private void AddVisionToTilemap(bool[,] source) {
 					var width = gridData.Width;
 					var depth = gridData.Depth;
 					
 					for (int z = 0; z < depth; z++) {
 						for (int x = 0; x < width; x++) {
-							if (_visible[x, z]) {
+							if (source[x, z]) {
 								//todo grid offset
 								viewTilemap.SetTile(new Vector3Int(x, z, 0), viewTile);
 							}

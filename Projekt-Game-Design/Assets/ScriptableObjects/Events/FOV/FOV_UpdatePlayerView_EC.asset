@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16b7e99933e74061ad8512a02b468e22, type: 3}
-  m_Name: FOV_UpdatePlayerCharView_EC
+  m_Script: {fileID: 11500000, guid: c464ed6ff7814414921d7f0e8729811b, type: 3}
+  m_Name: FOV_UpdatePlayerView_EC
   m_EditorClassIdentifier: 
-  description: 
+  description: Sends new view data of all active player characters

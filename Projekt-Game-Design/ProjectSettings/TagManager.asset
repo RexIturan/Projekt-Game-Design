@@ -11,6 +11,8 @@ TagManager:
   - Equipment/WeaponL
   - Equipment/Shield
   - Equipment/Quiver
+  - Equipment/Head
+  - Equipment/Body
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - FOV
   - Selectable
   - Terrain
-  - 
+  - HideInFog
   - 
   - 
   - 
