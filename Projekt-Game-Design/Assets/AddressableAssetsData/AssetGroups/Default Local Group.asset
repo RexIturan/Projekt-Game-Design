@@ -129,6 +129,10 @@ MonoBehaviour:
     m_Address: WorldObjectTypeContainerSO
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: c38c0faff1c3a98448226ada56b4585c
+    m_Address: Assets/URP
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
   m_SchemaSet:
