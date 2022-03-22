@@ -80,7 +80,7 @@ namespace UI.Components.Ability
 												effect.Add(healing);
 										}
 
-										if(targetedEffect.area.GetPattern().Length > 1 || targetedEffect.area.GetPattern()[0].Length > 1)
+										if(targetedEffect.area.GetPattern().Length > 1 || targetedEffect.area.GetPattern().GetLength(1) > 1)
 										{
 												TextElement patternHeader = new TextElement();
 												patternHeader.text = "Area of effect: ";

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI.Components.Ability;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -14,23 +15,11 @@ namespace UI.Components.Tooltip
 		{
 				private static readonly string className = "tooltipHeader";
 
-				private TextElement header;
-				private TextElement description;
+				public AbilityTooltip(VisualElement tooltipParent) : base(tooltipParent) {}
 
-				public AbilityTooltip(VisualElement tooltipParent) : base(tooltipParent)
-				{
-						header = new TextElement();
-						header.AddToClassList(className);
-						description = new TextElement();
-
-						Add(header);
-						Add(description);
-				}
-
-				public void UpdateValues(string name, string description)
-				{
-						header.text = name;
-						this.description.text = description;
+				public void UpdateValues(AbilitySO ability) {
+						Clear();
+						Add(new AbilityDetailPanel(ability));
 				}
 		}
 }

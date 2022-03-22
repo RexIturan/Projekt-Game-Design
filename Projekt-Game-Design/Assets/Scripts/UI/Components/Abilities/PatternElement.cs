@@ -20,8 +20,8 @@ namespace UI.Components.Ability
 
 				public PatternElement(TargetPattern pattern)
 				{
-						bool[][] boolPattern = pattern.GetPattern();
-						for(int row = 0; row < boolPattern[0].Length; row++ )
+						bool[,] boolPattern = pattern.GetPattern();
+						for(int row = 0; row < boolPattern.GetLength(1); row++ )
 						{
 								// Setting up style
 								styleSheets.Add(Resources.Load<StyleSheet>(defaultStyleSheet));
@@ -30,13 +30,13 @@ namespace UI.Components.Ability
 								VisualElement rowElement = new VisualElement();
 								rowElement.AddToClassList(rowClassName);
 
-								for (int col = 0; col < boolPattern.Length; col++ )
+								for (int col = 0; col < boolPattern.GetLength(0); col++ )
 								{
 										Image tile = new Image();
 
 										if ( pattern.GetAnchor().Equals(new Vector2Int(col, row)) )
 										{
-												if ( boolPattern[col][row] )
+												if ( boolPattern[col,row] )
 												{
 														tile.image = anchorImage.texture;
 												}
@@ -47,7 +47,7 @@ namespace UI.Components.Ability
 										}
 										else
 										{
-												if ( boolPattern[col][row] )
+												if ( boolPattern[col,row] )
 												{
 														tile.image = targetImage.texture;
 												}

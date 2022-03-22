@@ -116,10 +116,6 @@ namespace UI.Components.ActionButton {
 			}
 			
 			nameLabel.SetStyleDisplayVisibility(ShowName);
-
-			actionTooltip.UpdateValues(nameLabel.text, "This is a placeholder. You can see it's a placeholder. This means, that this code needs to be reworked. Yes. " + 
-					"The deal is, this function should also require a description, but I don't want to touch too many things. ");
-			actionTooltip.Activate();
 		}
 		
 		public void BindOnClickedAction(Action<object[]> onFocus, Action<object[]> onBlur, object[] args) {
@@ -137,7 +133,6 @@ namespace UI.Components.ActionButton {
 			button.UnregisterCallback<BlurEvent>(HandleBlur);
 			onFocusCallback = null;
 			onBlurCallback = null;
-			actionTooltip.Deactivate();
 		}
 
 		public void SetupActionButton(Sprite image, string text) {
@@ -145,12 +140,21 @@ namespace UI.Components.ActionButton {
 			ActionText = text;
 			UpdateComponent();
 		}
+
+		public void SetupTooltip(AbilitySO ability) {
+			actionTooltip.UpdateValues(ability);
+			actionTooltip.Activate();
+		}
 		
 		public void ResetActionButton() {
 			ImageData = null;
 			ActionText = "";
 			UnbindOnClickedAction();
 			UpdateComponent();
+		}
+
+		public void ResetTooltip() {
+			actionTooltip.Deactivate();
 		}
 		
 ///// PUBLIC Constructors ///////////////////////////////////////////////////////////////////////////

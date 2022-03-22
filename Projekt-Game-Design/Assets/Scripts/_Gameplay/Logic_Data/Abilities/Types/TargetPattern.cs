@@ -73,8 +73,8 @@ namespace Ability {
 			width = 1;
 		}
 
-		public bool[][] GetPattern() {
-			return GetPattern(0);
+		public bool[,] GetPattern() {
+			return pattern;
 		}
 
 		//todo why no direction enum?

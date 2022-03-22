@@ -230,6 +230,7 @@ namespace GDP01.UI.Components {
 		public void ResetActionButtons() {
 			foreach ( var button in actionButtons ) {
 				button.ResetActionButton();
+				button.ResetTooltip();
 			}	
 		}
 		

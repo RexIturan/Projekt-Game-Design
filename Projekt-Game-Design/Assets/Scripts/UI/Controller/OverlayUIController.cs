@@ -200,6 +200,7 @@ public class OverlayUIController : MonoBehaviour {
 						actionButton.Button.SetEnabled(false);	
 					}
 					actionButton.SetupActionButton(ability.icon, ability.name);
+					actionButton.SetupTooltip(ability);
 					actionButton.BindOnClickedAction(OnFocusCallback, OnBlurCallback, arguments);
 				}
 				else {
