@@ -143,7 +143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8238772793520087123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0.5}
+  m_LocalPosition: {x: -7.5, y: 0, z: -24.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPosition: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
-  gridData: {fileID: 11400000, guid: 3162147cfd81d2942ac3608f2a8e6ab5, type: 2}
+  gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
 --- !u!114 &7084610371603930105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +199,9 @@ MonoBehaviour:
   _armorPositionOffset: {x: 0, y: 0, z: 0}
   _defaultRotationOffset: {x: 0, y: 0, z: 0}
   _defaultPositionOffset: {x: 0, y: 0.25, z: 0}
+  onTileEnterEC: {fileID: 11400000, guid: 4e00fed1a0c174249b7a24571939cd4e, type: 2}
+  pickupEC: {fileID: 11400000, guid: c850df41d4dbc034b881094411eeae9d, type: 2}
+  redrawLevelEC: {fileID: 11400000, guid: 076a51549e7ef074aaa161d0013325a5, type: 2}
   _itemData:
     id: -1
     gridPosition: {x: 0, y: 0, z: 0}

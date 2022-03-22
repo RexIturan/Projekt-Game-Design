@@ -5,7 +5,7 @@ using WorldObjects;
 namespace Visual {
     public class PrefabGridDrawer : MonoBehaviour, IMapDrawer {
 
-        [SerializeField] private GridDataSO globalGridData;
+        // [SerializeField] private GridDataSO globalGridData;
         
         //new
         [SerializeField] private GridDataSO gridData;
@@ -76,7 +76,7 @@ namespace Visual {
 	        var itemData = itemDictionary.itemList[id];
 	        var item = items[gridPos.x, gridPos.y, gridPos.z];
 	        var itemComponent = item.GetComponent<ItemComponent>();
-	        itemComponent.InitItem(itemData);
+	        itemComponent.InitItem(itemData, gridPos);
         }
         
         private void CreateItemGameObject(int id, Vector3 worldPos, Vector3Int gridPos, GameObject[,,] itemComponents) {
@@ -91,7 +91,8 @@ namespace Visual {
 	        itemComponents[gridPos.x, gridPos.y, gridPos.z] = obj;
 	        ItemComponent itemComponent = itemComponents[gridPos.x, gridPos.y, gridPos.z].GetComponent<ItemComponent>();
 					itemComponent.Type = itemType;
-					itemComponent.Reset();
+					itemComponent.InitItem(itemType, gridPos);
+					// itemComponent.Reset();
         }
 
         private void RemoveItemGameObject(Vector3Int gridPos, GameObject[,,] items) {

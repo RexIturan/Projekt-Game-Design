@@ -25,8 +25,13 @@ namespace WorldObjects {
 				protected set { _gridTransform.rotation = value; }
 			}
 
-			public Vector3Int Position => _gridTransform.gridPosition;
-			
+			public Vector3Int GridPosition {
+				get { return _gridTransform.gridPosition; }
+				set {
+					_gridTransform.gridPosition = value;
+				}
+			}
+
 			public virtual D Save() {
 				return new D {
 					Id = id,

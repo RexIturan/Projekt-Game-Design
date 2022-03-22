@@ -17,6 +17,7 @@ namespace Characters {
 		}
 
 		// todo set GameObject to grid Position
+		[ContextMenu("MoveToGridPosition")]
 		public void MoveToGridPosition() {
 			gameObject.transform.position = gridData.GetWorldPosFromGridPos(gridPosition);
 		}

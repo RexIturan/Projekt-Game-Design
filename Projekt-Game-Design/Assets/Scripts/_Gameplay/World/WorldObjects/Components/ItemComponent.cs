@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
 using Characters;
+using Characters.Types;
+using Events.ScriptableObjects;
+using Events.ScriptableObjects.GameState;
+using Grid;
 using UnityEngine;
-using WorldObjects;
 
 namespace WorldObjects {
 	/// <summary>
@@ -20,7 +24,10 @@ namespace WorldObjects {
 		[SerializeField] private Vector3 _armorPositionOffset = new Vector3(0, 0, 0);
 		[SerializeField] private Vector3 _defaultRotationOffset = new Vector3(0, 0, 0);
 		[SerializeField] private Vector3 _defaultPositionOffset = new Vector3(0, 0.25f, 0);
-
+		[SerializeField] private PositionGameObjectEventChannelSO onTileEnterEC;
+		[SerializeField] private IntEventChannelSO pickupEC;
+		[SerializeField] private VoidEventChannelSO redrawLevelEC;
+		
 		// [SerializeField] protected new ItemSO _type;
 		public new ItemSO Type {
 			get => ( ItemSO )_type;
@@ -29,19 +36,24 @@ namespace WorldObjects {
 		
 		[SerializeField] private ItemData _itemData;
 		
+		private GridController _gridController;
+
 		private void Awake() {
 			_meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
 			_meshFilter = gameObject.GetComponentInChildren<MeshFilter>();
 
 			//todo remove temporary
-			GetComponent<GridTransform>().gridPosition = Vector3Int.FloorToInt(transform.position);
+			// GridPosition = Vector3Int.FloorToInt(transform.position);
 		}
 
-		public void InitItem(ItemSO itemSO) {
+		public void InitItem(ItemSO itemSO, Vector3Int gridPosition) {
 			
 			_meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
 			_meshFilter = gameObject.GetComponentInChildren<MeshFilter>();
 
+			GridPosition = gridPosition;
+			_gridTransform.MoveToGridPosition();
+			
 			Type = itemSO;
 
 			if ( Type is BodyArmorSO ) {
@@ -63,12 +75,47 @@ namespace WorldObjects {
 			_meshFilter.mesh = itemSO.mesh;
 		}
 
+		private void HandleOnTileEnter(Vector3Int position, GameObject characterObject) {
+			if ( _gridTransform.gridPosition == position && 
+			     characterObject.GetComponent<Statistics>().Faction == Faction.Player ) {
+				
+				if(!_gridController)
+					_gridController = GridController.FindGridController();
+
+				if(!_gridController)
+					Debug.LogError("Could not find Grid Controller. ");
+				else { 
+					// Debug.Log("Searching for items at: " + _gridTransform.gridPosition.x + ", " + _gridTransform.gridPosition.z);
+					List<int> items = _gridController.GetItemsAtGridPos(GridPosition);
+
+					if(items.Count > 0) {
+						// Debug.Log("Item found ");
+						foreach(int itemId in items) 
+							pickupEC.RaiseEvent(itemId);
+
+						_gridController.RemoveAllItemsAtGridPos(_gridTransform.gridPosition);
+						redrawLevelEC.RaiseEvent();
+					}
+				}
+			}
+		}
+		
+///// Unity Functions //////////////////////////////////////////////////////////////////////////////
+
+		private void OnEnable() {
+			onTileEnterEC.OnEventRaised += HandleOnTileEnter;
+		}
+
+		private void OnDisable() {
+			onTileEnterEC.OnEventRaised -= HandleOnTileEnter;
+		}
+
 		public void Reset() {
-			InitItem(Type);
+			InitItem(Type, GridPosition);
 		}
 
 		private void OnValidate() {
-			InitItem(Type);
+			InitItem(Type, GridPosition);
 		}
 	}
 }

@@ -21,7 +21,7 @@ public class C_MoveToTarget_OnUpdateSO : StateActionSO {
 public class C_MoveToTarget_OnUpdate : StateAction {
 	protected new C_MoveToTarget_OnUpdateSO OriginSO => ( C_MoveToTarget_OnUpdateSO )base.OriginSO;
 
-	private readonly PathFindingPathQueryEventChannelSO _pathfindingPathQueryEventChannel;
+	private readonly PathFindingPathQueryEventChannelSO _pathfindingPathQueryEC;
 	private readonly GridDataSO _gridDataSO;
 	
 	// Game Object Components
@@ -36,8 +36,8 @@ public class C_MoveToTarget_OnUpdate : StateAction {
 	private List<PathNode> _path;
 	private int _currentStep;
 
-	public C_MoveToTarget_OnUpdate(PathFindingPathQueryEventChannelSO pathfindingPathQueryEventChannel, GridDataSO gridDataSO) {
-		this._pathfindingPathQueryEventChannel = pathfindingPathQueryEventChannel;
+	public C_MoveToTarget_OnUpdate(PathFindingPathQueryEventChannelSO pathfindingPathQueryEC, GridDataSO gridDataSO) {
+		this._pathfindingPathQueryEC = pathfindingPathQueryEC;
 		_gridDataSO = gridDataSO;
 	}
 
@@ -50,29 +50,31 @@ public class C_MoveToTarget_OnUpdate : StateAction {
 	}
 
 	public override void OnUpdate() {
-		if ( _currentStep >= _path.Count && _timeSinceLastStep >= TimePerStep )
-			_movementController.MovementDone = true;
-
-		if ( !_movementController.MovementDone ) {
-			_movementController.FaceMovingDirection();
-
-			_timeSinceLastStep += Time.deltaTime;
-
-			if ( _timeSinceLastStep >= TimePerStep && _currentStep < _path.Count ) {
-				_timeSinceLastStep -= TimePerStep;
-
-				_gridTransform.gridPosition = _path[_currentStep].pos;
-
-				_currentStep++;
-			}
-		}
+		
+		//todo move to movement controller
+		// if ( _currentStep >= _path.Count && _timeSinceLastStep >= TimePerStep )
+		// 	_movementController.MovementDone = true;
+		//
+		// if ( !_movementController.MovementDone ) {
+		// 	_movementController.FaceMovingDirection();
+		//
+		// 	_timeSinceLastStep += Time.deltaTime;
+		//
+		// 	if ( _timeSinceLastStep >= TimePerStep && _currentStep < _path.Count ) {
+		// 		_timeSinceLastStep -= TimePerStep;
+		//
+		// 		_gridTransform.gridPosition = _path[_currentStep].pos;
+		//
+		// 		_currentStep++;
+		// 	}
+		// }
 	}
 
 	public override void OnStateEnter() {
 		Vector3Int startNode = _gridTransform.gridPosition;
 		Vector3Int endNode = _movementController.movementTarget.pos; 
 
-		_pathfindingPathQueryEventChannel.RaiseEvent(startNode, endNode, SavePath);
+		_pathfindingPathQueryEC.RaiseEvent(startNode, endNode, SavePath);
 
 		_timeSinceLastStep = 0;
 		_currentStep = 1;
@@ -81,6 +83,7 @@ public class C_MoveToTarget_OnUpdate : StateAction {
 
 	private void SavePath(List<PathNode> path) {
 		this._path = path;
+		_movementController.StartNewMove(path);
 	}
 }
 

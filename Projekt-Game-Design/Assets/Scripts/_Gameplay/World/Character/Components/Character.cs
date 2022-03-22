@@ -1,4 +1,5 @@
-﻿using Characters;
+﻿using System.Collections.Generic;
+using Characters;
 using Characters.Movement;
 using Combat;
 using GDP01._Gameplay.World.Character.Data;
@@ -33,9 +34,9 @@ namespace GDP01._Gameplay.World.Character.Components {
 		[SerializeField] protected AbilityController _abilityController;
 		[SerializeField] protected MovementController _movementController;
 		[SerializeField] protected HealthbarController _healthbarController;
-		
-		
-		
+
+		private Dictionary<AbilitySO, int> cooldownDict;
+
 		public virtual D Save() {
 			//todo create DataSave
 			return new D {

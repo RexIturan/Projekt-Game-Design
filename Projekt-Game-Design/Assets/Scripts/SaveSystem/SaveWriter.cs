@@ -175,7 +175,7 @@ namespace SaveSystem {
 					switchId = switchComp.Id,
 					activated = switchComp.IsActivated,
 					switchTypeId = switchComp.Type.id,
-					gridPos = switchComp.Position,
+					gridPos = switchComp.GridPosition,
 					orientation = switchComp.Rotation
 				});
 			}
