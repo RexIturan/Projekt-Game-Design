@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: g_Evaluate
+  m_Script: {fileID: 11500000, guid: 16b7e99933e74061ad8512a02b468e22, type: 3}
+  m_Name: ClearTileEffects_EC
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: 3354c9d0c0a030149886b92d7ec595d6, type: 2}
-  - {fileID: 11400000, guid: e1ea505d456ed0a4999ea2b5a124fc62, type: 2}
+  description: 'Tile Effect Drawer listens on this channel to clear the tilemap. '

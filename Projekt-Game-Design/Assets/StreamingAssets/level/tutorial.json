@@ -329,6 +329,38 @@
     }
   ],
   "junks": [],
+  "tileEffects": [
+	{
+      "prefabID": 0,
+      "position": {
+        "x": 7,
+        "y": 1,
+        "z": 24
+      },
+	  "timeUntilActivation": 0,
+      "timeToLive": 2
+	},
+	{
+      "prefabID": 0,
+      "position": {
+        "x": 6,
+        "y": 1,
+        "z": 24
+      },
+	  "timeUntilActivation": 0,
+      "timeToLive": 4
+	},
+	{
+      "prefabID": 0,
+      "position": {
+        "x": 5,
+        "y": 1,
+        "z": 24
+      },
+	  "timeUntilActivation": 0,
+      "timeToLive": 6
+	}
+  ],
   "items": [
     {
       "id": 1,

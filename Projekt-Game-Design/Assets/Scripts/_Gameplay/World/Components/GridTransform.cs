@@ -12,6 +12,8 @@ namespace Characters {
 		//TODO get current grid data
 		[SerializeField, fsIgnore] private GridDataSO gridData;
 
+		public GridDataSO GetGridData() { return gridData; }
+
 		public void Start() {
 			MoveToGridPosition();
 		}
