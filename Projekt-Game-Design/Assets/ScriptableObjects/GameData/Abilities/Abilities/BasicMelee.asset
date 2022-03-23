@@ -40,6 +40,7 @@ MonoBehaviour:
       rows:
       - line: 01
       anchor: {x: 0, y: 0}
+  cooldown: 0
   selectedActions:
   - {fileID: 11400000, guid: 91a528d44b0383848a019fbc0509b9f9, type: 2}
   - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}

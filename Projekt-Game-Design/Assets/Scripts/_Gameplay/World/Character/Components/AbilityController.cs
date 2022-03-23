@@ -1,8 +1,11 @@
 ﻿using Ability.ScriptableObjects;
 using System.Collections.Generic;
+using System.Linq;
 using Characters;
 using Characters.Movement;
 using Combat;
+using GDP01._Gameplay.World.Character.Components;
+using GDP01._Gameplay.World.Character.Data;
 using UnityEngine;
 using Util;
 using GDP01.World.Components;
@@ -25,6 +28,8 @@ namespace GDP01.Characters.Component {
 				}
 			}
 		}
+		
+		private readonly Dictionary<AbilitySO, int> cooldownDict = new Dictionary<AbilitySO, int>();
 
 ///// Serialize Variables //////////////////////////////////////////////////////////////////////////	
 		
@@ -71,7 +76,36 @@ namespace GDP01.Characters.Component {
 
 		public bool IsAbilitySelected => SelectedAbility != null;
 
-		///// Public Functions /////////////////////////////////////////////////////////////////////////////		
+///// Cooldown /////////////////////////////////////////////////////////////////////////////////////
+
+		public void ReduceCooldowns() {
+			List<AbilitySO> abilityToRemove = new List<AbilitySO>();
+			var keys = cooldownDict.Keys.ToList();
+			foreach ( var ability in keys ) {
+				cooldownDict[ability]--;
+				if ( cooldownDict[ability] <= 0 ) {
+					abilityToRemove.Add(ability);
+				}
+			}
+
+			abilityToRemove.ForEach(ability => cooldownDict.Remove(ability));
+		}
+
+		public void SetCooldown(AbilitySO abilitySO) {
+			if ( abilitySO.HasCoolDown ) {
+				cooldownDict.Add(abilitySO, abilitySO.Cooldown);	
+			}
+		}
+		
+		public int GetCoolDown(AbilitySO abilitySO) {
+			return IsCooldownActive(abilitySO) ? cooldownDict[abilitySO] : 0;
+		}
+
+		public bool IsCooldownActive(AbilitySO abilitySO) {
+			return cooldownDict.ContainsKey(abilitySO) && cooldownDict[abilitySO] > 0;
+		}
+		
+///// Public Functions /////////////////////////////////////////////////////////////////////////////
 
 		public AbilitySO GetSelectedAbility() {
 			return SelectedAbilityID > -1 ? abilityContainer.abilities[SelectedAbilityID] : null;
@@ -96,12 +130,16 @@ namespace GDP01.Characters.Component {
 		}
 
 		public bool IsAbilityAvailable(int id) {
-			return IsAbilityAvailable(abilityContainer.abilities[SelectedAbilityID]);
+			return IsAbilityAvailable(abilityContainer.abilities[id]);
 		}
 		
 		public bool IsAbilityAvailable(AbilitySO ability) {
 			int cost = GetMinimalCost(ability);
-			return _statistics.StatusValues.Energy.Value >= cost;
+			
+			bool cooldownsReady = !IsCooldownActive(ability);;
+			bool enoughEnergyAvailable = _statistics.StatusValues.Energy.Value >= cost;
+			
+			return enoughEnergyAvailable && cooldownsReady;
 		}
 
 		public int GetMinimalCost(AbilitySO ability) {

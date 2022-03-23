@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using GDP01.Util.Util.UI;
 using UI.Components.Tooltip;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static GDP01.Util.UI.CustomVisualElementExtensions;
 
 namespace UI.Components.ActionButton {
 	
@@ -15,14 +15,19 @@ namespace UI.Components.ActionButton {
 	}
 	
 	public class ActionButton : VisualElement, IActionButton  {
-		///// USS Class Names //////////////////////////////////////////////////////////////////////////////
+///// USS Class Names //////////////////////////////////////////////////////////////////////////////
+		private const string componentName = "ActionButton";
+		
 		private static readonly string baseUssClassName = "action-button";
 		// private static readonly string containerSuffix = "container";
 		private static readonly string topContainerSuffix = "top-container";
 		private static readonly string nameSuffix = "name";
 		private static readonly string mappingSuffix = "mapping";
 		private static readonly string buttonSuffix = "button";
+		private static readonly string buttonContainerSuffix = "button-container";
 		private static readonly string imageSuffix = "image";
+		private static readonly string cooldownSuffix = "cooldown";
+		private static readonly string cooldownContainerSuffix = "cooldown-container";
 		
 		private static readonly string defaultStyleSheet = "UI/actionButton";
 ///// PRIVATE VARIABLES ////////////////////////////////////////////////////////////////////////////
@@ -33,9 +38,12 @@ namespace UI.Components.ActionButton {
 ///// UI ELEMENTS //////////////////////////////////////////////////////////////////////////////////
 
 		private VisualElement actionImage;
+		private VisualElement buttonContainer;
 		private GroupedButton button;
 		private Label nameLabel;
 		private Label mappingLabel;
+		private VisualElement cooldownContainer;
+		private Label cooldownLabel;
 		private AbilityTooltip actionTooltip;
 		
 ///// PROPERTIES ///////////////////////////////////////////////////////////////////////////////////
@@ -44,6 +52,7 @@ namespace UI.Components.ActionButton {
 		public Sprite ImageData { get; set; }
 		public string Mapping { get; set; }
 		public string ActionText { get; set; }
+		public int Cooldown { get; set; } 
 		public Button Button => button;
 		
 		public bool ShowName { get; set; }
@@ -54,8 +63,8 @@ namespace UI.Components.ActionButton {
 			return $"{baseUssClassName}-{suffix}";
 		}
 		
-		private void BuildActionButton(string componentName) {
-			name = $"ActionButton_{componentName}";
+		private void BuildActionButton(string componentNameSuffix) {
+			name = $"{componentName}_{componentNameSuffix}";
 			AddToClassList(baseUssClassName);
 			
 			StyleSheet style = Resources.Load<StyleSheet>(defaultStyleSheet);
@@ -64,6 +73,11 @@ namespace UI.Components.ActionButton {
 			var topContainer = new VisualElement() { name = "ActionButton_Top_Container" };
 			topContainer.AddToClassList(GetClassNameWithSuffix(topContainerSuffix));
 
+			InitContainer(ref buttonContainer,  componentName, 
+				"Button_Container",
+				baseUssClassName, new []{buttonContainerSuffix});
+			
+			
 			button = new GroupedButton() { name = "ActionButton_Button"};
 			button.AddToClassList(GetClassNameWithSuffix(buttonSuffix));
 
@@ -83,12 +97,28 @@ namespace UI.Components.ActionButton {
 			};
 			nameLabel.AddToClassList(GetClassNameWithSuffix(nameSuffix));
 			
+			//cooldown
+			InitContainer(ref cooldownContainer, componentName, 
+				"Cooldown_Container",
+				baseUssClassName, new []{cooldownContainerSuffix});
+			
+			InitLabel(ref cooldownLabel, componentName, "Cooldown_Label", 
+				"0", baseUssClassName, cooldownSuffix);
+
+			cooldownLabel.pickingMode = PickingMode.Ignore;
+			cooldownContainer.pickingMode = PickingMode.Ignore;
+			cooldownContainer.Add(cooldownLabel);
+			
 			topContainer.Add( mappingLabel );
 			actionImage.Add( topContainer );
 			button.Add( actionImage );
 
+			buttonContainer.pickingMode = PickingMode.Ignore;
+			buttonContainer.Add(button);
+			buttonContainer.Add(cooldownContainer);
+			
 			Add( nameLabel );
-			Add( button );
+			Add( buttonContainer );
 			
 			//tooltip
 			actionTooltip = new AbilityTooltip(this);
@@ -114,6 +144,14 @@ namespace UI.Components.ActionButton {
 			else {
 				actionImage.style.backgroundImage = null;
 			}
+
+			if ( Cooldown > 0 ) {
+				cooldownLabel.text = Cooldown.ToString();
+				cooldownLabel.SetStyleDisplayVisibility(true);
+			}
+			else {
+				cooldownLabel.SetStyleDisplayVisibility(false);
+			}
 			
 			nameLabel.SetStyleDisplayVisibility(ShowName);
 		}
@@ -138,6 +176,14 @@ namespace UI.Components.ActionButton {
 		public void SetupActionButton(Sprite image, string text) {
 			ImageData = image;
 			ActionText = text;
+			UpdateComponent();
+		}
+		
+		public void SetupActionButton(AbilitySO abilitySO, int cooldown) {
+			ImageData = abilitySO.icon;
+			ActionText = abilitySO.name;
+			Cooldown = cooldown;
+			SetupTooltip(abilitySO);
 			UpdateComponent();
 		}
 
@@ -186,12 +232,13 @@ namespace UI.Components.ActionButton {
 
 		public ActionButton() : this("default", 0, "NA","no name", true) { }
 		
-		public ActionButton(string componentName, int id, string mapping, string text, bool showName,  Sprite img = null) {
+		public ActionButton(string componentName, int id, string mapping, string text, bool showName,  Sprite img = null, int cooldown = 0) {
 			this.Id = id;
 			this.Mapping = mapping;
 			ActionText = text;
 			ImageData = img;
 			ShowName = showName;
+			Cooldown = cooldown;
 			
 			BuildActionButton(componentName);
 			UpdateComponent();

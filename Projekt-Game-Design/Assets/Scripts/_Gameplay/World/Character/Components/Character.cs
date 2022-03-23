@@ -35,8 +35,12 @@ namespace GDP01._Gameplay.World.Character.Components {
 		[SerializeField] protected MovementController _movementController;
 		[SerializeField] protected HealthbarController _healthbarController;
 
-		private Dictionary<AbilitySO, int> cooldownDict;
+		
 
+		
+		
+///// SaveState ////////////////////////////////////////////////////////////////////////////////////		
+		
 		public virtual D Save() {
 			//todo create DataSave
 			return new D {
@@ -52,7 +56,6 @@ namespace GDP01._Gameplay.World.Character.Components {
 				//todo -> CharacterSO
 				MovementPointsPerEnergy = _movementController.movementPointsPerEnergy,
 				MovementCostPerTile = _movementController.movementCostPerTile,
-				
 			};
 		}
 

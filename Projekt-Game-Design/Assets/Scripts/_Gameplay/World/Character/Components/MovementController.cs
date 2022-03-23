@@ -138,7 +138,7 @@ namespace Characters.Movement {
 		}
 
 		private void OnTileEntered() {
-			Debug.Log($"Enter Tile at {stepTargetGridPosition}");
+			// Debug.Log($"Enter Tile at {stepTargetGridPosition}");
 			
 			entered = true;
 			// - set new position
@@ -148,7 +148,7 @@ namespace Characters.Movement {
 		}
 
 		private void OnTileExit() {
-			Debug.Log($"Exit Tile at {previousGridPosition}");
+			// Debug.Log($"Exit Tile at {previousGridPosition}");
 			exited = true;
 
 			onTileExitEC.RaiseEvent(previousGridPosition, gameObject);

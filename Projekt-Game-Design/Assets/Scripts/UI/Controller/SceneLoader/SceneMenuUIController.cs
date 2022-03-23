@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using GDP01.SceneManagement.EventChannels;
-using GDP01.Util.Util.UI;
+using GDP01.Util.UI;
 using SaveSystem;
 using SceneManagement.ScriptableObjects;
 using SceneManagement.Types;

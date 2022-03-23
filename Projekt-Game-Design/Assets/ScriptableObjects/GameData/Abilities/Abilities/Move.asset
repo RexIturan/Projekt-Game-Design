@@ -27,6 +27,7 @@ MonoBehaviour:
   conditions: 1
   costs: 0
   targetedEffects: []
+  cooldown: 0
   selectedActions:
   - {fileID: 11400000, guid: dc79f1f8601c7714991200007604a816, type: 2}
   - {fileID: 11400000, guid: 5eeee1affae48bc4b8b3424a918e952a, type: 2}

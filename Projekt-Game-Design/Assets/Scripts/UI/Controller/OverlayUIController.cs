@@ -199,8 +199,7 @@ public class OverlayUIController : MonoBehaviour {
 					if ( !abilityController.IsAbilityAvailable(ability) ) {
 						actionButton.Button.SetEnabled(false);	
 					}
-					actionButton.SetupActionButton(ability.icon, ability.name);
-					actionButton.SetupTooltip(ability);
+					actionButton.SetupActionButton(ability, abilityController.GetCoolDown(ability));
 					actionButton.BindOnClickedAction(OnFocusCallback, OnBlurCallback, arguments);
 				}
 				else {
@@ -332,7 +331,7 @@ public class OverlayUIController : MonoBehaviour {
 		SetTurnIndicatorVisibility(value);
 	}
 	
-	private void HandleEndTurn(Faction faction) {
+	private void HandleNewTurn(Faction faction) {
 		UpdateActionBar();
 	}
 
@@ -374,7 +373,7 @@ public class OverlayUIController : MonoBehaviour {
 		previewChangedEC.OnEventRaised += HandlePreviewChanged;
 		
 		//todo updating ui when turn changes -> handle otherwise
-		newTurnEC.OnEventRaised += HandleEndTurn;
+		newTurnEC.OnEventRaised += HandleNewTurn;
 		inputReader.SelectAbilityEvent += HandleSelectAbility;
 		
 		//todo maybe move to ui manager
@@ -394,7 +393,7 @@ public class OverlayUIController : MonoBehaviour {
 		previewChangedEC.OnEventRaised -= HandlePreviewChanged;
 		
 		//todo updating ui when turn changes -> handle otherwise
-		newTurnEC.OnEventRaised -= HandleEndTurn;
+		newTurnEC.OnEventRaised -= HandleNewTurn;
 		inputReader.SelectAbilityEvent -= HandleSelectAbility;
 	}
 }

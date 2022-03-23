@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static GDP01.Util.Util.UI.CustomVisualElementExtensions;
+using static GDP01.Util.UI.CustomVisualElementExtensions;
 
 namespace GDP01.UI.Components.DragAndDrop {
 	public class DragAndDropSlot : VisualElement {

@@ -16,6 +16,7 @@ public class AbilitySO : ScriptableObject {
     public string description;
 		public CharacterAnimation Animation;
 		public string activationSound;
+		// todo move to projectile?
 		public GameObject projectilePrefab;
 		public float timeUntilDamage;
 		public bool repeated;
@@ -27,10 +28,23 @@ public class AbilitySO : ScriptableObject {
     public TileProperties conditions; // restrictions for target in regards of the tiles between
     public int costs; 
     public TargetedEffect [] targetedEffects;
+    
+    // cooldown
+    public int cooldown = 0;
+    
+    // charges
+    //todo ability instance / item instance 
 
     public List<StateActionSO> selectedActions;
     public List<StateActionSO> executingActions;
 
+///// Properties ///////////////////////////////////////////////////////////////////////////////////    
+    
+	public bool HasCoolDown => cooldown > 0;
+	public int Cooldown => cooldown;
+
+	///// Unity Functions ////////////////////////////////////////////////////////////////////////////// 	
+	
     private void OnEnable() {
 	    foreach ( var effect in targetedEffects ) {
 		    effect.area.InitFromStringPattern();

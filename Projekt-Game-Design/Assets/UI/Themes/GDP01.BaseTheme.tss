@@ -13,6 +13,8 @@
     --focus-border-color: rgba(0, 0, 255, 1);
     --hover-border-color: #3b3bf1;
     --disabled-border-color: #202020;
+    --cooldown-text-color: #FFFFFF;
+    --cooldown-font-size: 70px;
 
     /* Char Icon */
     --icon-border-color: #FFFFFF;
@@ -25,6 +27,6 @@
 }
 
 .unity-button:focus{
-    background-color: white;
+    /*background-color: white;*/
     color: black;
 }

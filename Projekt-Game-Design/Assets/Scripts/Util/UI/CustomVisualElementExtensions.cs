@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine.UIElements;
 
-namespace GDP01.Util.Util.UI {
+namespace GDP01.Util.UI {
 	public static class CustomVisualElementExtensions {
 		public static void SetStyleDisplayVisibility(this VisualElement element, bool visibility) {
 			element.style.display = visibility ? DisplayStyle.Flex : DisplayStyle.None;
