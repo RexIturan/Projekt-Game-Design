@@ -31,7 +31,7 @@ namespace Characters {
 					// var spawnData = playerDataContainerSo.playerSpawnData[playerSave.plyerSpawnDataId];
 					var obj = Instantiate(type.prefab, playerParent, true);
 					var playerSC = obj.GetComponent<PlayerCharacterSC>();
-					playerSC.playerType = type;
+					playerSC.Type = type;
 					playerSC.InitializeFromSave(playerSave);
 
 					if (playerSC.active)

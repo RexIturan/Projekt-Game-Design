@@ -34,7 +34,7 @@ namespace GDP01.Structure {
 		[Header("Recieve Events On"), SerializeField] private IntEventChannelSO useConnectorEC;
 		
 		
-		public LevelDataSO CurrentLevel => currentLevel;
+		public LevelDataSO CurrentLevel => currentLevel ?? startLevel;
 		public string StartLevelName => startLevel.name;
 
 		public void LoadNextLevel() {
@@ -94,7 +94,7 @@ namespace GDP01.Structure {
 			}
 			
 			var sceneLoadingData = new SceneLoadingData {
-				MainSceneData = level.Scene,
+				MainSceneData = level.GameScene,
 				ActivateOnLoad = true,
 				DontUnload = false
 			};

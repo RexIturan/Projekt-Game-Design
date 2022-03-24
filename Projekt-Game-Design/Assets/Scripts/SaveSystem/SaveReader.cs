@@ -81,10 +81,16 @@ namespace SaveSystem {
 		}
 		
 		private void ReadInventory(Inventory_Save saveInventory, InventorySO inventory) {
-			inventory.playerInventory.Clear();
+			inventory.Claer(saveInventory.size);
+
+			for ( int i = 0; i < saveInventory.size; i++ ) {
+				
+			}
+			
 			foreach (var itemID in saveInventory.itemIds) {
+				inventory.AddItemAt(itemID.id, _itemContainerSo.itemList[itemID.itemID]);
 				//inventory has just indices
-				inventory.playerInventory.Add(_itemContainerSo.itemList[itemID]);    
+				// inventory.InventorySlots.Add(_itemContainerSo.itemList[itemID]);    
 			}
 		}
 		

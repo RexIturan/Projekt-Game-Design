@@ -11,6 +11,7 @@ public class InventorySlot : VisualElement
     public readonly InventorySlotType slotType;
     public int inventoryItemID = -1; // ID within Inventory
 		public ItemSO item;
+		public int slotId;
     
     public InventorySlot()
     {
@@ -28,17 +29,17 @@ public class InventorySlot : VisualElement
 				itemTooltip.Deactivate();
     }
     
-    public InventorySlot(InventorySlotType type) : this()
+    public InventorySlot(InventorySlotType type, int id) : this()
     {
         // clicked += () => Debug.Log("click");
         //InventoryUIController.StartDrag(Mouse.current.position.ReadValue(), this);
+        slotId = id;
         slotType = type;
     }
     
-    public void HoldItem(ItemSO item)
-    {
+    public void HoldItem(ItemSO item) {
 				this.item = item;
-        icon.image = item.icon.texture;
+        icon.image = item?.icon.texture;
         inventoryItemID = item ? item.id : -1;
 				// Debug.Log("Test in HoldItem");
 
@@ -58,6 +59,7 @@ public class InventorySlot : VisualElement
         inventoryItemID = -1;
         icon.image = null;
 				item = null;
+				this.slotId = -1;
 
 			  itemTooltip.Deactivate();
     }

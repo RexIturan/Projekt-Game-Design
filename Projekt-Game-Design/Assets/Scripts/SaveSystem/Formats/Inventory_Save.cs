@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 
 namespace SaveSystem.SaveFormats {
-    [Serializable]
-    public class Inventory_Save {
-        public int size;
-        public List<int> itemIds;
+	[Serializable]
+	public class Inventory_Save {
+		[Serializable]
+		public struct ItemSlot {
+			public int id;
+			public int itemID;
+		}
+		
+		public int size;
+		public List<ItemSlot> itemIds;
 
-        public Inventory_Save() {
-            this.itemIds = new List<int>();
-        }
-    }
+		public Inventory_Save(int size) {
+			this.size = size;
+			this.itemIds = new List<ItemSlot>();
+		}
+	}
 }

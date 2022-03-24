@@ -11,23 +11,64 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventorySO : ScriptableObject, ISaveState<InventorySO.InventoryData> {
 	public struct InventoryData {
-		public List<ItemSO.ItemTypeData> inventory;
+		public int size;
+		public ItemSO.ItemTypeData[] inventory;
 	}
-	
-	public List<ItemSO> playerInventory;
+
+	[SerializeField] private ItemSO[] inventorySlots;
+	public ItemSO[] InventorySlots => inventorySlots;
 	
 ///// Save State ///////////////////////////////////////////////////////////////////////////////////
 	
 	public InventoryData Save() {
 		return new InventoryData {
-			inventory = playerInventory.Select(item => item?.ToData()).ToList(),
+			size = inventorySlots.Length,
+			inventory = inventorySlots.Select(item => item?.ToData()).ToArray(),
 		};
 	}
 
 	public void Load(InventoryData data) {
-		playerInventory.Clear();
+		inventorySlots = new ItemSO[data.size];
 		if ( data.inventory != null ) {
-			playerInventory = new List<ItemSO>(data.inventory.Select(itemData => itemData?.obj));
+			for ( int i = 0; i < data.size; i++ ) {
+				inventorySlots[i] = data.inventory[i]?.obj;
+			}
 		}
+	}
+
+	public void Claer(int size) {
+		inventorySlots = new ItemSO[size];
+	}
+
+	public void AddItemAt(int index, ItemSO item) {
+		inventorySlots[index] = item;
+	}
+
+	public bool AddItem(ItemSO item) {
+		var firstFreeSpace = -1;
+		for ( int i = 0; i < inventorySlots.Length; i++ ) {
+			if ( inventorySlots[i] == null ) {
+				firstFreeSpace = i;
+				break;
+			}
+		}
+
+		if ( firstFreeSpace >= 0 ) {
+			inventorySlots[firstFreeSpace] = item;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public bool Contains(ItemSO item) {
+		return inventorySlots.Contains(item);
+	}
+	
+	public ItemSO RemoveItemAt(int slotId) {
+		var item = inventorySlots[slotId];
+		inventorySlots[slotId] = null;
+		return item;
 	}
 }

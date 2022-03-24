@@ -449,6 +449,7 @@ MonoBehaviour:
   UnequipItemEC: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
   menuOpenedEvent: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
   menuClosedEvent: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
+  moveItemEC: {fileID: 11400000, guid: 3af3f7711d070e643a7a871910e9c9e3, type: 2}
 --- !u!1 &3159855197138855706
 GameObject:
   m_ObjectHideFlags: 0

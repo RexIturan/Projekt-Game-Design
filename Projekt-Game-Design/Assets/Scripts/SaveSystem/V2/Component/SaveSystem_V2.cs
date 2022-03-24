@@ -10,9 +10,9 @@ namespace SaveSystem.V2.Component {
 	
 	public class SaveSystem_V2 : MonoBehaviour {
 
-		private const string directory = "save_data";
-		private const string mvpBase = "mvp";
-		private const string mvpSave = "mvp_save";
+		[SerializeField] private string directory = "save_data";
+		[SerializeField] private string startLoading = "mvp";
+		[SerializeField] private string startSave = "mvp_save";
 		
 		//todo remove
 		private const string testSave = "FullSerializerTest";
@@ -24,14 +24,18 @@ namespace SaveSystem.V2.Component {
 		
 		private SaveData _saveData = null;
 		private SaveData SaveData {
-			get { return _saveData; }
+			get { return _saveData ??= new SaveData(); }
 			set { _saveData = value; }
 		}
 
 ///// Callbacks ////////////////////////////////////////////////////////////////////////////////////		
 		
 		private void HandleSceneLoaded() {
-			SaveData?.LoadLevel();
+			//todo(vincent) must laod old levels without breaking
+			if ( _saveData is { } ) {
+				SaveData.LoadLevel();	
+			}
+			
 			// _saveData.Load();
 		}
 		
@@ -54,7 +58,7 @@ namespace SaveSystem.V2.Component {
 		
 		[ContextMenu("Load")]
 		public void Load() {
-			string filename = "";
+			string filename = startLoading;
 			string dir = "test";
 
 			if ( FileManager.FileExists(filename, dir) ) {
@@ -78,7 +82,7 @@ namespace SaveSystem.V2.Component {
 			SaveData.Save();
 			
 			string json = StringSerializationAPI.Serialize(typeof(SaveData), SaveData);
-			FileManager.WriteToFile(json, mvpSave, true, directory);
+			FileManager.WriteToFile(json, startSave, true, directory);
 		}
 		
 ///// Unity Functions		

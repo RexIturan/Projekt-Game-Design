@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace WorldObjects {
 	public partial class WorldObjectManager {
+		[Header("Item Data")]
 		[SerializeField] private ItemSO defaultItemSO;
 		[SerializeField] private Transform itemParent;
 		[SerializeField] private List<ItemComponent> _itemComponents;

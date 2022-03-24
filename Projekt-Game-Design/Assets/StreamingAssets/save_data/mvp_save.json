@@ -1,30 +1,337 @@
 {
     "GameData": {
         "LocationData": {
-            "Name": "Level-B"
+            "Name": "MVP-1"
         },
-        "PlayerCharacters": null,
+        "PlayerCharacters": [
+            {
+                "Id": 0,
+                "Name": "No-Name",
+                "Active": true,
+                "GridPosition": {
+                    "x": 7,
+                    "y": 1,
+                    "z": 28
+                },
+                "Type": {
+                    "Name": "DefaultPlayerType",
+                    "Guid": "5d339fb430d10f341bd2896617aec0a2",
+                    "$type": "PlayerTypeSO",
+                    "$id": "5"
+                },
+                "StatsOverride": {
+                    "Energy": {
+                        "Value": 12
+                    }
+                },
+                "Entering": false,
+                "LocationName": "MVP-1"
+            },
+            {
+                "Id": 1,
+                "Name": "No-Name",
+                "Active": false,
+                "GridPosition": {
+                    "x": 27,
+                    "y": 1,
+                    "z": 22
+                },
+                "Type": {
+                    "$ref": "5"
+                },
+                "StatsOverride": null,
+                "Entering": false,
+                "LocationName": "MVP-1"
+            }
+        ],
         "EquipmentContainerData": {
-            "equipmentSheets": []
+            "equipmentSheets": [
+                {
+                    "weaponLeft": {
+                        "Name": "w_HealingStaff",
+                        "Guid": "2bb46315d9e79354e9a0f70f15a2f62c"
+                    },
+                    "weaponRight": {
+                        "Name": "w_FireStaff",
+                        "Guid": "a64ffcb2741f33c428e1d99165ba48ec"
+                    },
+                    "headArmor": null,
+                    "bodyArmor": null,
+                    "shield": null
+                },
+                {
+                    "weaponLeft": {
+                        "Name": "w_dagger",
+                        "Guid": "4659d52d798315241a03658f7e537d8e"
+                    },
+                    "weaponRight": {
+                        "Name": "w_dagger",
+                        "Guid": "4659d52d798315241a03658f7e537d8e"
+                    },
+                    "headArmor": null,
+                    "bodyArmor": null,
+                    "shield": null
+                }
+            ]
         },
         "InventoryData": {
-            "inventory": []
+            "size": 28,
+            "inventory": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ]
         }
     },
     "LevelData": {
-        "Level-B": {
-            "Collectabeles": [
+        "MVP-1": {
+            "Collectabeles": null,
+            "EnemyCharacterDatas": [
                 {
-                    "Position": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0
+                    "Id": 0,
+                    "Name": "TrainingDummy-AlwaysSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 31,
+                        "y": 1,
+                        "z": 45
                     },
-                    "Amount": 1,
-                    "Active": false
+                    "Type": {
+                        "Name": "TrainingDummy",
+                        "Guid": "d98026b2cf0e8434eaa9d5a2ae19dba3",
+                        "$type": "EnemyTypeSO",
+                        "$id": "18"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 1,
+                    "Name": "TrainingDummy-AlwaysSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 41,
+                        "y": 1,
+                        "z": 33
+                    },
+                    "Type": {
+                        "$ref": "18"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 2,
+                    "Name": "Enemy_Soldier-DontSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 34,
+                        "y": 1,
+                        "z": 19
+                    },
+                    "Type": {
+                        "Name": "Enemy_Soldier",
+                        "Guid": "c491683a0b68f934db35972bd4517070",
+                        "$type": "EnemyTypeSO",
+                        "$id": "21"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 3,
+                    "Name": "Enemy_Soldier-DontSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 32,
+                        "y": 1,
+                        "z": 7
+                    },
+                    "Type": {
+                        "$ref": "21"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 4,
+                    "Name": "Enemy_Archer-Ranged",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 31,
+                        "y": 1,
+                        "z": 5
+                    },
+                    "Type": {
+                        "Name": "Enemy_Archer",
+                        "Guid": "1e39128114910f6479d38d0413d19eb0",
+                        "$type": "EnemyTypeSO",
+                        "$id": "24"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 5,
+                    "Name": "Enemy_Soldier-DontSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 17,
+                        "y": 1,
+                        "z": 8
+                    },
+                    "Type": {
+                        "$ref": "21"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 6,
+                    "Name": "Enemy_Soldier-DontSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 18,
+                        "y": 1,
+                        "z": 9
+                    },
+                    "Type": {
+                        "$ref": "21"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 7,
+                    "Name": "Enemy_Archer-Ranged",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 16,
+                        "y": 1,
+                        "z": 14
+                    },
+                    "Type": {
+                        "$ref": "24"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 8,
+                    "Name": "TrainingDummy-AlwaysSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 41,
+                        "y": 1,
+                        "z": 33
+                    },
+                    "Type": {
+                        "$ref": "18"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 9,
+                    "Name": "Enemy_Soldier-DontSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 34,
+                        "y": 1,
+                        "z": 19
+                    },
+                    "Type": {
+                        "$ref": "21"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 10,
+                    "Name": "Enemy_Soldier-DontSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 32,
+                        "y": 1,
+                        "z": 7
+                    },
+                    "Type": {
+                        "$ref": "21"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 11,
+                    "Name": "Enemy_Archer-Ranged",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 31,
+                        "y": 1,
+                        "z": 5
+                    },
+                    "Type": {
+                        "$ref": "24"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 12,
+                    "Name": "Enemy_Soldier-DontSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 17,
+                        "y": 1,
+                        "z": 8
+                    },
+                    "Type": {
+                        "$ref": "21"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 13,
+                    "Name": "Enemy_Soldier-DontSkip",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 18,
+                        "y": 1,
+                        "z": 9
+                    },
+                    "Type": {
+                        "$ref": "21"
+                    },
+                    "StatsOverride": null
+                },
+                {
+                    "Id": 14,
+                    "Name": "Enemy_Archer-Ranged",
+                    "Active": true,
+                    "GridPosition": {
+                        "x": 16,
+                        "y": 1,
+                        "z": 14
+                    },
+                    "Type": {
+                        "$ref": "24"
+                    },
+                    "StatsOverride": null
                 }
             ],
-            "EnemyCharacterDatas": [],
             "Doors": [],
             "Switches": [],
             "Items": []

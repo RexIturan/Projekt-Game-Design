@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1429793941084580079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117a02b62d2446808efad8590e520900, type: 3}
+  m_Name: MVP-1_Connector_SO_0
+  m_EditorClassIdentifier: 
+  connectorName: 
+  id: 0
+  levelData: {fileID: 11400000}
+  gridPos: {x: 0, y: 0, z: 0}
+  range: {x: 0, y: 0, z: 0}
+  triggerPositions: []
+  type: 0
+  target: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92f955366c64bb4985ed2263c8521c2, type: 3}
+  m_Name: MVP-1
+  m_EditorClassIdentifier: 
+  levelName: MVP-1
+  scene: {fileID: 11400000, guid: b3bf5902193f4314086cff3ee8f1c203, type: 2}
+  type: 0
+  gridContainerSO: {fileID: 11400000, guid: cf77658e9fdf6c24193f76cce7d45bff, type: 2}
+  gridDataSO: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  mesh: {fileID: 4300000, guid: 40913f80debda2c4a9f666483bc27daf, type: 2}
+  connectors:
+  - {fileID: -1429793941084580079}

@@ -5,6 +5,7 @@ using Util.Extensions;
 
 namespace WorldObjects {
 	public partial class WorldObjectManager {
+		[Header("Door Data")]
 		[SerializeField] private DoorTypeSO defaultDoorTypeSO;
 		[SerializeField] private Transform doorParent;
 		[SerializeField] private List<Door> _doorComponents;

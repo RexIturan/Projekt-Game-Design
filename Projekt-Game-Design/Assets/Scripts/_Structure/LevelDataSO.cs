@@ -13,7 +13,7 @@ namespace GDP01.Structure {
 	[CreateAssetMenu(fileName = "LevelData", menuName = "Level/Level Data", order = 0)]
 	public class LevelDataSO : ScriptableObject {
 		[SerializeField] private string levelName;
-		[SerializeField] private GameSceneSO scene;
+		[SerializeField] private GameSceneSO gameScene;
 		[SerializeField] private ELevelType type;
 		
 		//todo unify below
@@ -27,7 +27,7 @@ namespace GDP01.Structure {
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
 		#region Properties
 
-		public GameSceneSO Scene => scene;
+		public GameSceneSO GameScene => gameScene;
 		public List<LevelConnectorSO> Connectors => connectors;
 
 		#endregion
@@ -41,7 +41,7 @@ namespace GDP01.Structure {
 
 			LevelConnectorSO connector = ScriptableObject.CreateInstance<LevelConnectorSO>();
 			connector.LevelData = this;
-			connector.name = "Connector_SO_" + connectors.Count;
+			connector.name = this.name + "_Connector_SO_" + connectors.Count;
 			connector.Id = connectors.Count;
 			connectors.Add(connector);
 			

@@ -35,10 +35,6 @@ namespace GDP01._Gameplay.World.Character.Components {
 		[SerializeField] protected MovementController _movementController;
 		[SerializeField] protected HealthbarController _healthbarController;
 
-		
-
-		
-		
 ///// SaveState ////////////////////////////////////////////////////////////////////////////////////		
 		
 		public virtual D Save() {

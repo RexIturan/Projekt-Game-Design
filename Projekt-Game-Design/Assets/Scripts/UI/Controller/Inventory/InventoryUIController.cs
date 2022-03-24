@@ -4,11 +4,13 @@ using System.Linq;
 using Characters;
 using Characters.Equipment.ScriptableObjects;
 using Events.ScriptableObjects;
+using GDP01._Gameplay.Logic_Data.Inventory.EventChannels;
 using GDP01.Characters.Component;
 using UI.Components.Character;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using static GDP01._Gameplay.Logic_Data.Inventory.Types.InventoryTarget;
 
 public class InventoryUIController : MonoBehaviour {
 	
@@ -17,6 +19,8 @@ public class InventoryUIController : MonoBehaviour {
 
 	[SerializeField] private InventorySO inventory;
 	[SerializeField] private EquipmentContainerSO equipmentContainer;
+	
+	//todo set inventory size in inventory manager or invetory so
 	[SerializeField] private int inventoryItemQuantity = 28;
 
 	[Header("Receiving Events On")]
@@ -39,6 +43,7 @@ public class InventoryUIController : MonoBehaviour {
 	[SerializeField] private UnequipItemEC_SO UnequipItemEC;
 	[SerializeField] private VoidEventChannelSO menuOpenedEvent;
 	[SerializeField] private VoidEventChannelSO menuClosedEvent;
+	[SerializeField] private MoveItemEventChannel moveItemEC; 
 
 	// public ItemContainerSO itemContainer;
 
@@ -78,7 +83,7 @@ public class InventoryUIController : MonoBehaviour {
 		//Create InventorySlots and add them as children to the SlotContainer
 		for ( int i = 0; i < inventoryItemQuantity; i++ ) {
 			InventorySlot item =
-				new InventorySlot(InventorySlot.InventorySlotType.NormalInventory);
+				new InventorySlot(InventorySlot.InventorySlotType.NormalInventory, i);
 
 			inventoryItems.Add(item);
 
@@ -129,10 +134,10 @@ public class InventoryUIController : MonoBehaviour {
 		CleanAllItemSlots();
 
 		int slotIdx = 0;
-		for ( int inventoryIdx = 0; inventoryIdx < inventory.playerInventory.Count; inventoryIdx++ ) {
+		for ( int inventoryIdx = 0; inventoryIdx < inventory.InventorySlots.Length; inventoryIdx++ ) {
 			// if item not equipped, display it in ItemSlot Container
 			if ( slotIdx < inventoryItems.Count ) {
-				inventoryItems[slotIdx].HoldItem(inventory.playerInventory[inventoryIdx]);
+				inventoryItems[slotIdx].HoldItem(inventory.InventorySlots[inventoryIdx]);
 				slotIdx++;
 			}
 			else
@@ -330,12 +335,18 @@ public class InventoryUIController : MonoBehaviour {
 
 			ItemSO originalItem = _originalSlot.item;
 			ItemSO targetItem = targetSlot.item;
-						
+
+			int fromID = _originalSlot.slotId;
+			int toID = targetSlot.slotId;
+			int playerID = _currentPlayerSelected;
+			
 			// There are four cases (sorry about the spaghetti code -.- )
 			//	1. both slots are in player inventory: just swap the inventory slots
 			if(_originalSlot.userData == null && targetSlot.userData == null) {
 				targetSlot.HoldItem(originalItem);
 
+				moveItemEC.RaiseEvent(Inventory, fromID, Inventory, toID, playerID);
+				
 				if(targetItem)
 					_originalSlot.HoldItem(targetItem);
 				else
@@ -347,14 +358,15 @@ public class InventoryUIController : MonoBehaviour {
 			//		If not, do nothing. Else if it's possible, swap items
 			//		If target slot wields no item, just unequip original
 			else if (_originalSlot.userData is EquipmentPosition pos && targetSlot.userData == null) {
+				moveItemEC.RaiseEvent(Equipment, ( int )pos, Inventory, toID, playerID);
 				
 				if(!targetItem) { 
-					UnequipItemEC.RaiseEvent(_currentPlayerSelected, pos);
+					// UnequipItemEC.RaiseEvent(_currentPlayerSelected, targetSlot.slotId, pos);
 					targetSlot.HoldItem(originalItem);
 					_originalSlot.DropItem();
 				}
 				else if(targetItem.ValidForPosition(pos)) { 
-					EquipItemEC.RaiseEvent(targetItem.id, _currentPlayerSelected, pos);
+					// EquipItemEC.RaiseEvent(targetItem.id, _currentPlayerSelected, pos);
 					targetSlot.HoldItem(originalItem);
 					_originalSlot.HoldItem(targetItem);
 				}
@@ -370,9 +382,11 @@ public class InventoryUIController : MonoBehaviour {
 			else if (_originalSlot.userData == null && 
 								targetSlot.userData != null && targetSlot.userData is EquipmentPosition) { 
 				EquipmentPosition targetPos = (EquipmentPosition) targetSlot.userData;
+				
+				moveItemEC.RaiseEvent(Inventory, fromID, Equipment, ( int )targetPos, playerID);
 
 				if(originalItem.ValidForPosition(targetPos)) { 
-					EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
+					// EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, _originalSlot.slotId, targetPos);
 					targetSlot.HoldItem(originalItem);
 					
 					if(targetItem)
@@ -390,23 +404,25 @@ public class InventoryUIController : MonoBehaviour {
 			else if (_originalSlot.userData is EquipmentPosition originalPos && 
 			         targetSlot.userData is EquipmentPosition targetPos) {
 				
+				moveItemEC.RaiseEvent(Equipment, ( int )originalPos, Equipment, ( int )targetPos, playerID);
+				
 				if(originalItem.ValidForPosition(targetPos)) { 
 					if(targetItem) { 
 						if(targetItem.ValidForPosition(originalPos)) { 
-							UnequipItemEC.RaiseEvent(_currentPlayerSelected, originalPos);
-							UnequipItemEC.RaiseEvent(_currentPlayerSelected, targetPos);
+							// UnequipItemEC.RaiseEvent(_currentPlayerSelected, originalPos);
+							// UnequipItemEC.RaiseEvent(_currentPlayerSelected, targetPos);
 
-							EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
+							// EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, _originalSlot.slotId, targetPos);
 							targetSlot.HoldItem(originalItem);
 
-							EquipItemEC.RaiseEvent(targetItem.id, _currentPlayerSelected, originalPos);
+							// EquipItemEC.RaiseEvent(targetItem.id, _currentPlayerSelected, targetSlot.slotId, originalPos);
 							_originalSlot.HoldItem(targetItem);
 						}
 						else
 							Debug.LogWarning("Item " + originalItem.id + " is not valid for target slot " + targetPos + "! ");
 					} else {  
-						UnequipItemEC.RaiseEvent(_currentPlayerSelected, originalPos);
-						EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, targetPos);
+						// UnequipItemEC.RaiseEvent(_currentPlayerSelected, originalPos);
+						// EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, _originalSlot.slotId, targetPos);
 						targetSlot.HoldItem(originalItem);
 						
 						_originalSlot.DropItem();

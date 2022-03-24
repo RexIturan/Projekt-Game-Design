@@ -25,7 +25,7 @@ namespace SaveSystem {
 ///// Properties ////////////////////////////////////////////////////////////////////////////////
 		
 		public Save() {
-			inventory = new Inventory_Save();
+			inventory = new Inventory_Save(0);
 			equipmentInventory = new List<Inventory_Save>();
 			quests = new List<Quest_Save>();
 			gridDataSave = new GridData_Save();
@@ -56,7 +56,7 @@ namespace SaveSystem {
 			junks.Clear();
 			tileGrids.Clear();
 			gridDataSave = new GridData_Save();
-			inventory = new Inventory_Save();
+			inventory = new Inventory_Save(0);
 			quests.Clear();
 		}
 	}

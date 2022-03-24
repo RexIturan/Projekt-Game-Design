@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace WorldObjects {
 	public partial class WorldObjectManager {
+		[Header("Switch Data")]
 		[SerializeField] private SwitchTypeSO defaultSwitchTypeSO;
 		[SerializeField] private Transform switchParent;
 		[SerializeField] private List<SwitchComponent> _switchComponents;

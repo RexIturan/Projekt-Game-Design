@@ -357,30 +357,34 @@
 
   ],
   "inventory": {
-    "size": 1,
+    "size": 28,
     "itemIds": [
-      3, 4
+      {
+        "id": 1,
+        "itemID": 4
+      },
+      {
+        "id": 3,
+        "itemID": 5
+      }
     ]
   },
   "equipmentInventory": [
     {
       "size": 5,
-      "itemIds": [
-        -1,
-        -1,
-        -1,
-        -1,
-        -1
-      ]
+      "itemIds": []
     },
     {
       "size": 5,
       "itemIds": [
-        0,
-        0,
-        -1,
-        -1,
-        -1
+        {
+          "id": 0,
+          "itemID": 0
+        },
+        {
+          "id": 1,
+          "itemID": 0
+        }
       ]
     }
   ],

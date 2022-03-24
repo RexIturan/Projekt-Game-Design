@@ -17,7 +17,7 @@ using UnityEngine;
 /// </summary> 
 public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterData> {
 
-	[SerializeField] public PlayerTypeSO playerType;
+	// [SerializeField] public PlayerTypeSO playerType;
 
 	//todo move to some central location
 	[SerializeField, fsIgnore] private Color playerColor;
@@ -35,6 +35,11 @@ public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterDat
 	
 	//todo maybe dont use this here
 	private LevelManager LevelManager => StructureProvider.Current.LevelManager;
+
+	public PlayerTypeSO Type {
+		get { return ( PlayerTypeSO )_type; }
+		set { _type = value;}
+	}
 	
 	//locationAccess
 	public string LocationName {
@@ -64,29 +69,29 @@ public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterDat
 		active = false;
 
 		//stats
-		_statistics.StatusValues.InitValues(playerType.baseStatusValues);
+		_statistics.StatusValues.InitValues(Type.baseStatusValues);
 		_statistics.SetFaction(active ? Faction.Player : Faction.Friendly);
-		_statistics.DisplayImage = playerType.icon;
+		_statistics.DisplayImage = Type.icon;
 
 		//movement Position
-		_movementController.movementPointsPerEnergy = playerType.movementPointsPerEnergy;
-		_movementController.movementCostPerTile = playerType.movementCostPerTile;
+		_movementController.movementPointsPerEnergy = Type.movementPointsPerEnergy;
+		_movementController.movementCostPerTile = Type.movementCostPerTile;
 
 		//Grid Position
 		_gridTransform.gridPosition = Vector3Int.zero;
 
 		//model
-		_modelController.prefab = playerType.modelPrefab;
+		_modelController.prefab = Type.modelPrefab;
 		_modelController.Initialize(null);
-		_modelController.SetStandardHead(playerType.headModel);
-		_modelController.SetStandardBody(playerType.bodyModel);
+		_modelController.SetStandardHead(Type.headModel);
+		_modelController.SetStandardBody(Type.bodyModel);
 		_modelController.SetFactionMaterial(_statistics.Faction);
 
 		//Equipment
 		_equipmentController.EquipmentID = id; // playerSpawnData.equipmentID;
 
 		//Abilities
-		_abilityController.BaseAbilities = playerType.basicAbilities;
+		_abilityController.BaseAbilities = Type.basicAbilities;
 
 		_healthbarController.SetColor(_statistics.Faction == Faction.Player
 			? playerColor
@@ -130,7 +135,6 @@ public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterDat
 		// data.LocationName = StructureProvider.Current.LevelManager
 
 		data.LocationName = _locationName = LevelManager.CurrentLevel.name;
-		
 		
 		return data; 
 	}

@@ -103,7 +103,7 @@ namespace SaveSystem {
 						new PlayerCharacter_Save() {
 							id = playerCharacterSc.id,
 							active = playerCharacterSc.active,
-							plyerTypeId = playerCharacterSc.playerType.id,
+							plyerTypeId = playerCharacterSc.Type.id,
 							pos = pcGridTransform.gridPosition,
 							hitpoints = playerStatistics.StatusValues.HitPoints.Value,
 							energy = playerStatistics.StatusValues.Energy.Value
@@ -204,11 +204,19 @@ namespace SaveSystem {
 		}
 
 		private Inventory_Save GetInventorySaveData(InventorySO inventory) {
-			Inventory_Save inventorySave = new Inventory_Save();
-			inventorySave.size = inventory.playerInventory.Capacity;
-			foreach ( var item in inventory.playerInventory ) {
-				inventorySave.itemIds.Add(item.id);
+			Inventory_Save inventorySave = new Inventory_Save(0);
+			inventorySave.size = inventory.InventorySlots.Length;
+			for ( int i = 0; i < inventorySave.size; i++ ) {
+				if ( inventory.InventorySlots[i] is { } ) {
+					inventorySave.itemIds.Add(new Inventory_Save.ItemSlot{
+						id = i,
+						itemID = inventory.InventorySlots[i].id
+					});
+				}
 			}
+			// foreach ( var item in inventory.InventorySlots ) {
+			// 	inventorySave.itemIds.Add(item.id);
+			// }
 
 			return inventorySave;
 		}
@@ -221,12 +229,21 @@ namespace SaveSystem {
 				if ( equipmentSheet is null )
 					break;
 
-				var equiped = new List<int>();
-				foreach ( var item in equipmentSheet.EquipmentToArray() ) {
-					equiped.Add(item ? item.id : -1);
+				var equiped = new List<Inventory_Save.ItemSlot>();
+				var equipmentArray = equipmentSheet.EquipmentToArray();
+				for ( int i = 0; i < equipmentArray.Length; i++ ) {
+					if ( equipmentArray[i] is { } ) {
+						equiped.Add(new Inventory_Save.ItemSlot {
+							id = i,
+							itemID = equipmentArray[i].id 
+						});	
+					}
 				}
+				// foreach ( var item in equipmentSheet.EquipmentToArray() ) {
+				// 	equiped.Add(new KeyValuePair<int, int>(item ? item.id : -1));
+				// }
 
-				equipmentInventorys.Add(new Inventory_Save() {
+				equipmentInventorys.Add(new Inventory_Save(equipmentArray.Length) {
 					size = equipmentSheet.GetCount(),
 					itemIds = equiped
 				});

@@ -27,8 +27,5 @@ namespace GDP01._Gameplay.Provider {
 
 		private WorldObjectManager _worldObjectManager;
 		public WorldObjectManager WorldObjectManager => TryGetAndCacheComponentOfTypeInActiveScene(ref _worldObjectManager);
-		
-		
-		
 	}
 }

@@ -12,16 +12,31 @@ namespace GDP01.Gameplay.SaveTypes {
 			
 			var dataList = componetDataList;
 
+			HashSet<int> idsUsed = new HashSet<int>();
+
 			foreach ( var component in components ) {
 				D data = component.Save();
 
 				int existingIdx = dataList.FindIndex(d => d.Id == data.Id);
 
-				if ( existingIdx != -1 ) {
-					dataList[existingIdx] = data;
+				//id was already saved
+				if ( idsUsed.Contains(existingIdx) ) {
+					idsUsed.Add(dataList.Count);
+					data.Id = dataList.Count;
+					dataList.Add(data);
 				}
 				else {
-					dataList.Add(data);
+					//id wasnt saved but there is a data block that has to be overridden
+					if ( existingIdx != -1 ) {
+						dataList[existingIdx] = data;
+						idsUsed.Add(existingIdx);
+					}
+					// id wasnt saved and there is not data available
+					else {
+						idsUsed.Add(dataList.Count);
+						data.Id = dataList.Count;
+						dataList.Add(data);
+					}
 				}
 			}
 			return dataList;

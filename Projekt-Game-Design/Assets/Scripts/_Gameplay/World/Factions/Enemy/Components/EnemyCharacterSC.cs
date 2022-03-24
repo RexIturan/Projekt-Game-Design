@@ -10,101 +10,105 @@ using static Characters.Types.Faction;
 /// <summary><c>Enemy State Container</c> Script to attached to each enemy</summary>
 [Serializable]
 public class EnemyCharacterSC : Character<EnemyCharacterSC, EnemyCharacterData> {
-	
-		[Header("Basic Stats")]
-		// Base stats
-		// public EnemyTypeSO enemyType;
-		public EnemyBehaviorSO behavior;
+	[Header("Basic Stats")]
+	// Base stats
+	// public EnemyTypeSO enemyType;
+	public EnemyBehaviorSO behavior;
 
-		[SerializeField] private AIController _aIController;
-		[SerializeField] protected new EnemyTypeSO _type;
+	[SerializeField] private AIController _aIController;
 
-		
-		[Header("Statemachine")]
-		public bool isNextToAct; // it's the enemy character's turn to act (decided by Enemy Controller)
-		public bool isDone; // this enemy character in particular is done
-		public bool isDead; // set when enemy enters the dead state
-		public bool abilitySelected;
-		public bool abilityExecuted;
-		public bool noTargetFound;
-		public bool rangeChecked;
-		
-		
-		//Properties
-		public LootTableSO LootTable { get; set; }
-		public EnemyTypeSO Type { get => _type; set => _type = value; }
-		
 
-		[Obsolete]
-		public void Initialize()
-		{
-				//stats
-				_statistics.SetFaction(Enemy);
-				_statistics.StatusValues.InitValues(_type.baseStatusValues);
+	[Header("Statemachine")]
+	public bool isNextToAct; // it's the enemy character's turn to act (decided by Enemy Controller)
 
-			//movement Position
-			_movementController.movementPointsPerEnergy = _type.movementPointsPerEnergy;
+	public bool isDone; // this enemy character in particular is done
+	public bool isDead; // set when enemy enters the dead state
+	public bool abilitySelected;
+	public bool abilityExecuted;
+	public bool noTargetFound;
+	public bool rangeChecked;
 
-			//Grid Position
-			_gridTransform.gridPosition = Vector3Int.zero;
 
-			// Equipment
-			// maybe later
+	//Properties
+	public LootTableSO LootTable { get; set; }
 
-			//Abilities
-			_abilityController.RefreshAbilities();
-			_abilityController.BaseAbilities = _type.basicAbilities;
-			_abilityController.damageInflicted = true;
+	public EnemyTypeSO Type {
+		get => ( EnemyTypeSO )_type;
+		set => _type = value;
+	}
 
-			//model
-			_modelController.prefab = _type.modelPrefab;
-			_modelController.Initialize(null);
-			_modelController.SetStandardHead(_type.headModel);
-			_modelController.SetStandardBody(_type.bodyModel);
-			_modelController.SetMeshHead(_type.headModel);
-			_modelController.SetMeshBody(_type.bodyModel);
-			if ( _type.weapon != null ) {
-				_modelController.SetMeshRight(_type.weapon.mesh, _type.weapon.material);
-			}
-			else {
-				_modelController.SetMeshRight(null, null);
-			}
-			_modelController.SetMeshLeft(null, null);
-			_modelController.SetFactionMaterial(Enemy);
 
-			//targetable
-			_targetable.Initialise();
-			
-			//ai
-			behavior = _type.behaviour;
-			_aIController.SetBehavior(behavior);
+	[Obsolete]
+	public void Initialize() {
+		//stats
+		_statistics.SetFaction(Enemy);
+		_statistics.StatusValues.InitValues(_type.baseStatusValues);
 
-			LootTable = _type.lootTable;
+		//movement Position
+		_movementController.movementPointsPerEnergy = _type.movementPointsPerEnergy;
+
+		//Grid Position
+		_gridTransform.gridPosition = Vector3Int.zero;
+
+		// Equipment
+		// maybe later
+
+		//Abilities
+		_abilityController.RefreshAbilities();
+		_abilityController.BaseAbilities = _type.basicAbilities;
+		_abilityController.damageInflicted = true;
+
+		//model
+		_modelController.prefab = _type.modelPrefab;
+		_modelController.Initialize(null);
+		_modelController.SetStandardHead(_type.headModel);
+		_modelController.SetStandardBody(_type.bodyModel);
+		_modelController.SetMeshHead(_type.headModel);
+		_modelController.SetMeshBody(_type.bodyModel);
+		if ( Type.weapon != null ) {
+			_modelController.SetMeshRight(Type.weapon.mesh, Type.weapon.material);
 		}
-		
-		[Obsolete]
-		public void InitializeFromSave(Enemy_Save saveData) {
-			Initialize();
-			_statistics.StatusValues.HitPoints.Value = saveData.hitpoints;
-			_statistics.StatusValues.Energy.Value = saveData.energy;
-			_gridTransform.gridPosition = saveData.pos;
+		else {
+			_modelController.SetMeshRight(null, null);
 		}
 
-		public override EnemyCharacterData Save() {
-			var data = base.Save();
+		_modelController.SetMeshLeft(null, null);
+		_modelController.SetFactionMaterial(Enemy);
 
-			data.AiBehaviour = behavior;
-			
-			return data;
-		}
+		//targetable
+		_targetable.Initialise();
 
-		public override void Load(EnemyCharacterData data) {
-			base.Load(data);
+		//ai
+		behavior = Type.behaviour;
+		_aIController.SetBehavior(behavior);
 
-			_statistics.SetFaction(Enemy);
-			
-			//init ai
-			behavior = data.AiBehaviour;
-			_aIController.SetBehavior(behavior);
-		}
+		LootTable = Type.lootTable;
+	}
+
+	[Obsolete]
+	public void InitializeFromSave(Enemy_Save saveData) {
+		Initialize();
+		_statistics.StatusValues.HitPoints.Value = saveData.hitpoints;
+		_statistics.StatusValues.Energy.Value = saveData.energy;
+		_gridTransform.gridPosition = saveData.pos;
+	}
+
+	public override EnemyCharacterData Save() {
+		var data = base.Save();
+		
+		data.Name = Type.name + "-" + behavior.name;
+		data.AiBehaviour = behavior;
+
+		return data;
+	}
+
+	public override void Load(EnemyCharacterData data) {
+		base.Load(data);
+
+		_statistics.SetFaction(Enemy);
+
+		//init ai
+		behavior = data.AiBehaviour;
+		_aIController.SetBehavior(behavior);
+	}
 }

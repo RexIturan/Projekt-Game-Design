@@ -18,9 +18,12 @@ namespace WorldObjects {
 
 				[SerializeField] private SwitchAnimator switchAnimator;
 				
-				[SerializeField] protected new SwitchTypeSO _type;
-				public new SwitchTypeSO Type => _type;
-				
+				// [SerializeField] protected new SwitchTypeSO _type;
+				public new SwitchTypeSO Type {
+					get { return ( SwitchTypeSO )_type; }
+					set { _type = value; }
+				}
+
 				[SerializeField] private SwitchData switchData;
 				
 				public float Range => switchData.range;

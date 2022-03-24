@@ -75,12 +75,21 @@ namespace GDP01.Equipment {
 
 		public void InitialiseFromSave(Inventory_Save equipmentSheetSave,
 			ItemContainerSO _itemContainerSo) {
-			for ( int i = 0; i < equipmentSheetSave.itemIds.Count; i++ ) {
-				int itemId = equipmentSheetSave.itemIds[i];
-				ItemSO item = _itemContainerSo.GetItemFromID(itemId);
-				if ( item ) {
-					EquipItemAt(i, item);	
+			if ( equipmentSheetSave.itemIds is { } ) {
+				foreach ( var itemSlot in equipmentSheetSave.itemIds ) {
+					ItemSO item = _itemContainerSo.GetItemFromID(itemSlot.itemID);
+					if ( item ) {
+						EquipItemAt(itemSlot.id +1, item);	
+					}
 				}
+				//
+				// for ( int i = 0; i < equipmentSheetSave.itemIds.Count; i++ ) {
+				// 	int itemId = equipmentSheetSave.itemIds[i].itemID;
+				// 	ItemSO item = _itemContainerSo.GetItemFromID(itemId);
+				// 	if ( item ) {
+				// 		EquipItemAt(i, item);	
+				// 	}
+				// }	
 			}
 		}
 

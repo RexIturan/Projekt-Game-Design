@@ -10,7 +10,7 @@ namespace QuestSystem.ScriptabelObjects {
 		
 		public override bool IsDone() {
 			if ( active ) {
-				var playerInventory = inventory.playerInventory;
+				var playerInventory = inventory.InventorySlots;
 				done = false;
 				foreach ( var invItem in playerInventory ) {
 					if ( item != null ) {

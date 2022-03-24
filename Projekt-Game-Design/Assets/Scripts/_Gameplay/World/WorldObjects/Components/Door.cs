@@ -172,7 +172,7 @@ namespace WorldObjects
 										foreach ( int keyId in Keys )
 										{
 												bool hasKey = false;
-												foreach ( ItemSO item in inventory.playerInventory )
+												foreach ( ItemSO item in inventory.InventorySlots )
 												{
 														if ( item.id == keyId )
 																hasKey = true;
