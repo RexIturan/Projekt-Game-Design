@@ -632,6 +632,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1912348391730053946, guid: c5d2b4d33bf133349b5cbbfd8a6b8c48, type: 3}
+      propertyPath: gridData
+      value: 
+      objectReference: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
     - target: {fileID: 1912348391730053947, guid: c5d2b4d33bf133349b5cbbfd8a6b8c48, type: 3}
       propertyPath: m_Name
       value: GraphController_01
@@ -1131,10 +1135,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8249263230387100160, guid: fc8468785089d404997c3806015ef3c3, type: 3}
-      propertyPath: moveItemEC
-      value: 
-      objectReference: {fileID: 11400000, guid: 3af3f7711d070e643a7a871910e9c9e3, type: 2}
     - target: {fileID: 8249263230387100161, guid: fc8468785089d404997c3806015ef3c3, type: 3}
       propertyPath: m_RootOrder
       value: 4

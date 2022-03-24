@@ -27,10 +27,9 @@ namespace MeshGenerator {
 		private const int Depth = 1;
 		private const int Width = 2;
 
-		[Header("References")] [SerializeField]
-		private GridDataSO globalGridData;
+		[Header("References")] 
+		[SerializeField] private GridDataSO gridData;
 
-		[SerializeField] private GridContainerSO gridContainer;
 		[SerializeField] private TileTypeContainerSO tileTypeContainer;
 
 ///// Private Variables ////////////////////////////////////////////////////////////////////////////		
@@ -60,7 +59,8 @@ namespace MeshGenerator {
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
 		private Mesh CreateNewMesh() {
-			return MeshCreator.CreateMesh(globalGridData.LevelName);
+			//todo get name from levelmanager 
+			return MeshCreator.CreateMesh(gridData.LevelName);
 		}
 
 		private void GenerateMesh(Vector3Int lowerBounds, Vector3Int dimensions) {
@@ -77,7 +77,7 @@ namespace MeshGenerator {
 					for ( int x = lowerBounds.x; x < dimensions.x; x++ ) {
 						if ( _tileData[y, z, x] == DataTile.Block ) {
 							var intPos = new Vector3Int(x, y, z);
-							var pos = new Vector3(x, y, z) + globalGridData.OriginPosition;
+							var pos = new Vector3(x, y, z) + gridData.OriginPosition;
 
 							if ( !TileInDirection(intPos, Direction.Top, lowerBounds, dimensions) ) {
 								// draw top
@@ -272,15 +272,15 @@ namespace MeshGenerator {
 		/// </summary>
 		public void UpdateTileData() {
 			// setup 3d tile data representation
-			int width = globalGridData.Width;
-			int height = globalGridData.Height;
-			int depth = globalGridData.Depth;
+			int width = gridData.Width;
+			int height = gridData.Height;
+			int depth = gridData.Depth;
 			//todo maybe use [x,y,z] and not [y,z,x]
 			_tileData = new DataTile[height, depth, width];
 
 			// get data from grid container
 			for ( int y = 0; y < height; y++ ) {
-				var grid = gridContainer.tileGrids[y];
+				var grid = gridData.TileGrids[y];
 
 				for ( int z = 0; z < depth; z++ ) {
 					for ( int x = 0; x < width; x++ ) {

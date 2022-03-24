@@ -16,8 +16,7 @@ namespace Graph {
 				public WorldObjectList worldObjectList;
         [SerializeField] private TileTypeContainerSO tileTypeContainer;
         [SerializeField] private GraphContainerSO graphContainer;
-        [SerializeField] private GridContainerSO gridContainer;
-        [SerializeField] private GridDataSO globalGridData;
+        [SerializeField] private GridDataSO gridData;
         
         [Header("Settings")]
         [SerializeField] private bool diagonal;
@@ -36,7 +35,7 @@ namespace Graph {
         
         //TODO make graph for each layer
             var graph = CreateNewGraph(1);
-            GenerateGraph(gridContainer.tileGrids[0], gridContainer.tileGrids[1], graph);
+            GenerateGraph(gridData.TileGrids[0], gridData.TileGrids[1], graph);
             graphContainer.basicMovementGraph.Add(graph);
             
             graphDrawer.DrawGraph();
@@ -64,18 +63,18 @@ namespace Graph {
             // }
             
             foreach (var enemy in characterList.enemyContainer) {
-                var pos = globalGridData.GetGridPos2DFromGridPos3D(enemy.GetComponent<GridTransform>().gridPosition);
+                var pos = gridData.GetGridPos2DFromGridPos3D(enemy.GetComponent<GridTransform>().gridPosition);
                 graph.GetGridObject(pos).SetIsWalkable(false);
 						}
 
 						foreach ( var player in characterList.playerContainer ) {
-								var pos = globalGridData.GetGridPos2DFromGridPos3D(player.GetComponent<GridTransform>().gridPosition);
+								var pos = gridData.GetGridPos2DFromGridPos3D(player.GetComponent<GridTransform>().gridPosition);
 								graph.GetGridObject(pos).SetIsWalkable(false);
 						}
 
 						foreach ( var npc in characterList.friendlyContainer )
 						{
-								var pos = globalGridData.GetGridPos2DFromGridPos3D(npc.GetComponent<GridTransform>().gridPosition);
+								var pos = gridData.GetGridPos2DFromGridPos3D(npc.GetComponent<GridTransform>().gridPosition);
 								graph.GetGridObject(pos).SetIsWalkable(false);
 						}
 
@@ -83,7 +82,7 @@ namespace Graph {
 						{
 								if(!door.GetComponent<Door>().IsOpen)
 								{
-										var pos = globalGridData.GetGridPos2DFromGridPos3D(door.GetComponent<GridTransform>().gridPosition);
+										var pos = gridData.GetGridPos2DFromGridPos3D(door.GetComponent<GridTransform>().gridPosition);
 										graph.GetGridObject(pos).SetIsWalkable(false);
 								}
 						}
@@ -92,7 +91,7 @@ namespace Graph {
 						{
 								if(!switchComponent.GetComponent<SwitchComponent>().Type.walkThrough)
 								{
-										var pos = globalGridData.GetGridPos2DFromGridPos3D(switchComponent.GetComponent<GridTransform>().gridPosition);
+										var pos = gridData.GetGridPos2DFromGridPos3D(switchComponent.GetComponent<GridTransform>().gridPosition);
 										graph.GetGridObject(pos).SetIsWalkable(false);
 								}
 						}
@@ -101,7 +100,7 @@ namespace Graph {
 						{
 								if ( !junk.GetComponent<Junk>().junkType.walkThrough && !junk.GetComponent<Junk>().broken)
 								{
-										var pos = globalGridData.GetGridPos2DFromGridPos3D(junk.GetComponent<GridTransform>().gridPosition);
+										var pos = gridData.GetGridPos2DFromGridPos3D(junk.GetComponent<GridTransform>().gridPosition);
 										graph.GetGridObject(pos).SetIsWalkable(false);
 								}
 						}
@@ -115,11 +114,11 @@ namespace Graph {
         
         public NodeGraph CreateNewGraph(int height) {
             NodeGraph graph = new NodeGraph(
-                width: globalGridData.Width,
+                width: gridData.Width,
                 height: height,
-                depth: globalGridData.Depth,
-                cellSize: globalGridData.CellSize,
-                originPosition: globalGridData.OriginPosition);
+                depth: gridData.Depth,
+                cellSize: gridData.CellSize,
+                originPosition: gridData.OriginPosition);
             return graph;
         }
     }

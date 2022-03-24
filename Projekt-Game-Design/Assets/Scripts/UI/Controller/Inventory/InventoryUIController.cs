@@ -358,14 +358,16 @@ public class InventoryUIController : MonoBehaviour {
 			//		If not, do nothing. Else if it's possible, swap items
 			//		If target slot wields no item, just unequip original
 			else if (_originalSlot.userData is EquipmentPosition pos && targetSlot.userData == null) {
-				moveItemEC.RaiseEvent(Equipment, ( int )pos, Inventory, toID, playerID);
-				
-				if(!targetItemType) { 
+				//Unequip
+				if(!targetItemType) {
+					moveItemEC.RaiseEvent(Equipment, ( int )pos, Inventory, toID, playerID);
 					// UnequipItemEC.RaiseEvent(_currentPlayerSelected, targetSlot.slotId, pos);
 					targetSlot.HoldItem(originalItemType);
 					_originalSlot.DropItem();
 				}
 				else if(targetItemType.ValidForPosition(pos)) { 
+					moveItemEC.RaiseEvent(Equipment, ( int )pos, Inventory, toID, playerID);
+					
 					// EquipItemEC.RaiseEvent(targetItem.id, _currentPlayerSelected, pos);
 					targetSlot.HoldItem(originalItemType);
 					_originalSlot.HoldItem(targetItemType);
@@ -379,13 +381,11 @@ public class InventoryUIController : MonoBehaviour {
 			//	3. original slot is in player inventory, target is equipment:
 			//		If original item is not valid for equipment slot, do nothing
 			//		Else, equip original item. Unequip target item if necessary
-			else if (_originalSlot.userData == null && 
-								targetSlot.userData != null && targetSlot.userData is EquipmentPosition) { 
-				EquipmentPosition targetPos = (EquipmentPosition) targetSlot.userData;
+			else if (_originalSlot.userData == null && targetSlot.userData is EquipmentPosition targetSlotEquipmentPos) {
 				
-				moveItemEC.RaiseEvent(Inventory, fromID, Equipment, ( int )targetPos, playerID);
-
-				if(originalItemType.ValidForPosition(targetPos)) { 
+				if(originalItemType.ValidForPosition(targetSlotEquipmentPos)) {
+					moveItemEC.RaiseEvent(Inventory, fromID, Equipment, ( int )targetSlotEquipmentPos, playerID);
+					
 					// EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, _originalSlot.slotId, targetPos);
 					targetSlot.HoldItem(originalItemType);
 					
@@ -395,7 +395,7 @@ public class InventoryUIController : MonoBehaviour {
 						_originalSlot.DropItem();
 				}
 				else
-					Debug.LogWarning("Item " + originalItemType.id + " is not valid for target slot " + targetPos + "! ");
+					Debug.LogWarning("Item " + originalItemType.id + " is not valid for target slot " + targetSlotEquipmentPos + "! ");
 			}
 			
 			//	4. original and target slots are equipment:
@@ -535,7 +535,6 @@ public class InventoryUIController : MonoBehaviour {
 
 		characterList = CharacterList.FindInstant();
 
-		// BUG adakdlkah?
 		if ( characterList?.playerContainer?.Count > 0 ) {
 			_selectedPlayerStatistics = characterList.playerContainer[0]?.GetComponent<Statistics>();
 		}

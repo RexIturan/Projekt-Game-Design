@@ -86,7 +86,7 @@ namespace WorldObjects {
 				if(!_worldObjects)
 					Debug.LogError("Could not find Grid Controller. ");
 				else { 
-					pickupEC.RaiseEvent(this.Id);
+					pickupEC.RaiseEvent(this.Type.id);
 					_worldObjects.items.Remove(this.gameObject);
 					Destroy(gameObject);
 				}

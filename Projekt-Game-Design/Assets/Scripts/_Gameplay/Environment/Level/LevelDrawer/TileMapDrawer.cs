@@ -13,8 +13,9 @@ namespace Visual {
         }
 
         [Header("References")]
-        [SerializeField] private GridContainerSO gridContainer;
-        [SerializeField] private GridDataSO globalGridData;
+        // [SerializeField] private GridContainerSO gridContainer;
+        // [SerializeField] private GridDataSO globalGridData;
+        [SerializeField] private GridDataSO gridData;
         [SerializeField] private TileTypeContainerSO tileTypeContainer;
         
         [Header("Visuals")]
@@ -40,9 +41,9 @@ namespace Visual {
         public void DrawGridLayout() {
 	        bottomTilemap.ClearAllTiles();
 
-	        var width = globalGridData.Width;
-	        var depth = globalGridData.Depth;
-	        var offset = globalGridData.GetLowerBounds();
+	        var width = gridData.Width;
+	        var depth = gridData.Depth;
+	        var offset = gridData.GetLowerBounds();
 	        
 	        for ( int x = 0; x < width; x++ ) {
 		        for ( int z = 0; z < depth; z++ ) {
@@ -56,8 +57,8 @@ namespace Visual {
                 tilemap.ClearAllTiles();    
             }
 
-            for (int l = 0; l < globalGridData.Height; l++) {
-                var tileGrid = gridContainer.tileGrids[l];
+            for (int l = 0; l < gridData.Height; l++) {
+                var tileGrid = gridData.TileGrids[l];
                 for (int x = 0; x < tileGrid.Width; x++) {
                     for (int y = 0; y < tileGrid.Depth; y++) {
                         var tile = tileGrid.GetGridObject(x, y);

@@ -6,7 +6,7 @@ namespace FieldOfView
 {
     public class FieldOfView
     {
-        private readonly GridContainerSO _grid;
+        private readonly GridDataSO _grid;
         private readonly TileTypeContainerSO _tileTypeContainer;
 
         // debug
@@ -14,7 +14,7 @@ namespace FieldOfView
         private readonly int _visionRangeTest;
         private readonly Vector2Int _startPosTest;
 
-        public FieldOfView(GridContainerSO grid, TileTypeContainerSO tileTypeContainer, bool debug = false, int visionRangeTest = 0, Vector2Int startPosTest = default) {
+        public FieldOfView(GridDataSO grid, TileTypeContainerSO tileTypeContainer, bool debug = false, int visionRangeTest = 0, Vector2Int startPosTest = default) {
             this._grid = grid;
             this._tileTypeContainer = tileTypeContainer;
             
@@ -28,8 +28,8 @@ namespace FieldOfView
         {
             bool[,] visibleTiles = new bool[2*visionRange+1, 2*visionRange+1];
             
-            int maxWidth = _grid.tileGrids[1].Width;
-            int maxHeight = _grid.tileGrids[1].Depth;
+            int maxWidth = _grid.TileGrids[1].Width;
+            int maxHeight = _grid.TileGrids[1].Depth;
 
             int lowerX = Mathf.Max(0, startTile[0] - visionRange);
             int upperX = Mathf.Min(maxWidth, startTile[0] + visionRange);
@@ -54,7 +54,7 @@ namespace FieldOfView
                 {
                     for (int j = lowerY; j < upperY; j++)
                     {
-                        int tileType = _grid.tileGrids[1].GetGridObject(i, j).tileTypeID;
+                        int tileType = _grid.TileGrids[1].GetGridObject(i, j).tileTypeID;
                         if (_tileTypeContainer.tileTypes[tileType].properties.HasFlag(blocking))
                         {
                             str += "|b";
@@ -94,7 +94,7 @@ namespace FieldOfView
                 
                 if (x0==x1 && y0==y1) return true;
                 
-                var tileType = _grid.tileGrids[1].GetGridObject(x0, y0).tileTypeID;
+                var tileType = _grid.TileGrids[1].GetGridObject(x0, y0).tileTypeID;
                 if (_tileTypeContainer.tileTypes[tileType].properties.HasFlag(blocking))
                 {
                     return false;

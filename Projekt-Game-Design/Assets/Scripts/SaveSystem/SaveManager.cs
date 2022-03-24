@@ -26,8 +26,7 @@ namespace SaveSystem {
 		private VoidEventChannelSO levelLoaded;
 
 		[Header("Data References")] 
-		[SerializeField] private GridContainerSO gridContainer;
-		[SerializeField] private GridDataSO globalGridData;
+		[SerializeField] private GridDataSO gridData;
 		public CharacterList characterList;
 		public InventorySO inventory;
 		public QuestContainerSO questContainer;
@@ -66,7 +65,7 @@ namespace SaveSystem {
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
 
 		public SaveReader SaveReader => _saveReader ??= new SaveReader(
-			gridContainer, globalGridData, inventory, questContainer, itemTypeContainerSO, equipmentContainer);
+			gridData, inventory, questContainer, itemTypeContainerSO, equipmentContainer);
 		
 //////////////////////////////////////// Local Functions ///////////////////////////////////////////
 
@@ -104,10 +103,10 @@ namespace SaveSystem {
 
 		private void Start() {
 			// setup save Writer
-			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, equipmentContainer, questContainer);
+			_saveWriter = new SaveWriter(gridData, inventory, equipmentContainer, questContainer);
 
 			// setup save Reader
-			_saveReader = new SaveReader(gridContainer, globalGridData, inventory, questContainer, itemTypeContainerSO, equipmentContainer);
+			_saveReader = new SaveReader(gridData, inventory, questContainer, itemTypeContainerSO, equipmentContainer);
 		}
 
 		#endregion

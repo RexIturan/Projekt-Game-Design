@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8392dfd75ca104a4497b102d99936a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemContainer: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
+  itemTypeContainer: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
   equipmentContainer: {fileID: 11400000, guid: 06f235e350237cc41b1711487af77bbe, type: 2}
+  moveItemEC: {fileID: 11400000, guid: 3af3f7711d070e643a7a871910e9c9e3, type: 2}
   equipItemEC: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
   unequipItemEC: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
   pickupEC: {fileID: 11400000, guid: c850df41d4dbc034b881094411eeae9d, type: 2}

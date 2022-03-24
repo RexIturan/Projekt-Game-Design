@@ -1,4 +1,6 @@
-﻿using SaveSystem.SaveFormats;
+﻿using System.Collections.Generic;
+using SaveSystem.SaveFormats;
+using UnityEditor;
 using UnityEngine;
 using Util.Extensions;
 
@@ -20,6 +22,77 @@ namespace Grid {
 		[SerializeField] private Vector3 originPosition;
 		[SerializeField] private Vector3 _cellCenter;
 
+		
+		private List<TileGrid> tileGrids = new List<TileGrid>();
+		public List<TileGrid> TileGrids => tileGrids;
+
+		public void InitGrids(GridDataSO gridData) {
+			var layerNum = gridData.Height;
+
+			tileGrids = new List<TileGrid>();
+
+			for ( int i = 0; i < layerNum; i++ ) {
+				tileGrids.Add(CreateNewTileGrid(gridData));
+			}
+		}
+
+		#region Copy
+
+		public GridDataSO Copy() {
+			var newGridData = ScriptableObject.CreateInstance<GridDataSO>();
+
+#if UNITY_EDITOR
+			// AssetDatabase.CreateAsset(newGridData, "Assets/newGridData.asset");
+#endif
+			
+			newGridData.InitGrids(this);
+			newGridData.InitValues(this);
+			
+			newGridData.InitValues(this);
+			newGridData.InitGrids(this);
+			for ( int i = 0; i < TileGrids.Count; i++ ) {
+				TileGrids[i].CopyTo(newGridData.TileGrids[i], Vector2Int.zero);
+			}
+
+			return newGridData;
+		}
+		
+		public void CopyAllGrids(Vector2Int originOffset, GridDataSO gridData) {
+			CopyTileGrid(originOffset, gridData);
+		}
+
+		private void CopyTileGrid(Vector2Int originOffset, GridDataSO gridData) {
+			var oldTileGrids = tileGrids;
+			for ( int i = 0; i < tileGrids.Count; i++ ) {
+				TileGrid newTileGrid = CreateNewTileGrid(gridData);
+
+				// if ( i == 0 ) {
+				//  FillTileGrid(newTileGrid, tileTypesContainer.tileTypes[1].id);
+				// }
+				// else {
+				//  FillTileGrid(newTileGrid, tileTypesContainer.tileTypes[0].id);
+				// }
+
+				oldTileGrids[i].CopyTo(newTileGrid, originOffset * -1);
+				tileGrids[i] = newTileGrid;
+			}
+		}
+
+		#endregion
+
+		#region Create New
+
+		private TileGrid CreateNewTileGrid(GridDataSO gridData) {
+			return new TileGrid(
+				gridData.Width,
+				gridData.Depth,
+				gridData.CellSize,
+				gridData.OriginPosition
+			);
+		}
+
+		#endregion
+		
 		#region Setter / Getter
 
 		public string LevelName => levelName;
@@ -36,6 +109,7 @@ namespace Grid {
 		#endregion
 
 		public void InitValues(GridDataSO newData) {
+			levelName = newData.LevelName;
 			width = newData.Width;
 			height = newData.Height;
 			depth = newData.Depth;
@@ -272,5 +346,19 @@ namespace Grid {
 
 		#endregion
 
+		#if UNITY_EDITOR
+		#endif
+		
+		[ContextMenu("Save GridData As new Asset")]
+		public void SaveGridDataAs() {
+			//clone	
+			var newGridData = Copy();
+			newGridData.name = LevelName;
+			
+#if UNITY_EDITOR
+			AssetDatabase.CreateAsset(newGridData, "Assets/testGridData_2.asset");
+			// AssetDatabase.SaveAssets();
+#endif
+		}
 	}
 }

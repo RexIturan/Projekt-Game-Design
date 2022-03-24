@@ -11,7 +11,6 @@ using Util;
 
 namespace FieldOfView {
     public class FieldOfViewController : MonoBehaviour {
-        [SerializeField] private GridContainerSO grid;
         [SerializeField] private TileTypeContainerSO tileTypeContainer;
         [SerializeField] private bool debug;
         // [SerializeField] private int visionRangeTest;
@@ -54,7 +53,7 @@ namespace FieldOfView {
         }
 
         private FieldOfView InitFieldOfView() {
-            return new FieldOfView(grid, tileTypeContainer, debug);
+            return new FieldOfView(gridData, tileTypeContainer, debug);
         }
 
         private void HandleQueryEvent(Vector3Int startPos, int range, TileProperties blocking, Action<bool[,]> callback) {
@@ -196,7 +195,7 @@ namespace FieldOfView {
             bool blocksLight = true;
 
             if (gridData.IsIn2DGridBounds(x, y)) {
-                var type = grid.tileGrids[1].GetGridObject(x, y).tileTypeID;
+                var type = gridData.TileGrids[1].GetGridObject(x, y).tileTypeID;
                 var flags = tileTypeContainer.tileTypes[type].properties;
                 blocksLight = flags.HasFlag(flag: blocker);
             }

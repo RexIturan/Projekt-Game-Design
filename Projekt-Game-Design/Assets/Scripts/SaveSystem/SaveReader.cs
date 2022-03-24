@@ -15,7 +15,6 @@ namespace SaveSystem {
 //////////////////////////////////// Local Variables ///////////////////////////////////////////////
 
 		// grid
-		private readonly GridContainerSO _gridContaier;
 		private readonly GridDataSO _gridData;
 
 		// inventorys
@@ -48,8 +47,8 @@ namespace SaveSystem {
 		/// </summary>
 		/// <param name="saveGridSave"></param>
 		/// <param name="gridContaier"></param>
-		private void ReadGrid(Save save, GridDataSO gridData, GridContainerSO gridContaier) {
-			gridContaier.InitGrids(gridData);
+		private void ReadGrid(Save save, GridDataSO gridData) {
+			gridData.InitGrids(gridData);
 			
 			var saveTileGridSave = save.tileGrids;
 			// var saveItemGridSave = save.itemGrids;
@@ -59,9 +58,9 @@ namespace SaveSystem {
 			var layers = gridData.Height;
 
 			if ( saveTileGridSave.Count == layers ) {
-				gridContaier.tileGrids.Clear();
+				gridData.TileGrids.Clear();
 				//init tile grid
-				gridContaier.tileGrids.AddRange(saveTileGridSave);	
+				gridData.TileGrids.AddRange(saveTileGridSave);	
 			}
 			
 			// if (saveItemGridSave.Count == layers && 
@@ -130,14 +129,12 @@ namespace SaveSystem {
 		#region Public Functions
 
 		public SaveReader(
-			GridContainerSO gridContaier, 
 			GridDataSO gridData,
 			InventorySO inventory,
 			QuestContainerSO questContainer,
 			ItemTypeContainerSO itemTypeContainerSO,
 			EquipmentContainerSO equipmentContainer) {
 			
-			_gridContaier = gridContaier;
 			_gridData = gridData;
 			_inventory = inventory;
 			_equipmentContainer = equipmentContainer;
@@ -154,7 +151,7 @@ namespace SaveSystem {
 		public void ReadSave(Save save) {
 			
 			ReadGridData(save, _gridData);
-			ReadGrid(save, _gridData, _gridContaier);
+			ReadGrid(save, _gridData);
 
 			// ReadCharacter(save.players, save.enemies);
 			_characterInitializer.Initialise(save.players, save.enemies);

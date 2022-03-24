@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Grid;
-using Level.Grid.ItemGrid;
+﻿using Grid;
 using UnityEngine;
 using WorldObjects;
 
@@ -11,7 +9,6 @@ namespace Visual {
         
         //new
         [SerializeField] private GridDataSO gridData;
-        [SerializeField] private GridContainerSO gridContainer;
         [SerializeField] private ItemTypeContainerSO itemTypeDictionary;
         
         //item

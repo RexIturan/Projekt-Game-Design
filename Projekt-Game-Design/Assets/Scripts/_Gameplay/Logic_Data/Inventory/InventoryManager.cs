@@ -37,8 +37,12 @@ public class InventoryManager : MonoBehaviour {
 	}
 
 	private void Pickup(int itemID) {
-		if(itemID >= 0)
-			inventory.AddItem(itemTypeContainer.itemList[itemID]);
+		var item = itemTypeContainer.GetItemFromID(itemID);
+			
+		if(item is {})
+			inventory.AddItem(item);
+		
+		Debug.Log($"InventoryManager\nPick up Item: {item} with id {itemID}");
 	}
 
 	private void MoveItem(InventoryTarget fromTarget, int fromID, InventoryTarget ToTarget, int toID, int equipmentId) {
@@ -76,11 +80,16 @@ public class InventoryManager : MonoBehaviour {
 	}
 
 	private void SwapItemsInIventory(int fromID, int toID) {
-		var fromItem = inventory.InventorySlots[fromID];
-		var toItem = inventory.InventorySlots[toID];
+		if ( inventory.IsSlotIdValid(fromID) && inventory.IsSlotIdValid(toID) ) {
+			var fromItem = inventory.InventorySlots[fromID];
+			var toItem = inventory.InventorySlots[toID];
 
-		inventory.InventorySlots[fromID] = toItem;
-		inventory.InventorySlots[toID] = fromItem;
+			inventory.InventorySlots[fromID] = toItem;
+			inventory.InventorySlots[toID] = fromItem;
+		}
+		else {
+			Debug.LogError($"SwapItems failed with with inventoryID: from:{fromID} and to:{toID}");
+		}
 	}
 	
 	private void SwapEquipment(int equipmentId, EquipmentPosition fromPos, EquipmentPosition toPos) {
@@ -92,31 +101,46 @@ public class InventoryManager : MonoBehaviour {
 	}
 	
 	private void UnequipItem(int equipmentId, EquipmentPosition pos, int toId) {
-		// remove item from equipment inventory
-		ItemTypeSO fromItemType = equipmentContainer.UnequipItemFor(equipmentId, pos);
-		
-		inventory.AddItemAt(toId, fromItemType);
+		if ( inventory.IsSlotIdValid(toId) ) {
+			// remove item from equipment inventory
+			ItemTypeSO fromItemType = equipmentContainer.UnequipItemFor(equipmentId, pos);
 
-		Debug.Log($"Unequip Item: {fromItemType} at {pos}");
+			var inventoryItem = inventory.RemoveItemAt(toId);
+			
+			inventory.AddItemAt(toId, fromItemType);
+			
+			if ( inventoryItem is {} ) {
+				equipmentContainer.SetItemInEquipment(equipmentId, pos, inventoryItem);
+			}
+
+			Debug.Log($"Unequip Item: {fromItemType} at {pos}");
 		
-		RefreshAllEquipments();
+			RefreshAllEquipments();	
+		}
+		else {
+			Debug.LogError($"UnequipItem failed with inventoryID to:{toId}");
+		}
 	}
 
 	private void EquipItem( int equipmentId, int inventorySlot, EquipmentPosition pos) {
-		var item = inventory.RemoveItemAt(inventorySlot);
+		if ( inventory.IsSlotIdValid(inventorySlot) ) {
+			var item = inventory.RemoveItemAt(inventorySlot);
 
-		ItemTypeSO equippedItemType = equipmentContainer.SetItemInEquipment(equipmentId, pos, item);
+			ItemTypeSO equippedItemType = equipmentContainer.SetItemInEquipment(equipmentId, pos, item);
 			
-		if(equippedItemType is {}) { 
-			Debug.LogError("Couldnt Equip Item");
-			Debug.Log("Item position was already occupied. Putting item back to player inventory. ");
-			// inventory.playerInventory.Add(equippedItem);
-			inventory.AddItemAt(inventorySlot, item);
+			if(equippedItemType is {}) { 
+				Debug.Log($"Swap Equiped Item {equippedItemType} with InventoryItem {item}");
+				// inventory.playerInventory.Add(equippedItem);
+				inventory.AddItemAt(inventorySlot, equippedItemType);
+			}
+
+			Debug.Log($"Equip Item: {item} At: {pos}");
+			
+			RefreshAllEquipments();
 		}
-
-		Debug.Log($"Equip Item: {item} At: {pos}");
-			
-		RefreshAllEquipments();
+		else {
+			Debug.LogError($"EquipItem failed with inventoryID to:{inventorySlot}");
+		}
 	}
 
 	private void RefreshAllEquipments() {

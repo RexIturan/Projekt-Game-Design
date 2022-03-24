@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: EquipmentContainerSO
   m_EditorClassIdentifier: 
   equipmentSheets:
-  - weaponLeft: {fileID: 11400000, guid: 2bb46315d9e79354e9a0f70f15a2f62c, type: 2}
-    weaponRight: {fileID: 11400000, guid: a64ffcb2741f33c428e1d99165ba48ec, type: 2}
-    headArmor: {fileID: 0}
-    bodyArmor: {fileID: 0}
-    shield: {fileID: 0}
-  - weaponLeft: {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
-    weaponRight: {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
-    headArmor: {fileID: 0}
-    bodyArmor: {fileID: 0}
-    shield: {fileID: 0}
+  - weaponTypeLeft: {fileID: 11400000, guid: 2bb46315d9e79354e9a0f70f15a2f62c, type: 2}
+    weaponTypeRight: {fileID: 11400000, guid: a64ffcb2741f33c428e1d99165ba48ec, type: 2}
+    headArmorType: {fileID: 0}
+    bodyArmorType: {fileID: 0}
+    shieldType: {fileID: 11400000, guid: 2a30aff15b31d4744a504a9f0c0af94d, type: 2}
+  - weaponTypeLeft: {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
+    weaponTypeRight: {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
+    headArmorType: {fileID: 0}
+    bodyArmorType: {fileID: 0}
+    shieldType: {fileID: 0}

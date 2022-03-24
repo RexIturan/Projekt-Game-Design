@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
 using Characters;
 using Characters.Equipment.ScriptableObjects;
-using Characters.Movement;
 using Grid;
-using Level.Grid.CharacterGrid;
-using Level.Grid.ItemGrid;
-using Level.Grid.ObjectGrid;
 using QuestSystem.ScriptabelObjects;
 using SaveSystem.SaveFormats;
 using UnityEngine;
@@ -14,8 +10,7 @@ using WorldObjects;
 namespace SaveSystem {
 	public class SaveWriter {
 		// grid
-		private readonly GridContainerSO _gridContaier;
-		private readonly GridDataSO _globalGridData;
+		private readonly GridDataSO _gridData;
 
 		// character
 		private CharacterList _characterList;
@@ -46,10 +41,10 @@ namespace SaveSystem {
 			return gridDataSave;
 		}
 
-		private List<TileGrid> GetTileGridSaveData(GridContainerSO gridContainer) {
+		private List<TileGrid> GetTileGridSaveData(GridDataSO gridData) {
 			List<TileGrid> gridSaveData = new List<TileGrid>();
 
-			foreach ( var grids in gridContainer.tileGrids ) {
+			foreach ( var grids in gridData.TileGrids ) {
 				gridSaveData.Add(grids);
 			}
 
@@ -243,13 +238,11 @@ namespace SaveSystem {
 		#region Public Functions
 
 		public SaveWriter(
-			GridContainerSO gridContaier,
 			GridDataSO gridData,
 			InventorySO inventory,
 			EquipmentContainerSO equipmentContainer,
 			QuestContainerSO questContainer) {
-			_gridContaier = gridContaier;
-			_globalGridData = gridData;
+			_gridData = gridData;
 			_inventory = inventory;
 			_equipmentContainer = equipmentContainer;
 			_questContainer = questContainer;
@@ -265,13 +258,13 @@ namespace SaveSystem {
 				inventory = GetInventorySaveData(_inventory),
 				equipmentInventory = GetEquipmentInventorySaveData(_equipmentContainer),
 				quests = GetQuestSaveData(_questContainer),
-				gridDataSave = GetGridDataSaveData(_globalGridData),
+				gridDataSave = GetGridDataSaveData(_gridData),
 				players = GetPlayerSaveData(_characterList),
 				enemies = GetEnemySaveData(_characterList),
 				doors = GetDoorsSaveData(_worldObjectList),
 				switches = GetSwitchesSaveData(_worldObjectList),
 				junks = GetJunksSaveData(_worldObjectList),
-				tileGrids = GetTileGridSaveData(_gridContaier),
+				tileGrids = GetTileGridSaveData(_gridData),
 				// itemGrids = GetItemGridSaveData(_gridContaier),
 				// characterGrids = GetCharacterGridSaveData(_gridContaier),
 				// objectGrids = GetObjectGridSaveData(_gridContaier)

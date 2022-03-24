@@ -16,9 +16,7 @@ namespace GDP01.Structure {
 		[SerializeField] private GameSceneSO gameScene;
 		[SerializeField] private ELevelType type;
 		
-		//todo unify below
-		[SerializeField] private GridContainerSO gridContainerSO;
-		[SerializeField] private GridDataSO gridDataSO;
+		[SerializeField] private GridDataSO gridData;
 		[SerializeField] private Mesh mesh;
 		
 		[SerializeField] private List<LevelConnectorSO> connectors;

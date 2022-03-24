@@ -15,6 +15,7 @@ public class InventorySO : ScriptableObject, ISaveState<InventorySO.InventoryDat
 		public ItemTypeSO.ItemTypeData[] inventory;
 	}
 
+	//todo is List better here?
 	[SerializeField] private ItemTypeSO[] inventorySlots;
 	public ItemTypeSO[] InventorySlots => inventorySlots;
 	
@@ -70,5 +71,9 @@ public class InventorySO : ScriptableObject, ISaveState<InventorySO.InventoryDat
 		var item = inventorySlots[slotId];
 		inventorySlots[slotId] = null;
 		return item;
+	}
+
+	public bool IsSlotIdValid(int id) {
+		return id >= 0 && id < inventorySlots.Length;
 	}
 }

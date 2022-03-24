@@ -59,18 +59,17 @@ public class InventorySlot : VisualElement
         inventoryItemID = -1;
         icon.image = null;
 				itemType = null;
-				this.slotId = -1;
+				// this.slotId = -1;
 
 			  itemTooltip.Deactivate();
     }
     
     private void OnPointerDown(PointerDownEvent evt)
     {
-        //Not the left mouse button
-        if (inventoryItemID == -1 || evt.button != 0)
-        {
-            return;
-        }
+        //Not the left mouse button OR noitem Or no slot
+        if (inventoryItemID == -1 || slotId == -1 || evt.button != 0)
+          return;
+        
         //Clear the image
         icon.image = null;
         //Start the drag

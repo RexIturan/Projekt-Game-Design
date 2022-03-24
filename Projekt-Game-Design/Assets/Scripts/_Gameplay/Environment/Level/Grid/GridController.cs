@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using Level.Grid;
-using Level.Grid.ItemGrid;
-using UnityEngine;
+﻿using UnityEngine;
 using Util.Extensions;
 
 namespace Grid {
 	//todo rename -> GridEditor??
 	public class GridController : MonoBehaviour {
-		[SerializeField] private GridContainerSO gridContainer;
+		// [SerializeField] private GridContainerSO gridContainer;
 		[SerializeField] private GridDataSO gridData;
 
 		[SerializeField] private TileTypeContainerSO tileTypesContainer;
@@ -69,7 +66,7 @@ namespace Grid {
 			gridDataSO.ChangeBounds(newDimensions.x, newDimensions.y, originOffset);
 			
 			//copy grids into the new grids
-			gridContainer.CopyAllGrids(originOffset, gridDataSO);
+			gridData.CopyAllGrids(originOffset, gridDataSO);
 		}
 		
 		#endregion
@@ -146,10 +143,10 @@ namespace Grid {
 
 		private void SetTileAt(int x, int y, int z, int tileTypeID) {
 			
-			if ( gridContainer.tileGrids != null ) {
-				if ( gridContainer.tileGrids.Count > y ) {
-					if ( gridContainer.tileGrids[y] != null ) {
-						gridContainer.tileGrids[y].GetGridObject(x, z)
+			if ( gridData.TileGrids != null ) {
+				if ( gridData.TileGrids.Count > y ) {
+					if ( gridData.TileGrids[y] != null ) {
+						gridData.TileGrids[y].GetGridObject(x, z)
 							.SetTileType(tileTypeID);
 					}
 				}
@@ -210,7 +207,7 @@ namespace Grid {
 			ResizeGrids(min2D, max2D, out var newMin2D, out var newMax2D);
 
 			for ( int y = min3D.y; y <= max3D.y; y++ ) {
-				var tileGrid = gridContainer.tileGrids[y];
+				var tileGrid = gridData.TileGrids[y];
 				for ( int x = newMin2D.x; x <= newMax2D.x; x++ ) {
 					for ( int z = newMin2D.y; z <= newMax2D.y; z++ ) {
 						tileGrid.GetGridObject(x, z).SetTileType(tileTypeID);
@@ -239,9 +236,9 @@ namespace Grid {
 		public void ResetGrid() {
 			gridData.Reset();
 
-			gridContainer.InitGrids(gridData);
-			FillTileGrid(gridContainer.tileGrids[0], tileTypesContainer.tileTypes[1].id);
-			FillTileGrid(gridContainer.tileGrids[1], tileTypesContainer.tileTypes[0].id);
+			gridData.InitGrids(gridData);
+			FillTileGrid(gridData.TileGrids[0], tileTypesContainer.tileTypes[1].id);
+			FillTileGrid(gridData.TileGrids[1], tileTypesContainer.tileTypes[0].id);
 		}
 				
 		public static GridController FindGridController() {
