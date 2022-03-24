@@ -3,7 +3,15 @@ using UnityEngine;
 
 namespace Util.Extensions {
 	public static class GameObjectExtensions {
-		public static void ClearGameObjectReferences<T>(this List<T> componentList)
+		
+		public static void ClearGameObjectReferences(this List<GameObject> componentList){
+			if ( componentList is { Count: > 0} ) {
+				componentList.ForEach(GameObject.Destroy);
+				componentList.Clear();
+			}
+		}
+		
+		public static void ClearMonoBehaviourGameObjectReferences<T>(this List<T> componentList)
 			where T : MonoBehaviour {
 
 			if ( componentList is { Count: > 0} ) {

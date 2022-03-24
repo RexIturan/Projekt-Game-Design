@@ -33,7 +33,7 @@ namespace SaveSystem {
 		public QuestContainerSO questContainer;
 		public CharacterInitialiser characterInitializer;
 		public WorldObjectInitialiser worldObjectInitialiser;
-		[SerializeField] private ItemContainerSO itemContainerSO;
+		[SerializeField] private ItemTypeContainerSO itemTypeContainerSO;
 		[SerializeField] private EquipmentContainerSO equipmentContainer;
 
 	//load level from textasset
@@ -66,7 +66,7 @@ namespace SaveSystem {
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
 
 		public SaveReader SaveReader => _saveReader ??= new SaveReader(
-			gridContainer, globalGridData, inventory, questContainer, itemContainerSO, equipmentContainer);
+			gridContainer, globalGridData, inventory, questContainer, itemTypeContainerSO, equipmentContainer);
 		
 //////////////////////////////////////// Local Functions ///////////////////////////////////////////
 
@@ -107,7 +107,7 @@ namespace SaveSystem {
 			_saveWriter = new SaveWriter(gridContainer, globalGridData, inventory, equipmentContainer, questContainer);
 
 			// setup save Reader
-			_saveReader = new SaveReader(gridContainer, globalGridData, inventory, questContainer, itemContainerSO, equipmentContainer);
+			_saveReader = new SaveReader(gridContainer, globalGridData, inventory, questContainer, itemTypeContainerSO, equipmentContainer);
 		}
 
 		#endregion

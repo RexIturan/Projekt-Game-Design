@@ -10,12 +10,13 @@ namespace WorldObjects {
 			// public new ItemSO.ItemTypeData Type { get => _type; set => _type = value; }
 
 			public void Init(ItemData data) {
-				Type = data.Type;
+				ReferenceData = data.ReferenceData;
 			}
 		}
 
 		public override ItemData Save() {
 			var data = base.Save();
+			_itemData.ReferenceData = Type.ToReferenceData();
 			data.Init(_itemData);
 			return data;
 		}
@@ -23,6 +24,8 @@ namespace WorldObjects {
 		public override void Load(ItemData data) {
 			base.Load(data);
 
+			Type = ( ItemTypeSO )data.ReferenceData.obj;
+			
 			_itemData = data;
 		}
 	}

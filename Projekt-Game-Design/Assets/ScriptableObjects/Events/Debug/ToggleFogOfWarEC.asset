@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e25fed01b435799438d9ee30f8e0bbcf, type: 3}
-  m_Name: p_PickupItems_OnExit
+  m_Script: {fileID: 11500000, guid: 16b7e99933e74061ad8512a02b468e22, type: 3}
+  m_Name: ToggleFogOfWarEC
   m_EditorClassIdentifier: 
-  itemPickupEvent: {fileID: 11400000, guid: c850df41d4dbc034b881094411eeae9d, type: 2}
-  redrawLevelEC: {fileID: 11400000, guid: 076a51549e7ef074aaa161d0013325a5, type: 2}
+  description: 

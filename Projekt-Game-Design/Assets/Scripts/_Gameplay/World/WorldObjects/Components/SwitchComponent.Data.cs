@@ -7,25 +7,31 @@ namespace WorldObjects {
 	public partial class SwitchComponent : ISaveState<SwitchComponent.SwitchData> {
 		[Serializable]
 		public class SwitchData : WorldObject.Data {
-			protected new SwitchTypeSO _type;
-			public new SwitchTypeSO Type { get => _type; set => _type = value; }
 
 			[SerializeField] private bool active;
+			[SerializeField] private int range = -1;
+			
 			public bool Active {
 				get => active;
 				set => active = value;
 			}
-			public int range = -1;
+
+			public int Range {
+				get => range;
+				set => range = value;
+			}
 
 			public void Init(SwitchData data) {
-				_type = data.Type;
 				active = data.active;
-				range = data.range < 0 ? Type.range : data.range;
+				range = data.range;
 			}
 		}
 		
 		public override SwitchData Save() {
 			SwitchData data = base.Save();
+
+			switchData.ReferenceData = Type.ToReferenceData();
+			switchData.Range = Type.range;
 			
 			//todo save door data
 			data.Init(switchData);
@@ -36,7 +42,7 @@ namespace WorldObjects {
 		public override void Load(SwitchData data) {
 			base.Load(data);
 
-			_type = data.Type;
+			Type = ( SwitchTypeSO )data.ReferenceData.obj;
 			//todo load door data
 			
 			//todo does this work?

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,6 +9,7 @@ namespace GDP01.Util {
     public class SerializableScriptableObject : ScriptableObject {
 	    
 	    //SerializableScriptableObjectData
+	    [Serializable]
 	    public class ReferenceData {
 		    public string guid;
 		    public string name;
@@ -29,7 +31,7 @@ namespace GDP01.Util {
 	    /// Wrapper to save the reference of an ScriptableObject
 	    /// </summary>
 	    /// <returns>Wrapper Object</returns>
-	    public ReferenceData ToData() {
+	    public ReferenceData ToReferenceData() {
 		    return new ReferenceData {
 			    guid = Guid,
 			    name = name,

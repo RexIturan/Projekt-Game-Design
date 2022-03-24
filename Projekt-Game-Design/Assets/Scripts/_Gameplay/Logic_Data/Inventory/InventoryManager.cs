@@ -7,7 +7,7 @@ using UnityEngine;
 using static GDP01._Gameplay.Logic_Data.Inventory.Types.InventoryTarget;
 
 public class InventoryManager : MonoBehaviour {
-	[SerializeField] private ItemContainerSO itemContainer;
+	[SerializeField] private ItemTypeContainerSO itemTypeContainer;
 	[SerializeField] private InventorySO inventory;
 	[SerializeField] private EquipmentContainerSO equipmentContainer;
 
@@ -38,7 +38,7 @@ public class InventoryManager : MonoBehaviour {
 
 	private void Pickup(int itemID) {
 		if(itemID >= 0)
-			inventory.AddItem(itemContainer.itemList[itemID]);
+			inventory.AddItem(itemTypeContainer.itemList[itemID]);
 	}
 
 	private void MoveItem(InventoryTarget fromTarget, int fromID, InventoryTarget ToTarget, int toID, int equipmentId) {
@@ -84,20 +84,20 @@ public class InventoryManager : MonoBehaviour {
 	}
 	
 	private void SwapEquipment(int equipmentId, EquipmentPosition fromPos, EquipmentPosition toPos) {
-		ItemSO fromItem = equipmentContainer.UnequipItemFor(equipmentId, fromPos);
-		ItemSO toItem = equipmentContainer.UnequipItemFor(equipmentId, toPos);
+		ItemTypeSO fromItemType = equipmentContainer.UnequipItemFor(equipmentId, fromPos);
+		ItemTypeSO toItemType = equipmentContainer.UnequipItemFor(equipmentId, toPos);
 		
-		equipmentContainer.SetItemInEquipment(equipmentId, fromPos, toItem);
-		equipmentContainer.SetItemInEquipment(equipmentId, toPos, fromItem);
+		equipmentContainer.SetItemInEquipment(equipmentId, fromPos, toItemType);
+		equipmentContainer.SetItemInEquipment(equipmentId, toPos, fromItemType);
 	}
 	
 	private void UnequipItem(int equipmentId, EquipmentPosition pos, int toId) {
 		// remove item from equipment inventory
-		ItemSO fromItem = equipmentContainer.UnequipItemFor(equipmentId, pos);
+		ItemTypeSO fromItemType = equipmentContainer.UnequipItemFor(equipmentId, pos);
 		
-		inventory.AddItemAt(toId, fromItem);
+		inventory.AddItemAt(toId, fromItemType);
 
-		Debug.Log($"Unequip Item: {fromItem} at {pos}");
+		Debug.Log($"Unequip Item: {fromItemType} at {pos}");
 		
 		RefreshAllEquipments();
 	}
@@ -105,9 +105,9 @@ public class InventoryManager : MonoBehaviour {
 	private void EquipItem( int equipmentId, int inventorySlot, EquipmentPosition pos) {
 		var item = inventory.RemoveItemAt(inventorySlot);
 
-		ItemSO equippedItem = equipmentContainer.SetItemInEquipment(equipmentId, pos, item);
+		ItemTypeSO equippedItemType = equipmentContainer.SetItemInEquipment(equipmentId, pos, item);
 			
-		if(equippedItem is {}) { 
+		if(equippedItemType is {}) { 
 			Debug.LogError("Couldnt Equip Item");
 			Debug.Log("Item position was already occupied. Putting item back to player inventory. ");
 			// inventory.playerInventory.Add(equippedItem);

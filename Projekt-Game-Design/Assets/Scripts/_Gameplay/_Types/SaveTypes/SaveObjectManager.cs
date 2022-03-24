@@ -53,7 +53,7 @@ namespace GDP01.Gameplay.SaveTypes {
 			where C : SaveObjectFactory<C, D>, ISaveState<D> {
 			
 			//clear and remove all _doors
-			components.ClearGameObjectReferences();
+			components.ClearMonoBehaviourGameObjectReferences();
 			components = new List<C>();
 
 			//cache door data

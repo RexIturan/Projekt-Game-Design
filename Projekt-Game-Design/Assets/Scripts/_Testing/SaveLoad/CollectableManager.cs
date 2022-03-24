@@ -21,7 +21,7 @@ namespace SaveSystem.V2.TestComponents {
 		}
 
 		public void Load(List<CollectableData> data) {
-			collectables.ClearGameObjectReferences();
+			collectables.ClearMonoBehaviourGameObjectReferences();
 			collectables = new List<Collectable>();
 			foreach ( var collectableData in data ) {
 				collectables.Add(CreateNewCollectable(collectableData));	

@@ -12,13 +12,14 @@ namespace Input {
 	[CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader", order = 0)]
 	public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IMenuActions,
 		GameInput.ICameraActions, GameInput.ILevelEditorActions, GameInput.IPathfindingDebugActions,
-		GameInput.IInventoryActions, GameInput.ILoadingScreenActions {
+		GameInput.IInventoryActions, GameInput.ILoadingScreenActions, GameInput.IDebugActions {
 		// todo rework event channels: move and rename them 
 		[Header("Sending Events On")]
 		[SerializeField] private VoidEventChannelSO uiToggleMenuEC;
 		[SerializeField] private ScreenEventChannelSO uiToggleScreenEC;
 		[SerializeField] private EFactionEventChannelSO endTurnEC;
 		[SerializeField] private IntEventChannelSO setLevelEditorModeEC;
+		[SerializeField] private VoidEventChannelSO toggleFogOfWarEC;
 
 		[Header("Receiving Events On")] [SerializeField]
 		private VoidEventChannelSO enableMenuInput;
@@ -75,10 +76,12 @@ namespace Input {
 				_gameInput.PathfindingDebug.SetCallbacks(this);
 				_gameInput.Inventory.SetCallbacks(this);
 				_gameInput.LoadingScreen.SetCallbacks(this);
+				_gameInput.Debug.SetCallbacks(this);
 			}
 
 			// todo idk what the default input should be
 			// EnableGameplayInput();
+			EnableDebugInput();
 		}
 
 		#region Action Map Toggles
@@ -125,7 +128,7 @@ namespace Input {
 			_gameInput.Inventory.Enable();
 		}
 
-		public void EnableDebugInput() {
+		public void EnablePathfindingDebugInput() {
 			_gameInput.PathfindingDebug.Enable();
 		}
 
@@ -149,6 +152,10 @@ namespace Input {
 			_gameInput.LoadingScreen.Enable();
 		}
 
+		public void EnableDebugInput() {
+			_gameInput.Debug.Enable();
+		}
+		
 		public void DisableAllInput() {
 			_gameInput.Gameplay.Disable();
 			_gameInput.LevelEditor.Disable();
@@ -157,6 +164,7 @@ namespace Input {
 			_gameInput.PathfindingDebug.Disable();
 			_gameInput.LoadingScreen.Disable();
 			_gameInput.Inventory.Disable();
+			_gameInput.Debug.Disable();
 		}
 
 		#endregion
@@ -386,6 +394,16 @@ namespace Input {
 		public void OnResetLevel(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
 				ResetEditorLevelEvent.Invoke();	
+			}
+		}
+
+		#endregion
+
+		#region Debug
+
+		public void OnFogOfWar(InputAction.CallbackContext context) {
+			if ( context.phase == InputActionPhase.Performed ) {
+				toggleFogOfWarEC.RaiseEvent();
 			}
 		}
 

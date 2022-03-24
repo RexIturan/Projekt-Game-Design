@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,10 +59,11 @@ MonoBehaviour:
   questContainer: {fileID: 11400000, guid: 65a51bfc297041f4788c7db5608fe983, type: 2}
   characterInitializer: {fileID: 1363089168}
   worldObjectInitialiser: {fileID: 6243888046473227220}
-  itemContainerSO: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
+  itemTypeContainerSO: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}
   equipmentContainer: {fileID: 11400000, guid: 06f235e350237cc41b1711487af77bbe, type: 2}
   testLevel: []
   saveManagerData: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
+  defaultLevelFilename: test_level
   defaultGameFilename: tutorial
   loadLocation: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
   locationsToLoad:
@@ -98,3 +100,4 @@ MonoBehaviour:
   doorContainer: {fileID: 11400000, guid: 9c9e1505ca630dc468131be2225d7281, type: 2}
   switchContainer: {fileID: 11400000, guid: 78f822e7e41f18f44a7e171d99fd7241, type: 2}
   junkContainer: {fileID: 11400000, guid: 7919583d454054a4c8cad24c1c3dae54, type: 2}
+  itemTypeContainer: {fileID: 11400000, guid: 9c0103f97c6ccb944b231b864511fe70, type: 2}

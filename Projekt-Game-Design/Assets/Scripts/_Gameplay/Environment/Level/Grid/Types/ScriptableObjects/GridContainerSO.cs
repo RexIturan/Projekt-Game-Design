@@ -13,9 +13,9 @@ namespace Grid {
         //todo use array?
         public List<TileGrid> tileGrids = new List<TileGrid>();
 
-        public ItemGrid[] items;
-        public CharacterGrid[] characters;
-        public ObjectGrid[] objects;
+        // public ItemGrid[] items;
+        // public CharacterGrid[] characters;
+        // public ObjectGrid[] objects;
 
         // public void InitGridContainer() {
 	       //  items = new ItemGrid[1];
@@ -27,15 +27,15 @@ namespace Grid {
 	        var layerNum = gridData.Height;
 	        
 	        tileGrids = new List<TileGrid>();
-	        items = new ItemGrid[layerNum];
-	        characters = new CharacterGrid[layerNum];
-	        objects = new ObjectGrid[layerNum];
+	        // items = new ItemGrid[layerNum];
+	        // characters = new CharacterGrid[layerNum];
+	        // objects = new ObjectGrid[layerNum];
 	        
 	        for ( int i = 0; i < layerNum; i++ ) {
 		        tileGrids.Add(CreateNewTileGrid(gridData));
-		        items[i] = CreateNewItemGrid(gridData);
-		        characters[i] = CreateNewCharacterGrid(gridData);
-		        objects[i] = CreateNewObjectGrid(gridData);
+		        // items[i] = CreateNewItemGrid(gridData);
+		        // characters[i] = CreateNewCharacterGrid(gridData);
+		        // objects[i] = CreateNewObjectGrid(gridData);
 	        }
         }
 
@@ -43,9 +43,9 @@ namespace Grid {
 
         public void CopyAllGrids(Vector2Int originOffset, GridDataSO gridData) {
 	        CopyTileGrid(originOffset, gridData);
-	        CopyCharacterGrid(originOffset, gridData);
-	        CopyItemGrid(originOffset, gridData);
-	        CopyObjectGrid(originOffset, gridData);
+	        // CopyCharacterGrid(originOffset, gridData);
+	        // CopyItemGrid(originOffset, gridData);
+	        // CopyObjectGrid(originOffset, gridData);
         }
         
         private void CopyTileGrid(Vector2Int originOffset, GridDataSO gridData) {
@@ -65,38 +65,38 @@ namespace Grid {
 	        }
         }
 		
-        private void CopyCharacterGrid(Vector2Int originOffset, GridDataSO gridData) {
-	        var oldCharacterGrids = characters;
-			
-	        for ( int i = 0; i < characters.Length; i++ ) {
-		        var newCharacterGrid = CreateNewCharacterGrid(gridData);
-
-		        oldCharacterGrids[i].CopyTo(newCharacterGrid, originOffset * -1);
-		        characters[i] = newCharacterGrid;
-	        }
-        }
+        // private void CopyCharacterGrid(Vector2Int originOffset, GridDataSO gridData) {
+	       //  var oldCharacterGrids = characters;
+			     //
+	       //  for ( int i = 0; i < characters.Length; i++ ) {
+		      //   var newCharacterGrid = CreateNewCharacterGrid(gridData);
+        //
+		      //   oldCharacterGrids[i].CopyTo(newCharacterGrid, originOffset * -1);
+		      //   characters[i] = newCharacterGrid;
+	       //  }
+        // }
 		
-        private void CopyItemGrid(Vector2Int originOffset, GridDataSO gridData) {
-	        var oldItemGrids = items;
-			
-	        for ( int i = 0; i < items.Length; i++ ) {
-		        var newItemGrid = CreateNewItemGrid(gridData);
-
-		        oldItemGrids[i].CopyTo(newItemGrid, originOffset * -1);
-		        items[i] = newItemGrid;
-	        }
-        }
+        // private void CopyItemGrid(Vector2Int originOffset, GridDataSO gridData) {
+	       //  var oldItemGrids = items;
+			     //
+	       //  for ( int i = 0; i < items.Length; i++ ) {
+		      //   var newItemGrid = CreateNewItemGrid(gridData);
+        //
+		      //   oldItemGrids[i].CopyTo(newItemGrid, originOffset * -1);
+		      //   items[i] = newItemGrid;
+	       //  }
+        // }
 		
-        private void CopyObjectGrid(Vector2Int originOffset, GridDataSO gridData) {
-	        var oldObjectGrids = objects;
-			
-	        for ( int i = 0; i < items.Length; i++ ) {
-		        var newObjectGrid = CreateNewObjectGrid(gridData);
-
-		        oldObjectGrids[i].CopyTo(newObjectGrid, originOffset * -1);
-		        objects[i] = newObjectGrid;
-	        }
-        }
+        // private void CopyObjectGrid(Vector2Int originOffset, GridDataSO gridData) {
+	       //  var oldObjectGrids = objects;
+			     //
+	       //  for ( int i = 0; i < items.Length; i++ ) {
+		      //   var newObjectGrid = CreateNewObjectGrid(gridData);
+        //
+		      //   oldObjectGrids[i].CopyTo(newObjectGrid, originOffset * -1);
+		      //   objects[i] = newObjectGrid;
+	       //  }
+        // }
 
         #endregion
 

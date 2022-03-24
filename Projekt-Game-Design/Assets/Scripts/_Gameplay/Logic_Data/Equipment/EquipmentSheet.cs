@@ -5,11 +5,11 @@ namespace GDP01.Equipment {
 	[System.Serializable]
 	public class EquipmentSheet {
 		//todo these to [serializedField] private -> and public properties
-		public WeaponSO weaponLeft;
-		public WeaponSO weaponRight;
-		public HeadArmorSO headArmor;
-		public BodyArmorSO bodyArmor;
-		public ShieldSO shield;
+		public WeaponTypeSO weaponTypeLeft;
+		public WeaponTypeSO weaponTypeRight;
+		public HeadArmorTypeSO headArmorType;
+		public BodyArmorTypeSO bodyArmorType;
+		public ShieldTypeSO shieldType;
 		
 		private int _id;
 		public int Id {
@@ -19,9 +19,9 @@ namespace GDP01.Equipment {
 
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////		
 		
-		private void SetEquipmentSlot<T>(ref T slot, ItemSO item) where T : ItemSO {
-			if ( item == null ) slot = null;
-			if ( item is T compatibleItem ) {
+		private void SetEquipmentSlot<T>(ref T slot, ItemTypeSO itemType) where T : ItemTypeSO {
+			if ( itemType == null ) slot = null;
+			if ( itemType is T compatibleItem ) {
 				slot = compatibleItem;
 			}
 		}
@@ -30,11 +30,11 @@ namespace GDP01.Equipment {
 		
 		public EquipmentSheet(int id) {
 			Id = id;
-			weaponLeft = null;
-			weaponRight = null;
-			headArmor = null;
-			bodyArmor = null;
-			shield = null;
+			weaponTypeLeft = null;
+			weaponTypeRight = null;
+			headArmorType = null;
+			bodyArmorType = null;
+			shieldType = null;
 		}
 
 		/// <summary>returns the number of equipment slots</summary>
@@ -59,27 +59,27 @@ namespace GDP01.Equipment {
 		/// <item>5. shield</item> 
 		/// </list>
 		/// </remarks>
-		public ItemSO[] EquipmentToArray() {
-			ItemSO[] items = new ItemSO[GetCount()];
-			items[0] = weaponLeft;
-			items[1] = weaponRight;
-			items[2] = headArmor;
-			items[3] = bodyArmor;
-			items[4] = shield;
+		public ItemTypeSO[] EquipmentToArray() {
+			ItemTypeSO[] items = new ItemTypeSO[GetCount()];
+			items[0] = weaponTypeLeft;
+			items[1] = weaponTypeRight;
+			items[2] = headArmorType;
+			items[3] = bodyArmorType;
+			items[4] = shieldType;
 			return items;
 		}
 
-		public void EquipItemAt(int i, ItemSO item) {
-			SetEquipedItem((EquipmentPosition) i, item);
+		public void EquipItemAt(int i, ItemTypeSO itemType) {
+			SetEquipedItem((EquipmentPosition) i, itemType);
 		}
 
 		public void InitialiseFromSave(Inventory_Save equipmentSheetSave,
-			ItemContainerSO _itemContainerSo) {
+			ItemTypeContainerSO itemTypeContainerSO) {
 			if ( equipmentSheetSave.itemIds is { } ) {
 				foreach ( var itemSlot in equipmentSheetSave.itemIds ) {
-					ItemSO item = _itemContainerSo.GetItemFromID(itemSlot.itemID);
-					if ( item ) {
-						EquipItemAt(itemSlot.id +1, item);	
+					ItemTypeSO itemType = itemTypeContainerSO.GetItemFromID(itemSlot.itemID);
+					if ( itemType ) {
+						EquipItemAt(itemSlot.id +1, itemType);	
 					}
 				}
 				//
@@ -93,55 +93,55 @@ namespace GDP01.Equipment {
 			}
 		}
 
-		public ItemSO GetEquipedItem(EquipmentPosition equipmentPosition) {
-			ItemSO item = null;
+		public ItemTypeSO GetEquipedItem(EquipmentPosition equipmentPosition) {
+			ItemTypeSO itemType = null;
 
 			switch ( equipmentPosition ) {
 				case EquipmentPosition.RIGHT:
-					item = weaponRight;
+					itemType = weaponTypeRight;
 					break;
 				case EquipmentPosition.LEFT:
-					item = weaponLeft;
+					itemType = weaponTypeLeft;
 					break;
 				case EquipmentPosition.HEAD:
-					item = headArmor;
+					itemType = headArmorType;
 					break;
 				case EquipmentPosition.BODY:
-					item = bodyArmor;
+					itemType = bodyArmorType;
 					break;
 				case EquipmentPosition.SHIELD:
-					item = shield;
+					itemType = shieldType;
 					break;
 				default:
 					break;
 			}
 
-			return item;
+			return itemType;
 		}
 
 
 		
-		public void SetEquipedItem(EquipmentPosition equipmentPosition, ItemSO item) {
+		public void SetEquipedItem(EquipmentPosition equipmentPosition, ItemTypeSO itemType) {
 			
 			switch ( equipmentPosition ) {
 				case EquipmentPosition.RIGHT:
-					SetEquipmentSlot(ref weaponRight, item);
+					SetEquipmentSlot(ref weaponTypeRight, itemType);
 					break;
 				
 				case EquipmentPosition.LEFT:
-					SetEquipmentSlot(ref weaponLeft, item);
+					SetEquipmentSlot(ref weaponTypeLeft, itemType);
 					break;
 				
 				case EquipmentPosition.HEAD:
-					SetEquipmentSlot(ref headArmor, item);
+					SetEquipmentSlot(ref headArmorType, itemType);
 					break;
 				
 				case EquipmentPosition.BODY:
-					SetEquipmentSlot(ref bodyArmor, item);
+					SetEquipmentSlot(ref bodyArmorType, itemType);
 					break;
 				
 				case EquipmentPosition.SHIELD:
-					SetEquipmentSlot(ref shield, item);
+					SetEquipmentSlot(ref shieldType, itemType);
 					break;
 				
 				default:
@@ -149,18 +149,18 @@ namespace GDP01.Equipment {
 			}
 		}
 
-		public ItemSO UnequipItem(EquipmentPosition equipmentPosition) {
+		public ItemTypeSO UnequipItem(EquipmentPosition equipmentPosition) {
 			var item = GetEquipedItem(equipmentPosition);
 			SetEquipedItem(equipmentPosition, null);
 			return item;
 		}
 
 		public void Init(EquipmentContainerSO.EquipmentSheetData sheet) {
-			weaponLeft  = sheet.weaponLeft?.obj as WeaponSO;
-			weaponRight = sheet.weaponRight?.obj as WeaponSO;
-			headArmor   = sheet.headArmor?.obj as HeadArmorSO;
-			bodyArmor   = sheet.bodyArmor?.obj as BodyArmorSO;
-			shield      = sheet.shield?.obj as ShieldSO;
+			weaponTypeLeft  = sheet.weaponLeft?.obj as WeaponTypeSO;
+			weaponTypeRight = sheet.weaponRight?.obj as WeaponTypeSO;
+			headArmorType   = sheet.headArmor?.obj as HeadArmorTypeSO;
+			bodyArmorType   = sheet.bodyArmor?.obj as BodyArmorTypeSO;
+			shieldType      = sheet.shield?.obj as ShieldTypeSO;
 		}
 	}
 }

@@ -36,21 +36,21 @@ public class P_EquipActiveWeapon_OnEnter : StateAction {
 
 		// If the ability comes from the ability on the right, set right weapon active. 
 		// If it comes from the weapon on the left, set left weapon active
-		WeaponSO weaponRight = _equipmentController.RightWeapon;
+		WeaponTypeSO weaponTypeRight = _equipmentController.RightWeaponType;
 		bool rightContainsAbility = false;
 
-		if(weaponRight) { 
-			foreach(AbilitySO rightAbility in weaponRight.abilities) {
+		if(weaponTypeRight) { 
+			foreach(AbilitySO rightAbility in weaponTypeRight.abilities) {
 				if(rightAbility.id == _abilityController.SelectedAbilityID)
 					rightContainsAbility = true;
 			}
 		}
 
-		WeaponSO weaponLeft = _equipmentController.LeftWeapon;
+		WeaponTypeSO weaponTypeLeft = _equipmentController.LeftWeaponType;
 		bool leftContainsAbility = false;
 
-		if(weaponLeft != null) { 
-			foreach(AbilitySO leftAbility in weaponLeft.abilities) {
+		if(weaponTypeLeft != null) { 
+			foreach(AbilitySO leftAbility in weaponTypeLeft.abilities) {
 				if(leftAbility.id == _abilityController.SelectedAbilityID)
 					leftContainsAbility = true;
 			}

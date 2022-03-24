@@ -26,7 +26,7 @@ namespace SaveSystem {
 		private readonly QuestContainerSO _questContainer;
 
 		// dictionarys
-		private ItemContainerSO _itemContainerSo;
+		private ItemTypeContainerSO _itemTypeContainerSO;
 		
 		// runtime ref
 		private CharacterInitialiser _characterInitializer;
@@ -88,7 +88,7 @@ namespace SaveSystem {
 			}
 			
 			foreach (var itemID in saveInventory.itemIds) {
-				inventory.AddItemAt(itemID.id, _itemContainerSo.itemList[itemID.itemID]);
+				inventory.AddItemAt(itemID.id, _itemTypeContainerSO.itemList[itemID.itemID]);
 				//inventory has just indices
 				// inventory.InventorySlots.Add(_itemContainerSo.itemList[itemID]);    
 			}
@@ -103,7 +103,7 @@ namespace SaveSystem {
 				int id = equipmentContainer.CreateNewEquipmentSheet();
 				var equipment = equipmentContainer.EquipmentSheets[id];
 				
-				equipment.InitialiseFromSave(equipmentSheetSave, _itemContainerSo);
+				equipment.InitialiseFromSave(equipmentSheetSave, _itemTypeContainerSO);
 			}
 			
 			//todo rethink this -> do here, maybe get initialised chars as parameter?
@@ -120,13 +120,6 @@ namespace SaveSystem {
 			}
 		}
 		
-		private void ReadItems(List<Item_Save> saveItems, GridContainerSO gridContaier) {
-			foreach ( var saveItem in saveItems ) {
-				Vector2Int pos = _gridData.GetGridPos2DFromGridPos3D(saveItem.gridPos);
-				gridContaier.items[saveItem.gridPos.y].GetGridObject(pos).SetId(saveItem.id);
-			}
-		}
-
 		private void ReadQuests(List<Quest_Save> saveQuests, QuestContainerSO questContainer) {
 			questContainer.Initialise(saveQuests);
 		}
@@ -141,7 +134,7 @@ namespace SaveSystem {
 			GridDataSO gridData,
 			InventorySO inventory,
 			QuestContainerSO questContainer,
-			ItemContainerSO itemContainerSO,
+			ItemTypeContainerSO itemTypeContainerSO,
 			EquipmentContainerSO equipmentContainer) {
 			
 			_gridContaier = gridContaier;
@@ -149,7 +142,7 @@ namespace SaveSystem {
 			_inventory = inventory;
 			_equipmentContainer = equipmentContainer;
 			_questContainer = questContainer;
-			_itemContainerSo = itemContainerSO;
+			_itemTypeContainerSO = itemTypeContainerSO;
 		}
 
 		public void SetRuntimeReferences(CharacterInitialiser characterInitialiser,
@@ -165,14 +158,12 @@ namespace SaveSystem {
 
 			// ReadCharacter(save.players, save.enemies);
 			_characterInitializer.Initialise(save.players, save.enemies);
-			_worldObjectInitialiser.Initialise(save.doors, save.switches, save.junks);
+			_worldObjectInitialiser.Initialise(save.doors, save.switches, save.junks, save.items);
 
 			ReadInventory(save.inventory, _inventory);
 
 			ReadEquipmentInventory(save.equipmentInventory, _equipmentContainer);
 			
-			ReadItems(save.items, _gridContaier);
-
 			ReadQuests(save.quests, _questContainer);
 		}
 

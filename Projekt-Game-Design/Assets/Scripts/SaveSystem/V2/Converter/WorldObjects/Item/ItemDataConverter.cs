@@ -12,7 +12,7 @@ namespace SaveSystem.V2.Converter.Item {
 			base.DoSerialize(model, serialized);
 			
 			SerializeMember(serialized, 
-				null, "Type", model.Type);
+				null, "Type", model.ReferenceData);
 			
 			return fsResult.Success;
 		}
@@ -20,9 +20,9 @@ namespace SaveSystem.V2.Converter.Item {
 		protected override fsResult DoDeserialize(Dictionary<string, fsData> data, ref ItemComponent.ItemData model) {
 			var result = base.DoDeserialize(data, ref model);
 
-			if ( ( DeserializeMember(data, null, "Type", out ItemSO.ItemTypeData itemType) ).Succeeded ) {
+			if ( ( DeserializeMember(data, null, "Type", out ItemTypeSO.ItemTypeData itemReference) ).Succeeded ) {
 				//todo find item reference
-				model.Type = itemType;
+				model.ReferenceData = itemReference;
 			}
 			
 			return result;

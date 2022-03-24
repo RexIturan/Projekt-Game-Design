@@ -107,7 +107,7 @@ namespace GDP01._Gameplay.Logic_Data.Loot {
 				into lootGroup
 				select new {
 					Type = lootGroup.Key.type,
-					Item = lootGroup.Key.item,
+					Item = lootGroup.Key.itemType,
 					Count = lootGroup.Count(),
 				};
 
@@ -122,7 +122,7 @@ namespace GDP01._Gameplay.Logic_Data.Loot {
 
 			foreach ( var lootObject in lootObjects ) {
 				if ( lootObject.type == LootType.Item ) {
-					loot.items.Add(lootObject.item);
+					loot.items.Add(lootObject.itemType);
 				}
 				//todo add gold & experience
 			}

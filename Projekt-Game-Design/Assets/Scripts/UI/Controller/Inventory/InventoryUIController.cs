@@ -195,24 +195,24 @@ public class InventoryUIController : MonoBehaviour {
 
 		var equipmentSheet = equipmentContainer.EquipmentSheets[equipmentID];
 		
-		if ( equipmentSheet.weaponLeft) {
-			weaponLeft.HoldItem(equipmentSheet.weaponLeft);
+		if ( equipmentSheet.weaponTypeLeft) {
+			weaponLeft.HoldItem(equipmentSheet.weaponTypeLeft);
 		}
 		
-		if ( equipmentSheet.weaponRight) {
-			weaponRight.HoldItem(equipmentSheet.weaponRight);
+		if ( equipmentSheet.weaponTypeRight) {
+			weaponRight.HoldItem(equipmentSheet.weaponTypeRight);
 		}
 		
-		if ( equipmentSheet.headArmor) {
-			headArmor.HoldItem(equipmentSheet.headArmor);
+		if ( equipmentSheet.headArmorType) {
+			headArmor.HoldItem(equipmentSheet.headArmorType);
 		}
 		
-		if ( equipmentSheet.bodyArmor) {
-			bodyArmor.HoldItem(equipmentSheet.bodyArmor);
+		if ( equipmentSheet.bodyArmorType) {
+			bodyArmor.HoldItem(equipmentSheet.bodyArmorType);
 		}
 		
-		if ( equipmentSheet.shield) {
-			shield.HoldItem(equipmentSheet.shield);
+		if ( equipmentSheet.shieldType) {
+			shield.HoldItem(equipmentSheet.shieldType);
 		}
 	}
 
@@ -293,7 +293,7 @@ public class InventoryUIController : MonoBehaviour {
 		_ghostIcon.style.top = position.y - _ghostIcon.layout.height / 2;
 		_ghostIcon.style.left = position.x - _ghostIcon.layout.width / 2;
 		//Set the image
-		_ghostIcon.style.backgroundImage = _originalSlot.item.icon.texture;
+		_ghostIcon.style.backgroundImage = _originalSlot.itemType.icon.texture;
 		//Flip the visibility on
 		_ghostIcon.style.visibility = Visibility.Visible;
 	}
@@ -333,8 +333,8 @@ public class InventoryUIController : MonoBehaviour {
 			InventorySlot targetSlot = overlappedSlots.OrderBy(x => Vector2.Distance
 				(x.worldBound.position, _ghostIcon.worldBound.position)).First();
 
-			ItemSO originalItem = _originalSlot.item;
-			ItemSO targetItem = targetSlot.item;
+			ItemTypeSO originalItemType = _originalSlot.itemType;
+			ItemTypeSO targetItemType = targetSlot.itemType;
 
 			int fromID = _originalSlot.slotId;
 			int toID = targetSlot.slotId;
@@ -343,12 +343,12 @@ public class InventoryUIController : MonoBehaviour {
 			// There are four cases (sorry about the spaghetti code -.- )
 			//	1. both slots are in player inventory: just swap the inventory slots
 			if(_originalSlot.userData == null && targetSlot.userData == null) {
-				targetSlot.HoldItem(originalItem);
+				targetSlot.HoldItem(originalItemType);
 
 				moveItemEC.RaiseEvent(Inventory, fromID, Inventory, toID, playerID);
 				
-				if(targetItem)
-					_originalSlot.HoldItem(targetItem);
+				if(targetItemType)
+					_originalSlot.HoldItem(targetItemType);
 				else
 					_originalSlot.DropItem();
 			}
@@ -360,18 +360,18 @@ public class InventoryUIController : MonoBehaviour {
 			else if (_originalSlot.userData is EquipmentPosition pos && targetSlot.userData == null) {
 				moveItemEC.RaiseEvent(Equipment, ( int )pos, Inventory, toID, playerID);
 				
-				if(!targetItem) { 
+				if(!targetItemType) { 
 					// UnequipItemEC.RaiseEvent(_currentPlayerSelected, targetSlot.slotId, pos);
-					targetSlot.HoldItem(originalItem);
+					targetSlot.HoldItem(originalItemType);
 					_originalSlot.DropItem();
 				}
-				else if(targetItem.ValidForPosition(pos)) { 
+				else if(targetItemType.ValidForPosition(pos)) { 
 					// EquipItemEC.RaiseEvent(targetItem.id, _currentPlayerSelected, pos);
-					targetSlot.HoldItem(originalItem);
-					_originalSlot.HoldItem(targetItem);
+					targetSlot.HoldItem(originalItemType);
+					_originalSlot.HoldItem(targetItemType);
 				}
 				else { 
-					Debug.LogWarning("The item " + targetItem.id + 
+					Debug.LogWarning("The item " + targetItemType.id + 
 							" you want to swap is not valid for the item slot (" + pos + ")! ");
 				}
 			}
@@ -385,17 +385,17 @@ public class InventoryUIController : MonoBehaviour {
 				
 				moveItemEC.RaiseEvent(Inventory, fromID, Equipment, ( int )targetPos, playerID);
 
-				if(originalItem.ValidForPosition(targetPos)) { 
+				if(originalItemType.ValidForPosition(targetPos)) { 
 					// EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, _originalSlot.slotId, targetPos);
-					targetSlot.HoldItem(originalItem);
+					targetSlot.HoldItem(originalItemType);
 					
-					if(targetItem)
-						_originalSlot.HoldItem(targetItem);
+					if(targetItemType)
+						_originalSlot.HoldItem(targetItemType);
 					else
 						_originalSlot.DropItem();
 				}
 				else
-					Debug.LogWarning("Item " + originalItem.id + " is not valid for target slot " + targetPos + "! ");
+					Debug.LogWarning("Item " + originalItemType.id + " is not valid for target slot " + targetPos + "! ");
 			}
 			
 			//	4. original and target slots are equipment:
@@ -406,37 +406,37 @@ public class InventoryUIController : MonoBehaviour {
 				
 				moveItemEC.RaiseEvent(Equipment, ( int )originalPos, Equipment, ( int )targetPos, playerID);
 				
-				if(originalItem.ValidForPosition(targetPos)) { 
-					if(targetItem) { 
-						if(targetItem.ValidForPosition(originalPos)) { 
+				if(originalItemType.ValidForPosition(targetPos)) { 
+					if(targetItemType) { 
+						if(targetItemType.ValidForPosition(originalPos)) { 
 							// UnequipItemEC.RaiseEvent(_currentPlayerSelected, originalPos);
 							// UnequipItemEC.RaiseEvent(_currentPlayerSelected, targetPos);
 
 							// EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, _originalSlot.slotId, targetPos);
-							targetSlot.HoldItem(originalItem);
+							targetSlot.HoldItem(originalItemType);
 
 							// EquipItemEC.RaiseEvent(targetItem.id, _currentPlayerSelected, targetSlot.slotId, originalPos);
-							_originalSlot.HoldItem(targetItem);
+							_originalSlot.HoldItem(targetItemType);
 						}
 						else
-							Debug.LogWarning("Item " + originalItem.id + " is not valid for target slot " + targetPos + "! ");
+							Debug.LogWarning("Item " + originalItemType.id + " is not valid for target slot " + targetPos + "! ");
 					} else {  
 						// UnequipItemEC.RaiseEvent(_currentPlayerSelected, originalPos);
 						// EquipItemEC.RaiseEvent(originalItem.id, _currentPlayerSelected, _originalSlot.slotId, targetPos);
-						targetSlot.HoldItem(originalItem);
+						targetSlot.HoldItem(originalItemType);
 						
 						_originalSlot.DropItem();
 					}
 				}
 				else
-					Debug.LogWarning("Item " + originalItem.id + " is not valid for target slot " + targetPos + "! ");
+					Debug.LogWarning("Item " + originalItemType.id + " is not valid for target slot " + targetPos + "! ");
 			}
 			else
 				Debug.LogError("You should not see me. ");
 		}
 
-		if( _originalSlot.item )
-			_originalSlot.icon.image = _originalSlot.item.icon.texture;
+		if( _originalSlot.itemType )
+			_originalSlot.icon.image = _originalSlot.itemType.icon.texture;
 
 		// clear dragging related visuals and data
 		_isDragging = false;

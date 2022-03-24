@@ -13,7 +13,9 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 		private static readonly int viewTextureId = Shader.PropertyToID("_PlayerViewTexture"),
 			dimensionId = Shader.PropertyToID("_TileMapDimensions"),
 			offsetId = Shader.PropertyToID("_TileMapOffset");
-		
+
+		[SerializeField] private VoidEventChannelSO ToggleFogOfWarEC;
+		[SerializeField] private Texture2D debugViewTexture2D;
 		[SerializeField] private Texture2D viewTexture2D;
 		[SerializeField] private GraphicsFormat textureFormat = GraphicsFormat.R8_SInt;
 		[SerializeField] private GridDataSO gridDataSO;
@@ -25,12 +27,13 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 		
 		// cache curtrent view / visited
 		private int[,] view;
-
+		private bool fogActive = true;
+		
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
-		private Color GetViewColor(int x, int y, int[,] ints) {
+		private Color GetColor(int value) {
 			Color color;
-			switch ( view[x,y] ) {
+			switch ( value ) {
 				//current
 				case Visible:
 					color = new Color(1, 0, 0); 
@@ -47,6 +50,10 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 			}
 
 			return color;
+		}
+
+		private Color GetViewColor(int x, int y, int[,] ints) {
+			return GetColor(ints[x, y]);
 		}
 	
 ///// Callbacks ////////////////////////////////////////////////////////////////////////////////////		
@@ -72,6 +79,16 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 			// update view
 			UpdateViewTexture();
 		}
+
+		private void SetViewTexture() {
+			fogOfWarMaterial.SetTexture(viewTextureId, viewTexture2D);
+			fogOfWarHideMaterial.SetTexture(viewTextureId, viewTexture2D);
+		}
+
+		private void SetDebugViewTexture() {
+			fogOfWarMaterial.SetTexture(viewTextureId, debugViewTexture2D);
+			fogOfWarHideMaterial.SetTexture(viewTextureId, debugViewTexture2D);
+		}
 		
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////
 		
@@ -91,10 +108,14 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 				wrapMode = TextureWrapMode.Clamp
 			};
 
+			debugViewTexture2D = new Texture2D(1, 1) {
+				filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Repeat
+			};
+			debugViewTexture2D.SetPixel(0,0, GetColor(Visible));
+
 			// set material variables
 			// Shader.SetGlobalTexture(viewTextureId, viewTexture2D);
-			fogOfWarMaterial.SetTexture(viewTextureId, viewTexture2D);
-			fogOfWarHideMaterial.SetTexture(viewTextureId, viewTexture2D);
+			SetViewTexture();
 		}
 
 		// update texture
@@ -106,7 +127,7 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 			for ( int y = 0; y < height; y++ ) {
 				for ( int x = 0; x < width; x++ ) {
 					//todo if slow use setPixels and cache view values as color array
-					viewTexture2D.SetPixel(x, y, GetViewColor(x,y,view));
+					viewTexture2D.SetPixel(x, y, GetViewColor(x, y, view));
 				}
 			}
 			
@@ -128,6 +149,19 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 			// Shader.SetGlobalVector(dimensionId, new Vector4(gridDataSO.Width , gridDataSO.Depth));
 		}
 
+///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
+
+		private void HandleToggleFogOfWar() {
+			fogActive = !fogActive;
+
+			if ( fogActive ) {
+				SetViewTexture();
+			}
+			else {
+				SetDebugViewTexture();
+			}
+		}
+		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
 
 		[ContextMenu("Start")]
@@ -136,10 +170,12 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 		}
 
 		private void OnEnable() {
+			ToggleFogOfWarEC.OnEventRaised += HandleToggleFogOfWar;
 			updatePlayerViewEC.OnEventRaised += UpdatePlayerView;
 		}
 
 		private void OnDisable() {
+			ToggleFogOfWarEC.OnEventRaised -= HandleToggleFogOfWar;
 			updatePlayerViewEC.OnEventRaised -= UpdatePlayerView;
 		}
 	}

@@ -19,7 +19,7 @@ public class EnemyTypeSO : CharacterTypeSO {
 	// public ScriptableObject item; // standard equipped Item 
 
 	// ability
-	public ItemSO weapon;
+	public ItemTypeSO weapon;
 	
 	public EnemyCharacterData ToData() {
 		EnemyCharacterData data = base.ToData<EnemyCharacterData>();

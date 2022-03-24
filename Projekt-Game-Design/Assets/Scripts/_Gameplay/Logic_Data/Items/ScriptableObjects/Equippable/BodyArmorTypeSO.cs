@@ -4,7 +4,7 @@ using UnityEngine;
 /// BodyArmorSO
 /// </summary>
 [CreateAssetMenu(fileName = "new_bodyArmor", menuName = "Items/Body Armor")]
-public class BodyArmorSO : ArmorSO
+public class BodyArmorTypeSO : ArmorTypeSO
 {
 		override public bool ValidForPosition(EquipmentPosition equipmentPosition) { return equipmentPosition.Equals(EquipmentPosition.BODY); }
 }

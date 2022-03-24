@@ -11,7 +11,7 @@ namespace WorldObjects {
 				return new T {
 					Id = id,
 					Prefab = prefab,
-					Type = this.ToData(),
+					ReferenceData = this.ToReferenceData(),
 				};
 			}
 		}

@@ -4,7 +4,7 @@ using UnityEngine;
 /// HeadArmorSO
 /// </summary>
 [CreateAssetMenu(fileName = "new_headArmor", menuName = "Items/Head Armor")]
-public class HeadArmorSO : ItemSO
+public class HeadArmorTypeSO : ItemTypeSO
 {
 		override public bool ValidForPosition(EquipmentPosition equipmentPosition) { return equipmentPosition.Equals(EquipmentPosition.HEAD); }
 }

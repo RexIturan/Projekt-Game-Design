@@ -6,7 +6,7 @@ namespace QuestSystem.ScriptabelObjects {
 		public override TaskType Type { get; } = TaskType.Item_Equipped;
 		public override string BaseName { get; } = "ItemEquipped";
 		
-		[SerializeField] private ItemSO item;
+		[SerializeField] private ItemTypeSO itemType;
 		[SerializeField] private EquipmentContainerSO equipmentContainer;
 		
 		public override bool IsDone() {
@@ -16,8 +16,8 @@ namespace QuestSystem.ScriptabelObjects {
 				foreach ( var equipInv in equipmentInventories ) {
 					var equipArray = equipInv.EquipmentToArray();
 					foreach ( var equipItem in equipArray ) {
-						if ( item != null ) {
-							if ( equipItem == item ) {
+						if ( itemType != null ) {
+							if ( equipItem == itemType ) {
 								done = true;
 							}
 						}

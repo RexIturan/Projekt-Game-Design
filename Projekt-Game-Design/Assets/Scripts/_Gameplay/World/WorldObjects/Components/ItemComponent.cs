@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Characters;
 using Characters.Types;
 using Events.ScriptableObjects;
@@ -29,14 +30,14 @@ namespace WorldObjects {
 		[SerializeField] private VoidEventChannelSO redrawLevelEC;
 		
 		// [SerializeField] protected new ItemSO _type;
-		public new ItemSO Type {
-			get => ( ItemSO )_type;
+		public new ItemTypeSO Type {
+			get => ( ItemTypeSO )_type;
 			set => _type = value;
 		}
 		
 		[SerializeField] private ItemData _itemData;
-		
-		private GridController _gridController;
+
+		private WorldObjectList _worldObjects;
 
 		private void Awake() {
 			_meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
@@ -46,7 +47,7 @@ namespace WorldObjects {
 			// GridPosition = Vector3Int.FloorToInt(transform.position);
 		}
 
-		public void InitItem(ItemSO itemSO, Vector3Int gridPosition) {
+		public void InitItem(ItemTypeSO itemTypeSO, Vector3Int gridPosition) {
 			
 			_meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
 			_meshFilter = gameObject.GetComponentInChildren<MeshFilter>();
@@ -54,14 +55,14 @@ namespace WorldObjects {
 			GridPosition = gridPosition;
 			_gridTransform.MoveToGridPosition();
 			
-			Type = itemSO;
+			Type = itemTypeSO;
 
-			if ( Type is BodyArmorSO ) {
+			if ( Type is BodyArmorTypeSO ) {
 				modelTransform.localRotation = Quaternion.Euler(_armorRotationOffset);
 				modelTransform.localPosition = _armorPositionOffset;
 				// Debug.Log("armor/head");
 			}
-			else if ( Type is HeadArmorSO ) {
+			else if ( Type is HeadArmorTypeSO ) {
 				modelTransform.localRotation = Quaternion.Euler(_armorRotationOffset);
 				modelTransform.localPosition = new Vector3(0, -0.5f, 0);
 			}
@@ -71,31 +72,23 @@ namespace WorldObjects {
 				// Debug.Log("other item");
 			}
 
-			_meshRenderer.material = itemSO.material;
-			_meshFilter.mesh = itemSO.mesh;
+			_meshRenderer.material = itemTypeSO.material;
+			_meshFilter.mesh = itemTypeSO.mesh;
 		}
 
 		private void HandleOnTileEnter(Vector3Int position, GameObject characterObject) {
 			if ( _gridTransform.gridPosition == position && 
 			     characterObject.GetComponent<Statistics>().Faction == Faction.Player ) {
 				
-				if(!_gridController)
-					_gridController = GridController.FindGridController();
+				if(!_worldObjects)
+					_worldObjects = WorldObjectList.FindInstant();
 
-				if(!_gridController)
+				if(!_worldObjects)
 					Debug.LogError("Could not find Grid Controller. ");
 				else { 
-					// Debug.Log("Searching for items at: " + _gridTransform.gridPosition.x + ", " + _gridTransform.gridPosition.z);
-					List<int> items = _gridController.GetItemsAtGridPos(GridPosition);
-
-					if(items.Count > 0) {
-						// Debug.Log("Item found ");
-						foreach(int itemId in items) 
-							pickupEC.RaiseEvent(itemId);
-
-						_gridController.RemoveAllItemsAtGridPos(_gridTransform.gridPosition);
-						redrawLevelEC.RaiseEvent();
-					}
+					pickupEC.RaiseEvent(this.Id);
+					_worldObjects.items.Remove(this.gameObject);
+					Destroy(gameObject);
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 using SaveSystem.SaveFormats;
 using System.Collections.Generic;
 using UnityEngine;
+using Util.Extensions;
 
 namespace WorldObjects
 {
@@ -9,10 +10,12 @@ namespace WorldObjects
 				[SerializeField] private DoorContainerSO doorContainer;
 				[SerializeField] private SwitchContainerSO switchContainer;
 				[SerializeField] private JunkContainerSO junkContainer;
+				[SerializeField] private ItemTypeContainerSO itemTypeContainer;
 
 				public void Initialise(List<Door_Save> door_Saves, 
 						List<Switch_Save> switch_Saves,
-						List<Junk_Save> junk_Saves)
+						List<Junk_Save> junk_Saves,
+						List<Item_Save> itemSaves)
 				{
 						WorldObjectList worldObjects = WorldObjectList.FindInstant();
 
@@ -52,6 +55,14 @@ namespace WorldObjects
 								GameObject junkObj = Instantiate(type.prefab, parent, true);
 								junkObj.GetComponent<Junk>().Initialise(junk, type);
 								worldObjects.junks.Add(junkObj);
+						}
+						
+						worldObjects.items.ClearGameObjectReferences();
+						foreach ( var itemSave in itemSaves ) {
+							ItemTypeSO itemType = itemTypeContainer.GetItemFromID(itemSave.id);
+							GameObject itemObj = Instantiate(itemType.prefab, worldObjects.ItemParent, true);
+							itemObj.GetComponent<ItemComponent>().InitItem(itemType, itemSave.gridPos);
+							worldObjects.items.Add(itemObj);
 						}
 				}
 		}

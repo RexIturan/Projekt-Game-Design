@@ -9,9 +9,9 @@
                 "Name": "No-Name",
                 "Active": true,
                 "GridPosition": {
-                    "x": 7,
+                    "x": 6,
                     "y": 1,
-                    "z": 28
+                    "z": 23
                 },
                 "Type": {
                     "Name": "DefaultPlayerType",
@@ -19,11 +19,7 @@
                     "$type": "PlayerTypeSO",
                     "$id": "5"
                 },
-                "StatsOverride": {
-                    "Energy": {
-                        "Value": 12
-                    }
-                },
+                "StatsOverride": null,
                 "Entering": false,
                 "LocationName": "MVP-1"
             },
@@ -47,14 +43,8 @@
         "EquipmentContainerData": {
             "equipmentSheets": [
                 {
-                    "weaponLeft": {
-                        "Name": "w_HealingStaff",
-                        "Guid": "2bb46315d9e79354e9a0f70f15a2f62c"
-                    },
-                    "weaponRight": {
-                        "Name": "w_FireStaff",
-                        "Guid": "a64ffcb2741f33c428e1d99165ba48ec"
-                    },
+                    "weaponLeft": null,
+                    "weaponRight": null,
                     "headArmor": null,
                     "bodyArmor": null,
                     "shield": null
@@ -78,9 +68,15 @@
             "size": 28,
             "inventory": [
                 null,
+                {
+                    "Name": "w_FireStaff",
+                    "Guid": "a64ffcb2741f33c428e1d99165ba48ec"
+                },
                 null,
-                null,
-                null,
+                {
+                    "Name": "w_HealingStaff",
+                    "Guid": "2bb46315d9e79354e9a0f70f15a2f62c"
+                },
                 null,
                 null,
                 null,
@@ -332,9 +328,340 @@
                     "StatsOverride": null
                 }
             ],
-            "Doors": [],
-            "Switches": [],
-            "Items": []
+            "Doors": [
+                {
+                    "open": true,
+                    "broken": false,
+                    "locked": true,
+                    "keyIds": [],
+                    "switchIds": [],
+                    "triggerIds": [],
+                    "remainingSwitches": [],
+                    "remainingTrigger": [],
+                    "referenceData": {
+                        "Name": "BasicDoor",
+                        "Guid": "a332522f73c0bbf4dbe440e88190b4ed"
+                    },
+                    "id": 0,
+                    "gridPosition": {
+                        "x": 12,
+                        "y": 1,
+                        "z": 33
+                    },
+                    "gridrotation": {
+                        "x": 1.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "open": true,
+                    "broken": false,
+                    "locked": true,
+                    "keyIds": [],
+                    "switchIds": [],
+                    "triggerIds": [],
+                    "remainingSwitches": [],
+                    "remainingTrigger": [],
+                    "referenceData": {
+                        "Name": "BasicDoor",
+                        "Guid": "a332522f73c0bbf4dbe440e88190b4ed"
+                    },
+                    "id": 1,
+                    "gridPosition": {
+                        "x": 26,
+                        "y": 1,
+                        "z": 36
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "open": true,
+                    "broken": false,
+                    "locked": true,
+                    "keyIds": [],
+                    "switchIds": [],
+                    "triggerIds": [],
+                    "remainingSwitches": [],
+                    "remainingTrigger": [],
+                    "referenceData": {
+                        "Name": "BasicDoor",
+                        "Guid": "a332522f73c0bbf4dbe440e88190b4ed"
+                    },
+                    "id": 2,
+                    "gridPosition": {
+                        "x": 35,
+                        "y": 1,
+                        "z": 42
+                    },
+                    "gridrotation": {
+                        "x": 1.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "open": false,
+                    "broken": false,
+                    "locked": true,
+                    "keyIds": [],
+                    "switchIds": [
+                        0
+                    ],
+                    "triggerIds": [],
+                    "remainingSwitches": [
+                        0
+                    ],
+                    "remainingTrigger": [],
+                    "referenceData": {
+                        "Name": "BasicDoor",
+                        "Guid": "a332522f73c0bbf4dbe440e88190b4ed"
+                    },
+                    "id": 3,
+                    "gridPosition": {
+                        "x": 36,
+                        "y": 1,
+                        "z": 29
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "open": false,
+                    "broken": false,
+                    "locked": true,
+                    "keyIds": [],
+                    "switchIds": [
+                        1
+                    ],
+                    "triggerIds": [],
+                    "remainingSwitches": [
+                        1
+                    ],
+                    "remainingTrigger": [],
+                    "referenceData": {
+                        "Name": "BasicDoor",
+                        "Guid": "a332522f73c0bbf4dbe440e88190b4ed"
+                    },
+                    "id": 4,
+                    "gridPosition": {
+                        "x": 35,
+                        "y": 1,
+                        "z": 14
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "open": false,
+                    "broken": false,
+                    "locked": true,
+                    "keyIds": [],
+                    "switchIds": [
+                        1
+                    ],
+                    "triggerIds": [],
+                    "remainingSwitches": [
+                        1
+                    ],
+                    "remainingTrigger": [],
+                    "referenceData": {
+                        "Name": "BasicDoor",
+                        "Guid": "a332522f73c0bbf4dbe440e88190b4ed"
+                    },
+                    "id": 5,
+                    "gridPosition": {
+                        "x": 31,
+                        "y": 1,
+                        "z": 18
+                    },
+                    "gridrotation": {
+                        "x": 1.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "open": false,
+                    "broken": false,
+                    "locked": true,
+                    "keyIds": [],
+                    "switchIds": [
+                        2
+                    ],
+                    "triggerIds": [],
+                    "remainingSwitches": [
+                        2
+                    ],
+                    "remainingTrigger": [],
+                    "referenceData": {
+                        "Name": "BasicDoor",
+                        "Guid": "a332522f73c0bbf4dbe440e88190b4ed"
+                    },
+                    "id": 6,
+                    "gridPosition": {
+                        "x": 26,
+                        "y": 1,
+                        "z": 10
+                    },
+                    "gridrotation": {
+                        "x": 1.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "open": false,
+                    "broken": false,
+                    "locked": true,
+                    "keyIds": [],
+                    "switchIds": [
+                        2
+                    ],
+                    "triggerIds": [],
+                    "remainingSwitches": [
+                        2
+                    ],
+                    "remainingTrigger": [],
+                    "referenceData": {
+                        "Name": "BasicDoor",
+                        "Guid": "a332522f73c0bbf4dbe440e88190b4ed"
+                    },
+                    "id": 7,
+                    "gridPosition": {
+                        "x": 22,
+                        "y": 1,
+                        "z": 14
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                    }
+                }
+            ],
+            "Switches": [
+                {
+                    "active": false,
+                    "range": 1,
+                    "referenceData": {
+                        "Name": "BasicSwitch",
+                        "Guid": "46777157b1b0dbf4ab5805399f03302a"
+                    },
+                    "id": 0,
+                    "gridPosition": {
+                        "x": 33,
+                        "y": 1,
+                        "z": 32
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "active": false,
+                    "range": 1,
+                    "referenceData": {
+                        "Name": "BasicSwitch",
+                        "Guid": "46777157b1b0dbf4ab5805399f03302a"
+                    },
+                    "id": 1,
+                    "gridPosition": {
+                        "x": 36,
+                        "y": 1,
+                        "z": 18
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                    }
+                },
+                {
+                    "active": false,
+                    "range": 1,
+                    "referenceData": {
+                        "Name": "BasicSwitch",
+                        "Guid": "46777157b1b0dbf4ab5805399f03302a"
+                    },
+                    "id": 2,
+                    "gridPosition": {
+                        "x": 29,
+                        "y": 1,
+                        "z": 8
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 1.0
+                    }
+                }
+            ],
+            "Items": [
+                {
+                    "referenceData": {
+                        "Name": "w_FireStaff",
+                        "Guid": "a64ffcb2741f33c428e1d99165ba48ec"
+                    },
+                    "id": 0,
+                    "gridPosition": {
+                        "x": 41,
+                        "y": 1,
+                        "z": 40
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "referenceData": {
+                        "Name": "w_hammer",
+                        "Guid": "67a9ec7fd48b38d458783f0ce375304a"
+                    },
+                    "id": 1,
+                    "gridPosition": {
+                        "x": 41,
+                        "y": 1,
+                        "z": 42
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "referenceData": {
+                        "Name": "w_sword",
+                        "Guid": "4e3ae39bd9b95854ab4c55c1d90db993"
+                    },
+                    "id": 2,
+                    "gridPosition": {
+                        "x": 41,
+                        "y": 1,
+                        "z": 44
+                    },
+                    "gridrotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                }
+            ]
         }
     }
 }

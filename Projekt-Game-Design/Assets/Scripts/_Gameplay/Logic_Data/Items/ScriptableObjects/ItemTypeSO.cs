@@ -10,10 +10,10 @@ using WorldObjects;
 /// contains info about use, type, stats and looks of a Item 
 /// </summary>
 [CreateAssetMenu(fileName = "New Item", menuName = "Items/Item")]
-public class ItemSO : WorldObject.TypeSO {
+public class ItemTypeSO : WorldObject.TypeSO {
 	
 		public class ItemTypeData : ReferenceData {
-			public new ItemSO obj;
+			public new ItemTypeSO obj;
 		}
 	
 
@@ -36,11 +36,11 @@ public class ItemSO : WorldObject.TypeSO {
 
 #if UNITY_EDITOR
     private void OnEnable() {
-			var itemContainers = AssetDatabase.FindAssets($"t:{nameof(ItemContainerSO)}");
+			var itemContainers = AssetDatabase.FindAssets($"t:{nameof(ItemTypeContainerSO)}");
 
 			foreach ( var containerGuid in itemContainers ) {
 				var containerPath = AssetDatabase.GUIDToAssetPath(containerGuid);
-				var itemContainer = AssetDatabase.LoadAssetAtPath<ItemContainerSO>(containerPath);
+				var itemContainer = AssetDatabase.LoadAssetAtPath<ItemTypeContainerSO>(containerPath);
 			    
 				if ( !itemContainer.itemList.Contains(this) ) {
 					itemContainer.itemList.Add(this);

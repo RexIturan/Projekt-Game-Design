@@ -25,8 +25,8 @@ namespace GDP01._Gameplay.Provider {
 		private CharacterTypeContainerSO _characterTypeConteinerSO;
 		public CharacterTypeContainerSO CharacterTypeContainerSO => LoadAndCache(ref _characterTypeConteinerSO);
 		
-		private ItemContainerSO _itemContainerSO;
-		public ItemContainerSO ItemContainerSO => LoadAndCache(ref _itemContainerSO);
+		private ItemTypeContainerSO _itemTypeContainerSO;
+		public ItemTypeContainerSO ItemTypeContainerSO => LoadAndCache(ref _itemTypeContainerSO);
 
 		private WorldObjectTypeContainerSO _worldObjectTypeContainerSO;
 		public WorldObjectTypeContainerSO WorldObjectTypeContainerSO =>
@@ -49,7 +49,7 @@ namespace GDP01._Gameplay.Provider {
 		public SerializableScriptableObject FindSOByNameAndGuid(string guid, string name) {
 			SerializableScriptableObject foundSO = null;
 
-			foundSO = ItemContainerSO.GetItemTypeByGuid(guid) ?? ItemContainerSO.GetItemTypeByName(name);
+			foundSO = ItemTypeContainerSO.GetItemTypeByGuid(guid) ?? ItemTypeContainerSO.GetItemTypeByName(name);
 			if ( foundSO == null ) {
 				foundSO = WorldObjectTypeContainerSO.GetItemTypeByGuid(guid) ??
 				          WorldObjectTypeContainerSO.GetItemTypeByName(name);

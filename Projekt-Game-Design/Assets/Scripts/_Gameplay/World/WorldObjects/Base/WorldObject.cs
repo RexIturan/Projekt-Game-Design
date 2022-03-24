@@ -37,13 +37,13 @@ namespace WorldObjects {
 					Id = id,
 					GridPosition = _gridTransform.gridPosition,
 					Rotation = _gridTransform.rotation,
-					Type = _type?.ToData()
+					ReferenceData = Type?.ToReferenceData()
 				};
 			}
 
 			public virtual void Load(D data) {
 				id = data.Id;
-				_type = ( TypeSO )data.Type.obj;
+				_type = ( TypeSO )data.ReferenceData.obj;
 			
 				//Grid Position
 				_gridTransform.gridPosition = data.GridPosition;

@@ -35,13 +35,14 @@ namespace WorldObjects {
 				remainingSwitches = data.remainingSwitches;
 				remainingTrigger = data.remainingTrigger;
 				
-				Type = data.Type;
+				ReferenceData = data.ReferenceData;
 			}
 		}
 
 		public override DoorData Save() {
 			DoorData data = base.Save();
-			
+
+			doorData.ReferenceData = Type.ToReferenceData();
 			//todo save door data
 			data.Init(doorData);
 			
@@ -51,7 +52,7 @@ namespace WorldObjects {
 		public override void Load(DoorData data) {
 			base.Load(data);
 
-			_type = ( DoorTypeSO )data.Type.obj;
+			_type = ( DoorTypeSO )data.ReferenceData.obj;
 			//todo load door data
 			
 			//todo does this work?

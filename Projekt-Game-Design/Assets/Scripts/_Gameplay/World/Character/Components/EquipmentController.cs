@@ -42,13 +42,13 @@ namespace GDP01.Characters.Component {
 				// e.g. Cast A uses the left hand, Attack R uses the right hand
 				[SerializeField] private EquipmentPosition activeHand = NONE;
 
-				private ItemSO activeItem;
+				private ItemTypeSO _activeItemType;
 				
-				public WeaponSO RightWeapon => 
-					equipmentContainer.GetItemFromEquipment(EquipmentID, RIGHT) as WeaponSO;
+				public WeaponTypeSO RightWeaponType => 
+					equipmentContainer.GetItemFromEquipment(EquipmentID, RIGHT) as WeaponTypeSO;
 				
-				public WeaponSO LeftWeapon => 
-					equipmentContainer.GetItemFromEquipment(EquipmentID, LEFT) as WeaponSO;
+				public WeaponTypeSO LeftWeaponType => 
+					equipmentContainer.GetItemFromEquipment(EquipmentID, LEFT) as WeaponTypeSO;
 				
 				public void RefreshEquipment() {
 						// Model-wise
@@ -66,49 +66,49 @@ namespace GDP01.Characters.Component {
 						if ( modelController ) {
 								// Find the proper Items for their respective hands
 								//
-								ItemSO itemLeftHand;
-								ItemSO itemRightHand;
+								ItemTypeSO itemTypeLeftHand;
+								ItemTypeSO itemTypeRightHand;
 
 								// if the active hand is the left, and the active weapon is in the right equipment position
 								// of if the active hand is the right, and the active weapon is in the left equipment position,
 								// swap the hands
 								if(activeHand != activeEquipment) {
-										itemLeftHand = RightWeapon;
-										itemRightHand = LeftWeapon;
+										itemTypeLeftHand = RightWeaponType;
+										itemTypeRightHand = LeftWeaponType;
 								}
 								else {
 										// else put the right weapon to the right hand, and the left weapon to the left by default
-										itemLeftHand = LeftWeapon;
-										itemRightHand = RightWeapon;
+										itemTypeLeftHand = LeftWeaponType;
+										itemTypeRightHand = RightWeaponType;
 								}
 
-								ItemSO itemHead = equipmentContainer.EquipmentSheets[EquipmentID].headArmor;
-								ItemSO itemBody = equipmentContainer.EquipmentSheets[EquipmentID].bodyArmor;
-								ItemSO itemShield = equipmentContainer.EquipmentSheets[EquipmentID].shield;
+								ItemTypeSO itemTypeHead = equipmentContainer.EquipmentSheets[EquipmentID].headArmorType;
+								ItemTypeSO itemTypeBody = equipmentContainer.EquipmentSheets[EquipmentID].bodyArmorType;
+								ItemTypeSO itemTypeShield = equipmentContainer.EquipmentSheets[EquipmentID].shieldType;
 
-								if ( itemLeftHand ) {
-									modelController.SetMeshLeft(itemLeftHand.mesh, itemLeftHand.material);	
+								if ( itemTypeLeftHand ) {
+									modelController.SetMeshLeft(itemTypeLeftHand.mesh, itemTypeLeftHand.material);	
 								}
 								else {
 									modelController.SetMeshLeft(null, null);
 								}
 								
-								if ( itemRightHand ) {
-									modelController.SetMeshRight(itemRightHand.mesh, itemRightHand.material);	
+								if ( itemTypeRightHand ) {
+									modelController.SetMeshRight(itemTypeRightHand.mesh, itemTypeRightHand.material);	
 								}
 								else {
 									modelController.SetMeshRight(null, null);
 								}
 								
-								if ( itemShield ) {
-									modelController.SetMeshShield(itemShield.mesh, itemShield.material);	
+								if ( itemTypeShield ) {
+									modelController.SetMeshShield(itemTypeShield.mesh, itemTypeShield.material);	
 								}
 								else {
 									modelController.SetMeshShield(null, null);
 								}
 								
-								modelController.SetMeshHead(itemHead ? itemHead.mesh : null);
-								modelController.SetMeshBody(itemBody ? itemBody.mesh : null);
+								modelController.SetMeshHead(itemTypeHead ? itemTypeHead.mesh : null);
+								modelController.SetMeshBody(itemTypeBody ? itemTypeBody.mesh : null);
 						}
 				}
 
@@ -119,15 +119,15 @@ namespace GDP01.Characters.Component {
 						}
 				}
 
-				public List<WeaponSO> GetEquippedWeapons()
+				public List<WeaponTypeSO> GetEquippedWeapons()
 				{
-						List<WeaponSO> items = new List<WeaponSO>();
+						List<WeaponTypeSO> items = new List<WeaponTypeSO>();
 
-						WeaponSO item = LeftWeapon;
+						WeaponTypeSO item = LeftWeaponType;
 						if ( item )
 								items.Add(item);
 
-						item = RightWeapon;
+						item = RightWeaponType;
 						if ( item )
 								items.Add(item);
 

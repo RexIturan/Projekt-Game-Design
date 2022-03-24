@@ -12,11 +12,11 @@ using UnityEngine;
 public class InventorySO : ScriptableObject, ISaveState<InventorySO.InventoryData> {
 	public struct InventoryData {
 		public int size;
-		public ItemSO.ItemTypeData[] inventory;
+		public ItemTypeSO.ItemTypeData[] inventory;
 	}
 
-	[SerializeField] private ItemSO[] inventorySlots;
-	public ItemSO[] InventorySlots => inventorySlots;
+	[SerializeField] private ItemTypeSO[] inventorySlots;
+	public ItemTypeSO[] InventorySlots => inventorySlots;
 	
 ///// Save State ///////////////////////////////////////////////////////////////////////////////////
 	
@@ -28,7 +28,7 @@ public class InventorySO : ScriptableObject, ISaveState<InventorySO.InventoryDat
 	}
 
 	public void Load(InventoryData data) {
-		inventorySlots = new ItemSO[data.size];
+		inventorySlots = new ItemTypeSO[data.size];
 		if ( data.inventory != null ) {
 			for ( int i = 0; i < data.size; i++ ) {
 				inventorySlots[i] = data.inventory[i]?.obj;
@@ -37,14 +37,14 @@ public class InventorySO : ScriptableObject, ISaveState<InventorySO.InventoryDat
 	}
 
 	public void Claer(int size) {
-		inventorySlots = new ItemSO[size];
+		inventorySlots = new ItemTypeSO[size];
 	}
 
-	public void AddItemAt(int index, ItemSO item) {
-		inventorySlots[index] = item;
+	public void AddItemAt(int index, ItemTypeSO itemType) {
+		inventorySlots[index] = itemType;
 	}
 
-	public bool AddItem(ItemSO item) {
+	public bool AddItem(ItemTypeSO itemType) {
 		var firstFreeSpace = -1;
 		for ( int i = 0; i < inventorySlots.Length; i++ ) {
 			if ( inventorySlots[i] == null ) {
@@ -54,7 +54,7 @@ public class InventorySO : ScriptableObject, ISaveState<InventorySO.InventoryDat
 		}
 
 		if ( firstFreeSpace >= 0 ) {
-			inventorySlots[firstFreeSpace] = item;
+			inventorySlots[firstFreeSpace] = itemType;
 			return true;
 		}
 		else {
@@ -62,11 +62,11 @@ public class InventorySO : ScriptableObject, ISaveState<InventorySO.InventoryDat
 		}
 	}
 
-	public bool Contains(ItemSO item) {
-		return inventorySlots.Contains(item);
+	public bool Contains(ItemTypeSO itemType) {
+		return inventorySlots.Contains(itemType);
 	}
 	
-	public ItemSO RemoveItemAt(int slotId) {
+	public ItemTypeSO RemoveItemAt(int slotId) {
 		var item = inventorySlots[slotId];
 		inventorySlots[slotId] = null;
 		return item;

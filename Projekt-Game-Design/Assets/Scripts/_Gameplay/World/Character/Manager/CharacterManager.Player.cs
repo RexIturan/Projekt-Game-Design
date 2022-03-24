@@ -40,7 +40,7 @@ namespace GDP01._Gameplay.World.Character {
 		public void LoadPlayerCharacterData(List<PlayerCharacterData> playerCharactersData) {
 			
 			//clear playerchars
-			playerCharacterComponents.ClearGameObjectReferences();
+			playerCharacterComponents.ClearMonoBehaviourGameObjectReferences();
 			playerCharacterComponents = new List<PlayerCharacterSC>();
 			
 			_playerCharacterData = playerCharactersData;

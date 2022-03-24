@@ -56,36 +56,6 @@ namespace SaveSystem {
 			return gridSaveData;
 		}
 
-		private List<ItemGrid> GetItemGridSaveData(GridContainerSO gridContainer) {
-			List<ItemGrid> gridSaveData = new List<ItemGrid>();
-
-			foreach ( var grids in gridContainer.items ) {
-				gridSaveData.Add(grids);
-			}
-
-			return gridSaveData;
-		}
-
-		private List<CharacterGrid> GetCharacterGridSaveData(GridContainerSO gridContainer) {
-			List<CharacterGrid> gridSaveData = new List<CharacterGrid>();
-
-			foreach ( var grids in gridContainer.characters ) {
-				gridSaveData.Add(grids);
-			}
-
-			return gridSaveData;
-		}
-
-		private List<ObjectGrid> GetObjectGridSaveData(GridContainerSO gridContainer) {
-			List<ObjectGrid> gridSaveData = new List<ObjectGrid>();
-
-			foreach ( var grids in gridContainer.objects ) {
-				gridSaveData.Add(grids);
-			}
-
-			return gridSaveData;
-		}
-
 		private List<PlayerCharacter_Save> GetPlayerSaveData(CharacterList characterList) {
 			List<PlayerCharacter_Save> playerChars = new List<PlayerCharacter_Save>();
 

@@ -121,7 +121,7 @@ namespace GDP01.Characters.Component {
 			//todo this is just used by player characters
 			EquipmentController equipmentController = gameObject.GetComponent<EquipmentController>();
 			if(equipmentController is {}) {
-				foreach(WeaponSO item in equipmentController.GetEquippedWeapons()) {
+				foreach(WeaponTypeSO item in equipmentController.GetEquippedWeapons()) {
 					currentAbilities.AddRange(item.abilities);
 				}
 			}

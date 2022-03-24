@@ -25,6 +25,9 @@ namespace WorldObjects {
 		[SerializeField] private Data managerData;
 		
 		public Data Save() {
+			if(worldObjectList is {})
+				ConvertWorldObjects();
+
 			return new Data(
 				SaveDoors(),
 				SaveSwitches(),

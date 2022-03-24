@@ -7,8 +7,8 @@ namespace WorldObjects {
 	public abstract partial class WorldObject {
 		[Serializable]
 		public abstract class Data : SaveObjectCreatorData {
-			[SerializeField] protected ReferenceData _type = null;
-			public ReferenceData Type { get => _type; set => _type = value; }
+			[SerializeField] protected ReferenceData referenceData = null;
+			public ReferenceData ReferenceData { get => referenceData; set => referenceData = value; }
 		}
 	}
 }

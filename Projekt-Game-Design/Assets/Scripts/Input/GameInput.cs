@@ -1360,6 +1360,34 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""331cf142-7c25-46cf-b5d9-e7d24e82ce05"",
+            ""actions"": [
+                {
+                    ""name"": ""FogOfWar"",
+                    ""type"": ""Button"",
+                    ""id"": ""39e17387-9907-4923-8de5-5dea782ed0ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3a395456-423c-486d-bfa1-3a05d6daff34"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""FogOfWar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1431,6 +1459,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_FogOfWar = m_Debug.FindAction("FogOfWar", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -2046,6 +2077,39 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_FogOfWar;
+    public struct DebugActions
+    {
+        private @GameInput m_Wrapper;
+        public DebugActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @FogOfWar => m_Wrapper.m_Debug_FogOfWar;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @FogOfWar.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnFogOfWar;
+                @FogOfWar.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnFogOfWar;
+                @FogOfWar.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnFogOfWar;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @FogOfWar.started += instance.OnFogOfWar;
+                @FogOfWar.performed += instance.OnFogOfWar;
+                @FogOfWar.canceled += instance.OnFogOfWar;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -2123,5 +2187,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnFogOfWar(InputAction.CallbackContext context);
     }
 }

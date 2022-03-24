@@ -755,6 +755,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77308457aa6f45ebaee4c8c2dd6e35d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ToggleFogOfWarEC: {fileID: 11400000, guid: 3e50107f89cb8e54690a4db3e1479518, type: 2}
+  debugViewTexture2D: {fileID: 0}
   viewTexture2D: {fileID: 0}
   textureFormat: 17
   gridDataSO: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}

@@ -15,11 +15,11 @@ namespace Characters.Equipment.ScriptableObjects {
 		}
 
 		public class EquipmentSheetData {
-			public ItemSO.ItemTypeData weaponLeft;
-			public ItemSO.ItemTypeData weaponRight;
-			public ItemSO.ItemTypeData headArmor;
-			public ItemSO.ItemTypeData bodyArmor;
-			public ItemSO.ItemTypeData shield;
+			public ItemTypeSO.ItemTypeData weaponLeft;
+			public ItemTypeSO.ItemTypeData weaponRight;
+			public ItemTypeSO.ItemTypeData headArmor;
+			public ItemTypeSO.ItemTypeData bodyArmor;
+			public ItemTypeSO.ItemTypeData shield;
 		}
 
 ///// Fields ///////////////////////////////////////////////////////////////////////////////////////		
@@ -41,20 +41,20 @@ namespace Characters.Equipment.ScriptableObjects {
 			equipmentSheets.Clear();
 		}
 
-		public ItemSO GetItemFromEquipment(int playerID, EquipmentPosition equipmentPosition) {
+		public ItemTypeSO GetItemFromEquipment(int playerID, EquipmentPosition equipmentPosition) {
 			return EquipmentSheets[playerID].GetEquipedItem(equipmentPosition);
 		}
 
-		public ItemSO SetItemInEquipment(int playerID, EquipmentPosition equipmentPosition, ItemSO item) {
-			ItemSO previous = null;
+		public ItemTypeSO SetItemInEquipment(int playerID, EquipmentPosition equipmentPosition, ItemTypeSO itemType) {
+			ItemTypeSO previous = null;
 
 			previous = EquipmentSheets[playerID].GetEquipedItem(equipmentPosition);
-			EquipmentSheets[playerID].SetEquipedItem(equipmentPosition, item);
+			EquipmentSheets[playerID].SetEquipedItem(equipmentPosition, itemType);
 
 			return previous;
 		}
 
-		public ItemSO UnequipItemFor(int playerID, EquipmentPosition equipmentPosition) {
+		public ItemTypeSO UnequipItemFor(int playerID, EquipmentPosition equipmentPosition) {
 			return EquipmentSheets[playerID].UnequipItem(equipmentPosition);
 		}
 
@@ -94,11 +94,11 @@ namespace Characters.Equipment.ScriptableObjects {
 			//todo refactore?
 			return new EquipmentContainerData {
 				equipmentSheets = EquipmentSheets.Select(sheet => new EquipmentSheetData {
-					weaponLeft  = sheet.weaponLeft?.ToData(),
-					weaponRight = sheet.weaponRight?.ToData(),
-					headArmor   = sheet.headArmor?.ToData(),
-					bodyArmor   = sheet.bodyArmor?.ToData(),
-					shield      = sheet.shield?.ToData(),
+					weaponLeft  = sheet.weaponTypeLeft?.ToData(),
+					weaponRight = sheet.weaponTypeRight?.ToData(),
+					headArmor   = sheet.headArmorType?.ToData(),
+					bodyArmor   = sheet.bodyArmorType?.ToData(),
+					shield      = sheet.shieldType?.ToData(),
 				}).ToList()
 			};
 		}

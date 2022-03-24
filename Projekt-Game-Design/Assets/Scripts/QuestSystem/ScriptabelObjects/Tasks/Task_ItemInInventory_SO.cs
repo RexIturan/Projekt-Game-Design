@@ -5,7 +5,7 @@ namespace QuestSystem.ScriptabelObjects {
 		public override TaskType Type { get; } = TaskType.Item_In_Inventory;
 		public override string BaseName { get; } = "ItemInInventory";
 
-		[SerializeField] private ItemSO item;
+		[SerializeField] private ItemTypeSO itemType;
 		[SerializeField] private InventorySO inventory;
 		
 		public override bool IsDone() {
@@ -13,8 +13,8 @@ namespace QuestSystem.ScriptabelObjects {
 				var playerInventory = inventory.InventorySlots;
 				done = false;
 				foreach ( var invItem in playerInventory ) {
-					if ( item != null ) {
-						if ( invItem == item ) {
+					if ( itemType != null ) {
+						if ( invItem == itemType ) {
 							done = true;
 						}
 					}

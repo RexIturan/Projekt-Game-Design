@@ -18,9 +18,6 @@ namespace Visual {
 		
 		public void RedrawLevel() {
 			drawer?.DrawGrid();
-			if ( objectDrawer ) {
-				objectDrawer.RedrawItems();	
-			}
 			updateMeshEC.RaiseEvent();
 		}
 

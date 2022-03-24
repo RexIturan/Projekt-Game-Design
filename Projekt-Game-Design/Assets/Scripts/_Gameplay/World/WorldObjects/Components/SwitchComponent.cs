@@ -26,7 +26,7 @@ namespace WorldObjects {
 
 				[SerializeField] private SwitchData switchData;
 				
-				public float Range => switchData.range;
+				public float Range => switchData.Range;
 
 				public bool Activated {
 					get => switchData.Active;

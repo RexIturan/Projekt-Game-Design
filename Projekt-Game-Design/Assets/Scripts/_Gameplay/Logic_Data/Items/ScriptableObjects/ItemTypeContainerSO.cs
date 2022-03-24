@@ -10,23 +10,23 @@ using Util.Extensions;
 /// List of each Item
 /// </summary>
 [CreateAssetMenu(fileName = "New ItemList", menuName = "Items/ItemList")]
-public class ItemContainerSO : ScriptableObject {
-	[SerializeField] public List<ItemSO> itemList = new List<ItemSO>();
-	[SerializeField] private ItemSO _defaultItem;
+public class ItemTypeContainerSO : ScriptableObject {
+	[SerializeField] public List<ItemTypeSO> itemList = new List<ItemTypeSO>();
+	[SerializeField] private ItemTypeSO defaultItemType;
 	
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
 	
-	public ItemSO Default => _defaultItem;
+	public ItemTypeSO Default => defaultItemType;
 
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////
 
-	public ItemSO GetItemFromID(int id) {
-		ItemSO item = null;
+	public ItemTypeSO GetItemFromID(int id) {
+		ItemTypeSO itemType = null;
 		if ( itemList.IsValidIndex(id) ) {
-			item = itemList[id];
+			itemType = itemList[id];
 		}
 
-		return item;
+		return itemType;
 	}
 
 	public void UpdateItemList() {
@@ -48,11 +48,11 @@ public class ItemContainerSO : ScriptableObject {
 		UpdateItemList();
 	}
 
-	public ItemSO GetItemTypeByGuid(string guid) {
+	public ItemTypeSO GetItemTypeByGuid(string guid) {
 		return itemList.FirstOrDefault(item => item.Guid == guid);
 	}
 
-	public ItemSO GetItemTypeByName(string name) {
+	public ItemTypeSO GetItemTypeByName(string name) {
 		return itemList.FirstOrDefault(item => item.name.Equals(name));
 	}
 }

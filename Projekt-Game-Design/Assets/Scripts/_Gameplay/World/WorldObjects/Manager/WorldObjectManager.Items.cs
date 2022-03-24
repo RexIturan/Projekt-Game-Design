@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WorldObjects {
 	public partial class WorldObjectManager {
 		[Header("Item Data")]
-		[SerializeField] private ItemSO defaultItemSO;
+		[SerializeField] private ItemTypeSO defaultItemTypeSO;
 		[SerializeField] private Transform itemParent;
 		[SerializeField] private List<ItemComponent> _itemComponents;
 		
@@ -17,13 +17,13 @@ namespace WorldObjects {
 				ref _itemComponents, 
 				ref managerData.ItemDataList, 
 				itemDataList, 
-				defaultItemSO.prefab, 
+				defaultItemTypeSO.prefab, 
 				itemParent);
 		}
 		
 		[ContextMenu("Add Item")]
 		private void AddItem() {
-			ItemComponent.ItemData data = defaultItemSO.ToComponentData();
+			ItemComponent.ItemData data = defaultItemTypeSO.ToComponentData();
 			
 			//todo refactor get next playerchar id
 			data.Id = _itemComponents.Count + managerData.ItemDataList?.Count ?? 0;

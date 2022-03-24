@@ -20,7 +20,7 @@ namespace WorldObjects {
 					Door.DoorData data = base.ToComponentData<Door.DoorData>();
 		
 					// playerData.EquipmentId = equipmentID;
-					data.Type = ToData();
+					data.ReferenceData = ToReferenceData();
 		
 					return data;
 				}

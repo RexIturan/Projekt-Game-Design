@@ -23,15 +23,15 @@ namespace UI.Components.Item
 				/// <summary>
 				/// Creates arbitrary detail view of an item. 
 				/// </summary>
-				/// <param name="item">item which's properties are displayed in the detail view </param>
-				public ItemDetailPanel(ItemSO item) : this(item, ICON_ON_DEFAULT) { }
+				/// <param name="itemType">item which's properties are displayed in the detail view </param>
+				public ItemDetailPanel(ItemTypeSO itemType) : this(itemType, ICON_ON_DEFAULT) { }
 
 				/// <summary>
 				/// Creates arbitrary detail view of an item. 
 				/// </summary>
-				/// <param name="item">item which's properties are displayed in the detail view </param>
+				/// <param name="itemType">item which's properties are displayed in the detail view </param>
 				/// <param name="iconOn">decides whether or not the detail view displays the item's icon </param>
-				public ItemDetailPanel(ItemSO item, bool iconOn)
+				public ItemDetailPanel(ItemTypeSO itemType, bool iconOn)
 				{
 						// Setting up style
 						styleSheets.Add(Resources.Load<StyleSheet>(defaultStyleSheet));
@@ -44,12 +44,12 @@ namespace UI.Components.Item
 						if ( iconOn )
 						{
 								Image icon = new Image();
-								icon.image = item.icon.texture;
+								icon.image = itemType.icon.texture;
 								header.Add(icon);
 						}
 
 						TextElement headerName = new TextElement();
-						headerName.text = item.name;
+						headerName.text = itemType.name;
 						header.Add(headerName);
 
 						Add(header);
@@ -64,22 +64,22 @@ namespace UI.Components.Item
 				/// <summary>
 				/// Creates detail view of a weapon. 
 				/// </summary>
-				/// <param name="weapon">weapon which's properties are displayed in the detail view </param>
+				/// <param name="weaponType">weapon which's properties are displayed in the detail view </param>
 				/// <param name="iconOn">decides whether or not the detail view displays the item's icon </param>
-				public ItemDetailPanel(WeaponSO weapon, bool iconOn) : this(( ItemSO )weapon, iconOn)
+				public ItemDetailPanel(WeaponTypeSO weaponType, bool iconOn) : this(( ItemTypeSO )weaponType, iconOn)
 				{
 						// adding stats
 						VisualElement stats = new VisualElement();
 
-						StatBulletPoint damage = new StatBulletPoint(StatType.DAMAGE, calculateWeaponDamage(weapon));
+						StatBulletPoint damage = new StatBulletPoint(StatType.DAMAGE, calculateWeaponDamage(weaponType));
 						stats.Add(damage);
-						StatBulletPoint range = new StatBulletPoint(StatType.RANGE, calculateWeaponRange(weapon));
+						StatBulletPoint range = new StatBulletPoint(StatType.RANGE, calculateWeaponRange(weaponType));
 						stats.Add(range);
 
 						Add(stats);
 
 						// adding abilities
-						if ( weapon.abilities.Length > 0 )
+						if ( weaponType.abilities.Length > 0 )
 						{
 								TextElement abilityHeader = new TextElement();
 								abilityHeader.text = "Abilities: ";
@@ -87,7 +87,7 @@ namespace UI.Components.Item
 
 								VisualElement abilities = new VisualElement();
 
-								foreach(AbilitySO ability in weapon.abilities)
+								foreach(AbilitySO ability in weaponType.abilities)
 								{
 										Image abilityIcon = new Image();
 										abilityIcon.image = ability.icon.texture;
@@ -107,20 +107,20 @@ namespace UI.Components.Item
 				/// <summary>
 				/// Creates detail view of an armor piece. 
 				/// </summary>
-				/// <param name="armor">armor which's properties are displayed in the detail view </param>
-				public ItemDetailPanel(ArmorSO armor) : this(armor, ICON_ON_DEFAULT) { }
+				/// <param name="armorType">armor which's properties are displayed in the detail view </param>
+				public ItemDetailPanel(ArmorTypeSO armorType) : this(armorType, ICON_ON_DEFAULT) { }
 
 				/// <summary>
 				/// Creates detail view of an armor piece. 
 				/// </summary>
-				/// <param name="armor">armor which's properties are displayed in the detail view </param>
+				/// <param name="armorType">armor which's properties are displayed in the detail view </param>
 				/// <param name="iconOn">decides whether or not the detail view displays the item's icon </param>
-				public ItemDetailPanel(ArmorSO armor, bool iconOn) : this((ItemSO) armor, iconOn)
+				public ItemDetailPanel(ArmorTypeSO armorType, bool iconOn) : this((ItemTypeSO) armorType, iconOn)
 				{
 						// adding stats
 						VisualElement stats = new VisualElement();
 
-						StatBulletPoint defense = new StatBulletPoint(StatType.DEFENSE, armor.armor);
+						StatBulletPoint defense = new StatBulletPoint(StatType.DEFENSE, armorType.armor);
 						stats.Add(defense);
 				}
 
@@ -130,15 +130,15 @@ namespace UI.Components.Item
 				/// Decides the displayed damage of a weapon. (Here, it's the maximum base damage of its abilities.) 
 				/// TODO: Should be placed in WeaponSO (not done yet due to merging issues). 
 				/// </summary>
-				/// <param name="weapon">Weapon which's damage is calculated</param>
+				/// <param name="weaponType">Weapon which's damage is calculated</param>
 				/// <returns>Damage of the weapon</returns>
-				private int calculateWeaponDamage(WeaponSO weapon)
+				private int calculateWeaponDamage(WeaponTypeSO weaponType)
 				{
 						int damage = 0;
 
 						List<TargetedEffect> targetedEffects = new List<TargetedEffect>();
 
-						foreach(AbilitySO ability in weapon.abilities)
+						foreach(AbilitySO ability in weaponType.abilities)
 						{
 								targetedEffects.AddRange(ability.targetedEffects);
 						}
@@ -156,13 +156,13 @@ namespace UI.Components.Item
 				/// Decides the displayed range of a weapon. (Here, it's the maximum range of its abilities.) 
 				/// TODO: Should be placed in WeaponSO (not done yet due to merging issues). 
 				/// </summary>
-				/// <param name="weapon">Weapon which's range is calculated</param>
+				/// <param name="weaponType">Weapon which's range is calculated</param>
 				/// <returns>Range of the weapon</returns>
-				private int calculateWeaponRange(WeaponSO weapon)
+				private int calculateWeaponRange(WeaponTypeSO weaponType)
 				{
 						int range = 0;
 						
-						foreach ( AbilitySO ability in weapon.abilities )
+						foreach ( AbilitySO ability in weaponType.abilities )
 						{
 								if ( range < ability.range )
 										range = ability.range;

@@ -1,4 +1,6 @@
-﻿using Grid;
+﻿using System.Collections.Generic;
+using Grid;
+using Level.Grid.ItemGrid;
 using UnityEngine;
 using WorldObjects;
 
@@ -10,52 +12,51 @@ namespace Visual {
         //new
         [SerializeField] private GridDataSO gridData;
         [SerializeField] private GridContainerSO gridContainer;
-        [SerializeField] private ItemContainerSO itemDictionary;
+        [SerializeField] private ItemTypeContainerSO itemTypeDictionary;
         
         //item
         [SerializeField] private GameObject itemParent;
         private GameObject[,,] _itemObjects = new GameObject[1, 1, 1];
 
-
-        public void RedrawItems() {
-	        //todo
-	        //check if draw array is big enough
-	        ResizeItemObjects(gridData); 
-	        
-	        var items = gridContainer.items;
-
-	        // for each
-	        for ( int layer = 0; layer < items.Length; layer++ ) {
-		        var currentItemGrid = items[layer];
-		        for ( int y = 0; y < currentItemGrid.Depth; y++ ) {
-			        for ( int x = 0; x < currentItemGrid.Width; x++ ) {
-				        
-				        var item = currentItemGrid.GetGridObject(x, y);
-				        var itemRepresentation = _itemObjects[x, layer, y];
-				        var worldPos = gridData.GetWorldPosFromGridPos(x, layer, y) + gridData.GetCellCenter();
-				        var gridPos = new Vector3Int(x, layer, y);
-				        
-				        if ( item.Exists() ) {
-					        // create GameObject at
-					        if ( itemRepresentation != null ) {
-						        //check if it is the right object
-						        ChangeItemGameObject(item.ID, gridPos, _itemObjects);
-					        }
-					        else {
-						        //get prefab from item id
-										CreateItemGameObject(item.ID, worldPos, gridPos, _itemObjects);
-					        }
-				        }
-				        else {
-					        if ( itemRepresentation != null ) {
-						        RemoveItemGameObject(gridPos, _itemObjects);
-					        }
-				        }
-				        
-			        }
-		        }
-	        }
-        }
+        // public void RedrawItems() {
+	       //  //todo
+	       //  //check if draw array is big enough
+	       //  ResizeItemObjects(gridData); 
+	       //  
+	       //  // var items = gridContainer.items;
+        //
+	       //  // for each
+	       //  for ( int layer = 0; layer < items.Length; layer++ ) {
+		      //   var currentItemGrid = items[layer];
+		      //   for ( int y = 0; y < currentItemGrid.Depth; y++ ) {
+			     //    for ( int x = 0; x < currentItemGrid.Width; x++ ) {
+				    //     
+				    //     var item = currentItemGrid.GetGridObject(x, y);
+				    //     var itemRepresentation = _itemObjects[x, layer, y];
+				    //     var worldPos = gridData.GetWorldPosFromGridPos(x, layer, y) + gridData.GetCellCenter();
+				    //     var gridPos = new Vector3Int(x, layer, y);
+				    //     
+				    //     if ( item.Exists() ) {
+					   //      // create GameObject at
+					   //      if ( itemRepresentation != null ) {
+						  //       //check if it is the right object
+						  //       ChangeItemGameObject(item.ID, gridPos, _itemObjects);
+					   //      }
+					   //      else {
+						  //       //get prefab from item id
+								// 		CreateItemGameObject(item.ID, worldPos, gridPos, _itemObjects);
+					   //      }
+				    //     }
+				    //     else {
+					   //      if ( itemRepresentation != null ) {
+						  //       RemoveItemGameObject(gridPos, _itemObjects);
+					   //      }
+				    //     }
+				    //     
+			     //    }
+		      //   }
+	       //  }
+        // }
 
         private void ResizeItemObjects(GridDataSO grid) {
 	        var width = grid.Width;
@@ -73,15 +74,15 @@ namespace Visual {
         }
 
         private void ChangeItemGameObject(int id, Vector3Int gridPos, GameObject[,,] items) {
-	        var itemData = itemDictionary.itemList[id];
+	        var itemData = itemTypeDictionary.itemList[id];
 	        var item = items[gridPos.x, gridPos.y, gridPos.z];
 	        var itemComponent = item.GetComponent<ItemComponent>();
 	        itemComponent.InitItem(itemData, gridPos);
         }
         
         private void CreateItemGameObject(int id, Vector3 worldPos, Vector3Int gridPos, GameObject[,,] itemComponents) {
-	        ItemSO itemType = itemDictionary.itemList[id];
-	        var prefab = itemType.prefab;
+	        ItemTypeSO itemTypeType = itemTypeDictionary.itemList[id];
+	        var prefab = itemTypeType.prefab;
 	        var obj = GameObject.Instantiate(
 		        original: prefab, 
 		        position: worldPos,
@@ -90,8 +91,8 @@ namespace Visual {
 	        obj.transform.SetParent(itemParent.transform);
 	        itemComponents[gridPos.x, gridPos.y, gridPos.z] = obj;
 	        ItemComponent itemComponent = itemComponents[gridPos.x, gridPos.y, gridPos.z].GetComponent<ItemComponent>();
-					itemComponent.Type = itemType;
-					itemComponent.InitItem(itemType, gridPos);
+					itemComponent.Type = itemTypeType;
+					itemComponent.InitItem(itemTypeType, gridPos);
 					// itemComponent.Reset();
         }
 
@@ -168,6 +169,28 @@ namespace Visual {
         public void DrawCursorAt(Vector3 pos) {
             throw new System.NotImplementedException();
         }
+
+        // public List<GameObject> GetAllItems() {
+	       //  List<GameObject> items = new List<GameObject>();
+        //
+	       //  ItemGrid[] itemsGrid = gridContainer.items;
+	       //  
+	       //  for ( int layer = 0; layer < itemsGrid.Length; layer++ ) {
+		      //   ItemGrid currentItemGrid = itemsGrid[layer];
+		      //   for ( int y = 0; y < currentItemGrid.Depth; y++ ) {
+			     //    for ( int x = 0; x < currentItemGrid.Width; x++ ) {
+							 //  Item item = currentItemGrid.GetGridObject(x, y);
+							 //  GameObject itemRepresentation = _itemObjects[x, layer, y];
+        //
+							 //  if ( itemRepresentation is { } ) {
+								//   items.Add(itemRepresentation);
+							 //  }
+			     //    }
+		      //   }
+	       //  }
+        //
+	       //  return items;
+        // }
         
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
  
