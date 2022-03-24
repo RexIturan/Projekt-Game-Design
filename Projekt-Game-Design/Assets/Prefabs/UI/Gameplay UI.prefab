@@ -127,7 +127,7 @@ MonoBehaviour:
   VictoryColor: {r: 0, g: 1, b: 0, a: 1}
   componentNames:
     gameEndLabel: GameEndLabel
-    backToMenuButton: BackToManu
+    backToMenuButton: BackToMenu
     exitGameButton: Exit
   ExitGameEC: {fileID: 11400000, guid: ee3583ef0c2a49f4fb8dcf23f05248d1, type: 2}
   loadMenuEC: {fileID: 11400000, guid: d4f619ca60109054faab02a134bbbf02, type: 2}

@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/EndGameScreen.uss?fileID=7433441132597879392&amp;guid=75bccb72f8513444fa49299f2ed12c1d&amp;type=3#EndGameScreen" />
     <ui:VisualElement name="Background" style="align-items: center; justify-content: center; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.72);">
-        <ui:Label text="Game Over" display-tooltip-when-elided="true" name="GameEndLabel" style="font-size: 100px; height: 30%; -unity-text-align: middle-center; color: rgba(255, 255, 255, 255);" />
+        <ui:Label text="Game Over" display-tooltip-when-elided="true" name="GameEndLabel" style="font-size: 100px; height: 30%; -unity-text-align: middle-center; color: rgb(255, 255, 255);" />
         <ui:VisualElement style="flex-direction: row; width: 100%; justify-content: center; height: 32%; align-items: center;">
-            <ui:Button text="Back To Manu" display-tooltip-when-elided="true" name="BackToManu" class="endScreenButton" />
+            <ui:Button text="Back To Menu" display-tooltip-when-elided="true" name="BackToMenu" class="endScreenButton" />
             <ui:Button text="Exit" display-tooltip-when-elided="true" name="Exit" class="endScreenButton" />
         </ui:VisualElement>
     </ui:VisualElement>
