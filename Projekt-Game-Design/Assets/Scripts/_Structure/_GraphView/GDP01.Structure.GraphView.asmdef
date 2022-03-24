@@ -2,16 +2,12 @@
     "name": "GDP01.Structure.GraphView",
     "rootNamespace": "",
     "references": [
-        "GUID:6077d53cee304074ab132af0ea2850ae",
-        "GUID:20e1af7e65b430244924993fb3219d29",
-        "GUID:18b4fb767b8f81047b7c24fdec94709e",
-        "GUID:f5a2611bdfe852b4c8fca5bac89a209d",
-        "GUID:b18b07c5396e40141b83c74e8bc86a03",
-        "GUID:e3dbde8db2a8c084f97dd1f478882d5f",
-        "GUID:b88a5f528fbef8a4394e710350d152b1",
-        "GUID:25b3b89fd23d4fa4eacc4d3f79f1cae8",
-        "GUID:e1451e5080ad5ef45aa6b76d1020ed08",
-        "GUID:e26626b741194d64fa42f482337cf8f3"
+        "Unity.GraphTools.Foundation.Overdrive.CommandStateObserver",
+        "Unity.GraphTools.Foundation.Overdrive.Model",
+        "Unity.GraphTools.Foundation.Overdrive.Editor",
+        "Unity.GraphTools.Foundation.Overdrive",
+        "GDP01.Structure.Types",
+        "GDP01.Structure"
     ],
     "includePlatforms": [
         "Editor"
