@@ -2,6 +2,7 @@
 	public enum ScreenType {
 		None,
 		Background,
-		Menu
+		Menu,
+		Overlay
 	}
 }

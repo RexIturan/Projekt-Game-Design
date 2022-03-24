@@ -9,6 +9,7 @@ using Input;
 using LevelEditor;
 using Player;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Util;
 using WorldObjects;
 
@@ -162,6 +163,8 @@ namespace GDP01.Player.Player {
 		}
 
 		private void Update() {
+			if(EventSystem.current.IsPointerOverGameObject()) return;
+			
 			if ( inputCache.IsMouseOverUI ) return;
 			//todo(vincent) i maybe destroyed this
 			if ( menuOpened ) return;

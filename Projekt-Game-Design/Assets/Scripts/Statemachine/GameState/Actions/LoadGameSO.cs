@@ -3,7 +3,7 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "LoadGame", menuName = "State Machines/Actions/Load Game")]
+[CreateAssetMenu(fileName = "LoadGame", menuName = "State Machines/Actions/GameState/Load Game")]
 public class LoadGameSO : StateActionSO
 {
 	public override StateAction CreateAction() => new LoadGame();

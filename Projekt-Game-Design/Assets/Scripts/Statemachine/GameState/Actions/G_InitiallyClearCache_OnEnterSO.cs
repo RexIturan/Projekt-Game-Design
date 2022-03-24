@@ -20,8 +20,7 @@ public class G_InitiallyClearCache_OnEnter : StateAction
 		public override void OnUpdate() { }
 
 		public override void OnStateEnter() {
-				_gameSC.defeat = false;
-				_gameSC.victory = false;
+			_gameSC.ResetGameState();
 		}
 
 		public override void OnStateExit() { }

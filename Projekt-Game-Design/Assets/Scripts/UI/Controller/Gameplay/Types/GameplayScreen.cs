@@ -2,5 +2,6 @@
 	public enum GameplayScreen {
 		Gameplay,
 		Inventory,
+		GameEnd
 	}
 }

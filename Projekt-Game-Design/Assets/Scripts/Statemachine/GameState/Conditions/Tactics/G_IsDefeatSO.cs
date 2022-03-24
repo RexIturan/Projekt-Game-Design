@@ -17,9 +17,8 @@ public class G_IsDefeat : Condition
 		_gameSc = stateMachine.gameObject.GetComponent<GameSC>();
 	}
 	
-	protected override bool Statement()
-	{
-		return _gameSc.defeat;
+	protected override bool Statement() {
+		return _gameSc.gameOver;
 	}
 	
 	public override void OnStateEnter()

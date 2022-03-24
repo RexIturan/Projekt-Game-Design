@@ -10,9 +10,7 @@ namespace Statemachine.GameState.Conditions.Structure {
 		protected override Condition CreateCondition() => new ShouldStartGameCondition();
 	}
 
-	public class ShouldStartGameCondition : Condition
-	{
-		protected new ExitedGameSO OriginSO => (ExitedGameSO)base.OriginSO;
+	public class ShouldStartGameCondition : Condition	{
 		private GameSC _gameSc;
 
 		public override void Awake(StateMachine stateMachine) {
@@ -23,13 +21,9 @@ namespace Statemachine.GameState.Conditions.Structure {
 			return _gameSc.start;
 		}
 	
-		public override void OnStateEnter()
-		{
-		}
+		public override void OnStateEnter() {}
 	
-		public override void OnStateExit()
-		{
-		}
+		public override void OnStateExit() {}
 	}
 }
 

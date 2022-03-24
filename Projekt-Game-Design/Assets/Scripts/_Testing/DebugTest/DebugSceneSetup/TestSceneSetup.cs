@@ -18,7 +18,7 @@ namespace DebugTest.DebugSceneSetup {
 
         private void Start() {
 	        gameSc.initializedGame = true;
-	        gameSc.isInTacticsMode = true;
+	        // gameSc.isInTacticsMode = true;
         }
         
         private void OnDestroy() {

@@ -65,7 +65,7 @@ public class PauseMenuUIController : MonoBehaviour {
 		_saveButton.clicked += HandleSave;
 		_optionsButton.clicked += ShowOptionsScreen;
 		_loadButton.clicked += HandleLoad;
-		_backToMenuButton.clicked += MainMenuButtonPressed;
+		_backToMenuButton.clicked += HandleMainMenuButton;
 		_resumeButton.clicked += HandleResumeButton;
 		_quitButton.clicked += HandleQuitGame;
 
@@ -81,7 +81,7 @@ public class PauseMenuUIController : MonoBehaviour {
 		_saveButton.clicked -= HandleSave;
 		_optionsButton.clicked -= ShowOptionsScreen;
 		_loadButton.clicked -= HandleLoad;
-		_backToMenuButton.clicked -= MainMenuButtonPressed;
+		_backToMenuButton.clicked -= HandleMainMenuButton;
 		_resumeButton.clicked -= HandleResumeButton;
 		_quitButton.clicked -= HandleQuitGame;
 		
@@ -128,7 +128,7 @@ public class PauseMenuUIController : MonoBehaviour {
 		}
 	}
 
-	void MainMenuButtonPressed() {
+	void HandleMainMenuButton() {
 		// load Scene
 		loadMenuEC.RaiseEvent(menuToLoad, true);
 		

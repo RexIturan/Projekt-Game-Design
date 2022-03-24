@@ -36,6 +36,11 @@ namespace Characters.Equipment.ScriptableObjects {
 
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////		
 		
+		public void Init() {
+			ClearClaimedIds();
+			equipmentSheets.Clear();
+		}
+
 		public ItemSO GetItemFromEquipment(int playerID, EquipmentPosition equipmentPosition) {
 			return EquipmentSheets[playerID].GetEquipedItem(equipmentPosition);
 		}

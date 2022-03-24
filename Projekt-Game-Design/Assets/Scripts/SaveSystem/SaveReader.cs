@@ -90,7 +90,8 @@ namespace SaveSystem {
 		
 		private void ReadEquipmentInventory(List<Inventory_Save> saveEquipmentInventory,
 			EquipmentContainerSO equipmentContainer) {
-			equipmentContainer.EquipmentSheets.Clear();
+			equipmentContainer.Init();
+			
 			
 			foreach (var equipmentSheetSave in saveEquipmentInventory) {
 				int id = equipmentContainer.CreateNewEquipmentSheet();

@@ -28,7 +28,7 @@ public class ModeSelected : Condition
 		bool statement = false;
 		switch (_mode) {
 			case Mode.Tactics:
-				statement = _gameSc.isInTacticsMode;
+				statement = true;
 				break;
 			case Mode.Macro:
 				throw new ArgumentOutOfRangeException();

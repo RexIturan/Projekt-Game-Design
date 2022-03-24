@@ -20,7 +20,7 @@ namespace GDP01.Characters.Component {
 					get => _equipmentID;
 
 					set {
-						if(value < 0) Debug.LogError("EquipmentId should be greater then 0");
+						if(value < 0) Debug.LogError($"EquipmentId is {value}, but must be >= 0");
 						
 						equipmentContainer.UnclaimId(_equipmentID);
 

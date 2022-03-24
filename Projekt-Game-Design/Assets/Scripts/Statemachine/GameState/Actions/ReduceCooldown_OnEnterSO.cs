@@ -6,7 +6,7 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "ReduceCooldown", menuName = "State Machines/Actions/Reduce Cooldown")]
+[CreateAssetMenu(fileName = "ReduceCooldown", menuName = "State Machines/Actions/GameState/Reduce Cooldown")]
 public class ReduceCooldown_OnEnterSO : StateActionSO {
 	public override StateAction CreateAction() => new ReduceCooldown_OnEnter();
 }

@@ -9,10 +9,12 @@ namespace UI.Gameplay {
 		[SerializeField] private BoolEventChannelSO SetMenuVisibilityEC;
 		[SerializeField] private BoolEventChannelSO setGameOverlayVisibilityEC;
 		[SerializeField] private BoolEventChannelSO setInventoryVisibilityEC;
-		
+
 		[Header("Receiving Events On")]
 		[SerializeField] private VoidEventChannelSO uiToggleMenuEC;
 		[SerializeField] private ScreenEventChannelSO uiToggleScreenEC;
+		[SerializeField] private VoidEventChannelSO GameEndScreenEC;
+		[SerializeField] private VoidEventChannelSO QuestScreenEC;
 		
 		[Header("Screen Handeling")] 
 		[SerializeField] private ScreenManager screenManager;
@@ -20,20 +22,31 @@ namespace UI.Gameplay {
 		[SerializeField] private ScreenController inventoryScreen;
 		[SerializeField] private ScreenController pauseScreen;
 		[SerializeField] private ScreenController questScreen;
+		[SerializeField] private ScreenController gameEndScreen;
 		
 ///// Private Variables ////////////////////////////////////////////////////////////////////////////
 
 		private MenuScreen menuScreen;
 		private GameplayScreen currentScreen;
+		private bool showQuestScreen = true;
+		private bool showGameEndScreen = false;
 
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
 		private void SetGameplayScreenVisibility(bool value) {
 			//old
 			// setGameOverlayVisibilityEC.RaiseEvent(value);
-			
+
 			//new
 			screenManager.SetScreenVisibility(overlayScreen, value);
+
+			if ( showQuestScreen ) {
+				screenManager.SetScreenVisibility(questScreen, value);
+			}
+
+			if ( showGameEndScreen ) {
+				screenManager.SetScreenVisibility(gameEndScreen, value);
+			}
 		}
 
 		private void SetInventoryScreenVisibility(bool value) {
@@ -99,6 +112,7 @@ namespace UI.Gameplay {
 					EnableGampleyScreen();
 					menuScreen = MenuScreen.None;
 					break;
+				
 			}
 		}
 
@@ -126,6 +140,26 @@ namespace UI.Gameplay {
 			}
 		}
 		
+		//todo(vincent) should work i would like something more general 
+		private void HandleQuestScreenToggle() {
+			showQuestScreen = !showQuestScreen;
+			
+			if(menuScreen == MenuScreen.PauseMenu)
+				return;
+			
+			if(currentScreen == GameplayScreen.Gameplay)
+				screenManager.SetScreenVisibility(questScreen, showQuestScreen);
+		}
+
+		private void HandleGameEndScreenToggle() {
+			showGameEndScreen = !showGameEndScreen;
+			
+			if(menuScreen == MenuScreen.PauseMenu)
+				TryToggleMenu();
+			
+			SwitchGameplayScreen(GameplayScreen.Gameplay);
+		}
+		
 ///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
 
 		private void Start() {
@@ -136,11 +170,15 @@ namespace UI.Gameplay {
 		private void Awake() {
 			uiToggleMenuEC.OnEventRaised += TryToggleMenu;
 			uiToggleScreenEC.OnEventRaised += TryToggleScreen;
+			GameEndScreenEC.OnEventRaised += HandleGameEndScreenToggle;
+			QuestScreenEC.OnEventRaised += HandleQuestScreenToggle;
 		}
 
 		private void OnDisable() {
 			uiToggleMenuEC.OnEventRaised -= TryToggleMenu;
 			uiToggleScreenEC.OnEventRaised -= TryToggleScreen;
+			GameEndScreenEC.OnEventRaised -= HandleGameEndScreenToggle;
+			QuestScreenEC.OnEventRaised -= HandleQuestScreenToggle;
 		}
 	}
 }

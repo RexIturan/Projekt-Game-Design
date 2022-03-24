@@ -33,7 +33,26 @@ MonoBehaviour:
       strengthBonus: 0.52
       dexterityBonus: 0
       intelligenceBonus: 0
-    targets: 23
+    targets: 22
+    targetIsCenter: 1
+    area:
+      stringPattern: '- x -
+
+        x[x]x
+
+        - x -'
+      rows:
+      - line: 000100
+      - line: 010101
+      - line: 000100
+      anchor: {x: 1, y: 1}
+  - effect:
+      type: 1
+      baseDamage: 30
+      strengthBonus: 0.52
+      dexterityBonus: 0
+      intelligenceBonus: 0
+    targets: 1
     targetIsCenter: 1
     area:
       stringPattern: '- x -

@@ -27,6 +27,8 @@ public class TacticsGameDataSO : ScriptableObject {
 
     public void Reset() {
         turnNum = 0;
+        currentPlayerIndex = 0;
+        currentPlayer = turnOrder[currentPlayerIndex];
     }
 }
 

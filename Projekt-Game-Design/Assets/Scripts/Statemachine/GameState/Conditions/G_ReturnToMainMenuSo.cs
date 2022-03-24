@@ -18,17 +18,14 @@ namespace Statemachine.GameState.Conditions {
 			_gameSC = stateMachine.GetComponent<GameSC>();
 		}
 	
-		protected override bool Statement()
-		{
-			return _gameSC.reload;
+		protected override bool Statement() {
+			return _gameSC.backToMainMenu;
 		}
 	
-		public override void OnStateEnter()
-		{
-		}
+		public override void OnStateEnter(){}
 	
 		public override void OnStateExit() {
-			_gameSC.reload = false;
+			_gameSC.backToMainMenu = false;
 		}
 	}
 }

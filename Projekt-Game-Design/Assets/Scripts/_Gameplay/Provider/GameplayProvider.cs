@@ -17,11 +17,18 @@ namespace GDP01._Gameplay.Provider {
 		#endregion
 		
 		private GameplayProvider() {}
+
+		//todo remove when transitioned to new save system
+		private CharacterList _characterList;
+		public CharacterList CharacterList => TryGetAndCacheComponentOfTypeInActiveScene(ref _characterList);
 		
 		private CharacterManager _characterManager;
 		public CharacterManager CharacterManager => TryGetAndCacheComponentOfTypeInActiveScene(ref _characterManager);
 
 		private WorldObjectManager _worldObjectManager;
 		public WorldObjectManager WorldObjectManager => TryGetAndCacheComponentOfTypeInActiveScene(ref _worldObjectManager);
+		
+		
+		
 	}
 }

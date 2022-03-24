@@ -1,13 +1,15 @@
 {
     "name": "GDP01.GameManager",
-    "rootNamespace": "GDP01.GameManager",
+    "rootNamespace": "",
     "references": [
-        "GUID:d8d86edead9285548a0b5203ad54c5e3",
-        "GUID:a46fa3f8826f4e5408526f4eeccb2e6a",
-        "GUID:bd4d88f6695cbba4095968043b9ed903",
-        "GUID:c2bdc2cb200c8844192c5472ae6ae4e6",
-        "GUID:55a703282c6fb1b44be30d5981192602",
-        "GUID:08a65659543cc7441a1677f652290219"
+        "GDP01.Gameplay.EventChannels",
+        "GDP01.Gameplay.Types",
+        "GDP01.EventChannel",
+        "GDP01.SceneManagement",
+        "GDP01.SaveSystem",
+        "GDP01.SceneManagement.Types",
+        "GDP01.Gameplay",
+        "GDP01.Util.Singleton"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

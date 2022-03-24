@@ -60,7 +60,7 @@ public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterDat
 	
 	//todo remove
 	public void Initialize() {
-		id = -1;
+		id = 0;
 		active = false;
 
 		//stats
@@ -83,7 +83,7 @@ public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterDat
 		_modelController.SetFactionMaterial(_statistics.Faction);
 
 		//Equipment
-		_equipmentController.EquipmentID = -1; // playerSpawnData.equipmentID;
+		_equipmentController.EquipmentID = id; // playerSpawnData.equipmentID;
 
 		//Abilities
 		_abilityController.BaseAbilities = playerType.basicAbilities;

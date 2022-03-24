@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Characters.Types;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using GameManager.ScriptableObjects;
 using SaveSystem;
 using SaveSystem.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
@@ -39,43 +41,42 @@ namespace GameManager {
 		private bool _hasSaveData = false;
 
 		[Header("StateMachine")] public bool start;
-		public bool reload;
+		public bool backToMainMenu;
 
 		public bool evaluated;
 
 		// structure
-		public bool shouldExit;
-		public bool exited;
-
 		public bool initializedGame;
 
-		// todo refactor to enum
-		public bool isInTacticsMode;
-
 		// public bool isInMacroMode;
-		public bool defeat;
+		public bool gameOver;
 		public bool victory;
+
+		[Header("Victory Conditions"), SerializeField] private List<GameEndConditionSO> victoryConditions;
+		[Header("GameOver Conditions"), SerializeField] private List<GameEndConditionSO> gameOverConditions;
 
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
 
 		public Faction CurrentPlayer => tacticsData.currentPlayer;
 
+///// Private Functions ////////////////////////////////////////////////////////////////////////////
+
+		
+
 /////	Callbacks
 
 		private void HandleStartGame() {
 			start = true;
-			defeat = false;
+			gameOver = false;
 			victory = false;
 			// evaluated = false;
-			reload = false;
+			backToMainMenu = false;
 
-			shouldExit = false;
-			exited = false;
 			initializedGame = false;
 		}
 
 		private void HandleDefeat() {
-			defeat = true;
+			gameOver = true;
 		}
 
 		private void HandleVictory() {
@@ -84,7 +85,7 @@ namespace GameManager {
 
 		void HandlelocationLoaded() {
 			initializedGame = true;
-			isInTacticsMode = true;
+			// isInTacticsMode = true;
 		}
 
 		private void HandleEndTurn(Faction faction) {
@@ -105,6 +106,8 @@ namespace GameManager {
 			// newTurnEC.RaiseEvent(faction);
 		}
 
+///// Public Functions /////////////////////////////////////////////////////////////////////////////		
+		
 		public void UpdateOverlay(Faction faction) {
 			newTurnEC.RaiseEvent(faction);
 		}
@@ -131,6 +134,38 @@ namespace GameManager {
 		// 	}
 		// }
 
+		public void ResetGameState() {
+			gameOver = false;
+			victory = false;
+
+			start = false;
+			backToMainMenu = false;
+			initializedGame = false;
+
+			//todo set when evaluating ???
+			evaluated = true;
+			
+			tacticsData.Reset();
+		}
+		
+		public void CheckGameEndingConditions() {
+			//for each gameover condition -> check ->
+			// -> set gameOver = true
+			foreach ( var condition in gameOverConditions ) {
+				if ( condition.CheckCondition() ) {
+					gameOver = true;
+				}
+			}
+			
+			// for each victory condition -> check
+			// -> set victory = true
+			foreach ( var condition in victoryConditions ) {
+				if ( condition.CheckCondition() ) {
+					victory = true;
+				}
+			}
+		}
+		
 /////	Unity Functions
 		private void Awake() {
 			startGameEC.OnEventRaised += HandleStartGame;
