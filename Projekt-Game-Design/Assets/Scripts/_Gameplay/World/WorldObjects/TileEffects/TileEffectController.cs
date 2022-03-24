@@ -13,7 +13,12 @@ namespace GDP01.TileEffects
 		/// </summary>
     public class TileEffectController : MonoBehaviour
     {
+				public int id;
+
 				[SerializeField] private List<TileEffectSO> effects;
+				[SerializeField] private List<TileEffectSO> preActivationEffects;
+				[SerializeField] private List<TileEffectSO> startEffects;
+				[SerializeField] private List<TileEffectSO> removeSchedule;
 
 				[SerializeField] private TileBase inactiveTile;
 				[SerializeField] private TileBase activeTile;
@@ -52,15 +57,19 @@ namespace GDP01.TileEffects
 						return active ? activeTile : inactiveTile;
 				}
 
-				public void AddEffect(TileEffectSO effect) {
-						effects.Add(effect);
-				}
-
 				public void SetTimeUntilActivation(int turns) {
 						timeUntilActivation = turns;
 
 						if ( timeUntilActivation > 0 )
 								active = false;
+				}
+
+				public int GetTimeUntilActivation() {
+						return timeUntilActivation;
+				}
+
+				public int GetTimeToLive() {
+						return timeToLive;
 				}
 
 				public void SetTimeToLive(int turns) {
@@ -71,11 +80,36 @@ namespace GDP01.TileEffects
 						this.eternal = eternal;
 				}
 
+				public bool GetEternal()
+				{
+						return eternal;
+				}
+
+				public bool GetActive() {
+						return active;
+				}
+
 				public bool GetDestroy() {
 						return destroy;
 				}
 
 				#endregion
+				
+				public void AddEffect(TileEffectSO effect) {
+						effects.Add(effect);
+				}
+
+				public void RemoveEffect(TileEffectSO effect) {
+						removeSchedule.Add(effect);
+				}
+
+				public void RemoveScheduledEffects() {
+						foreach ( TileEffectSO effect in removeSchedule ) {
+								effects.Remove(effect);
+								preActivationEffects.Remove(effect);
+						}
+						removeSchedule.Clear();
+				}
 
 				private void Awake()
 				{
@@ -94,9 +128,15 @@ namespace GDP01.TileEffects
 						if(timeUntilActivation <= 0 && !destroy) {
 								active = true;
 						}
+
+						foreach(TileEffectSO effect in startEffects) {
+								effect.OnAction(this);
+						}
 				}
 
 				private void HandleOnEnter(Vector3Int pos, GameObject obj) {
+						RemoveScheduledEffects();
+
 						if(active && pos.Equals(GetComponent<GridTransform>().gridPosition)) {
 								foreach ( TileEffectSO effect in effects ) {
 										if(effect.actionOnEnter)
@@ -105,8 +145,9 @@ namespace GDP01.TileEffects
 						}
 				}
 
-				private void HandleOnExit(Vector3Int pos, GameObject obj)
-				{
+				private void HandleOnExit(Vector3Int pos, GameObject obj) {
+						RemoveScheduledEffects();
+
 						if ( active && pos.Equals(GetComponent<GridTransform>().gridPosition) ) {
 								foreach ( TileEffectSO effect in effects ) {
 										if(effect.actionOnExit)
@@ -120,6 +161,8 @@ namespace GDP01.TileEffects
 				/// and, if active, takes actions. 
 				/// </summary>
 				public void OnAction() {
+						RemoveScheduledEffects();
+
 						// only do anything if the effect is not queued to destruction 
 						if ( !destroy ) {
 								// pre-active phase
@@ -128,6 +171,11 @@ namespace GDP01.TileEffects
 
 										if ( timeUntilActivation <= 0 )
 												active = true;
+
+										// actions for every update before activation
+										foreach ( TileEffectSO effect in preActivationEffects ) {
+												effect.OnAction(this);
+										}
 								}
 								// active phase
 								else {

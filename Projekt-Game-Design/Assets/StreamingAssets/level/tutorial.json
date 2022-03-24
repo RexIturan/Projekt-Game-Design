@@ -333,31 +333,21 @@
 	{
       "prefabID": 0,
       "position": {
-        "x": 7,
+        "x": 2,
         "y": 1,
-        "z": 24
+        "z": 22
       },
-	  "timeUntilActivation": 0,
-      "timeToLive": 2
-	},
-	{
-      "prefabID": 0,
-      "position": {
-        "x": 6,
-        "y": 1,
-        "z": 24
-      },
-	  "timeUntilActivation": 0,
+	  "timeUntilActivation": 1,
       "timeToLive": 4
 	},
 	{
       "prefabID": 0,
       "position": {
-        "x": 5,
+        "x": 11,
         "y": 1,
-        "z": 24
+        "z": 22
       },
-	  "timeUntilActivation": 0,
+	  "timeUntilActivation": 3,
       "timeToLive": 6
 	}
   ],

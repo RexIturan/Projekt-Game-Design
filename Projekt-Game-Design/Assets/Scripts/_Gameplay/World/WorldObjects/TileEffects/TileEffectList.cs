@@ -12,17 +12,24 @@ namespace GDP01.TileEffects
     public class TileEffectList : MonoBehaviour
     {
 				[SerializeField] private List<GameObject> tileEffects;
+				/// <summary>
+				/// List of effects that will be added upon next HandleTileEffects
+				/// </summary>
+				[SerializeField] private List<GameObject> scheduledEffects;
 				[SerializeField] private GameObject baseTileEffect;
 
+				[SerializeField] private CreateTileEffectEventChannelSO createTileEffectEC;
 				[SerializeField] private VoidEventChannelSO handleTileEffects;
 				[SerializeField] private VoidEventChannelSO clearTilemapEC;
 				[SerializeField] private DrawTileEventChannelSO drawTileEC;
 
 				public void Awake() {
+						createTileEffectEC.OnEventRaised += CreateTileEffect;
 						handleTileEffects.OnEventRaised += HandleTileEffects;
 				}
 
 				public void OnDestroy () {
+						createTileEffectEC.OnEventRaised -= CreateTileEffect;
 						handleTileEffects.OnEventRaised -= HandleTileEffects;
 				}
 
@@ -44,12 +51,47 @@ namespace GDP01.TileEffects
 						tileEffects.Clear();
 				}
 
+				/// <summary>
+				/// For game initialization. Is called by SaveLoader. 
+				/// </summary>
+				/// <param name="tileEffect">Tile effect that is added </param>
 				public void Add(GameObject tileEffect) {
-						tileEffects.Add(tileEffect);
+						scheduledEffects.Add(tileEffect);
+				}
+
+				private void CreateTileEffect(GameObject tileEffect, Vector3Int position) {
+						// only add if such a tile effect doesn't already exist
+						if ( !ExistsTileEffect(tileEffect, position) ) {
+								GameObject newTileEffect = Instantiate(tileEffect, Vector3.zero, Quaternion.identity, transform);
+								newTileEffect.GetComponent<GridTransform>().gridPosition = position;
+								Add(newTileEffect);
+						}
+				}
+
+				private bool ExistsTileEffect(GameObject newTileEffect, Vector3Int pos) {
+						int id = newTileEffect.GetComponent<TileEffectController>().id;
+
+						List<GameObject> allEffects = new List<GameObject>();
+						allEffects.AddRange(tileEffects);
+						allEffects.AddRange(scheduledEffects);
+
+						return allEffects.Exists(tileEffect => {
+								return tileEffect.GetComponent<TileEffectController>().id == id && 
+										tileEffect.GetComponent<GridTransform>().gridPosition.Equals(pos);
+						});
+				}
+
+				private void AddScheduledEffects() {
+						foreach(GameObject tileEffect in scheduledEffects) {
+								tileEffects.Add(tileEffect);
+						}
+						scheduledEffects.Clear();
 				}
 
 				public void HandleTileEffects()
 				{
+						AddScheduledEffects();
+
 						// evaluate effects etc. 
 						foreach(GameObject tileEffect in tileEffects) {
 								tileEffect.GetComponent<TileEffectController>().OnAction();

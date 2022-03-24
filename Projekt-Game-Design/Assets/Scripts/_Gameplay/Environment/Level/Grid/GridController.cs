@@ -75,6 +75,24 @@ namespace Grid {
 		#endregion
 		
 		#region Get
+		
+		/// <summary>
+		/// Returns the tile type at given position. 
+		/// </summary>
+		/// <param name="gridPos">Position within the grid </param>
+		/// <returns>Type of corresponding tile </returns>
+		public TileTypeSO GetTileAt(Vector3Int gridPos) {
+			int id = -1;
+			if( gridPos.y < gridContainer.tileGrids.Count ) {
+				Tile tile = gridContainer.tileGrids[gridPos.y].GetGridObject(gridPos.x, gridPos.z);
+
+				if (tile != null) { 
+					id = tile.tileTypeID;
+				}
+			}
+
+			return id >= 0 ? tileTypesContainer.tileTypes[id] : null;
+		}
 
 		public List<int> GetItemsAtGridPos(Vector3Int gridPos) {
 			List<int> items = new List<int>();

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileEffects: []
   baseTileEffect: {fileID: 497861194024093764, guid: 30a985767643f214ca1a957c316b118f, type: 3}
+  createTileEffectEC: {fileID: 11400000, guid: e973fdde918dba0438fe8b7cb4a3bbb4, type: 2}
   handleTileEffects: {fileID: 11400000, guid: 2c9482165dce16f47a2bcf5277d250e4, type: 2}
   clearTilemapEC: {fileID: 11400000, guid: 982685c396600e24dbc79476583d652e, type: 2}
   drawTileEC: {fileID: 11400000, guid: 23ed44330a99a8d46b8fc5834f6c6164, type: 2}
