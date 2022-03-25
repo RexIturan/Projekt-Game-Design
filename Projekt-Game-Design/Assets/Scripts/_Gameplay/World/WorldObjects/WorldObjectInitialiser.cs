@@ -15,11 +15,11 @@ namespace WorldObjects
 				[SerializeField] private ItemTypeContainerSO itemTypeContainer;
 				[SerializeField] private TileEffectContainerSO tileEffectContainer;
 
-				public void Initialise(List<Door_Save> door_Saves, 
+				public void Initialise(List<Door_Save> door_Saves,
 						List<Switch_Save> switch_Saves,
 						List<Junk_Save> junk_Saves,
+						List<TileEffect_Save> tileEffects_Saves,
 						List<Item_Save> itemSaves)
-						List<TileEffect_Save> tileEffects_Saves)
 				{
 						WorldObjectList worldObjects = WorldObjectList.FindInstant();
 						TileEffectList tileEffects = FindObjectOfType<TileEffectList>();
@@ -30,7 +30,7 @@ namespace WorldObjects
 
 						worldObjects.doors.Clear();
 
-						foreach(Door_Save door in door_Saves)
+						foreach ( Door_Save door in door_Saves )
 						{
 								DoorTypeSO type = doorContainer.doors[door.doorTypeId];
 								GameObject doorObj = Instantiate(type.prefab, parent, true);
@@ -42,7 +42,7 @@ namespace WorldObjects
 
 						worldObjects.switches.Clear();
 
-						foreach(Switch_Save switchSave in switch_Saves)
+						foreach ( Switch_Save switchSave in switch_Saves )
 						{
 								SwitchTypeSO type = switchContainer.switches[switchSave.switchTypeId];
 								GameObject switchObj = Instantiate(type.prefab, parent, true);
@@ -61,28 +61,30 @@ namespace WorldObjects
 								junkObj.GetComponent<Junk>().Initialise(junk, type);
 								worldObjects.junks.Add(junkObj);
 						}
-						
+
 						worldObjects.items.ClearGameObjectReferences();
-						foreach ( var itemSave in itemSaves ) {
-							ItemTypeSO itemType = itemTypeContainer.GetItemFromID(itemSave.id);
-							GameObject itemObj = Instantiate(itemType.prefab, worldObjects.ItemParent, true);
-							itemObj.GetComponent<ItemComponent>().InitItem(itemType, itemSave.gridPos);
-							worldObjects.items.Add(itemObj);
-
-						parent = GameObject.Find("WorldObjects/TileEffects").transform;
-
-						tileEffects.Clear();
-
-						foreach ( TileEffect_Save tileEffect in tileEffects_Saves )
+						foreach ( var itemSave in itemSaves )
 						{
-								GameObject prefab = tileEffectContainer.tileEffects[tileEffect.prefabID];
-								GameObject tileEffectObj = Instantiate(prefab, parent, true);
-								TileEffectController tileEffectController = tileEffectObj.GetComponent<TileEffectController>();
-								tileEffectController.SetTimeUntilActivation(tileEffect.timeUntilActivation);
-								tileEffectController.SetTimeToLive(tileEffect.timeToLive);
-								tileEffectObj.GetComponent<GridTransform>().gridPosition = tileEffect.position;
+								ItemTypeSO itemType = itemTypeContainer.GetItemFromID(itemSave.id);
+								GameObject itemObj = Instantiate(itemType.prefab, worldObjects.ItemParent, true);
+								itemObj.GetComponent<ItemComponent>().InitItem(itemType, itemSave.gridPos);
+								worldObjects.items.Add(itemObj);
 
-								tileEffects.Add(tileEffectObj);
+								parent = GameObject.Find("WorldObjects/TileEffects").transform;
+
+								tileEffects.Clear();
+
+								foreach ( TileEffect_Save tileEffect in tileEffects_Saves )
+								{
+										GameObject prefab = tileEffectContainer.tileEffects[tileEffect.prefabID];
+										GameObject tileEffectObj = Instantiate(prefab, parent, true);
+										TileEffectController tileEffectController = tileEffectObj.GetComponent<TileEffectController>();
+										tileEffectController.SetTimeUntilActivation(tileEffect.timeUntilActivation);
+										tileEffectController.SetTimeToLive(tileEffect.timeToLive);
+										tileEffectObj.GetComponent<GridTransform>().gridPosition = tileEffect.position;
+
+										tileEffects.Add(tileEffectObj);
+								}
 						}
 				}
 		}

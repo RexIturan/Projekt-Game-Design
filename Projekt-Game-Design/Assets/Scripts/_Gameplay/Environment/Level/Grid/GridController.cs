@@ -4,7 +4,6 @@ using Util.Extensions;
 namespace Grid {
 	//todo rename -> GridEditor??
 	public class GridController : MonoBehaviour {
-		// [SerializeField] private GridContainerSO gridContainer;
 		[SerializeField] private GridDataSO gridData;
 
 		[SerializeField] private TileTypeContainerSO tileTypesContainer;
@@ -80,8 +79,8 @@ namespace Grid {
 		/// <returns>Type of corresponding tile </returns>
 		public TileTypeSO GetTileAt(Vector3Int gridPos) {
 			int id = -1;
-			if( gridPos.y < gridContainer.tileGrids.Count ) {
-				Tile tile = gridContainer.tileGrids[gridPos.y].GetGridObject(gridPos.x, gridPos.z);
+			if( gridPos.y < gridData.TileGrids.Count ) {
+				Tile tile = gridData.TileGrids[gridPos.y].GetGridObject(gridPos.x, gridPos.z);
 
 				if (tile != null) { 
 					id = tile.tileTypeID;

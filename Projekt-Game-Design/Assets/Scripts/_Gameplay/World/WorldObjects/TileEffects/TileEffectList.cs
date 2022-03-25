@@ -16,8 +16,6 @@ namespace GDP01.TileEffects
 				/// List of effects that will be added upon next HandleTileEffects
 				/// </summary>
 				[SerializeField] private List<GameObject> scheduledEffects;
-				[SerializeField] private GameObject baseTileEffect;
-
 				[SerializeField] private CreateTileEffectEventChannelSO createTileEffectEC;
 				[SerializeField] private VoidEventChannelSO handleTileEffects;
 				[SerializeField] private VoidEventChannelSO clearTilemapEC;
@@ -31,14 +29,6 @@ namespace GDP01.TileEffects
 				public void OnDestroy () {
 						createTileEffectEC.OnEventRaised -= CreateTileEffect;
 						handleTileEffects.OnEventRaised -= HandleTileEffects;
-				}
-
-				public void Start()
-				{
-						GameObject tileEffect = Instantiate(baseTileEffect, Vector3.zero, Quaternion.identity, transform);
-						tileEffects.Add(tileEffect);
-						tileEffect.GetComponent<GridTransform>().gridPosition = new Vector3Int(8, 1, 23);
-						tileEffect.GetComponent<TileEffectController>().SetEternal(true);
 				}
 
 				/// <summary>
