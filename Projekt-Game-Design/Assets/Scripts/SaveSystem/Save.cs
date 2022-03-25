@@ -12,6 +12,7 @@ namespace SaveSystem {
 		public List<Door_Save> doors;
 		public List<Switch_Save> switches;
 		public List<Junk_Save> junks;
+		public List<TileEffect_Save> tileEffects;
 		public List<Item_Save> items;
 		public Inventory_Save inventory;
 		public List<Inventory_Save> equipmentInventory;
@@ -34,6 +35,7 @@ namespace SaveSystem {
 			doors = new List<Door_Save>();
 			switches = new List<Switch_Save>();
 			junks = new List<Junk_Save>();
+			tileEffects = new List<TileEffect_Save>();
 			items = new List<Item_Save>();
 			tileGrids = new List<TileGrid>();
 		}
@@ -54,6 +56,7 @@ namespace SaveSystem {
 			doors.Clear();
 			switches.Clear();
 			junks.Clear();
+			tileEffects.Clear();
 			tileGrids.Clear();
 			gridDataSave = new GridData_Save();
 			inventory = new Inventory_Save(0);

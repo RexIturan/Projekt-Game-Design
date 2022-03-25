@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba83751154a6fb499bc7a28ee69104e, type: 3}
+  m_Name: te_smallFireExpand
+  m_EditorClassIdentifier: 
+  actionOnEvaluate: 1
+  actionOnEnter: 0
+  actionOnExit: 0
+  tileEffectPrefab: {fileID: 497861194024093764, guid: 30a985767643f214ca1a957c316b118f, type: 3}
+  createTileEffectEC: {fileID: 11400000, guid: e973fdde918dba0438fe8b7cb4a3bbb4, type: 2}
+  expansionRequirementsTop: 8
+  expansionRequirementsGround: 1

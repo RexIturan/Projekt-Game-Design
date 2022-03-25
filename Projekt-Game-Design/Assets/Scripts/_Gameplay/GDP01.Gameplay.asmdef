@@ -20,7 +20,8 @@
         "GDP01.SaveSystem.V2.Types",
         "FullSerializer",
         "GDP01.Util.Singleton",
-        "GDP01.Structure"
+        "GDP01.Structure",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,3 +1,5 @@
+using Characters;
+using GDP01.TileEffects;
 using SaveSystem.SaveFormats;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,13 +13,16 @@ namespace WorldObjects
 				[SerializeField] private SwitchContainerSO switchContainer;
 				[SerializeField] private JunkContainerSO junkContainer;
 				[SerializeField] private ItemTypeContainerSO itemTypeContainer;
+				[SerializeField] private TileEffectContainerSO tileEffectContainer;
 
 				public void Initialise(List<Door_Save> door_Saves, 
 						List<Switch_Save> switch_Saves,
 						List<Junk_Save> junk_Saves,
 						List<Item_Save> itemSaves)
+						List<TileEffect_Save> tileEffects_Saves)
 				{
 						WorldObjectList worldObjects = WorldObjectList.FindInstant();
+						TileEffectList tileEffects = FindObjectOfType<TileEffectList>();
 
 						// doors
 						//
@@ -63,6 +68,21 @@ namespace WorldObjects
 							GameObject itemObj = Instantiate(itemType.prefab, worldObjects.ItemParent, true);
 							itemObj.GetComponent<ItemComponent>().InitItem(itemType, itemSave.gridPos);
 							worldObjects.items.Add(itemObj);
+
+						parent = GameObject.Find("WorldObjects/TileEffects").transform;
+
+						tileEffects.Clear();
+
+						foreach ( TileEffect_Save tileEffect in tileEffects_Saves )
+						{
+								GameObject prefab = tileEffectContainer.tileEffects[tileEffect.prefabID];
+								GameObject tileEffectObj = Instantiate(prefab, parent, true);
+								TileEffectController tileEffectController = tileEffectObj.GetComponent<TileEffectController>();
+								tileEffectController.SetTimeUntilActivation(tileEffect.timeUntilActivation);
+								tileEffectController.SetTimeToLive(tileEffect.timeToLive);
+								tileEffectObj.GetComponent<GridTransform>().gridPosition = tileEffect.position;
+
+								tileEffects.Add(tileEffectObj);
 						}
 				}
 		}
