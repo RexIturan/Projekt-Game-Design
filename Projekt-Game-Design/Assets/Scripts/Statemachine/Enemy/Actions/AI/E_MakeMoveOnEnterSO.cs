@@ -3,6 +3,7 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 using Util;
+using GDP01;
 using StateMachine = UOP1.StateMachine.StateMachine;
 using Characters.EnemyCharacter;
 using GDP01.Characters.Component;
@@ -39,69 +40,107 @@ public class E_MakeMoveOnEnter : StateAction {
 
     public override void OnStateEnter() {
 				_aiController.ClearFullCache();
+				_abilityController.RefreshAbilities();
 
-				if ( _enemySC.behavior.alwaysSkip )
-						Skip();
-				else
-				{
-						_abilityController.RefreshAbilities();
-						
-						
-						_aiController.TargetClosestVisiblePlayer(_attacker.visibleTiles);
-						// _aiController.TargetClosestPlayer();
-						if ( !_aiController.aiTarget )
-								Skip();
-						else
-						{
-								// Debug.Log("Closest player found ");
+				bool actionTaken = false;
 
-								// try to attack player
-								_aiController.SaveValidAbilities();
-								if ( _aiController.validAbilities.Count > 0 )
-								{
-										// choose random ability
-										// choose index of ability in ValidAbility list, index is between 0 and validAbilities.Count - 1
-										int randomAbility = Mathf.FloorToInt(Random.value * _aiController.validAbilities.Count);
-
-										_abilityController.SelectedAbilityID = _aiController.validAbilities[randomAbility].id;
-										_abilityController.abilityConfirmed = true;
-								}
-								else
-								{
-										// try to move towards player
-										_aiController.TargetNearestTileToPlayerTarget();
-										if ( _aiController.movementTarget != null )
-										{
-												// execute movement
-												// Debug.Log("Closest Tile to player target found ");
-
-												// does enemy character have moveing ability?
-												int abilityId = -1;
-												foreach ( var ability in _abilityController.Abilities )
-												{
-														if ( ability.moveToTarget )
-														{
-																abilityId = ability.id;
-														}
-												}
-
-												if ( abilityId != -1 )
-												{
-														// moving ability available, so execute it
-														_abilityController.SelectedAbilityID = abilityId;
-														_abilityController.abilityConfirmed = true;
-												}
-												else
-														Skip();
-										}
-										else
-												Skip();
-								}
+				for(int i = 0; !actionTaken && i < _behavior.actionPriorities.Count; i++) {
+						switch ( _behavior.actionPriorities[i] ) {
+								case AIAction.SKIP:
+										actionTaken = HandleSkip();
+										break;
+								case AIAction.ATTACK:
+										actionTaken = HandleAttack();
+										break;
+								case AIAction.SUPPORT:
+										actionTaken = HandleSupport();
+										break;
+								case AIAction.MOVE_TO_ATTACK:
+										actionTaken = HandleMoveToAttack();
+										break;
+								case AIAction.MOVE_TO_SUPPORT:
+										actionTaken = HandleMoveToSupport();
+										break;
 						}
 				}
-    }
 
-    private void Skip() {
+				if ( !actionTaken )
+						HandleSkip();
+		}
+
+		/// <summary>
+		/// Skips the turn. 
+		/// </summary>
+		/// <returns>True because skipping is always a valid move to make </returns>
+		private bool HandleSkip() {
         _enemySC.isDone = true;
-    }
+				return true;
+		}
+
+		/// <summary>
+		/// Tries to attack the target. 
+		/// </summary>
+		/// <returns>True if the target can be attacked </returns>
+		private bool HandleAttack() {
+				bool actionSelected = false;
+
+				_aiController.TargetClosestVisiblePlayer(_attacker.visibleTiles);
+
+				// try to attack player
+				_aiController.SaveValidAbilities();
+
+				if ( _aiController.validAbilities.Count > 0 ) {
+						// choose random ability
+						int randomAbility = Mathf.FloorToInt(Random.value * _aiController.validAbilities.Count);
+
+						_abilityController.SelectedAbilityID = _aiController.validAbilities[randomAbility].id;
+						_abilityController.abilityConfirmed = true;
+
+						actionSelected = true;
+				}
+
+				return actionSelected;
+		}
+
+		/// <summary>
+		/// Tries to move towards target. 
+		/// </summary>
+		/// <returns>True if enemy can successfully move towards the target </returns>
+		private bool HandleMoveToAttack()
+		{
+				bool actionSelected = false;
+
+				_aiController.TargetClosestVisiblePlayer(_attacker.visibleTiles);
+
+				// try to move towards player
+				_aiController.TargetNearestTileToPlayerTarget();
+				if ( _aiController.movementTarget != null ) {
+						// does enemy character have moveing ability?
+						int abilityId = -1;
+						foreach ( var ability in _abilityController.Abilities ) {
+								// TODO: Here, it is not checked if the ability is affordable 
+								if ( ability.moveToTarget ) {
+										abilityId = ability.id;
+								}
+						}
+
+						if ( abilityId != -1 ) {
+								// moving ability available, so execute it
+								_abilityController.SelectedAbilityID = abilityId;
+								_abilityController.abilityConfirmed = true;
+
+								actionSelected = true;
+						}
+				}
+
+				return actionSelected;
+		}
+
+		private bool HandleSupport() {
+				return false;
+		}
+
+		private bool HandleMoveToSupport() {
+				return false;
+		}
 }

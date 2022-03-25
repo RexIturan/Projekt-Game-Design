@@ -39,6 +39,26 @@
   ],
   "enemies": [
     {
+      "enemyTypeId": 1,
+      "pos": {
+        "x": 4,
+        "y": 1,
+        "z": 27
+      },
+      "hitpoints": 1000000,
+      "energy": 100000
+    },
+    {
+      "enemyTypeId": 3,
+      "pos": {
+        "x": 6,
+        "y": 1,
+        "z": 27
+      },
+      "hitpoints": 1000000,
+      "energy": 100000
+    },
+    {
       "enemyTypeId": 2,
       "pos": {
         "x": 31,

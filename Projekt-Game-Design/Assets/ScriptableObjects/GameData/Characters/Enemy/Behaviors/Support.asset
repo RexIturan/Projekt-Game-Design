@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29b3b05d297fc3a4d9ff241ab789fa1c, type: 3}
-  m_Name: AlwaysSkip
+  m_Name: Support
   m_EditorClassIdentifier: 
-  actionPriorities: 00000000
-  rangeOfInterestMovement: 0
-  keepDistance: 0
+  actionPriorities: 02000000040000000100000003000000
+  rangeOfInterestMovement: 50000
+  keepDistance: 3
