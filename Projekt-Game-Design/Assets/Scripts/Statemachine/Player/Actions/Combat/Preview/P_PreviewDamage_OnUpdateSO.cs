@@ -58,8 +58,7 @@ public class P_PreviewDamage_OnUpdate : StateAction
 				_clearPreviewEvent.OnEventRaised += ClearLastTargetPos;
 		}
 
-		public override void OnUpdate()
-		{
+		public override void OnUpdate() {
 				AbilitySO ability = _abilityController.GetSelectedAbility();
 
 				Vector3Int mousePos = _inputCache.cursor.abovePos.gridPos;
@@ -72,56 +71,21 @@ public class P_PreviewDamage_OnUpdate : StateAction
 
 						bool isInRange = false;
 
-						for ( int i = 0; !isInRange && i < _attacker.tilesInRange.Count; i++ )
-						{
-								if ( _attacker.tilesInRange[i].pos.Equals(targetPos) )
-								{
+						for ( int i = 0; !isInRange && i < _attacker.tilesInRange.Count; i++ ) {
+								if ( _attacker.tilesInRange[i].pos.Equals(targetPos) ) {
 										isInRange = true;
 								}
 						}
 
 						// only draw the preview if the target position is in range and the ability has effects
-						if ( isInRange && ability != null && ability.targetedEffects != null )
-						{
-								// TODO: Apply some of the logic to InflictDamage_OnEnter
-
-								List<Tuple<Targetable, int>> targetDamagePairs = new List<Tuple<Targetable, int>>();
-								HashSet<Targetable> allTargets = new HashSet<Targetable>();
-
-								// rotations of pattern depending on the angle the attacker is facing
-								int rotations = _attacker.GetRotationsToTarget(targetPos);
-								foreach ( TargetedEffect targetedEffect in ability.targetedEffects )
-								{
-										int damage = CombatUtils.CalculateDamage(targetedEffect.effect, _statistics.StatusValues);
-
-										List<Targetable> targets = CombatUtils.FindAllTargets(
-											targetedEffect.area.GetTargetedTiles(targetPos, rotations),
-											_attacker, targetedEffect.targets);
-
-										foreach ( Targetable target in targets )
-										{
-												targetDamagePairs.Add(new Tuple<Targetable, int>(target, damage));
-												allTargets.Add(target);
+						if ( isInRange && ability != null && ability.targetedEffects != null ) {
+								// get cumulated damage and display preview
+								foreach ( Tuple<Targetable, int> targetDamagePair in CombatUtils.GetCumulatedDamage(targetPos, ability, _attacker)) {
+										HealthbarController healthbar = targetDamagePair.Item1.GetComponentInChildren<HealthbarController>();
+										if ( healthbar ) {
+												healthbar.SetPreviewValue(-targetDamagePair.Item2);
 										}
-								}
-
-								// cumulate damage and display preview
-								foreach ( Targetable target in allTargets )
-								{
-										int cumulatedDamage = 0;
-
-										targetDamagePairs.ForEach(pair => {
-												if ( pair.Item1.Equals(target) )
-														cumulatedDamage += pair.Item2;
-										});
-
-										HealthbarController healthbar = target.GetComponentInChildren<HealthbarController>();
-										if ( healthbar )
-										{
-												healthbar.SetPreviewValue(-cumulatedDamage);
-										}
-										else
-										{
+										else {
 												Debug.Log("Could not find healthbar of object. ");
 										}
 								}
