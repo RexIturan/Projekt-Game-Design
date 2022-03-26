@@ -105,8 +105,11 @@ namespace Combat
 								attacker, targetedEffect.targets);
 
 						foreach ( Targetable target in targets ) {
-							targetDamagePairs.Add(new Tuple<Targetable, int>(target, damage));
-							allTargets.Add(target);
+							// TODO: is it ok to say dead people receive no damage? 
+							if(!target.IsDead) { 
+								targetDamagePairs.Add(new Tuple<Targetable, int>(target, damage));
+								allTargets.Add(target);
+							}
 						}
 					}
 
@@ -123,6 +126,48 @@ namespace Combat
 					}
 
 					return cumulatedDamagePairs;
+				}
+
+				/// <summary>
+				/// Calculates the total damage an ability would deal upon a given faction. 
+				/// Range of health is not considered, so 30 points of damage against a character with 1 point of health 
+				/// will still be count as 30 points of damage. 
+				/// </summary>
+				public static int GetCumulatedDamageOnFaction(Vector3Int targetPos, AbilitySO ability, Attacker attacker, Faction faction) {
+						return GetCumulatedDamageOnFaction(targetPos, ability, attacker, faction, false);
+				}
+
+				/// <summary>
+				/// Calculates the total damage an ability would deal upon a given faction. 
+				/// </summary>
+				/// <param name="actual">Defines whether range of health should be considered, 
+				/// i.e. if flag is set, 30 points of damage against a character with 1 point of health will be count as 1 point of damage, 
+				/// and if the flag is not set, it will be count as 30 points of damage </param>
+				public static int GetCumulatedDamageOnFaction(Vector3Int targetPos, AbilitySO ability, Attacker attacker, Faction faction, bool actual) {
+						List<Tuple<Targetable, int>> targetDamagePairs = GetCumulatedDamage(targetPos, ability, attacker);
+						int totalDamage = 0;
+						foreach(Tuple<Targetable, int> targetDamagePair in targetDamagePairs) {
+								Statistics targetableStats = targetDamagePair.Item1.GetComponent<Statistics>();
+
+								if ( targetableStats && targetableStats.Faction.Equals(faction) ) { 
+										if(!actual)
+												totalDamage += targetDamagePair.Item2;
+										else {
+												int actualDamage = 0;
+												if ( targetDamagePair.Item2 > 0 ) { 
+														actualDamage = Mathf.Min(targetableStats.StatusValues.HitPoints.Value - targetableStats.StatusValues.HitPoints.Min, 
+																targetDamagePair.Item2);
+												}
+												else if ( targetDamagePair.Item2 < 0 ) {
+														actualDamage = Mathf.Max(targetableStats.StatusValues.HitPoints.Value - targetableStats.StatusValues.HitPoints.Max,
+																targetDamagePair.Item2);
+												}
+
+												totalDamage += actualDamage;
+										}
+								}
+						}
+						return totalDamage;
 				}
 		}
 }

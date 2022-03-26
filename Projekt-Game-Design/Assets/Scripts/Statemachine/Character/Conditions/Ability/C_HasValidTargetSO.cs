@@ -51,38 +51,8 @@ public class C_HasValidTarget : Condition
 				AbilitySO ability = _abilityContainer.abilities[_abilityController.SelectedAbilityID];
 
 				// relationship valid for ability?
-				if ( targetExists )
-				{
-						Faction attackerFaction = _attacker.gameObject.GetComponent<Statistics>().GetFaction();
-						Faction targetFaction = _target.gameObject.GetComponent<Statistics>().GetFaction();
-
-						// Debug.Log("Target Faction: " + targetFaction.ToString());
-						// Debug.Log("Attacker Faction: " + attackerFaction.ToString());
-
-						if ( ability.targets.HasFlag(TargetRelationship.Neutral) &&
-								targetFaction.Equals(Faction.Neutral))
-						{
-								targetRelationshipValid = true;
-						}
-						if ( ability.targets.HasFlag(TargetRelationship.Self) )
-						{
-								if ( _attacker.gameObject == _target.gameObject )
-										targetRelationshipValid = true;
-						}
-						if ( ability.targets.HasFlag(TargetRelationship.Ally) )
-						{
-								if ( attackerFaction.Equals(targetFaction) &&
-										 _attacker.gameObject != _target.gameObject )
-										targetRelationshipValid = true;
-						}
-						if ( ability.targets.HasFlag(TargetRelationship.Enemy) )
-						{
-								// only valid if the attacker is enemy and target is player
-								// of if attacker is player and target is enemy
-								if (( attackerFaction.Equals(Faction.Enemy) && targetFaction.Equals(Faction.Player)) ||
-										( attackerFaction.Equals(Faction.Player) && targetFaction.Equals(Faction.Enemy)))
-										targetRelationshipValid = true;
-						}
+				if ( targetExists ) {
+						targetRelationshipValid = AbilityController.HasRightRelationshipForAbility(ability, _attacker, _target);
 				}
 
 				// in range?

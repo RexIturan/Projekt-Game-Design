@@ -20,7 +20,6 @@ public class E_MakeMoveOnEnter : StateAction {
     private EnemyCharacterSC _enemySC;
 		private AIController _aiController;
 		private AbilityController _abilityController;
-		private EnemyBehaviorSO _behavior;
 
     private GameObject _targetPlayer;
     private PathNode _closesTileToPlayer;
@@ -32,20 +31,22 @@ public class E_MakeMoveOnEnter : StateAction {
     public override void Awake(StateMachine stateMachine) {
 	    statistics = stateMachine.gameObject.GetComponent<Statistics>();
 	    _attacker = stateMachine.gameObject.GetComponent<Attacker>();
-        _enemySC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
-        _behavior = _enemySC.behavior;
-				_aiController = stateMachine.gameObject.GetComponent<AIController>();
-				_abilityController = _enemySC.gameObject.GetComponent<AbilityController>();
+      _enemySC = stateMachine.gameObject.GetComponent<EnemyCharacterSC>();
+			_aiController = stateMachine.gameObject.GetComponent<AIController>();
+			_abilityController = _enemySC.gameObject.GetComponent<AbilityController>();
 		}
 
     public override void OnStateEnter() {
 				_aiController.ClearFullCache();
 				_abilityController.RefreshAbilities();
+				_aiController.RefreshValidAbilities();
+
+				EnemyBehaviorSO behavior = _aiController.GetBehavior();
 
 				bool actionTaken = false;
 
-				for(int i = 0; !actionTaken && i < _behavior.actionPriorities.Count; i++) {
-						switch ( _behavior.actionPriorities[i] ) {
+				for(int i = 0; !actionTaken && i < behavior.actionPriorities.Count; i++) {
+						switch ( behavior.actionPriorities[i] ) {
 								case AIAction.SKIP:
 										actionTaken = HandleSkip();
 										break;
@@ -82,6 +83,7 @@ public class E_MakeMoveOnEnter : StateAction {
 		/// </summary>
 		/// <returns>True if the target can be attacked </returns>
 		private bool HandleAttack() {
+				/*
 				bool actionSelected = false;
 
 				_aiController.TargetClosestVisiblePlayer(_attacker.visibleTiles);
@@ -98,8 +100,8 @@ public class E_MakeMoveOnEnter : StateAction {
 
 						actionSelected = true;
 				}
-
-				return actionSelected;
+				*/
+				return _aiController.ChooseAbilityWithHighestDamageOutput();
 		}
 
 		/// <summary>
@@ -137,7 +139,8 @@ public class E_MakeMoveOnEnter : StateAction {
 		}
 
 		private bool HandleSupport() {
-				return false;
+				Debug.Log("Trying to support ");
+				return _aiController.ChooseAbilityWithHighestHealingOutput();
 		}
 
 		private bool HandleMoveToSupport() {

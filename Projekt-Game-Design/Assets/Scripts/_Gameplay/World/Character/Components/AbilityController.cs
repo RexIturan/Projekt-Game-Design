@@ -9,6 +9,7 @@ using GDP01._Gameplay.World.Character.Data;
 using UnityEngine;
 using Util;
 using GDP01.World.Components;
+using Characters.Types;
 
 namespace GDP01.Characters.Component {
 	[RequireComponent(typeof(MovementController))]
@@ -160,6 +161,36 @@ namespace GDP01.Characters.Component {
 			cost += ability.costs;
 			// Debug.Log($"{cost}\n{movementController.PreviewPath?.AllToString()}");
 			return cost;
+		}
+
+		public static bool HasRightRelationshipForAbility(AbilitySO ability, Attacker attacker, Targetable target) {
+			if(!ability || !attacker || !target)
+				return false;
+
+			bool targetRelationshipValid = false;
+
+			Faction attackerFaction = attacker.gameObject.GetComponent<Statistics>().GetFaction();
+			Faction targetFaction = target.gameObject.GetComponent<Statistics>().GetFaction();
+
+			if ( ability.targets.HasFlag(TargetRelationship.Neutral) && targetFaction.Equals(Faction.Neutral)) {
+				targetRelationshipValid = true;
+			}
+			else if ( ability.targets.HasFlag(TargetRelationship.Self) && attacker.gameObject.Equals(target.gameObject)) { 
+				targetRelationshipValid = true;
+			}
+			else if ( ability.targets.HasFlag(TargetRelationship.Ally) &&
+								attackerFaction.Equals(targetFaction) && !attacker.gameObject.Equals(target.gameObject)) {
+				targetRelationshipValid = true;
+			}
+			else if ( ability.targets.HasFlag(TargetRelationship.Enemy) ) {
+				// only valid if the attacker is enemy and target is player
+				// of if attacker is player and target is enemy
+				if (( attackerFaction.Equals(Faction.Enemy) && targetFaction.Equals(Faction.Player)) ||
+						( attackerFaction.Equals(Faction.Player) && targetFaction.Equals(Faction.Enemy)))
+					targetRelationshipValid = true;
+			}
+
+			return targetRelationshipValid;
 		}
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
