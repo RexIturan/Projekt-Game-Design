@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b3b05d297fc3a4d9ff241ab789fa1c, type: 3}
   m_Name: Ranged
   m_EditorClassIdentifier: 
-  alwaysSkip: 0
+  actionPriorities: 0100000003000000
   rangeOfInterestMovement: 50000
   keepDistance: 3

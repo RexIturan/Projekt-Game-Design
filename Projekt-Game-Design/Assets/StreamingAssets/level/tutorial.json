@@ -16,7 +16,7 @@
       "active": true,
       "plyerTypeId": 0,
       "pos": {
-        "x": 6,
+        "x": 7,
         "y": 1,
         "z": 23
       },
@@ -25,6 +25,18 @@
     },
     {
       "id": 1,
+      "active": true,
+      "plyerTypeId": 0,
+      "pos": {
+        "x": 6,
+        "y": 1,
+        "z": 23
+      },
+      "hitpoints": 1000000,
+      "energy": 1000000
+    },
+    {
+      "id": 2,
       "active": false,
       "plyerTypeId": 0,
       "pos": {
@@ -38,6 +50,26 @@
 
   ],
   "enemies": [
+    {
+      "enemyTypeId": 1,
+      "pos": {
+        "x": 4,
+        "y": 1,
+        "z": 27
+      },
+      "hitpoints": 1000000,
+      "energy": 100000
+    },
+    {
+      "enemyTypeId": 3,
+      "pos": {
+        "x": 6,
+        "y": 1,
+        "z": 27
+      },
+      "hitpoints": 1000000,
+      "energy": 100000
+    },
     {
       "enemyTypeId": 2,
       "pos": {

@@ -31,12 +31,13 @@ namespace Characters.EnemyCharacter
 				// so we can see what the AI tries to do
 				public PathNode movementTarget; // position they want to reach
 				public int selectedAbility;
-
-				public List<AbilitySO> validAbilities;
-
+				
 				[SerializeField] private List<List<PathNode>> tilesInRangePerAbility;
 				[SerializeField] private List<AbilitySO> abilityPerTilesInRange;
+				
+				[SerializeField] private List<Tuple<AbilitySO, List<Vector3Int>>> validAbilitiesWithRange;
 
+				private AbilitySO currentAbility; // used to determine what ability a view query is for 
 
 				private EnemyBehaviorSO behavior;
 				[Header("References to other Components of Enemy Character: ")]
@@ -47,6 +48,7 @@ namespace Characters.EnemyCharacter
 				[SerializeField] private Attacker _attacker;
 
 				public void SetBehavior(EnemyBehaviorSO behavior) { this.behavior = behavior; }
+				public EnemyBehaviorSO GetBehavior() { return behavior; }
 
 				private void Awake()
 				{
@@ -56,10 +58,10 @@ namespace Characters.EnemyCharacter
 				public void ClearPartsOfCache()
 				{
 						selectedAbility = -1;
-
-						validAbilities = new List<AbilitySO>();
+						
 						tilesInRangePerAbility = new List<List<PathNode>>();
 						abilityPerTilesInRange = new List<AbilitySO>();
+						validAbilitiesWithRange = new List<Tuple<AbilitySO, List<Vector3Int>>>();
 				}
 
 				public void ClearFullCache()
@@ -68,16 +70,10 @@ namespace Characters.EnemyCharacter
 						// enemyTarget = null;
 						movementTarget = null;
 						selectedAbility = -1;
-
-						validAbilities = new List<AbilitySO>();
+						
 						tilesInRangePerAbility = new List<List<PathNode>>();
 						abilityPerTilesInRange= new List<AbilitySO>();
-				}
-
-				// uses pathfinding to find closest player
-				public void TargetClosestPlayer()
-				{
-						pathfindingQueryEvent.RaiseEvent(_gridTransform.gridPosition, behavior.rangeOfInterestMovement, SaveClosestPlayerAsTarget);
+						validAbilitiesWithRange = new List<Tuple<AbilitySO, List<Vector3Int>>>();
 				}
 
 				public void TargetClosestVisiblePlayer(List<PathNode> visibleTiles) {
@@ -97,19 +93,15 @@ namespace Characters.EnemyCharacter
 						if ( characterListObj )
 								characterList = characterListObj.GetComponent<CharacterList>();
 
-						if ( characterList )
-						{
-								for(int i = 0; !aiTarget && i < pathNodes.Count; i++)
-								{
-										foreach(GameObject player in characterList.playerContainer)
-										{
+						if ( characterList ) {
+								for(int i = 0; !aiTarget && i < pathNodes.Count; i++) {
+										foreach(GameObject player in characterList.playerContainer) {
 												Targetable playerTargetable = player.GetComponent<Targetable>();
 
 												float distanceBetweenPlayerAndTile = !playerTargetable ? Int32.MaxValue : 
 														(pathNodes[i].pos - playerTargetable.GetGridPosition()).magnitude;
 
-												if ( distanceBetweenPlayerAndTile < 1.001 )
-												{
+												if ( distanceBetweenPlayerAndTile < 1.001 ) {
 														aiTarget = playerTargetable;
 														closestNodeToTarget = pathNodes[i];
 														// set also in attacker component
@@ -120,15 +112,52 @@ namespace Characters.EnemyCharacter
 						}
 				}
 
+				public void TargetEnemyWithLowestHealth(List<PathNode> visibleTiles) {
+						Targetable lowestHealthTarget = null;
+						float lowestHealth = 1.0f;
+
+						foreach(GameObject enemy in CharacterList.FindInstant().enemyContainer) {
+								Vector3Int pos = enemy.GetComponent<GridTransform>().gridPosition;
+
+								if(visibleTiles.Any(node => node.pos.Equals(pos))) {
+										Statistics stats = enemy.GetComponent<Statistics>();
+										float health = (float) (stats.StatusValues.HitPoints.Value - stats.StatusValues.HitPoints.Min) / stats.StatusValues.HitPoints.Max;
+										if (health < lowestHealth) {
+												Debug.Log($"Enemy in sight with only {health * 100}% health. ");
+												lowestHealth = health;
+												lowestHealthTarget = enemy.GetComponent<Targetable>();
+										}
+								}
+						}
+						
+						if(lowestHealthTarget) {
+								PathNode closest = null;
+								float minDistance = (_gridTransform.gridPosition - lowestHealthTarget.GetGridPosition()).magnitude;
+
+								foreach(PathNode reachableNode in _movementController.reachableTiles) {
+										float distance = (reachableNode.pos - lowestHealthTarget.GetGridPosition()).magnitude;
+										if(distance < minDistance) {
+												minDistance = distance;
+												closest = reachableNode;
+										}
+								}
+
+								if ( closest != null ) {
+										closestNodeToTarget = closest;
+										aiTarget = lowestHealthTarget;
+								}
+						}
+				}
+
 				// targets the nearest reachable tile towards the targeted player
 				// the tile the enemy is standing on will not be recognized as reachable, it will be skipped, 
 				// so if the enemy can't move another tile, movement target will be set to null
-				public void TargetNearestTileToPlayerTarget()
+				public void TargetNearestTileToTarget()
 				{
-						pathfindingPathQueryEvent.RaiseEvent(_gridTransform.gridPosition, closestNodeToTarget.pos, SaveClosestTileToPlayerAsMovementTarget);
+						pathfindingPathQueryEvent.RaiseEvent(_gridTransform.gridPosition, closestNodeToTarget.pos, SaveClosestTileToTargetAsMovementTarget);
 				}
 
-				private void SaveClosestTileToPlayerAsMovementTarget(List<PathNode> pathNodes)
+				private void SaveClosestTileToTargetAsMovementTarget(List<PathNode> pathNodes)
 				{
 						int lastAffordableStep = 0;
 
@@ -143,50 +172,115 @@ namespace Characters.EnemyCharacter
 						_movementController.movementTarget = movementTarget;
 				}
 
-				public void SaveValidAbilities()
-				{
-						validAbilities.Clear();
-						tilesInRangePerAbility.Clear();
-						abilityPerTilesInRange.Clear();
+				#region New Functionality
 
-						// should be refreshed on entering the Search state in StateMachine
-						foreach (AbilitySO ability in _abilityController.Abilities)
-						{
-								// only valid if affordable
-								if(IsAffordable(ability))
-								{
-										// only if target has valid relationship for ability
-										if(HasRightRelationshipForAbility(ability))
-										{
-												fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition, ability.range, 
-														TileProperties.ShootTrough, AddAbilitiesInRangeToValidAbilities);
-												abilityPerTilesInRange.Add(ability);
+				/// <summary>
+				/// Initializes the list of abilities that can be used, regardless of targets in range. 
+				/// Also saves the range of each valid ability. 
+				/// </summary>
+				public void RefreshValidAbilities() {
+						validAbilitiesWithRange.Clear();
+
+						foreach (AbilitySO ability in _abilityController.Abilities) {
+								if ( _abilityController.IsAbilityAvailable(ability) ) { 
+										// save ability in list with empty range 
+										validAbilitiesWithRange.Add(new Tuple<AbilitySO, List<Vector3Int>>(ability, new List<Vector3Int>()));
+
+										currentAbility = ability;
+										fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition, ability.range, ability.conditions, SaveRangeForValidAbility);
+								}
+						}
+				}
+
+				/// <summary>
+				/// Saves fieldOfViewQuery tiles to current ability in validAbilitiesWithRange
+				/// </summary>
+				/// <param name="tilesInRange">Tiles in range </param>
+				public void SaveRangeForValidAbility(bool[,] tilesInRange) {
+						foreach ( Tuple<AbilitySO, List<Vector3Int>> abilityRangePair in validAbilitiesWithRange ) {
+								if ( abilityRangePair.Item1.Equals(currentAbility) ) {
+										abilityRangePair.Item2.AddRange(
+												PathNode.ConvertPathNodeListToVector3IntList(FieldOfViewController.VisibleTilesToPathNodeList(tilesInRange)));
+								}
+						}
+						currentAbility = null;
+				}
+
+				/// <summary>
+				/// Goes through all valid abilities, calculates the damage output for every 
+				/// possible target and if any has more damage than 0, chooses the ability. 
+				/// Returns whether or not an ability has been choosen. 
+				/// </summary>
+				/// <returns>True if ability has been choosen </returns>
+				public bool ChooseAbilityWithHighestDamageOutput() {
+						return ChooseAbilityWithHighestOutput(true);
+				}
+
+				/// <summary>
+				/// Goes through all valid abilities, calculates the healing output for every 
+				/// possible target and if any has more healing than 0, chooses the ability. 
+				/// Returns whether or not an ability has been choosen. 
+				/// </summary>
+				/// <returns>True if ability has been choosen </returns>
+				public bool ChooseAbilityWithHighestHealingOutput() {
+						return ChooseAbilityWithHighestOutput(false);
+				}
+
+				public bool ChooseAbilityWithHighestOutput(bool outputIsDamage) {
+						int maxDamage = 0;
+						AbilitySO bestAbility = null;
+						Vector3Int bestTargetPos = Vector3Int.zero;
+						Targetable bestTarget = null;
+
+						foreach(Tuple<AbilitySO, List<Vector3Int>> abilityRangePair in validAbilitiesWithRange) {
+								foreach(Vector3Int possibleTarget in abilityRangePair.Item2) {
+										AbilitySO ability = abilityRangePair.Item1;
+										Targetable target = Targetable.GetTargetsWithPosition(possibleTarget);
+
+										if (ability.targets.HasFlag(TargetRelationship.Ground) ||
+												AbilityController.HasRightRelationshipForAbility(ability, _attacker, target) ) {
+
+												// if damage is maximized, calculate virtual damage
+												// if healing is maximized, calculate *actual* healing
+												int damage;
+												if (outputIsDamage)
+														damage = CombatUtils.GetCumulatedDamageOnFaction(possibleTarget, ability, _attacker, Faction.Player);
+												else
+														damage = CombatUtils.GetCumulatedDamageOnFaction(possibleTarget, ability, _attacker, Faction.Enemy, true);
+
+												// damage should be maximized, healing should be minimized (most negative healing is best)
+												if ((outputIsDamage && damage > maxDamage) ||
+														(!outputIsDamage && damage < maxDamage)) {
+														maxDamage = damage;
+														bestAbility = ability;
+														bestTargetPos = possibleTarget;
+														bestTarget = target;
+
+														if(outputIsDamage)
+																Debug.Log($"Ability {ability.name} on {possibleTarget} would deal {damage} damage. ");
+														else
+																Debug.Log($"Ability {ability.name} on {possibleTarget} would deal {-damage} healing. ");
+												}
 										}
 								}
 						}
 
-						AddTilesInRangeToValidAbilities();
-				}
+						if((outputIsDamage && maxDamage > 0) || 
+								(!outputIsDamage && maxDamage < 0)) {
+								_abilityController.SelectedAbilityID = bestAbility.id;
+								_abilityController.abilitySelected = true;
+								_abilityController.abilityConfirmed = true;
 
-				private void AddAbilitiesInRangeToValidAbilities(bool[,] visibleTilesInRange)
-				{
-						tilesInRangePerAbility.Add(FieldOfViewController.VisibleTilesToPathNodeList(visibleTilesInRange));
-				}
+								_attacker.SetGroundTarget(bestTargetPos);
+								_attacker.SetTarget(bestTarget);
 
-				private void AddTilesInRangeToValidAbilities()
-				{
-						for ( int i = 0; i < tilesInRangePerAbility.Count; i++ )
-						{
-								bool targetIsInRange = false;
-								foreach ( PathNode node in tilesInRangePerAbility[i] )
-								{
-										if ( node.pos.Equals(aiTarget.GetGridPosition()) )
-												targetIsInRange = true;
-								}
-								if ( targetIsInRange )
-										validAbilities.Add(abilityPerTilesInRange[i]);
+								return true;
 						}
+						else
+								return false;
 				}
+
+				#endregion
 
 				#region Utils/Helpers that belong elsewhere
 
