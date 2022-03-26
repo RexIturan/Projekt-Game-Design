@@ -8,6 +8,7 @@ using StateMachine = UOP1.StateMachine.StateMachine;
 using Characters.EnemyCharacter;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
+using Characters.Movement;
 
 [CreateAssetMenu(fileName = "e_MakeMoveOnEnter", menuName = "State Machines/Actions/Enemy/e_MakeMoveOnEnter")]
 public class E_MakeMoveOnEnterSO : StateActionSO {
@@ -17,7 +18,7 @@ public class E_MakeMoveOnEnterSO : StateActionSO {
 public class E_MakeMoveOnEnter : StateAction {
 		private Attacker _attacker;
 		private Statistics statistics;
-    private EnemyCharacterSC _enemySC;
+		private EnemyCharacterSC _enemySC;
 		private AIController _aiController;
 		private AbilityController _abilityController;
 
@@ -83,24 +84,6 @@ public class E_MakeMoveOnEnter : StateAction {
 		/// </summary>
 		/// <returns>True if the target can be attacked </returns>
 		private bool HandleAttack() {
-				/*
-				bool actionSelected = false;
-
-				_aiController.TargetClosestVisiblePlayer(_attacker.visibleTiles);
-
-				// try to attack player
-				_aiController.SaveValidAbilities();
-
-				if ( _aiController.validAbilities.Count > 0 ) {
-						// choose random ability
-						int randomAbility = Mathf.FloorToInt(Random.value * _aiController.validAbilities.Count);
-
-						_abilityController.SelectedAbilityID = _aiController.validAbilities[randomAbility].id;
-						_abilityController.abilityConfirmed = true;
-
-						actionSelected = true;
-				}
-				*/
 				return _aiController.ChooseAbilityWithHighestDamageOutput();
 		}
 
@@ -108,14 +91,31 @@ public class E_MakeMoveOnEnter : StateAction {
 		/// Tries to move towards target. 
 		/// </summary>
 		/// <returns>True if enemy can successfully move towards the target </returns>
-		private bool HandleMoveToAttack()
-		{
-				bool actionSelected = false;
-
+		private bool HandleMoveToAttack() {
 				_aiController.TargetClosestVisiblePlayer(_attacker.visibleTiles);
+				return TryToMove();
+		}
 
-				// try to move towards player
-				_aiController.TargetNearestTileToPlayerTarget();
+		private bool HandleSupport() {
+				return _aiController.ChooseAbilityWithHighestHealingOutput();
+		}
+
+		private bool HandleMoveToSupport() {
+				_aiController.TargetEnemyWithLowestHealth(_attacker.visibleTiles);
+
+				if ( _aiController.aiTarget ) {
+						return TryToMove();
+				}
+				else
+						return false;
+		}
+
+		private bool TryToMove() {
+				bool actionSelected = false;
+				
+				// try to move towards target
+				_aiController.TargetNearestTileToTarget();
+
 				if ( _aiController.movementTarget != null ) {
 						// does enemy character have moveing ability?
 						int abilityId = -1;
@@ -136,14 +136,5 @@ public class E_MakeMoveOnEnter : StateAction {
 				}
 
 				return actionSelected;
-		}
-
-		private bool HandleSupport() {
-				Debug.Log("Trying to support ");
-				return _aiController.ChooseAbilityWithHighestHealingOutput();
-		}
-
-		private bool HandleMoveToSupport() {
-				return false;
 		}
 }

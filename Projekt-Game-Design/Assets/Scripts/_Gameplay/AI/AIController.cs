@@ -34,8 +34,7 @@ namespace Characters.EnemyCharacter
 				
 				[SerializeField] private List<List<PathNode>> tilesInRangePerAbility;
 				[SerializeField] private List<AbilitySO> abilityPerTilesInRange;
-
-				[SerializeField] private List<AbilitySO> validAbilities;
+				
 				[SerializeField] private List<Tuple<AbilitySO, List<Vector3Int>>> validAbilitiesWithRange;
 
 				private AbilitySO currentAbility; // used to determine what ability a view query is for 
@@ -59,8 +58,7 @@ namespace Characters.EnemyCharacter
 				public void ClearPartsOfCache()
 				{
 						selectedAbility = -1;
-
-						validAbilities = new List<AbilitySO>();
+						
 						tilesInRangePerAbility = new List<List<PathNode>>();
 						abilityPerTilesInRange = new List<AbilitySO>();
 						validAbilitiesWithRange = new List<Tuple<AbilitySO, List<Vector3Int>>>();
@@ -72,17 +70,10 @@ namespace Characters.EnemyCharacter
 						// enemyTarget = null;
 						movementTarget = null;
 						selectedAbility = -1;
-
-						validAbilities = new List<AbilitySO>();
+						
 						tilesInRangePerAbility = new List<List<PathNode>>();
 						abilityPerTilesInRange= new List<AbilitySO>();
 						validAbilitiesWithRange = new List<Tuple<AbilitySO, List<Vector3Int>>>();
-				}
-
-				// uses pathfinding to find closest player
-				public void TargetClosestPlayer()
-				{
-						pathfindingQueryEvent.RaiseEvent(_gridTransform.gridPosition, behavior.rangeOfInterestMovement, SaveClosestPlayerAsTarget);
 				}
 
 				public void TargetClosestVisiblePlayer(List<PathNode> visibleTiles) {
@@ -102,19 +93,15 @@ namespace Characters.EnemyCharacter
 						if ( characterListObj )
 								characterList = characterListObj.GetComponent<CharacterList>();
 
-						if ( characterList )
-						{
-								for(int i = 0; !aiTarget && i < pathNodes.Count; i++)
-								{
-										foreach(GameObject player in characterList.playerContainer)
-										{
+						if ( characterList ) {
+								for(int i = 0; !aiTarget && i < pathNodes.Count; i++) {
+										foreach(GameObject player in characterList.playerContainer) {
 												Targetable playerTargetable = player.GetComponent<Targetable>();
 
 												float distanceBetweenPlayerAndTile = !playerTargetable ? Int32.MaxValue : 
 														(pathNodes[i].pos - playerTargetable.GetGridPosition()).magnitude;
 
-												if ( distanceBetweenPlayerAndTile < 1.001 )
-												{
+												if ( distanceBetweenPlayerAndTile < 1.001 ) {
 														aiTarget = playerTargetable;
 														closestNodeToTarget = pathNodes[i];
 														// set also in attacker component
@@ -125,15 +112,52 @@ namespace Characters.EnemyCharacter
 						}
 				}
 
+				public void TargetEnemyWithLowestHealth(List<PathNode> visibleTiles) {
+						Targetable lowestHealthTarget = null;
+						float lowestHealth = 1.0f;
+
+						foreach(GameObject enemy in CharacterList.FindInstant().enemyContainer) {
+								Vector3Int pos = enemy.GetComponent<GridTransform>().gridPosition;
+
+								if(visibleTiles.Any(node => node.pos.Equals(pos))) {
+										Statistics stats = enemy.GetComponent<Statistics>();
+										float health = (float) (stats.StatusValues.HitPoints.Value - stats.StatusValues.HitPoints.Min) / stats.StatusValues.HitPoints.Max;
+										if (health < lowestHealth) {
+												Debug.Log($"Enemy in sight with only {health * 100}% health. ");
+												lowestHealth = health;
+												lowestHealthTarget = enemy.GetComponent<Targetable>();
+										}
+								}
+						}
+						
+						if(lowestHealthTarget) {
+								PathNode closest = null;
+								float minDistance = (_gridTransform.gridPosition - lowestHealthTarget.GetGridPosition()).magnitude;
+
+								foreach(PathNode reachableNode in _movementController.reachableTiles) {
+										float distance = (reachableNode.pos - lowestHealthTarget.GetGridPosition()).magnitude;
+										if(distance < minDistance) {
+												minDistance = distance;
+												closest = reachableNode;
+										}
+								}
+
+								if ( closest != null ) {
+										closestNodeToTarget = closest;
+										aiTarget = lowestHealthTarget;
+								}
+						}
+				}
+
 				// targets the nearest reachable tile towards the targeted player
 				// the tile the enemy is standing on will not be recognized as reachable, it will be skipped, 
 				// so if the enemy can't move another tile, movement target will be set to null
-				public void TargetNearestTileToPlayerTarget()
+				public void TargetNearestTileToTarget()
 				{
-						pathfindingPathQueryEvent.RaiseEvent(_gridTransform.gridPosition, closestNodeToTarget.pos, SaveClosestTileToPlayerAsMovementTarget);
+						pathfindingPathQueryEvent.RaiseEvent(_gridTransform.gridPosition, closestNodeToTarget.pos, SaveClosestTileToTargetAsMovementTarget);
 				}
 
-				private void SaveClosestTileToPlayerAsMovementTarget(List<PathNode> pathNodes)
+				private void SaveClosestTileToTargetAsMovementTarget(List<PathNode> pathNodes)
 				{
 						int lastAffordableStep = 0;
 
@@ -146,51 +170,6 @@ namespace Characters.EnemyCharacter
 						// also if the path to target is empty or if empty is next to enemy, set target to null
 						movementTarget = (lastAffordableStep >= pathNodes.Count || lastAffordableStep < 1) ? null : pathNodes[lastAffordableStep];
 						_movementController.movementTarget = movementTarget;
-				}
-
-				public void SaveValidAbilities()
-				{
-						validAbilities.Clear();
-						tilesInRangePerAbility.Clear();
-						abilityPerTilesInRange.Clear();
-
-						// should be refreshed on entering the Search state in StateMachine
-						foreach (AbilitySO ability in _abilityController.Abilities)
-						{
-								// only valid if affordable
-								if(IsAffordable(ability))
-								{
-										// only if target has valid relationship for ability
-										if(HasRightRelationshipForAbility(ability))
-										{
-												fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition, ability.range, 
-														TileProperties.ShootTrough, AddAbilitiesInRangeToValidAbilities);
-												abilityPerTilesInRange.Add(ability);
-										}
-								}
-						}
-
-						AddTilesInRangeToValidAbilities();
-				}
-
-				private void AddAbilitiesInRangeToValidAbilities(bool[,] visibleTilesInRange)
-				{
-						tilesInRangePerAbility.Add(FieldOfViewController.VisibleTilesToPathNodeList(visibleTilesInRange));
-				}
-
-				private void AddTilesInRangeToValidAbilities()
-				{
-						for ( int i = 0; i < tilesInRangePerAbility.Count; i++ )
-						{
-								bool targetIsInRange = false;
-								foreach ( PathNode node in tilesInRangePerAbility[i] )
-								{
-										if ( node.pos.Equals(aiTarget.GetGridPosition()) )
-												targetIsInRange = true;
-								}
-								if ( targetIsInRange )
-										validAbilities.Add(abilityPerTilesInRange[i]);
-						}
 				}
 
 				#region New Functionality
