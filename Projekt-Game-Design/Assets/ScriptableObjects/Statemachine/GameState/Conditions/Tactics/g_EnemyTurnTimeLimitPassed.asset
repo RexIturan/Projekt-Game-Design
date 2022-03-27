@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76f194f669f57634790bc0435aafcba1, type: 3}
-  m_Name: c_ResetTimerOnEnter
+  m_Script: {fileID: 11500000, guid: dc81443cdec289f4299f67cc0329c83e, type: 3}
+  m_Name: g_EnemyTurnTimeLimitPassed
   m_EditorClassIdentifier: 
+  time: 2

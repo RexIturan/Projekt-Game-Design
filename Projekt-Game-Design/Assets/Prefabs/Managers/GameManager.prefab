@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6182407919942541886}
   - component: {fileID: 6182407919942541885}
   - component: {fileID: 6182407919942541884}
+  - component: {fileID: 5013497699885375699}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -28,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -62,7 +64,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1002ea915020c4aacb650c9ec997c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startGameEC: {fileID: 0}
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
+  newTurnEC: {fileID: 0}
   triggerDefeatEC: {fileID: 11400000, guid: 737a96b0278c36b4880712610f7b8d96, type: 2}
   triggerVictoryEC: {fileID: 11400000, guid: dba5723c0c774e942b1f9888c6013e47, type: 2}
   setTurnIndicatorVisibilityEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
@@ -74,11 +78,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
   showLoadScreen: 1
   saveSystem: {fileID: 0}
+  start: 0
+  backToMainMenu: 0
   evaluated: 1
-  shouldExit: 0
-  exited: 0
   initializedGame: 0
-  initializedTactics: 0
-  isInTacticsMode: 0
-  defeat: 0
+  gameOver: 0
   victory: 0
+  victoryConditions: []
+  gameOverConditions: []
+--- !u!114 &5013497699885375699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6182407919942541883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a178bd4e9354cd3ac160a6d68f6cb09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeSinceTransition: 0
