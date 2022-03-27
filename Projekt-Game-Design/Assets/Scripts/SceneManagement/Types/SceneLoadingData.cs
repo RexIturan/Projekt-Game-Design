@@ -26,6 +26,7 @@ namespace SceneManagement.Types {
 		[SerializeField] private bool activateOnLoad;
 		[SerializeField] private bool dontUnload;
 		[SerializeField] private string name;
+		[SerializeField] private bool updateSave;
 
 		///// Properties ///////////////////////////////////////////////////////////////////////////////////
 	
@@ -37,5 +38,6 @@ namespace SceneManagement.Types {
 		public bool ActivateOnLoad { get => activateOnLoad; set => activateOnLoad = value; }
 		public bool DontUnload { get => dontUnload; set => dontUnload = value;}
 		public string Name { get => name; set => name = value; }
+		public bool UpdateSave { get => updateSave; set => updateSave = value; }
 	}
 }

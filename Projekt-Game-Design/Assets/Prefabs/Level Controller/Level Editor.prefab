@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,9 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992c6cb5eaca4d568a6545da4b674c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showCenterPos: 0
+  showMouseHit: 0
   levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}
   setModeEC: {fileID: 11400000, guid: 9d4a76d0eeb24bf49ae35e7d82abeb87, type: 2}
+  levelEditorLayerEC: {fileID: 11400000, guid: e949f10908c36b341b3daec352b4c5c9, type: 2}
+  levelEditorModeEC: {fileID: 11400000, guid: 2f30f535d51883d4daf990f53bc67638, type: 2}
   redrawLevelEC: {fileID: 11400000, guid: 076a51549e7ef074aaa161d0013325a5, type: 2}
+  levelEditorStateUpdateEC: {fileID: 11400000, guid: c0c1e1124f6528549b08daef2d5ff9ba, type: 2}
   gridDrawer: {fileID: 0}
   cursorDrawer: {fileID: 0}
   gridController: {fileID: 0}
@@ -53,6 +59,7 @@ MonoBehaviour:
   inputCache: {fileID: 11400000, guid: 767106d458901634590366e6fae31156, type: 2}
   tileTypesContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}
   gridDataSO: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
-  mode: 0
-  editMode: 0
-  selectedTileType: {fileID: 0}
+  _editorState:
+    layerType: 1
+    editorMode: 1
+    selectedTileType: {fileID: 0}

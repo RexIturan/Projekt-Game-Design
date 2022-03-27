@@ -23,11 +23,27 @@ namespace WorldObjects {
 		
 		[ContextMenu("Add Item")]
 		private void AddItem() {
+			CreateItem(defaultItemTypeSO);
+		}
+
+		private ItemComponent CreateItem(ItemTypeSO itemType) {
 			ItemComponent.ItemData data = defaultItemTypeSO.ToComponentData();
 			
 			//todo refactor get next playerchar id
 			data.Id = _itemComponents.Count + managerData.ItemDataList?.Count ?? 0;
-			_itemComponents.Add(CreateComponent<ItemComponent, ItemComponent.ItemData>(data, itemParent));
+			var itemComponent = CreateComponent<ItemComponent, ItemComponent.ItemData>(data, itemParent);
+			_itemComponents.Add(itemComponent);
+			return itemComponent;
+		}
+		
+		public void AddItemAt(ItemTypeSO itemTypeSO, Vector3 worldPos) {
+			var item = CreateItem(itemTypeSO);
+			item.GridTransform.MoveTo(worldPos);
+		}
+		
+		public void AddItemAt(ItemTypeSO itemTypeSO, Vector3Int gridPos) {
+			var item = CreateItem(itemTypeSO);
+			item.GridTransform.MoveTo(gridPos);
 		}
 	}
 }

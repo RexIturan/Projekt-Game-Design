@@ -34,7 +34,9 @@ namespace WorldObjects {
 			get => ( ItemTypeSO )_type;
 			set => _type = value;
 		}
+
 		
+
 		[SerializeField] private ItemData _itemData;
 
 		private WorldObjectList _worldObjects;

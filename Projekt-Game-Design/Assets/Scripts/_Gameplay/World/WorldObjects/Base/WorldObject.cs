@@ -20,6 +20,8 @@ namespace WorldObjects {
 
 			// Other Components
 			[SerializeField] protected GridTransform _gridTransform;
+
+			public GridTransform GridTransform => _gridTransform;
 			public Vector3 Rotation {
 				get { return _gridTransform.rotation; }
 				protected set { _gridTransform.rotation = value; }
@@ -31,6 +33,10 @@ namespace WorldObjects {
 					_gridTransform.gridPosition = value;
 				}
 			}
+
+///// Public Methodes //////////////////////////////////////////////////////////////////////////////			
+			
+///// SaveState ////////////////////////////////////////////////////////////////////////////////////
 
 			public virtual D Save() {
 				return new D {

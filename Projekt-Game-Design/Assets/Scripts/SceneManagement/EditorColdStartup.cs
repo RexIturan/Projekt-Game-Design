@@ -1,7 +1,9 @@
 ﻿// ReSharper disable RedundantUsingDirective
 
 using Events.ScriptableObjects;
+using GDP01.SceneManagement.EventChannels;
 using SceneManagement.ScriptableObjects;
+using SceneManagement.Types;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -18,7 +20,12 @@ namespace SceneManagement {
 		[SerializeField] private GameSceneSO startSceneSO;
 		[SerializeField] private GameSceneSO persistentManagersSO;
 		[SerializeField] private AssetReference loadSceneEventChannel;
-
+		
+		[Header("New SceneLoading")]
+		[SerializeField] private SceneLoadingInfoEventChannelSO loadSceneEC;
+		[SerializeField] private SceneLoadingData loadingData;
+		[SerializeField] private bool useSceneLoadingData = false;
+		
 		private void Start() {
 			if ( persistentManagersSO is { } ) {
 				// Debug.Log("cold startup: is persistant managers loaded?");
@@ -51,7 +58,12 @@ namespace SceneManagement {
 				operation => {
 					Debug.Log("EditorColdStartup > ReloadScene > UnloadSceneAsync(thisScene).completed" +
 					          "\n cold startup: unloading of original scene complete \n-> load startSceneSO");
-					loadEventChannelSO.RaiseEvent(new[] { startSceneSO });
+					if ( useSceneLoadingData ) {
+						loadSceneEC.RaiseEvent(loadingData);
+					}
+					else {
+						loadEventChannelSO.RaiseEvent(new[] { startSceneSO });	
+					}
 				};
 
 			//todo(vincent) destroy this EditorColdStartup

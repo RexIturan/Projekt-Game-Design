@@ -40,7 +40,7 @@ namespace SaveSystem.V2.Component {
 		}
 		
 		private void HandleUpdateSaveDataBeforeLevelLoaded(SceneLoadingData sceneLoadingData) {
-			if ( sceneLoadingData.MainSceneData is TacticsLevelSO ) {
+			if (sceneLoadingData.UpdateSave ) {
 				UpdateSaveData();
 			}
 		}

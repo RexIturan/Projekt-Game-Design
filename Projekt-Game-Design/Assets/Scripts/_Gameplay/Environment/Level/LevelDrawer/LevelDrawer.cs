@@ -10,9 +10,7 @@ namespace Visual {
 		[Header("SendingEventsOn")] [SerializeField]
 		private VoidEventChannelSO updateMeshEC;
 
-		
 		[SerializeField] private TileMapDrawer drawer;
-		[SerializeField] private PrefabGridDrawer objectDrawer;
 
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////		
 		

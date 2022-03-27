@@ -14,6 +14,7 @@ namespace Grid {
 		[SerializeField] private int width; //world x
 		[SerializeField] private int height; //world y
 		[SerializeField] private int depth; //world z
+
 		//todo use?
 		// [SerializeField] private Vector3Int size;
 		[SerializeField] private float cellSize;
@@ -22,10 +23,29 @@ namespace Grid {
 		[SerializeField] private Vector3 originPosition;
 		[SerializeField] private Vector3 _cellCenter;
 
+		//grid bounds
+		private Vector3Int maxPosition = new Vector3Int(100, 1, 100);
+		private Vector3Int minPosition = new Vector3Int(-100, 0, -100);
 		
+		//grid container
 		private List<TileGrid> tileGrids = new List<TileGrid>();
 		public List<TileGrid> TileGrids => tileGrids;
 
+		#region Setter / Getter
+
+		public string LevelName => levelName ??= "No-Name";
+		public int Width => width;
+		public int Height => height;
+		public int Depth => depth;
+		public float CellSize => cellSize;
+
+		public Vector3 OriginPosition {
+			get => originPosition;
+			set => originPosition = value;
+		}
+
+		#endregion
+		
 		public void InitGrids(GridDataSO gridData) {
 			var layerNum = gridData.Height;
 
@@ -93,21 +113,6 @@ namespace Grid {
 
 		#endregion
 		
-		#region Setter / Getter
-
-		public string LevelName => levelName;
-		public int Width => width;
-		public int Height => height;
-		public int Depth => depth;
-		public float CellSize => cellSize;
-
-		public Vector3 OriginPosition {
-			get => originPosition;
-			set => originPosition = value;
-		}
-
-		#endregion
-
 		public void InitValues(GridDataSO newData) {
 			levelName = newData.LevelName;
 			width = newData.Width;
@@ -282,6 +287,16 @@ namespace Grid {
 			return pos;
 		}
 
+		public Vector3Int GetGridPosInBounds(Vector3Int gridPos3D) {
+			var newX = Mathf.Clamp(gridPos3D.x, minPosition.x, maxPosition.x); 
+			var newY = Mathf.Clamp(gridPos3D.y, minPosition.y, maxPosition.y);
+			var newZ = Mathf.Clamp(gridPos3D.z, minPosition.z, maxPosition.z);
+			
+			return new Vector3Int {
+				x = newX, y =newY, z = newZ
+			};
+		}
+		
 		#endregion
 
 		#region Bound Check
@@ -360,5 +375,7 @@ namespace Grid {
 			// AssetDatabase.SaveAssets();
 #endif
 		}
+
+		
 	}
 }

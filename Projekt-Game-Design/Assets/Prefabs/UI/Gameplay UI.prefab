@@ -686,6 +686,7 @@ GameObject:
   - component: {fileID: 3159855197483783987}
   - component: {fileID: 3159855197483783986}
   - component: {fileID: 2095958464735229883}
+  - component: {fileID: 5109034479693778032}
   m_Layer: 0
   m_Name: Overlay
   m_TagString: Untagged
@@ -750,6 +751,22 @@ MonoBehaviour:
   newTurnEC: {fileID: 11400000, guid: 3a28845fa87e62b47abeaf01656a2806, type: 2}
   uiToggleMenuEC: {fileID: 11400000, guid: 9444ec8e72a59b64d934049dd28bcc23, type: 2}
   inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+--- !u!114 &5109034479693778032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159855197483783988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1adaeeabfa64ce88b09f1ea599af883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 3159855197483783986}
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  numOfActions: 10
+  preventDeselectOnLeftClick: 1
 --- !u!1 &3159855197502036354
 GameObject:
   m_ObjectHideFlags: 0

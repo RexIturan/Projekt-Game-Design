@@ -6,8 +6,30 @@ namespace UI.Components.Tooltip
 		/// <summary>
 		/// Attached to UI gameobject in scene to display tooltips. 
 		/// </summary>
-		public class TooltipLayer : MonoBehaviour
-		{
+		public class TooltipLayer : MonoBehaviour {
+			
+			#region Monobehaviour Singelton
+
+			private static TooltipLayer instance;
+			public static TooltipLayer Current => instance; 
+			
+			private void Awake() {
+				if ( instance == null ) {
+					instance = this;
+				}
+				else {
+					Debug.LogWarning("There can only be one UpdateHelper!");
+					Destroy(gameObject);
+				}
+			}
+
+			private void OnDestroy() {
+				instance = null;
+			}
+
+			#endregion
+			
+			
 				private static readonly string defaultStyleSheet = "tooltip";
 				private static readonly string className = "tooltipLayer";
 

@@ -29,11 +29,14 @@ namespace UI.Components.ActionButton {
 		private static readonly string cooldownSuffix = "cooldown";
 		private static readonly string cooldownContainerSuffix = "cooldown-container";
 		
+		private static readonly string selectedClassName = "selected";
+		
 		private static readonly string defaultStyleSheet = "UI/actionButton";
 ///// PRIVATE VARIABLES ////////////////////////////////////////////////////////////////////////////
 
 		private Action onFocusCallback;
 		private Action onBlurCallback;
+		private Action onClickCallback;
 		
 ///// UI ELEMENTS //////////////////////////////////////////////////////////////////////////////////
 
@@ -56,6 +59,7 @@ namespace UI.Components.ActionButton {
 		public Button Button => button;
 		
 		public bool ShowName { get; set; }
+		public bool Selected { get; set; }
 		
 ///// PRIVATE FUNCTIONS ////////////////////////////////////////////////////////////////////////////		
 		
@@ -131,6 +135,10 @@ namespace UI.Components.ActionButton {
 		private void HandleBlur(EventBase evt) {
 			onBlurCallback();
 		}
+
+		private void HandleClick() {
+			onClickCallback();
+		}
 		
 ///// PUBLIC FUNCTIONS /////////////////////////////////////////////////////////////////////////////
 
@@ -152,8 +160,24 @@ namespace UI.Components.ActionButton {
 			else {
 				cooldownLabel.SetStyleDisplayVisibility(false);
 			}
+
+			if ( Selected ) {
+				AddToClassList(GetClassNameWithSuffix(selectedClassName));
+			}
+			else {
+				RemoveFromClassList(GetClassNameWithSuffix(selectedClassName));
+			}
 			
 			nameLabel.SetStyleDisplayVisibility(ShowName);
+		}
+		
+		public void BindOnClickedAction(Action<object[]> onClick, object[] args) {
+			onClickCallback = () => onClick(args);
+			
+			// button.clicked += this.callback;
+			button.RegisterCallback<FocusEvent>(HandleFocus);
+			button.RegisterCallback<BlurEvent>(HandleBlur);
+			button.clicked += HandleClick;
 		}
 		
 		public void BindOnClickedAction(Action<object[]> onFocus, Action<object[]> onBlur, object[] args) {
@@ -163,12 +187,14 @@ namespace UI.Components.ActionButton {
 			// button.clicked += this.callback;
 			button.RegisterCallback<FocusEvent>(HandleFocus);
 			button.RegisterCallback<BlurEvent>(HandleBlur);
+			button.clicked += HandleClick;
 		}
 
 		public void UnbindOnClickedAction() {
 			// button.clicked -= this.callback;
 			button.UnregisterCallback<FocusEvent>(HandleFocus);
 			button.UnregisterCallback<BlurEvent>(HandleBlur);
+			button.clicked -= HandleClick;
 			onFocusCallback = null;
 			onBlurCallback = null;
 		}
@@ -195,6 +221,7 @@ namespace UI.Components.ActionButton {
 		public void ResetActionButton() {
 			ImageData = null;
 			ActionText = "";
+			Cooldown = 0;
 			UnbindOnClickedAction();
 			UpdateComponent();
 		}
@@ -239,6 +266,7 @@ namespace UI.Components.ActionButton {
 			ImageData = img;
 			ShowName = showName;
 			Cooldown = cooldown;
+			Selected = false;
 			
 			BuildActionButton(componentName);
 			UpdateComponent();

@@ -1,4 +1,5 @@
-﻿using GDP01.Input.Input.Types;
+﻿using System;
+using GDP01.Input.Input.Types;
 using GDP01.UI.Components;
 using Input;
 using UnityEngine;
@@ -9,11 +10,8 @@ namespace UI {
 		[SerializeField] private UIDocument uiDocument;
 		[SerializeField] private InputReader inputReader;
 
-		[Range(0, 5)]
-		[SerializeField] private int numOfActionsLeft;
-		
-		[Range(0, 5)]
-		[SerializeField] private int numOfActionsRight;
+		private int numOfActionsLeft = 3;
+		private int numOfActionsRight = 7;
 		
 ///// Privat Variables /////////////////////////////////////////////////////////////////////////////
 	
@@ -28,8 +26,7 @@ namespace UI {
 ///// Public Function //////////////////////////////////////////////////////////////////////////////
 
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////		
-		
-		private void Start() {
+		private void OnEnable() {
 
 			//todo remove for
 			// inputReader.EnableGameplayInput();

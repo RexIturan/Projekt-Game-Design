@@ -33,7 +33,7 @@ MonoBehaviour:
       strengthBonus: 0.52
       dexterityBonus: 0
       intelligenceBonus: 0
-    targets: 22
+    targets: 20
     targetIsCenter: 1
     area:
       stringPattern: '- x -
@@ -53,7 +53,7 @@ MonoBehaviour:
       dexterityBonus: 0
       intelligenceBonus: 0
     targets: 1
-    targetIsCenter: 1
+    targetIsCenter: 0
     area:
       stringPattern: '- x -
 

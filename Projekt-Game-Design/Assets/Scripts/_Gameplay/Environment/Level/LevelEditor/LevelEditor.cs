@@ -1,75 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
-using Characters.Types;
 using Events.ScriptableObjects;
+using GDP01._Gameplay.Provider;
 using Grid;
 using Input;
+using LevelEditor.EventChannels;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Visual;
 
 namespace LevelEditor {
-	public class LevelEditor : MonoBehaviour {
-		//todo(vincent) rename
-		public enum EditType {
-			Select,
-			Paint,
-			Box,
-			Fill,
-		}
-
-		//todo rename
-		public enum EditLayer {
-			Terrain,
-			Item,
-			Character,
-			Objects,
-		}
-
-		[Header("Debug")]
-		public bool showCenterPos;
+	public partial class LevelEditor : MonoBehaviour {
+		[Header("Debug")] public bool showCenterPos;
 		public bool showMouseHit;
-		
-		[Header("Receiving Events On")] [SerializeField]
-		private VoidEventChannelSO levelLoaded;
 
+		[Header("Receiving Events On")] 
+		[SerializeField] private VoidEventChannelSO levelLoaded;
 		[SerializeField] private IntEventChannelSO setModeEC;
-
+		[SerializeField] private LevelEditorLayerEventChannel levelEditorLayerEC;
+		[SerializeField] private LevelEditorModeEventChannel levelEditorModeEC;
+		
 		[Header("Sending Events On")] [SerializeField]
 		private VoidEventChannelSO redrawLevelEC;
+		[SerializeField] private LevelEditorStateEventChannel levelEditorStateUpdateEC;
 
 		[Header("scene References")] 
-		[SerializeField] private TileMapDrawer gridDrawer;
+		// [SerializeField] private TileMapDrawer gridDrawer;
 		[SerializeField] private CursorDrawer cursorDrawer;
+		// [SerializeField] private GridController gridController;
 
-		[SerializeField] private GridController gridController;
-
-		[Header("Input")] [SerializeField] private InputReader inputReader;
+		[Header("Input")] 
+		[SerializeField] private InputReader inputReader;
 		[SerializeField] private InputCache inputCache;
 
 		[Header("SO References")] 
 		[SerializeField] private TileTypeContainerSO tileTypesContainer;
 		[SerializeField] private GridDataSO gridDataSO;
 
-		[Header("Settings")] 
-		[SerializeField] private EditType mode = EditType.Paint;
-		[SerializeField] private EditLayer editMode = EditLayer.Terrain;
-		[SerializeField] private Faction characterFaction = Faction.Player;
-		// [SerializeField] private PlayerSpawnDataSO playerSpawnDataSO;
-		[SerializeField] private PlayerTypeSO playerTypeSO;
-		// [SerializeField] private EnemySpawnDataSO enemySpawnDataSO;
-		[SerializeField] private EnemyTypeSO enemyTypeSO;
-		[SerializeField] private TileTypeSO selectedTileType;
+		[Header("Settings"), SerializeField] private EditorState _editorState;
 
 /////////////////////////////////////// Properties ////////////////////////////////////////////
 
-		public EditType Mode {
-			get => mode;
-			set => mode = value;
+		public TileMapDrawer GridDrawer => GameplayProvider.Current.GridDrawer;
+		private GridController GridController => GameplayProvider.Current.GridController;
+
+		public EditorMode Mode {
+			get => _editorState.editorMode;
+			set => _editorState.editorMode = value;
 		}
 
-		public EditLayer EditMode {
-			get => editMode;
-			set => editMode = value;
+		public LayerType Layer {
+			get => _editorState.layerType;
+			set => _editorState.layerType = value;
 		}
 
 /////////////////////////////////////// Local Variables ////////////////////////////////////////////
@@ -89,63 +71,142 @@ namespace LevelEditor {
 
 		private bool remove = false;
 
-		private List<Vector3> _clickedAbovePos;
-		private List<Vector3> _clickedSelectedPos;
-
 /////////////////////////////////////// Local Functions ////////////////////////////////////////////
 
 		private void SetMode(int newMode) {
-			var len = Enum.GetNames(typeof(EditType)).Length;
+			var len = Enum.GetNames(typeof(EditorMode)).Length;
 
 			if ( newMode >= len ) {
-				editMode = ( EditLayer )( newMode - len );
+				Layer = ( LayerType )( newMode - len );
 			}
 
 			if ( newMode >= 0 && newMode < len ) {
-				Mode = ( EditType )newMode;
+				Mode = ( EditorMode )newMode;
 			}
-			
-			Debug.Log($"Level Editor > Set Mode\n {mode} {editMode}");
+
+			Debug.Log($"Level Editor > Set Mode\n {Layer} {Mode}");
 		}
 
+		private void DrawCursor(LayerType layerType, CursorMode cursorMode, Vector3 pos,
+			Vector3 abovePos) {
+			switch ( layer: layerType, cursorMode ) {
+				case (LayerType.Tile, CursorMode.Remove):
+					cursorDrawer.DrawCursorAt(pos, cursorMode);
+					break;
+				case (LayerType.Tile, CursorMode.Add):
+					cursorDrawer.DrawCursorAt(abovePos, cursorMode);
+					break;
+
+				case (LayerType.Item, CursorMode.Add):
+				case (LayerType.Item, CursorMode.Remove):
+					cursorDrawer.DrawCursorAt(abovePos, cursorMode);
+					break;
+				
+				// layer none? mode none?
+				default:
+					cursorDrawer.DrawCursorAt(abovePos, CursorMode.Error);
+					break;
+			}
+		}
+
+///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
+		
+
+		private void HandleModeChange(EditorMode mode) {
+			_editorState.editorMode = mode;
+			Debug.Log($"Mode Update: {_editorState}");
+			levelEditorStateUpdateEC.RaiseEvent(_editorState);
+		}
+
+		private void HandleLayerChange(LayerType layer) {
+			_editorState.layerType = layer;
+			Debug.Log($"Layer Update: {_editorState}");
+			levelEditorStateUpdateEC.RaiseEvent(_editorState);
+		}
+		
+		private void HandleMouseDrag(Vector3 pos) {
+			if ( _leftClicked ) {
+				if ( _clickedAbovePos.Count == 1 ) {
+					_clickedAbovePos.Add(pos);
+				}
+				else {
+					_clickedAbovePos[1] = pos;
+				}
+			}
+			else {
+				if ( _clickedSelectedPos.Count == 1 ) {
+					_clickedSelectedPos.Add(pos);
+				}
+				else {
+					_clickedSelectedPos[1] = pos;
+				}
+			}
+		}
+
+		private void HandleMouseDragEnd() {
+			_dragEnd = true;
+		}
+
+/////////////////////////////////////// Public Functions ///////////////////////////////////////////
+
+		[ContextMenu("Update Editor State")]
+		public void UpdateEditorState() {
+			levelEditorStateUpdateEC.RaiseEvent(_editorState);	
+		}
+
+		public void RedrawLevel() {
+			GridDrawer.DrawGridLayout();
+			redrawLevelEC.RaiseEvent();
+		}
+
+///// Unity Functions //////////////////////////////////////////////////////////////////////////////		
+		
 		#region MonoBehaviour
 
-		private void Awake() {
+		private void OnEnable() {
 			_clickedAbovePos = new List<Vector3>();
 			_clickedSelectedPos = new List<Vector3>();
 
-			selectedTileType = tileTypesContainer.tileTypes[1];
+			_editorState.selectedTileType = tileTypesContainer.tileTypes[1];
 			inputReader.ResetEditorLevelEvent += ResetLevel;
 			levelLoaded.OnEventRaised += RedrawLevel;
 			setModeEC.OnEventRaised += SetMode;
+			levelEditorLayerEC.OnEventRaised += HandleLayerChange;
+			levelEditorModeEC.OnEventRaised += HandleModeChange;
+
+			UpdateEditorState();
 		}
 
-		private void OnDestroy() {
+		private void OnDisable() {
 			inputReader.ResetEditorLevelEvent -= ResetLevel;
 			levelLoaded.OnEventRaised -= RedrawLevel;
 			setModeEC.OnEventRaised -= SetMode;
+			levelEditorLayerEC.OnEventRaised -= HandleLayerChange;
+			levelEditorModeEC.OnEventRaised -= HandleModeChange;
 		}
 
 		private void Update() {
+			if(EventSystem.current is {} && EventSystem.current.IsPointerOverGameObject()) return;
+			
 			if ( !inputReader.GameInput.Gameplay.enabled || inputCache.IsMouseOutsideWindow() ) {
 				return;
 			}
 
 			inputCache.UpdateMouseInput(gridDataSO);
-			
+
 			//todo(vincent) refactor #input cache
 
 			#region refactor to mouse input / input cache
 
 			// Debug.Log(inputCache.IsMouseOverUI);
-			
+
 			if ( !inputCache.IsMouseOverUI ) {
 				rightMouseWasReleased = inputCache.rightButton.wasRelesed;
-				leftMouseWasReleased  = inputCache.leftButton.wasRelesed;
-				leftMouseIsPressed    = inputCache.leftButton.isPressed;
-				rightMouseIsPressed   = inputCache.rightButton.isPressed;
+				leftMouseWasReleased = inputCache.leftButton.wasRelesed;
+				leftMouseIsPressed = inputCache.leftButton.isPressed;
+				rightMouseIsPressed = inputCache.rightButton.isPressed;
 				_rightClicked = inputCache.rightButton.isPressed;
-				_leftClicked  = inputCache.leftButton.isPressed;
+				_leftClicked = inputCache.leftButton.isPressed;
 				_dragEnd = inputCache.DragEnded();
 			}
 			else {
@@ -171,59 +232,51 @@ namespace LevelEditor {
 			}
 
 			#endregion
-
-			switch ( mode ) {
-				case EditType.Select:
+			
+			var cursorMode = remove ? CursorMode.Remove : CursorMode.Add;
+			
+			switch ( Mode ) {
+				case EditorMode.Select:
 					cursorDrawer.DrawCursorAt(centeredGridPosAbove, CursorMode.Select);
 					break;
 
-				case EditType.Paint:
-					if (remove) {
-						DrawCursor(editMode, CursorMode.Remove, centeredGridPos, centeredGridPosAbove);
-					}
-					else {
-						DrawCursor(editMode, CursorMode.Add, centeredGridPos, centeredGridPosAbove);
-					}
+				case EditorMode.Paint:
+					DrawCursor(Layer, cursorMode, centeredGridPos, centeredGridPosAbove);
 
 					if ( _rightClicked ) {
-						RemoveOne(editMode);
+						RemoveOne();
 						break;
 					}
 
 					if ( _leftClicked ) {
-						AddOne(editMode);
+						AddOne();
 					}
 
 					break;
 
-				case EditType.Box:
+				case EditorMode.Box:
 
 					if ( _leftClicked ) {
 						HandleMouseDrag(positionAbove);
-						Debug.Log($"left:{_leftClicked} right:{_rightClicked}");
+						// Debug.Log($"left:{_leftClicked} right:{_rightClicked}");
 					}
-					else if ( _rightClicked) {
+					else if ( _rightClicked ) {
 						HandleMouseDrag(selectedPosition);
-						Debug.Log($"left:{_leftClicked} right:{_rightClicked}");
+						// Debug.Log($"left:{_leftClicked} right:{_rightClicked}");
 					}
 					else if ( leftMouseWasReleased || rightMouseWasReleased ) {
 						HandleMouseDragEnd();
 						_dragEnd = true;
 					}
 					else {
-						if (remove) {
-							DrawCursor(editMode, CursorMode.Remove, centeredGridPos, centeredGridPosAbove);
-						}
-						else {
-							DrawCursor(editMode, CursorMode.Add, centeredGridPos, centeredGridPosAbove);
-						}
+						DrawCursor(Layer, cursorMode, centeredGridPos, centeredGridPosAbove);
 					}
 
 					if ( _dragEnd ) {
 						//todo remove
-						Debug.Log("drag ended");
+						// Debug.Log("drag ended");
 						if ( remove ) {
-							RemoveMany(EditLayer.Terrain);
+							RemoveMany();
 						}
 						else {
 							AddMany();
@@ -245,152 +298,13 @@ namespace LevelEditor {
 							}
 						}
 					}
-					break;
-			}
-		}
 
-		private void DrawCursor(EditLayer layer, CursorMode cursorMode, Vector3 pos, Vector3 abovePos) {
-
-			switch ( layer, cursorMode ) {
-				case ( EditLayer.Terrain, CursorMode.Remove ) :
-					cursorDrawer.DrawCursorAt(pos, cursorMode);
-					break;
-				case (EditLayer.Terrain, CursorMode.Add):
-					cursorDrawer.DrawCursorAt(abovePos, cursorMode);
-					break;
-				
-				case (EditLayer.Item, CursorMode.Add):
-				case (EditLayer.Item, CursorMode.Remove):
-					cursorDrawer.DrawCursorAt(abovePos, cursorMode);
 					break;
 			}
 		}
 
 		#endregion
 
-/////////////////////////////////////// Public Functions ///////////////////////////////////////////
-
-			public void RedrawLevel() {
-				gridDrawer.DrawGridLayout();
-				redrawLevelEC.RaiseEvent();
-			}
-
-			#region Add
-
-			private void AddOne(EditLayer layer) {
-				
-				Debug.Log($"AddOne: {mode} {editMode} {_clickedAbovePos[0]}");
-				
-				switch ( layer ) {
-					case EditLayer.Terrain:
-						AddTileAt(_clickedAbovePos[0]);
-						break;
-					
-					case EditLayer.Item:
-						gridController.AddItemAt(_clickedAbovePos[0], 0);
-						break;
-					
-					// case EditLayer.Character:
-					// 	if ( characterFaction == Faction.Player ) {
-					// 		gridController.AddPlayerCharacterAt(_clickedAbovePos[0], Faction.Player, playerTypeSO);	
-					// 	}
-					// 	else {
-					// 		gridController.AddEnemyCharacterAt(_clickedAbovePos[0], Faction.Player, enemyTypeSO);
-					// 	}
-					// 	break;
-				}
-				
-				_clickedAbovePos.Clear();
-				_leftClicked = false;
-				RedrawLevel();
-			}
-
-			private void AddMany() {
-				AddMultipleTilesAt(_clickedAbovePos[0], _clickedAbovePos[1]);
-				_clickedAbovePos.Clear();
-				_leftClicked = false;
-				_dragEnd = false;
-				cursorDrawer.HideCursor();
-				RedrawLevel();
-			}
-			
-			#endregion
-
-			#region Remove
-
-			private void RemoveOne(EditLayer layer) {
-				switch ( layer ) {
-					case EditLayer.Terrain:
-						gridController.AddTileAt(_clickedSelectedPos[0], tileTypesContainer.tileTypes[0].id);
-						break;
-					case EditLayer.Item:
-						gridController.RemoveItemAt(_clickedAbovePos[0]);
-						break;
-				}
-
-				_clickedSelectedPos.Clear();
-				_rightClicked = false;
-
-				RedrawLevel();
-			}
-
-			private void RemoveMany(EditLayer layer) {
-				switch ( layer ) {
-					case EditLayer.Terrain:
-						gridController.AddMultipleTilesAt(_clickedSelectedPos[0], _clickedSelectedPos[1],
-							tileTypesContainer.tileTypes[0].id);
-						break;
-				}
-
-				//todo move to iunput cache??
-				// reset input cache
-				_clickedSelectedPos.Clear();
-				_rightClicked = false;
-				_dragEnd = false;
-				cursorDrawer.HideCursor();
-				RedrawLevel();
-			}
-
-			#endregion
-
-			private void HandleMouseDrag(Vector3 pos) {
-				if ( _leftClicked ) {
-					if ( _clickedAbovePos.Count == 1 ) {
-						_clickedAbovePos.Add(pos);
-					}
-					else {
-						_clickedAbovePos[1] = pos;
-					}
-				}
-				else {
-					if ( _clickedSelectedPos.Count == 1 ) {
-						_clickedSelectedPos.Add(pos);
-					}
-					else {
-						_clickedSelectedPos[1] = pos;
-					}
-				}
-			}
-
-			private void HandleMouseDragEnd() {
-				_dragEnd = true;
-			}
-
-			private void AddMultipleTilesAt(Vector3 clickPos, Vector3 dragPos) {
-				gridController.AddMultipleTilesAt(clickPos, dragPos, selectedTileType.id);
-			}
-
-			private void AddTileAt(Vector3 clickPos) {
-				gridController.AddTileAt(clickPos, selectedTileType.id);	
-			}
-
-			public void ResetLevel() {
-				gridController.ResetGrid();
-				RedrawLevel();
-			}
-
-			// public void AddObjectAt(Vector3 clickPos) {
-			//     objectController.AddTileAt(clickPos, worldObjectContainer.worldObjects[1]);
-			// }
-		}
+		
 	}
+}

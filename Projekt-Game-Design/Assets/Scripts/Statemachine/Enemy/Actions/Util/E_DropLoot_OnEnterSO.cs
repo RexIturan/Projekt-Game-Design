@@ -1,4 +1,5 @@
 using Characters;
+using GDP01._Gameplay.Provider;
 using GDP01.Loot.ScriptableObjects;
 using Grid;
 using UnityEngine;
@@ -34,30 +35,32 @@ public class E_DropLoot_OnEnter : StateAction {
 	}
 
 	public override void OnStateEnter() {
-		DropLoot(_redrawLevelEC, _enemy.LootTable, _gridTransform.gridPosition);
+		DropLoot(_enemy.LootTable, _gridTransform.gridPosition);
 	}
 
 	// TODO move to Item Spawner
-	public static void DropLoot(VoidEventChannelSO redrawLevelEC, LootTableSO lootTable,
+	public static void DropLoot(LootTableSO lootTable,
 		Vector3Int gridPos) {
-		GridController _gridController = GridController.FindGridController();
+		var worldObjectManager = GameplayProvider.Current.WorldObjectManager;
 
-		if ( !_gridController )
-			Debug.LogWarning("Could not find grid controller. ");
+		if ( !worldObjectManager )
+			Debug.LogWarning("Could not find worldObjectManager. ");
 		else {
+			ItemTypeSO itemType = null;
 			int dropID = -1;
 			var lootDrop = lootTable.GetLootDrop();
 
 			//todo drop multiple items 
 			if ( lootDrop.items.Count > 0 ) {
 				dropID = lootDrop.items[0].id;
+				itemType = lootDrop.items[0];
 			}
 
-			if ( dropID >= 0 ) {
+			if ( dropID >= 0 && itemType is {} ) {
 				//todo move reference to grid controller to ItemSpawner or so and just invoke a event here 
 				Debug.Log("Dropping loot: " + dropID + " at " + gridPos.x + ", " + gridPos.z);
-				_gridController.AddItemAtGridPos(gridPos, dropID);
-				redrawLevelEC.RaiseEvent();
+				
+				worldObjectManager.AddItemAt(itemType, gridPos);
 			}
 		}
 	}

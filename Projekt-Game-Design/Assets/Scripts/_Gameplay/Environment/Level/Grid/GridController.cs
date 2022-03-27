@@ -18,6 +18,7 @@ namespace Grid {
 			}
 		}
 
+		//todo use vec3
 		private void ResizeGrids(Vector2Int gridPos, out Vector2Int newGridPos) {
 			newGridPos = gridPos;
 			if ( !gridData.IsIn2DGridBounds(gridPos) ) {
@@ -90,72 +91,21 @@ namespace Grid {
 			return id >= 0 ? tileTypesContainer.tileTypes[id] : null;
 		}
 
-		// public List<int> GetItemsAtGridPos(Vector3Int gridPos) {
-		// 	List<int> items = new List<int>();
-		//
-		// 	int i = 0;
-		// 	foreach(ItemGrid tileGrid in gridContainer.items) {
-		//
-		// 		var item = tileGrid.GetGridObject(new Vector2Int(gridPos.x, gridPos.z));
-		// 		if(item != null && item.ID >= 0) { 
-		// 			items.Add(item.ID);
-		// 			Debug.Log("Item in layer: " + i);
-		// 		}
-		// 		i++;
-		// 	}
-		//
-		// 	return items;
-		// }
-
 		#endregion
 
 		#region Add One
 
-		public void AddItemAt(Vector3 pos, int itemId) {
-			AddItemAtGridPos(gridData.GetGridPos3DFromWorldPos(pos), itemId);
-		}
-		
-		// public void AddCharacterAt(Vector3 pos, Faction faction) {
-		// 	AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction);
-		// }
-		
-		// public void AddEnemyCharacterAt(Vector3 pos, Faction faction, EnemyTypeSO enemyTypeSO) {
-		// 	AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction, null, null);
-		// }
-		//
-		// public void AddPlayerCharacterAt(Vector3 pos, Faction faction, PlayerTypeSO playerTypeSO) {
-		// 	AddCharacterAt(gridData.GetGridPos3DFromWorldPos(pos), faction, null, null);
-		// }
-		//
-		public void AddTileAt(Vector3 pos, int tileTypeID) {
-			AddTileAt(gridData.GetGridPos3DFromWorldPos(pos), tileTypeID);
-		}
-		//
-		// private void AddCharacterAt(Vector3Int gridPos, Faction faction, PlayerCharacterSC playerCharacterSC, EnemyCharacterSC enemyCharacterSC) {
-		// 	
-		// 	var layer = gridPos.y;
-		// 	var gridPos2D = gridData.GetGridPos2DFromGridPos3D(gridPos);
-		//
-		// 	ResizeGrids(gridPos2D, out var finalPos);
-		// 	
-		// 	SetCharacterAt(finalPos.x, layer, finalPos.y, faction, playerCharacterSC, enemyCharacterSC);
-		// }
-
-		public void AddItemAtGridPos(Vector3Int gridPos, int itemId) {
-			var layer = gridPos.y;
-			var gridPos2D = gridData.GetGridPos2DFromGridPos3D(gridPos);
-
-			ResizeGrids(gridPos2D, out var finalPos);
-			
+		public void AddTileAt(Vector3 pos, TileTypeSO tileType) {
+			AddTileAt(gridData.GetGridPos3DFromWorldPos(pos), tileType.id);
 		}
 		
 		private void AddTileAt(Vector3Int gridPos, int tileTypeID) {
-			var layer = gridPos.y;
-			var gridPos2D = gridData.GetGridPos2DFromGridPos3D(gridPos);
+			var posInBounds = gridData.GetGridPosInBounds(gridPos);
+			var gridPos2D = gridData.GetGridPos2DFromGridPos3D(posInBounds);
 
 			ResizeGrids(gridPos2D, out var finalPos);
 
-			SetTileAt(finalPos.x, layer, finalPos.y, tileTypeID);
+			SetTileAt(finalPos.x, posInBounds.y, finalPos.y, tileTypeID);
 		}
 
 		private void SetTileAt(int x, int y, int z, int tileTypeID) {
@@ -170,43 +120,19 @@ namespace Grid {
 			}
 		}
 
-		// private void SetCharacterAt(int x, int y, int z, Faction faction, PlayerCharacterSC playerCharacterSC, EnemyCharacterSC enemyCharacterSC) {
-		// 	//todo char data
-		// 	if ( gridContainer.characters != null ) {
-		// 		if ( gridContainer.characters.Length > y ) {
-		// 			if ( gridContainer.characters[y] != null ) {
-		// 				gridContainer.characters[y].GetGridObject(x, z).SetCharData(faction, playerCharacterSC, enemyCharacterSC);
-		// 			}
-		// 		}
-		// 	}
-		// }
-
-		// private void SetItemAt(Vector2Int pos, int layer, int itemId) {
-		// 	Debug.Log($"SetItemAt {pos} {itemId} |{gridContainer.items[layer].Width}, {layer}, {gridContainer.items[layer].Depth}");
-		//
-		// 	var tileId = gridContainer.tileGrids[layer].GetGridObject(pos).tileTypeID;
-		// 	var tile = tileTypesContainer.tileTypes[tileId];
-		// 	if ( ! tile.properties.HasFlag(TileProperties.Solid | TileProperties.Opaque) ) {
-		// 		gridContainer.items[layer].GetGridObject(pos).SetId(itemId);	
-		// 	}
-		// }
-		
 		#endregion
 
 		#region Remove One
-
-		// public void RemoveTileAt()
-
-		public void RemoveItemAt(Vector3 worldPos) {
-			AddItemAt(worldPos, -1);
-		}
 		
+		public void RemoveTileAt(Vector3 worldPos) {
+			AddTileAt(gridData.GetGridPos3DFromWorldPos(worldPos), 0);
+		}
+
 		#endregion
 
 		#region Add Many
 
 		public void AddMultipleTilesAt(Vector3 start, Vector3 end, int tileTypeID) {
-			// AddMultipleTilesAt(WorldPosToTilePos(start), WorldPosToTilePos(end), tileTypeID);
 			AddMultipleTilesAt(
 				gridPos3DStart: gridData.GetGridPos3DFromWorldPos(start),
 				gridPos3DEnd: gridData.GetGridPos3DFromWorldPos(end), 
@@ -215,8 +141,11 @@ namespace Grid {
 
 		private void AddMultipleTilesAt(Vector3Int gridPos3DStart, Vector3Int gridPos3DEnd, int tileTypeID) {
 
-			var min3D = Vector3Int.Min(gridPos3DStart, gridPos3DEnd);
-			var max3D = Vector3Int.Max(gridPos3DStart, gridPos3DEnd);
+			var startInBounds = gridData.GetGridPosInBounds(gridPos3DStart);
+			var endInBounds = gridData.GetGridPosInBounds(gridPos3DEnd);
+			
+			var min3D = Vector3Int.Min(startInBounds, endInBounds);
+			var max3D = Vector3Int.Max(startInBounds, endInBounds);
 
 			var min2D = gridData.GetGridPos2DFromGridPos3D(min3D);
 			var max2D = gridData.GetGridPos2DFromGridPos3D(max3D);
@@ -237,17 +166,10 @@ namespace Grid {
 
 		#region Remove many
 
-		// public void RemoveAllItemsAtGridPos(Vector3Int gridPos) {
-		// 	for(int layer = 0; layer < gridContainer.items.Length; layer++) { 
-		// 		Vector2Int gridPos2D = new Vector2Int(gridPos.x, gridPos.z);
-		// 	  Debug.Log($"SetItemAt {gridPos2D} {-1} |{gridContainer.items[layer].Width}, {layer}, {gridContainer.items[layer].Depth}");
-		//
-		// 		var gridObject = gridContainer.items[layer].GetGridObject(gridPos2D);
-		// 		if(gridObject != null)
-		// 			gridObject.SetId(-1);
-		// 	}
-		// }
-
+		public void RemoveMultipleTilesAt(Vector3 start, Vector3 end) {
+			AddMultipleTilesAt(start, end, 0);
+		}
+		
 		#endregion
 
 		public void ResetGrid() {

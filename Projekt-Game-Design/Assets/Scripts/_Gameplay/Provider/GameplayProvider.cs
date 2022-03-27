@@ -1,6 +1,8 @@
 ﻿using System;
 using GDP01._Gameplay.World.Character;
+using Grid;
 using UnityEngine.SceneManagement;
+using Visual;
 using WorldObjects;
 using static GDP01.Util.Singelton.ProviderHelper;
 
@@ -27,5 +29,11 @@ namespace GDP01._Gameplay.Provider {
 
 		private WorldObjectManager _worldObjectManager;
 		public WorldObjectManager WorldObjectManager => TryGetAndCacheComponentOfTypeInActiveScene(ref _worldObjectManager);
+		
+		private TileMapDrawer _gridDrawer;
+		public TileMapDrawer GridDrawer => TryGetAndCacheComponentOfTypeInActiveScene(ref _gridDrawer);
+
+		private GridController _gridController;
+		public GridController GridController => TryGetAndCacheComponentOfTypeInActiveScene(ref _gridController);
 	}
 }

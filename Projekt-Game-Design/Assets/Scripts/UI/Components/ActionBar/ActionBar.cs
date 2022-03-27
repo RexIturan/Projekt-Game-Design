@@ -97,12 +97,12 @@ namespace GDP01.UI.Components {
 		}
 
 		private void HandleActionClicked(ActionButton actionButton) {
-				// var navEvent = new NavigationSubmitEvent();
-				// navEvent.target = actionButton.Button;
-				// this.SendEvent(navEvent);
+				var navEvent = new NavigationSubmitEvent();
+				navEvent.target = actionButton.Button;
+				this.SendEvent(navEvent);
 
 				//todo maybe change the behaviour so the ability would be repeatable?
-				HandleActionSelected(actionButton);
+				// HandleActionSelected(actionButton);
 		}
 
 ///// PUBLIC FUNCTIONS  ////////////////////////////////////////////////////////////////////////////

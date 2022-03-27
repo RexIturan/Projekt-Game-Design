@@ -714,10 +714,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9012959172467064327, guid: a2133eacc6c402545be76d899962b51e, type: 3}
-      propertyPath: gridData
-      value: 
-      objectReference: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2133eacc6c402545be76d899962b51e, type: 3}
 --- !u!114 &1259656477 stripped
@@ -1162,7 +1158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1916368008
 Transform:
   m_ObjectHideFlags: 0

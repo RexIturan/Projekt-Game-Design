@@ -55,6 +55,38 @@ namespace UI.Controller {
 				yield return new WaitForSeconds(delay);
 			}
 		}  
+		
+		private void BindElements() {
+			//get action bar
+			_actionBar = uiDocument.rootVisualElement.Q<ActionBar>();
+			
+			_actionBar.Mappings.Clear();
+			for ( int i = 0; i < numOfActions; i++ ) {
+				var id = i + 1;
+				_actionBar.Mappings.Add(id < 10 ? id.ToString() : "0");
+			}
+			
+			_actionBar.UpdateComponent();
+		}
+
+		private void UnbindElements() {
+			_actionBar = null;
+		}
+		
+///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
+		
+		//todo callbacks
+		private void HandlePanelPointerDownEvent(PointerDownEvent evt) {
+			if ( preventDeselectOnLeftClick ) {
+				if ( evt.button == 0 ) {
+					//do stuff
+					// evt.StopImmediatePropagation();
+					// evt.StopPropagation();
+					// evt.PreventDefault();
+				}
+			}
+		}
+		
 ///// Public Function //////////////////////////////////////////////////////////////////////////////
 
 		public void FocusThroughAllButtons() {
@@ -68,45 +100,19 @@ namespace UI.Controller {
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////		
 		
 		private void Start() {
-
-			//todo remove for
-			inputReader.EnableGameplayInput();
-			
-			//get action bar
-			_actionBar = uiDocument.rootVisualElement.Q<ActionBar>();
-			
-			_actionBar.Mappings.Clear();
-			for ( int i = 0; i < numOfActions; i++ ) {
-				var id = i + 1;
-				_actionBar.Mappings.Add(id < 10 ? id.ToString() : "0");
-			}
-			
-			_actionBar.UpdateComponent();
-			inputReader.SelectAbilityEvent += _actionBar.ClickActionButton;
-
 			//todo move to panel override or so
-			var panel = uiDocument.rootVisualElement.hierarchy.parent;
-			panel.RegisterCallback<PointerDownEvent>(HandlePanelPointerDownEvent);
-		}
-
-		private void HandlePanelPointerDownEvent(PointerDownEvent evt) {
-			if ( preventDeselectOnLeftClick ) {
-				if ( evt.button == 0 ) {
-					//do stuff
-					// evt.StopImmediatePropagation();
-					// evt.StopPropagation();
-					// evt.PreventDefault();
-				}
-			}
+			// var panel = uiDocument.rootVisualElement.hierarchy.parent;
+			// panel.RegisterCallback<PointerDownEvent>(HandlePanelPointerDownEvent);
 		}
 		
 		private void OnEnable() {
-			//todo player selected
-			//todo player deselect
+			BindElements();
+			inputReader.SelectAbilityEvent += _actionBar.SelectActionButton;
 		}
 
 		private void OnDisable() {
-			inputReader.SelectAbilityEvent -= _actionBar.ClickActionButton;
+			inputReader.SelectAbilityEvent -= _actionBar.SelectActionButton;
+			UnbindElements();
 		}
 	}
 }

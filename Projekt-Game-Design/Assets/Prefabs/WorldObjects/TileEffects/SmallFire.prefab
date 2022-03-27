@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 662010485810030292}
   - component: {fileID: 4968240534970928259}
   - component: {fileID: 7134298740225583253}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmallFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4677438736407579183}
   - component: {fileID: 8778468464749009076}
   - component: {fileID: 9078415997630535266}
-  m_Layer: 1
+  m_Layer: 7
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 2901441984632087649}
   - component: {fileID: 5151575451971335865}
   - component: {fileID: 7447565856850256982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fire BOTW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8197902774300409200}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4170762301815921071}
   - component: {fileID: 8480641681323634602}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 7651453006934658792}
   - component: {fileID: 8134125837266471712}
   - component: {fileID: 5906919925806924985}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fire3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,7 +468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3447638718424112295}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,9 +498,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 662010485810030292}
     m_Modifications:
+    - target: {fileID: 224354769480931263, guid: 1d8f42fd3b8697b4fa72a28747ac0d2f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817696903877871157, guid: 1d8f42fd3b8697b4fa72a28747ac0d2f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2951273937917908678, guid: 1d8f42fd3b8697b4fa72a28747ac0d2f, type: 3}
       propertyPath: m_Name
       value: PreviewComponent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951273937917908678, guid: 1d8f42fd3b8697b4fa72a28747ac0d2f, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5202155160295885620, guid: 1d8f42fd3b8697b4fa72a28747ac0d2f, type: 3}
       propertyPath: tileEffectController
@@ -549,6 +561,10 @@ PrefabInstance:
     - target: {fileID: 6638876954472189871, guid: 1d8f42fd3b8697b4fa72a28747ac0d2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7682789467609785688, guid: 1d8f42fd3b8697b4fa72a28747ac0d2f, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7682789467609785688, guid: 1d8f42fd3b8697b4fa72a28747ac0d2f, type: 3}
       propertyPath: m_IsActive

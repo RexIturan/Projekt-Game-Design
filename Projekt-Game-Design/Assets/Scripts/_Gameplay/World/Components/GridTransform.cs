@@ -14,14 +14,27 @@ namespace Characters {
 
 		public GridDataSO GetGridData() { return gridData; }
 
-		public void Start() {
-			MoveToGridPosition();
-		}
-
+///// Public Methodes //////////////////////////////////////////////////////////////////////////////		
+		
 		// todo set GameObject to grid Position
 		[ContextMenu("MoveToGridPosition")]
 		public void MoveToGridPosition() {
 			gameObject.transform.position = gridData.GetWorldPosFromGridPos(gridPosition);
+		}
+
+		public void MoveTo(Vector3 worldPos) {
+			MoveTo(gridData.GetGridPos3DFromWorldPos(worldPos));
+		}
+
+		public void MoveTo(Vector3Int gridPos) {
+			gridPosition = gridPos;
+			MoveToGridPosition();
+		}
+		
+///// Unity Methodes ///////////////////////////////////////////////////////////////////////////////
+
+		public void Start() {
+			MoveToGridPosition();
 		}
 	}
 }

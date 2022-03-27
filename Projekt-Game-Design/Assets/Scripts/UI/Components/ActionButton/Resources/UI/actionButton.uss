@@ -6,6 +6,11 @@
     align-items: center;
 }
 
+.action-button-selected .action-button-button{
+    border-color: #ff3659;
+    background-color: #ff3255;
+}
+
 .action-button-button:focus {
     border-color: var(--focus-border-color);
 }
