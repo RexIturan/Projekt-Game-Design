@@ -57,7 +57,7 @@
         "y": 1,
         "z": 27
       },
-      "hitpoints": 0,
+      "hitpoints": 1000,
       "energy": 100000
     },
     {
@@ -67,7 +67,7 @@
         "y": 1,
         "z": 27
       },
-      "hitpoints": 0,
+      "hitpoints": 1000,
       "energy": 100000
     },
     {
