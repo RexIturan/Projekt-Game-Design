@@ -9,22 +9,33 @@ using UnityEngine;
 
 namespace Combat
 {
-		public class CombatUtils : MonoBehaviour
+		public static class CombatUtils
 		{
-				/**
-				 * calculates the damage/healing inflicted
-				 */
-				public static int CalculateDamage(Effect effect, StatusValues stats)
+				/// <summary>
+				/// Calculates the inflicted damage by an attacker towards a target. 
+				/// </summary>
+				/// <param name="effect"></param>
+				/// <param name="statsAttacker"></param>
+				/// <returns></returns>
+				public static int CalculateDamage(Effect effect, Attacker attacker, Targetable target)
 				{
-						int effectDamage = effect.baseDamage +
-															 ( int )( effect.strengthBonus * stats.Strength.Value ) +
-															 ( int )( effect.dexterityBonus * stats.Dexterity.Value ) +
-															 ( int )( effect.intelligenceBonus * stats.Intelligence.Value );
+						Statistics targetStatistics = target.GetComponent<Statistics>();
+						Statistics attackerStatistics = attacker.GetComponent<Statistics>();
+
+						StatusValues statsAttacker = attackerStatistics.StatusValues;
+
+						float effectDamage = effect.baseDamage +
+																	( effect.strengthBonus * statsAttacker.Strength.Value ) +
+																	( effect.dexterityBonus * statsAttacker.Dexterity.Value ) +
+																	( effect.intelligenceBonus * statsAttacker.Intelligence.Value );
 
 						if ( effect.type == DamageType.Healing )
 								effectDamage *= -1;
 
-						return effectDamage;
+						// type multiplication
+						effectDamage = effectDamage * DamageTable.GetFactorForDamageAndArmor(effect.type, targetStatistics.ArmorType);
+
+						return Mathf.FloorToInt(effectDamage);
 				}
 
 				public static List<Targetable> FindAllTargets(
@@ -98,13 +109,13 @@ namespace Combat
 					
 					// calculate damage for each target for each targeted effects
 					foreach ( TargetedEffect targetedEffect in ability.targetedEffects ) {
-						int damage = CalculateDamage(targetedEffect.effect, statistics.StatusValues);
-
 						List<Targetable> targets = FindAllTargets(
 								targetedEffect.area.GetTargetedTiles(targetPos, rotations),
 								attacker, targetedEffect.targets);
 
 						foreach ( Targetable target in targets ) {
+							int damage = CalculateDamage(targetedEffect.effect, attacker, target);
+
 							// TODO: is it ok to say dead people receive no damage? 
 							if(!target.IsDead) { 
 								targetDamagePairs.Add(new Tuple<Targetable, int>(target, damage));

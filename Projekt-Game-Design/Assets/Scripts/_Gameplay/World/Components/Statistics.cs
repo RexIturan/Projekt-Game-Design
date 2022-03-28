@@ -1,4 +1,5 @@
 ﻿using System;
+using Ability;
 using Characters.Types;
 using UnityEngine;
 using Visual.Healthbar;
@@ -9,11 +10,14 @@ namespace Characters {
 		public string DisplayName;
 		public Sprite DisplayImage;
 		[SerializeField] private StatusValues stats;
+		[SerializeField] private ArmorType armorType;
 		//todo move somewhere else??
 		[SerializeField] private Faction faction;
 
 		//property -> getter
 		public StatusValues StatusValues => stats;
+
+		public ArmorType ArmorType => armorType;
 
 		public Faction Faction => faction;
 		// getter und setter faction
