@@ -1,7 +1,9 @@
 {
     "name": "GDP01.EventChannel",
     "rootNamespace": "GDP01.EventChannel",
-    "references": [],
+    "references": [
+        "GUID:a46fa3f8826f4e5408526f4eeccb2e6a"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
