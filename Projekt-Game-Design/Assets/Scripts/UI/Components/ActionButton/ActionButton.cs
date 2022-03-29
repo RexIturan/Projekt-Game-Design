@@ -271,5 +271,12 @@ namespace UI.Components.ActionButton {
 			BuildActionButton(componentName);
 			UpdateComponent();
 		}
+		
+		/// <summary>
+		/// Cleanup tooltip on deletion. 
+		/// </summary>
+		~ActionButton() {
+			actionTooltip.Remove();
+		}
 	}
 }
