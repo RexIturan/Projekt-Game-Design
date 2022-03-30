@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d96e5cedd26fc4aadb20f716d67fe5, type: 3}
   m_Name: c_AbilityInProgress
   m_EditorClassIdentifier: 
-  abilityConfirmedEC: {fileID: 0}
-  abilityExecutedEC: {fileID: 0}
+  abilityConfirmedEC: {fileID: 11400000, guid: c8d63aaeb201f314499176fcc285dcfa, type: 2}
+  abilityExecutedEC: {fileID: 11400000, guid: e2abec9137f95984980d057a99f5946e, type: 2}
