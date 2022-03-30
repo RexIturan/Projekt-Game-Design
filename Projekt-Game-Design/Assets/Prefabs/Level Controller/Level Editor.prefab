@@ -52,9 +52,7 @@ MonoBehaviour:
   levelEditorModeEC: {fileID: 11400000, guid: 2f30f535d51883d4daf990f53bc67638, type: 2}
   redrawLevelEC: {fileID: 11400000, guid: 076a51549e7ef074aaa161d0013325a5, type: 2}
   levelEditorStateUpdateEC: {fileID: 11400000, guid: c0c1e1124f6528549b08daef2d5ff9ba, type: 2}
-  gridDrawer: {fileID: 0}
   cursorDrawer: {fileID: 0}
-  gridController: {fileID: 0}
   inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   inputCache: {fileID: 11400000, guid: 767106d458901634590366e6fae31156, type: 2}
   tileTypesContainer: {fileID: 11400000, guid: 31ddde445889df348a0a7e1b03cbe1b2, type: 2}
@@ -62,4 +60,10 @@ MonoBehaviour:
   _editorState:
     layerType: 1
     editorMode: 1
-    selectedTileType: {fileID: 0}
+    selectedTileType: {fileID: 11400000, guid: 353c6e4f6e21d804da9b81d38eb3d86f, type: 2}
+    selectedPlayerType: {fileID: 11400000, guid: 5d339fb430d10f341bd2896617aec0a2, type: 2}
+    selectedEnemyType: {fileID: 11400000, guid: c491683a0b68f934db35972bd4517070, type: 2}
+    selectedItemType: {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
+    selectedDoorType: {fileID: 11400000, guid: a332522f73c0bbf4dbe440e88190b4ed, type: 2}
+    selectedSwitchType: {fileID: 11400000, guid: 46777157b1b0dbf4ab5805399f03302a, type: 2}
+    selectedEffectTypeId: 0

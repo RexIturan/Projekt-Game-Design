@@ -1,6 +1,8 @@
 ﻿using System;
+using GDP01._Gameplay.Provider;
+using GDP01.TileEffects;
 using Grid;
-using UnityEngine;
+using WorldObjects;
 
 namespace LevelEditor {
 	public partial class LevelEditor {
@@ -9,6 +11,12 @@ namespace LevelEditor {
 			public LevelEditor.LayerType layerType = LayerType.Tile;
 			public LevelEditor.EditorMode editorMode = EditorMode.Select;
 			public TileTypeSO selectedTileType;
+			public PlayerTypeSO selectedPlayerType;
+			public EnemyTypeSO selectedEnemyType;
+			public ItemTypeSO selectedItemType;
+			public DoorTypeSO selectedDoorType;
+			public SwitchTypeSO selectedSwitchType;
+			public int selectedEffectTypeId;
 
 			public override string ToString() {
 				return $"layer: {layerType}, mode: {editorMode}, selectedTile: {selectedTileType} ";

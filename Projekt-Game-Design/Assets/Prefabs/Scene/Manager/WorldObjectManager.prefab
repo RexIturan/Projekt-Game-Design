@@ -44,14 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b8feb0dc714cedb5e3e488faf2a94b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldObjectManagerData:
+  worldObjectList: {fileID: 0}
+  itemDrawer: {fileID: 0}
+  _gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  managerData:
     DoorDataList: []
     SwitchDataList: []
     ItemDataList: []
   defaultDoorTypeSO: {fileID: 11400000, guid: a332522f73c0bbf4dbe440e88190b4ed, type: 2}
   doorParent: {fileID: 0}
   _doorComponents: []
-  defaultItemSO: {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
+  defaultItemTypeSO: {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
   itemParent: {fileID: 0}
   _itemComponents: []
   defaultSwitchTypeSO: {fileID: 11400000, guid: 46777157b1b0dbf4ab5805399f03302a, type: 2}

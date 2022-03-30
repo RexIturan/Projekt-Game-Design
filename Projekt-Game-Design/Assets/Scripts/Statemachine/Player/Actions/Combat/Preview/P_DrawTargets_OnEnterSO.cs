@@ -3,6 +3,8 @@ using Characters;
 using Combat;
 using Events.ScriptableObjects;
 using System.Collections.Generic;
+using System.Linq;
+using GDP01._Gameplay.Provider;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
 using UnityEngine;
@@ -40,7 +42,6 @@ public class P_DrawTargets_OnEnter : StateAction {
 	public override void OnUpdate() { }
 
 	public override void OnStateEnter() {
-		CharacterList characters = CharacterList.FindInstant();
 		WorldObjectList worldObjects = WorldObjectList.FindInstant();
 
 		List<PathNode> allies = new List<PathNode>();
@@ -63,14 +64,17 @@ public class P_DrawTargets_OnEnter : StateAction {
 			// allies
 			if (ability.targets.HasFlag(TargetRelationship.Ally)) {
 				bool allyTarget = false;
-				
-				foreach(GameObject player in characters.playerContainer) {
-					Targetable playerTarget = player.GetComponent<Targetable>();
-					if(playerTarget && playerTarget.GetGridPosition().Equals(tile.pos) &&
-						 player != _attacker.gameObject)
-						allyTarget = true;
-				}
 
+				List<PlayerCharacterSC> allyCharcters = GameplayProvider.Current.CharacterManager
+					.GetPlayerCharactersWhere(
+						player => 
+							player.GridPosition.Equals(tile.pos) && player.gameObject != _attacker.gameObject)
+					.ToList();
+
+				if ( allyCharcters is { Count: > 0 } ) {
+					allyTarget = true;
+				}
+				
 				if(allyTarget)
 					allies.Add(tile);
 			}
@@ -80,8 +84,12 @@ public class P_DrawTargets_OnEnter : StateAction {
 				bool neutralTarget = false;
 				
 				List<GameObject> neutralObjects = new List<GameObject>();
-				neutralObjects.AddRange(worldObjects.doors);
-				neutralObjects.AddRange(worldObjects.junks);
+
+				WorldObjectManager worldObjectManager = GameplayProvider.Current.WorldObjectManager;
+				
+				neutralObjects.AddRange(worldObjectManager.GetDoors().Select(door => door.gameObject));
+				//TODO JUNK
+				// neutralObjects.AddRange(worldObjects.junks);
 
 				foreach(GameObject neutralObj in neutralObjects) {
 					Targetable neutralTargetable = neutralObj.GetComponent<Targetable>();
@@ -96,12 +104,21 @@ public class P_DrawTargets_OnEnter : StateAction {
 			// enemy
 			if (ability.targets.HasFlag(TargetRelationship.Enemy)) {
 				bool enemyTarget = false;
-				
-				foreach(GameObject enemy in characters.enemyContainer) {
-					Targetable enemyTargetable = enemy.GetComponent<Targetable>();
-					if( enemyTargetable && enemyTargetable.GetGridPosition().Equals(tile.pos))
-						enemyTarget = true;
+
+				List<EnemyCharacterSC> foundEnemysAtPosition = GameplayProvider.Current.CharacterManager
+					.GetEnemyCahractersWhere(
+						enemy => enemy.GridPosition.Equals(tile.pos) && enemy.IsAlive)
+					.ToList();
+
+				if ( foundEnemysAtPosition is { Count: > 0 } ) {
+					enemyTarget = true;
 				}
+				
+				// foreach(GameObject enemy in characters.enemyContainer) {
+				// 	Targetable enemyTargetable = enemy.GetComponent<Targetable>();
+				// 	if( enemyTargetable && enemyTargetable.GetGridPosition().Equals(tile.pos))
+				// 		enemyTarget = true;
+				// }
 
 				if(enemyTarget)
 					enemies.Add(tile);

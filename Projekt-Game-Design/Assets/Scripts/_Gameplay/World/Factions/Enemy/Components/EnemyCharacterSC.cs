@@ -22,7 +22,7 @@ public class EnemyCharacterSC : Character<EnemyCharacterSC, EnemyCharacterData> 
 	public bool isNextToAct; // it's the enemy character's turn to act (decided by Enemy Controller)
 
 	public bool isDone; // this enemy character in particular is done
-	public bool isDead; // set when enemy enters the dead state
+	// public bool isDead; // set when enemy enters the dead state
 	public bool abilitySelected;
 	public bool abilityExecuted;
 	public bool noTargetFound;
@@ -36,6 +36,8 @@ public class EnemyCharacterSC : Character<EnemyCharacterSC, EnemyCharacterData> 
 		get => ( EnemyTypeSO )_type;
 		set => _type = value;
 	}
+
+	public bool ShouldBeRemoved => IsDead && IsActive;
 
 
 	[Obsolete]
@@ -110,5 +112,14 @@ public class EnemyCharacterSC : Character<EnemyCharacterSC, EnemyCharacterData> 
 		//init ai
 		behavior = data.AiBehaviour;
 		_aIController.SetBehavior(behavior);
+	}
+
+	public void Remove() {
+		active = false;
+		_modelController.HideModel();
+	}
+
+	public void SetIsNextToAct(bool value) {
+		isNextToAct = value;
 	}
 }

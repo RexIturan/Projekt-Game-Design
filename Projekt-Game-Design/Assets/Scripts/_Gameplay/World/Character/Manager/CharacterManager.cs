@@ -9,12 +9,15 @@ using GDP01._Gameplay.World.Character.Data;
 using GDP01.Gameplay.SaveTypes;
 using GDP01.Structure;
 using GDP01.Structure.Provider;
+using Grid;
 using SaveSystem.V2.Data;
 using UnityEngine;
 using Util.Extensions;
 
 namespace GDP01._Gameplay.World.Character {
-	public partial class CharacterManager : SaveObjectManager, ISaveState<CharacterManger.Data> {
+	public partial class CharacterManager : SaveObjectManager, ISaveState<CharacterManager.Data> {
+
+		[SerializeField] private GridDataSO _gridData;
 		
 		[Header("Recieving Events On"), SerializeField] private IntEventChannelSO useConnectorEC;
 		
@@ -46,7 +49,7 @@ namespace GDP01._Gameplay.World.Character {
 		
 ///// Save Load ////////////////////////////////////////////////////////////////////////////////////
 		
-		public CharacterManger.Data Save() {
+		public Data Save() {
 			// todo Implement
 			// todo build
 			// - player char data
@@ -59,13 +62,13 @@ namespace GDP01._Gameplay.World.Character {
 				ConvertEnemyCharacter();
 			}
 			
-			return new CharacterManger.Data {
+			return new Data {
 				PlayerCharacterDataList = SavePlayerCharData(),
 				EnemyCharacterDataList = SaveEnemyCharacterData()
 			};
 		}
 
-		public void Load(CharacterManger.Data data) {
+		public void Load(Data data) {
 			// todo Implement
 			//todo create Game Objects from:
 			// - player char data

@@ -1,4 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/LevelEditorControls.uss?fileID=7433441132597879392&amp;guid=6c35110ce7c656d41b33001d6368e309&amp;type=3#LevelEditorControls" />
+    <ui:VisualElement name="SaveControls" style="position: absolute; width: 10%; height: 100%; justify-content: center; align-items: stretch;">
+        <ui:Button text="CreateNew" display-tooltip-when-elided="true" name="CreateNew" class="save-contol-button" />
+        <ui:VisualElement name="SaveButtons" style="flex-direction: column; justify-content: space-between; align-items: stretch;">
+            <ui:Button text="SaveV1" display-tooltip-when-elided="true" name="SaveV1" class="save-contol-button save-control-button-half" />
+            <ui:Button text="SaveV2" display-tooltip-when-elided="true" name="SaveV2" class="save-control-button-half save-contol-button" style="flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="LoadButtons" style="flex-direction: column; justify-content: space-between;">
+            <ui:Button text="LoadV1" display-tooltip-when-elided="true" name="LoadV1" class="save-contol-button save-control-button-half" style="flex-grow: 1;" />
+            <ui:Button text="LoadV2" display-tooltip-when-elided="true" name="LoadV2" class="save-contol-button save-control-button-half" style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
     <ui:VisualElement name="LevelEditorContainer" picking-mode="Ignore" style="flex-grow: 1; align-items: center; justify-content: center; display: flex;">
         <ui:VisualElement name="Right" picking-mode="Ignore" style="flex-grow: 1; align-items: flex-end; width: 100%; height: 100%; position: absolute; justify-content: center;">
             <ui:VisualElement name="Control_Right" style="right: auto; left: auto; width: auto; position: relative; height: auto; top: auto; align-items: stretch; justify-content: center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 7px; margin-right: 7px; margin-top: 7px; margin-bottom: 7px;">
@@ -19,7 +31,7 @@
             <ui:VisualElement name="Control_Top" style="align-items: flex-end;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement style="flex-direction: row; justify-content: center;">
+    <ui:VisualElement picking-mode="Ignore" style="flex-direction: row; justify-content: center;">
         <GDP01.UI.Components.ActionBar name="ActionBar-Left" />
         <GDP01.UI.Components.ActionBar name="ActionBar-Right" />
     </ui:VisualElement>

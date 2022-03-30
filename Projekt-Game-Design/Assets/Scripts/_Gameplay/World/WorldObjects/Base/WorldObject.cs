@@ -9,8 +9,11 @@ namespace WorldObjects {
 		public abstract class Factory<T, D> : SaveObjectFactory<T, D>, ISaveState<D> where D : WorldObject.Data, new() where T : ISaveState<D> {
 		
 			[SerializeField] protected int id;
-			public int Id => id;
-		
+			public int Id {
+				get { return id; }
+				set { id = value; }
+			}
+
 			//Type
 			[SerializeField] protected WorldObject.TypeSO _type;
 			public WorldObject.TypeSO Type {

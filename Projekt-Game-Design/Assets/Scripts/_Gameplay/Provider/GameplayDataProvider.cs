@@ -2,6 +2,7 @@
 using System.Linq;
 using Characters.Equipment.ScriptableObjects;
 using GDP01._Gameplay.World.Character;
+using GDP01.TileEffects;
 using GDP01.Util;
 using WorldObjects;
 using static GDP01.Util.Singelton.ProviderHelper;
@@ -38,6 +39,8 @@ namespace GDP01._Gameplay.Provider {
 		private InventorySO _inventorySO;
 		public InventorySO InventorySO => LoadAndCache(ref _inventorySO);
 
+		private TileEffectContainerSO _tileEffectContainerSO;
+		public TileEffectContainerSO TileEffectContainerSO => LoadAndCache(ref _tileEffectContainerSO);
 		
 		
 		

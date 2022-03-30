@@ -112,5 +112,9 @@ namespace Characters {
 					break;
 			}
 		}
+
+		public void HideModel() {
+			Model.SetActive(false);
+		}
 	}
 }

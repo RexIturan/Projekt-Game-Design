@@ -129,15 +129,15 @@ namespace UI.Components.ActionButton {
 		}
 
 		private void HandleFocus(EventBase evt) {
-			onFocusCallback();
+			onFocusCallback?.Invoke();
 		}
 		
 		private void HandleBlur(EventBase evt) {
-			onBlurCallback();
+			onBlurCallback?.Invoke();
 		}
 
 		private void HandleClick() {
-			onClickCallback();
+			onClickCallback?.Invoke();
 		}
 		
 ///// PUBLIC FUNCTIONS /////////////////////////////////////////////////////////////////////////////

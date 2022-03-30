@@ -1,7 +1,10 @@
 using Characters;
 using Events.ScriptableObjects.GameState;
 using System.Collections.Generic;
+using System.Linq;
 using Characters.Types;
+using GDP01._Gameplay.Provider;
+using GDP01._Gameplay.World.Character;
 using UnityEngine;
 
 /**
@@ -9,126 +12,97 @@ using UnityEngine;
  * defines when enemy turn is over (enemy wants to end turn)
  * defines enemy character's order in which they act
  */
-public class EnemyController : MonoBehaviour
-{
-		[Header("Sending Events On: ")]
-		[SerializeField] private EFactionEventChannelSO endTurnEC;
+public class EnemyController : MonoBehaviour {
+	[Header("Sending Events On: ")] [SerializeField]
+	private EFactionEventChannelSO endTurnEC;
 
-		[Header("Receiving Events On")]
-		[SerializeField] private EFactionEventChannelSO startTurnEC;
+	[Header("Receiving Events On")] [SerializeField]
+	private EFactionEventChannelSO startTurnEC;
 
-		[SerializeField] private bool isOnTurn;
-		private CharacterList characterList;
-		private List<EnemyCharacterSC> enemyOrder; // saves each enemy in order in which they are supposed to act
-		private int currentlyActingEnemy = 0;
+	[SerializeField] private bool isOnTurn;
 
-		private List<GameObject> enemiesToDestroy; // deletes these enemies after one round
+	private List<EnemyCharacterSC>
+		enemyOrder; // saves each enemy in order in which they are supposed to act
 
-    // Start is called before the first frame update
-    void Start()
-    {
-				isOnTurn = false;
-				enemiesToDestroy = new List<GameObject>();
-    }
+	private int currentlyActingEnemy = 0;
 
-		private void Awake()
-		{
-				startTurnEC.OnEventRaised += StartNewTurn;
-				FindCharacterListIfNotSet();
+	private List<EnemyCharacterSC>
+		enemiesToDestroy = new List<EnemyCharacterSC>(); // deletes these enemies after one round
+
+	private CharacterManager CharacterManager => GameplayProvider.Current.CharacterManager;
+
+	// Start is called before the first frame update
+	void Start() {
+		isOnTurn = false;
+		enemiesToDestroy = new List<EnemyCharacterSC>();
+	}
+
+	private void Awake() {
+		startTurnEC.OnEventRaised += StartNewTurn;
+	}
+
+	private void OnDestroy() {
+		startTurnEC.OnEventRaised -= StartNewTurn;
+	}
+
+	private void Update() {
+		EvaluateEnemyTurn();
+	}
+
+	public void EvaluateEnemyTurn() {
+		if ( isOnTurn ) {
+			// find next enemy character that isn't done
+			while ( currentlyActingEnemy < enemyOrder.Count &&
+			        ( enemyOrder[currentlyActingEnemy].isDone ||
+			          enemyOrder[currentlyActingEnemy].IsDead ) )
+				currentlyActingEnemy++;
+
+			// if there is no enemy character that isn't done (= all enemy characters are done),
+			// end turn
+			// elsewise tell enemy character to make their turn
+			if ( currentlyActingEnemy >= enemyOrder.Count )
+				EndTurn();
+			else {
+				enemyOrder[currentlyActingEnemy].isNextToAct = true;
+			}
 		}
+	}
 
-		private void OnDestroy()
-		{
-				startTurnEC.OnEventRaised -= StartNewTurn;
+	private void StartNewTurn(Faction faction) {
+		if ( faction.Equals(Faction.Enemy) ) {
+			isOnTurn = true;
+			SetUpAllEnemies();
+			DestroyDeadEnemies();
 		}
+	}
 
-		private void Update()
-		{
-				EvaluateEnemyTurn();
-		}
+	// sets each enemy to not done and not on turn
+	// defines/initialises the (turn)order in which the enemy characters act
+	private void SetUpAllEnemies() {
+		// turn order is order within enemy container, may be changes later on, but not necessary
+		enemyOrder = new List<EnemyCharacterSC>();
 
-		private void FindCharacterListIfNotSet()
-		{
-				if ( !characterList )
-				{
-						GameObject characterListGameObject = GameObject.Find("Characters");
-						if ( characterListGameObject )
-								characterList = characterListGameObject.GetComponent<CharacterList>();
-				}
-		}
+		GameplayProvider.Current.CharacterManager.GetEnemyCahracters().ForEach(
+			enemy => {
+				enemy.isDone = false;
+				enemy.isNextToAct = false;
+				enemyOrder.Add(enemy);
+			});
 
-		public void EvaluateEnemyTurn()
-		{
-				if ( isOnTurn )
-				{
-						FindCharacterListIfNotSet();
+		currentlyActingEnemy = 0;
+	}
 
-						// find next enemy character that isn't done
-						while ( currentlyActingEnemy < enemyOrder.Count && 
-								(enemyOrder[currentlyActingEnemy].isDone || enemyOrder[currentlyActingEnemy].isDead) )
-								currentlyActingEnemy++;
+	private void EndTurn() {
+		isOnTurn = false;
+		endTurnEC.RaiseEvent(Faction.Enemy);
+	}
 
-						// if there is no enemy character that isn't done (= all enemy characters are done),
-						// end turn
-						// elsewise tell enemy character to make their turn
-						if ( currentlyActingEnemy >= enemyOrder.Count )
-								EndTurn();
-						else
-						{
-								enemyOrder[currentlyActingEnemy].isNextToAct = true;
-						}
-				}
-		}
+	private void DestroyDeadEnemies() {
+		enemiesToDestroy.ForEach(enemy => enemy.Remove());
 
-		private void StartNewTurn(Faction faction)
-		{
-				if ( faction.Equals(Faction.Enemy) )
-				{
-						isOnTurn = true;
-						SetUpAllEnemies();
-						DestroyDeadEnemies();
-				}
-		}
+		List<EnemyCharacterSC> enemiesToremove = CharacterManager.GetEnemyCahracters()
+			.Where(enemy => enemy.ShouldBeRemoved).ToList();
 
-		// sets each enemy to not done and not on turn
-		// defines/initialises the (turn)order in which the enemy characters act
-		private void SetUpAllEnemies()
-		{
-				FindCharacterListIfNotSet();
-
-				// turn order is order within enemy container, may be changes later on, but not necessary
-				enemyOrder = new List<EnemyCharacterSC>();
-
-				foreach(GameObject enemyObj in characterList.enemyContainer)
-				{
-						EnemyCharacterSC enemy = enemyObj.GetComponent<EnemyCharacterSC>();
-						enemy.isDone = false;
-						enemy.isNextToAct = false;
-
-						enemyOrder.Add(enemy);
-				}
-
-				currentlyActingEnemy = 0;
-		}
-
-		private void EndTurn()
-		{
-				isOnTurn = false;
-				endTurnEC.RaiseEvent(Faction.Enemy);
-		}
-
-		private void DestroyDeadEnemies()
-		{
-				foreach(GameObject enemy in enemiesToDestroy)
-				{
-						characterList.deadEnemies.Remove(enemy);
-						GameObject.Destroy(enemy);
-				}
-
-				// put new dead enemies on list
-				foreach(GameObject enemy in characterList.deadEnemies)
-				{
-						enemiesToDestroy.Add(enemy);
-				}
-		}
+		enemiesToDestroy.AddRange(enemiesToremove);
+	}
 }

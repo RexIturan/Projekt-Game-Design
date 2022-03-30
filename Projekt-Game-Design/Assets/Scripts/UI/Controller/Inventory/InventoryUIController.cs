@@ -5,6 +5,8 @@ using Characters;
 using Characters.Equipment.ScriptableObjects;
 using Events.ScriptableObjects;
 using GDP01._Gameplay.Logic_Data.Inventory.EventChannels;
+using GDP01._Gameplay.Provider;
+using GDP01._Gameplay.World.Character;
 using GDP01.Characters.Component;
 using UI.Components.Character;
 using UnityEngine;
@@ -49,7 +51,6 @@ public class InventoryUIController : MonoBehaviour {
 
 ///// Private Variables	////////////////////////////////////////////////////////////////////////////	
 
-	private CharacterList characterList;
 	private VisualElement _inventorySlotContainer;
 
 	// Für das Inventar
@@ -74,8 +75,12 @@ public class InventoryUIController : MonoBehaviour {
 
 	// Der aktuell ausgewählte Spieler im Inventar
 	private Statistics _selectedPlayerStatistics;
-	private static int _currentPlayerSelected = 0;
+	private PlayerCharacterSC _currentPlayerSelected;
 
+///// Properties ///////////////////////////////////////////////////////////////////////////////////
+
+	private CharacterManager CharacterManager => GameplayProvider.Current.CharacterManager; 
+	
 ///// Private Functions	////////////////////////////////////////////////////////////////////////////
 	
 	//todo move to Inventory Component
@@ -148,14 +153,13 @@ public class InventoryUIController : MonoBehaviour {
 
 	private void UpdatePlayerContainer() {
 		_playerContainer.Clear();
-		characterList = CharacterList.FindInstant(); 
 		
-		if(characterList == null) return;
+		List<PlayerCharacterSC> playerCharacters = CharacterManager.GetPlayerCharacters();
 		
-		for ( int i = 0; i < characterList.playerContainer.Count; i++ ) {
+		for ( int i = 0; i < CharacterManager.GetPlayerCharacters().Count; i++ ) {
 			int index = i;
-			GameObject playerCharacter = characterList.playerContainer[i];
-			var stats = playerCharacter.GetComponent<Statistics>();
+			PlayerCharacterSC player = playerCharacters[i];
+			Statistics stats = player.GetComponent<Statistics>();
 			if ( stats ) {
 				
 				CharacterIcon icon = new CharacterIcon();
@@ -168,10 +172,10 @@ public class InventoryUIController : MonoBehaviour {
 				
 				//todo refactor this, it works but idont like it
 				icon.SetCallback(() => {
-					_currentPlayerSelected = index;
-					_selectedPlayerStatistics = playerCharacter.GetComponent<Statistics>();
+					_currentPlayerSelected = player;
+					_selectedPlayerStatistics = stats;
 					UpdateEquipmentContainer();
-					RefreshStats(playerCharacter);
+					RefreshStats(player.gameObject);
 				});
 
 				_playerContainer.Add(icon);
@@ -188,8 +192,7 @@ public class InventoryUIController : MonoBehaviour {
 		InventorySlot bodyArmor = _equipmentInventoryContainer.Q<InventorySlot>("BodyArmor");
 		InventorySlot shield = _equipmentInventoryContainer.Q<InventorySlot>("Shield");
 
-		PlayerCharacterSC currPlayer = characterList?.playerContainer[_currentPlayerSelected]
-			.GetComponent<PlayerCharacterSC>();
+		PlayerCharacterSC currPlayer = _currentPlayerSelected;
 
 		int equipmentID = currPlayer.GetComponent<EquipmentController>().EquipmentID;
 
@@ -338,7 +341,7 @@ public class InventoryUIController : MonoBehaviour {
 
 			int fromID = _originalSlot.slotId;
 			int toID = targetSlot.slotId;
-			int playerID = _currentPlayerSelected;
+			int playerID = _currentPlayerSelected.id;
 			
 			// There are four cases (sorry about the spaghetti code -.- )
 			//	1. both slots are in player inventory: just swap the inventory slots
@@ -529,14 +532,8 @@ public class InventoryUIController : MonoBehaviour {
 	private void InitPlayerCharacterSelection() {
 		
 		// initially select first player
-		if ( characterList == null ) {
-			characterList = FindObjectOfType<CharacterList>();
-		}
-
-		characterList = CharacterList.FindInstant();
-
-		if ( characterList?.playerContainer?.Count > 0 ) {
-			_selectedPlayerStatistics = characterList.playerContainer[0]?.GetComponent<Statistics>();
+		if ( CharacterManager.GetPlayerCharacters().Count > 0 ) {
+			_selectedPlayerStatistics = CharacterManager.GetPlayerCharacters()[0]?.GetComponent<Statistics>();
 		}
 		else {
 			_selectedPlayerStatistics = null;
@@ -545,7 +542,6 @@ public class InventoryUIController : MonoBehaviour {
 	}
 
 	private void CleanPlayerCharacterSelection() {
-		characterList = null;
 		_selectedPlayerStatistics = null;
 	}
 	

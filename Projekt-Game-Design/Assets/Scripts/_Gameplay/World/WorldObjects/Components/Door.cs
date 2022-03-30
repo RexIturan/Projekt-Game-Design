@@ -7,11 +7,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Characters.Types;
+using GDP01._Gameplay.Provider;
+using GDP01._Gameplay.World.Character;
 using UnityEngine;
 using WorldObjects.Doors;
 
 namespace WorldObjects
 {
+	[RequireComponent(typeof(Targetable))]
+	[RequireComponent(typeof(Statistics))]
 		public partial class Door : WorldObject.Factory<Door, Door.DoorData> {
 				private const float OPENING_DISTANCE = 1.1f;
 
@@ -30,6 +34,8 @@ namespace WorldObjects
 				}
 
 				[SerializeField] private DoorData doorData;
+				[SerializeField] private Targetable _targetable;
+				[SerializeField] private Statistics _statistics;
 				
 				public bool Open { get => doorData.open; set => doorData.open = value; }
 				public bool Broken { get => doorData.broken; set => doorData.broken = value; }
@@ -60,67 +66,94 @@ namespace WorldObjects
 				public bool IsOpen => Open;
 				public bool IsBroken => Broken;
 				public bool IsLocked => Locked;
+
+
+
+				public void InitFromSave(Door_Save saveData, DoorTypeSO doorType) {
+					_type = doorType;
+						
+					doorData.open = saveData.open;
+					doorData.locked = true;
+					doorData.broken = false;
+
+					GridTransform.RotateTo(saveData.orientation);
+
+					_targetable = gameObject.AddComponent<Targetable>();
+					_targetable.Initialise();
+
+					GridTransform.MoveTo(saveData.gridPos);
+					
+					_statistics.StatusValues.InitValues(null);
+					_statistics.StatusValues.HitPoints.Max = doorType.hitPoints;
+					_statistics.StatusValues.HitPoints.Value = saveData.currentHitPoints;
+					_statistics.SetFaction(Faction.Neutral);
+
+					Keys = saveData.keyIds;
+					Switches = saveData.switchIds;
+					Triggers = saveData.triggerIds;
+					RemainingSwitches = saveData.remainingSwitchIds;
+					RemainingTriggers = saveData.remainingTriggerIds;
+
+					FirstUpdate();
+				}
 				
-				public void Initialise(Door_Save saveData, DoorTypeSO doorType) {
+				public void Initialise(DoorTypeSO doorType) {
 						_type = doorType;
 						
-						doorData.open = saveData.open;
+						doorData.open = false;
 						doorData.locked = true;
 						doorData.broken = false;
 
-						Rotation = saveData.orientation;
-						InitialiseOrientation();
+						GridTransform.RotateTo(Vector3.zero);
 
-						if ( doorType.destructable )
-						{
-								Targetable targetable = gameObject.AddComponent<Targetable>();
-								targetable.Initialise();
-						}
+						_targetable = gameObject.AddComponent<Targetable>();
+						_targetable.Initialise();
 
-						// Instantiate(doorType.model, transform);
+						GridTransform.MoveTo(Vector3.zero);
 
-						gameObject.GetComponent<GridTransform>().gridPosition = saveData.gridPos;
+						_statistics.StatusValues.InitValues(null);
+						_statistics.StatusValues.HitPoints.Max = doorType.hitPoints;
+						_statistics.StatusValues.HitPoints.Value = doorType.hitPoints;
+						_statistics.SetFaction(Faction.Neutral);
 
-						Statistics stats = gameObject.GetComponent<Statistics>();
-						stats.StatusValues.InitValues(null);
-						stats.StatusValues.HitPoints.Max = doorType.hitPoints;
-						stats.StatusValues.HitPoints.Value = saveData.currentHitPoints;
-						stats.SetFaction(Faction.Neutral);
+						Keys = new List<int>();
+						Switches = new List<int>();
+						Triggers = new List<int>();
+						RemainingSwitches = new List<int>();
+						RemainingTriggers = new List<int>();
 
-						Keys = saveData.keyIds;
-						Switches = saveData.switchIds;
-						Triggers = saveData.triggerIds;
-						RemainingSwitches = saveData.remainingSwitchIds;
-						RemainingTriggers = saveData.remainingTriggerIds;
-
-						if ( Keys.Count > 0 ) {
-							slidingDoorController.InitValues(DoorType.Key, Keys.Count);
-						} else if ( Switches.Count > 0 ) {
-							slidingDoorController.InitValues(DoorType.Switch, Switches.Count);
-						}
-
-						if ( RemainingSwitches.Count < Switches.Count ) {
-							var activeSwitches = Switches.Count - RemainingSwitches.Count;
-							for ( int i = 0; i < activeSwitches; i++ ) {
-								slidingDoorController.OpenLock();
-							}
-						}
-
-						UpdateDoor();
-						
-						if ( IsOpen ) {
-							OpenDoor();
-						}
+						FirstUpdate();
 				}
 
+				private void FirstUpdate() {
+					if ( Keys.Count > 0 ) {
+						slidingDoorController.InitValues(DoorType.Key, Keys.Count);
+					} else if ( Switches.Count > 0 ) {
+						slidingDoorController.InitValues(DoorType.Switch, Switches.Count);
+					}
+
+					if ( RemainingSwitches.Count < Switches.Count ) {
+						var activeSwitches = Switches.Count - RemainingSwitches.Count;
+						for ( int i = 0; i < activeSwitches; i++ ) {
+							slidingDoorController.OpenLock();
+						}
+					}
+
+					UpdateDoor();
+						
+					if ( IsOpen ) {
+						OpenDoor();
+					}
+				}
+				
 				// causes the model's front face to go into the direction 
 				// that is specified by the vector in orientation
 				// for example: orientation (1, 0) would cause the door to have its front face
 				// faced towards the positive x-Axis-Vector
-				private void InitialiseOrientation()
-				{
-					gameObject.transform.rotation = Quaternion.LookRotation(Rotation);
-				}
+				// private void InitialiseOrientation()
+				// {
+				// 	gameObject.transform.rotation = Quaternion.LookRotation(Rotation);
+				// }
 
 				public void Awake()
 				{
@@ -188,21 +221,30 @@ namespace WorldObjects
 										
 										if ( !IsLocked )
 										{
-												CharacterList characters = CharacterList.FindInstant();
 												bool playerInRange = false;
 
 												if ( !Type.openManually )
 														playerInRange = true;
 												else
 												{
-														foreach ( GameObject player in characters.playerContainer )
-														{
-																Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
-																Vector3Int doorPos = gameObject.GetComponent<GridTransform>().gridPosition;
-
-																if ( Vector3Int.Distance(playerPos, doorPos) < OPENING_DISTANCE )
-																		playerInRange = true;
-														}
+													Vector3Int doorPos = gameObject.GetComponent<GridTransform>().gridPosition;
+													
+													List<PlayerCharacterSC> foundPlayerCharacters = 
+														GameplayProvider.Current.CharacterManager.GetPlayerCharactersWhere(
+															(player) => Vector3Int.Distance(player.GridPosition, doorPos) <
+															            OPENING_DISTANCE).ToList();
+													
+													if ( foundPlayerCharacters is { Count: >0 } ) {
+														playerInRange = true;
+													}
+														// foreach ( GameObject player in GameplayProvider.Current.CharacterManager.playerContainer )
+														// {
+														// 		Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
+														// 		
+														//
+														// 		if ( Vector3Int.Distance(playerPos, doorPos) < OPENING_DISTANCE )
+														// 				playerInRange = true;
+														// }
 												}
 
 												if ( playerInRange || Switches.Count > 0)

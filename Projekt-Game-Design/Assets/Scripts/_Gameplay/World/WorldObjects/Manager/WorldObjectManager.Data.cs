@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GDP01.TileEffects;
 using SaveSystem.V2.Data;
 using UnityEngine;
 
@@ -11,10 +12,12 @@ namespace WorldObjects {
 			public List<SwitchComponent.SwitchData> SwitchDataList;
 			public List<ItemComponent.ItemData> ItemDataList;
 			
+			
 			public Data(
 				List<Door.DoorData> doors, 
 				List<SwitchComponent.SwitchData> switches,
-				List<ItemComponent.ItemData> items) {
+				List<ItemComponent.ItemData> items
+			) {
 				
 				DoorDataList = doors;
 				SwitchDataList = switches;

@@ -361,14 +361,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
-      propertyPath: gridData
-      value: 
-      objectReference: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
-    - target: {fileID: 6243888046473227220, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
-      propertyPath: tileEffectContainer
-      value: 
-      objectReference: {fileID: 11400000, guid: ae591c7995e26af4e8f135e286b53a03, type: 2}
     - target: {fileID: 7187340983742418651, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
       propertyPath: m_Name
       value: SaveManager

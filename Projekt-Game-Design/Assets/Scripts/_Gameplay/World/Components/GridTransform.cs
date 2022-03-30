@@ -22,6 +22,10 @@ namespace Characters {
 			gameObject.transform.position = gridData.GetWorldPosFromGridPos(gridPosition);
 		}
 
+		private void RotateToRotation() {
+			gameObject.transform.rotation = Quaternion.LookRotation(rotation);
+		}
+		
 		public void MoveTo(Vector3 worldPos) {
 			MoveTo(gridData.GetGridPos3DFromWorldPos(worldPos));
 		}
@@ -31,7 +35,12 @@ namespace Characters {
 			MoveToGridPosition();
 		}
 		
-///// Unity Methodes ///////////////////////////////////////////////////////////////////////////////
+		public void RotateTo(Vector3 newRotation) {
+			rotation = newRotation;
+			RotateToRotation();
+		}
+
+		///// Unity Methodes ///////////////////////////////////////////////////////////////////////////////
 
 		public void Start() {
 			MoveToGridPosition();

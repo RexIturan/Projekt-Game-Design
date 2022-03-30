@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GDP01._Gameplay.Provider;
+using UnityEngine;
 using WorldObjects;
 
 namespace QuestSystem.ScriptabelObjects {
@@ -13,16 +14,25 @@ namespace QuestSystem.ScriptabelObjects {
 		public override bool IsDone() {
 			if ( active ) {
 				done = false;
-				if (_worldObjectList is {}) {
-					foreach ( var switchObj in _worldObjectList.switches ) {
-						var component = switchObj.GetComponent<SwitchComponent>();
-						if ( component is {} ) {
-							if ( component.IsActivated && component.Id == switchId ) {
-								done = true;
-							}
-						}
-					}	
+
+
+				var foundSwitch = GameplayProvider.Current.WorldObjectManager
+					.GetSwitchWhere(switchComp => switchComp.IsActivated && switchComp.Id == switchId);
+
+				if ( foundSwitch is { Count: >0 } ) {
+					done = true;
 				}
+					
+				// if (_worldObjectList is {}) {
+				// 	foreach ( var switchObj in _worldObjectList.switches ) {
+				// 		var component = switchObj.GetComponent<SwitchComponent>();
+				// 		if ( component is {} ) {
+				// 			if ( component.IsActivated && component.Id == switchId ) {
+				// 				done = true;
+				// 			}
+				// 		}
+				// 	}	
+				// }
 			}
 
 			return done;

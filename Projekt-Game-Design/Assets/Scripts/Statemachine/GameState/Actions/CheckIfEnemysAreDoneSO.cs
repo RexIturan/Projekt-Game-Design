@@ -1,6 +1,9 @@
-﻿using Characters;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Characters;
 using Characters.Types;
 using Events.ScriptableObjects.GameState;
+using GDP01._Gameplay.Provider;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -23,13 +26,9 @@ public class CheckIfEnemysAreDone : StateAction {
 	public override void Awake(StateMachine stateMachine) { }
 
 	public override void OnUpdate() {
-		var characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
 		var done = true;
-		foreach ( var enemy in characterList.enemyContainer ) {
-			if ( !enemy.GetComponent<EnemyCharacterSC>().isDone ) {
-				done = false;
-			}
-		}
+
+		done = GameplayProvider.Current.CharacterManager.GetEnemyCahracters().All(enemy => enemy.isDone);
 
 		if ( done ) {
 			_endTurnEC.RaiseEvent(Faction.Enemy);

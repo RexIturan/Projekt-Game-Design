@@ -2,6 +2,8 @@
 using Characters;
 using Characters.Movement;
 using Combat;
+using GDP01._Gameplay.Provider;
+using GDP01._Gameplay.World.Character;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
 using Grid;
@@ -50,39 +52,44 @@ namespace GDP01.Player.Player {
 		
 ///// Properties
 
-		private CharacterList CharList => characterList ??= CharacterList.FindInstant();
+		// private CharacterList CharList => characterList ??= CharacterList.FindInstant();
+		private CharacterManager CharacterManager => GameplayProvider.Current.CharacterManager; 
 		public bool HasSelected => Selected != null;
 		public Selectable Selected => selectedPlayerCharacter;
 
 ///// Private Functions
 
 		private void ActivatePlayerAtPos(Vector3Int gridPos) {
-			if ( CharList is null )
+			if ( CharacterManager is null )
 				return;
 			
 			List<PlayerCharacterSC> playersToActivate = new List<PlayerCharacterSC>();
 
-			foreach ( var npcObj in CharList.friendlyContainer ) {
-				PlayerCharacterSC playerSC = npcObj.GetComponent<PlayerCharacterSC>();
-				if(playerSC && npcObj.GetComponent<GridTransform>().gridPosition.Equals(gridPos))
-					playersToActivate.Add(playerSC);
-			}
-
-			foreach ( PlayerCharacterSC player in playersToActivate )
-			  player.Activate();
+			CharacterManager.ActivatePlayerCharacterAt(gridPos);
+			
+			// foreach ( var npcObj in CharList.friendlyContainer ) {
+			// 	PlayerCharacterSC playerSC = npcObj.GetComponent<PlayerCharacterSC>();
+			// 	if(playerSC && npcObj.GetComponent<GridTransform>().gridPosition.Equals(gridPos))
+			// 		playersToActivate.Add(playerSC);
+			// }
+			//
+			// foreach ( PlayerCharacterSC player in playersToActivate )
+			//   player.Activate();
 		}
 
 		private Selectable GetPlayerAtPos(Vector3Int gridPos) {
-			if ( CharList is null )
+			if ( CharacterManager is null )
 				return null;
 			
-			foreach ( var playerCharObj in CharList.playerContainer ) {
-				var gridTransform = playerCharObj.GetComponent<GridTransform>();
-				if ( gridTransform.gridPosition.Equals(gridPos) ) {
-					return playerCharObj.GetComponent<Selectable>();
-				}
-			}
-			return null;
+			return CharacterManager.GetPlayerAtPos(gridPos)?.GetComponent<Selectable>();
+			//
+			// foreach ( var playerCharObj in CharList.playerContainer ) {
+			// 	var gridTransform = playerCharObj.GetComponent<GridTransform>();
+			// 	if ( gridTransform.gridPosition.Equals(gridPos) ) {
+			// 		return playerCharObj.GetComponent<Selectable>();
+			// 	}
+			// }
+			// return null;
 		}
 		
 		// gets player or enemy character targetable component with grid position
@@ -149,7 +156,6 @@ namespace GDP01.Player.Player {
 			abilityUnselectedEvent.OnEventRaised += HandleAbilityDeselected;
 			
 			//get Lists
-			characterList = CharacterList.FindInstant();
 			worldObjectList = WorldObjectList.FindInstant();
 		}
 

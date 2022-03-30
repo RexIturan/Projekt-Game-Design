@@ -1,56 +1,99 @@
 ﻿using System.Collections.Generic;
 using Characters.EnemyCharacter.ScriptableObjects;
 using Characters.PlayerCharacter.ScriptableObjects;
+using Characters.Types;
+using GDP01._Gameplay.Provider;
+using GDP01._Gameplay.World.Character;
+using GDP01._Gameplay.World.Character.Data;
 using SaveSystem.SaveFormats;
 using UnityEngine;
+using Util.Extensions;
 
 namespace Characters {
 	public class CharacterInitialiser : MonoBehaviour {
-		private CharacterList _characterList;
+		
 		[SerializeField] private Transform playerParent;
 		[SerializeField] private Transform enemyParent;
 
 		[SerializeField] private EnemyDataContainerSO enemyDataContainerSO;
 		[SerializeField] private PlayerDataContainerSO playerDataContainerSo;
 
+		private CharacterManager CharacterManager => GameplayProvider.Current.CharacterManager;
+		
+
+		/// Playercharcter = PC | EnemyCharacter = EC  
 		public void Initialise(List<PlayerCharacter_Save> saveDataPlayers,
 			List<Enemy_Save> saveDataEnemys) {
-			_characterList = CharacterList.FindInstant();
 
-			if ( _characterList ) {
-				_characterList.enemyContainer.Clear();
-				_characterList.playerContainer.Clear();
+			if ( CharacterManager ) {
 
-				//todo remove this
-				playerParent = GameObject.Find("Characters/players").transform;
-				enemyParent = GameObject.Find("Characters/enemys").transform;
-
-				// throw new System.NotImplementedException();
+				CharacterManager.ClearPlayerCharacters();
+				CharacterManager.ClearEnemyCharacters();
+				
+				//laod PC
+				List<PlayerCharacterData> playerData = new List<PlayerCharacterData>();
 				foreach ( var playerSave in saveDataPlayers ) {
+					
 					var type = playerDataContainerSo.playerTypes[playerSave.plyerTypeId];
+
 					// var spawnData = playerDataContainerSo.playerSpawnData[playerSave.plyerSpawnDataId];
-					var obj = Instantiate(type.prefab, playerParent, true);
+					var obj = Instantiate(type.prefab);
 					var playerSC = obj.GetComponent<PlayerCharacterSC>();
 					playerSC.Type = type;
 					playerSC.InitializeFromSave(playerSave);
 
-					if (playerSC.active)
-						_characterList.playerContainer.Add(playerSC.gameObject);
-					else
-						_characterList.friendlyContainer.Add(playerSC.gameObject);
+					CharacterManager.AddPlayerCharacter(playerSC);
 				}
-
+				
+				
+				//laod EC
 				foreach ( var enemySave in saveDataEnemys ) {
 					var type = enemyDataContainerSO.enemyTypes[enemySave.enemyTypeId];
 					// var spawnData = enemyDataContainerSO.enemySpawnData[enemySave.enemySpawnDataId];
-					var obj = Instantiate(type.prefab, enemyParent, true);
+					var obj = Instantiate(type.prefab);
 					var enemySC = obj.GetComponent<EnemyCharacterSC>();
-          var enemyGridTransform = obj.GetComponent<GridTransform>();
+					var enemyGridTransform = obj.GetComponent<GridTransform>();
 					enemySC.Type = type;
 					enemySC.InitializeFromSave(enemySave);
-					_characterList.enemyContainer.Add(enemySC.gameObject);
+					CharacterManager.AddEnemyCharacter(enemySC);
 				}
 			}
+			
+			//
+			// if ( _characterList ) {
+			// 	_characterList.enemyContainer.ClearGameObjectReferences();
+			// 	_characterList.playerContainer.ClearGameObjectReferences();
+   //
+			// 	//todo remove this
+			// 	playerParent = GameObject.Find("Characters/players").transform;
+			// 	enemyParent = GameObject.Find("Characters/enemys").transform;
+   //
+			// 	// throw new System.NotImplementedException();
+			// 	foreach ( var playerSave in saveDataPlayers ) {
+			// 		var type = playerDataContainerSo.playerTypes[playerSave.plyerTypeId];
+			// 		// var spawnData = playerDataContainerSo.playerSpawnData[playerSave.plyerSpawnDataId];
+			// 		var obj = Instantiate(type.prefab, playerParent, true);
+			// 		var playerSC = obj.GetComponent<PlayerCharacterSC>();
+			// 		playerSC.Type = type;
+			// 		playerSC.InitializeFromSave(playerSave);
+   //
+			// 		if (playerSC.active)
+			// 			_characterList.playerContainer.Add(playerSC.gameObject);
+			// 		else
+			// 			_characterList.friendlyContainer.Add(playerSC.gameObject);
+			// 	}
+   //
+			// 	foreach ( var enemySave in saveDataEnemys ) {
+			// 		var type = enemyDataContainerSO.enemyTypes[enemySave.enemyTypeId];
+			// 		// var spawnData = enemyDataContainerSO.enemySpawnData[enemySave.enemySpawnDataId];
+			// 		var obj = Instantiate(type.prefab, enemyParent, true);
+			// 		var enemySC = obj.GetComponent<EnemyCharacterSC>();
+   //        var enemyGridTransform = obj.GetComponent<GridTransform>();
+			// 		enemySC.Type = type;
+			// 		enemySC.InitializeFromSave(enemySave);
+			// 		_characterList.enemyContainer.Add(enemySC.gameObject);
+			// 	}
+			// }
 		}
 	}
 }

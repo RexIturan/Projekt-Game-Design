@@ -1,7 +1,7 @@
 ﻿using System;
 using GDP01._Gameplay.World.Character;
+using GDP01.TileEffects;
 using Grid;
-using UnityEngine.SceneManagement;
 using Visual;
 using WorldObjects;
 using static GDP01.Util.Singelton.ProviderHelper;
@@ -29,6 +29,10 @@ namespace GDP01._Gameplay.Provider {
 
 		private WorldObjectManager _worldObjectManager;
 		public WorldObjectManager WorldObjectManager => TryGetAndCacheComponentOfTypeInActiveScene(ref _worldObjectManager);
+
+		private TileEffectManager _tileEffectManager;
+		public TileEffectManager TileEffectManager =>
+			TryGetAndCacheComponentOfTypeInActiveScene(ref _tileEffectManager);
 		
 		private TileMapDrawer _gridDrawer;
 		public TileMapDrawer GridDrawer => TryGetAndCacheComponentOfTypeInActiveScene(ref _gridDrawer);

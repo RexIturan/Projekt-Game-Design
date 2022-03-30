@@ -7,11 +7,11 @@ namespace WorldObjects
 {
 		public class WorldObjectList : MonoBehaviour
 		{
-				public List<GameObject> doors;
-				public List<GameObject> switches;
-				[SerializeField] private List<GameObject> trigger;
-				public List<GameObject> junks;
-				public List<GameObject> items;
+				// public List<GameObject> doors;
+				// public List<GameObject> switches;
+				// [SerializeField] private List<GameObject> trigger;
+				// public List<GameObject> junks;
+				// public List<GameObject> items;
 
 				[SerializeField] private Transform itemParent;
 				public Transform ItemParent => itemParent ?? this.transform;

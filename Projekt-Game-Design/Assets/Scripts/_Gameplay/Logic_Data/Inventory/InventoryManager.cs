@@ -2,6 +2,7 @@ using Characters.Equipment.ScriptableObjects;
 using Events.ScriptableObjects;
 using GDP01._Gameplay.Logic_Data.Inventory.EventChannels;
 using GDP01._Gameplay.Logic_Data.Inventory.Types;
+using GDP01._Gameplay.Provider;
 using GDP01.Characters.Component;
 using UnityEngine;
 using static GDP01._Gameplay.Logic_Data.Inventory.Types.InventoryTarget;
@@ -143,14 +144,9 @@ public class InventoryManager : MonoBehaviour {
 		}
 	}
 
+	//todo move to EquipmentManager
 	private void RefreshAllEquipments() {
-		//todo use event channel
-		//todo dont use characters + controller
-		CharacterList characterList = FindObjectOfType<CharacterList>();
-		if ( characterList ) {
-			foreach ( GameObject player in characterList.playerContainer) {
-				player.GetComponent<EquipmentController>().RefreshEquipment();
-			}
-		}
+		GameplayProvider.Current.CharacterManager.GetPlayerCharacters()
+			.ForEach(player => player.EquipmentController.RefreshEquipment());
 	}
 }

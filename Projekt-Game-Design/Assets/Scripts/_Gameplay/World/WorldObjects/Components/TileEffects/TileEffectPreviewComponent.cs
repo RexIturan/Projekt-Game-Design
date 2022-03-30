@@ -8,13 +8,13 @@ namespace GDP01
 {
     public class TileEffectPreviewComponent : MonoBehaviour
     {
-				[SerializeField] private TileEffectController tileEffectController;
+				[SerializeField] private TileEffectController tileEffect;
 				[SerializeField] private InputCache inputCache;
 				[SerializeField] private TextMeshProUGUI textMesh;
 				[SerializeField] private GameObject canvas;
 
 				private void Update() {
-						if ( inputCache.cursor.abovePos.gridPos.Equals(tileEffectController.GetComponent<GridTransform>().gridPosition) )
+						if ( inputCache.cursor.abovePos.gridPos.Equals(tileEffect.GetComponent<GridTransform>().gridPosition) )
 								ShowPreview();
 						else
 								HidePreview();
@@ -23,16 +23,16 @@ namespace GDP01
 				private void ShowPreview() {
 						canvas.SetActive(true);
 
-						if( tileEffectController.GetActive() ) {
+						if( tileEffect.GetActive() ) {
 								// show preview of time to live if active but not eternal
-								if ( !tileEffectController.GetEternal() )
-										textMesh.text = tileEffectController.GetTimeToLive().ToString();
+								if ( !tileEffect.GetEternal() )
+										textMesh.text = tileEffect.GetTimeToLive().ToString();
 								else
 										HidePreview();
 						}
 						// else show time until activation
 						else {
-								textMesh.text = tileEffectController.GetTimeUntilActivation().ToString();
+								textMesh.text = tileEffect.GetTimeUntilActivation().ToString();
 						}
 				}
 

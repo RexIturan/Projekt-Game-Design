@@ -1,6 +1,8 @@
 ﻿using Characters;
 using Characters.Types;
 using GameManager;
+using GDP01._Gameplay.Provider;
+using GDP01._Gameplay.World.Character;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -22,18 +24,15 @@ public class Refill_OnEnter : StateAction {
     public override void OnUpdate() { }
 
     public override void OnStateEnter() {
-        var characterList = Object.FindObjectOfType<CharacterList>();
+        CharacterManager characterManager = GameplayProvider.Current.CharacterManager;
+        
         switch (_gameSC.CurrentPlayer) { 
             case Faction.Player:
-                foreach (var player in characterList.playerContainer) {
-                    player.GetComponent<Statistics>().RefillEnergy();
-                }
+	            characterManager.GetPlayerCharacters().ForEach(player => player.Statistics.RefillEnergy());
                 _gameSC.UpdateOverlay(Faction.Player);
                 break;
             case Faction.Enemy:
-                foreach (var enemy in characterList.enemyContainer) {
-                    enemy.GetComponent<Statistics>().RefillEnergy();
-                }
+	            characterManager.GetEnemyCahracters().ForEach(enemy => enemy.Statistics.RefillEnergy());
                 break;
         }
     }

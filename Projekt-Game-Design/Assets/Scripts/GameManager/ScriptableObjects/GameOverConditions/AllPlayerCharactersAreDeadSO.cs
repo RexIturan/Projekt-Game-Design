@@ -10,14 +10,8 @@ namespace GameManager.ScriptableObjects.GameOverConditions {
 		public override bool CheckCondition() {
 			//get char list
 
-			CharacterList charlist = GameplayProvider.Current.CharacterList;
-
-			bool allDead = true;
-			if ( charlist.playerContainer is { Count: > 0 } ) {
-				allDead = !charlist.playerContainer.Any(o => o.GetComponent<Targetable>().IsAlive);
-			}
-
-			return allDead;
+			return GameplayProvider.Current.CharacterManager.GetPlayerCharacters()
+				.All(player => player.IsDead);
 		}
 	}
 }

@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using Characters;
 using Events.ScriptableObjects.GameState;
+using GDP01._Gameplay.Provider;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -16,7 +19,6 @@ public class G_TriggerDefeatOnPlayerDeath_OnUpdateSO : StateActionSO
 public class G_TriggerDefeatOnPlayerDeath_OnUpdate : StateAction
 {
 		private readonly VoidEventChannelSO triggerDefeatEC;
-		private CharacterList characterList;
 
 		public G_TriggerDefeatOnPlayerDeath_OnUpdate(VoidEventChannelSO triggerDefeatEC)
 		{
@@ -25,25 +27,16 @@ public class G_TriggerDefeatOnPlayerDeath_OnUpdate : StateAction
 
 		public override void Awake(StateMachine stateMachine) { }
 
-		public override void OnUpdate()
-		{
-				if ( !characterList ) {
-					characterList = CharacterList.FindInstant();
-				}
-				if( characterList )
-				{
-						bool allDead = true;
+		public override void OnUpdate() {
+				bool allDead = true;
 
-						foreach(GameObject player in characterList.playerContainer)
-						{
-								Statistics playerStats = player.GetComponent<Statistics>();
-								if ( playerStats && !playerStats.StatusValues.HitPoints.IsMin() )
-										allDead = false;
-						}
-
-						if ( allDead )
-								triggerDefeatEC.RaiseEvent();
+				List<PlayerCharacterSC> playerCahractersAlive = GameplayProvider.Current.CharacterManager.GetPlayerCharactersWhere((player) => player.IsAlive).ToList();
+				if ( playerCahractersAlive is { Count: > 0 } ) {
+					allDead = false;
 				}
+
+				if ( allDead )
+						triggerDefeatEC.RaiseEvent();
 		}
 
 		public override void OnStateEnter() { }

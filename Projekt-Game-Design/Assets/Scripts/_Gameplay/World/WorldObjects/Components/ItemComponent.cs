@@ -5,6 +5,7 @@ using Characters;
 using Characters.Types;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using GDP01._Gameplay.Provider;
 using Grid;
 using UnityEngine;
 
@@ -81,17 +82,9 @@ namespace WorldObjects {
 		private void HandleOnTileEnter(Vector3Int position, GameObject characterObject) {
 			if ( _gridTransform.gridPosition == position && 
 			     characterObject.GetComponent<Statistics>().Faction == Faction.Player ) {
-				
-				if(!_worldObjects)
-					_worldObjects = WorldObjectList.FindInstant();
 
-				if(!_worldObjects)
-					Debug.LogError("Could not find Grid Controller. ");
-				else { 
-					pickupEC.RaiseEvent(this.Type.id);
-					_worldObjects.items.Remove(this.gameObject);
-					Destroy(gameObject);
-				}
+				pickupEC.RaiseEvent(this.Type.id);
+				GameplayProvider.Current.WorldObjectManager.RemoveItem(this);
 			}
 		}
 		

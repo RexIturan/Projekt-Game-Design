@@ -23,49 +23,80 @@ namespace UI {
 			public Sprite Effect;
 		}
 		
-		private const string layerActionBarName = "ActionBar-Right";
-		private const string modeActionBarName = "ActionBar-Left";
-			
-		// [SerializeField] private LevelEditor.LevelEditor levelEditor;
+		[Serializable]
+		private struct SaveControlButtonNames {
+			public string createNew;
+			public string saveV1;
+			public string saveV2;
+			public string loadV1;
+			public string loadV2;
+		}
+		
+		
 
-		[Header("Receiving Events On")] [SerializeField]
-		private BoolEventChannelSO visibilityMenuEventChannel;
+		[Header("Receiving Events On")] 
 		[SerializeField] private LevelEditorStateEventChannel levelEditorStateUpdateEC; 
 
 		[Header("Sending Events On")]
-		//input
-		[SerializeField]
-		private VoidEventChannelSO enableMenuInput;
-
+		//old
+		//input todo remove
+		[SerializeField] private VoidEventChannelSO enableMenuInput;
 		[SerializeField] private VoidEventChannelSO enableGamplayInput;
-
 		// save manager
 		[SerializeField] private VoidEventChannelSO saveLevel;
-
 		[SerializeField] private VoidEventChannelSO loadLevel;
 
+		//NEW
 		//level editor
 		[SerializeField] private LevelEditorLayerEventChannel levelEditorLayerEC;
 		[SerializeField] private LevelEditorModeEventChannel levelEditorModeEC;
 
 		[Header("Graphics"), SerializeField] private LevelEditorUIGraphicsData _graphicsData; 
 		
+		
 ///// Private VAriables ////////////////////////////////////////////////////////////////////////////
 
-		// container
-		private VisualElement _levelEditorContainer;
-		
-		private Button _selectModeButton;
-		private Button _paintModeButton;
-		private Button _boxModeButton;
+		private readonly SaveControlButtonNames saveControlButtonNames = new SaveControlButtonNames {
+			createNew = "CreateNew",
+			saveV1 = "SaveV1",
+			saveV2 = "SaveV2",
+			loadV1 = "LoadV1",
+			loadV2 = "LoadV2",
+		};
 
-		private Button _menuButton;
+		private const string layerActionBarName = "ActionBar-Right";
+		private const string modeActionBarName = "ActionBar-Left";
+
+		//UI Elements
+		private Button createNewLevelButton;
+		private Button saveV1Button;
+		private Button saveV2Button;
+		private Button loadV1Button;
+		private Button loadV2Button;
 
 		private ActionBar _layerSelectionActionBar;
 		private ActionBar _modeSelectionActionBar;
 
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 		
+		private void UnbindButton(ref Button button, Action action) {
+			if ( button is { } ) {
+				button.clicked -= action;
+				button = null;
+			} else {
+				Debug.LogError($"UnbindButton\n{name} Button not Found.");
+			}
+		}
+
+		private void BindButton(ref Button button, VisualElement root, string name, Action action) {
+			button = root.Q<Button>(name);
+			if ( button is { } ) {
+				button.clicked += action;	
+			} else {
+				Debug.LogError($"BindButton\n{name} Button not Found.");
+			}
+		} 
+
 		private void SetLevelEditorMode(object[] obj) {
 			SetLevelEditorMode(( EditorMode )obj[0]);
 		}
@@ -82,80 +113,30 @@ namespace UI {
 			levelEditorModeEC.RaiseEvent(editorMode);
 		}
 
-		// private void OnDisable() {
-		//     selectModeButton.clicked -= HandleSelectModusButtonClicked;
-		//     paintModeButton.clicked -= HandlePaintModusButtonClicked;
-		//     boxModeButton.clicked -= HandleBoxModusButtonClicked;
-		//     fillModeButton.clicked -= HandleFillModusButtonClicked;
-		// }
-
-		// void MainMenuButtonPressed()
-		// {
-		//     // Szene laden
-		//     SceneManager.LoadScene("MainMenu");
-		// }
-		//
-		// void QuitGame()
-		// {
-		//     // Spiel beenden
-		//     Application.Quit();
-		// }
-
-		void SetMenuVisibility(bool value) {
-			if ( value ) {
-				ShowMenu();
-			}
-			else {
-				HideMenu();
-			}
-		}
-
-		void ShowMenu() {
-			enableMenuInput.RaiseEvent();
-			// Einstellungen ausblenden und Menü zeigen
-			_levelEditorContainer.style.display = DisplayStyle.None;
-			
-			//todo use screen manager
-		}
-
-		void HideMenu() {
-			enableGamplayInput.RaiseEvent();
-			// Einstellungen ausblenden und Menü zeigen
-			_levelEditorContainer.style.display = DisplayStyle.Flex;
-			//todo use screen manager
-		}
-
 		private void BindElements() {
 			var root = GetComponent<UIDocument>().rootVisualElement;
-			_levelEditorContainer = root.Q<VisualElement>("LevelEditorContainer");
-			_selectModeButton = root.Q<Button>("select");
-			_paintModeButton = root.Q<Button>("paint");
-			_boxModeButton = root.Q<Button>("box");
-			// _menuButton = root.Q<Button>("menuButton");
 			
-			_selectModeButton.clicked += HandleSelectModusButtonClicked;
-			_paintModeButton.clicked += HandlePaintModusButtonClicked;
-			_boxModeButton.clicked += HandleBoxModusButtonClicked;
-			// _menuButton.clicked += ShowMenu;
-
+			//bind buttons
+			BindButton(ref createNewLevelButton, root, saveControlButtonNames.createNew, HandleCreateNew);
+			BindButton(ref saveV1Button, root, saveControlButtonNames.saveV1, HandleSaveV1);
+			BindButton(ref saveV2Button, root, saveControlButtonNames.saveV2, HandleSaveV2);
+			BindButton(ref loadV1Button, root, saveControlButtonNames.loadV1, HandleLoadV1);
+			BindButton(ref loadV2Button, root, saveControlButtonNames.loadV2, HandleLoadV2);
+			
+			
 			_layerSelectionActionBar = root.Q<ActionBar>(layerActionBarName);
 			_modeSelectionActionBar = root.Q<ActionBar>(modeActionBarName);
 		}
 
 		private void UnbindElements() {
-			_selectModeButton.clicked -= HandleSelectModusButtonClicked;
-			_paintModeButton.clicked -= HandlePaintModusButtonClicked;
-			_boxModeButton.clicked -= HandleBoxModusButtonClicked;
-			// _menuButton.clicked -= ShowMenu;
-
-			_levelEditorContainer = null;
-			_selectModeButton = null;
-			_paintModeButton = null;
-			_boxModeButton = null;
-			// _menuButton = null;
-			
 			_layerSelectionActionBar = null;
 			_modeSelectionActionBar = null;
+			
+			UnbindButton(ref createNewLevelButton, HandleCreateNew);
+			UnbindButton(ref saveV1Button, HandleSaveV1);
+			UnbindButton(ref saveV2Button, HandleSaveV2);
+			UnbindButton(ref loadV1Button, HandleLoadV1);
+			UnbindButton(ref loadV2Button, HandleLoadV2);
 		}
 
 		private void UpdateActionBars(EditorState editorState) {
@@ -215,6 +196,36 @@ namespace UI {
 
 ///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
 
+		private void HandleCreateNew() {
+			Debug.Log("Handle CreateNew");
+			//TODO implement
+			throw new NotImplementedException();
+		}
+		
+		private void HandleSaveV1() {
+			Debug.Log("Handle SaveV1");
+			saveLevel.RaiseEvent();
+			//TODO specific level
+		}
+		
+		private void HandleSaveV2() {
+			Debug.Log("Handle SaveV2");
+			//TODO implement
+			throw new NotImplementedException();
+		}
+		
+		private void HandleLoadV1() {
+			Debug.Log("Handle LoadV1");
+			loadLevel.RaiseEvent();
+			//TODO specific level
+		}
+		
+		private void HandleLoadV2() {
+			Debug.Log("Handle LoadV2");
+			//TODO implement
+			throw new NotImplementedException();
+		}
+
 		void HandleSelectModusButtonClicked() {
 			SetLevelEditorMode(EditorMode.Select);
 		}
@@ -246,14 +257,12 @@ namespace UI {
 			BindElements();
 
 			// subscribe to input events
-			visibilityMenuEventChannel.OnEventRaised += SetMenuVisibility;
 			levelEditorStateUpdateEC.OnEventRaised += HandleLevelEditorStateChaged;
 		}
 
 		private void OnDisable() {
 			UnbindElements();
 
-			visibilityMenuEventChannel.OnEventRaised -= SetMenuVisibility;
 			levelEditorStateUpdateEC.OnEventRaised -= HandleLevelEditorStateChaged;
 		}
 	}

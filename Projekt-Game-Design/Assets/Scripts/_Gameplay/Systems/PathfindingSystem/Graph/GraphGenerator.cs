@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Characters;
+using GDP01._Gameplay.Provider;
+using GDP01._Gameplay.World.Character;
 using Graph.ScriptableObjects;
 using Grid;
 using Level.Grid;
@@ -12,18 +14,18 @@ namespace Graph {
         [SerializeField] private GraphDrawer graphDrawer;
 
         [Header("SO References")] 
-        public CharacterList characterList;
-				public WorldObjectList worldObjectList;
         [SerializeField] private TileTypeContainerSO tileTypeContainer;
         [SerializeField] private GraphContainerSO graphContainer;
         [SerializeField] private GridDataSO gridData;
         
         [Header("Settings")]
         [SerializeField] private bool diagonal;
+
+        private CharacterManager CharacterManager => GameplayProvider.Current.CharacterManager;
+        private WorldObjectManager WorldObjectManager => GameplayProvider.Current.WorldObjectManager;
         
         public void GenerateGraphFromGrids() {
-            characterList = CharacterList.FindInstant();
-						worldObjectList = WorldObjectList.FindInstant();
+            
             // characterContainer.FillContainer();
             
             graphContainer.basicMovementGraph = new List<NodeGraph>();
@@ -55,55 +57,46 @@ namespace Graph {
                 }
             }
             
-            // todo refactor
-            // sets the player and enemy pos to not walkable
-            // foreach (var player in characterContainer.playerContainer) {
-            //     var pos = globalGridData.GridPos3DToGridPos2D(player.gridPosition);
-            //     graph.GetGridObject(pos).SetIsWalkable(false);
-            // }
-            
-            foreach (var enemy in characterList.enemyContainer) {
-                var pos = gridData.GetGridPos2DFromGridPos3D(enemy.GetComponent<GridTransform>().gridPosition);
+            foreach (var enemy in CharacterManager.GetEnemyCahracters()) {
+	            if ( enemy.IsAlive ) {
+		            var pos = gridData.GetGridPos2DFromGridPos3D(enemy.GridPosition);
                 graph.GetGridObject(pos).SetIsWalkable(false);
+	            }
 						}
 
-						foreach ( var player in characterList.playerContainer ) {
+						foreach ( var player in CharacterManager.GetPlayerCharacters() ) {
+							if ( player.IsAlive ) {
 								var pos = gridData.GetGridPos2DFromGridPos3D(player.GetComponent<GridTransform>().gridPosition);
 								graph.GetGridObject(pos).SetIsWalkable(false);
+							}
 						}
 
-						foreach ( var npc in characterList.friendlyContainer )
-						{
-								var pos = gridData.GetGridPos2DFromGridPos3D(npc.GetComponent<GridTransform>().gridPosition);
-								graph.GetGridObject(pos).SetIsWalkable(false);
-						}
-
-						foreach ( var door in worldObjectList.doors )
-						{
-								if(!door.GetComponent<Door>().IsOpen)
+						foreach ( var door in WorldObjectManager.GetDoors() ) {
+								if(!door.IsOpen)
 								{
-										var pos = gridData.GetGridPos2DFromGridPos3D(door.GetComponent<GridTransform>().gridPosition);
+										var pos = gridData.GetGridPos2DFromGridPos3D(door.GridPosition);
 										graph.GetGridObject(pos).SetIsWalkable(false);
 								}
 						}
 
-						foreach ( var switchComponent in worldObjectList.switches )
+						foreach ( var switchComponent in WorldObjectManager.GetSwitches() )
 						{
-								if(!switchComponent.GetComponent<SwitchComponent>().Type.walkThrough)
+								if(!switchComponent.Type.walkThrough)
 								{
-										var pos = gridData.GetGridPos2DFromGridPos3D(switchComponent.GetComponent<GridTransform>().gridPosition);
+										var pos = gridData.GetGridPos2DFromGridPos3D(switchComponent.GridPosition);
 										graph.GetGridObject(pos).SetIsWalkable(false);
 								}
 						}
 
-						foreach ( var junk in worldObjectList.junks )
-						{
-								if ( !junk.GetComponent<Junk>().junkType.walkThrough && !junk.GetComponent<Junk>().broken)
-								{
-										var pos = gridData.GetGridPos2DFromGridPos3D(junk.GetComponent<GridTransform>().gridPosition);
-										graph.GetGridObject(pos).SetIsWalkable(false);
-								}
-						}
+						//TODO JUNK
+						// foreach ( var junk in worldObjectList.junks )
+						// {
+						// 		if ( !junk.GetComponent<Junk>().junkType.walkThrough && !junk.GetComponent<Junk>().broken)
+						// 		{
+						// 				var pos = gridData.GetGridPos2DFromGridPos3D(junk.GetComponent<GridTransform>().gridPosition);
+						// 				graph.GetGridObject(pos).SetIsWalkable(false);
+						// 		}
+						// }
 
 						for (int x = 0; x < graph.Width; x++) {
                 for (int z = 0; z < graph.Depth; z++) {

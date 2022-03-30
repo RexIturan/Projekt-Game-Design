@@ -16,18 +16,17 @@ namespace SaveSystem {
 	public class SaveManager : MonoBehaviour {
 		
 		[Header("Receiving Events On")] 
-		[SerializeField] private IntEventChannelSO saveGame;
-		[SerializeField] private IntEventChannelSO loadGame;
-		[SerializeField] private VoidEventChannelSO saveLevel;
-		[SerializeField] private VoidEventChannelSO loadLevel;
-		[SerializeField] private StringEventChannelSO loadGameFromPath;
+		[SerializeField] private IntEventChannelSO saveGameEC;
+		[SerializeField] private IntEventChannelSO loadGameEC;
+		[SerializeField] private VoidEventChannelSO saveLevelEC;
+		[SerializeField] private VoidEventChannelSO loadLevelEC;
+		[SerializeField] private StringEventChannelSO loadGameFromPathEC;
 
 		[Header("Sending Events On")] [SerializeField]
 		private VoidEventChannelSO levelLoaded;
 
 		[Header("Data References")] 
 		[SerializeField] private GridDataSO gridData;
-		public CharacterList characterList;
 		public InventorySO inventory;
 		public QuestContainerSO questContainer;
 		public CharacterInitialiser characterInitializer;
@@ -75,10 +74,9 @@ namespace SaveSystem {
 		private Save WriteLevelDataToSave() {
 			_saveObject.Clear();
 						
-			CharacterList characterList = CharacterList.FindInstant();
 			WorldObjectList worldObjectList = WorldObjectList.FindInstant();
 
-			_saveWriter.SetRuntimeReferences(characterList, worldObjectList);
+			_saveWriter.SetRuntimeReferences(worldObjectList);
 			
 			_saveObject = _saveWriter.WirteLevelToSave();
 			return _saveObject;
@@ -89,15 +87,18 @@ namespace SaveSystem {
 		#region MonoBehaviour
 
 		private void Awake() {
-			saveGame.OnEventRaised += SaveGame;
-			loadGame.OnEventRaised += LoadGame;
+			saveGameEC.OnEventRaised += SaveGameEC;
+			loadGameEC.OnEventRaised += LoadGameEC;
 			// loadGameFromPath.OnEventRaised += LoadGridContainer;
+			saveLevelEC.OnEventRaised += HandleSaveLevel;
+			loadLevelEC.OnEventRaised += HandleLoadLevel;
+			
 			saveManagerData.Reset();
 		}
 
 		private void OnDestroy() {
-			saveGame.OnEventRaised -= SaveGame;
-			loadGame.OnEventRaised -= LoadGame;
+			saveGameEC.OnEventRaised -= SaveGameEC;
+			loadGameEC.OnEventRaised -= LoadGameEC;
 			// loadGameFromPath.OnEventRaised -= LoadGridContainer;
 		}
 
@@ -110,6 +111,17 @@ namespace SaveSystem {
 		}
 
 		#endregion
+
+///// Private Functions ////////////////////////////////////////////////////////////////////////////
+
+		private void HandleLoadLevel() {
+			LoadLevel("");
+			InitializeLevel();
+		}
+
+		private void HandleSaveLevel() {
+			SaveLevel("");
+		}
 		
 //////////////////////////////////////// Public Functions //////////////////////////////////////////
 
@@ -121,7 +133,7 @@ namespace SaveSystem {
 		// saves the current state of a playthrough
 		// save Obejct for game  
 		
-		public void SaveGame(int value) {
+		public void SaveGameEC(int value) {
 			//todo fix
 			String checkpointFile = defaultGameFilename;
 			checkpointFile += "0";
@@ -133,7 +145,7 @@ namespace SaveSystem {
 
 		#region Load Game
 
-		public void LoadGame(int value) {
+		public void LoadGameEC(int value) {
 			//todo fix
 			
 			String checkpointFile = defaultGameFilename;

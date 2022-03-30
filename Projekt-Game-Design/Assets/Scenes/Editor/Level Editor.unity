@@ -598,17 +598,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3413179617940674565, guid: 6a43a43ba4cf90f4c8fb5dd969523e94, type: 3}
   m_PrefabInstance: {fileID: 561744097}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &564408659 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2590095954336560726, guid: ee9989a80b866054db727cd000eeb9b0, type: 3}
-  m_PrefabInstance: {fileID: 88702757}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3086b1bda953457b82b9fa75933673c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &823821213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,17 +1144,9 @@ PrefabInstance:
       value: Level Editor
       objectReference: {fileID: 0}
     - target: {fileID: 8678411914411512487, guid: e60a11f52d47ed44cadd44ffe24b8f9b, type: 3}
-      propertyPath: gridDrawer
-      value: 
-      objectReference: {fileID: 297601290}
-    - target: {fileID: 8678411914411512487, guid: e60a11f52d47ed44cadd44ffe24b8f9b, type: 3}
       propertyPath: cursorDrawer
       value: 
       objectReference: {fileID: 525333942}
-    - target: {fileID: 8678411914411512487, guid: e60a11f52d47ed44cadd44ffe24b8f9b, type: 3}
-      propertyPath: gridController
-      value: 
-      objectReference: {fileID: 564408659}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e60a11f52d47ed44cadd44ffe24b8f9b, type: 3}
 --- !u!4 &2025804268 stripped
@@ -1221,7 +1202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b941e415cc648cf9aa3da05d8f85cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
   levelEditorStateUpdateEC: {fileID: 0}
   enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
@@ -1579,6 +1559,10 @@ PrefabInstance:
     - target: {fileID: 8194717185660528009, guid: 3269c024819c5fb4492d945234112401, type: 3}
       propertyPath: m_Name
       value: LevelEditor_UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8194717185675829583, guid: 3269c024819c5fb4492d945234112401, type: 3}
+      propertyPath: saveControlButtonNames.createNew
+      value: CreateNEw
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3269c024819c5fb4492d945234112401, type: 3}

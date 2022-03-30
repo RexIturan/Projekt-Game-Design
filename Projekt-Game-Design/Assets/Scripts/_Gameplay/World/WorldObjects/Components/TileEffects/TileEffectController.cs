@@ -2,8 +2,11 @@ using Characters;
 using Events.ScriptableObjects.GameState;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using SaveSystem.V2.Data;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using WorldObjects;
 
 namespace GDP01.TileEffects
 {
@@ -11,10 +14,10 @@ namespace GDP01.TileEffects
 		/// Defines the properties of all effects 
 		/// that a tile has at the moment. 
 		/// </summary>
-    public class TileEffectController : MonoBehaviour
-    {
-				public int id;
+    public class TileEffectController : MonoBehaviour, ISaveState<TileEffectController.Data> {
 
+			public int id;
+			
 				[SerializeField] private List<TileEffectSO> effects;
 				[SerializeField] private List<TileEffectSO> preActivationEffects;
 				[SerializeField] private List<TileEffectSO> startEffects;
@@ -198,6 +201,32 @@ namespace GDP01.TileEffects
 				public TileEffectController() {
 						effects = new List<TileEffectSO>();
 						destroy = false;
+				}
+
+				public class Data {
+					public int id;
+					public bool active;
+					// public List<int> currentEffects;
+					// public List<int> effectsToRemove;
+					public Vector3Int gridPosition;
+					public int timeUntilActivation;
+					public int timeToLive;
+				}
+
+				public Data Save() {
+					return new Data
+					{
+						id = id,
+						timeUntilActivation = timeUntilActivation,
+						timeToLive = timeToLive,
+						gridPosition = GetComponent<GridTransform>().gridPosition
+					};
+				}
+
+				public void Load(Data data) {
+					SetTimeUntilActivation(data.timeUntilActivation);
+					SetTimeToLive(data.timeToLive);
+					GetComponent<GridTransform>().MoveTo(data.gridPosition);
 				}
 		}
 }

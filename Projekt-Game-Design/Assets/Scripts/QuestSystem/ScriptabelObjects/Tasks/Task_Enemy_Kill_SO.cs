@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using GDP01._Gameplay.Provider;
+using GDP01._Gameplay.World.Character;
+using UnityEngine;
 using Util.Types;
 
 namespace QuestSystem.ScriptabelObjects {
@@ -11,12 +13,13 @@ namespace QuestSystem.ScriptabelObjects {
 
 ///// Private Variable
 		
-		private CharacterList characterList;
 		private int currentCount;
 		private int startCount;
 
-///// Private Variable
-		
+///// Properties
+
+		private CharacterManager CharacterManager => GameplayProvider.Current.CharacterManager;
+
 ///// TaskSO		
 		
 		public override TaskType Type { get; } = TaskType.Enemy_Kill;
@@ -24,7 +27,7 @@ namespace QuestSystem.ScriptabelObjects {
 		
 		public override bool IsDone() {
 			if ( active ) {
-				currentCount = characterList.GetDeapEnemyCount(enemyType);
+				currentCount = CharacterManager.GetEnemyCountByType(enemyType);
 				if ( currentCount - startCount >= neededCount ) {
 					done = true;
 				}
@@ -41,8 +44,7 @@ namespace QuestSystem.ScriptabelObjects {
 
 		public override void StartTask() {
 			base.StartTask();
-			characterList = CharacterList.FindInstant();
-			startCount = characterList.GetDeapEnemyCount(enemyType);
+			startCount = CharacterManager.GetEnemyCountByType(enemyType);
 		}
 
 		public override TaskInfo GetInfo() {

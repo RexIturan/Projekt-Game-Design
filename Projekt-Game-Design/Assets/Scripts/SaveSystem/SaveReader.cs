@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using Characters;
 using Characters.Equipment.ScriptableObjects;
+using GDP01._Gameplay.Provider;
 using GDP01.Equipment;
 using Grid;
 using QuestSystem.ScriptabelObjects;
@@ -106,15 +107,12 @@ namespace SaveSystem {
 			}
 			
 			//todo rethink this -> do here, maybe get initialised chars as parameter?
-			var characterList = CharacterList.FindInstant();
-			if ( characterList is { } ) {
-				var playerCharNum = characterList.playerContainer.Count +
-				                    characterList.friendlyContainer.Count;
-				var equipmentInvCount = equipmentContainer.EquipmentSheets.Count;
-				if ( equipmentInvCount < playerCharNum) {
-					for ( int i = 0; i < playerCharNum - equipmentInvCount; i++ ) {
-						equipmentContainer.CreateNewEquipmentSheet();
-					}
+			
+			var playerCharNum = GameplayProvider.Current.CharacterManager.GetPlayerCharacters().Count;
+			var equipmentInvCount = equipmentContainer.EquipmentSheets.Count;
+			if ( equipmentInvCount < playerCharNum) {
+				for ( int i = 0; i < playerCharNum - equipmentInvCount; i++ ) {
+					equipmentContainer.CreateNewEquipmentSheet();
 				}
 			}
 		}

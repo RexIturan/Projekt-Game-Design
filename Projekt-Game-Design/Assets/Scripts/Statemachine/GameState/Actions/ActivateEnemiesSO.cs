@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GDP01._Gameplay.Provider;
+using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
@@ -17,10 +18,9 @@ public class ActivateEnemies_OnEnter : StateAction {
 
     public override void OnStateEnter() {
         Debug.Log("Activating Enemies. ");
-        var characterList = GameObject.Find("Characters").GetComponent<CharacterList>();
-        foreach (var enemy in characterList.enemyContainer) {
-            enemy.GetComponent<EnemyCharacterSC>().isNextToAct = true;
-        }
+        
+        GameplayProvider.Current.CharacterManager.GetEnemyCahracters()
+	        .ForEach(enemy => enemy.SetIsNextToAct(true));
     }
 
     public override void OnStateExit() { }

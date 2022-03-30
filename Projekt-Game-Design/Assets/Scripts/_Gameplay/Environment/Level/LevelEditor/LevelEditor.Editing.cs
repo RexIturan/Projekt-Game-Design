@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GDP01._Gameplay.Provider;
 using UnityEngine;
 using Util.Extensions;
 
@@ -8,7 +9,7 @@ namespace LevelEditor {
 		private List<Vector3> _clickedAbovePos;
 		private List<Vector3> _clickedSelectedPos;
 
-		private void ClearCachedClickeDPositions() {
+		private void ClearCachedClickedPositions() {
 			_clickedAbovePos.Clear();
 			_clickedSelectedPos.Clear();
 		}
@@ -48,12 +49,37 @@ namespace LevelEditor {
 					RedrawLevel();
 					break;
 
+				//PC
+				case LayerType.Character_Player:
+					GameplayProvider.Current.CharacterManager.AddPlayerCharacterAt(_editorState.selectedPlayerType, FirstClickedAbovePos);
+					break;
+				
+				//EC
+				case LayerType.Character_Enemy:
+					GameplayProvider.Current.CharacterManager.AddEnemyCharacterAt(_editorState.selectedEnemyType, FirstClickedAbovePos);
+					break;
+				
+				//item
 				case LayerType.Item:
-					//todo Add item at
+					GameplayProvider.Current.WorldObjectManager.AddItemAt(_editorState.selectedItemType, FirstClickedAbovePos);
+					break;
+				
+				case LayerType.Door:
+					GameplayProvider.Current.WorldObjectManager.AddDoorAt(_editorState.selectedDoorType, FirstClickedAbovePos);
+					break;
+				
+				case LayerType.Switch:
+					GameplayProvider.Current.WorldObjectManager.AddSwitchAt(_editorState.selectedSwitchType, FirstClickedAbovePos);
+					break;
+				
+				case LayerType.Effect:
+					GameplayProvider.Current.TileEffectManager.AddTileEffectAt(
+						_editorState.selectedEffectTypeId, 
+						gridDataSO.GetGridPos3DFromWorldPos(FirstClickedAbovePos));
 					break;
 			}
 
-			ClearCachedClickeDPositions();
+			ClearCachedClickedPositions();
 			_leftClicked = false;
 		}
 
@@ -67,7 +93,7 @@ namespace LevelEditor {
 			}
 			
 			cursorDrawer.HideCursor();
-			ClearCachedClickeDPositions();
+			ClearCachedClickedPositions();
 			_leftClicked = false;
 			_dragEnd = false;
 		}
@@ -77,18 +103,45 @@ namespace LevelEditor {
 		#region Remove
 
 		private void RemoveOne() {
+			Debug.Log($"RemoveOne: {Layer} {Mode} {FirstClickedAbovePos}");
+			
 			switch ( Layer ) {
 				case LayerType.Tile:
-					GridController.RemoveTileAt(GetClickedPos(true, 0));
+					GridController.RemoveTileAt(GetClickedPos(false, 0));
+					//todo this should only be done if a tile is removed not everytime v
 					RedrawLevel();
 					break;
 				
+				//PC
+				case LayerType.Character_Player:
+					GameplayProvider.Current.CharacterManager.RemovePlayerCharacterAt(FirstClickedAbovePos);
+					break;
+				
+				//EC
+				case LayerType.Character_Enemy:
+					GameplayProvider.Current.CharacterManager.RemoveEnemyCharacterAt(FirstClickedAbovePos);
+					break;
+				
+				//item
 				case LayerType.Item:
-					
+					GameplayProvider.Current.WorldObjectManager.RemoveItemAt(FirstClickedAbovePos);
+					break;
+				
+				case LayerType.Door:
+					GameplayProvider.Current.WorldObjectManager.RemoveDoorAt(FirstClickedAbovePos);
+					break;
+				
+				case LayerType.Switch:
+					GameplayProvider.Current.WorldObjectManager.RemoveSwitchAt(FirstClickedAbovePos);
+					break;
+				
+				case LayerType.Effect:
+					GameplayProvider.Current.TileEffectManager.RemoveTileEffectAt(
+						gridDataSO.GetGridPos3DFromWorldPos(FirstClickedAbovePos));
 					break;
 			}
 
-			ClearCachedClickeDPositions();
+			ClearCachedClickedPositions();
 			_rightClicked = false;
 		}
 
@@ -103,7 +156,7 @@ namespace LevelEditor {
 
 			//todo move to iunput cache??
 			// reset input cache
-			ClearCachedClickeDPositions();
+			ClearCachedClickedPositions();
 			_rightClicked = false;
 			_dragEnd = false;
 			cursorDrawer.HideCursor();

@@ -7,16 +7,8 @@ namespace GameManager.ScriptableObjects.VictoryConditions {
 	[CreateAssetMenu(fileName = "AllEnemysAreDeadSO", menuName = "GameManager/Conditions/Victory/AllEnemysAreDead")]
 	public class AllEnemysAreDeadSO : GameEndConditionSO{
 		public override bool CheckCondition() {
-			//get char list
-
-			CharacterList charlist = GameplayProvider.Current.CharacterList;
-
-			bool allDead = true;
-			if ( charlist.enemyContainer is { Count: > 0 } ) {
-				allDead = !charlist.enemyContainer.Any(o => o.GetComponent<Targetable>().IsAlive);
-			}
-
-			return allDead;
+			return GameplayProvider.Current.CharacterManager.GetEnemyCahracters()
+				.All(enemy => enemy.IsDead);
 		}
 	}
 }

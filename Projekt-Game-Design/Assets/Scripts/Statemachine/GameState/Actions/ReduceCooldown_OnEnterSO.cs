@@ -1,6 +1,8 @@
 ﻿using Characters;
 using Characters.Types;
 using GameManager;
+using GDP01._Gameplay.Provider;
+using GDP01._Gameplay.World.Character;
 using GDP01.Characters.Component;
 using UnityEngine;
 using UOP1.StateMachine;
@@ -23,18 +25,15 @@ public class ReduceCooldown_OnEnter : StateAction {
 	public override void OnUpdate() {}
 	
 	public override void OnStateEnter() {
-		var characterList = Object.FindObjectOfType<CharacterList>();
+		CharacterManager characterManager = GameplayProvider.Current.CharacterManager;
+		
 		switch (_gameSC.CurrentPlayer) { 
 			case Faction.Player:
-				foreach (var player in characterList.playerContainer) {
-					player.GetComponent<AbilityController>().ReduceCooldowns();
-				}
+				characterManager.GetPlayerCharacters().ForEach(player => player.AbilityController.ReduceCooldowns());
 				_gameSC.UpdateOverlay(Faction.Player);
 				break;
 			case Faction.Enemy:
-				foreach (var enemy in characterList.enemyContainer) {
-					enemy.GetComponent<AbilityController>().ReduceCooldowns();
-				}
+				characterManager.GetEnemyCahracters().ForEach(enemy => enemy.AbilityController.ReduceCooldowns());
 				break;
 		}
 	}

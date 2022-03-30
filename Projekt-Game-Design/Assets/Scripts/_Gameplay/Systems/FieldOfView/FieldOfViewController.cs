@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Characters;
 using Combat;
 using Events.ScriptableObjects.FieldOfView;
+using GDP01._Gameplay.Provider;
+using GDP01._Gameplay.World.Character;
 using Grid;
 using Level.Grid;
 using UnityEngine;
@@ -125,12 +127,10 @@ namespace FieldOfView {
 				public void GeneratePlayerCharacterVision() {
 					
 					//todo should work on list<pos, range> 
-					var charList = CharacterList.FindInstant();
-
 					bool[,] playerVision = new bool[gridData.Width, gridData.Depth];
 					
-					if ( charList != null ) {
-						var playerList = charList.playerContainer;
+					if ( GameplayProvider.Current.CharacterManager != null ) {
+						var playerList = GameplayProvider.Current.CharacterManager.GetPlayerCharacters();
 
 						viewTilemap.ClearAllTiles();
 						viewTilemap.transform.position = gridData.OriginPosition;

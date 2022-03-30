@@ -17,7 +17,9 @@ namespace Characters {
 			set { _type = value; }
 		}
 
-///// Public Functions /////////////////////////////////////////////////////////////////////////////			
+		public float InPercent =>  (float) (Value - Min) / Max;
+
+		///// Public Functions /////////////////////////////////////////////////////////////////////////////			
 			
 		public void Increse(int incValue) {
 			Value += incValue;

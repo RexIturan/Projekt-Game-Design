@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using Audio;
 using Characters;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using GDP01._Gameplay.Provider;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 
@@ -71,15 +74,27 @@ namespace WorldObjects {
 				// activates switch if conditions are met
 				public void UpdateSwitch() {
 						if ( !IsActivated ) {
-								CharacterList characters = CharacterList.FindInstant();
+							
 								bool playerInRange = false;
-								foreach ( GameObject player in characters.playerContainer ) {
-										Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
-										Vector3Int switchPos = gameObject.GetComponent<GridTransform>().gridPosition;
-										if ( Vector3Int.Distance(playerPos, switchPos) < ( float )Range + EPSILON ) {
-												playerInRange = true;
-										}
+								Vector3Int switchPos = gameObject.GetComponent<GridTransform>().gridPosition;
+								float range = Range + EPSILON;
+								
+								List<PlayerCharacterSC> foundPlayerCharacters = 
+									GameplayProvider.Current.CharacterManager.GetPlayerCharactersWhere(
+										(player) => 
+											Vector3Int.Distance(player.GridPosition, switchPos) < range).ToList();
+
+								if ( foundPlayerCharacters is { Count: >0 } ) {
+									playerInRange = true;
 								}
+								
+								// foreach ( GameObject player in characters.playerContainer ) {
+								// 		Vector3Int playerPos = player.GetComponent<GridTransform>().gridPosition;
+								// 		
+								// 		if ( Vector3Int.Distance(playerPos, switchPos) < ( float )Range + EPSILON ) {
+								// 				playerInRange = true;
+								// 		}
+								// }
 
 								if ( playerInRange )
 										SwitchActivated();

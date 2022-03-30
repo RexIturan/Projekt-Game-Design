@@ -30,7 +30,6 @@ public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterDat
 	
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
 	
-	public Statistics Statistics => _statistics;
 	public EquipmentController EquipmentController => _equipmentController;
 	
 	//todo maybe dont use this here
@@ -56,8 +55,10 @@ public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterDat
 		get => _enteringNewLocation;
 		set => _enteringNewLocation = value;
 	}
+
 	
-///// Private Functions ////////////////////////////////////////////////////////////////////////////	
+
+	///// Private Functions ////////////////////////////////////////////////////////////////////////////	
 
 	private bool initialized = false;
 
@@ -122,9 +123,9 @@ public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterDat
 		_modelController.SetFactionMaterial(_statistics.Faction);
 		_healthbarController.SetColor(playerColor);
 
-		CharacterList characters = CharacterList.FindInstant();
-		characters.friendlyContainer.Remove(gameObject);
-		characters.playerContainer.Add(gameObject);
+		// CharacterList characters = CharacterList.FindInstant();
+		// characters.friendlyContainer.Remove(gameObject);
+		// characters.playerContainer.Add(gameObject);
 	}
 
 	public override PlayerCharacterData Save() {
@@ -154,7 +155,8 @@ public class PlayerCharacterSC : Character<PlayerCharacterSC, PlayerCharacterDat
 		_modelController.SetFactionMaterial(_statistics.Faction);
 
 		if ( data.LocationName == null || data.LocationName.Equals(String.Empty) ) {
-			data.LocationName = LevelManager.CurrentLevel.name;
+			//todo what should be the default loaction name
+			data.LocationName = LevelManager?.CurrentLevel.name ?? "";
 		}
 		else {
 			//todo deactivate char

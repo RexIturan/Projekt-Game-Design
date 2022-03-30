@@ -254,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 56e2fc8d2b6b03d40a1c7ecf51e46bbb, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 4affee0ef5c5fb94185dabe62e02303b, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 63c4d350f330dbf44adc68654459dc00, type: 3}
   m_SortingOrder: 0
 --- !u!114 &8194717185675829583
 MonoBehaviour:
@@ -287,6 +287,12 @@ MonoBehaviour:
     Door: {fileID: 21300000, guid: de125da4c9d399b498dd38d7a161d28d, type: 3}
     Switch: {fileID: 21300000, guid: 1f75aafbe79077f44825fbdd0ce1bff3, type: 3}
     Effect: {fileID: 21300000, guid: a352e586e1f794247952be863ab2f114, type: 3}
+  controlButtonNames:
+    createNewLevel: CreateNew
+    saveV1: SaveV1
+    saveV2: SaveV2
+    loadV1: LoadV1
+    loadV2: LoadV2
 --- !u!114 &8082475425973089818
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ using Level.Grid;
 using System.Collections.Generic;
 using System.Linq;
 using Characters.Types;
+using GDP01._Gameplay.Provider;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
 using UnityEngine;
@@ -84,44 +85,42 @@ namespace Characters.EnemyCharacter
 						});
 				}
 
-				private void SaveClosestPlayerAsTarget(List<PathNode> pathNodes)
-				{
-						aiTarget = null;
+				private void SaveClosestPlayerAsTarget(List<PathNode> pathNodes) {
+					aiTarget = null;
 
-						GameObject characterListObj = GameObject.Find("Characters");
-						CharacterList characterList = null;
-						if ( characterListObj )
-								characterList = characterListObj.GetComponent<CharacterList>();
+					for ( int i = 0; !aiTarget && i < pathNodes.Count; i++ ) {
+						List<PlayerCharacterSC> playerCharacters = 
+							GameplayProvider.Current.CharacterManager.GetPlayerCharacters();
+						
+						foreach ( var player in playerCharacters ) {
+							Targetable playerTargetable = player.GetComponent<Targetable>();
 
-						if ( characterList ) {
-								for(int i = 0; !aiTarget && i < pathNodes.Count; i++) {
-										foreach(GameObject player in characterList.playerContainer) {
-												Targetable playerTargetable = player.GetComponent<Targetable>();
+							float distanceBetweenPlayerAndTile = !playerTargetable
+								? Int32.MaxValue
+								: ( pathNodes[i].pos - playerTargetable.GetGridPosition() ).magnitude;
 
-												float distanceBetweenPlayerAndTile = !playerTargetable ? Int32.MaxValue : 
-														(pathNodes[i].pos - playerTargetable.GetGridPosition()).magnitude;
-
-												if ( distanceBetweenPlayerAndTile < 1.001 ) {
-														aiTarget = playerTargetable;
-														closestNodeToTarget = pathNodes[i];
-														// set also in attacker component
-														_attacker.SetTarget(aiTarget);
-												}
-										}
-								}
+							if ( distanceBetweenPlayerAndTile < 1.001 ) {
+								aiTarget = playerTargetable;
+								closestNodeToTarget = pathNodes[i];
+								// set also in attacker component
+								_attacker.SetTarget(aiTarget);
+							}
 						}
+					}
 				}
 
 				public void TargetEnemyWithLowestHealth(List<PathNode> visibleTiles) {
 						Targetable lowestHealthTarget = null;
 						float lowestHealth = 1.0f;
 
-						foreach(GameObject enemy in CharacterList.FindInstant().enemyContainer) {
-								Vector3Int pos = enemy.GetComponent<GridTransform>().gridPosition;
+						var enemys = GameplayProvider.Current.CharacterManager.GetEnemyCahracters();
+						
+						foreach(var enemy in enemys) {
+								Vector3Int pos = enemy.GridPosition;
 
 								if(visibleTiles.Any(node => node.pos.Equals(pos))) {
 										Statistics stats = enemy.GetComponent<Statistics>();
-										float health = (float) (stats.StatusValues.HitPoints.Value - stats.StatusValues.HitPoints.Min) / stats.StatusValues.HitPoints.Max;
+										float health = stats.StatusValues.HitPoints.InPercent;
 										if (health < lowestHealth) {
 												Debug.Log($"Enemy in sight with only {health * 100}% health. ");
 												lowestHealth = health;

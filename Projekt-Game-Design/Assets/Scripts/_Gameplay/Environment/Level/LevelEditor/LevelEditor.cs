@@ -111,7 +111,6 @@ namespace LevelEditor {
 
 ///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
 		
-
 		private void HandleModeChange(EditorMode mode) {
 			_editorState.editorMode = mode;
 			Debug.Log($"Mode Update: {_editorState}");
@@ -194,43 +193,34 @@ namespace LevelEditor {
 
 			inputCache.UpdateMouseInput(gridDataSO);
 
-			//todo(vincent) refactor #input cache
-
 			#region refactor to mouse input / input cache
 
-			// Debug.Log(inputCache.IsMouseOverUI);
+			rightMouseWasReleased = inputCache.rightButton.wasRelesed;
+			leftMouseWasReleased = inputCache.leftButton.wasRelesed;
+			leftMouseIsPressed = inputCache.leftButton.isPressed;
+			rightMouseIsPressed = inputCache.rightButton.isPressed;
+			_rightClicked = inputCache.rightButton.isPressed;
+			_leftClicked = inputCache.leftButton.started;
+			_dragEnd = inputCache.DragEnded();
 
-			if ( !inputCache.IsMouseOverUI ) {
-				rightMouseWasReleased = inputCache.rightButton.wasRelesed;
-				leftMouseWasReleased = inputCache.leftButton.wasRelesed;
-				leftMouseIsPressed = inputCache.leftButton.isPressed;
-				rightMouseIsPressed = inputCache.rightButton.isPressed;
-				_rightClicked = inputCache.rightButton.isPressed;
-				_leftClicked = inputCache.leftButton.isPressed;
-				_dragEnd = inputCache.DragEnded();
-			}
-			else {
-				rightMouseWasReleased = false;
-				leftMouseWasReleased = false;
-				leftMouseIsPressed = false;
-				rightMouseIsPressed = false;
-			}
-
-			Vector3 selectedPosition = inputCache.cursor.selectedPos.tilePos;
-			Vector3 positionAbove = inputCache.cursor.abovePos.tilePos;
+			Vector3 tileWorldPositionSelected = inputCache.cursor.selectedPos.tilePos;
+			Vector3 tileWorldPositionAbove = inputCache.cursor.abovePos.tilePos;
 			var centeredGridPos = inputCache.cursor.selectedPos.tileCenter;
 			var centeredGridPosAbove = inputCache.cursor.abovePos.tileCenter;
 
-			if ( rightMouseIsPressed ) {
-				remove = true;
-				_clickedSelectedPos.Add(selectedPosition);
+			remove = rightMouseIsPressed && !(leftMouseIsPressed || _leftClicked);
+
+			if ( leftMouseIsPressed || rightMouseIsPressed ) {
+				_clickedSelectedPos.Add(tileWorldPositionSelected);
+				_clickedAbovePos.Add(tileWorldPositionAbove);	
 			}
 
-			if ( leftMouseIsPressed ) {
-				remove = false;
-				_clickedAbovePos.Add(positionAbove);
+			// kein input aber gecached daten -> clear
+			if ( !rightMouseIsPressed && !leftMouseIsPressed &&
+			     !( rightMouseWasReleased || leftMouseWasReleased ) ) {
+				ClearCachedClickedPositions();
 			}
-
+			
 			#endregion
 			
 			var cursorMode = remove ? CursorMode.Remove : CursorMode.Add;
@@ -252,16 +242,20 @@ namespace LevelEditor {
 						AddOne();
 					}
 
+					if ( leftMouseWasReleased || rightMouseWasReleased ) {
+						ClearCachedClickedPositions();
+					}
+
 					break;
 
 				case EditorMode.Box:
 
 					if ( _leftClicked ) {
-						HandleMouseDrag(positionAbove);
+						HandleMouseDrag(tileWorldPositionAbove);
 						// Debug.Log($"left:{_leftClicked} right:{_rightClicked}");
 					}
 					else if ( _rightClicked ) {
-						HandleMouseDrag(selectedPosition);
+						HandleMouseDrag(tileWorldPositionSelected);
 						// Debug.Log($"left:{_leftClicked} right:{_rightClicked}");
 					}
 					else if ( leftMouseWasReleased || rightMouseWasReleased ) {

@@ -52,8 +52,9 @@ namespace WorldObjects {
 		public override void Load(DoorData data) {
 			base.Load(data);
 
-			_type = ( DoorTypeSO )data.ReferenceData.obj;
-			//todo load door data
+			Type = ( DoorTypeSO )data.ReferenceData.obj;
+			
+			this.Initialise(Type);
 			
 			//todo does this work?
 			doorData = data;

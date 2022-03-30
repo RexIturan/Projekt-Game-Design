@@ -21,7 +21,7 @@ namespace GDP01._Gameplay.World.Character.Components {
 	[RequireComponent(typeof(Targetable))]
 	public abstract class Character<T, D> : SaveObjectFactory<T, D>, ISaveState<D> where D : CharacterData, new() where T : ISaveState<D> {
 		public int id;
-		public bool active;
+		protected bool active;
 
 		[SerializeField] protected CharacterTypeSO _type;
 		
@@ -35,6 +35,32 @@ namespace GDP01._Gameplay.World.Character.Components {
 		[SerializeField] protected MovementController _movementController;
 		[SerializeField] protected HealthbarController _healthbarController;
 
+///// Properties ///////////////////////////////////////////////////////////////////////////////////		
+		
+		public GridTransform GridTransform => _gridTransform;
+		public Vector3 Rotation {
+			get { return _gridTransform.rotation; }
+			protected set { _gridTransform.rotation = value; }
+		}
+
+		public Vector3Int GridPosition {
+			get { return _gridTransform.gridPosition; }
+			protected set {
+				_gridTransform.gridPosition = value;
+			}
+		}
+
+		public bool IsActive => active;
+		
+		//targetable
+		public Targetable TargetableComponent => _targetable;
+		public bool IsDead => _targetable.IsDead;
+		public bool IsAlive => _targetable.IsAlive;
+
+		public AbilityController AbilityController => _abilityController;
+		
+		public Statistics Statistics => _statistics;
+		
 ///// SaveState ////////////////////////////////////////////////////////////////////////////////////		
 		
 		public virtual D Save() {

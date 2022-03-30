@@ -44,12 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7cd85304f34f6cab0dbb79be751b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharacterParent: {fileID: 0}
-  enemyCharacterParent: {fileID: 0}
-  defaultPlayerData: {fileID: 11400000, guid: 5d339fb430d10f341bd2896617aec0a2, type: 2}
-  defaultEnemyData: {fileID: 11400000, guid: c491683a0b68f934db35972bd4517070, type: 2}
-  playerCharacters: []
-  _playerCharacterData: []
-  enemyCharacters: []
-  _enemyCharacterData: []
+  _characterList: {fileID: 0}
+  _gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   useConnectorEC: {fileID: 11400000, guid: 7a311da8c12a7c64f9e56ab7c3d6ab1c, type: 2}
+  enemyCharacterParent: {fileID: 0}
+  defaultEnemyData: {fileID: 11400000, guid: c491683a0b68f934db35972bd4517070, type: 2}
+  enemyCharacterComponents: []
+  _enemyCharacterData: []
+  playerCharacterParent: {fileID: 0}
+  defaultPlayerData: {fileID: 11400000, guid: 5d339fb430d10f341bd2896617aec0a2, type: 2}
+  playerCharacterComponents: []
+  _playerCharacterData: []

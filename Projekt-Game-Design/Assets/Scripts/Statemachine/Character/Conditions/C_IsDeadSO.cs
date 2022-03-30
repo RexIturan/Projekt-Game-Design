@@ -1,4 +1,5 @@
 ﻿using Characters;
+using Combat;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
@@ -11,14 +12,14 @@ public class C_IsDeadSO : StateConditionSO {
 public class C_IsDead : Condition {
 	protected new C_IsDeadSO OriginSO => ( C_IsDeadSO )base.OriginSO;
 
-	private Statistics _statistics;
+	private Targetable _targetable;
 
 	public override void Awake(StateMachine stateMachine) {
-		_statistics = stateMachine.gameObject.GetComponent<Statistics>();
+		_targetable = stateMachine.gameObject.GetComponent<Targetable>();
 	}
 
 	protected override bool Statement() {
-		return _statistics.StatusValues.HitPoints.IsMin();
+		return _targetable.IsDead;
 	}
 
 	public override void OnStateEnter() { }

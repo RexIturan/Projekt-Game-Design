@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Util.Extensions;
@@ -56,12 +57,56 @@ namespace WorldObjects {
 		}
 		
 		[ContextMenu("Add Door")]
-		private void AddDoor() {
-			var data = defaultDoorTypeSO.ToComponentData();
-			
+		private void AddNewDoor() {
+			_doorComponents.Add(CreateDoor(defaultDoorTypeSO));
+		}
+
+		public void AddDoor(Door door) {
+			door.transform.SetParent(doorParent ? doorParent : transform);
+			door.Id = _doorComponents.Count;
+			_doorComponents.Add(door);
+		}
+		
+		private Door CreateDoor(DoorTypeSO doorType) {
+			var data = doorType.ToComponentData();
 			//todo refactor get next playerchar id
 			data.Id = _doorComponents.Count + managerData.DoorDataList?.Count ?? 0;
-			_doorComponents.Add(CreateComponent<Door, Door.DoorData>(data, doorParent));
+			Door door = CreateComponent<Door, Door.DoorData>(data, doorParent);
+			return door;
+		}
+
+		public Door GetDoorAt(Vector3 worldPos) {
+			return GetDoorAt(_gridData.GetGridPos3DFromWorldPos(worldPos));
+		}
+		
+		public Door GetDoorAt(Vector3Int gridPos) {
+			return _doorComponents.FirstOrDefault(door => door.GridPosition.Equals(gridPos));
+		}
+		
+		public void AddDoorAt(DoorTypeSO doorType, Vector3 worldPosition) {
+			if ( GetDoorAt(worldPosition) == null ) {
+				var door = CreateDoor(doorType);
+				door.GridTransform.MoveTo(worldPosition);	
+				_doorComponents.Add(door);
+			}
+		}
+		
+		public void RemoveDoorAt(Vector3 worldPos) {
+			var door = GetDoorAt(worldPos);
+			if ( door is { } ) {
+				_doorComponents.Remove(door);
+				Destroy(door.gameObject);
+			}
+		}
+
+		private void ClearDoors() {
+			_doorComponents.ClearMonoBehaviourGameObjectReferences();
+			managerData.DoorDataList.Clear();
+		}
+
+
+		public List<Door> GetDoors() {
+			return _doorComponents;
 		}
 	}
 }
