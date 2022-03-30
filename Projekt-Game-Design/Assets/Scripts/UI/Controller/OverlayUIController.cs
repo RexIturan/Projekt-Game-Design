@@ -65,6 +65,10 @@ public class OverlayUIController : MonoBehaviour {
 	// Callbackfunktion für die Abilitys
 	private Action<int> _callBackAction;
 
+	// Game state variables (TODO: Maybe don't save them here, but query them dynamically instead?)
+	private GamePhase currentGamePhase;
+	private bool executionInProgress;
+
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
 	private void SetTurnIndicatorVisibility(bool show) {
@@ -286,10 +290,15 @@ public class OverlayUIController : MonoBehaviour {
 		_turnIndicator = null;
 	}
 
+	private void UpdateEndTurnButtonEnable() {
+		_endTurnButton.SetEnabled(!executionInProgress && currentGamePhase.Equals(GamePhase.PLAYER_TURN));
+	}
+
 ///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
 
 	private void HandleGamePhaseChange(GamePhase currentPhase) {
-		_endTurnButton.SetEnabled(currentPhase.Equals(GamePhase.PLAYER_TURN));
+		currentGamePhase = currentPhase;
+		UpdateEndTurnButtonEnable();
 	}
 
 	private void HandleEndTurnUI() {
@@ -356,6 +365,9 @@ public class OverlayUIController : MonoBehaviour {
 	private void HandleAbilityExecuted() {
 		UpdateActionBar();
 		ClearPreviewEnergy();
+
+		executionInProgress = false;
+		UpdateEndTurnButtonEnable();
 	}
 	
 	private void HandlePreviewChanged() {
@@ -365,6 +377,9 @@ public class OverlayUIController : MonoBehaviour {
 	private void HandleAbilityConfirmed() {
 		//clear Preview
 		ClearPreviewEnergy();
+		
+		executionInProgress = true;
+		UpdateEndTurnButtonEnable();
 	}
 	
 ///// Public Functions	////////////////////////////////////////////////////////////////////////////
