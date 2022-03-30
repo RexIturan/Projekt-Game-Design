@@ -5,6 +5,7 @@ using Characters.Movement;
 using Characters.Types;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using GDP01;
 using GDP01.Characters.Component;
 using GDP01.UI.Components;
 using Input;
@@ -16,12 +17,15 @@ using Object = System.Object;
 
 public class OverlayUIController : MonoBehaviour {
 	[Header("Receiving Events On")] 
+	[SerializeField] private GamePhaseEventChannelSO gamePhaseAnnouncementEC;
 	[SerializeField] private BoolEventChannelSO setGameOverlayVisibilityEC;
 	[SerializeField] private BoolEventChannelSO setTurnIndicatorVisibilityEC;
 	[SerializeField] private EquipItemEC_SO EquipEvent;
 	[SerializeField] private UnequipItemEC_SO UnequipEvent;
 	[SerializeField] private GameObjEventChannelSO playerDeselectedEC;
 	[SerializeField] private GameObjActionIntEventChannelSO playerSelectedEC;
+
+	[SerializeField] private VoidEventChannelSO unfocusActionButton;
 	
 	[SerializeField] private VoidEventChannelSO abilityConfirmedEC;
 	[SerializeField] private VoidEventChannelSO abilityExecutedEC;
@@ -46,6 +50,9 @@ public class OverlayUIController : MonoBehaviour {
 
 	// Action Container
 	private ActionBar _actionBar;
+
+	// End Turn Button
+	private Button _endTurnButton;
 
 	// PlayerView Container
 	private CharacterStatusValuePanel _characterStatusValuePanel;
@@ -259,11 +266,12 @@ public class OverlayUIController : MonoBehaviour {
 		var root = GetComponent<UIDocument>().rootVisualElement;
 		_actionBar = root.Q<ActionBar>();
 		_overlayContainer = root.Q<VisualElement>("OverlayContainer");
+		_endTurnButton = _overlayContainer.Q<Button>("EndTurnButton");
 		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
 		_turnIndicator = root.Q<TemplateContainer>("TurnIndicator");
 
 		// _overlayContainer.Q<Button>("IngameMenuButton").clicked += HandleOpenMenuButton;
-		_overlayContainer.Q<Button>("EndTurnButton").clicked += HandleEndTurnUI;
+		_endTurnButton.clicked += HandleEndTurnUI;
 		
 		// _actionBar.SetVisibility(false);
 		// _characterStatusValuePanel.SetVibility(false);
@@ -279,6 +287,10 @@ public class OverlayUIController : MonoBehaviour {
 	}
 
 ///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
+
+	private void HandleGamePhaseChange(GamePhase currentPhase) {
+		_endTurnButton.SetEnabled(currentPhase.Equals(GamePhase.PLAYER_TURN));
+	}
 
 	private void HandleEndTurnUI() {
 		Debug.Log("EndTurn Pressed");
@@ -362,11 +374,15 @@ public class OverlayUIController : MonoBehaviour {
 	private void OnEnable() {
 		BindElements();
 		
+		gamePhaseAnnouncementEC.OnEventRaised += HandleGamePhaseChange;
+
 		setGameOverlayVisibilityEC.OnEventRaised += HandleSetGameOverlayVisibilityEC;
 		setTurnIndicatorVisibilityEC.OnEventRaised += HandleSetTurnIndicatorVisibilityEC;
 
 		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
+
+		unfocusActionButton.OnEventRaised += _actionBar.UnfocusActionButtons;
 
 		abilityConfirmedEC.OnEventRaised += HandleAbilityConfirmed;
 		abilityExecutedEC.OnEventRaised += HandleAbilityExecuted;
@@ -383,10 +399,14 @@ public class OverlayUIController : MonoBehaviour {
 	private void OnDisable() {
 		UnbindElements();
 		
+		gamePhaseAnnouncementEC.OnEventRaised -= HandleGamePhaseChange;
+
 		setGameOverlayVisibilityEC.OnEventRaised -= HandleSetGameOverlayVisibilityEC;
 		setTurnIndicatorVisibilityEC.OnEventRaised -= HandleSetTurnIndicatorVisibilityEC;
 		playerSelectedEC.OnEventRaised -= HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised -= HandlePlayerDeselected;
+		
+		unfocusActionButton.OnEventRaised -= _actionBar.UnfocusActionButtons;
 		
 		abilityConfirmedEC.OnEventRaised -= HandleAbilityConfirmed;
 		abilityExecutedEC.OnEventRaised -= HandleAbilityExecuted;

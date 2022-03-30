@@ -21,6 +21,7 @@ namespace GDP01.Player.Player {
 		// if no ability is selected, there shouldn't be any targets taken on
 		[SerializeField] private VoidEventChannelSO clearTargetCacheEvent;
 
+		[SerializeField] private VoidEventChannelSO unfocusActionButton;
 		[SerializeField] private VoidEventChannelSO menuOpenedEvent;
 		[SerializeField] private VoidEventChannelSO menuClosedEvent;
 		[SerializeField] private VoidEventChannelSO abilitySelectedEvent;
@@ -255,6 +256,7 @@ namespace GDP01.Player.Player {
 					abilityController.abilitySelected = false;
 					abilityController.SelectedAbilityID = -1;
 					abilityController.LastSelectedAbilityID = -1;
+					unfocusActionButton.RaiseEvent();
 				}
 				else {
 					selectedPlayerCharacter.Deselect();

@@ -137,7 +137,7 @@ namespace UI.Components.ActionButton {
 		}
 
 		private void HandleClick() {
-			onClickCallback();
+			onClickCallback?.Invoke();
 		}
 		
 ///// PUBLIC FUNCTIONS /////////////////////////////////////////////////////////////////////////////
