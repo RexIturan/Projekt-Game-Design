@@ -61,7 +61,7 @@ MonoBehaviour:
       the likes of which you have never seen. Just what have you gotten yourself
       into?
     instructions: Walk on top of an Item to pick it up.
-  item: {fileID: 11400000, guid: a64ffcb2741f33c428e1d99165ba48ec, type: 2}
+  itemType: {fileID: 0}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
 --- !u!114 &-3854722035668380972
 MonoBehaviour:

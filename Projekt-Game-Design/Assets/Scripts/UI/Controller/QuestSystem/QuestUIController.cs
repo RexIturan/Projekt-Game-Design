@@ -1,4 +1,5 @@
-﻿using QuestSystem.ScriptabelObjects;
+﻿using System;
+using QuestSystem.ScriptabelObjects;
 using UI.Components.QuestSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -21,31 +22,41 @@ namespace UI.QuestSystem {
 
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
-		
-///// Unity Functions //////////////////////////////////////////////////////////////////////////////
-
-		private void Awake() {
-			//register Action 
-		}
-
-		private void OnDisable() {
-			//unregister Action
-		}
-
-		private void Start() {
+		private void BindElements() {
+			var root = uiDocument.rootVisualElement;
 			//get task panel form uiDocument
-			taskContainer = uiDocument.rootVisualElement.Q<TaskContainer>();
+			taskContainer = root.Q<TaskContainer>();
 			// taskContainer.SetVisibility(false);
 		}
 
+		private void UnbindElements() {
+			taskContainer = null;
+		}
+
+		private void UpdateQuestContainer() {
+			taskContainer.Quests = questContainer.activeQuests;
+			taskContainer.UpdateComponent();
+		}
+		
+///// Unity Functions //////////////////////////////////////////////////////////////////////////////
+
 		private void Update() {
 			if ( taskContainer != null ) {
-				taskContainer.Quests = questContainer.activeQuests;
-				taskContainer.UpdateComponent();
+				UpdateQuestContainer();
 			}
 			else {
 				taskContainer = uiDocument.rootVisualElement.Q<TaskContainer>();
 			}
+		}
+
+		private void OnEnable() {
+			BindElements();
+			
+			//todo update quest EC
+		}
+
+		private void OnDisable() {
+			UnbindElements();
 		}
 	}
 }
