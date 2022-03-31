@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217fea63b884c22458397a6b84cdb0c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 7da3658b67561f34b93aefd61fd6c8b0, type: 3}
   m_Name: g_PlayMainMenuMusic_OnEnter
   m_EditorClassIdentifier: 
-  soundName: MainMenuMusic
+  sound: {fileID: 11400000, guid: f97a3dcce735b1447b8611d2719d2ace, type: 2}
+  playSoundEC: {fileID: 11400000, guid: 334da6b366e267b41bf607620497b575, type: 2}
+  onEnter: 1
+  onExit: 0

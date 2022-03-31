@@ -3,8 +3,9 @@ using UnityEngine;
 using Ability;
 using Level.Grid;
 using UOP1.StateMachine.ScriptableObjects;
+using Audio;
 
-#if UNITY_EDITOR 
+#if UNITY_EDITOR
 using UnityEditor;
 #endif
 
@@ -15,7 +16,7 @@ public class AbilitySO : ScriptableObject {
     public Sprite icon;
     public string description;
 		public CharacterAnimation Animation;
-		public string activationSound;
+		public SoundSO activationSound;
 		// todo move to projectile?
 		public GameObject projectilePrefab;
 		public float timeUntilDamage;

@@ -14,9 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   prefab: {fileID: 5962490239412866605, guid: 138da39f5995c8441ba69bfb066fa3ac, type: 3}
-  model: {fileID: 6552241739913167568, guid: 0b79706ee80d7d74484e96c25689f46f, type: 3}
-  switchName: 
-  description: 
-  activationSound: activation_01
+  activationSound: {fileID: 11400000, guid: 3502a77a57144b34d80bd1f706185835, type: 2}
   range: 1
   walkThrough: 0

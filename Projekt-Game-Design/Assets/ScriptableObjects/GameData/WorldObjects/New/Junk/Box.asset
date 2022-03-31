@@ -17,14 +17,7 @@ MonoBehaviour:
   model: {fileID: 5177814715606673796, guid: ac16ac2e5cbfc5a45b4bbe1b168aa19f, type: 3}
   junkName: Box ;)
   description: Box the box. C'mon
-  destructionSound: destruction_01
+  destructionSound: {fileID: 11400000, guid: a10dce7779f15d741b3e5176ef3593df, type: 2}
   walkThrough: 0
   destructable: 1
   hitPoints: 20
-  drop:
-    maxGold: 0
-    minGold: 0
-    experience: 0
-    itemDropList:
-    - itemID: 4
-      probability: 1

@@ -1,3 +1,4 @@
+using Audio;
 using UnityEngine;
 
 namespace WorldObjects
@@ -12,7 +13,7 @@ namespace WorldObjects
 				// public string switchName;
 				// public string description;
 				
-				public string activationSound;
+				public SoundSO activationSound;
 				//activation range
 				public int range;
 				

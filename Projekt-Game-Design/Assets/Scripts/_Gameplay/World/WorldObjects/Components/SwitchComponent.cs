@@ -14,6 +14,7 @@ namespace WorldObjects {
 
 				[Header("Sending Events on:")]
 				[SerializeField] private IntEventChannelSO switchActivatedEvent;
+				[SerializeField] private SoundEventChannelSO playSoundEC;
 
 				[Header("Receiving Events on:")]
 				[SerializeField] private VoidEventChannelSO updateWorldObjectEvent;
@@ -105,9 +106,8 @@ namespace WorldObjects {
 					Activated = true;
 					switchAnimator.FlipSwitch();
 					switchActivatedEvent.RaiseEvent(Id);
-
-					//todo send event to play a sound
-					AudioManager.FindSoundManager()?.PlaySound(Type.activationSound);
+					
+					playSoundEC.RaiseEvent(Type.activationSound);
 				}
 		}
 }
