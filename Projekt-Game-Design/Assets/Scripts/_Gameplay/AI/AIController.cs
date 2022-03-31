@@ -153,11 +153,15 @@ namespace Characters.EnemyCharacter
 				// so if the enemy can't move another tile, movement target will be set to null
 				public void TargetNearestTileToTarget()
 				{
-						pathfindingPathQueryEvent.RaiseEvent(_gridTransform.gridPosition, closestNodeToTarget.pos, SaveClosestTileToTargetAsMovementTarget);
+						if(aiTarget)
+								pathfindingPathQueryEvent.RaiseEvent(_gridTransform.gridPosition, closestNodeToTarget.pos, SaveClosestTileToTargetAsMovementTarget);
 				}
 
 				private void SaveClosestTileToTargetAsMovementTarget(List<PathNode> pathNodes)
 				{
+						if ( pathNodes == null || pathNodes.Count <= 1 )
+								return;
+
 						int lastAffordableStep = 0;
 
 						while ( lastAffordableStep < pathNodes.Count - 1 &&

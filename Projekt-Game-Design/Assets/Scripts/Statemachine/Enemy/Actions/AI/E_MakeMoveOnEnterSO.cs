@@ -9,6 +9,7 @@ using Characters.EnemyCharacter;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
 using Characters.Movement;
+using System;
 
 [CreateAssetMenu(fileName = "e_MakeMoveOnEnter", menuName = "State Machines/Actions/Enemy/e_MakeMoveOnEnter")]
 public class E_MakeMoveOnEnterSO : StateActionSO {
@@ -38,6 +39,14 @@ public class E_MakeMoveOnEnter : StateAction {
 		}
 
     public override void OnStateEnter() {
+				try { MakeMove(); }
+				catch ( Exception e ) {
+						Debug.LogError("Enemy AI caused exception; skipping enemy character. Exception: " + e.StackTrace);
+						// HandleSkip();
+				}
+		}
+
+		private void MakeMove() {
 				_aiController.ClearFullCache();
 				_abilityController.RefreshAbilities();
 				_aiController.RefreshValidAbilities();

@@ -93,6 +93,7 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	private void EndTurn() {
+		Debug.Log("Enemy Controller ending turn. ");
 		isOnTurn = false;
 		endTurnEC.RaiseEvent(Faction.Enemy);
 	}
