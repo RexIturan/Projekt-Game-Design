@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d92f955366c64bb4985ed2263c8521c2, type: 3}
-  m_Name: Prot-Boss
+  m_Name: Prototyp-Boss
   m_EditorClassIdentifier: 
-  levelName: Prot-Boss
-  scene: {fileID: 0}
+  levelName: Prototyp-Boss
+  gameScene: {fileID: 11400000, guid: 0f58ce1e86f0c4445ada298da30d3e9b, type: 2}
   type: 0
-  gridContainerSO: {fileID: 0}
-  gridDataSO: {fileID: 0}
+  gridData: {fileID: 11400000, guid: ee882862722edcc4388ce49beb095217, type: 2}
   mesh: {fileID: 0}
   connectors: []

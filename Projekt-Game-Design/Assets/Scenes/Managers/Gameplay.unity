@@ -716,58 +716,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd4b5d694b50833438d3749397872739, type: 3}
---- !u!1 &457101657
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 457101658}
-  - component: {fileID: 457101659}
-  m_Layer: 0
-  m_Name: FogOfWar Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &457101658
+--- !u!4 &457101658 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+  m_PrefabInstance: {fileID: 7636806259913492089}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457101657}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 77743129}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &457101659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457101657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77308457aa6f45ebaee4c8c2dd6e35d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ToggleFogOfWarEC: {fileID: 11400000, guid: 3e50107f89cb8e54690a4db3e1479518, type: 2}
-  debugViewTexture2D: {fileID: 0}
-  viewTexture2D: {fileID: 0}
-  textureFormat: 17
-  gridDataSO: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
-  fogOfWarMaterial: {fileID: 2100000, guid: 9a8fd8849d054514f8be9ed2ff2b5185, type: 2}
-  fogOfWarHideMaterial: {fileID: 2100000, guid: bc944adf98683394d9e33aade93d36a8, type: 2}
-  updatePlayerViewEC: {fileID: 11400000, guid: 0ac410e2b6a8cea46866a793dc14f7f3, type: 2}
 --- !u!1 &607133440
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,9 +822,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8875245550231976412, guid: 24b3cf5fda3b78e468ba4d5f91a964c6, type: 3}
+      propertyPath: gameScene
+      value: 
+      objectReference: {fileID: 11400000, guid: e35cd8d4811081a4f80a80280bf4f60c, type: 2}
+    - target: {fileID: 8875245550231976412, guid: 24b3cf5fda3b78e468ba4d5f91a964c6, type: 3}
       propertyPath: startLevel
       value: 
       objectReference: {fileID: 11400000, guid: c575f9aac294b3d4789dfc15bc49b180, type: 2}
+    - target: {fileID: 8875245550231976412, guid: 24b3cf5fda3b78e468ba4d5f91a964c6, type: 3}
+      propertyPath: startScene
+      value: 
+      objectReference: {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
     - target: {fileID: 8875245550231976413, guid: 24b3cf5fda3b78e468ba4d5f91a964c6, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1191,6 +1152,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6951885556118909281, guid: adc4aaf4e4c72fd46bdecdf3b7328637, type: 3}
   m_PrefabInstance: {fileID: 2050972135}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7636806259913492089
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 77743129}
+    m_Modifications:
+    - target: {fileID: 7636806259829724960, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_Name
+      value: FogOfWar Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
 --- !u!1001 &8249263231753559630
 PrefabInstance:
   m_ObjectHideFlags: 0

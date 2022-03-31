@@ -133,6 +133,22 @@ MonoBehaviour:
     m_Address: Assets/URP
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: ae591c7995e26af4e8f135e286b53a03
+    m_Address: TileEffectContainerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e1e42916f810af847888a8cb0c438584
+    m_Address: MVP-1.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 44ca6607a15708245931305fce08822e
+    m_Address: Prototyp-01.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ddc27d57cdbe60047b475cee6ccd27eb
+    m_Address: Prototyp-Boss.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
   m_SchemaSet:

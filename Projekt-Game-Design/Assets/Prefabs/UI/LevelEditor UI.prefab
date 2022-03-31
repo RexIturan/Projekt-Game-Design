@@ -268,7 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b941e415cc648cf9aa3da05d8f85cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visibilityMenuEventChannel: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
   levelEditorStateUpdateEC: {fileID: 11400000, guid: c0c1e1124f6528549b08daef2d5ff9ba, type: 2}
   enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
   enableGamplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
@@ -287,12 +286,6 @@ MonoBehaviour:
     Door: {fileID: 21300000, guid: de125da4c9d399b498dd38d7a161d28d, type: 3}
     Switch: {fileID: 21300000, guid: 1f75aafbe79077f44825fbdd0ce1bff3, type: 3}
     Effect: {fileID: 21300000, guid: a352e586e1f794247952be863ab2f114, type: 3}
-  controlButtonNames:
-    createNewLevel: CreateNew
-    saveV1: SaveV1
-    saveV2: SaveV2
-    loadV1: LoadV1
-    loadV2: LoadV2
 --- !u!114 &8082475425973089818
 MonoBehaviour:
   m_ObjectHideFlags: 0

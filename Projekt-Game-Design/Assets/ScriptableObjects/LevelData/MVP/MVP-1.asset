@@ -33,10 +33,9 @@ MonoBehaviour:
   m_Name: MVP-1
   m_EditorClassIdentifier: 
   levelName: MVP-1
-  scene: {fileID: 11400000, guid: b3bf5902193f4314086cff3ee8f1c203, type: 2}
+  gameScene: {fileID: 11400000, guid: b3bf5902193f4314086cff3ee8f1c203, type: 2}
   type: 0
-  gridContainerSO: {fileID: 11400000, guid: cf77658e9fdf6c24193f76cce7d45bff, type: 2}
-  gridDataSO: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   mesh: {fileID: 4300000, guid: 40913f80debda2c4a9f666483bc27daf, type: 2}
   connectors:
   - {fileID: -1429793941084580079}

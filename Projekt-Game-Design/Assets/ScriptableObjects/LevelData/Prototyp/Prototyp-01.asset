@@ -10,16 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d92f955366c64bb4985ed2263c8521c2, type: 3}
-  m_Name: Prot-1
+  m_Name: Prototyp-01
   m_EditorClassIdentifier: 
-  levelName: Prot-1
-  scene: {fileID: 0}
+  levelName: Prototyp-01
+  gameScene: {fileID: 11400000, guid: 5798fad6de593434b973bcf2e6073a59, type: 2}
   type: 0
-  gridContainerSO: {fileID: 0}
-  gridDataSO: {fileID: 0}
+  gridData: {fileID: 11400000, guid: e27a72e7a1f9ad440ac944bca357bdbe, type: 2}
   mesh: {fileID: 0}
   connectors:
-  - {fileID: 7852975028126360977}
+  - {fileID: 699973493320677720}
+--- !u!114 &699973493320677720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117a02b62d2446808efad8590e520900, type: 3}
+  m_Name: Prototyp-01_Connector_SO_0
+  m_EditorClassIdentifier: 
+  connectorName: 
+  id: 0
+  levelData: {fileID: 11400000}
+  gridPos: {x: 0, y: 0, z: 0}
+  range: {x: 0, y: 0, z: 0}
+  triggerPositions: []
+  type: 0
+  target: {fileID: 0}
 --- !u!114 &7852975028126360977
 MonoBehaviour:
   m_ObjectHideFlags: 0

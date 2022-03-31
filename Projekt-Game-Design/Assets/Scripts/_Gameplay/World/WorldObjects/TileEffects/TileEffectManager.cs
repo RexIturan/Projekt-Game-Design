@@ -171,7 +171,9 @@ namespace GDP01.TileEffects
 				public void Load(TileEffectManager.Data managerData) {
 					managerData.TileEffectData.ForEach(data => {
 						var tileEffectObj = CreateTileEffectObject(data.id);
-						tileEffectObj.GetComponent<TileEffectController>().Load(data);
+						var tileEffectController = tileEffectObj.GetComponent<TileEffectController>();
+						tileEffectController.Load(data);
+						Add(tileEffectController.gameObject);
 					});
 				}
     }

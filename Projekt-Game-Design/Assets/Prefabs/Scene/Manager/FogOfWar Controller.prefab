@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7636806259829724960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7636806259829724963}
+  - component: {fileID: 7636806259829724962}
+  m_Layer: 0
+  m_Name: FogOfWar Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7636806259829724963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636806259829724960}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7636806259829724962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636806259829724960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77308457aa6f45ebaee4c8c2dd6e35d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToggleFogOfWarEC: {fileID: 11400000, guid: 3e50107f89cb8e54690a4db3e1479518, type: 2}
+  debugViewTexture2D: {fileID: 0}
+  viewTexture2D: {fileID: 0}
+  textureFormat: 17
+  gridDataSO: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
+  fogOfWarMaterial: {fileID: 2100000, guid: 9a8fd8849d054514f8be9ed2ff2b5185, type: 2}
+  fogOfWarHideMaterial: {fileID: 2100000, guid: bc944adf98683394d9e33aade93d36a8, type: 2}
+  updatePlayerViewEC: {fileID: 11400000, guid: 0ac410e2b6a8cea46866a793dc14f7f3, type: 2}
