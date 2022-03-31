@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 9889ee4a1b03ca248996a9e1e676dd8d, type: 3}
   description: 'A weak sphere of fire to burn the enemies. '
   Animation: 10
-  activationSound: {fileID: 11400000, guid: 42f6bd2360cc2d04b9c772877bc480f8, type: 2}
+  activationSound: {fileID: 11400000, guid: 61e1a1d94fb953c4394f0fceb41adbfe, type: 2}
   projectilePrefab: {fileID: 1194966964175767583, guid: 221069eb46b8bfc4dbfeeaddbebf8e03, type: 3}
   timeUntilDamage: 1
   repeated: 0
