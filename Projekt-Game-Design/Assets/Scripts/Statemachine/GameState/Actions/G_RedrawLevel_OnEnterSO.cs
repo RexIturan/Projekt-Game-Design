@@ -11,8 +11,8 @@ public class G_RedrawLevel_OnEnterSO : StateActionSO
     public override StateAction CreateAction() => new G_RedrawLevel_OnEnter(levelLoaded);
 }
 
-public class G_RedrawLevel_OnEnter : StateAction
-{
+public class G_RedrawLevel_OnEnter : StateAction {
+	
     protected new G_RedrawLevel_OnEnterSO OriginSO => (G_RedrawLevel_OnEnterSO)base.OriginSO;
 
     private readonly VoidEventChannelSO _levelLoaded;
@@ -26,8 +26,7 @@ public class G_RedrawLevel_OnEnter : StateAction
 
     public override void OnUpdate() { }
 
-    public override void OnStateEnter()
-    {
+    public override void OnStateEnter() {
         _levelLoaded.RaiseEvent();
     }
 

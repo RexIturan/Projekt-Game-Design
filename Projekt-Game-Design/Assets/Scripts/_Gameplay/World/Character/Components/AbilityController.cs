@@ -10,6 +10,7 @@ using UnityEngine;
 using Util;
 using GDP01.World.Components;
 using Characters.Types;
+using UOP1.StateMachine;
 
 namespace GDP01.Characters.Component {
 	[RequireComponent(typeof(MovementController))]
@@ -191,6 +192,29 @@ namespace GDP01.Characters.Component {
 			}
 
 			return targetRelationshipValid;
+		}
+		
+		public void SelectAbility(int id) {
+			Debug.Log($"Try selecting Ability:{id}");
+
+			if ( id == SelectedAbilityID ) {
+				return;
+			}
+
+			abilitySelected = false;
+			SelectedAbilityID = -1;
+			LastSelectedAbilityID = -1;
+
+			var statemachine = GetComponent<StateMachine>();
+			statemachine?.TransitionManually();
+			
+			if ( id > -1 ) {
+				// deselect old ability
+				abilitySelected = true;
+				SelectedAbilityID = id;
+				LastSelectedAbilityID = id;	
+				statemachine?.TransitionManually();
+			}
 		}
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////

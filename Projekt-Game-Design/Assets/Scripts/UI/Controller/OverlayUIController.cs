@@ -7,6 +7,7 @@ using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
 using GDP01;
 using GDP01.Characters.Component;
+using GDP01.Player.Player;
 using GDP01.UI.Components;
 using Input;
 using UI.Components.Character;
@@ -26,7 +27,7 @@ public class OverlayUIController : MonoBehaviour {
 	[SerializeField] private GameObjActionIntEventChannelSO playerSelectedEC;
 	[SerializeField] private GameObjEventChannelSO playerSelectedPreviewEC; // selected in player controller, but not in selected state
 
-	[SerializeField] private VoidEventChannelSO unfocusActionButton;
+	[SerializeField] private VoidEventChannelSO unfocusActionButtonEC;
 	
 	[SerializeField] private VoidEventChannelSO abilityConfirmedEC;
 	[SerializeField] private VoidEventChannelSO abilityExecutedEC;
@@ -280,8 +281,8 @@ public class OverlayUIController : MonoBehaviour {
 		// _overlayContainer.Q<Button>("IngameMenuButton").clicked += HandleOpenMenuButton;
 		_endTurnButton.clicked += HandleEndTurnUI;
 		
-		// _actionBar.SetVisibility(false);
-		// _characterStatusValuePanel.SetVibility(false);
+		_actionBar.SetVisibility(false);
+		_characterStatusValuePanel.SetVibility(false);
 	}
 
 	private void UnbindElements() {
@@ -325,7 +326,6 @@ public class OverlayUIController : MonoBehaviour {
 		_callBackAction = selectAction;
 
 		BindEnergyChangeToCharPanel();
-
 		UpdateActionBar();
 		
 		// Anzeigen der notwendigen Komponenten
@@ -415,7 +415,7 @@ public class OverlayUIController : MonoBehaviour {
 		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
 		playerSelectedPreviewEC.OnEventRaised += HandlePlayerSelectedPreview;
 
-		unfocusActionButton.OnEventRaised += _actionBar.UnfocusActionButtons;
+		unfocusActionButtonEC.OnEventRaised += _actionBar.UnfocusActionButtonsEC;
 
 		abilityConfirmedEC.OnEventRaised += HandleAbilityConfirmed;
 		abilityExecutedEC.OnEventRaised += HandleAbilityExecuted;
@@ -427,9 +427,19 @@ public class OverlayUIController : MonoBehaviour {
 		
 		//todo maybe move to ui manager
 		enableGamplayInput.RaiseEvent();
+
+		//TODO find something better
+		//reproduces the behaviour when a PC is selected -> if a pc is selected show the action bar
+		if ( PlayerController.Current.Selected is { } ) {
+			var playerObj = PlayerController.Current.Selected.gameObject;
+			var abilityController = playerObj.GetComponent<AbilityController>();
+			HandlePlayerSelected(playerObj, abilityController.SelectAbility);
+		}
 	}
 
 	private void OnDisable() {
+		unfocusActionButtonEC.OnEventRaised -= _actionBar.UnfocusActionButtonsEC;
+		
 		UnbindElements();
 		
 		gamePhaseAnnouncementEC.OnEventRaised -= HandleGamePhaseChange;
@@ -439,8 +449,6 @@ public class OverlayUIController : MonoBehaviour {
 		playerSelectedEC.OnEventRaised -= HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised -= HandlePlayerDeselected;
 		playerSelectedPreviewEC.OnEventRaised -= HandlePlayerSelectedPreview;
-		
-		unfocusActionButton.OnEventRaised -= _actionBar.UnfocusActionButtons;
 		
 		abilityConfirmedEC.OnEventRaised -= HandleAbilityConfirmed;
 		abilityExecutedEC.OnEventRaised -= HandleAbilityExecuted;

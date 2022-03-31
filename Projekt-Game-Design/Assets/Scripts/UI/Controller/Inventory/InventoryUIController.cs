@@ -9,6 +9,7 @@ using GDP01._Gameplay.Logic_Data.Inventory.EventChannels;
 using GDP01._Gameplay.Provider;
 using GDP01._Gameplay.World.Character;
 using GDP01.Characters.Component;
+using GDP01.Player.Player;
 using UI.Components.Character;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,7 +24,7 @@ public class InventoryUIController : MonoBehaviour {
 	[SerializeField] private InventorySO inventory;
 	[SerializeField] private EquipmentContainerSO equipmentContainer;
 	
-	//todo set inventory size in inventory manager or invetory so
+	//todo set inventory size in inventory manager or invetorySO
 	[SerializeField] private int inventoryItemQuantity = 28;
 
 	[Header("Receiving Events On")]
@@ -85,8 +86,16 @@ public class InventoryUIController : MonoBehaviour {
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
 
 	private CharacterManager CharacterManager => GameplayProvider.Current.CharacterManager; 
-	
-///// Private Functions	////////////////////////////////////////////////////////////////////////////
+	private PlayerCharacterSC SelectedPlayer {
+		get {
+			// get cached PC -> get selected PC in player controller -> get first PC from Charactermanager 
+			return _currentPlayerSelected ??= 
+				PlayerController.Current.Selected?.GetComponent<PlayerCharacterSC>() ?? 
+				CharacterManager.GetFirstPlayerCharacter();
+		}
+	}
+
+	///// Private Functions	////////////////////////////////////////////////////////////////////////////
 	
 	//todo move to Inventory Component
 	private void InitializeInventory() {
@@ -156,19 +165,20 @@ public class InventoryUIController : MonoBehaviour {
 		}
 	}
 
-	private void UpdatePlayerContainer() {
+	/// Character Selector In the inventory
+	private void UpdatePlayerCharacterSelector() {
 		_playerContainer.Clear();
 		
 		List<PlayerCharacterSC> playerCharacters = CharacterManager.GetPlayerCharacters();
 		
-		for ( int i = 0; i < CharacterManager.GetPlayerCharacters().Count; i++ ) {
+		for ( int i = 0; i < playerCharacters.Count; i++ ) {
 			int index = i;
 			PlayerCharacterSC player = playerCharacters[i];
 			Statistics stats = player.GetComponent<Statistics>();
 			if ( stats ) {
 				
 				CharacterIcon icon = new CharacterIcon();
-				icon.name += $"-{stats.DisplayImage}";
+				icon.name += $"-{stats.DisplayImage} ????";
 				icon.CharacterName = stats.DisplayName;
 				icon.Image = stats.DisplayImage;
 				icon.Level = stats.StatusValues.Level.Value;
@@ -191,13 +201,14 @@ public class InventoryUIController : MonoBehaviour {
 	private void UpdateEquipmentContainer() {
 		CleanAllItemEquipmentSlots();
 
+		//why qery every update?
 		InventorySlot weaponLeft = _equipmentInventoryContainer.Q<InventorySlot>("WeaponLeft");
 		InventorySlot weaponRight = _equipmentInventoryContainer.Q<InventorySlot>("WeaponRight");
 		InventorySlot headArmor = _equipmentInventoryContainer.Q<InventorySlot>("HeadArmor");
 		InventorySlot bodyArmor = _equipmentInventoryContainer.Q<InventorySlot>("BodyArmor");
 		InventorySlot shield = _equipmentInventoryContainer.Q<InventorySlot>("Shield");
 
-		PlayerCharacterSC currPlayer = _currentPlayerSelected;
+		PlayerCharacterSC currPlayer = SelectedPlayer;
 
 		int equipmentID = currPlayer.GetComponent<EquipmentController>().EquipmentID;
 
@@ -226,8 +237,8 @@ public class InventoryUIController : MonoBehaviour {
 
 	// Sets to selected player or first in container if none selected
 	// TODO: copied from OverlayUIController
+	//todo move to own class
 	private void RefreshStats(GameObject obj) {
-		//todo move to own class
 		var charIcon = _characterStatusValuePanel.CharIcon;
 		
 		var healthBar = _characterStatusValuePanel.HealthBar;
@@ -346,7 +357,7 @@ public class InventoryUIController : MonoBehaviour {
 
 			int fromID = _originalSlot.slotId;
 			int toID = targetSlot.slotId;
-			int playerID = _currentPlayerSelected.id;
+			int playerID = SelectedPlayer.id;
 			
 			// There are four cases (sorry about the spaghetti code -.- )
 			//	1. both slots are in player inventory: just swap the inventory slots
@@ -558,18 +569,13 @@ public class InventoryUIController : MonoBehaviour {
 	 * only send menuOpened/menuClosed events if no else is open
 	 */
 	private void HandleInventoryOverlay(bool enableInventory, bool othersOpened) {
-		if(enableInventory) { 
-			playSoundEC.RaiseEvent(openSound);
-		}
-		else {
-			playSoundEC.RaiseEvent(closeSound);
-		}
+		playSoundEC.RaiseEvent(enableInventory ? openSound : closeSound);
 
 		// add items to ItemSlots
 		UpdateInventorySlots();
 		
 		// add all players to container
-		UpdatePlayerContainer();
+		UpdatePlayerCharacterSelector();
 
 		// add equipped items to equipment container
 		UpdateEquipmentContainer();
@@ -625,9 +631,10 @@ public class InventoryUIController : MonoBehaviour {
 	private void OnEnable() {
 		BindElements();
 		InitPlayerCharacterSelection();
-		
+
+		RefreshStats(SelectedPlayer.gameObject);
 		HandleInventoryOverlay(true, true);
-		
+
 		// setInventoryVisibilityEC.OnEventRaised += HandleInventoryOverlay;
 		// setMenuVisibilityEC.OnEventRaised += HandleOtherScreensOpened;
 		// setGameOverlayVisibilityEC.OnEventRaised += HandleOtherScreensOpened;

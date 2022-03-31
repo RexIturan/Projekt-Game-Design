@@ -31,6 +31,8 @@ public class EnemyController : MonoBehaviour {
 
 	private CharacterManager CharacterManager => GameplayProvider.Current.CharacterManager;
 
+///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
+	
 	// Start is called before the first frame update
 	void Start() {
 		isOnTurn = false;
@@ -49,7 +51,9 @@ public class EnemyController : MonoBehaviour {
 		EvaluateEnemyTurn();
 	}
 
-	public void EvaluateEnemyTurn() {
+///// Unity Functions	//////////////////////////////////////////////////////////////////////////////	
+	
+	private void EvaluateEnemyTurn() {
 		if ( isOnTurn ) {
 			// find next enemy character that isn't done
 			while ( currentlyActingEnemy < enemyOrder.Count &&
@@ -84,9 +88,11 @@ public class EnemyController : MonoBehaviour {
 
 		GameplayProvider.Current.CharacterManager.GetEnemyCahracters().ForEach(
 			enemy => {
-				enemy.isDone = false;
-				enemy.isNextToAct = false;
-				enemyOrder.Add(enemy);
+				if ( enemy.IsAlive ) {
+					enemy.isDone = false;
+					enemy.isNextToAct = false;
+					enemyOrder.Add(enemy);	
+				}
 			});
 
 		currentlyActingEnemy = 0;

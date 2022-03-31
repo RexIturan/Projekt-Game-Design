@@ -63,19 +63,19 @@ namespace Util.VisualDebug {
             HideNodeVisuals();
         }
         
-        private void Update() {
-            if (_autoShowSnapshots) {
-                float autoShowSnapshotsTimerMax = .05f;
-                _autoShowSnapshotsTimer -= Time.deltaTime;
-                if (_autoShowSnapshotsTimer <= 0f) {
-                    _autoShowSnapshotsTimer += autoShowSnapshotsTimerMax;
-                    ShowNextSnapshot();
-                    if (_gridSnapshotActionList.Count == 0) {
-                        _autoShowSnapshots = false;
-                    }
-                }
-            }
-        }
+        // private void Update() {
+        //     if (_autoShowSnapshots) {
+        //         float autoShowSnapshotsTimerMax = .05f;
+        //         _autoShowSnapshotsTimer -= Time.deltaTime;
+        //         if (_autoShowSnapshotsTimer <= 0f) {
+        //             _autoShowSnapshotsTimer += autoShowSnapshotsTimerMax;
+        //             ShowNextSnapshot();
+        //             if (_gridSnapshotActionList.Count == 0) {
+        //                 _autoShowSnapshots = false;
+        //             }
+        //         }
+        //     }
+        // }
 
         private void HandleOnStepEvent() {
             ShowNextSnapshot();

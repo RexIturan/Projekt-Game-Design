@@ -66,7 +66,7 @@ namespace UI.Controller {
 				_actionBar.Mappings.Add(id < 10 ? id.ToString() : "0");
 			}
 			
-			_actionBar.UpdateComponent();
+			_actionBar.UpdateMapping();
 		}
 
 		private void UnbindElements() {

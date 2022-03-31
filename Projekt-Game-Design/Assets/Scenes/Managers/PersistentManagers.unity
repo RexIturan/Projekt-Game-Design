@@ -361,6 +361,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: defaultGameFilename
+      value: end-turn-bug
+      objectReference: {fileID: 0}
     - target: {fileID: 7187340983742418651, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
       propertyPath: m_Name
       value: SaveManager

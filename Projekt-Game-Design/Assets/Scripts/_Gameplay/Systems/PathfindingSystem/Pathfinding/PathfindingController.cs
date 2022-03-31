@@ -40,44 +40,44 @@ namespace Pathfinding {
             findPathBatchEC.OnEventRaised += HandleFindPathBatch;
         }
 
-        //todo remove
-        private void Update() {
-            // if (test) {
-            //     var pos = MousePosition.GetMouseWorldPosition();
-            //
-            //     if (_clickedPos != null && _reachableNodes != null && _reachableNodes.Count > 0) {
-            //         var gridPos = globalGridData.GetGridPos3DFromWorldPos(pos);
-            //         bool reachable = false;
-            //         PathNode currentNode = null;
-            //         foreach (var node in _reachableNodes) {
-            //             if (node.pos.x == gridPos.x && node.pos.y == gridPos.y) {
-            //                 reachable = true;
-            //                 currentNode = node;
-            //             }
-            //         }
-            //
-            //         if (reachable) {
-            //             var path = _pathfinding.CalculatePath(currentNode);
-            //             drawer.DrawPreviewPath(path);
-            //         }
-            //     }
-            //
-            //     if (Mouse.current.leftButton.wasPressedThisFrame) {
-            //         // var pos = MousePosition.GetMouseWorldPosition();
-            //         // Debug.Log($"{pos}");
-            //
-            //         _reachableNodes = GetReachableNodes(pos, dist);
-            //         drawer.DrawPreview(_reachableNodes);
-            //         // var nodeList = "";
-            //         // foreach (var node in reachableNodes) {
-            //         //     nodeList += $" {node.ToString()}";
-            //         // }
-            //     }
-            //     // else{
-            //     //     Debug.LogWarning("Click Position is not inside the Graph");
-            //     // }
-            // }
-        }
+        // //todo remove
+        // private void Update() {
+        //     // if (test) {
+        //     //     var pos = MousePosition.GetMouseWorldPosition();
+        //     //
+        //     //     if (_clickedPos != null && _reachableNodes != null && _reachableNodes.Count > 0) {
+        //     //         var gridPos = globalGridData.GetGridPos3DFromWorldPos(pos);
+        //     //         bool reachable = false;
+        //     //         PathNode currentNode = null;
+        //     //         foreach (var node in _reachableNodes) {
+        //     //             if (node.pos.x == gridPos.x && node.pos.y == gridPos.y) {
+        //     //                 reachable = true;
+        //     //                 currentNode = node;
+        //     //             }
+        //     //         }
+        //     //
+        //     //         if (reachable) {
+        //     //             var path = _pathfinding.CalculatePath(currentNode);
+        //     //             drawer.DrawPreviewPath(path);
+        //     //         }
+        //     //     }
+        //     //
+        //     //     if (Mouse.current.leftButton.wasPressedThisFrame) {
+        //     //         // var pos = MousePosition.GetMouseWorldPosition();
+        //     //         // Debug.Log($"{pos}");
+        //     //
+        //     //         _reachableNodes = GetReachableNodes(pos, dist);
+        //     //         drawer.DrawPreview(_reachableNodes);
+        //     //         // var nodeList = "";
+        //     //         // foreach (var node in reachableNodes) {
+        //     //         //     nodeList += $" {node.ToString()}";
+        //     //         // }
+        //     //     }
+        //     //     // else{
+        //     //     //     Debug.LogWarning("Click Position is not inside the Graph");
+        //     //     // }
+        //     // }
+        // }
 
         public void InitialisePathfinding() {
             // todo give the pathfinding all graphs

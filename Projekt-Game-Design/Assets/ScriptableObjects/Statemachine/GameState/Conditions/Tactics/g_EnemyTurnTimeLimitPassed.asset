@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc81443cdec289f4299f67cc0329c83e, type: 3}
   m_Name: g_EnemyTurnTimeLimitPassed
   m_EditorClassIdentifier: 
-  time: 2
+  time: 0.8

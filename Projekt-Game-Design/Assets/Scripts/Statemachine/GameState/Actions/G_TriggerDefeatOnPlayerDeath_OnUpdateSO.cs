@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Characters;
@@ -7,6 +8,7 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
+[Obsolete]
 [CreateAssetMenu(fileName = "g_TriggerDefeatOnPlayerDeath_OnUpdate", menuName = "State Machines/Actions/GameState/Trigger Defeat On Player Death On Update")]
 public class G_TriggerDefeatOnPlayerDeath_OnUpdateSO : StateActionSO
 {
@@ -16,6 +18,7 @@ public class G_TriggerDefeatOnPlayerDeath_OnUpdateSO : StateActionSO
 		public override StateAction CreateAction() => new G_TriggerDefeatOnPlayerDeath_OnUpdate(triggerDefeatEC);
 }
 
+[Obsolete]
 public class G_TriggerDefeatOnPlayerDeath_OnUpdate : StateAction
 {
 		private readonly VoidEventChannelSO triggerDefeatEC;

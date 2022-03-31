@@ -18,6 +18,28 @@ using WorldObjects;
 
 namespace GDP01.Player.Player {
 	public class PlayerController : MonoBehaviour {
+		
+		#region Monobehaviour Singelton
+
+		private static PlayerController instance;
+		public static PlayerController Current => instance; 
+			
+		private void Awake() {
+			if ( instance == null ) {
+				instance = this;
+			}
+			else {
+				Debug.LogWarning("There can only be one PlayerController!");
+				Destroy(gameObject);
+			}
+		}
+
+		private void OnDestroy() {
+			instance = null;
+		}
+
+		#endregion
+		
 		[Header("Sending events on")]
 		[SerializeField] private GameObjEventChannelSO playerSelectedPreviewEC;
 
@@ -139,7 +161,7 @@ namespace GDP01.Player.Player {
 		
 		///// Monobehaviour Functions
 	
-		private void Awake() {
+		private void OnEnable() {
 			abilitySelected = false;
 			menuOpened = false;
 
@@ -208,7 +230,7 @@ namespace GDP01.Player.Player {
 						if (selectedPlayerCharacter) {
 							DeselectSelectedCharacter();
 						}
-						selectedPlayerCharacter = selectable.gameObject.GetComponent<Selectable>();
+						selectedPlayerCharacter = selectable;
 						SelectSelectedCharacter();
 					}
 				}

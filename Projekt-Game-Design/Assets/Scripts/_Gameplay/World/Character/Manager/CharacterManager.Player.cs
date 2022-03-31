@@ -133,5 +133,9 @@ namespace GDP01._Gameplay.World.Character {
 				Destroy(player.gameObject);
 			}
 		}
+
+		public PlayerCharacterSC GetFirstPlayerCharacter() {
+			return playerCharacterComponents[0];
+		}
 	}
 }

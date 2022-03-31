@@ -123,9 +123,7 @@ namespace GDP01.UI.Components {
 			}
 		}
 
-		//todo refactor
-		public void UpdateComponent() {
-
+		public void UpdateMapping() {
 			if ( Mappings.Count < actionCount ) {
 				var missingMappings = actionCount - Mappings.Count;
 				for ( int i = 0; i < missingMappings; i++ ) {
@@ -151,6 +149,19 @@ namespace GDP01.UI.Components {
 					}
 				}
 			}
+
+			if ( actionButtons is { Count: > 0 } ) {
+				for ( int i = 0; i < this.actionCount; i++ ) {
+					if ( actionButtons[i] is { } ) {
+						actionButtons[i].Mapping = Mappings[i];
+						actionButtons[i].UpdateComponent();
+					}
+				}
+			}
+		}
+		
+		//todo refactor
+		public void UpdateComponent() {
 			
 			//todo dont do it like this, check if change is needed
 			buttonContainer.Clear();
@@ -242,7 +253,7 @@ namespace GDP01.UI.Components {
 			element.style.display = visibility ? DisplayStyle.Flex : DisplayStyle.None;
 		}
 
-		public void UnfocusActionButtons() {
+		public void UnfocusActionButtonsEC() {
 			Focus();
 		}
 
@@ -290,6 +301,7 @@ namespace GDP01.UI.Components {
 					element.showNames = showNames.GetValueFromBag(bag, cc);
 					
 					element.BuildComponent();
+					element.UpdateMapping();
 					element.UpdateComponent();
 				}
 			}
@@ -306,6 +318,7 @@ namespace GDP01.UI.Components {
 			this.styleSheets.Add(style);
 			
 			BuildComponent();
+			UpdateMapping();
 			UpdateComponent();
 		}
 	}
