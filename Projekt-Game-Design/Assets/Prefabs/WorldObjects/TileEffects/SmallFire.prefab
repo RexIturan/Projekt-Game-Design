@@ -515,6 +515,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5202155160295885620, guid: 1d8f42fd3b8697b4fa72a28747ac0d2f, type: 3}
+      propertyPath: tileEffect
+      value: 
+      objectReference: {fileID: 7134298740225583253}
+    - target: {fileID: 5202155160295885620, guid: 1d8f42fd3b8697b4fa72a28747ac0d2f, type: 3}
       propertyPath: tileEffectController
       value: 
       objectReference: {fileID: 7134298740225583253}

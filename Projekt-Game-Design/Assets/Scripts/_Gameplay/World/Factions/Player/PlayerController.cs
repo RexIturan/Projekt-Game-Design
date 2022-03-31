@@ -96,18 +96,6 @@ namespace GDP01.Player.Player {
 			// }
 			// return null;
 		}
-		
-		// gets player or enemy character targetable component with grid position
-		private Targetable GetTargetAtPos(Vector3Int gridPos) {
-			var targetableObjects = Targetable.GetAllInstances();
-
-		  foreach( var targetable in targetableObjects)
-			{
-				if( targetable != null && targetable.GetGridPosition().Equals(gridPos))
-					return targetable;
-			}
-			return null;
-    }
 
 		private void ClearTargetCache() {
 			target = null;
@@ -232,7 +220,7 @@ namespace GDP01.Player.Player {
 		  		Attacker playerAttacker = selectedPlayerCharacter.gameObject.GetComponent<Attacker>();
 					if(playerAttacker) {
 						// targetable target
-						Targetable newTarget = GetTargetAtPos(inputCache.cursor.abovePos.gridPos);
+						Targetable newTarget = Targetable.GetTargetsWithPosition(inputCache.cursor.abovePos.gridPos);
   					if(newTarget) { 
 	  					target = newTarget;
 							playerAttacker.SetTarget(newTarget);
