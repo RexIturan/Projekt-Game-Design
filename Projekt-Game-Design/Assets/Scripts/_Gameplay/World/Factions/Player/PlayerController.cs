@@ -2,6 +2,7 @@
 using Characters;
 using Characters.Movement;
 using Combat;
+using Events.ScriptableObjects;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
 using Grid;
@@ -15,6 +16,9 @@ using WorldObjects;
 
 namespace GDP01.Player.Player {
 	public class PlayerController : MonoBehaviour {
+		[Header("Sending events on")]
+		[SerializeField] private GameObjEventChannelSO playerSelectedPreviewEC;
+
 		[Header("Receiving events on")]
 		// when an ability is selected, depending on the ability, 
 		// an event can tell the PlayerController when to recognize targets
@@ -134,6 +138,8 @@ namespace GDP01.Player.Player {
 
 		public void SelectSelectedCharacter() {
 			selectedPlayerCharacter.Select();
+			
+			playerSelectedPreviewEC.RaiseEvent(selectedPlayerCharacter.gameObject);
 		}
 		
 		///// Monobehaviour Functions
@@ -210,7 +216,6 @@ namespace GDP01.Player.Player {
 						}
 						selectedPlayerCharacter = selectable.gameObject.GetComponent<Selectable>();
 						SelectSelectedCharacter();
-						selectedPlayerCharacter.Select();
 					}
 				}
 

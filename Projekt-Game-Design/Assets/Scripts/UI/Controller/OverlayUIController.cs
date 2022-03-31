@@ -24,6 +24,7 @@ public class OverlayUIController : MonoBehaviour {
 	[SerializeField] private UnequipItemEC_SO UnequipEvent;
 	[SerializeField] private GameObjEventChannelSO playerDeselectedEC;
 	[SerializeField] private GameObjActionIntEventChannelSO playerSelectedEC;
+	[SerializeField] private GameObjEventChannelSO playerSelectedPreviewEC; // selected in player controller, but not in selected state
 
 	[SerializeField] private VoidEventChannelSO unfocusActionButton;
 	
@@ -59,6 +60,8 @@ public class OverlayUIController : MonoBehaviour {
 
 	// Zur Identifikation des gewaehlten Spielers
 	private GameObject _selectedPlayer;
+
+	private GameObject _selectedPlayerPreview;
 
 	private TemplateContainer _turnIndicator;
 
@@ -105,7 +108,7 @@ public class OverlayUIController : MonoBehaviour {
 
 
 	private void UpdateStats() {
-		UpdateStats(_selectedPlayer);
+		UpdateStats(_selectedPlayerPreview);
 	}
 
 	//todo move to own class
@@ -254,12 +257,12 @@ public class OverlayUIController : MonoBehaviour {
 	}
 	
 	private void BindEnergyChangeToCharPanel() {
-		var statistics = _selectedPlayer.GetComponent<Statistics>();
+		var statistics = _selectedPlayerPreview.GetComponent<Statistics>();
 		statistics.StatusValues.Energy.OnValueChanged += UpdateStats;
 	}
 	
 	private void UnbindEnergyChangeToCharPanel() {
-		var statistics = _selectedPlayer?.GetComponent<Statistics>();
+		var statistics = _selectedPlayerPreview?.GetComponent<Statistics>();
 		if ( statistics is { } ) {
 			statistics.StatusValues.Energy.OnValueChanged -= UpdateStats;	
 		}
@@ -318,6 +321,7 @@ public class OverlayUIController : MonoBehaviour {
 	/// <param name="selectAction">callback to call when a action ist clicked</param>
 	private void HandlePlayerSelected(GameObject player, Action<int> selectAction) {
 		_selectedPlayer = player;
+		_selectedPlayerPreview = player;
 		_callBackAction = selectAction;
 
 		BindEnergyChangeToCharPanel();
@@ -326,6 +330,17 @@ public class OverlayUIController : MonoBehaviour {
 		
 		// Anzeigen der notwendigen Komponenten
 		ShowActionBar();
+		ShowPlayerViewContainer();
+	}
+
+	/// <summary>
+	/// Updates the character panel only. 
+	/// </summary>
+	/// <param name="player">Selected player whose stats are displayed </param>
+	private void HandlePlayerSelectedPreview(GameObject player) {
+		_selectedPlayerPreview = player;
+		
+		UpdateStats();
 		ShowPlayerViewContainer();
 	}
 
@@ -378,6 +393,8 @@ public class OverlayUIController : MonoBehaviour {
 		//clear Preview
 		ClearPreviewEnergy();
 		
+		_actionBar.SetVisibility(false);
+		
 		executionInProgress = true;
 		UpdateEndTurnButtonEnable();
 	}
@@ -396,6 +413,7 @@ public class OverlayUIController : MonoBehaviour {
 
 		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
+		playerSelectedPreviewEC.OnEventRaised += HandlePlayerSelectedPreview;
 
 		unfocusActionButton.OnEventRaised += _actionBar.UnfocusActionButtons;
 
@@ -420,6 +438,7 @@ public class OverlayUIController : MonoBehaviour {
 		setTurnIndicatorVisibilityEC.OnEventRaised -= HandleSetTurnIndicatorVisibilityEC;
 		playerSelectedEC.OnEventRaised -= HandlePlayerSelected;
 		playerDeselectedEC.OnEventRaised -= HandlePlayerDeselected;
+		playerSelectedPreviewEC.OnEventRaised -= HandlePlayerSelectedPreview;
 		
 		unfocusActionButton.OnEventRaised -= _actionBar.UnfocusActionButtons;
 		

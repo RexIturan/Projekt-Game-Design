@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f189cba0f3834e46b6de3ea3391b4484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSelectedPreviewEC: {fileID: 11400000, guid: 3d536028c382c4442aeeee03bb970e0a, type: 2}
   clearTargetCacheEvent: {fileID: 11400000, guid: 6cec2c07edf3f0b4aadade5efedab8cd, type: 2}
   unfocusActionButton: {fileID: 11400000, guid: 725562ce185c90e40bc31550927406cc, type: 2}
   menuOpenedEvent: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}

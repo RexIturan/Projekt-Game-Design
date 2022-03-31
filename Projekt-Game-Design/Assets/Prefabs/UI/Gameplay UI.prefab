@@ -683,6 +683,7 @@ MonoBehaviour:
   UnequipEvent: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
   playerDeselectedEC: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
   playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
+  playerSelectedPreviewEC: {fileID: 11400000, guid: 3d536028c382c4442aeeee03bb970e0a, type: 2}
   unfocusActionButton: {fileID: 11400000, guid: 725562ce185c90e40bc31550927406cc, type: 2}
   abilityConfirmedEC: {fileID: 11400000, guid: c8d63aaeb201f314499176fcc285dcfa, type: 2}
   abilityExecutedEC: {fileID: 11400000, guid: e2abec9137f95984980d057a99f5946e, type: 2}
