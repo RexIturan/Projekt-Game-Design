@@ -30,8 +30,8 @@ namespace Util.Types {
 				}
 
 				if ( !_value.Equals(newValue) ) {
-					ValueChanged();
 					_value = newValue;
+					ValueChanged();
 				}
 			}
 		}
