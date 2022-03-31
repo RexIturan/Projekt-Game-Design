@@ -326,12 +326,12 @@ public class InventoryUIController : MonoBehaviour {
 
 		// mouse position
 		Vector3 mousePos = Mouse.current.position.ReadValue();
-		float x = mousePos.x;
-		float y = Screen.height - mousePos.y;
+		float x = mousePos.x / Screen.width;
+		float y = 1 - mousePos.y / Screen.height; // = (Screen.height - mousePos.y) / Screen.height
 
 		//Set the new position
-		_ghostIcon.style.top = y - _ghostIcon.layout.height / 2;
-		_ghostIcon.style.left = x - _ghostIcon.layout.width / 2;
+		_ghostIcon.style.left = x * _ghostIcon.parent.resolvedStyle.width - _ghostIcon.layout.width / 2;
+		_ghostIcon.style.top = y * _ghostIcon.parent.resolvedStyle.height - _ghostIcon.layout.height / 2;
 	}
 
 	//TODO Inventory Component
