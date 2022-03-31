@@ -21,6 +21,7 @@ namespace UI.Components.Tooltip {
 
 		private VisualElement tooltipParent;
 		private VisualElement tooltipLayer;
+		private UpdateHelper updateHelper;
 
 		// these may change depending on the 
 		protected bool onTop = true;
@@ -40,9 +41,9 @@ namespace UI.Components.Tooltip {
 		/// <param name="tooltipParent">Parent of this tooltip </param>
 		public TooltipElement(VisualElement tooltipParent) {
 			// Initializing helper for calling updates 
-			UpdateHelper helper = UpdateHelper.Current;
-			if ( helper )
-				helper.Subscribe(this);
+			updateHelper = UpdateHelper.Current;
+			if ( updateHelper )
+				updateHelper.Subscribe(this);
 			else
 				Debug.LogWarning("No Update helper found. Cannot use tooltip element. ");
 
@@ -68,6 +69,17 @@ namespace UI.Components.Tooltip {
 				tooltipLayer.Add(this);
 			else
 				Debug.LogWarning("No tooltip layer found. ");
+		}
+
+		/// <summary>
+		/// Hides and removes tooltip from scene and all its references. 
+		/// Should be called in parent's finalizers. 
+		/// </summary>
+		public void Remove() {
+			Deactivate();
+			tooltipLayer.Remove(this);
+			updateHelper.Unsubscribe(this);
+			tooltipParent = null;
 		}
 
 		private void HandleMouseEnterParent(MouseEnterEvent enterEvent) {
@@ -98,7 +110,8 @@ namespace UI.Components.Tooltip {
 			style.opacity = opacity;
 		}
 
-		private void HideTooltip() {
+		public void HideTooltip() {
+			isHovering = false;
 			style.visibility = Visibility.Hidden;
 
 			if ( tooltipLayer != null )
@@ -161,6 +174,7 @@ namespace UI.Components.Tooltip {
 
 		public void Deactivate() {
 			isActive = false;
+			HideTooltip();
 		}
 	}
 }

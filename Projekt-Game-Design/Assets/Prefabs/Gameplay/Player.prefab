@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f189cba0f3834e46b6de3ea3391b4484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSelectedPreviewEC: {fileID: 11400000, guid: 3d536028c382c4442aeeee03bb970e0a, type: 2}
   clearTargetCacheEvent: {fileID: 11400000, guid: 6cec2c07edf3f0b4aadade5efedab8cd, type: 2}
+  unfocusActionButton: {fileID: 11400000, guid: 725562ce185c90e40bc31550927406cc, type: 2}
   menuOpenedEvent: {fileID: 11400000, guid: 1c78a7b0d1c94bb4d9cd62a039be3390, type: 2}
   menuClosedEvent: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
   abilitySelectedEvent: {fileID: 11400000, guid: 98c46446971a28742b81ca1d0acc9adb, type: 2}
@@ -56,3 +59,4 @@ MonoBehaviour:
   cursorDrawer: {fileID: 0}
   selectedPlayerCharacter: {fileID: 0}
   target: {fileID: 0}
+  abilityBlockingTime: 0.5

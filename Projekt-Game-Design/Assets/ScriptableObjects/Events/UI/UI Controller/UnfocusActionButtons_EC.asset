@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: g_Defeat
+  m_Script: {fileID: 11500000, guid: 16b7e99933e74061ad8512a02b468e22, type: 3}
+  m_Name: UnfocusActionButtons_EC
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: aee8fc25a2aea2e4282603c0a8e206ea, type: 2}
-  - {fileID: 11400000, guid: b1c73421dfe92d145b474b7f4948e424, type: 2}
+  description: 'UI Overlay Controller listens on this channel to unfocus the action
+    buttons. '

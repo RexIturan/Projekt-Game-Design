@@ -18,6 +18,7 @@ MonoBehaviour:
   setLevelEditorModeEC: {fileID: 11400000, guid: 9d4a76d0eeb24bf49ae35e7d82abeb87, type: 2}
   toggleFogOfWarEC: {fileID: 11400000, guid: 3e50107f89cb8e54690a4db3e1479518, type: 2}
   enableMenuInput: {fileID: 11400000, guid: c6c134360964a5f46927e1abd2c3bf25, type: 2}
+  gamePhaseAnnouncementEC: {fileID: 11400000, guid: a97176799f7c9504fbb424cd9052d8a6, type: 2}
   enableGameplayInput: {fileID: 11400000, guid: 5f5017d12cef37543910981e84e21b00, type: 2}
   enableInventoryInput: {fileID: 11400000, guid: 6f2cf282820633f41a7bde9dc75b3af9, type: 2}
   enableLoadingScreenInput: {fileID: 11400000, guid: 390c6cfe22017ee4ebc6233afb443b42, type: 2}

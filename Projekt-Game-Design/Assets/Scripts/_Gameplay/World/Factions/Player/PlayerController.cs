@@ -4,6 +4,7 @@ using Characters.Movement;
 using Combat;
 using GDP01._Gameplay.Provider;
 using GDP01._Gameplay.World.Character;
+using Events.ScriptableObjects;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
 using Grid;
@@ -17,12 +18,16 @@ using WorldObjects;
 
 namespace GDP01.Player.Player {
 	public class PlayerController : MonoBehaviour {
+		[Header("Sending events on")]
+		[SerializeField] private GameObjEventChannelSO playerSelectedPreviewEC;
+
 		[Header("Receiving events on")]
 		// when an ability is selected, depending on the ability, 
 		// an event can tell the PlayerController when to recognize targets
 		// if no ability is selected, there shouldn't be any targets taken on
 		[SerializeField] private VoidEventChannelSO clearTargetCacheEvent;
 
+		[SerializeField] private VoidEventChannelSO unfocusActionButton;
 		[SerializeField] private VoidEventChannelSO menuOpenedEvent;
 		[SerializeField] private VoidEventChannelSO menuClosedEvent;
 		[SerializeField] private VoidEventChannelSO abilitySelectedEvent;
@@ -140,6 +145,8 @@ namespace GDP01.Player.Player {
 
 		public void SelectSelectedCharacter() {
 			selectedPlayerCharacter.Select();
+			
+			playerSelectedPreviewEC.RaiseEvent(selectedPlayerCharacter.gameObject);
 		}
 		
 		///// Monobehaviour Functions
@@ -215,7 +222,6 @@ namespace GDP01.Player.Player {
 						}
 						selectedPlayerCharacter = selectable.gameObject.GetComponent<Selectable>();
 						SelectSelectedCharacter();
-						selectedPlayerCharacter.Select();
 					}
 				}
 
@@ -261,6 +267,7 @@ namespace GDP01.Player.Player {
 					abilityController.abilitySelected = false;
 					abilityController.SelectedAbilityID = -1;
 					abilityController.LastSelectedAbilityID = -1;
+					unfocusActionButton.RaiseEvent();
 				}
 				else {
 					selectedPlayerCharacter.Deselect();

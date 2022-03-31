@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using GDP01.UI.Types;
+using UI.Components.Tooltip;
 using UnityEngine;
 
 namespace GDP01.UI {
 	public class ScreenManager : MonoBehaviour {
 		[SerializeField] private List<ScreenController> screens;
+		[SerializeField] private TooltipLayer tooltipLayer;
 
 		private event Action<ScreenController> OnScreenChanged = delegate(ScreenController controller) {  }; 
 
@@ -49,6 +51,11 @@ namespace GDP01.UI {
 				screen.Active = visibile;
 				screen.UpdateScreen();
 			}
+			HideAllTooltips();
+		}
+
+		public void HideAllTooltips() {
+			tooltipLayer.HideTooltips();
 		}
 
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////		

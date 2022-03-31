@@ -2,6 +2,7 @@
 using Characters.Types;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using GDP01;
 using GDP01.Input.Input.Types;
 using UI.Gameplay.Types;
 using UnityEngine;
@@ -23,12 +24,15 @@ namespace Input {
 
 		[Header("Receiving Events On")] [SerializeField]
 		private VoidEventChannelSO enableMenuInput;
-
+		
+		[SerializeField] private GamePhaseEventChannelSO gamePhaseAnnouncementEC;
 		[SerializeField] private VoidEventChannelSO enableGameplayInput;
 		[SerializeField] private VoidEventChannelSO enableInventoryInput;
 		[SerializeField] private VoidEventChannelSO enableLoadingScreenInput;
 
 		// Gameplay
+		private GamePhase currentPhase = GamePhase.OTHER;
+
 		// public event UnityAction inventoryEvent = delegate { };
 		// public event UnityAction menuEvent = delegate { };
 		public event UnityAction EndTurnEvent = delegate { };
@@ -62,6 +66,7 @@ namespace Input {
 		public GameInput GameInput => _gameInput;
 
 		private void OnEnable() {
+			gamePhaseAnnouncementEC.OnEventRaised += SaveGamePhase;
 			enableMenuInput.OnEventRaised += EnableMenuInput;
 			enableGameplayInput.OnEventRaised += EnableGameplayInput;
 			enableInventoryInput.OnEventRaised += EnableInventoryInput;
@@ -171,6 +176,10 @@ namespace Input {
 		
 		#region Gameplay
 
+		private void SaveGamePhase(GamePhase phase) {
+			currentPhase = phase;
+		}
+
 		public void OnEndTurn(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed ) {
 				EndTurnEvent.Invoke();
@@ -185,7 +194,7 @@ namespace Input {
 		}
 
 		public void OnInventory(InputAction.CallbackContext context) {
-			if ( context.phase == InputActionPhase.Performed ) {
+			if ( context.phase == InputActionPhase.Performed && currentPhase.Equals(GamePhase.PLAYER_TURN) ) {
 				uiToggleScreenEC.RaiseEvent(GameplayScreen.Inventory);
 				// SetMenuVisibilityEC.RaiseEvent(false);
 				// SetGameOverlayVisibilityEC.RaiseEvent(false);

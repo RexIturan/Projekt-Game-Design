@@ -78,5 +78,11 @@ namespace UI.Components.Tooltip
 								return null;
 						}
 				}
+
+				public void HideTooltips() {
+						foreach(TooltipElement tooltip in layerElement.Children()) {
+								tooltip.HideTooltip();
+						}
+				}
 		}
 }

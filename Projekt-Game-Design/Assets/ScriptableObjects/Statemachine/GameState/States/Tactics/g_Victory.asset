@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: g_Victory
   m_EditorClassIdentifier: 
   _actions:
+  - {fileID: 11400000, guid: aee8fc25a2aea2e4282603c0a8e206ea, type: 2}
   - {fileID: 11400000, guid: b1c73421dfe92d145b474b7f4948e424, type: 2}

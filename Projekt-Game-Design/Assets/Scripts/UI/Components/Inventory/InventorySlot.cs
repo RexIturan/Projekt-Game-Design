@@ -83,6 +83,13 @@ public class InventorySlot : VisualElement
         EquipmentInventory,
         Trashcan
     }
+
+		/// <summary>
+		/// Clean up item tooltip on finalization. 
+		/// </summary>
+		~InventorySlot() {
+				itemTooltip.Remove();
+		}
     
     #region UXML
     [Preserve]

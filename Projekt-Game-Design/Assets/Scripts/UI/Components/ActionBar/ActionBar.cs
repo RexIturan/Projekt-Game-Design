@@ -242,6 +242,10 @@ namespace GDP01.UI.Components {
 			element.style.display = visibility ? DisplayStyle.Flex : DisplayStyle.None;
 		}
 
+		public void UnfocusActionButtons() {
+			Focus();
+		}
+
 ///// PUBLIC CONSTRUCTORS //////////////////////////////////////////////////////////////////////////		
 
 		public new class UxmlFactory : UxmlFactory<GDP01.UI.Components.ActionBar, UxmlTraits> { }

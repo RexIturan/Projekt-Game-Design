@@ -1,67 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &400918081163192103
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1696924219733750335}
-  - component: {fileID: 5200889793477605835}
-  - component: {fileID: 4768485479344123767}
-  m_Layer: 0
-  m_Name: TooltipLayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1696924219733750335
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 400918081163192103}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3159855197512313784}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5200889793477605835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 400918081163192103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 56e2fc8d2b6b03d40a1c7ecf51e46bbb, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 25452bb15a721494390b6358ad61adbe, type: 3}
-  m_SortingOrder: 1
---- !u!114 &4768485479344123767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 400918081163192103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d690e0d14e4b364ba6b6786da49026f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uIDocument: {fileID: 5200889793477605835}
 --- !u!1 &2262598920538733375
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +518,7 @@ Transform:
   - {fileID: 3159855197138855705}
   - {fileID: 3159855197389789981}
   - {fileID: 5101793394829100823}
+  - {fileID: 6024754087705461039}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -601,6 +540,7 @@ MonoBehaviour:
   - {fileID: 3159855197138855704}
   - {fileID: 3159855197389789980}
   - {fileID: 1707465331723766402}
+  tooltipLayer: {fileID: 6733234609147648420}
 --- !u!114 &2876169678518441711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,7 +597,6 @@ Transform:
   m_Children:
   - {fileID: 3159855195508995720}
   - {fileID: 3159855197483783987}
-  - {fileID: 6024754087705461039}
   m_Father: {fileID: 3159855197406282495}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -737,12 +676,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20445f88bf8c6524b945ae9b716e278d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamePhaseAnnouncementEC: {fileID: 11400000, guid: a97176799f7c9504fbb424cd9052d8a6, type: 2}
   setGameOverlayVisibilityEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
   setTurnIndicatorVisibilityEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
   EquipEvent: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}
   UnequipEvent: {fileID: 11400000, guid: e42dbdac24ac2a8489146f06b8bc8dcc, type: 2}
   playerDeselectedEC: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
   playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
+  playerSelectedPreviewEC: {fileID: 11400000, guid: 3d536028c382c4442aeeee03bb970e0a, type: 2}
+  unfocusActionButton: {fileID: 11400000, guid: 725562ce185c90e40bc31550927406cc, type: 2}
   abilityConfirmedEC: {fileID: 11400000, guid: c8d63aaeb201f314499176fcc285dcfa, type: 2}
   abilityExecutedEC: {fileID: 11400000, guid: e2abec9137f95984980d057a99f5946e, type: 2}
   previewChangedEC: {fileID: 11400000, guid: bbea0bd10948d3748ac7308a0f8e9a8a, type: 2}
@@ -828,7 +770,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3159855196746121964}
-  - {fileID: 1696924219733750335}
   m_Father: {fileID: 3159855197406282495}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -876,8 +817,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3159855197422999879}
-  m_RootOrder: 2
+  m_Father: {fileID: 3159855197406282495}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3963125691839434740
 MonoBehaviour:
@@ -891,7 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 56e2fc8d2b6b03d40a1c7ecf51e46bbb, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: 194ae6da02e1ff341877beb0ca8d6f42, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 25452bb15a721494390b6358ad61adbe, type: 3}
   m_SortingOrder: 1

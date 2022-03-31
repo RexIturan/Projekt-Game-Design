@@ -53,6 +53,11 @@ namespace Util.UpdateHelper {
 						subscribedInstances.Add(subscribedInstance);
 				}
 
+				public void Unsubscribe(UpdatedClass subscribedInstance)
+				{
+						subscribedInstances.Remove(subscribedInstance);
+				}
+
 				public static UpdateHelper FindInstance()
 				{
 						return FindObjectOfType<UpdateHelper>();

@@ -117,6 +117,7 @@ namespace UI.Gameplay {
 		}
 
 		private void TryToggleScreen(GameplayScreen screen) {
+			Debug.Log("Trying to toggle screen. ");
 			
 			// do nothing if the menu is open
 			if(menuScreen == MenuScreen.PauseMenu)
