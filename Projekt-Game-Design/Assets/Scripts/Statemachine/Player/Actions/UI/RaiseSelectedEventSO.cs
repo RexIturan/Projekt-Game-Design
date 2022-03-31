@@ -34,7 +34,7 @@ public class RaiseSelectedEvent : StateAction {
 		_abilityController = stateMachine.gameObject.GetComponent<AbilityController>();
 	}
 
-	//TODO: Muss geaendert werden
+	//TODO: Moved to AbillityController
 	// private void AbilityCallback(int value) {
 	// 	Debug.Log("Es wurde die Ability mit der ID: " + value + " gedrückt.");
 	//

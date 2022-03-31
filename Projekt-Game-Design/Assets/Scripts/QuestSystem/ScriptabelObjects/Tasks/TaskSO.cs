@@ -24,6 +24,7 @@ namespace QuestSystem.ScriptabelObjects {
 		Enemy_Dead,
 		Char_Selected,
 		Object_Selected,
+		PlayerCharInRegion,
 		// Event_Raised,
 		// Object_Selected,
 		// Char_At_Pos,
@@ -96,6 +97,10 @@ namespace QuestSystem.ScriptabelObjects {
 					task = ScriptableObject.CreateInstance<Task_Object_Selected_SO>();
 					break;
 
+				case TaskType.PlayerCharInRegion:
+					task = ScriptableObject.CreateInstance<Task_PlayerCharInRegion_SO>();
+					break;
+				
 				case TaskType.Read_Text:
 				default:
 					task = ScriptableObject.CreateInstance<Task_ReadText_SO>();

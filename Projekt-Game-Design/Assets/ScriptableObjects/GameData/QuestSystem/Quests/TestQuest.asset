@@ -1,6 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8467908750364111612
+--- !u!114 &-8153502293867468319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a2e36d57864b89b27a1ef5e357380a, type: 3}
+  m_Name: 0_CharInRegion_1 char has to be at pos
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: 1 char has to be at pos
+    description: 
+    instructions: 1 char has to be at pos
+  minPos: {x: 6, y: 1, z: 24}
+  maxPos: {x: 7, y: 1, z: 24}
+  numOfChars: 1
+  updateAfterDone: 0
+--- !u!114 &-7052879659755139167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf8303fb84b400a8821a24348d133d5, type: 3}
+  m_Name: 3_Composite_right - left
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: 
+    description: 
+    instructions: 
+  count: 2
+  subTasks:
+  - {fileID: -1463848138564770807}
+  - {fileID: 3057310577441414211}
+--- !u!114 &-6445304939367186190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,10 +54,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
-  m_Name: 1_KeyPress_camera-down
+  m_Name: 2_KeyPress_camera-down
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
+  done: 1
   textTextBody:
     title: Press [S][Arrow Down]
     description: TODO
@@ -23,7 +67,7 @@ MonoBehaviour:
   mapName: Camera
   compositeName: down
   actionNames: []
---- !u!114 &-7736040180520264606
+--- !u!114 &-2808392128214320157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33,10 +77,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
-  m_Name: 0_KeyPress_camera-up
+  m_Name: 1_KeyPress_camera-up
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
+  done: 1
   textTextBody:
     title: Press [W][Arrow Up]
     description: TODO
@@ -46,7 +90,7 @@ MonoBehaviour:
   mapName: Camera
   compositeName: up
   actionNames: []
---- !u!114 &-4576197144052662707
+--- !u!114 &-1463848138564770807
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,33 +100,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
-  m_Name: 4_1_KeyPress_left
+  m_Name: 4_0_KeyPress_right
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
-  textTextBody:
-    title: Press [A][Arrow Left]
-    description: TODO
-    instructions: Press [A][Arrow Left]
-  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
-  actionName: MoveCamera
-  mapName: Camera
-  compositeName: left
-  actionNames: []
---- !u!114 &-3254571590361733681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
-  m_Name: 3_0_KeyPress_right
-  m_EditorClassIdentifier: 
-  active: 0
-  done: 0
+  done: 1
   textTextBody:
     title: Press [D][Arrow Right]
     description: TODO
@@ -107,47 +128,53 @@ MonoBehaviour:
   questId: 1
   description: 
   overrideAvailable: 0
-  disabled: 1
+  disabled: 0
   available: 0
   active: 0
-  finished: 0
+  finished: 1
   repeatable: 0
   prerequisits: []
-  overrideTaskIndex: 2
-  currentTaskIndex: 0
-  nextTaskIndex: 0
+  overrideTaskIndex: 0
+  currentTaskIndex: 6
+  nextTaskIndex: 6
   tasks:
+  - name: 1 char has to be at pos
+    type: 11
+    task: {fileID: -8153502293867468319}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 291
   - name: camera-up
     type: 0
-    task: {fileID: -7736040180520264606}
+    task: {fileID: -2808392128214320157}
     showProperty: 0
     button: '|'
     drawerHeight: 23
   - name: camera-down
     type: 0
-    task: {fileID: -8467908750364111612}
+    task: {fileID: -6445304939367186190}
     showProperty: 0
     button: '|'
     drawerHeight: 23
   - name: right - left
     type: 5
-    task: {fileID: 5026653192202650259}
+    task: {fileID: -7052879659755139167}
     showProperty: 1
     button: '-'
     drawerHeight: 113
   - name: right
     type: 0
-    task: {fileID: -3254571590361733681}
+    task: {fileID: -1463848138564770807}
     showProperty: 0
     button: '|'
     drawerHeight: 23
   - name: left
     type: 0
-    task: {fileID: -4576197144052662707}
+    task: {fileID: 3057310577441414211}
     showProperty: 0
     button: '|'
     drawerHeight: 23
---- !u!114 &5026653192202650259
+--- !u!114 &3057310577441414211
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,16 +183,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edf8303fb84b400a8821a24348d133d5, type: 3}
-  m_Name: 2_Composite_right - left
+  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
+  m_Name: 5_1_KeyPress_left
   m_EditorClassIdentifier: 
   active: 0
-  done: 0
+  done: 1
   textTextBody:
-    title: 
-    description: 
-    instructions: 
-  count: 2
-  subTasks:
-  - {fileID: -3254571590361733681}
-  - {fileID: -4576197144052662707}
+    title: Press [A][Arrow Left]
+    description: TODO
+    instructions: Press [A][Arrow Left]
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  actionName: MoveCamera
+  mapName: Camera
+  compositeName: left
+  actionNames: []
