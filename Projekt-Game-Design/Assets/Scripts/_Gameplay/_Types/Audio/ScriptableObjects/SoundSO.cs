@@ -7,6 +7,7 @@ namespace Audio
 		{
 				public new string name;
 				public AudioClip clip;
+				public bool looped;
 				public float volume;
 				public SoundType type;
 		}

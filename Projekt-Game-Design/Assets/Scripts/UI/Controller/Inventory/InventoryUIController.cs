@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Audio;
 using Characters;
 using Characters.Equipment.ScriptableObjects;
 using Events.ScriptableObjects;
@@ -46,10 +47,14 @@ public class InventoryUIController : MonoBehaviour {
 	[SerializeField] private VoidEventChannelSO menuOpenedEvent;
 	[SerializeField] private VoidEventChannelSO menuClosedEvent;
 	[SerializeField] private MoveItemEventChannel moveItemEC; 
+	[SerializeField] private SoundEventChannelSO playSoundEC;
 
 	// public ItemContainerSO itemContainer;
 
 ///// Private Variables	////////////////////////////////////////////////////////////////////////////	
+
+	[SerializeField] private SoundSO openSound;
+	[SerializeField] private SoundSO closeSound;
 
 	private VisualElement _inventorySlotContainer;
 
@@ -553,6 +558,13 @@ public class InventoryUIController : MonoBehaviour {
 	 * only send menuOpened/menuClosed events if no else is open
 	 */
 	private void HandleInventoryOverlay(bool enableInventory, bool othersOpened) {
+		if(enableInventory) { 
+			playSoundEC.RaiseEvent(openSound);
+		}
+		else {
+			playSoundEC.RaiseEvent(closeSound);
+		}
+
 		// add items to ItemSlots
 		UpdateInventorySlots();
 		

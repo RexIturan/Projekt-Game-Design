@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: https://www.silvermansound.com/free-music/the-good-fight
   clip: {fileID: 8300000, guid: d6dcdf5e310b446458f41ca72b0beca0, type: 3}
+  looped: 1
   volume: 0.1
   type: 0
