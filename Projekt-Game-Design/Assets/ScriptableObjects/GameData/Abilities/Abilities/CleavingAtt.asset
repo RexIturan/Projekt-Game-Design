@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: c7fa96ac0520f7e44af4c02d9401f93d, type: 3}
   description: Attacks all enemies in a line
   Animation: 9
-  activationSound: slash_01
+  activationSound: {fileID: 11400000, guid: b7d9ac76e946dd54eaa183fc8d34aac5, type: 2}
   projectilePrefab: {fileID: 0}
   timeUntilDamage: 0.2
   repeated: 0

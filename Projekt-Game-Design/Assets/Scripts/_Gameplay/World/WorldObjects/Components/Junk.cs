@@ -2,6 +2,7 @@ using Audio;
 using Characters;
 using Characters.Types;
 using Combat;
+using Events.ScriptableObjects;
 using SaveSystem.SaveFormats;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace WorldObjects
 
 				[Header("Sending Events On:")]
 				[SerializeField] private VoidEventChannelSO redrawLevelEC;
+				[SerializeField] private SoundEventChannelSO playSoundEC;
 
 				// public int junkId;
 				public JunkTypeSO junkType;
@@ -79,7 +81,7 @@ namespace WorldObjects
 						// TODO(vincent) refactor -> Drop.GetLoot -> LootSpawner.Spawn(Loot)
 						// E_DropLoot_OnEnter.DropLoot(redrawLevelEC, junkType.drop, gameObject.GetComponent<GridTransform>().gridPosition);
 
-						AudioManager.FindSoundManager().PlaySound(junkType.destructionSound);
+						playSoundEC.RaiseEvent(junkType.destructionSound);
 				}
 		}
 }

@@ -22,6 +22,9 @@ namespace WorldObjects
 				//todo refactor this replace with inventory query event channel
 				[SerializeField] private InventorySO inventory;
 
+				[Header("Sending events on:")]
+				[SerializeField] private SoundEventChannelSO playSoundEC;
+
 				[Header("Receiving Events on:")]
 				[SerializeField] private VoidEventChannelSO updateWorldObjectsEvent;
 				[SerializeField] private IntEventChannelSO switchActivatedEvent;
@@ -260,7 +263,7 @@ namespace WorldObjects
 						Open = true;
 						Broken = true;
 
-						AudioManager.FindSoundManager()?.PlaySound(Type.destructionSound);
+						playSoundEC.RaiseEvent(Type.destructionSound);
 				}
 
 				private void OpenDoor()
@@ -268,7 +271,7 @@ namespace WorldObjects
 						slidingDoorController.OpenDoor();
 						Open = true;
 
-						AudioManager.FindSoundManager()?.PlaySound(Type.openingSound);
+						playSoundEC.RaiseEvent(Type.openingSound);
 				}
 		}
 }

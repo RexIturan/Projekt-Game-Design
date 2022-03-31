@@ -688,7 +688,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1502812501606799226, guid: 9c0d15b8af32de048907681cc71285d0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1502812502152733881, guid: 9c0d15b8af32de048907681cc71285d0, type: 3}
+      propertyPath: playSoundEC
+      value: 
+      objectReference: {fileID: 11400000, guid: 334da6b366e267b41bf607620497b575, type: 2}
+    - target: {fileID: 1502812502152733881, guid: 9c0d15b8af32de048907681cc71285d0, type: 3}
+      propertyPath: stopAllSounds
+      value: 
+      objectReference: {fileID: 11400000, guid: badbd7a352afbfd46aa8cea7759d9962, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c0d15b8af32de048907681cc71285d0, type: 3}

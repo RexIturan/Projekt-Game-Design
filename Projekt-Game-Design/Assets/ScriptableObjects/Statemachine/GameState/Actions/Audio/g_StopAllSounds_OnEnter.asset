@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d945cf595b573343b969fe6adac5c86, type: 3}
   m_Name: g_StopAllSounds_OnEnter
   m_EditorClassIdentifier: 
+  stopAllSoundsEC: {fileID: 11400000, guid: badbd7a352afbfd46aa8cea7759d9962, type: 2}

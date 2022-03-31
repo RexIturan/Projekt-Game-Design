@@ -1,3 +1,5 @@
+using Audio;
+using Events.ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +8,9 @@ namespace Visual
 {
 		public class Projectile : MonoBehaviour
 		{
+				[SerializeField] private SoundEventChannelSO playSoundEC;
+				[SerializeField] private SoundSO impactSound;
+
 				public float time;
 				public float timeEnd = 1;
 				public Vector3 start;
@@ -20,19 +25,19 @@ namespace Visual
 						lastPos = start;
 				}
 
-				void Update()
-				{
+				void Update() {
 						time += Time.deltaTime;
 
-						if ( time <= timeEnd )
-						{
+						if ( time <= timeEnd ) {
 								Vector3 newPos = CalculatePosition();
 								gameObject.transform.position = newPos;
 								gameObject.transform.rotation = Quaternion.LookRotation(newPos - lastPos);
 								lastPos = newPos;
 						}
-						else
+						else { 
+								playSoundEC.RaiseEvent(impactSound);
 								Destroy(gameObject);
+						}
 				}
 
 				private Vector3 CalculatePosition()
