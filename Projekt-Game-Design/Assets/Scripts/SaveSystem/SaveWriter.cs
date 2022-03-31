@@ -104,20 +104,22 @@ namespace SaveSystem {
 			List<Door_Save> doors = new List<Door_Save>();
 
 			foreach ( var door in WorldObjectManager.GetDoors() ) {
-				Statistics doorStats = door.GetComponent<Statistics>();
+				if ( door != null ) {
+					Statistics doorStats = door.GetComponent<Statistics>();
 
-				doors.Add(new Door_Save() {
-					doorTypeId = door.Type.id,
-					gridPos = door.GridPosition,
-					orientation = door.Rotation,
-					open = door.IsOpen,
-					keyIds = door.Keys,
-					switchIds = door.Switches,
-					triggerIds = door.Triggers,
-					remainingSwitchIds = door.RemainingSwitches,
-					remainingTriggerIds = door.RemainingTriggers,
-					currentHitPoints = doorStats.StatusValues.HitPoints.Value
-				});
+					doors.Add(new Door_Save() {
+						doorTypeId = door.Type.id,
+						gridPos = door.GridPosition,
+						orientation = door.Rotation,
+						open = door.IsOpen,
+						keyIds = door.Keys,
+						switchIds = door.Switches,
+						triggerIds = door.Triggers,
+						remainingSwitchIds = door.RemainingSwitches,
+						remainingTriggerIds = door.RemainingTriggers,
+						currentHitPoints = doorStats.StatusValues.HitPoints.Value
+					});	
+				}
 			}
 
 			return doors;

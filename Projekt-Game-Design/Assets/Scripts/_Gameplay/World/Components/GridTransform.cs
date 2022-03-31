@@ -1,4 +1,5 @@
-﻿using FullSerializer;
+﻿using System;
+using FullSerializer;
 using Grid;
 using UnityEngine;
 
@@ -44,6 +45,11 @@ namespace Characters {
 
 		public void Start() {
 			MoveToGridPosition();
+		}
+
+		private void OnValidate() {
+			MoveToGridPosition();
+			RotateToRotation();
 		}
 	}
 }
