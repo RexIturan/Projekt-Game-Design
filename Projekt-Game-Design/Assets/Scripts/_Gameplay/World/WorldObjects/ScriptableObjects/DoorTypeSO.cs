@@ -1,3 +1,4 @@
+using Audio;
 using UnityEngine;
 
 namespace WorldObjects {
@@ -10,8 +11,8 @@ namespace WorldObjects {
 				public string doorName;
 				public string description;
 				
-				public string destructionSound;
-				public string openingSound;
+				public SoundSO destructionSound;
+				public SoundSO openingSound;
 				public bool openManually;
 				public bool destructable;
 				public int hitPoints;

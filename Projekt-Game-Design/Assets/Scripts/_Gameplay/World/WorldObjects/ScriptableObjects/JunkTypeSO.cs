@@ -1,3 +1,4 @@
+using Audio;
 using UnityEngine;
 
 namespace WorldObjects
@@ -13,7 +14,7 @@ namespace WorldObjects
 				public GameObject model;
 				public string junkName;
 				public string description;
-				public string destructionSound;
+				public SoundSO destructionSound;
 				public bool walkThrough;
 				public bool destructable;
 				public int hitPoints;

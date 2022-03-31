@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756ff2157b844a748934b1ac587958e3, type: 3}
   m_Name: c_PlayAbilitySound_OnEnter
   m_EditorClassIdentifier: 
+  playSoundEC: {fileID: 11400000, guid: 334da6b366e267b41bf607620497b575, type: 2}

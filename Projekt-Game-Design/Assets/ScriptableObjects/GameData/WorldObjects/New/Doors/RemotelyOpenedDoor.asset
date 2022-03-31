@@ -17,8 +17,8 @@ MonoBehaviour:
   model: {fileID: 477475561137574740, guid: f1fd36ea81fe1af4c9c8f81381da9b68, type: 3}
   doorName: Heavy Door
   description: 'There is no way to destroy this one. Better just open it. '
-  destructionSound: destruction_01
-  openingSound: door_open_01
+  destructionSound: {fileID: 11400000, guid: a10dce7779f15d741b3e5176ef3593df, type: 2}
+  openingSound: {fileID: 11400000, guid: 1806bd9ac36de1149baca4ba83d29a4b, type: 2}
   openManually: 0
   destructable: 0
   hitPoints: 100

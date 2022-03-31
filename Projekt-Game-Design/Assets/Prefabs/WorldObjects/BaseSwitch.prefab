@@ -419,14 +419,18 @@ MonoBehaviour:
   _type: {fileID: 11400000, guid: 46777157b1b0dbf4ab5805399f03302a, type: 2}
   _gridTransform: {fileID: 1641406335026457172}
   switchActivatedEvent: {fileID: 11400000, guid: 447d8770f6205264f9db44ea93ad8822, type: 2}
+  playSoundEC: {fileID: 11400000, guid: 334da6b366e267b41bf607620497b575, type: 2}
   updateWorldObjectEvent: {fileID: 11400000, guid: e2abec9137f95984980d057a99f5946e, type: 2}
   onTileEnterEC: {fileID: 0}
   switchAnimator: {fileID: 1179756913273468689}
-  _type: {fileID: 11400000, guid: 46777157b1b0dbf4ab5805399f03302a, type: 2}
   switchData:
     id: -1
     gridPosition: {x: 0, y: 0, z: 0}
     gridrotation: {x: 0, y: 0, z: 0}
+    referenceData:
+      guid: 
+      name: 
+      obj: {fileID: 0}
     active: 0
     range: -1
 --- !u!114 &1179756913273468689
