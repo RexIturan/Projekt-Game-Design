@@ -1,4 +1,7 @@
-﻿using Events.ScriptableObjects;
+﻿using Characters.Types;
+using Events.ScriptableObjects;
+using Events.ScriptableObjects.GameState;
+using GDP01;
 using GDP01.UI;
 using UI.Gameplay.Types;
 using UnityEngine;
@@ -15,6 +18,7 @@ namespace UI.Gameplay {
 		[SerializeField] private ScreenEventChannelSO uiToggleScreenEC;
 		[SerializeField] private VoidEventChannelSO GameEndScreenEC;
 		[SerializeField] private VoidEventChannelSO QuestScreenEC;
+		[SerializeField] private GamePhaseEventChannelSO startTurnEC;
 		
 		[Header("Screen Handeling")] 
 		[SerializeField] private ScreenManager screenManager;
@@ -23,6 +27,7 @@ namespace UI.Gameplay {
 		[SerializeField] private ScreenController pauseScreen;
 		[SerializeField] private ScreenController questScreen;
 		[SerializeField] private ScreenController gameEndScreen;
+		[SerializeField] private ScreenController enemyTurnIndicatorScreen;
 		
 ///// Private Variables ////////////////////////////////////////////////////////////////////////////
 
@@ -30,6 +35,7 @@ namespace UI.Gameplay {
 		private GameplayScreen currentScreen;
 		private bool showQuestScreen = true;
 		private bool showGameEndScreen = false;
+		private bool showEnemyTurnIndicatorScreen = false;
 
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
@@ -65,6 +71,11 @@ namespace UI.Gameplay {
 			screenManager.SetScreenVisibility(pauseScreen, value);
 		}
 
+		private void SetEnemyTurnIndicatorScreenVisibility(bool value) {
+			//new
+			screenManager.SetScreenVisibility(enemyTurnIndicatorScreen, value);
+		}
+		
 		private void ToggleGameplayScreen(GameplayScreen screen, bool visible) {
 			switch ( screen ) {
 				case GameplayScreen.Gameplay:
@@ -160,6 +171,23 @@ namespace UI.Gameplay {
 			
 			SwitchGameplayScreen(GameplayScreen.Gameplay);
 		}
+
+		private void HandleStartTurn(GamePhase phase) {
+			switch ( phase ) {
+				case GamePhase.ENEMY_TURN:
+					//enable Enemyturn indicator
+					showEnemyTurnIndicatorScreen = true;
+					SetEnemyTurnIndicatorScreenVisibility(showEnemyTurnIndicatorScreen);
+					break;
+				
+				case GamePhase.PLAYER_TURN:
+				default:
+					//disable Enemyturn indicator
+					showEnemyTurnIndicatorScreen = false;
+					SetEnemyTurnIndicatorScreenVisibility(showEnemyTurnIndicatorScreen);
+					break;
+			}
+		}
 		
 ///// Unity Functions	//////////////////////////////////////////////////////////////////////////////
 
@@ -168,11 +196,12 @@ namespace UI.Gameplay {
 			menuScreen = MenuScreen.None;
 		}
 
-		private void Awake() {
+		private void OnEnable() {
 			uiToggleMenuEC.OnEventRaised += TryToggleMenu;
 			uiToggleScreenEC.OnEventRaised += TryToggleScreen;
 			GameEndScreenEC.OnEventRaised += HandleGameEndScreenToggle;
 			QuestScreenEC.OnEventRaised += HandleQuestScreenToggle;
+			startTurnEC.OnEventRaised += HandleStartTurn;
 		}
 
 		private void OnDisable() {
@@ -180,6 +209,7 @@ namespace UI.Gameplay {
 			uiToggleScreenEC.OnEventRaised -= TryToggleScreen;
 			GameEndScreenEC.OnEventRaised -= HandleGameEndScreenToggle;
 			QuestScreenEC.OnEventRaised -= HandleQuestScreenToggle;
+			startTurnEC.OnEventRaised += HandleStartTurn;
 		}
 	}
 }
