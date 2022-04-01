@@ -17,8 +17,8 @@ MonoBehaviour:
   icon: {fileID: 0}
   prefab: {fileID: 2212653873986083977, guid: 42107428269f5be4f89a9a916cc1675c, type: 3}
   modelPrefab: {fileID: 8839921088689484587, guid: 40de477da2fde4445bb9e2932cfa69c8, type: 3}
-  headModel: {fileID: -512814852588796520, guid: a9b97bb237d970d479610c06205b120d, type: 3}
-  bodyModel: {fileID: 8347488232688724282, guid: 2bcdc85eb13225944b79da3eef396cde, type: 3}
+  headModel: {fileID: 6341174740706719893, guid: a9b97bb237d970d479610c06205b120d, type: 3}
+  bodyModel: {fileID: 5357694594398822888, guid: 2bcdc85eb13225944b79da3eef396cde, type: 3}
   baseStatusValues:
   - name: Hit Points
     _min: 0
@@ -43,4 +43,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6dd922bf52e18d4782479a84383cd63, type: 2}
   behaviour: {fileID: 11400000, guid: 1f2adb223990b1f458c58b0569d99fbf, type: 2}
   lootTable: {fileID: 0}
-  weapon: {fileID: 0}
+  weapon: {fileID: 11400000, guid: 67a9ec7fd48b38d458783f0ce375304a, type: 2}
