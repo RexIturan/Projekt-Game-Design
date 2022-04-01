@@ -33,6 +33,7 @@ namespace Ability.ScriptableObjects {
 				// pattern initialisation
 				//
 				foreach ( TargetedEffect effect in ability.targetedEffects ) {
+					effect.area.InitFromStringPattern();
 					if ( effect.area != null && !effect.area.IsValid() ) {
 						Debug.LogError("Ability " + ability.id +
 						               " Effect has had invalid pattern! Setting to single target. ");

@@ -6,6 +6,8 @@ using GDP01._Gameplay.Provider;
 using SaveSystem.V2.Data;
 using UnityEngine;
 using WorldObjects;
+using Characters.Types;
+using Grid;
 
 namespace GDP01.TileEffects
 {
@@ -25,9 +27,14 @@ namespace GDP01.TileEffects
 				/// </summary>
 				[SerializeField] private List<GameObject> scheduledEffects;
 				[SerializeField] private CreateTileEffectEventChannelSO createTileEffectEC;
-				[SerializeField] private VoidEventChannelSO handleTileEffects;
+				[SerializeField] private FactionEventChannelSO handleTileEffects;
 				[SerializeField] private VoidEventChannelSO clearTilemapEC;
 				[SerializeField] private DrawTileEventChannelSO drawTileEC;
+
+				/// <summary>
+				/// Time it takes to destroy a tile effect when it's queued for destruction. 
+				/// </summary>
+				private static readonly float TIME_FOR_DESTROY = 1.5f;
 
 				public void Awake() {
 						createTileEffectEC.OnEventRaised += CreateTileEffect;
@@ -96,12 +103,39 @@ namespace GDP01.TileEffects
 				}
 				
 				private void CreateTileEffect(GameObject tileEffect, Vector3Int position) {
+						TileEffectController tileEffectController = tileEffect.GetComponent<TileEffectController>();
+
 						// only add if such a tile effect doesn't already exist
-						if ( !ExistsTileEffect(tileEffect.GetComponent<TileEffectController>().id, position) ) {
+						// and if the requirements for the tile types are met
+						if ( !ExistsTileEffect(tileEffectController.id, position) && 
+								TileRequirementsAreMet(tileEffectController, position)) {
 								GameObject newTileEffect = Instantiate(tileEffect, Vector3.zero, Quaternion.identity, transform);
 								newTileEffect.GetComponent<GridTransform>().gridPosition = position;
 								Add(newTileEffect);
 						}
+				}
+
+				private bool TileRequirementsAreMet(TileEffectController tileEffect, Vector3Int tilePos) {
+						bool canBePlaced = false;
+						GridController gridController = GridController.FindGridController();
+
+						if ( gridController ) {
+								TileTypeSO tile = gridController.GetTileAt(tilePos);
+								TileTypeSO groundTile = gridController.GetTileAt(tilePos - new Vector3Int(0, 1, 0));
+								Debug.Log($"Checking for tile effect, ground {groundTile}, top {tile}");
+
+								canBePlaced = tile && groundTile &&
+										HasAllFlags(( int )tileEffect.creationRequirementsTop, ( int )tile.properties) &&
+										HasAllFlags(( int )tileEffect.creationRequirementsGround, ( int )groundTile.properties);
+						}
+						else
+								Debug.LogError("Could not find grid controller. Cannot expand tile effect. ");
+
+						return canBePlaced;
+				}
+
+				private bool HasAllFlags(int requiredFlags, int actualFlags) {
+						return (requiredFlags & actualFlags).Equals(requiredFlags);
 				}
 
 				private bool ExistsTileEffect(int id, Vector3Int pos) {
@@ -123,19 +157,21 @@ namespace GDP01.TileEffects
 						scheduledEffects.Clear();
 				}
 
-				public void HandleTileEffects()
+				public void HandleTileEffects(Faction newTurnFaction)
 				{
 						AddScheduledEffects();
 
 						// evaluate effects etc. 
 						foreach(GameObject tileEffect in tileEffects) {
-								tileEffect.GetComponent<TileEffectController>().OnAction();
+								TileEffectController tileEffectController = tileEffect.GetComponent<TileEffectController>();
+								if(tileEffectController.updatedOnFaction.Equals(newTurnFaction))
+										tileEffectController.OnAction();
 						}
 
 						// destroy the dead ones
 						for(int i = 0; i < tileEffects.Count;) {
 								if( tileEffects[i].GetComponent<TileEffectController>().GetDestroy() ) {
-										Destroy(tileEffects[i]);
+										Destroy(tileEffects[i], TIME_FOR_DESTROY);
 										tileEffects.RemoveAt(i);
 								}
 								else {

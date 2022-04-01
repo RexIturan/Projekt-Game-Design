@@ -142,11 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6758085f371d1e47b58df991e73760e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doors: []
-  switches: []
-  trigger: []
-  junks: []
-  items: []
   itemParent: {fileID: 3360063722395253866}
 --- !u!1 &3742565553089270234
 GameObject:
@@ -186,6 +181,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 127592475957944959}
     m_Modifications:
+    - target: {fileID: 5722859279383250517, guid: 8ebc5e3c3960e504cada28cdad3c4541, type: 3}
+      propertyPath: handleTileEffects
+      value: 
+      objectReference: {fileID: 11400000, guid: 657f587a56a85be4198e00209488b229, type: 2}
     - target: {fileID: 5736917966531822956, guid: 8ebc5e3c3960e504cada28cdad3c4541, type: 3}
       propertyPath: m_Name
       value: TileEffects

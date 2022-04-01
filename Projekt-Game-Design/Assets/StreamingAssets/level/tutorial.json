@@ -51,7 +51,7 @@
   ],
   "enemies": [
     {
-      "enemyTypeId": 1,
+      "enemyTypeId": 3,
       "pos": {
         "x": 4,
         "y": 1,
@@ -61,7 +61,7 @@
       "energy": 100000
     },
     {
-      "enemyTypeId": 3,
+      "enemyTypeId": 4,
       "pos": {
         "x": 6,
         "y": 1,

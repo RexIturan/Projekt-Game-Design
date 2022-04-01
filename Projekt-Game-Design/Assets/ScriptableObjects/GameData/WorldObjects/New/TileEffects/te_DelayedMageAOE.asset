@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88badb17e2f519e4594d499c00b5b42c, type: 3}
-  m_Name: TileEffectContainer
+  m_Script: {fileID: 11500000, guid: 94a4c04fdcb19ac43ae33bac4fecad8d, type: 3}
+  m_Name: te_DelayedMageAOE
   m_EditorClassIdentifier: 
-  tileEffects:
-  - {fileID: 497861194024093764, guid: 30a985767643f214ca1a957c316b118f, type: 3}
-  - {fileID: 497861194024093764, guid: 8ea1df33278e4c04f829b95d26c449f8, type: 3}
+  actionOnEvaluate: 1
+  actionOnEnter: 0
+  actionOnExit: 0
+  damage: 7
+  targets: 01000000
+  createTextEC: {fileID: 11400000, guid: 8e396545472a5c74d8cc707f516a0f48, type: 2}

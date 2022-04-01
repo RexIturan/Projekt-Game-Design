@@ -7,6 +7,8 @@ using SaveSystem.V2.Data;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using WorldObjects;
+using Characters.Types;
+using Level.Grid;
 
 namespace GDP01.TileEffects
 {
@@ -27,8 +29,9 @@ namespace GDP01.TileEffects
 				[SerializeField] private TileBase activeTile;
 
 				/// <summary>
-				/// Amount of times the effect actions are not taken, 
-				/// i.e. if set to 1, the next action will not be taken, but the one after it
+				/// Updates til activation. If it is set to 1, 
+				/// the next update will activate the effect. 
+				/// That update will also trigger the active actions already. 
 				/// </summary>
 				[SerializeField] private int timeUntilActivation;
 				/// <summary>
@@ -50,7 +53,25 @@ namespace GDP01.TileEffects
 				/// a tile effect that's set to destroy doesn't take actions
 				/// </summary>
 				[SerializeField] private bool destroy;
+				
+				public Faction updatedOnFaction;
 
+				[Header("Requirements for placement: ")]
+				/// <summary>
+				/// Requirements for the tile in which the effect will be placed 
+				/// </summary>
+				public TileProperties creationRequirementsTop;
+
+				/// <summary>
+				/// Requirements for the tile beneath the tile in which the effect will be placed 
+				/// </summary>
+				public TileProperties creationRequirementsGround;
+
+				[Header("For AI: ")]
+				public int worthAgainstPlayerPerTarget;
+				public int worthForEnemyPerTarget;
+
+				[Header("Receiving events on: ")]
 				[SerializeField] private PositionGameObjectEventChannelSO onTileEnterEC;
 				[SerializeField] private PositionGameObjectEventChannelSO onTileExitEC;
 
@@ -180,8 +201,9 @@ namespace GDP01.TileEffects
 												effect.OnAction(this);
 										}
 								}
+
 								// active phase
-								else {
+								if( active ) {
 										if ( timeToLive > 0 || eternal ) {
 												foreach ( TileEffectSO effect in effects ) {
 														if(effect.actionOnEvaluate)
@@ -190,7 +212,7 @@ namespace GDP01.TileEffects
 
 												timeToLive--;
 										}
-										else {
+										if ( timeToLive <= 0 && !eternal) {
 												destroy = true;
 												active = false;
 										}
