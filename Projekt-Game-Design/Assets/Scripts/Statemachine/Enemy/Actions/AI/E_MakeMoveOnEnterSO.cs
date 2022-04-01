@@ -42,7 +42,7 @@ public class E_MakeMoveOnEnter : StateAction {
 				try { MakeMove(); }
 				catch ( Exception e ) {
 						Debug.LogError("Enemy AI caused exception; skipping enemy character. Exception: " + e.StackTrace);
-						// HandleSkip();
+						HandleSkip();
 				}
 		}
 

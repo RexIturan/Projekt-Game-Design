@@ -59,6 +59,7 @@ namespace GDP01.Characters.Component {
 		public Vector3Int singleTargetPos; // is set, if there is only one proper target for the ability at the moment
 		
 		public bool damageInflicted;
+		public bool tileEffectsSpawned;
 		
 		public int SelectedAbilityID {
 			get => abilityID;

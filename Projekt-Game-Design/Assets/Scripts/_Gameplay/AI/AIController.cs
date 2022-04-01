@@ -14,6 +14,8 @@ using GDP01.Characters.Component;
 using GDP01.World.Components;
 using UnityEngine;
 using Util;
+using GDP01.TileEffects;
+using Ability;
 
 namespace Characters.EnemyCharacter
 {
@@ -251,6 +253,12 @@ namespace Characters.EnemyCharacter
 												else
 														damage = CombatUtils.GetCumulatedDamageOnFaction(possibleTarget, ability, _attacker, Faction.Enemy, true);
 
+												// consider tile effects
+												if ( outputIsDamage )
+														damage += CalculateWorthOfTileEffect(ability, possibleTarget, true);
+												else
+														damage -= CalculateWorthOfTileEffect(ability, possibleTarget, false);
+
 												// damage should be maximized, healing should be minimized (most negative healing is best)
 												if ((outputIsDamage && damage > maxDamage) ||
 														(!outputIsDamage && damage < maxDamage)) {
@@ -281,6 +289,31 @@ namespace Characters.EnemyCharacter
 						}
 						else
 								return false;
+				}
+
+				private int CalculateWorthOfTileEffect(AbilitySO ability, Vector3Int target, bool offensive) {
+						int worth = 0;
+						
+						foreach(TargetedEffect effect in ability.targetedEffects) {
+								if(effect.tileEffect) {
+										TileEffectController tileEffect = effect.tileEffect.GetComponent<TileEffectController>();
+
+										if (tileEffect) {
+												List<Vector3Int> affectedTiles = effect.area.GetTargetedTiles(target, _attacker.GetRotationsToTarget(target));
+
+												if ( offensive ) {
+														int playerTargetCount = CombatUtils.FindAllTargets(affectedTiles, _attacker, TargetRelationship.Enemy).Count;
+														worth += playerTargetCount * tileEffect.worthAgainstPlayerPerTarget;
+												}
+												else {
+														int enemyTargetCount = CombatUtils.FindAllTargets(affectedTiles, _attacker, TargetRelationship.Ally).Count;
+														worth += enemyTargetCount * tileEffect.worthForEnemyPerTarget;
+												}
+										}
+								}
+						}
+
+						return worth;
 				}
 
 				#endregion

@@ -1,4 +1,5 @@
 using Characters.Types;
+using Events.ScriptableObjects;
 using GameManager;
 using UnityEngine;
 using UOP1.StateMachine;
@@ -8,14 +9,14 @@ using UOP1.StateMachine.ScriptableObjects;
 public class G_HandleTileEffects_OnEnterSO : StateActionSO
 {
 		[SerializeField] private Faction onFactionsTurn;
-		[SerializeField] private VoidEventChannelSO handleTileEffectsEC;
+		[SerializeField] private FactionEventChannelSO handleTileEffectsEC;
 
 		public override StateAction CreateAction() => new G_HandleTileEffects_OnEnter(handleTileEffectsEC, onFactionsTurn);
 }
 
 public class G_HandleTileEffects_OnEnter : StateAction
 {
-		private VoidEventChannelSO handleTileEffectsEC;
+		private FactionEventChannelSO handleTileEffectsEC;
 		private Faction onFactionsTurn;
 
 		private GameSC _gameSC;
@@ -25,7 +26,7 @@ public class G_HandleTileEffects_OnEnter : StateAction
 				_gameSC = stateMachine.GetComponent<GameSC>();
 		}
 
-		public G_HandleTileEffects_OnEnter(VoidEventChannelSO handleTileEffectsEC, Faction onFactionsTurn)
+		public G_HandleTileEffects_OnEnter(FactionEventChannelSO handleTileEffectsEC, Faction onFactionsTurn)
 		{
 				this.handleTileEffectsEC = handleTileEffectsEC;
 				this.onFactionsTurn = onFactionsTurn;
@@ -35,8 +36,7 @@ public class G_HandleTileEffects_OnEnter : StateAction
 
 		public override void OnStateEnter()
 		{
-				if ( _gameSC.CurrentPlayer.Equals(onFactionsTurn) )
-						handleTileEffectsEC.RaiseEvent();
+				handleTileEffectsEC.RaiseEvent(_gameSC.CurrentPlayer);
 		}
 
 		public override void OnStateExit() { }
