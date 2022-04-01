@@ -1,0 +1,1 @@
+Some of the weapons (greatsword, greater healing stuff) are just for enemies to wear and don't have any functionalty yet. They may be used otherwise later no, but serve no real purpose at the moment. 
