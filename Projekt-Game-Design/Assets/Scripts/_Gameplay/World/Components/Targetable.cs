@@ -52,7 +52,12 @@ namespace Combat {
 		}
 
 		public Vector3Int GetGridPosition() {
-			return gridTransform.gridPosition;
+			if(gridTransform)
+				return gridTransform.gridPosition;
+			else {
+				Debug.LogError("Targetable without grid position! ");
+				return Vector3Int.zero;
+			}
 		}
 		
 		public static Targetable[] GetAllInstances() {
