@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5962490239412866605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.5, y: 0, z: -24.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -63,8 +63,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8392edbd17a741e4b3aa49918501c3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statistics: {fileID: 0}
-  gridTransform: {fileID: 0}
+  statistics: {fileID: 657795278606191778}
+  gridTransform: {fileID: 1641406335026457172}
   healthbarController: {fileID: 0}
 --- !u!114 &657795278606191778
 MonoBehaviour:
