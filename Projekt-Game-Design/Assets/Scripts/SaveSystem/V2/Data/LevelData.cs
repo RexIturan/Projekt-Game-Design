@@ -25,6 +25,7 @@ namespace SaveSystem.V2.Data {
 		public List<EnemyCharacterData> EnemyCharacterDatas { get; set; }
 		public List<Door.DoorData> Doors;
 		public List<SwitchComponent.SwitchData> Switches;
+		public List<Junk.JunkData> Junks;
 		public List<ItemComponent.ItemData> Items;
 		public List<TileEffectController.Data> TileEffects;
 
@@ -37,6 +38,7 @@ namespace SaveSystem.V2.Data {
 			var worldObjectData = WorldObjectManager.Save();
 			Doors = worldObjectData.DoorDataList;
 			Switches = worldObjectData.SwitchDataList;
+			Junks = worldObjectData.JunkDataList;
 			Items = worldObjectData.ItemDataList;
 
 			TileEffects = TileEffectManager?.Save().TileEffectData; 
@@ -50,7 +52,7 @@ namespace SaveSystem.V2.Data {
 			
 			CharacterManager.LoadEnemyCharacterData(EnemyCharacterDatas);
 			
-			WorldObjectManager?.Load(new WorldObjectManager.Data(Doors, Switches, Items));
+			WorldObjectManager?.Load(new WorldObjectManager.Data(Doors, Switches, Junks, Items));
 			
 			TileEffectManager?.Load(new TileEffectManager.Data{ TileEffectData = TileEffects});
 		}

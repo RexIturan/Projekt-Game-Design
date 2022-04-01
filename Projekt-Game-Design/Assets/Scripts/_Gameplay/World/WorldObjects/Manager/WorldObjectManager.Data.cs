@@ -10,17 +10,20 @@ namespace WorldObjects {
 		public class Data {
 			public List<Door.DoorData> DoorDataList;
 			public List<SwitchComponent.SwitchData> SwitchDataList;
+			public List<Junk.JunkData> JunkDataList;
 			public List<ItemComponent.ItemData> ItemDataList;
 			
 			
 			public Data(
 				List<Door.DoorData> doors, 
 				List<SwitchComponent.SwitchData> switches,
+				List<Junk.JunkData> junks,
 				List<ItemComponent.ItemData> items
 			) {
 				
 				DoorDataList = doors;
 				SwitchDataList = switches;
+				JunkDataList = junks;
 				ItemDataList = items;
 			}
 		}
@@ -34,6 +37,7 @@ namespace WorldObjects {
 			return new Data(
 				SaveDoors(),
 				SaveSwitches(),
+				SaveJunks(),
 				SaveItems()
 			);
 		}
@@ -46,6 +50,9 @@ namespace WorldObjects {
 			
 			//load switches
 			LoadSwitches(data.SwitchDataList);
+			
+			//load junks
+			LoadJunks(data.JunkDataList);
 			
 			//load items
 			LoadItems(data.ItemDataList);

@@ -249,9 +249,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 626402419}
     - target: {fileID: 369216589412363947, guid: a6f52cf4fa385f84cb6945dbcc174985, type: 3}
+      propertyPath: junkParent
+      value: 
+      objectReference: {fileID: 2055316357553044433}
+    - target: {fileID: 369216589412363947, guid: a6f52cf4fa385f84cb6945dbcc174985, type: 3}
       propertyPath: worldObjectList
       value: 
       objectReference: {fileID: 2055316357553044432}
+    - target: {fileID: 369216589412363947, guid: a6f52cf4fa385f84cb6945dbcc174985, type: 3}
+      propertyPath: defaultJunkTypeSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 555cf8c25f07f9c49bbd4f27ceb2a29d, type: 2}
     - target: {fileID: 3343141295175601145, guid: a6f52cf4fa385f84cb6945dbcc174985, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1396,6 +1404,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6758085f371d1e47b58df991e73760e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2055316357553044433 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2091091243, guid: de1834a2696f4f94bb9cab7fb0014db2, type: 3}
+  m_PrefabInstance: {fileID: 2055316357553044430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4947512092532588845
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1641406335026457172}
   - component: {fileID: 3675022155374443427}
   - component: {fileID: 711754707877432427}
+  - component: {fileID: 1303129264910596755}
   m_Layer: 0
   m_Name: BaseJunk
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5962490239412866605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.5, y: 0, z: -24.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -178,9 +179,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b16651f916c7bb4484cf5a41892f572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  broken: 0
+  id: 0
+  _type: {fileID: 0}
+  _gridTransform: {fileID: 1641406335026457172}
   updateWorldObjectsEvent: {fileID: 11400000, guid: 43cbd7484c763514587e57c1e45ea0fa, type: 2}
   redrawLevelEC: {fileID: 11400000, guid: 076a51549e7ef074aaa161d0013325a5, type: 2}
   playSoundEC: {fileID: 11400000, guid: 334da6b366e267b41bf607620497b575, type: 2}
-  junkType: {fileID: 11400000, guid: 45d42a0392b021b4ca4506b575f477c1, type: 2}
-  orientation: {x: 0, y: 0, z: 0}
+  junkData:
+    id: -1
+    gridPosition: {x: 0, y: 0, z: 0}
+    gridrotation: {x: 0, y: 0, z: 0}
+    referenceData:
+      guid: 
+      name: 
+      obj: {fileID: 0}
+    broken: 0
+  _targetable: {fileID: 1303129264910596755}
+  _statistics: {fileID: 657795278606191778}
+--- !u!114 &1303129264910596755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5962490239412866605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8392edbd17a741e4b3aa49918501c3f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics: {fileID: 657795278606191778}
+  gridTransform: {fileID: 1641406335026457172}
+  healthbarController: {fileID: 0}
