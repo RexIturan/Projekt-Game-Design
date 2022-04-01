@@ -7,6 +7,7 @@ using SaveSystem.V2.Data;
 using UnityEngine;
 using WorldObjects;
 using Characters.Types;
+using Grid;
 
 namespace GDP01.TileEffects
 {
@@ -102,12 +103,39 @@ namespace GDP01.TileEffects
 				}
 				
 				private void CreateTileEffect(GameObject tileEffect, Vector3Int position) {
+						TileEffectController tileEffectController = tileEffect.GetComponent<TileEffectController>();
+
 						// only add if such a tile effect doesn't already exist
-						if ( !ExistsTileEffect(tileEffect.GetComponent<TileEffectController>().id, position) ) {
+						// and if the requirements for the tile types are met
+						if ( !ExistsTileEffect(tileEffectController.id, position) && 
+								TileRequirementsAreMet(tileEffectController, position)) {
 								GameObject newTileEffect = Instantiate(tileEffect, Vector3.zero, Quaternion.identity, transform);
 								newTileEffect.GetComponent<GridTransform>().gridPosition = position;
 								Add(newTileEffect);
 						}
+				}
+
+				private bool TileRequirementsAreMet(TileEffectController tileEffect, Vector3Int tilePos) {
+						bool canBePlaced = false;
+						GridController gridController = GridController.FindGridController();
+
+						if ( gridController ) {
+								TileTypeSO tile = gridController.GetTileAt(tilePos);
+								TileTypeSO groundTile = gridController.GetTileAt(tilePos - new Vector3Int(0, 1, 0));
+								Debug.Log($"Checking for tile effect, ground {groundTile}, top {tile}");
+
+								canBePlaced = tile && groundTile &&
+										HasAllFlags(( int )tileEffect.creationRequirementsTop, ( int )tile.properties) &&
+										HasAllFlags(( int )tileEffect.creationRequirementsGround, ( int )groundTile.properties);
+						}
+						else
+								Debug.LogError("Could not find grid controller. Cannot expand tile effect. ");
+
+						return canBePlaced;
+				}
+
+				private bool HasAllFlags(int requiredFlags, int actualFlags) {
+						return (requiredFlags & actualFlags).Equals(requiredFlags);
 				}
 
 				private bool ExistsTileEffect(int id, Vector3Int pos) {

@@ -80,6 +80,8 @@ MonoBehaviour:
   active: 0
   destroy: 0
   updatedOnFaction: 1
+  expansionRequirementsTop: 8
+  expansionRequirementsGround: 17
   worthAgainstPlayerPerTarget: 0
   worthForEnemyPerTarget: 0
   onTileEnterEC: {fileID: 11400000, guid: 4e00fed1a0c174249b7a24571939cd4e, type: 2}

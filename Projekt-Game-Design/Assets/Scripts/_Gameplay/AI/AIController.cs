@@ -232,7 +232,8 @@ namespace Characters.EnemyCharacter
 				}
 
 				public bool ChooseAbilityWithHighestOutput(bool outputIsDamage) {
-						int maxDamage = 0;
+						float bestScoring = 0; // defines how good an ability use is according to the ai 
+						float scoringThreshold = 1f; // defines how good an ability has to be to be used 
 						AbilitySO bestAbility = null;
 						Vector3Int bestTargetPos = Vector3Int.zero;
 						Targetable bestTarget = null;
@@ -245,39 +246,31 @@ namespace Characters.EnemyCharacter
 										if (ability.targets.HasFlag(TargetRelationship.Ground) ||
 												AbilityController.HasRightRelationshipForAbility(ability, _attacker, target) ) {
 
-												// if damage is maximized, calculate virtual damage
-												// if healing is maximized, calculate *actual* healing
-												int damage;
+												// if damage is supposed to be maximized, calculate virtual damage
+												// if healing is supposed to be maximized, calculate *actual* healing
+												float scoring;
 												if (outputIsDamage)
-														damage = CombatUtils.GetCumulatedDamageOnFaction(possibleTarget, ability, _attacker, Faction.Player);
+														scoring = CombatUtils.GetCumulatedDamageOnFaction(possibleTarget, ability, _attacker, Faction.Player);
 												else
-														damage = CombatUtils.GetCumulatedDamageOnFaction(possibleTarget, ability, _attacker, Faction.Enemy, true);
+														scoring = -CombatUtils.GetCumulatedDamageOnFaction(possibleTarget, ability, _attacker, Faction.Enemy, true);
 
 												// consider tile effects
-												if ( outputIsDamage )
-														damage += CalculateWorthOfTileEffect(ability, possibleTarget, true);
-												else
-														damage -= CalculateWorthOfTileEffect(ability, possibleTarget, false);
+												scoring += CalculateWorthOfTileEffect(ability, possibleTarget, outputIsDamage);
 
 												// damage should be maximized, healing should be minimized (most negative healing is best)
-												if ((outputIsDamage && damage > maxDamage) ||
-														(!outputIsDamage && damage < maxDamage)) {
-														maxDamage = damage;
+												if (scoring > bestScoring) {
+														bestScoring = scoring;
 														bestAbility = ability;
 														bestTargetPos = possibleTarget;
 														bestTarget = target;
-
-														if(outputIsDamage)
-																Debug.Log($"Ability {ability.name} on {possibleTarget} would deal {damage} damage. ");
-														else
-																Debug.Log($"Ability {ability.name} on {possibleTarget} would deal {-damage} healing. ");
+														
+														Debug.Log($"Ability {ability.name} on {possibleTarget} would deal {scoring} {(outputIsDamage ? "damage" : "healing")} (effective). ");
 												}
 										}
 								}
 						}
 
-						if((outputIsDamage && maxDamage > 0) || 
-								(!outputIsDamage && maxDamage < 0)) {
+						if(bestScoring >= scoringThreshold) {
 								_abilityController.SelectedAbilityID = bestAbility.id;
 								_abilityController.abilitySelected = true;
 								_abilityController.abilityConfirmed = true;
@@ -291,8 +284,10 @@ namespace Characters.EnemyCharacter
 								return false;
 				}
 
-				private int CalculateWorthOfTileEffect(AbilitySO ability, Vector3Int target, bool offensive) {
-						int worth = 0;
+				private float CalculateWorthOfTileEffect(AbilitySO ability, Vector3Int target, bool offensive) {
+						float worth = 0;
+						float distanceBias = 0.01f; // this much is substracted from the scoring 
+																				// for each unit of distance between the targeted tile and the targeted character (1% substracted for each unit of distance) 
 						
 						foreach(TargetedEffect effect in ability.targetedEffects) {
 								if(effect.tileEffect) {
@@ -300,14 +295,16 @@ namespace Characters.EnemyCharacter
 
 										if (tileEffect) {
 												List<Vector3Int> affectedTiles = effect.area.GetTargetedTiles(target, _attacker.GetRotationsToTarget(target));
+												List<Targetable> targetsInArea = offensive ? CombatUtils.FindAllTargets(affectedTiles, _attacker, TargetRelationship.Enemy) :
+																																		 CombatUtils.FindAllTargets(affectedTiles, _attacker, TargetRelationship.Ally);
+												int worthPerTarget = offensive ? tileEffect.worthAgainstPlayerPerTarget : tileEffect.worthForEnemyPerTarget;
 
-												if ( offensive ) {
-														int playerTargetCount = CombatUtils.FindAllTargets(affectedTiles, _attacker, TargetRelationship.Enemy).Count;
-														worth += playerTargetCount * tileEffect.worthAgainstPlayerPerTarget;
-												}
-												else {
-														int enemyTargetCount = CombatUtils.FindAllTargets(affectedTiles, _attacker, TargetRelationship.Ally).Count;
-														worth += enemyTargetCount * tileEffect.worthForEnemyPerTarget;
+												// for each target in the area, add something to the score
+												foreach(Targetable targetCharacter in targetsInArea) {
+														float worthForTarget = worthPerTarget * ( 1 - distanceBias * Vector3Int.Distance(targetCharacter.GetGridPosition(), target) );
+
+														// addition to score should not be negative 
+														worth += Mathf.Max(0, worthForTarget);
 												}
 										}
 								}

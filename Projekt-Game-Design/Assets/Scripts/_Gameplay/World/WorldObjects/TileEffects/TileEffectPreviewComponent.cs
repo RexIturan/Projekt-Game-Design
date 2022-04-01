@@ -12,7 +12,6 @@ namespace GDP01
 				[SerializeField] private InputCache inputCache;
 				[SerializeField] private TextMeshProUGUI textMesh;
 				[SerializeField] private GameObject canvas;
-
 				private void Update() {
 						if ( inputCache.cursor.abovePos.gridPos.Equals(tileEffect.GetComponent<GridTransform>().gridPosition) )
 								ShowPreview();
@@ -23,17 +22,11 @@ namespace GDP01
 				private void ShowPreview() {
 						canvas.SetActive(true);
 
-						if( tileEffect.GetActive() ) {
-								// show preview of time to live if active but not eternal
-								if ( !tileEffect.GetEternal() )
-										textMesh.text = tileEffect.GetTimeToLive().ToString();
-								else
-										HidePreview();
-						}
-						// else show time until activation
-						else {
+						if ( !tileEffect.GetActive() && !tileEffect.GetDestroy() ) {
 								textMesh.text = tileEffect.GetTimeUntilActivation().ToString();
 						}
+						else
+								HidePreview();
 				}
 
 				private void HidePreview() {

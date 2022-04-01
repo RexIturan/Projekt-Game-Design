@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using WorldObjects;
 using Characters.Types;
+using Level.Grid;
 
 namespace GDP01.TileEffects
 {
@@ -54,6 +55,17 @@ namespace GDP01.TileEffects
 				[SerializeField] private bool destroy;
 				
 				public Faction updatedOnFaction;
+
+				[Header("Requirements for placement: ")]
+				/// <summary>
+				/// Requirements for the tile in which the effect will be placed 
+				/// </summary>
+				public TileProperties creationRequirementsTop;
+
+				/// <summary>
+				/// Requirements for the tile beneath the tile in which the effect will be placed 
+				/// </summary>
+				public TileProperties creationRequirementsGround;
 
 				[Header("For AI: ")]
 				public int worthAgainstPlayerPerTarget;
