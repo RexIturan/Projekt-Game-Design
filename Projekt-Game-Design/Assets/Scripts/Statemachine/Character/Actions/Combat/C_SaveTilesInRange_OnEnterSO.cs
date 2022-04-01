@@ -14,10 +14,11 @@ using GDP01.World.Components;
 	menuName = "State Machines/Actions/Character/Save Tiles In Range On Enter")]
 public class C_SaveTilesInRange_OnEnterSO : StateActionSO {
 	[SerializeField] private FOVQueryEventChannelSO fieldOfViewQueryEvent;
+	[SerializeField] private FOVCrossQueryEventChannelSO fieldOfViewCrossQueryEvent;
 	[SerializeField] private AbilityContainerSO abilityContainer;
 
 	public override StateAction CreateAction() =>
-		new C_SaveTilesInRange_OnEnter(fieldOfViewQueryEvent, abilityContainer);
+		new C_SaveTilesInRange_OnEnter(fieldOfViewQueryEvent, fieldOfViewCrossQueryEvent, abilityContainer);
 }
 
 public class C_SaveTilesInRange_OnEnter : StateAction {
@@ -28,12 +29,16 @@ public class C_SaveTilesInRange_OnEnter : StateAction {
 	private AbilityController _abilityController;
 	private GridTransform _gridTransform;
 
-	private readonly FOVQueryEventChannelSO fieldOfViewQueryEvent;
+	private readonly FOVQueryEventChannelSO _fieldOfViewQueryEvent;
+	private readonly FOVCrossQueryEventChannelSO _fieldOfViewCrossQueryEvent;
 	private readonly AbilityContainerSO _abilityContainer;
 
-	public C_SaveTilesInRange_OnEnter(FOVQueryEventChannelSO fieldOfViewQueryEvent, AbilityContainerSO abilityContainer) {
-		this.fieldOfViewQueryEvent = fieldOfViewQueryEvent;
-		this._abilityContainer = abilityContainer;
+	public C_SaveTilesInRange_OnEnter(FOVQueryEventChannelSO fieldOfViewQueryEvent, 
+			FOVCrossQueryEventChannelSO fieldOfViewCrossQueryEvent, 
+			AbilityContainerSO abilityContainer) {
+		_fieldOfViewQueryEvent = fieldOfViewQueryEvent;
+		_fieldOfViewCrossQueryEvent = fieldOfViewCrossQueryEvent;
+		_abilityContainer = abilityContainer;
 	}
 
 	public override void OnUpdate() { }
@@ -46,17 +51,20 @@ public class C_SaveTilesInRange_OnEnter : StateAction {
 	}
 
 	public override void OnStateEnter() {
-		//todo redo
-		int index = 1;
-		if ( _abilityController.SelectedAbilityID >= 0 ) {
-			index = _abilityController.SelectedAbilityID;
-		}
-		fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition,
-		( _abilityContainer.abilities[index].range ),
-		TileProperties.ShootTrough,
-		SaveToStateContainer);
+		AbilitySO ability = _abilityController.SelectedAbility;
 		
-		fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition,
+		if(ability) { 
+			if(ability.targetableTilesAreCross)
+				_fieldOfViewCrossQueryEvent.RaiseEvent(_gridTransform.gridPosition, 
+					TileProperties.ShootTrough, SaveToStateContainer);
+			else
+				_fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition,
+					( ability.range ),
+					TileProperties.ShootTrough,
+					SaveToStateContainer);
+		}
+		
+		_fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition,
 			statistics.StatusValues.ViewDistance.Value,
 			TileProperties.Opaque | TileProperties.Solid,
 			SaveVisibleTilesToStateContainer);

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: c_SaveTilesInRange_OnEnter
   m_EditorClassIdentifier: 
   fieldOfViewQueryEvent: {fileID: 11400000, guid: a8df37a37a427914e8db4b19294fa893, type: 2}
+  fieldOfViewCrossQueryEvent: {fileID: 11400000, guid: 7eb8bcc3d796f4f408a843946a301b1a, type: 2}
   abilityContainer: {fileID: 11400000, guid: 636fde585deb2974e93548838daccee6, type: 2}

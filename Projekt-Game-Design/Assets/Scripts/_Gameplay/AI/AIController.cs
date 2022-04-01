@@ -23,6 +23,7 @@ namespace Characters.EnemyCharacter
 		{
 				[Header("Sending Events On:")]
 				[SerializeField] private PathfindingQueryEventChannelSO pathfindingQueryEvent;
+				[SerializeField] private FOVCrossQueryEventChannelSO fieldOfViewCrossQueryEvent;
 				[SerializeField] private PathFindingPathQueryEventChannelSO pathfindingPathQueryEvent;
 				[SerializeField] private FOVQueryEventChannelSO fieldOfViewQueryEvent;
 
@@ -34,9 +35,6 @@ namespace Characters.EnemyCharacter
 				// so we can see what the AI tries to do
 				public PathNode movementTarget; // position they want to reach
 				public int selectedAbility;
-				
-				[SerializeField] private List<List<PathNode>> tilesInRangePerAbility;
-				[SerializeField] private List<AbilitySO> abilityPerTilesInRange;
 				
 				[SerializeField] private List<Tuple<AbilitySO, List<Vector3Int>>> validAbilitiesWithRange;
 
@@ -62,8 +60,6 @@ namespace Characters.EnemyCharacter
 				{
 						selectedAbility = -1;
 						
-						tilesInRangePerAbility = new List<List<PathNode>>();
-						abilityPerTilesInRange = new List<AbilitySO>();
 						validAbilitiesWithRange = new List<Tuple<AbilitySO, List<Vector3Int>>>();
 				}
 
@@ -73,9 +69,7 @@ namespace Characters.EnemyCharacter
 						// enemyTarget = null;
 						movementTarget = null;
 						selectedAbility = -1;
-						
-						tilesInRangePerAbility = new List<List<PathNode>>();
-						abilityPerTilesInRange= new List<AbilitySO>();
+
 						validAbilitiesWithRange = new List<Tuple<AbilitySO, List<Vector3Int>>>();
 				}
 
@@ -192,7 +186,13 @@ namespace Characters.EnemyCharacter
 										validAbilitiesWithRange.Add(new Tuple<AbilitySO, List<Vector3Int>>(ability, new List<Vector3Int>()));
 
 										currentAbility = ability;
-										fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition, ability.range, ability.conditions, SaveRangeForValidAbility);
+
+										if(ability.targetableTilesAreCross) {
+												fieldOfViewCrossQueryEvent.RaiseEvent(_gridTransform.gridPosition, ability.conditions, SaveRangeForValidAbility);
+										}
+										else {
+												fieldOfViewQueryEvent.RaiseEvent(_gridTransform.gridPosition, ability.range, ability.conditions, SaveRangeForValidAbility);
+										}
 								}
 						}
 				}
