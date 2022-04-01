@@ -60,7 +60,10 @@ namespace Combat
 					}
 
 					targets = Targetable.GetTargetsWithPositions(targets, targetPositons);
-					
+
+					// Remove dead from targets
+					targets.RemoveAll(target => target.IsDead);
+
 					return targets;
 				}
 
