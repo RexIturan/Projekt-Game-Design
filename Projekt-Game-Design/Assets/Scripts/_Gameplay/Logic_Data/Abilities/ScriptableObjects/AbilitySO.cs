@@ -25,6 +25,7 @@ public class AbilitySO : ScriptableObject {
 
     public TargetRelationship targets; // targetable objects: allies, enemies, etc. 
     public bool moveToTarget; // moves action taker to field of target
+		public bool targetableTilesAreCross; // set to true to make the four adjacent tiles the tiles in range 
     public int range; 
     public TileProperties conditions; // restrictions for target in regards of the tiles between
     public int costs; 

@@ -23,6 +23,7 @@ MonoBehaviour:
   damaging: 1
   targets: 30
   moveToTarget: 0
+  targetableTilesAreCross: 1
   range: 1
   conditions: 0
   costs: 15
@@ -40,9 +41,9 @@ MonoBehaviour:
       rows:
       - line: 010101
       anchor: {x: 1, y: 0}
+    tileEffect: {fileID: 0}
   cooldown: 0
   selectedActions:
-  - {fileID: 11400000, guid: ae2b28614c9f55c429539a655c859735, type: 2}
   - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}
   - {fileID: 11400000, guid: 0a0be4e3712d36d4783fb37465ff98f3, type: 2}
   - {fileID: 11400000, guid: 8a1e9fbff673a4f45bc0cc198c55f15a, type: 2}

@@ -10,49 +10,61 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
-  m_Name: Shockwave
+  m_Name: e_Mass_Heal
   m_EditorClassIdentifier: 
-  id: 6
-  icon: {fileID: 21300000, guid: 33634726b6d54464a926d9ab44f1b582, type: 3}
-  description: Attacks all enemies in a line
-  Animation: 8
-  activationSound: {fileID: 11400000, guid: b7d9ac76e946dd54eaa183fc8d34aac5, type: 2}
+  id: 0
+  icon: {fileID: 21300000, guid: dde01e2c40a62b0488b1de262fe77b8c, type: 3}
+  description: 
+  Animation: 10
+  activationSound: {fileID: 11400000, guid: 9b25387dcba2fb0429883d9e3b07b8ec, type: 2}
   projectilePrefab: {fileID: 0}
-  timeUntilDamage: 0.15
+  timeUntilDamage: 0
   repeated: 0
-  damaging: 1
-  targets: 30
+  damaging: 0
+  targets: 9
   moveToTarget: 0
-  targetableTilesAreCross: 1
-  range: 1
-  conditions: 0
+  range: 0
+  conditions: 8
   costs: 8
   targetedEffects:
   - effect:
-      type: 1
-      baseDamage: 7
-      strengthBonus: 0.7
+      type: 0
+      baseDamage: 5
+      strengthBonus: 0
       dexterityBonus: 0
       intelligenceBonus: 0
-    targets: 20
+    targets: 2
     targetIsCenter: 1
     area:
-      stringPattern: 'x
+      stringPattern: '- - x x x - -
+
+        - x x x x x -
+
+        x x x x x x x
 
         x
+        x x[x]x x x
 
-        x
+        x x x x x x x
 
-        [x]'
+        - x x x x x -
+
+        - - x
+        x x - -'
       rows:
-      - line: 010101
-      anchor: {x: 0, y: 0}
+      - line: 00000101010000
+      - line: 00010101010100
+      - line: 00000101010000
+      - line: 00000000000000
+      - line: 00000000000000
+      - line: 00000000000000
+      - line: 00000000000000
+      anchor: {x: 3, y: 3}
     tileEffect: {fileID: 0}
-  cooldown: 0
+  cooldown: 2
   selectedActions:
+  - {fileID: 11400000, guid: 91a528d44b0383848a019fbc0509b9f9, type: 2}
   - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}
-  - {fileID: 11400000, guid: 0a0be4e3712d36d4783fb37465ff98f3, type: 2}
-  - {fileID: 11400000, guid: 8a1e9fbff673a4f45bc0cc198c55f15a, type: 2}
   - {fileID: 11400000, guid: 8d5abf5e064648d46a86187da80dd12b, type: 2}
   executingActions:
   - {fileID: 11400000, guid: 45027094d4b799243a3cfa555ca9d099, type: 2}

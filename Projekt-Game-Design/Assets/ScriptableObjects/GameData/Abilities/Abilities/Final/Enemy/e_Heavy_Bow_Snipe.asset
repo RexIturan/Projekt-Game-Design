@@ -10,58 +10,44 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
-  m_Name: DelayedMageAOE
+  m_Name: e_Heavy_Bow_Snipe
   m_EditorClassIdentifier: 
-  id: 10
+  id: 15
   icon: {fileID: 21300000, guid: dde01e2c40a62b0488b1de262fe77b8c, type: 3}
-  description: 'Creates fire that damages players after one turn. '
-  Animation: 10
-  activationSound: {fileID: 11400000, guid: 61e1a1d94fb953c4394f0fceb41adbfe, type: 2}
-  projectilePrefab: {fileID: 1194966964175767583, guid: 221069eb46b8bfc4dbfeeaddbebf8e03, type: 3}
-  timeUntilDamage: 1
+  description: 
+  Animation: 6
+  activationSound: {fileID: 11400000, guid: 42f6bd2360cc2d04b9c772877bc480f8, type: 2}
+  projectilePrefab: {fileID: 1194966964175767583, guid: 5b3f54d4a571a4c4e8d4122580f21dd2, type: 3}
+  timeUntilDamage: 0.7
   repeated: 0
   damaging: 1
-  targets: 8
+  targets: 4
   moveToTarget: 0
-  range: 10
+  range: 15
   conditions: 8
-  costs: 5
+  costs: 9
   targetedEffects:
   - effect:
       type: 1
-      baseDamage: 0
+      baseDamage: 7
       strengthBonus: 0
       dexterityBonus: 0
       intelligenceBonus: 0
-    targets: 0
+    targets: 4
     targetIsCenter: 1
     area:
-      stringPattern: '- x x x -
-
-        x x x x x
-
-        x x[x]x x
-
-        x
-        x x x x
-
-        - x x x -'
+      stringPattern: '[ x ]'
       rows:
-      - line: 0000000000
-      - line: 0000000000
-      - line: 0000000000
-      - line: 0000000000
-      - line: 0000000000
-      anchor: {x: 2, y: 2}
-    tileEffect: {fileID: 497861194024093764, guid: 8ea1df33278e4c04f829b95d26c449f8, type: 3}
-  cooldown: 2
+      - line: 01
+      anchor: {x: 0, y: 0}
+    tileEffect: {fileID: 0}
+  cooldown: 1
   selectedActions:
   - {fileID: 11400000, guid: 91a528d44b0383848a019fbc0509b9f9, type: 2}
   - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}
   - {fileID: 11400000, guid: 8d5abf5e064648d46a86187da80dd12b, type: 2}
   executingActions:
   - {fileID: 11400000, guid: 45027094d4b799243a3cfa555ca9d099, type: 2}
-  - {fileID: 11400000, guid: 098f03dd643eec24ab1df4dd7a9b1803, type: 2}
   - {fileID: 11400000, guid: c6ff258bc012f104f99ecc63e4a53f6f, type: 2}
   - {fileID: 11400000, guid: 500d6a1753d7f5647b58a62daf07ba58, type: 2}
   - {fileID: 11400000, guid: b76cc6e520aa25f49bbdd9b7a6ee82fc, type: 2}

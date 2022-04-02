@@ -51,21 +51,81 @@
   ],
   "enemies": [
     {
-      "enemyTypeId": 3,
+      "enemyTypeId": 4,
       "pos": {
-        "x": 4,
+        "x": 3,
         "y": 1,
-        "z": 27
+        "z": 33
       },
       "hitpoints": 1000,
       "energy": 100000
     },
     {
-      "enemyTypeId": 4,
+      "enemyTypeId": 5,
       "pos": {
-        "x": 6,
+        "x": 5,
         "y": 1,
-        "z": 27
+        "z": 33
+      },
+      "hitpoints": 1000,
+      "energy": 100000
+    },
+    {
+      "enemyTypeId": 6,
+      "pos": {
+        "x": 7,
+        "y": 1,
+        "z": 33
+      },
+      "hitpoints": 1000,
+      "energy": 100000
+    },
+    {
+      "enemyTypeId": 7,
+      "pos": {
+        "x": 9,
+        "y": 1,
+        "z": 33
+      },
+      "hitpoints": 1000,
+      "energy": 100000
+    },
+    {
+      "enemyTypeId": 8,
+      "pos": {
+        "x": 3,
+        "y": 1,
+        "z": 30
+      },
+      "hitpoints": 1000,
+      "energy": 100000
+    },
+    {
+      "enemyTypeId": 9,
+      "pos": {
+        "x": 5,
+        "y": 1,
+        "z": 30
+      },
+      "hitpoints": 1000,
+      "energy": 100000
+    },
+    {
+      "enemyTypeId": 10,
+      "pos": {
+        "x": 7,
+        "y": 1,
+        "z": 30
+      },
+      "hitpoints": 1000,
+      "energy": 100000
+    },
+    {
+      "enemyTypeId": 11,
+      "pos": {
+        "x": 9,
+        "y": 1,
+        "z": 30
       },
       "hitpoints": 1000,
       "energy": 100000
