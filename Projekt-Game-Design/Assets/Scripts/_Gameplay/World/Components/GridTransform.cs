@@ -24,7 +24,9 @@ namespace Characters {
 		}
 
 		private void RotateToRotation() {
-			gameObject.transform.rotation = Quaternion.LookRotation(rotation);
+			if ( rotation != Vector3.zero ) {
+				gameObject.transform.rotation = Quaternion.LookRotation(rotation);	
+			}
 		}
 		
 		public void MoveTo(Vector3 worldPos) {

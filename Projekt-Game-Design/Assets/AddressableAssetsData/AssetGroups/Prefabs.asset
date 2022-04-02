@@ -17,8 +17,40 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: cc11351b0cb50264b9e5b2179030f4da
   m_SerializeEntries:
-  - m_GUID: ae69a7d0c3b73f94b9c60a5365548121
-    m_Address: Assets/Prefabs
+  - m_GUID: 6aa7b1686da8db54d9bcff883d0533bf
+    m_Address: Assets/Prefabs/WorldObjects
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7eeb928f579da5e43acee3f4faf47d8d
+    m_Address: Assets/Prefabs/Visual
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1d8af3f59e19e3d498c8310ccc1afeec
+    m_Address: Assets/Prefabs/Util
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8ee1d470ed196af4290587670c549bdd
+    m_Address: Assets/Prefabs/UI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 443cda8c5114fef418af49f4bc6d3dd4
+    m_Address: Assets/Prefabs/Scene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 54b24b460aa909f418a986069c74b91f
+    m_Address: Assets/Prefabs/Managers
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f40c958c9dd93a64c9d83c254f4c1c6b
+    m_Address: Assets/Prefabs/Level Controller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4bec1ed4558c8fc489f0d102e6670f0e
+    m_Address: Assets/Prefabs/Gameplay
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 65d01de10d25f4b478672d019c812478
+    m_Address: Assets/Prefabs/Character
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

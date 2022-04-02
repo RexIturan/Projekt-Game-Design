@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Debug
+  m_EditorClassIdentifier: 
+  m_GroupName: Debug
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c0e9a36e216d63247958abf9e4e289b6
+  m_SerializeEntries:
+  - m_GUID: db10b284605b6104684403fe9bc7a57a
+    m_Address: Assets/Prefabs/Debug/Visual Node.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6fbf83214a44219418bc095c8086c2f6
+    m_Address: Assets/Scripts/_Gameplay/Systems/PathfindingSystem/Pathfinding/VisualDebug/SquareOutline.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 19f143d336c68034785c31d1e217c162, type: 2}
+    - {fileID: 11400000, guid: 77af04b47b29e2a4893477b044d7d22c, type: 2}

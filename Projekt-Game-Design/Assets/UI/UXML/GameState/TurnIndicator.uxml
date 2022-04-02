@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="TurnIndicator_Screen" picking-mode="Ignore" style="background-color: rgba(0, 0, 0, 0.54); background-image: none; flex-grow: 1; align-items: center; justify-content: flex-start; position: absolute; width: 100%; height: 100%;">
+    <ui:VisualElement name="TurnIndicator_Screen" picking-mode="Ignore" style="background-color: rgba(0, 0, 0, 0.1); background-image: none; flex-grow: 1; align-items: center; justify-content: flex-start; position: absolute; width: 100%; height: 100%;">
         <ui:Label text="Enemy Turn" display-tooltip-when-elided="true" name="TunrIndicator_Label" style="margin-top: 48px; color: rgb(255, 0, 0); font-size: 91%;" />
     </ui:VisualElement>
 </ui:UXML>

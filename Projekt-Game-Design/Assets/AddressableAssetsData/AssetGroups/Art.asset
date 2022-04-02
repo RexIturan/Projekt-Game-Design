@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Art
+  m_EditorClassIdentifier: 
+  m_GroupName: Art
+  m_Data:
+    m_SerializedData: []
+  m_GUID: fef4a778ab6dacd498017979bb78bfb5
+  m_SerializeEntries:
+  - m_GUID: 9c56b19399b4f984ab07d8bff29a4c70
+    m_Address: Assets/Art/Sprites
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 01b407838620d0d4cbed9a03c66e30ca
+    m_Address: Assets/Art/Shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6eba58dcb01ddee4090e39beb9114b49
+    m_Address: Assets/Art/Models/projectiles
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bc9f5c3fce407d040934535c1eeaadc2
+    m_Address: Assets/Art/Material/TileMesh_mat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5f7ee377175686a4db223f1b0ca10bb9
+    m_Address: Assets/Art/Material/Switch
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1a281f5fdacc83c4995816b0e32d98f2
+    m_Address: Assets/Art/Material/LevelEditor/Standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 29a2065bdc4737c4b8a8ce13507f6dbf
+    m_Address: Assets/Art/Material/Indicators
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 572e879cdd5e13043b2c0c7ac4198acf
+    m_Address: Assets/Art/Material/FOV_mat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 891f0019db915a047b7c73cd718e11ad
+    m_Address: Assets/Art/Material/Door
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 17a9f55167434da498dcb346bf3f8931
+    m_Address: Assets/Art/Material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b442d63fc4f688c42b0926627f5f5bd4
+    m_Address: Assets/Art/Character
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a930d77f4f639924f9cd040a625ffa2c
+    m_Address: Assets/Art/Textures/Tiles
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cf27f54fb2c45d64fae052c4e0c1a50c
+    m_Address: Assets/Art/Textures/Foliage
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5ef145db3a7136542bd9f5d50725bc21
+    m_Address: Assets/Art/Textures/arrow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1d7c82d4ff8beee45ae61b1df863914b
+    m_Address: Assets/Art/Tilemap Resources
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6492b897520e3d14ca37635bfb735068
+    m_Address: Assets/Art/Models/Water
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7b6336d28fb65534896bf49ee03d2831
+    m_Address: Assets/Art/Models/level
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b7f52afb97ae75b45b1ac0f48cd23d50
+    m_Address: Assets/Art/Models/worldObjects/Keys_And_Lock_1.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9f5a52d02d0bfe84fa7d83456817da92
+    m_Address: Assets/Art/Models/worldObjects/key.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 46fc24b8f2f9b3445bee37fd76da8102
+    m_Address: Assets/Art/Models/items
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 12899f67b1cc3d54083e5e6473ead48f, type: 2}
+    - {fileID: 11400000, guid: 6e8ecb29c1a2abd41a5e4bfa7ab84908, type: 2}

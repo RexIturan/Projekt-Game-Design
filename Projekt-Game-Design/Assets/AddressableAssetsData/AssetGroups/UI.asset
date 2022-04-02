@@ -25,6 +25,38 @@ MonoBehaviour:
     m_Address: Assets/UI/Styles/Button_Layout.uss
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: db52480469437334a807a6cacc94ac6c
+    m_Address: Assets/UI/UXML
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 152d52da0b0049c485ac7b675f2cc08b
+    m_Address: Assets/UI/Themes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 15781ddda5d891544943d544e51faaa0
+    m_Address: Assets/UI/Styles
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e521dd27c80224c40b38353ce7fc504f
+    m_Address: Assets/UI/SaveSystem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8ed6f7098a3644d4c874dabce0af3564
+    m_Address: Assets/UI/ModalWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fa3a79f246b444b49ac2617116c04982
+    m_Address: Assets/UI/LevleEditor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 194ae6da02e1ff341877beb0ca8d6f42
+    m_Address: Assets/UI Toolkit/GDP01_TooltipPanelSettings.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 56e2fc8d2b6b03d40a1c7ecf51e46bbb
+    m_Address: Assets/UI Toolkit/GDP01_PanelSettings.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4664d4abb6a93614aa6f0d6af669cc38, type: 2}
   m_SchemaSet:
