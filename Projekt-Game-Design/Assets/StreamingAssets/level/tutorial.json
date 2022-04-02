@@ -420,7 +420,53 @@
       }
     }
   ],
-  "junks": [],
+  "junks": [
+      {
+        "junkTypeId": 1,
+        "gridPos": {
+			"x": 5,
+	        "y": 1,
+		    "z": 23
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 2,
+        "gridPos": {
+			"x": 4,
+	        "y": 1,
+		    "z": 23
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 3,
+        "gridPos": {
+			"x": 3,
+	        "y": 1,
+		    "z": 23
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      }
+	],
   "tileEffects": [
 	{
       "prefabID": 0,

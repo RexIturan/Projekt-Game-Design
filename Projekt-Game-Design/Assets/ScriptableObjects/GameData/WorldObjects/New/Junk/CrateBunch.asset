@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e83dff73502bbe408be1fe8b27689b3, type: 3}
+  m_Name: CrateBunch
+  m_EditorClassIdentifier: 
+  id: 2
+  prefab: {fileID: 5962490239412866605, guid: 60ace4b82b2b5d54c96634bb738e42bd, type: 3}
+  model: {fileID: 1550799276982701426, guid: 3dbb92b5a33b72b43894564fdd1211ee, type: 3}
+  junkName: Crate Bunch
+  description: 'It is a simple, destructable group of crates. '
+  destructionSound: {fileID: 11400000, guid: 42f6bd2360cc2d04b9c772877bc480f8, type: 2}
+  walkThrough: 0
+  destructable: 1
+  hitPoints: 5

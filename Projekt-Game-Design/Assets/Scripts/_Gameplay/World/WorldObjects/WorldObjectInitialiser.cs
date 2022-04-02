@@ -50,6 +50,15 @@ namespace WorldObjects
 							switchComponent.Initialise(switchSave, type);
 							WorldObjectManager.AddSwitch(switchComponent);
 						}
+
+						//load junk
+						foreach ( Junk_Save junkSave in junk_Saves ) {
+							JunkTypeSO type = junkContainer.junks[junkSave.junkTypeId];
+							GameObject junkObj = Instantiate(type.prefab);
+							Junk junk = junkObj.GetComponent<Junk>();
+							junk.InitFromSave(junkSave, type);
+							WorldObjectManager.AddJunk(junk);
+						}
 						
 						foreach ( var itemSave in itemSaves ) {
 							ItemTypeSO itemType = itemTypeContainer.GetItemFromID(itemSave.id);

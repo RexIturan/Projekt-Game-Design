@@ -8,10 +8,10 @@ using UnityEngine;
 
 namespace WorldObjects
 {
-		public class Junk : MonoBehaviour
+	[RequireComponent(typeof(Targetable))]
+	[RequireComponent(typeof(Statistics))]
+		public partial class Junk : WorldObject.Factory<Junk, Junk.JunkData>
 		{
-				public bool broken;
-
 				[Header("Receiving Events on:")]
 				[SerializeField] private VoidEventChannelSO updateWorldObjectsEvent;
 
@@ -19,13 +19,67 @@ namespace WorldObjects
 				[SerializeField] private VoidEventChannelSO redrawLevelEC;
 				[SerializeField] private SoundEventChannelSO playSoundEC;
 
-				// public int junkId;
-				public JunkTypeSO junkType;
+				public WorldObjectManager worldObjectManager;
 
-				public Vector3 orientation;
+				public new JunkTypeSO Type {
+					get { return ( JunkTypeSO )_type; }
+					set { _type = value; }
+				}
 
-				public void Initialise(Junk_Save saveData, JunkTypeSO junkType)
+				[SerializeField] private JunkData junkData;
+				[SerializeField] private Targetable _targetable;
+				[SerializeField] private Statistics _statistics;
+
+				public bool Broken { get => junkData.broken; set => junkData.broken = value; }
+
+				public bool IsBroken => Broken;
+
+				public void InitFromSave(Junk_Save saveData, JunkTypeSO junkType) {
+					_type = junkType;
+					
+					if(junkType.model) { 
+						Instantiate(junkType.model, transform);
+					}
+					else
+						Debug.LogError($"Junk type {junkType.name} (id: {junkType.id}) has no model. ");
+						
+					Broken = saveData.broken;
+
+					GridTransform.RotateTo(saveData.orientation);
+
+					_targetable = gameObject.AddComponent<Targetable>();
+					_targetable.Initialise();
+
+					GridTransform.MoveTo(saveData.gridPos);
+					
+					_statistics.StatusValues.InitValues(null);
+					_statistics.StatusValues.HitPoints.Max = junkType.hitPoints;
+					_statistics.StatusValues.HitPoints.Value = saveData.currentHitPoints;
+					_statistics.SetFaction(Faction.Neutral);
+					_statistics.SetArmorType(junkType.armorType);
+				}
+
+				public void Initialise(JunkTypeSO junkType)
 				{
+						_type = junkType;
+
+						junkData.broken = false;
+
+						GridTransform.RotateTo(Vector3.zero);
+
+						_targetable = gameObject.AddComponent<Targetable>();
+						_targetable.Initialise();
+
+						GridTransform.MoveTo(Vector3.zero);
+
+						_statistics.StatusValues.InitValues(null);
+						_statistics.StatusValues.HitPoints.Max = junkType.hitPoints;
+						_statistics.StatusValues.HitPoints.Value = junkType.hitPoints;
+						_statistics.SetFaction(Faction.Neutral);
+
+						// FirstUpdate();
+
+						/*
 						broken = saveData.broken;
 						this.junkType = junkType;
 
@@ -46,11 +100,7 @@ namespace WorldObjects
 						stats.StatusValues.HitPoints.Max = junkType.hitPoints;
 						stats.StatusValues.HitPoints.Value = saveData.currentHitPoints;
 						stats.SetFaction(Faction.Neutral);
-				}
-
-				private void InitialiseOrientation()
-				{
-						gameObject.transform.rotation = Quaternion.LookRotation(orientation);
+						*/
 				}
 
 				public void Awake()
@@ -69,19 +119,24 @@ namespace WorldObjects
 				 */
 				public void UpdateJunk()
 				{
-						if ( !broken && gameObject.GetComponent<Statistics>().StatusValues.HitPoints.IsMin() )
+						if ( !IsBroken && gameObject.GetComponent<Statistics>().StatusValues.HitPoints.IsMin() )
 						{
 								JunkDestroyed();
 						}
 				}
 
 				private void JunkDestroyed() {
-						broken = true;
+						Broken = true;
 						//todo ??????
 						// TODO(vincent) refactor -> Drop.GetLoot -> LootSpawner.Spawn(Loot)
 						// E_DropLoot_OnEnter.DropLoot(redrawLevelEC, junkType.drop, gameObject.GetComponent<GridTransform>().gridPosition);
 
-						playSoundEC.RaiseEvent(junkType.destructionSound);
+						playSoundEC.RaiseEvent(Type.destructionSound);
+
+						if ( worldObjectManager )
+								worldObjectManager.RemoveJunkAt(transform.position);
+						else
+								Debug.LogError("No world object manager for junk set. Can't remove junk. ");
 				}
 		}
 }

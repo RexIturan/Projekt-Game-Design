@@ -46,8 +46,10 @@ namespace Combat {
 			
 			if ( IsDead ) {
 				var healthbar = GetComponentInChildren<HealthbarController>();
-				healthbar.UpdateVisuals(statistics.StatusValues.HitPoints);
-				healthbar.StartHideAfterDelay();	
+				if( healthbar) { 
+					healthbar.UpdateVisuals(statistics.StatusValues.HitPoints);
+					healthbar.StartHideAfterDelay();
+				}
 			}
 		}
 

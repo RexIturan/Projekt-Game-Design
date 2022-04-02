@@ -1,0 +1,1 @@
+Notice that Boulder has the armor type "Fortified" and only receives damage from damage type "Siege". More information in the damage table here: Assets/Scripts/_Gameplay/Systems/CombatSystem/DamageTable.cs

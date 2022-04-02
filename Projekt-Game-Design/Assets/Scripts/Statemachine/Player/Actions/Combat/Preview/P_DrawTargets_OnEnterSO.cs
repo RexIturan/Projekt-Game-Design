@@ -88,8 +88,7 @@ public class P_DrawTargets_OnEnter : StateAction {
 				WorldObjectManager worldObjectManager = GameplayProvider.Current.WorldObjectManager;
 				
 				neutralObjects.AddRange(worldObjectManager.GetDoors().Select(door => door.gameObject));
-				//TODO JUNK
-				// neutralObjects.AddRange(worldObjects.junks);
+				neutralObjects.AddRange(worldObjectManager.GetJunks().Select(junk => junk.gameObject));
 
 				foreach(GameObject neutralObj in neutralObjects) {
 					Targetable neutralTargetable = neutralObj.GetComponent<Targetable>();
