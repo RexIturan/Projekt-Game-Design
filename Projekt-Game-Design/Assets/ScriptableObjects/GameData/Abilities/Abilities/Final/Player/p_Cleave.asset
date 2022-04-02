@@ -10,42 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
-  m_Name: BasicMelee
+  m_Name: p_Cleave
   m_EditorClassIdentifier: 
-  id: 1
-  icon: {fileID: 21300000, guid: 0a64a671c1b32f048b225fb1692082fd, type: 3}
-  abilityName: 
-  description: 'Einfacher Nahkampf. Kosten: 1'
-  Animation: 8
-  activationSound: {fileID: 11400000, guid: 42f6bd2360cc2d04b9c772877bc480f8, type: 2}
+  id: 26
+  icon: {fileID: 21300000, guid: 1fb39d2aa1c634e4fa484ed4cf7fdff1, type: 3}
+  abilityName: Cleave
+  description: 'Hit all your opponents at once with a great swing of your sword. '
+  Animation: 9
+  activationSound: {fileID: 11400000, guid: b7d9ac76e946dd54eaa183fc8d34aac5, type: 2}
   projectilePrefab: {fileID: 0}
-  timeUntilDamage: 0.15
+  timeUntilDamage: 0.2
   repeated: 1
   damaging: 1
-  targets: 20
+  targets: 28
   moveToTarget: 0
-  targetableTilesAreCross: 0
+  targetableTilesAreCross: 1
   range: 1
-  conditions: 0
-  costs: 8
+  conditions: 8
+  costs: 20
   targetedEffects:
   - effect:
       type: 1
-      baseDamage: 6
-      strengthBonus: 0.52
+      baseDamage: 15
+      strengthBonus: 0
       dexterityBonus: 0
       intelligenceBonus: 0
     targets: 20
     targetIsCenter: 1
     area:
-      stringPattern: '[x]'
+      stringPattern: '- x -
+
+        x x x
+
+        x[x]x'
       rows:
-      - line: 01
-      anchor: {x: 0, y: 0}
+      - line: 000000
+      - line: 000000
+      - line: 000000
+      anchor: {x: 1, y: 0}
     tileEffect: {fileID: 0}
-  cooldown: 0
+  cooldown: 2
   selectedActions:
-  - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}
   - {fileID: 11400000, guid: 8d5abf5e064648d46a86187da80dd12b, type: 2}
   executingActions:
   - {fileID: 11400000, guid: 45027094d4b799243a3cfa555ca9d099, type: 2}

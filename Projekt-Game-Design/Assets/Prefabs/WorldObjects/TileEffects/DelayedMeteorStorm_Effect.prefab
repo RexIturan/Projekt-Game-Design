@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5d4612931217747945d10ce7d42380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 2
   effects:
   - {fileID: 11400000, guid: ad174985899cac547928545e454786a5, type: 2}
   preActivationEffects:

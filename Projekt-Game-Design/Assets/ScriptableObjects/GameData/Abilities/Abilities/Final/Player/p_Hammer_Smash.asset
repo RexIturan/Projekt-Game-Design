@@ -10,29 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
-  m_Name: BasicMelee
+  m_Name: p_Hammer_Smash
   m_EditorClassIdentifier: 
-  id: 1
-  icon: {fileID: 21300000, guid: 0a64a671c1b32f048b225fb1692082fd, type: 3}
-  abilityName: 
-  description: 'Einfacher Nahkampf. Kosten: 1'
-  Animation: 8
+  id: 0
+  icon: {fileID: 21300000, guid: e8a1bb1099fee7947b16e56483d9c14f, type: 3}
+  abilityName: Smash
+  description: 'Crush them with your hammer. '
+  Animation: 9
   activationSound: {fileID: 11400000, guid: 42f6bd2360cc2d04b9c772877bc480f8, type: 2}
-  projectilePrefab: {fileID: 0}
-  timeUntilDamage: 0.15
+  projectilePrefab: {fileID: 1194966964175767583, guid: 5b3f54d4a571a4c4e8d4122580f21dd2, type: 3}
+  timeUntilDamage: 0.4
   repeated: 1
   damaging: 1
   targets: 20
   moveToTarget: 0
   targetableTilesAreCross: 0
   range: 1
-  conditions: 0
-  costs: 8
+  conditions: 8
+  costs: 15
   targetedEffects:
   - effect:
-      type: 1
-      baseDamage: 6
-      strengthBonus: 0.52
+      type: 3
+      baseDamage: 12
+      strengthBonus: 0
       dexterityBonus: 0
       intelligenceBonus: 0
     targets: 20
@@ -40,12 +40,11 @@ MonoBehaviour:
     area:
       stringPattern: '[x]'
       rows:
-      - line: 01
+      - line: 00
       anchor: {x: 0, y: 0}
     tileEffect: {fileID: 0}
-  cooldown: 0
+  cooldown: 1
   selectedActions:
-  - {fileID: 11400000, guid: 643b49d8b3440df42b7133e78ef88d8d, type: 2}
   - {fileID: 11400000, guid: 8d5abf5e064648d46a86187da80dd12b, type: 2}
   executingActions:
   - {fileID: 11400000, guid: 45027094d4b799243a3cfa555ca9d099, type: 2}

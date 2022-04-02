@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   icon: {fileID: 21300000, guid: 9a0eb45eaedcb804f9f2016fbf9296d0, type: 3}
-  description: move to target pos
+  abilityName: 'Run '
+  description: 'Move wherever your feet may carry you. '
   Animation: 5
-  activationSound: 
+  activationSound: {fileID: 0}
   projectilePrefab: {fileID: 0}
   timeUntilDamage: 0
   repeated: 1
   damaging: 0
   targets: 24
   moveToTarget: 1
+  targetableTilesAreCross: 0
   range: 0
   conditions: 1
   costs: 0

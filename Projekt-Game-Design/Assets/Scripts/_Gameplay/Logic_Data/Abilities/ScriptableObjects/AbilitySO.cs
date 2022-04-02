@@ -14,6 +14,7 @@ public class AbilitySO : ScriptableObject {
 
 	public int id;
     public Sprite icon;
+		public string abilityName;
     public string description;
 		public CharacterAnimation Animation;
 		public SoundSO activationSound;

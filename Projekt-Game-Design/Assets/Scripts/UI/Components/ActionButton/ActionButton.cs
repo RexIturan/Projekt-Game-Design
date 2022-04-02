@@ -207,7 +207,7 @@ namespace UI.Components.ActionButton {
 		
 		public void SetupActionButton(AbilitySO abilitySO, int cooldown) {
 			ImageData = abilitySO.icon;
-			ActionText = abilitySO.name;
+			ActionText = abilitySO.abilityName;
 			Cooldown = cooldown;
 			SetupTooltip(abilitySO);
 			UpdateComponent();
