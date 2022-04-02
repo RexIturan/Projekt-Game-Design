@@ -1,3 +1,4 @@
+using Ability;
 using Audio;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace WorldObjects {
 				public SoundSO destructionSound;
 				public bool walkThrough;
 				public bool destructable;
+				public ArmorType armorType;
 				public int hitPoints;
 				//todo(vincent) refactor
 				// public LootTable drop;

@@ -23,6 +23,7 @@ namespace Characters {
 		// getter und setter faction
 		public Faction GetFaction() { return faction; }
 		public void SetFaction(Faction faction) { this.faction = faction; }
+		public void SetArmorType(ArmorType armorType ) { this.armorType = armorType; }
 
 		public void RefillEnergy() {
 			// refill energy etc.

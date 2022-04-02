@@ -56,6 +56,7 @@ namespace WorldObjects
 					_statistics.StatusValues.HitPoints.Max = junkType.hitPoints;
 					_statistics.StatusValues.HitPoints.Value = saveData.currentHitPoints;
 					_statistics.SetFaction(Faction.Neutral);
+					_statistics.SetArmorType(junkType.armorType);
 				}
 
 				public void Initialise(JunkTypeSO junkType)
