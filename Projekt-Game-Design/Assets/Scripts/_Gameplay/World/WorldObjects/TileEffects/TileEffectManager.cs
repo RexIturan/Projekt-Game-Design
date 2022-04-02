@@ -146,7 +146,7 @@ namespace GDP01.TileEffects
 						return (requiredFlags & actualFlags).Equals(requiredFlags);
 				}
 
-				private bool ExistsTileEffect(int id, Vector3Int pos) {
+				public bool ExistsTileEffect(int id, Vector3Int pos) {
 
 						List<GameObject> allEffects = new List<GameObject>();
 						allEffects.AddRange(tileEffects);
@@ -241,6 +241,9 @@ namespace GDP01.TileEffects
 						}
 				}
 
+				public static TileEffectManager FindInstant() {
+						return FindObjectOfType<TileEffectManager>();
+				}
 
 				public TileEffectManager.Data Save() {
 					return new Data {

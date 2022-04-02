@@ -424,6 +424,126 @@
       {
         "junkTypeId": 1,
         "gridPos": {
+			"x": 3,
+	        "y": 1,
+		    "z": 25
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 1,
+        "gridPos": {
+			"x": 4,
+	        "y": 1,
+		    "z": 25
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 1,
+        "gridPos": {
+			"x": 5,
+	        "y": 1,
+		    "z": 25
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 1,
+        "gridPos": {
+			"x": 6,
+	        "y": 1,
+		    "z": 25
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 1,
+        "gridPos": {
+			"x": 7,
+	        "y": 1,
+		    "z": 25
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 1,
+        "gridPos": {
+			"x": 8,
+	        "y": 1,
+		    "z": 25
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 1,
+        "gridPos": {
+			"x": 9,
+	        "y": 1,
+		    "z": 25
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 1,
+        "gridPos": {
+			"x": 10,
+	        "y": 1,
+		    "z": 25
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 1,
+        "gridPos": {
 			"x": 5,
 	        "y": 1,
 		    "z": 23

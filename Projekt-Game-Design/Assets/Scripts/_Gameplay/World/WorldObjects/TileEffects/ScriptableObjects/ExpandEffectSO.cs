@@ -28,7 +28,9 @@ namespace GDP01.TileEffects
 						Vector3Int center = tileEffectController.GetComponent<GridTransform>().gridPosition;
 
 						foreach ( Vector3Int neighbor in GetSurroundings(center) ) {
-								createTileEffectEC.RaiseEvent(tileEffectPrefab, neighbor);
+								TileEffectManager tileEffectManager = TileEffectManager.FindInstant();
+								if ( tileEffectManager && !tileEffectManager.ExistsTileEffect(tileEffectController.id, neighbor) )
+										createTileEffectEC.RaiseEvent(tileEffectPrefab, neighbor);
 						}
 
 						tileEffectController.RemoveEffect(this);
