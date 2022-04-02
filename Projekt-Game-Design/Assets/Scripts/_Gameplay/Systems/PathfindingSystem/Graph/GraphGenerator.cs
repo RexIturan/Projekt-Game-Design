@@ -87,16 +87,15 @@ namespace Graph {
 										graph.GetGridObject(pos).SetIsWalkable(false);
 								}
 						}
-
-						//TODO JUNK
-						// foreach ( var junk in worldObjectList.junks )
-						// {
-						// 		if ( !junk.GetComponent<Junk>().junkType.walkThrough && !junk.GetComponent<Junk>().broken)
-						// 		{
-						// 				var pos = gridData.GetGridPos2DFromGridPos3D(junk.GetComponent<GridTransform>().gridPosition);
-						// 				graph.GetGridObject(pos).SetIsWalkable(false);
-						// 		}
-						// }
+						
+						foreach ( var junk in WorldObjectManager.GetJunks() )
+						{
+						 		if ( !junk.GetComponent<Junk>().Type.walkThrough && !junk.GetComponent<Junk>().Broken)
+						 		{
+						 				var pos = gridData.GetGridPos2DFromGridPos3D(junk.GetComponent<GridTransform>().gridPosition);
+						 				graph.GetGridObject(pos).SetIsWalkable(false);
+						 		}
+						}
 
 						for (int x = 0; x < graph.Width; x++) {
                 for (int z = 0; z < graph.Depth; z++) {

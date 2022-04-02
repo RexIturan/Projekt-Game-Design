@@ -19,6 +19,8 @@ namespace WorldObjects
 				[SerializeField] private VoidEventChannelSO redrawLevelEC;
 				[SerializeField] private SoundEventChannelSO playSoundEC;
 
+				public WorldObjectManager worldObjectManager;
+
 				public new JunkTypeSO Type {
 					get { return ( JunkTypeSO )_type; }
 					set { _type = value; }
@@ -129,6 +131,11 @@ namespace WorldObjects
 						// E_DropLoot_OnEnter.DropLoot(redrawLevelEC, junkType.drop, gameObject.GetComponent<GridTransform>().gridPosition);
 
 						playSoundEC.RaiseEvent(Type.destructionSound);
+
+						if ( worldObjectManager )
+								worldObjectManager.RemoveJunkAt(transform.position);
+						else
+								Debug.LogError("No world object manager for junk set. Can't remove junk. ");
 				}
 		}
 }

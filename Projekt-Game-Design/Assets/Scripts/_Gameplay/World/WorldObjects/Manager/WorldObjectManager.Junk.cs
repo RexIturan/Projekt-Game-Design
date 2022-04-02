@@ -27,7 +27,9 @@ namespace WorldObjects {
 		
 		[ContextMenu("Add Junk")]
 		private void AddNewJunk() {
-			_junkComponents.Add(CreateJunk(defaultJunkTypeSO));
+			Junk junk = CreateJunk(defaultJunkTypeSO);
+			_junkComponents.Add(junk);
+			junk.worldObjectManager = this;
 		}
 
 		private Junk CreateJunk(JunkTypeSO junkTypeSO) {
@@ -50,6 +52,7 @@ namespace WorldObjects {
 				var junk = CreateJunk(junkType);
 				junk.GridTransform.MoveTo(worldPos);
 				_junkComponents.Add(junk);
+				junk.worldObjectManager = this;
 			}
 		}
 		
@@ -70,6 +73,7 @@ namespace WorldObjects {
 			junk.transform.SetParent(junkParent ? junkParent : transform);
 			junk.Id = _junkComponents.Count;
 			_junkComponents.Add(junk);
+			junk.worldObjectManager = this;
 		}
 
 		public List<Junk> GetJunkWhere(Func<Junk, bool> predicate) {
