@@ -22,7 +22,8 @@ namespace Grid {
 		//offset to word space
 		[SerializeField] private Vector3 originPosition;
 		[SerializeField] private Vector3 _cellCenter;
-
+		[SerializeField] private TileTypeContainerSO tileTypeContainer;
+		
 		//grid bounds
 		private Vector3Int maxPosition = new Vector3Int(100, 1, 100);
 		private Vector3Int minPosition = new Vector3Int(-100, 0, -100);
@@ -376,6 +377,36 @@ namespace Grid {
 #endif
 		}
 
-		
+
+		public TileTypeSO GetTileTypeAt(Vector3Int gridPosition) {
+			TileTypeSO type = null;
+			
+			if ( IsIn3DGridBounds(gridPosition) ) {
+				var id = TileGrids[gridPosition.y].GetGridObject(gridPosition.x, gridPosition.z).tileTypeID;
+				type = tileTypeContainer.tileTypes[id];		
+			}
+
+			return type;
+		}
+
+		public List<TileTypeSO> GetNeighbouringTileTypes(Vector3Int gridPosition) {
+			List<TileTypeSO> neighbours = new List<TileTypeSO>();
+
+			Vector3Int upPos = gridPosition + Vector3Int.up;
+			Vector3Int NPos = gridPosition + Vector3Int.forward;
+			Vector3Int EPos = gridPosition + Vector3Int.right;
+			Vector3Int SPos = gridPosition + Vector3Int.back;
+			Vector3Int WPos = gridPosition + Vector3Int.left;
+			Vector3Int downPos = gridPosition + Vector3Int.up;
+			
+			neighbours.Add( GetTileTypeAt(upPos));
+			neighbours.Add( GetTileTypeAt(NPos));
+			neighbours.Add( GetTileTypeAt(EPos));
+			neighbours.Add( GetTileTypeAt(SPos));
+			neighbours.Add( GetTileTypeAt(WPos));
+			neighbours.Add( GetTileTypeAt(downPos));
+			
+			return neighbours;
+		}
 	}
 }

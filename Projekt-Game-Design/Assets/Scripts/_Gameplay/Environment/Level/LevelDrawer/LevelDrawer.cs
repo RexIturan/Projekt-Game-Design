@@ -18,11 +18,12 @@ namespace Visual {
 		
 		[Header("SendingEventsOn")] [SerializeField] private VoidEventChannelSO updateMeshEC;
 		[SerializeField] private TileMapDrawer drawer;
-
+		[SerializeField] private PrefabGridDrawer tileObjectDrawer;
 		[Header("Settings"), SerializeField] private ELevelType _levelType;
 
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
 
+		[ContextMenu("GenerateLevel")]
 		private void GenerateLevel() {
 			switch ( _levelType ) {
 				case ELevelType.SingleMesh:
@@ -32,6 +33,7 @@ namespace Visual {
 				
 				case ELevelType.GameObjectPerTile:
 					//TODO TileObjectController
+					tileObjectDrawer.GenerateTiles();
 					break;
 			}
 		}
@@ -39,10 +41,7 @@ namespace Visual {
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////		
 		
 		public void RedrawLevel() {
-			if ( _levelType == ELevelType.SingleMesh ) {
-				drawer?.DrawGrid();
-				updateMeshEC.RaiseEvent();	
-			}
+			GenerateLevel();
 		}
 
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////

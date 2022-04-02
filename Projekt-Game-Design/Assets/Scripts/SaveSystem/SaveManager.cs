@@ -255,6 +255,12 @@ namespace SaveSystem {
 			//todo initialise level??
 		}
 
+		[ContextMenu("LoadGridData")]
+		private void LoadGridData() {
+			LoadLevel("");
+			SaveReader.ReadGridDataFromSave(_saveObject, gridData);
+		}
+		
 		#endregion
 
 		//todo v Refactor

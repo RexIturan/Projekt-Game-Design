@@ -1,4 +1,5 @@
-﻿using Level.Grid;
+﻿using GDP01._Gameplay.Environment.Level.Grid.Types;
+using Level.Grid;
 using UnityEngine;
 
 namespace Grid {
@@ -9,5 +10,7 @@ namespace Grid {
         public TileProperties properties;
         public int movementCost;
         public Color color;
+        
+        public TileVariance tileVariance;
     }
 }

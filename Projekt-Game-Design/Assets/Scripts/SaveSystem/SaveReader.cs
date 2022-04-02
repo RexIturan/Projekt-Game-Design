@@ -145,6 +145,11 @@ namespace SaveSystem {
 			_characterInitializer = characterInitialiser;
 			_worldObjectInitialiser = worldObjectInitialiser;
 		}
+
+		public void ReadGridDataFromSave(Save save, GridDataSO gridDataSO) {
+			ReadGridData(save, gridDataSO);
+			ReadGrid(save, gridDataSO);
+		}
 		
 		public void ReadSave(Save save) {
 			

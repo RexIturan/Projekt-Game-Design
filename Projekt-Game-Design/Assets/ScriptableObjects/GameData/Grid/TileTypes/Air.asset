@@ -17,3 +17,17 @@ MonoBehaviour:
   properties: 8
   movementCost: 0
   color: {r: 1, g: 1, b: 1, a: 0}
+  tileVariance:
+    basicTile: {fileID: 0}
+    top_sides_0: {fileID: 0}
+    top_sides_N: {fileID: 0}
+    top_sides_NE: {fileID: 0}
+    top_sides_NS: {fileID: 0}
+    top_sides_NES: {fileID: 0}
+    top_sides_NESW: {fileID: 0}
+    bottom_sides_0: {fileID: 0}
+    bottom_sides_N: {fileID: 0}
+    bottom_sides_NE: {fileID: 0}
+    bottom_sides_NS: {fileID: 0}
+    bottom_sides_NES: {fileID: 0}
+    bottom_sides_NESW: {fileID: 0}
