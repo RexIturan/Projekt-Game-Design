@@ -120,6 +120,7 @@ MonoBehaviour:
   updateWorldObjectsEvent: {fileID: 11400000, guid: 43cbd7484c763514587e57c1e45ea0fa, type: 2}
   redrawLevelEC: {fileID: 11400000, guid: 076a51549e7ef074aaa161d0013325a5, type: 2}
   playSoundEC: {fileID: 11400000, guid: 334da6b366e267b41bf607620497b575, type: 2}
+  worldObjectManager: {fileID: 0}
   junkData:
     id: -1
     gridPosition: {x: 0, y: 0, z: 0}
