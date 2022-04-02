@@ -19,7 +19,7 @@ MonoBehaviour:
     the ground, dealing additional damage over multiple turns. '
   Animation: 10
   activationSound: {fileID: 11400000, guid: 61e1a1d94fb953c4394f0fceb41adbfe, type: 2}
-  projectilePrefab: {fileID: 1194966964175767583, guid: 5b3f54d4a571a4c4e8d4122580f21dd2, type: 3}
+  projectilePrefab: {fileID: 1194966964175767583, guid: 221069eb46b8bfc4dbfeeaddbebf8e03, type: 3}
   timeUntilDamage: 0.5
   repeated: 1
   damaging: 1

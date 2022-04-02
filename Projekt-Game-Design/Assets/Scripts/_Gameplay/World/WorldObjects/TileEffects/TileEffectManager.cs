@@ -31,6 +31,8 @@ namespace GDP01.TileEffects
 				[SerializeField] private VoidEventChannelSO clearTilemapEC;
 				[SerializeField] private DrawTileEventChannelSO drawTileEC;
 
+				private bool isHandlingEffects;
+
 				/// <summary>
 				/// Time it takes to destroy a tile effect when it's queued for destruction. 
 				/// </summary>
@@ -107,11 +109,17 @@ namespace GDP01.TileEffects
 
 						// only add if such a tile effect doesn't already exist
 						// and if the requirements for the tile types are met
-						if ( !ExistsTileEffect(tileEffectController.id, position) && 
-								TileRequirementsAreMet(tileEffectController, position)) {
+						if (TileRequirementsAreMet(tileEffectController, position)) {
+								RemoveExistingTileEffect(tileEffectController.id, position);
+
 								GameObject newTileEffect = Instantiate(tileEffect, Vector3.zero, Quaternion.identity, transform);
 								newTileEffect.GetComponent<GridTransform>().gridPosition = position;
 								Add(newTileEffect);
+
+								DrawTileEffects();
+
+								if ( !isHandlingEffects )
+										DestroyDeadEffects(0);
 						}
 				}
 
@@ -150,6 +158,31 @@ namespace GDP01.TileEffects
 						});
 				}
 
+				/// <summary>
+				/// Removes all scheduled and existing TileEffects at given position with given id. 
+				/// Is used when creating new TileEffects to avoid duplicates. 
+				/// </summary>
+				/// <param name="id">ID of TileEffect that is to remove</param>
+				/// <param name="pos">Only TileEffects at this grid position will be removed </param>
+				private void RemoveExistingTileEffect(int id, Vector3Int pos) {
+						foreach (GameObject tileEffect in tileEffects) {
+								if ( tileEffect.GetComponent<TileEffectController>().id == id &&
+										tileEffect.GetComponent<GridTransform>().gridPosition.Equals(pos) ) {
+										tileEffect.GetComponent<TileEffectController>().SetDestroyTrue();
+								}
+						}
+
+						for ( int i = 0; i < scheduledEffects.Count; ) {
+								if ( scheduledEffects[i].GetComponent<TileEffectController>().id == id &&
+										scheduledEffects[i].GetComponent<GridTransform>().gridPosition.Equals(pos) ) {
+										Destroy(scheduledEffects[i]);
+										scheduledEffects.RemoveAt(i);
+								}
+								else
+										i++;
+						}
+				}
+
 				private void AddScheduledEffects() {
 						foreach(GameObject tileEffect in scheduledEffects) {
 								tileEffects.Add(tileEffect);
@@ -159,6 +192,8 @@ namespace GDP01.TileEffects
 
 				public void HandleTileEffects(Faction newTurnFaction)
 				{
+						isHandlingEffects = true;
+
 						AddScheduledEffects();
 
 						// evaluate effects etc. 
@@ -169,26 +204,36 @@ namespace GDP01.TileEffects
 						}
 
 						// destroy the dead ones
+						DestroyDeadEffects(TIME_FOR_DESTROY);
+
+						DrawTileEffects();
+
+						isHandlingEffects = false;
+				}
+
+				private void DestroyDeadEffects(float delay) {
 						for(int i = 0; i < tileEffects.Count;) {
 								if( tileEffects[i].GetComponent<TileEffectController>().GetDestroy() ) {
-										Destroy(tileEffects[i], TIME_FOR_DESTROY);
+										Destroy(tileEffects[i], delay);
 										tileEffects.RemoveAt(i);
 								}
 								else {
 										i++;
 								}
 						}
-
-						DrawTileEffects();
 				}
 
 				/// <summary>
 				/// Draws tiles of tile effects onto tilemap. 
 				/// </summary>
 				private void DrawTileEffects() {
+						List<GameObject> allEffects = new List<GameObject>();
+						allEffects.AddRange(tileEffects);
+						allEffects.AddRange(scheduledEffects);
+
 						clearTilemapEC.RaiseEvent();
 
-						foreach(GameObject tileEffect in tileEffects) {
+						foreach(GameObject tileEffect in allEffects ) {
 								GridTransform tilePos = tileEffect.GetComponent<GridTransform>();
 								TileEffectController effectController = tileEffect.GetComponent<TileEffectController>();
 

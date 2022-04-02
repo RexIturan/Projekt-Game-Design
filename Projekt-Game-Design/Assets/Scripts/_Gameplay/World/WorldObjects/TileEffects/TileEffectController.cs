@@ -117,6 +117,10 @@ namespace GDP01.TileEffects
 						return destroy;
 				}
 
+				public void SetDestroyTrue() {
+						destroy = true;
+				}
+
 				#endregion
 				
 				public void AddEffect(TileEffectSO effect) {
