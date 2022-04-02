@@ -2,6 +2,7 @@
 
 namespace MeshGenerator {
 	public class MeshController : MonoBehaviour {
+		
 		[Header("Receiving Events On")] [SerializeField]
 		private VoidEventChannelSO updateMeshEC;
 
