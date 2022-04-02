@@ -68,6 +68,7 @@ namespace LevelEditor {
 		private bool _leftClicked;
 		private bool _rightClicked;
 		private bool _dragEnd;
+		private bool _dragStarted;
 
 		private bool remove = false;
 
@@ -124,27 +125,31 @@ namespace LevelEditor {
 		}
 		
 		private void HandleMouseDrag(Vector3 pos) {
-			if ( _leftClicked ) {
-				if ( _clickedAbovePos.Count == 1 ) {
-					_clickedAbovePos.Add(pos);
-				}
-				else {
-					_clickedAbovePos[1] = pos;
-				}
-			}
-			else {
-				if ( _clickedSelectedPos.Count == 1 ) {
-					_clickedSelectedPos.Add(pos);
-				}
-				else {
-					_clickedSelectedPos[1] = pos;
-				}
-			}
+			// if ( _leftClicked ) {
+			// 	if ( _clickedAbovePos.Count == 1 ) {
+			// 		_clickedAbovePos.Add(pos);
+			// 	}
+			// 	else {
+			// 		_clickedAbovePos[1] = pos;
+			// 		Debug.Log($"above [{_clickedAbovePos[0]}, {_clickedAbovePos[1]}]");
+			// 	}
+			// }
+			// else {
+			// 	if ( _clickedSelectedPos.Count == 1 ) {
+			// 		_clickedSelectedPos.Add(pos);
+			// 	}
+			// 	else {
+			// 		_clickedSelectedPos[1] = pos;
+			// 		Debug.Log($"selected [{_clickedSelectedPos[0]}, {_clickedSelectedPos[1]}]");
+			// 	}
+			// }
+			
+			// Debug.Log($"above [{_clickedAbovePos[0]}, {_clickedAbovePos[1]}]\nselected [{_clickedSelectedPos[0]}, {_clickedSelectedPos[1]}]");
 		}
 
-		private void HandleMouseDragEnd() {
-			_dragEnd = true;
-		}
+		// private void HandleMouseDragEnd() {
+		// 	_dragEnd = true;
+		// }
 
 /////////////////////////////////////// Public Functions ///////////////////////////////////////////
 
@@ -163,9 +168,6 @@ namespace LevelEditor {
 		#region MonoBehaviour
 
 		private void OnEnable() {
-			_clickedAbovePos = new List<Vector3>();
-			_clickedSelectedPos = new List<Vector3>();
-
 			_editorState.selectedTileType = tileTypesContainer.tileTypes[1];
 			inputReader.ResetEditorLevelEvent += ResetLevel;
 			levelLoaded.OnEventRaised += RedrawLevel;
@@ -199,7 +201,7 @@ namespace LevelEditor {
 			leftMouseWasReleased = inputCache.leftButton.wasRelesed;
 			leftMouseIsPressed = inputCache.leftButton.isPressed;
 			rightMouseIsPressed = inputCache.rightButton.isPressed;
-			_rightClicked = inputCache.rightButton.isPressed;
+			_rightClicked = inputCache.rightButton.started;
 			_leftClicked = inputCache.leftButton.started;
 			_dragEnd = inputCache.DragEnded();
 
@@ -208,18 +210,57 @@ namespace LevelEditor {
 			var centeredGridPos = inputCache.cursor.selectedPos.tileCenter;
 			var centeredGridPosAbove = inputCache.cursor.abovePos.tileCenter;
 
-			remove = rightMouseIsPressed && !(leftMouseIsPressed || _leftClicked);
+			// remove = rightMouseIsPressed && !(leftMouseIsPressed || _leftClicked);
 
-			if ( leftMouseIsPressed || rightMouseIsPressed ) {
-				_clickedSelectedPos.Add(tileWorldPositionSelected);
-				_clickedAbovePos.Add(tileWorldPositionAbove);	
+
+			if ( _leftClicked || leftMouseIsPressed ) {
+				remove = false;
 			}
+			if ( rightMouseIsPressed ) {
+				remove = true;
+			}
+
+			editing = leftMouseIsPressed || rightMouseIsPressed || leftMouseWasReleased || rightMouseWasReleased;
+
+			if ( editing ) {
+				CurrentPos = tileWorldPositionSelected;
+				CurrentAbovePos = tileWorldPositionAbove;
+
+				if ( _leftClicked || _rightClicked ) {
+					StartPos = CurrentPos;
+					StartAbovePos = CurrentAbovePos;
+					EndPos = CurrentPos;
+					EndAbovePos = CurrentAbovePos;
+				}
+
+				if ( leftMouseWasReleased || rightMouseWasReleased ) {
+					EndPos = CurrentPos;
+					EndAbovePos = CurrentAbovePos;
+				}
+			}
+			
+			
+			
+			// if ( leftMouseIsPressed || rightMouseIsPressed ) {
+			// 	_clickedSelectedPos.Add(tileWorldPositionSelected);
+			// 	_clickedAbovePos.Add(tileWorldPositionAbove);	
+			// }
+
+			// if ( _leftClicked ) {
+			// 	ClearCachedClickedPositions();
+			// 	_clickedSelectedPos.Add(tileWorldPositionSelected);
+			// 	_clickedAbovePos.Add(tileWorldPositionAbove);
+			// }
 
 			// kein input aber gecached daten -> clear
-			if ( !rightMouseIsPressed && !leftMouseIsPressed &&
-			     !( rightMouseWasReleased || leftMouseWasReleased ) ) {
-				ClearCachedClickedPositions();
-			}
+			// if ( !rightMouseIsPressed && !leftMouseIsPressed &&
+			//      !( rightMouseWasReleased || leftMouseWasReleased ) 
+			//      && _clickedAbovePos is {Count: >0 } 
+			//      && _clickedSelectedPos is {Count: >0 }
+			//      && !_dragEnd) {
+			// 	
+			// 	ClearCachedClickedPositions();
+			// }
 			
 			#endregion
 			
@@ -233,7 +274,7 @@ namespace LevelEditor {
 				case EditorMode.Paint:
 					DrawCursor(Layer, cursorMode, centeredGridPos, centeredGridPosAbove);
 
-					if ( _rightClicked ) {
+					if ( rightMouseIsPressed ) {
 						RemoveOne();
 						break;
 					}
@@ -251,46 +292,57 @@ namespace LevelEditor {
 				case EditorMode.Box:
 
 					if ( _leftClicked ) {
-						HandleMouseDrag(tileWorldPositionAbove);
+						Debug.Log("StartDrag left");
+						_dragStarted = true;
+						_dragEnd = false;
+						// HandleMouseDrag(tileWorldPositionAbove);
 						// Debug.Log($"left:{_leftClicked} right:{_rightClicked}");
 					}
 					else if ( _rightClicked ) {
-						HandleMouseDrag(tileWorldPositionSelected);
+						Debug.Log("StartDrag left");
+						_dragStarted = true;
+						_dragEnd = false;
+						// HandleMouseDrag(tileWorldPositionSelected);
 						// Debug.Log($"left:{_leftClicked} right:{_rightClicked}");
 					}
 					else if ( leftMouseWasReleased || rightMouseWasReleased ) {
-						HandleMouseDragEnd();
+						Debug.Log("End drag");
+						
+						// HandleMouseDragEnd();
 						_dragEnd = true;
-					}
-					else {
-						DrawCursor(Layer, cursorMode, centeredGridPos, centeredGridPosAbove);
+						_dragStarted = false;
 					}
 
 					if ( _dragEnd ) {
-						//todo remove
-						// Debug.Log("drag ended");
+						// Debug.Log("Drag ended Resolve -> ");
+						
 						if ( remove ) {
+							// Debug.Log("Drag Remove");
+							
 							RemoveMany();
 						}
 						else {
+							// Debug.Log("Drag add");
+							
 							AddMany();
+						}
+						
+						cursorDrawer.HideCursor();
+					}
+					else if(_dragStarted) {
+						if ( !remove ) {
+							var start = gridDataSO.GetTileCenter2DFromWorldPos(StartAbovePos);
+							var end = gridDataSO.GetTileCenter2DFromWorldPos(CurrentAbovePos);
+							cursorDrawer.DrawBoxCursorAt(start, end, CursorMode.Add);
+						}
+						else if ( remove ) {
+							var startRemove = gridDataSO.GetTileCenter2DFromWorldPos(StartPos);
+							var endRemove = gridDataSO.GetTileCenter2DFromWorldPos(CurrentPos);
+							cursorDrawer.DrawBoxCursorAt(startRemove, endRemove, CursorMode.Remove);
 						}
 					}
 					else {
-						if ( !remove ) {
-							if ( _clickedAbovePos.Count > 2 ) {
-								var start = gridDataSO.GetTileCenter2DFromWorldPos(_clickedAbovePos[0]);
-								var end = gridDataSO.GetTileCenter2DFromWorldPos(_clickedAbovePos[1]);
-								cursorDrawer.DrawBoxCursorAt(start, end, CursorMode.Add);
-							}
-						}
-						else if ( remove ) {
-							if ( _clickedSelectedPos.Count > 2 ) {
-								var startRemove = gridDataSO.GetTileCenter2DFromWorldPos(_clickedSelectedPos[0]);
-								var endRemove = gridDataSO.GetTileCenter2DFromWorldPos(_clickedSelectedPos[1]);
-								cursorDrawer.DrawBoxCursorAt(startRemove, endRemove, CursorMode.Remove);
-							}
-						}
+						DrawCursor(Layer, cursorMode, centeredGridPos, centeredGridPosAbove);
 					}
 
 					break;
