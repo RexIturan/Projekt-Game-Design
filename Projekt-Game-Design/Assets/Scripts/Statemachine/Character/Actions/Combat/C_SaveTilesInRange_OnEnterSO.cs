@@ -9,6 +9,8 @@ using Level.Grid;
 using FieldOfView;
 using GDP01.Characters.Component;
 using GDP01.World.Components;
+using Util;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "c_SaveTilesInRange_OnEnter",
 	menuName = "State Machines/Actions/Character/Save Tiles In Range On Enter")]
@@ -54,7 +56,9 @@ public class C_SaveTilesInRange_OnEnter : StateAction {
 		AbilitySO ability = _abilityController.SelectedAbility;
 		
 		if(ability) { 
-			if(ability.targetableTilesAreCross)
+			if(ability.targets == 0)
+					_attacker.tilesInRange = new List<PathNode>();
+			else if(ability.targetableTilesAreCross)
 				_fieldOfViewCrossQueryEvent.RaiseEvent(_gridTransform.gridPosition, 
 					TileProperties.ShootTrough, SaveToStateContainer);
 			else

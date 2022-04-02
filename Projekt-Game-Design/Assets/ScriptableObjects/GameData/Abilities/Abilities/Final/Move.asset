@@ -22,7 +22,7 @@ MonoBehaviour:
   timeUntilDamage: 0
   repeated: 1
   damaging: 0
-  targets: 24
+  targets: 0
   moveToTarget: 1
   targetableTilesAreCross: 0
   range: 0
