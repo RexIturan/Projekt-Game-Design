@@ -7,12 +7,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 624e9f5e488de0b4e9b45711e9f1760d, type: 3}
   m_Name: sfxSettings
   m_EditorClassIdentifier: 
-  name: SFX
+  name: SFX Volume
   volumeParameterName: sfx_volume
-  volume: 0
+  volume: -8.659473
   muted: 0
+  mixer: {fileID: 24100000, guid: af9358a67812fa246995a6713d62bd47, type: 2}

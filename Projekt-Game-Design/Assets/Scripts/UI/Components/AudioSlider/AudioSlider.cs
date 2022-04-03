@@ -54,13 +54,13 @@ public class AudioSlider : VisualElement
 				Add(lowerBox);
 		}
 
-		public AudioSlider(string labelName, AudioMixer mixer, MixerGroupSettingsSO groupSettings) : this() {
-				InitComponent(labelName, mixer, groupSettings);
+		public AudioSlider(MixerGroupSettingsSO groupSettings) : this() {
+				InitComponent(groupSettings);
 		}
 
-		private void InitComponent(string labelName, AudioMixer mixer, MixerGroupSettingsSO groupSettings) {
-				label.text = labelName;
-				this.mixer = mixer;
+		private void InitComponent(MixerGroupSettingsSO groupSettings) {
+				label.text = groupSettings.name;
+				mixer = groupSettings.mixer;
 				this.groupSettings = groupSettings;
 
 				volumeParameter = groupSettings.volumeParameterName;
@@ -68,6 +68,8 @@ public class AudioSlider : VisualElement
 				// apply values of settings
 				toggle.value = !groupSettings.muted;
 				slider.value = MapToValue(groupSettings.volume);
+
+				UpdateVolume();
 		}
 
 		private void HandleSliderChanged() {

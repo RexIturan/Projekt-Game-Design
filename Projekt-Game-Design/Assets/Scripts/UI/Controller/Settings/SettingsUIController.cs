@@ -21,17 +21,7 @@ namespace GDP01.UI.Controller.Settings {
 		[SerializeField] private ScreenManager screenManager;
 		[SerializeField] private ScreenController mainMenuScreen;
 		
-		[SerializeField] private AudioMixer mixer;
 		[SerializeField] private List<MixerGroupSettingsSO> groupSettings;
-				
-///// Private Constants ////////////////////////////////////////////////////////////////////////////
-
-		private static readonly string MASTER_VOLUME_LABEL = "Master Sound Volume";
-		private static readonly string MUSIC_VOLUME_LABEL = "Music Volume";
-		private static readonly string SFX_VOLUME_LABEL = "SFX Volume";
-		private static readonly string MASTER_VOLUME_PARAMETER_NAME = "master_volume";
-		private static readonly string MUSIC_VOLUME_PARAMETER_NAME = "music_volume";
-		private static readonly string SFX_VOLUME_PARAMETER_NAME = "sfx_volume";
 
 ///// Private Variables ////////////////////////////////////////////////////////////////////////////
 
@@ -74,7 +64,7 @@ namespace GDP01.UI.Controller.Settings {
 
 			VisualElement SoundSettingsContainer = root.Q<VisualElement>("SoundSettingsContainer");
 			foreach(MixerGroupSettingsSO settings in groupSettings) {
-				SoundSettingsContainer.Add(new AudioSlider(MASTER_VOLUME_LABEL, mixer, settings));
+				SoundSettingsContainer.Add(new AudioSlider(settings));
 			}
 		}
 
