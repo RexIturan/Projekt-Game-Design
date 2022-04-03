@@ -16,30 +16,6 @@
             "active": true,
             "plyerTypeId": 0,
             "pos": {
-                "x": 3,
-                "y": 1,
-                "z": 3
-            },
-            "hitpoints": 30,
-            "energy": 30
-        },
-        {
-            "id": 1,
-            "active": false,
-            "plyerTypeId": 0,
-            "pos": {
-                "x": 10,
-                "y": 1,
-                "z": 3
-            },
-            "hitpoints": 30,
-            "energy": 30
-        },
-        {
-            "id": 2,
-            "active": true,
-            "plyerTypeId": 0,
-            "pos": {
                 "x": 41,
                 "y": 1,
                 "z": 43
@@ -48,7 +24,7 @@
             "energy": 30
         },
         {
-            "id": 3,
+            "id": 1,
             "active": true,
             "plyerTypeId": 0,
             "pos": {
@@ -56,45 +32,25 @@
                 "y": 1,
                 "z": 44
             },
-            "hitpoints": 30,
+            "hitpoints": 27,
             "energy": 30
         },
         {
-            "id": 4,
-            "active": true,
+            "id": 2,
+            "active": false,
             "plyerTypeId": 0,
             "pos": {
                 "x": 5,
                 "y": 1,
                 "z": 51
             },
-            "hitpoints": 30,
+            "hitpoints": 12,
             "energy": 30
         }
     ],
     "enemies": [
-        {
-            "enemyTypeId": 0,
-            "pos": {
-                "x": 5,
-                "y": 1,
-                "z": 5
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 1,
-            "pos": {
-                "x": 8,
-                "y": 1,
-                "z": 8
-            },
-            "hitpoints": 20,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 0,
+        { 
+            "enemyTypeId": 4,
             "pos": {
                 "x": 39,
                 "y": 1,
@@ -104,7 +60,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 4,
             "pos": {
                 "x": 27,
                 "y": 1,
@@ -114,7 +70,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 4,
             "pos": {
                 "x": 26,
                 "y": 1,
@@ -124,7 +80,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 6,
             "pos": {
                 "x": 25,
                 "y": 1,
@@ -134,7 +90,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 5,
             "pos": {
                 "x": 11,
                 "y": 1,
@@ -144,7 +100,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 5,
             "pos": {
                 "x": 10,
                 "y": 1,
@@ -153,8 +109,9 @@
             "hitpoints": 30,
             "energy": 20
         },
+      
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 10,
             "pos": {
                 "x": 26,
                 "y": 1,
@@ -164,7 +121,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 4,
             "pos": {
                 "x": 21,
                 "y": 1,
@@ -173,8 +130,9 @@
             "hitpoints": 30,
             "energy": 20
         },
+      
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 4,
             "pos": {
                 "x": 15,
                 "y": 1,
@@ -184,7 +142,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 4,
             "pos": {
                 "x": 13,
                 "y": 1,
@@ -194,37 +152,38 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 8,
             "pos": {
                 "x": 16,
                 "y": 1,
                 "z": 22
             },
-            "hitpoints": 30,
+            "hitpoints": 35,
             "energy": 20
         },
+      
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 8,
             "pos": {
                 "x": 30,
                 "y": 1,
                 "z": 6
             },
-            "hitpoints": 30,
+            "hitpoints": 35,
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 5,
             "pos": {
                 "x": 34,
                 "y": 1,
                 "z": 7
             },
-            "hitpoints": 30,
+            "hitpoints": 35,
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 5,
             "pos": {
                 "x": 36,
                 "y": 1,
@@ -234,7 +193,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 6,
             "pos": {
                 "x": 34,
                 "y": 1,
@@ -243,8 +202,9 @@
             "hitpoints": 30,
             "energy": 20
         },
+      
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 4,
             "pos": {
                 "x": 40,
                 "y": 1,
@@ -254,7 +214,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 7,
             "pos": {
                 "x": 49,
                 "y": 1,
@@ -264,7 +224,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 5,
             "pos": {
                 "x": 46,
                 "y": 1,
@@ -274,7 +234,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 7,
             "pos": {
                 "x": 43,
                 "y": 1,
@@ -286,27 +246,27 @@
     ],
     "doors": [
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 29,
                 "y": 1,
                 "z": 39
             },
             "orientation": {
-                "x": 0.0,
+                "x": 1,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [4],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [4],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 26,
                 "y": 1,
@@ -319,14 +279,14 @@
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [4,5],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [4,5],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 25,
                 "y": 1,
@@ -339,94 +299,94 @@
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [4,5],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [4,5],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 42,
                 "y": 1,
                 "z": 48
             },
             "orientation": {
-                "x": 0.0,
+                "x": 0,
                 "y": 0.0,
-                "z": 0.0
+                "z": -1
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [3],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [3],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 41,
                 "y": 1,
                 "z": 48
             },
             "orientation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
+                "x": 0,
+                "y": 0,
+                "z": -1
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [3],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [3],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 21,
                 "y": 1,
                 "z": 52
             },
             "orientation": {
-                "x": 0.0,
+                "x": 1,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [1,2],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [1,2],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 21,
                 "y": 1,
                 "z": 53
             },
             "orientation": {
-                "x": 0.0,
+                "x": 1,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [1,2],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [1,2],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 31,
                 "y": 1,
@@ -439,14 +399,14 @@
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [6],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [6],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 16,
                 "y": 1,
@@ -459,109 +419,109 @@
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [0],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [0],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 8,
                 "y": 1,
                 "z": 54
             },
             "orientation": {
-                "x": 0.0,
+                "x": 1,
                 "y": 0.0,
                 "z": 0.0
             },
-            "open": false,
+            "open": true,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [0],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [0],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 8,
                 "y": 1,
                 "z": 51
             },
             "orientation": {
-                "x": 0.0,
+                "x":1,
                 "y": 0.0,
-                "z": 0.0
+                "z": 0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [0],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [0],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 7,
                 "y": 1,
                 "z": 46
             },
             "orientation": {
-                "x": 0.0,
+                "x":1,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [0],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [0],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 8,
                 "y": 1,
                 "z": 43
             },
             "orientation": {
-                "x": 0.0,
+                "x": 1,
                 "y": 0.0,
                 "z": 0.0
             },
-            "open": false,
+            "open": true,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [0],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [0],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
         {
-            "doorTypeId": 0,
+            "doorTypeId": 1,
             "gridPos": {
                 "x": 7,
                 "y": 1,
                 "z": 38
             },
             "orientation": {
-                "x": 0.0,
+                "x": 1,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [],
+            "switchIds": [0],
             "triggerIds": [],
-            "remainingSwitchIds": [],
+            "remainingSwitchIds": [0],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         }
@@ -569,21 +529,6 @@
     "switches": [
         {
             "switchId": 0,
-            "activated": false,
-            "switchTypeId": 0,
-            "gridPos": {
-                "x": 4,
-                "y": 1,
-                "z": 2
-            },
-            "orientation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            }
-        },
-        {
-            "switchId": 1,
             "activated": false,
             "switchTypeId": 0,
             "gridPos": {
@@ -598,7 +543,7 @@
             }
         },
         {
-            "switchId": 2,
+            "switchId": 1,
             "activated": false,
             "switchTypeId": 0,
             "gridPos": {
@@ -613,7 +558,7 @@
             }
         },
         {
-            "switchId": 3,
+            "switchId": 2,
             "activated": false,
             "switchTypeId": 0,
             "gridPos": {
@@ -628,7 +573,7 @@
             }
         },
         {
-            "switchId": 4,
+            "switchId": 3,
             "activated": false,
             "switchTypeId": 0,
             "gridPos": {
@@ -643,7 +588,7 @@
             }
         },
         {
-            "switchId": 5,
+            "switchId": 4,
             "activated": false,
             "switchTypeId": 0,
             "gridPos": {
@@ -658,7 +603,7 @@
             }
         },
         {
-            "switchId": 6,
+            "switchId": 5,
             "activated": false,
             "switchTypeId": 0,
             "gridPos": {
@@ -673,7 +618,7 @@
             }
         },
         {
-            "switchId": 7,
+            "switchId": 6,
             "activated": false,
             "switchTypeId": 0,
             "gridPos": {
