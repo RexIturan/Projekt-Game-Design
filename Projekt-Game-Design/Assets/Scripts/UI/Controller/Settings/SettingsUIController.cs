@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GDP01.Gameplay.Audio;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UIElements;
@@ -20,6 +22,7 @@ namespace GDP01.UI.Controller.Settings {
 		[SerializeField] private ScreenController mainMenuScreen;
 		
 		[SerializeField] private AudioMixer mixer;
+		[SerializeField] private List<MixerGroupSettingsSO> groupSettings;
 				
 ///// Private Constants ////////////////////////////////////////////////////////////////////////////
 
@@ -70,9 +73,9 @@ namespace GDP01.UI.Controller.Settings {
 			var root = GetComponent<UIDocument>().rootVisualElement;
 
 			VisualElement SoundSettingsContainer = root.Q<VisualElement>("SoundSettingsContainer");
-			SoundSettingsContainer.Add(new AudioSlider(MASTER_VOLUME_LABEL, mixer, MASTER_VOLUME_PARAMETER_NAME));
-			SoundSettingsContainer.Add(new AudioSlider(MUSIC_VOLUME_LABEL, mixer, MUSIC_VOLUME_PARAMETER_NAME));
-			SoundSettingsContainer.Add(new AudioSlider(SFX_VOLUME_LABEL, mixer, SFX_VOLUME_PARAMETER_NAME));
+			foreach(MixerGroupSettingsSO settings in groupSettings) {
+				SoundSettingsContainer.Add(new AudioSlider(MASTER_VOLUME_LABEL, mixer, settings));
+			}
 		}
 
 ///// Callbacks ////////////////////////////////////////////////////////////////////////////////////

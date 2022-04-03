@@ -142,6 +142,6 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: -7678000442862450230}
   m_UserColorIndex: 0
-  m_Mute: 1
+  m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0

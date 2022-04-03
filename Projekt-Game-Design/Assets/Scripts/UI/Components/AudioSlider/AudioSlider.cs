@@ -1,3 +1,4 @@
+using GDP01.Gameplay.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,7 @@ public class AudioSlider : VisualElement
 		private static readonly string classNameSlider = "slider";
 
 		private AudioMixer mixer;
+		private MixerGroupSettingsSO groupSettings;
 		private string volumeParameter;
 
 		private AudioSlider() {
@@ -41,30 +43,41 @@ public class AudioSlider : VisualElement
 				slider.AddToClassList(classNameSlider);
 				slider.lowValue = MIN_VOLUME_VALUE;
 				slider.highValue = MAX_VOLUME_VALUE;
-				slider.RegisterValueChangedCallback(_ => UpdateVolume());
+				slider.RegisterValueChangedCallback(_ => HandleSliderChanged());
 				lowerBox.Add(slider);
 
 				// Init toggle
 				toggle = new Toggle();
-				toggle.value = true;
-				toggle.RegisterValueChangedCallback(_ => UpdateVolume());
+				toggle.RegisterValueChangedCallback(_ => HandleToggleChanged());
 				lowerBox.Add(toggle);
 
 				Add(lowerBox);
 		}
 
-		public AudioSlider(string labelName, AudioMixer mixer, string volumeParameterName) : this() {
-				InitComponent(labelName, mixer, volumeParameterName);
-
-				float currentVolume;
-				mixer.GetFloat(volumeParameter, out currentVolume);
-				slider.value = MapToValue(currentVolume);
+		public AudioSlider(string labelName, AudioMixer mixer, MixerGroupSettingsSO groupSettings) : this() {
+				InitComponent(labelName, mixer, groupSettings);
 		}
 
-		private void InitComponent(string labelName, AudioMixer mixer, string volumeParameterName) {
+		private void InitComponent(string labelName, AudioMixer mixer, MixerGroupSettingsSO groupSettings) {
 				label.text = labelName;
 				this.mixer = mixer;
-				volumeParameter = volumeParameterName;
+				this.groupSettings = groupSettings;
+
+				volumeParameter = groupSettings.volumeParameterName;
+
+				// apply values of settings
+				toggle.value = !groupSettings.muted;
+				slider.value = MapToValue(groupSettings.volume);
+		}
+
+		private void HandleSliderChanged() {
+				groupSettings.volume = MapToVolume(slider.value);
+				UpdateVolume();
+		}
+
+		private void HandleToggleChanged() {
+				groupSettings.muted = !toggle.value;
+				UpdateVolume();
 		}
 
 		private void UpdateVolume() {
@@ -74,11 +87,11 @@ public class AudioSlider : VisualElement
 						mixer.SetFloat(volumeParameter, MapToVolume(MIN_VOLUME_VALUE));
 		}
 
-		private float MapToVolume(float value) {
+		private static float MapToVolume(float value) {
 				return Mathf.Log10(value) * 20;
 		}
 
-		private float MapToValue(float volume) {
+		private static float MapToValue(float volume) {
 				return Mathf.Pow(10, volume / 20);
 		}
 }

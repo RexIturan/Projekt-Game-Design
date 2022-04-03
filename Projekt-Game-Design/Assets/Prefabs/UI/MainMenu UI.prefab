@@ -83,6 +83,10 @@ MonoBehaviour:
   screenManager: {fileID: 9153631508648386837}
   mainMenuScreen: {fileID: 9153631506985252534}
   mixer: {fileID: 24100000, guid: af9358a67812fa246995a6713d62bd47, type: 2}
+  groupSettings:
+  - {fileID: 11400000, guid: 1b7c2065935184d4d8f3a86001b905e3, type: 2}
+  - {fileID: 11400000, guid: fa9beacf65b42704cae2244b58030c67, type: 2}
+  - {fileID: 11400000, guid: 6345aa509dd7862409b889e77255b28a, type: 2}
 --- !u!1 &9153631506985252530
 GameObject:
   m_ObjectHideFlags: 0

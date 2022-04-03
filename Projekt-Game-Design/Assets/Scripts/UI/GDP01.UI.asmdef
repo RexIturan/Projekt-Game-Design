@@ -18,6 +18,7 @@
         "GDP01.Input",
         "GDP01.Gameplay.EventChannels",
         "GDP01.Gameplay.Types",
+        "GDP01.Gameplay.Audio",
         "GDP01.Gameplay",
         "GDP01.SceneManagement.EventChannels",
         "GDP01.SceneManagement.Types",
