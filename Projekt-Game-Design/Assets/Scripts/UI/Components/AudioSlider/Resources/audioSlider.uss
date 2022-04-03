@@ -1,0 +1,16 @@
+﻿.audioSlider { 
+}
+
+.audioSlider .label {
+	color: white;
+	font-size: 20;
+}
+
+/* Contains the slider and the toggle */
+.audioSlider .lowerBox{
+	flex-direction: row;
+}
+
+.audioSlider .slider{
+	flex-grow: 1;
+}

@@ -1,16 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="/Assets/UI/Styles/Button_Layout.uss" />
+    <Style src="project://database/Assets/UI/Styles/Button_Layout.uss?fileID=7433441132597879392&amp;guid=6ddf6212474c2a84ca2664a443a93551&amp;type=3#Button_Layout" />
     <ui:VisualElement style="justify-content: center; align-items: center; width: 100%; height: 100%;">
         <ui:VisualElement name="settingsContainer" style="height: 80%; width: 35%; justify-content: space-around; align-items: center; background-color: rgba(0, 0, 0, 0.53);">
-            <ui:Label text="Settings" display-tooltip-when-elided="true" style="font-size: 50px; -unity-font-style: bold; color: rgb(255, 255, 255); position: relative; top: auto;" />
+            <ui:Label text="Settings" display-tooltip-when-elided="true" style="font-size: 50px; -unity-font-style: bold; color: rgb(255, 255, 255); position: relative; top: auto; align-items: stretch; -unity-text-align: upper-center;" />
             <ui:VisualElement name="SoundSettingsContainer">
                 <ui:Label text="Sound" display-tooltip-when-elided="true" style="align-items: stretch; justify-content: flex-start; font-size: 25px; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-align: upper-center;" />
-                <ui:Label text="Ambient:" display-tooltip-when-elided="true" style="align-items: stretch; justify-content: flex-start; font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
-                <ui:Slider picking-mode="Ignore" value="42" high-value="100" usage-hints="None" show-input-field="false" inverted="false" direction="Horizontal" name="AmbientSlider" style="width: 236px;" />
-                <ui:Label text="Music:" display-tooltip-when-elided="true" style="align-items: stretch; justify-content: flex-start; font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
-                <ui:Slider picking-mode="Ignore" value="42" high-value="100" usage-hints="None" show-input-field="false" inverted="false" direction="Horizontal" name="MusicSlider" style="width: 236px;" />
+                <ui:Label text="Ambient:" display-tooltip-when-elided="true" style="align-items: stretch; justify-content: flex-start; font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold; display: none; visibility: hidden;" />
+                <ui:Slider picking-mode="Ignore" value="42" high-value="100" usage-hints="None" show-input-field="false" inverted="false" direction="Horizontal" name="AmbientSlider" style="width: 236px; display: none; visibility: hidden;" />
+                <ui:Label text="Music:" display-tooltip-when-elided="true" style="align-items: stretch; justify-content: flex-start; font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold; display: none; visibility: hidden;" />
+                <ui:Slider picking-mode="Ignore" value="42" high-value="100" usage-hints="None" show-input-field="false" inverted="false" direction="Horizontal" name="MusicSlider" style="width: 236px; display: none; visibility: hidden;" />
             </ui:VisualElement>
-            <ui:VisualElement name="GraphicSettingsContainer">
+            <ui:VisualElement name="GraphicSettingsContainer" style="display: none; visibility: hidden;">
                 <ui:Label text="Graphic" display-tooltip-when-elided="true" style="align-items: stretch; justify-content: flex-start; font-size: 25px; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-align: upper-center;" />
                 <ui:Label text="Quality:" display-tooltip-when-elided="true" style="align-items: stretch; justify-content: flex-start; font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
                 <ui:Slider picking-mode="Ignore" value="42" high-value="100" usage-hints="None" show-input-field="false" inverted="false" direction="Horizontal" name="QualitySlider" style="width: 236px;" />

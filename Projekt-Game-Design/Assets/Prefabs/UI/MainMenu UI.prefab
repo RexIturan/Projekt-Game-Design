@@ -82,6 +82,7 @@ MonoBehaviour:
   showDebugMessages: 1
   screenManager: {fileID: 9153631508648386837}
   mainMenuScreen: {fileID: 9153631506985252534}
+  mixer: {fileID: 24100000, guid: af9358a67812fa246995a6713d62bd47, type: 2}
 --- !u!1 &9153631506985252530
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +163,7 @@ MonoBehaviour:
   levelEditor:
   - {fileID: 11400000, guid: d911fb750a0cffe4c8ea93da07f28943, type: 2}
   loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
+  startGameEC: {fileID: 0}
   buttonNames:
     startGame: StartButton
     loadLevel: LoadLevelButton
@@ -169,9 +171,6 @@ MonoBehaviour:
     levelEditor: LevelEditorButton
     settings: SettingsButton
     exit: ExitButton
-    testAction:
-      m_PersistentCalls:
-        m_Calls: []
   showSettings: 1
   showLevelEditor: 0
   showTestLevel: 0
@@ -259,7 +258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9153631508486532409
 Transform:
   m_ObjectHideFlags: 0
@@ -363,6 +362,7 @@ MonoBehaviour:
   - {fileID: 9153631507187017802}
   - {fileID: 9153631506985252534}
   - {fileID: 9153631506894544887}
+  tooltipLayer: {fileID: 0}
 --- !u!1001 &9153631507403139041
 PrefabInstance:
   m_ObjectHideFlags: 0

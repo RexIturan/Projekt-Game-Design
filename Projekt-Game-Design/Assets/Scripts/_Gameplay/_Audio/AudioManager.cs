@@ -1,6 +1,7 @@
 using Events.ScriptableObjects;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Audio
 {
@@ -8,7 +9,11 @@ namespace Audio
 		{
 				[SerializeField] private SoundEventChannelSO playSoundEC;
 				[SerializeField] private VoidEventChannelSO stopAllSounds;
-				
+
+				[SerializeField] private AudioMixerGroup musicGroup;
+				[SerializeField] private AudioMixerGroup sfxGroup;
+				[SerializeField] private AudioMixerGroup otherGroup;
+
 				private List<AudioSource> sources;
 
 				private void Awake() {
@@ -28,6 +33,22 @@ namespace Audio
 						source.clip = sound.clip;
 						source.loop = sound.looped;
 						source.volume = sound.volume;
+
+						// add to mixer group
+						switch(sound.type)
+						{
+								case SoundType.MUSIC:
+										source.outputAudioMixerGroup = musicGroup;
+										break;
+								case SoundType.SFX_GAME:
+								case SoundType.SFX_UI:
+										source.outputAudioMixerGroup = sfxGroup;
+										break;
+								default:
+										source.outputAudioMixerGroup = otherGroup;
+										break;
+						}
+
 						sources.Add(source);
 						return source;
 				}

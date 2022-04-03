@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 namespace GDP01.UI.Controller.Settings {
@@ -18,6 +19,17 @@ namespace GDP01.UI.Controller.Settings {
 		[SerializeField] private ScreenManager screenManager;
 		[SerializeField] private ScreenController mainMenuScreen;
 		
+		[SerializeField] private AudioMixer mixer;
+				
+///// Private Constants ////////////////////////////////////////////////////////////////////////////
+
+		private static readonly string MASTER_VOLUME_LABEL = "Master Sound Volume";
+		private static readonly string MUSIC_VOLUME_LABEL = "Music Volume";
+		private static readonly string SFX_VOLUME_LABEL = "SFX Volume";
+		private static readonly string MASTER_VOLUME_PARAMETER_NAME = "master_volume";
+		private static readonly string MUSIC_VOLUME_PARAMETER_NAME = "music_volume";
+		private static readonly string SFX_VOLUME_PARAMETER_NAME = "sfx_volume";
+
 ///// Private Variables ////////////////////////////////////////////////////////////////////////////
 
 		private Button _backButton;
@@ -54,6 +66,15 @@ namespace GDP01.UI.Controller.Settings {
 			UnbindButton(_backButton, HandleBackButton);
 		}
 
+		private void CreateAudioSlider() {
+			var root = GetComponent<UIDocument>().rootVisualElement;
+
+			VisualElement SoundSettingsContainer = root.Q<VisualElement>("SoundSettingsContainer");
+			SoundSettingsContainer.Add(new AudioSlider(MASTER_VOLUME_LABEL, mixer, MASTER_VOLUME_PARAMETER_NAME));
+			SoundSettingsContainer.Add(new AudioSlider(MUSIC_VOLUME_LABEL, mixer, MUSIC_VOLUME_PARAMETER_NAME));
+			SoundSettingsContainer.Add(new AudioSlider(SFX_VOLUME_LABEL, mixer, SFX_VOLUME_PARAMETER_NAME));
+		}
+
 ///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
 
 		private void HandleBackButton() {
@@ -70,6 +91,8 @@ namespace GDP01.UI.Controller.Settings {
 
 		private void OnEnable() {
 			BindButtons();
+
+			CreateAudioSlider();
 		}
 		
 		private void OnDisable() {
