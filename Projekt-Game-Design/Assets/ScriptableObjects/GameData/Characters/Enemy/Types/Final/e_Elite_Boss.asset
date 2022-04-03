@@ -43,5 +43,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6dd922bf52e18d4782479a84383cd63, type: 2}
   - {fileID: 11400000, guid: efdbd7fb14b3d2245ac09ea869afab11, type: 2}
   behaviour: {fileID: 11400000, guid: 1f2adb223990b1f458c58b0569d99fbf, type: 2}
-  lootTable: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: 1be6749879c0b1f438ab155cfd8e3bab, type: 2}
   weapon: {fileID: 11400000, guid: ad786582dcbc83a4bac86e1122746d74, type: 2}

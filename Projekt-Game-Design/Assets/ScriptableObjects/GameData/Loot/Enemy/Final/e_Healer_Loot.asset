@@ -10,20 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1626e1cbbee749cebc55972c00774c94, type: 3}
-  m_Name: e_Melee_Grunt_Loot
+  m_Name: e_Healer_Loot
   m_EditorClassIdentifier: 
   dropTables:
   - count: 1
     tabel:
-    - type: 1
-      itemType: {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
-      weight: 2
-      dropRate: 0.6666667
-      dropAmount: {x: 1, y: 1, z: 1, w: 1}
-      propertyHeight: 70
     - type: 0
       itemType: {fileID: 11400000, guid: 4e3ae39bd9b95854ab4c55c1d90db993, type: 2}
       weight: 1
-      dropRate: 0.33333334
+      dropRate: 1
       dropAmount: {x: 0, y: 0, z: 0, w: 0}
       propertyHeight: 48
