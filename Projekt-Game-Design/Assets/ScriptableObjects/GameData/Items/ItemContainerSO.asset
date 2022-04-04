@@ -36,4 +36,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 590ba17f4ae0a254e88b54ad567bcf78, type: 2}
   - {fileID: 11400000, guid: bd18c0a5ee68a2043b84dec0f287f58b, type: 2}
   - {fileID: 11400000, guid: d838db57f9df4cb47ae9a7ba6e342aca, type: 2}
+  - {fileID: 11400000, guid: a96669e1d6cb0af41b96b124d452ad88, type: 2}
   defaultItemType: {fileID: 0}
