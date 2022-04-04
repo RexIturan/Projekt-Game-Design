@@ -10,6 +10,7 @@ using Level.Grid;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Util;
+using WorldObjects;
 
 namespace FieldOfView {
     public class FieldOfViewController : MonoBehaviour {
@@ -199,6 +200,22 @@ namespace FieldOfView {
                 var flags = tileTypeContainer.tileTypes[type].properties;
                 blocksLight = flags.HasFlag(flag: blocker);
             }
+
+						// world objects
+						if ( !blocksLight ) {
+								// block light with doors 
+								WorldObjectManager worldObjectManager = FindObjectOfType<WorldObjectManager>();
+								if ( worldObjectManager )
+								{
+										Door door = worldObjectManager.GetDoorAt(new Vector3Int(x, 1, y));
+										if ( door && !door.IsBroken && !door.IsOpen )
+												blocksLight = true;
+
+										Junk junk = worldObjectManager.GetJunkAt(new Vector3Int(x, 1, y));
+										if ( junk && !junk.IsBroken && junk.Type.opaque )
+												blocksLight = true;
+								}
+						}
 
             return blocksLight;
         }

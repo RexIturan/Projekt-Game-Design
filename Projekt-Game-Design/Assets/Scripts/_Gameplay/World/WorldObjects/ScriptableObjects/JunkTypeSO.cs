@@ -14,6 +14,7 @@ namespace WorldObjects {
 
 				public SoundSO destructionSound;
 				public bool walkThrough;
+				public bool opaque;
 				public bool destructable;
 				public ArmorType armorType;
 				public int hitPoints;
