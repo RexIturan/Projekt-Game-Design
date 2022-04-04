@@ -30,42 +30,44 @@ namespace WorldObjects
 						WorldObjectList worldObjects = WorldObjectList.FindInstant();
 						TileEffectManager tileEffects = FindObjectOfType<TileEffectManager>();
 
-						WorldObjectManager.ClearAllComponents();
-						
-						
-						//load doors
-						foreach ( Door_Save doorSave in door_Saves ) {
-							DoorTypeSO type = doorContainer.doors[doorSave.doorTypeId];
-							GameObject doorObj = Instantiate(type.prefab);
-							doorObj.GetComponent<Door>().InitFromSave(doorSave, type);
-							Door door = doorObj.GetComponent<Door>();
-							WorldObjectManager.AddDoor(door);
-						}
+						WorldObjectManager?.ClearAllComponents();
 
-						//load switches
-						foreach ( Switch_Save switchSave in switch_Saves ) {
-							SwitchTypeSO type = switchContainer.switches[switchSave.switchTypeId];
-							GameObject switchObj = Instantiate(type.prefab);
-							SwitchComponent switchComponent = switchObj.GetComponent<SwitchComponent>();
-							switchComponent.Initialise(switchSave, type);
-							WorldObjectManager.AddSwitch(switchComponent);
-						}
+						if ( WorldObjectManager is { } ) {
+							
+							//load doors
+							foreach ( Door_Save doorSave in door_Saves ) {
+								DoorTypeSO type = doorContainer.doors[doorSave.doorTypeId];
+								GameObject doorObj = Instantiate(type.prefab);
+								doorObj.GetComponent<Door>().InitFromSave(doorSave, type);
+								Door door = doorObj.GetComponent<Door>();
+								WorldObjectManager.AddDoor(door);
+							}
 
-						//load junk
-						foreach ( Junk_Save junkSave in junk_Saves ) {
-							JunkTypeSO type = junkContainer.junks[junkSave.junkTypeId];
-							GameObject junkObj = Instantiate(type.prefab);
-							Junk junk = junkObj.GetComponent<Junk>();
-							junk.InitFromSave(junkSave, type);
-							WorldObjectManager.AddJunk(junk);
-						}
+							//load switches
+							foreach ( Switch_Save switchSave in switch_Saves ) {
+								SwitchTypeSO type = switchContainer.switches[switchSave.switchTypeId];
+								GameObject switchObj = Instantiate(type.prefab);
+								SwitchComponent switchComponent = switchObj.GetComponent<SwitchComponent>();
+								switchComponent.Initialise(switchSave, type);
+								WorldObjectManager.AddSwitch(switchComponent);
+							}
+
+							//load junk
+							foreach ( Junk_Save junkSave in junk_Saves ) {
+								JunkTypeSO type = junkContainer.junks[junkSave.junkTypeId];
+								GameObject junkObj = Instantiate(type.prefab);
+								Junk junk = junkObj.GetComponent<Junk>();
+								junk.InitFromSave(junkSave, type);
+								WorldObjectManager.AddJunk(junk);
+							}
 						
-						foreach ( var itemSave in itemSaves ) {
-							ItemTypeSO itemType = itemTypeContainer.GetItemFromID(itemSave.id);
-							GameObject itemObj = Instantiate(itemType.prefab);
-							ItemComponent item = itemObj.GetComponent<ItemComponent>();
-							item.InitItem(itemType, itemSave.gridPos);
-							WorldObjectManager.AddItem(item);
+							foreach ( var itemSave in itemSaves ) {
+								ItemTypeSO itemType = itemTypeContainer.GetItemFromID(itemSave.id);
+								GameObject itemObj = Instantiate(itemType.prefab);
+								ItemComponent item = itemObj.GetComponent<ItemComponent>();
+								item.InitItem(itemType, itemSave.gridPos);
+								WorldObjectManager.AddItem(item);
+							}
 						}
 						
 						// doors

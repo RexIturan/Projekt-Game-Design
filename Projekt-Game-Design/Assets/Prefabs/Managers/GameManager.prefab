@@ -64,9 +64,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1002ea915020c4aacb650c9ec997c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGameEC: {fileID: 0}
+  startGameEC: {fileID: 11400000, guid: e2496553f0221904d9f87281addeec4d, type: 2}
   endTurnEC: {fileID: 11400000, guid: 685e98dbde064774cb0e3747ccfcfc68, type: 2}
-  newTurnEC: {fileID: 0}
+  newTurnEC: {fileID: 11400000, guid: 3a28845fa87e62b47abeaf01656a2806, type: 2}
   triggerDefeatEC: {fileID: 11400000, guid: 737a96b0278c36b4880712610f7b8d96, type: 2}
   triggerVictoryEC: {fileID: 11400000, guid: dba5723c0c774e942b1f9888c6013e47, type: 2}
   setTurnIndicatorVisibilityEC: {fileID: 11400000, guid: 9068176bccaefea4abe00c1cb283da54, type: 2}
@@ -84,8 +84,10 @@ MonoBehaviour:
   initializedGame: 0
   gameOver: 0
   victory: 0
-  victoryConditions: []
-  gameOverConditions: []
+  victoryConditions:
+  - {fileID: 11400000, guid: e5825b0f6f2d8a44b8780e1d6555975f, type: 2}
+  gameOverConditions:
+  - {fileID: 11400000, guid: 52f019f6814c0874b84a552b1ffafda6, type: 2}
 --- !u!114 &5013497699885375699
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -135,33 +135,9 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
-      propertyPath: newTurnEC
-      value: 
-      objectReference: {fileID: 11400000, guid: 3a28845fa87e62b47abeaf01656a2806, type: 2}
-    - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
       propertyPath: saveSystem
       value: 
       objectReference: {fileID: 1363089166}
-    - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
-      propertyPath: startGameEC
-      value: 
-      objectReference: {fileID: 11400000, guid: e2496553f0221904d9f87281addeec4d, type: 2}
-    - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
-      propertyPath: victoryConditions.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
-      propertyPath: gameOverConditions.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
-      propertyPath: victoryConditions.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: e5825b0f6f2d8a44b8780e1d6555975f, type: 2}
-    - target: {fileID: 6182407919942541884, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
-      propertyPath: gameOverConditions.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 52f019f6814c0874b84a552b1ffafda6, type: 2}
     - target: {fileID: 6182407919942541886, guid: 4f471206904e70043a65c8634456c3ab, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -362,8 +338,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
-      propertyPath: defaultGameFilename
-      value: mvp_level
+      propertyPath: gameplayScene
+      value: 
+      objectReference: {fileID: 11400000, guid: e35cd8d4811081a4f80a80280bf4f60c, type: 2}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: unloadSceneEC
+      value: 
+      objectReference: {fileID: 11400000, guid: c8dbc4e17574ccf4d808afcc60ebd13e, type: 2}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: mainMenuSceneData
+      value: 
+      objectReference: {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: defaultLevelFilename
+      value: mvp_boss
       objectReference: {fileID: 0}
     - target: {fileID: 7187340983742418651, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
       propertyPath: m_Name

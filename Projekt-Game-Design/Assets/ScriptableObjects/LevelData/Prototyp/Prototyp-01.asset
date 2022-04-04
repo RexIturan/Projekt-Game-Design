@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92f955366c64bb4985ed2263c8521c2, type: 3}
   m_Name: Prototyp-01
   m_EditorClassIdentifier: 
-  levelName: Prototyp-01
+  levelName: mvp_level
   gameScene: {fileID: 11400000, guid: 5798fad6de593434b973bcf2e6073a59, type: 2}
   type: 0
   gridData: {fileID: 11400000, guid: e27a72e7a1f9ad440ac944bca357bdbe, type: 2}

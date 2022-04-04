@@ -25,6 +25,7 @@ namespace GDP01.Structure {
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
 		#region Properties
 
+		public string LevelName => levelName;
 		public GameSceneSO GameScene => gameScene;
 		public List<LevelConnectorSO> Connectors => connectors;
 

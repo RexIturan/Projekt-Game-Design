@@ -13,7 +13,9 @@
         "GDP01.Gameplay.Types",
         "GDP01.Gameplay",
         "GDP01.SceneManagement.EventChannels",
-        "GDP01.SceneManagement.Types"
+        "GDP01.SceneManagement.Types",
+        "GDP01.Structure.Types",
+        "GDP01.Structure"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

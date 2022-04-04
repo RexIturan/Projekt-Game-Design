@@ -82,7 +82,6 @@ MonoBehaviour:
   showDebugMessages: 1
   screenManager: {fileID: 9153631508648386837}
   mainMenuScreen: {fileID: 9153631506985252534}
-  mixer: {fileID: 24100000, guid: af9358a67812fa246995a6713d62bd47, type: 2}
   groupSettings:
   - {fileID: 11400000, guid: 1b7c2065935184d4d8f3a86001b905e3, type: 2}
   - {fileID: 11400000, guid: fa9beacf65b42704cae2244b58030c67, type: 2}
@@ -167,7 +166,7 @@ MonoBehaviour:
   levelEditor:
   - {fileID: 11400000, guid: d911fb750a0cffe4c8ea93da07f28943, type: 2}
   loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
-  startGameEC: {fileID: 0}
+  startGameEC: {fileID: 11400000, guid: e2496553f0221904d9f87281addeec4d, type: 2}
   buttonNames:
     startGame: StartButton
     loadLevel: LoadLevelButton
@@ -377,6 +376,10 @@ PrefabInstance:
     - target: {fileID: 8886087580656271280, guid: 59d931a38687f1d4b9b44f237fb405c7, type: 3}
       propertyPath: m_Name
       value: EventSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886087580656271280, guid: 59d931a38687f1d4b9b44f237fb405c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8886087580656271287, guid: 59d931a38687f1d4b9b44f237fb405c7, type: 3}
       propertyPath: m_RootOrder

@@ -241,6 +241,12 @@ public class SceneLoader : MonoBehaviour {
 		// }
 
 		_sceneCache.level = _loadingOperationHandles;
+		for ( int i = 0; i < _scenesToLoad.Length; i++ ) {
+			_sceneCache.main.Add(new SceneDataOperationHandleMapping {
+				operationHandle = _loadingOperationHandles[i],
+				sceneData = _scenesToLoad[i]
+			});	
+		}
 		
 		//Save loaded scenes (to be unloaded at next load request)
 		_currentlyLoadedScenes = _scenesToLoad;
@@ -324,7 +330,12 @@ public class SceneLoader : MonoBehaviour {
 	
 	private AsyncOperationHandle<SceneInstance> UnloadScene(SceneDataOperationHandleMapping mapping) {
 		//start loading
-		return StartUnloadScene(mapping.operationHandle);
+		
+		if ( mapping is { } ) {
+			return StartUnloadScene(mapping.operationHandle);	
+		}
+		
+		return default;
 	}
 
 	private void LoadDependencies(List<SceneLoadingData.SceneDataDependencySettings> dependencies) {
@@ -441,16 +452,16 @@ public class SceneLoader : MonoBehaviour {
 		}
 		else {
 			// todo all scenes must be main, check if sctive scene is in dependencies
-			// Scene currentActiveScene = SceneManager.GetActiveScene();
-			// if ( currentActiveScene is {  } ) {
-			// 	AsyncOperation unloadHandle = SceneManager.UnloadSceneAsync(currentActiveScene);
-			// 	unloadHandle.completed += operation => {
-			// 		LoadNewScene(loadingData);	
-			// 	};
-			// }
-			// else {
-			// 	
-			// }
+			Scene currentActiveScene = SceneManager.GetActiveScene();
+			if ( currentActiveScene is {  } ) {
+				AsyncOperation unloadHandle = SceneManager.UnloadSceneAsync(currentActiveScene);
+				unloadHandle.completed += operation => {
+					LoadNewScene(loadingData);	
+				};
+			}
+			else {
+				
+			}
 			
 			LoadNewScene(loadingData);
 		}
@@ -472,9 +483,13 @@ public class SceneLoader : MonoBehaviour {
 		else if ( sceneData is ControlSceneSO ) {
 			mapping = _sceneCache.persistant.Find(handleMapping => handleMapping.sceneData == sceneData);
 			_sceneCache.persistant.Remove(mapping);
+		} else if (sceneData is MenuSO) {
+			mapping = _sceneCache.main.Find(handleMapping => handleMapping.sceneData == sceneData);
 		}
 
-		UnloadScene(mapping);
+		if ( mapping is { } ) {
+			UnloadScene(mapping);	
+		}
 	}
 	
 	///// Unity Functions //////////////////////////////////////////////////////////////////////////////	

@@ -52,6 +52,7 @@ MonoBehaviour:
   loadLevelEC: {fileID: 11400000, guid: c6b8e93a8d8a01243af967f6d70a212b, type: 2}
   loadGameFromPathEC: {fileID: 11400000, guid: 6732e004d1f990b4381b9ebd3cffdcba, type: 2}
   levelLoaded: {fileID: 11400000, guid: 29992fcf814a3e948b6188ac57247b93, type: 2}
+  loadSceneEC: {fileID: 11400000, guid: 5f3a6f188738cb44b866c9a8cb513f95, type: 2}
   gridData: {fileID: 11400000, guid: 75baea6e881157b43bfd5e6b11cc807d, type: 2}
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
   questContainer: {fileID: 11400000, guid: 65a51bfc297041f4788c7db5608fe983, type: 2}
@@ -62,7 +63,9 @@ MonoBehaviour:
   testLevel: []
   saveManagerData: {fileID: 11400000, guid: 4c1a68020bf2def48a0a37764ec9e209, type: 2}
   defaultLevelFilename: test_level
-  defaultGameFilename: tutorial
+  defaultGameFilename: mvp_level
+  prototyLevel: {fileID: 11400000, guid: 0917a4be0b6e57a4787fc0746b9f583a, type: 2}
+  prototyBoss: {fileID: 11400000, guid: 0c5459e2aa0c5664c8090517f8d105a2, type: 2}
   loadLocation: {fileID: 11400000, guid: 4a2ce8bf8a8f20242a23e2ec942c4923, type: 2}
   locationsToLoad:
   - {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}

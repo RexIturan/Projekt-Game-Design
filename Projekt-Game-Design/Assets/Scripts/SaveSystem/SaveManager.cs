@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using Characters;
 using Characters.Equipment.ScriptableObjects;
 using Events.ScriptableObjects;
+using GDP01.SceneManagement.EventChannels;
+using GDP01.Structure;
 using Grid;
 using QuestSystem.ScriptabelObjects;
 using SaveSystem.ScriptableObjects;
 using SceneManagement.ScriptableObjects;
+using SceneManagement.Types;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.SceneManagement;
 using WorldObjects;
 
 namespace SaveSystem {
@@ -22,8 +26,10 @@ namespace SaveSystem {
 		[SerializeField] private VoidEventChannelSO loadLevelEC;
 		[SerializeField] private StringEventChannelSO loadGameFromPathEC;
 
-		[Header("Sending Events On")] [SerializeField]
-		private VoidEventChannelSO levelLoaded;
+		[Header("Sending Events On")] 
+		[SerializeField] private VoidEventChannelSO levelLoaded;
+		[SerializeField] private SceneLoadingInfoEventChannelSO loadSceneEC;
+		[SerializeField] private SceneLoadingInfoEventChannelSO unloadSceneEC;
 
 		[Header("Data References")] 
 		[SerializeField] private GridDataSO gridData;
@@ -44,6 +50,11 @@ namespace SaveSystem {
 		public SaveManagerDataSO saveManagerData;
 		[SerializeField] private string defaultLevelFilename = "test_level";
 		[SerializeField] private string defaultGameFilename = "tutorial";
+		
+		[SerializeField] private LevelDataSO prototyLevel;
+		[SerializeField] private LevelDataSO prototyBoss;
+		[SerializeField] private GameSceneSO gameplayScene;
+		[SerializeField] private GameSceneSO mainMenuSceneData;
 		
 		[Header("Sending Events On")]
 		[SerializeField] private LoadEventChannelSO loadLocation;
@@ -146,24 +157,60 @@ namespace SaveSystem {
 		#region Load Game
 
 		public void LoadGameEC(int value) {
-			//todo fix
-			
-			String checkpointFile = defaultGameFilename;
-			checkpointFile += value > 0 ? "0" : "";
 
+			var filename = defaultGameFilename;
+			bool loaded;
+			bool newSceneLoading = false;
+			SceneLoadingData loadingData = new SceneLoadingData {
+				Dependencies = new List<SceneLoadingData.SceneDataDependencySettings> {
+					new SceneLoadingData.SceneDataDependencySettings{ reset = false, sceneData = gameplayScene }
+				},
+				UpdateSave = false,
+				ActivateOnLoad = true,
+			};
+
+			SceneLoadingData unloadMenuLoadingData = new SceneLoadingData {
+				MainSceneData = mainMenuSceneData
+			};
+			
+			switch ( value ) {
+				case 0:
+					//load prototyp level
+					filename = prototyLevel.LevelName;
+					loadingData.MainSceneData = prototyLevel.GameScene;
+					newSceneLoading = true;
+					break;
+				case 1:
+					//load prototyp level
+					filename = prototyBoss.LevelName;
+					loadingData.MainSceneData = prototyBoss.GameScene;
+					newSceneLoading = true;
+					break;
+				default:
+					// String checkpointFile = defaultGameFilename;
+					// checkpointFile += value > 0 ? "0" : "";
+					break;
+			}
+			
+			
 			try {
-				bool loaded = LoadLevel(checkpointFile);
-				        
-				if ( loaded ) {
+				loaded = LoadLevel(filename);
+			
+				if ( loaded && newSceneLoading ) {
+
+					loadSceneEC.RaiseEvent(loadingData);
+					// unloadSceneEC.RaiseEvent(unloadMenuLoadingData);
+
+				} else if ( loaded ) {
 					loadLocation.RaiseEvent(locationsToLoad, false, true);
 					// saveManagerData.inputLoad = true;
 					// saveManagerData.loaded = true;
-				}
+				} 
 			}
 			catch ( Exception e ) {
 				// Debug.Log($"Could not load level: {filename}, with Exeption: {e}");
 				//todo does this work?
-				Console.WriteLine($"Could not load level: {checkpointFile}, with Exeption: {e}");
+				Console.WriteLine($"Could not load level: {filename}, with Exeption: {e}");
 				throw;
 			}
 		}

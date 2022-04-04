@@ -32,7 +32,11 @@ namespace SceneManagement.Types {
 	
 		public GameSceneSO MainSceneData { get => mainSceneData; set => mainSceneData = value;}
 
-		public List<SceneDataDependencySettings> Dependencies => dependentScenes;
+		public List<SceneDataDependencySettings> Dependencies {
+			get { return dependentScenes; }
+			set { dependentScenes = value;  }
+		}
+
 		public bool ShowLoadingScreen => showLoadingScreen;
 		public bool CloseLoadingScreenOnLoad => closeLoadingScreenOnLoad;
 		public bool ActivateOnLoad { get => activateOnLoad; set => activateOnLoad = value; }

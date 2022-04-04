@@ -328,14 +328,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 313425450415200337, guid: 2e7975395f4b1da4989c24071ff1d644, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9153631506985252535, guid: 2e7975395f4b1da4989c24071ff1d644, type: 3}
-      propertyPath: startGameEC
-      value: 
-      objectReference: {fileID: 11400000, guid: e2496553f0221904d9f87281addeec4d, type: 2}
+      propertyPath: showTestLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9153631508648386834, guid: 2e7975395f4b1da4989c24071ff1d644, type: 3}
       propertyPath: m_RootOrder
       value: 4

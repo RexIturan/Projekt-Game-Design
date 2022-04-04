@@ -140,6 +140,8 @@ public class MainMenuUIController : MonoBehaviour {
 			Debug.Log("LoadLevel Button Pressed");	
 		}
 		
+		loadGame.RaiseEvent(1);
+		startGameEC.RaiseEvent();
 		// loadGame.RaiseEvent(1);
 	}
 	
@@ -156,6 +158,8 @@ public class MainMenuUIController : MonoBehaviour {
 			Debug.Log("Test Level Button Pressed");	
 		}
 		
+		loadGame.RaiseEvent(2);
+		startGameEC.RaiseEvent();
 		// _loadTestLevelScreen.visible = true;
 		// _menuContainer.visible = false;
 	}

@@ -74,7 +74,7 @@ public class PauseMenuUIController : MonoBehaviour {
 		SetElementVisibility(_optionsButton, showOptionsLevel);
 		//todo doesnt work for now!
 		SetElementVisibility(_loadButton, false);
-		SetElementVisibility(_backToMenuButton, false);
+		// SetElementVisibility(_backToMenuButton, false);
 	}
 
 	private void UnbindElements() {
