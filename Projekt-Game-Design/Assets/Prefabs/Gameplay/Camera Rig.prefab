@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1403a8ab1db84c09851ec350272e9db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputCache: {fileID: 11400000, guid: 767106d458901634590366e6fae31156, type: 2}
+  panCameraEC: {fileID: 11400000, guid: fe854844b8d71814a8d2d5542e653e91, type: 2}
   inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   movementSpeed:
     useConstant: 1
