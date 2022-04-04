@@ -83,6 +83,7 @@ MonoBehaviour:
   enemyParent: {fileID: 0}
   enemyDataContainerSO: {fileID: 11400000, guid: 193267e50774c3a4aa842d7941f463d9, type: 2}
   playerDataContainerSo: {fileID: 11400000, guid: c9dd19647e8a08443a455a408c7818f1, type: 2}
+  idAppearanceContainerSO: {fileID: 11400000, guid: e514c8a7f0992f64a830cc7e87445fa5, type: 2}
 --- !u!114 &6243888046473227220
 MonoBehaviour:
   m_ObjectHideFlags: 0

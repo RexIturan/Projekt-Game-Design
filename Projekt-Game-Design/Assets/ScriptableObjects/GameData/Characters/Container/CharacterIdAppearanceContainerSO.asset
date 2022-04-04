@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24275e2a898e8374a8323033eda651bb, type: 3}
+  m_Name: CharacterIdAppearanceContainerSO
+  m_EditorClassIdentifier: 
+  defaultPlayer:
+    characterName: The Nameless One
+    characterIcon: {fileID: 21300000, guid: 0eeaab8ac838b664384e482a53b91156, type: 3}
+  playerAppearances:
+  - characterName: John The Brave
+    characterIcon: {fileID: 21300000, guid: e2120594bea12424ab1e4cd581bc03dc, type: 3}
+  - characterName: Pierre
+    characterIcon: {fileID: 21300000, guid: da09557406e4d3b4995692f06f530b7d, type: 3}
+  - characterName: Gardar Grimsson
+    characterIcon: {fileID: 21300000, guid: 1f13b719b0560e844bb98414e72960bd, type: 3}

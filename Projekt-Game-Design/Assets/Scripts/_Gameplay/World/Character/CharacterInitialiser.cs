@@ -18,6 +18,8 @@ namespace Characters {
 		[SerializeField] private EnemyDataContainerSO enemyDataContainerSO;
 		[SerializeField] private PlayerDataContainerSO playerDataContainerSo;
 
+		[SerializeField] private CharacterIdAppearanceContainerSO idAppearanceContainerSO;
+
 		private CharacterManager CharacterManager => GameplayProvider.Current.CharacterManager;
 		
 
@@ -41,6 +43,8 @@ namespace Characters {
 					var playerSC = obj.GetComponent<PlayerCharacterSC>();
 					playerSC.Type = type;
 					playerSC.InitializeFromSave(playerSave);
+
+					InitAppearance(obj, idAppearanceContainerSO.GetAppearanceToID(playerSC.id));
 
 					CharacterManager.AddPlayerCharacter(playerSC);
 				}
@@ -94,6 +98,12 @@ namespace Characters {
 			// 		_characterList.enemyContainer.Add(enemySC.gameObject);
 			// 	}
 			// }
+		}
+
+		private void InitAppearance(GameObject character, CharacterIdentificationAppearance appearance) {
+			Statistics stats = character.GetComponent<Statistics>();
+			stats.DisplayName = appearance.CharacterName;
+			stats.DisplayImage = appearance.CharacterIcon;
 		}
 	}
 }
