@@ -30,9 +30,10 @@ namespace FieldOfView {
 				
 				// fov algorithms
 				private FieldOfView_Adam _fieldOfViewAdam;
-        // private FieldOfView _fieldOfView;
+				// private FieldOfView _fieldOfView;
+				[SerializeField] private WorldObjectManager _worldObjectManager;
 
-        [Header("AdamFOV Settings")]
+				[Header("AdamFOV Settings")]
         [SerializeField] private Vector2Int posAdam;
         [SerializeField] private int rangeAdam;
         
@@ -40,9 +41,8 @@ namespace FieldOfView {
         [SerializeField] private TileBase viewTile;
         
         private bool[,] _visible;
-        
 
-        public void OnEnable() {
+				public void OnEnable() {
             // _fieldOfView = InitFieldOfView();
             fov_PlayerCharViewUpdateEC.OnEventRaised += GeneratePlayerCharacterVision;
             fieldOfViewQueryEventChannel.OnEventRaised += HandleQueryEvent;
@@ -201,20 +201,18 @@ namespace FieldOfView {
                 blocksLight = flags.HasFlag(flag: blocker);
             }
 
-						// world objects
-						if ( !blocksLight ) {
-								// block light with doors 
-								WorldObjectManager worldObjectManager = FindObjectOfType<WorldObjectManager>();
-								if ( worldObjectManager )
-								{
-										Door door = worldObjectManager.GetDoorAt(new Vector3Int(x, 1, y));
-										if ( door && !door.IsBroken && !door.IsOpen )
-												blocksLight = true;
+						if( !_worldObjectManager )
+								_worldObjectManager = FindObjectOfType<WorldObjectManager>();
 
-										Junk junk = worldObjectManager.GetJunkAt(new Vector3Int(x, 1, y));
-										if ( junk && !junk.IsBroken && junk.Type.opaque )
-												blocksLight = true;
-								}
+						// world objects
+						if ( !blocksLight && _worldObjectManager ) {
+								Door door = _worldObjectManager.GetDoorAt(new Vector3Int(x, 1, y));
+								if ( door && !door.IsBroken && !door.IsOpen )
+										blocksLight = true;
+								
+								Junk junk = _worldObjectManager.GetJunkAt(new Vector3Int(x, 1, y));
+								if ( junk && !junk.IsBroken && junk.Type.opaque )
+										blocksLight = true;
 						}
 
             return blocksLight;
