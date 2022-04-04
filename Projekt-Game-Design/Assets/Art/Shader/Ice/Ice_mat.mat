@@ -96,7 +96,7 @@ Material:
     - ADDITIONAL_LIGHTS: 1
     - Boolean_40f1ecfee88347cf98c7660f9a108254: 0
     - Boolean_543c2b4ef9e24f6ea26e2968ae5aa0ad: 1
-    - RimBrightness: 3.16
+    - RimBrightness: 4
     - Vector1_f3dce486942748d5955b09c15e36258f: 0.13
     - _AlphaClip: 0
     - _Blend: 0
@@ -128,15 +128,15 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - BottonColor: {r: 0, g: 0.18333316, b: 1, a: 1}
+    - BottonColor: {r: 0.8301887, g: 0.042292565, b: 0.096162416, a: 1}
     - Color_f702751c4f1a48479233bae40c6b6552: {r: 0, g: 0, b: 0, a: 0}
-    - TopColor: {r: 0.24094428, g: 0.576121, b: 0.9245283, a: 1}
+    - TopColor: {r: 0.8490566, g: 0.018161638, b: 0, a: 1}
     - _Axis: {r: 1, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _SubSurfaceColor: {r: 0.16534506, g: 0.09019608, b: 0.9137255, a: 0.99607843}
+    - _SubSurfaceColor: {r: 0.3018868, g: 0.054382734, b: 0.043859016, a: 0.99607843}
   m_BuildTextureStacks: []
 --- !u!114 &5929622144090739619
 MonoBehaviour:

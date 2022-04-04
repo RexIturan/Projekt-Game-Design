@@ -2,10 +2,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Util.ScriptableObjects;
+using Events.ScriptableObjects;
 using System;
 
 namespace DefaultNamespace.Camera {
     public class CameraController : MonoBehaviour {
+				[SerializeField] private Vector3EventChannelSO panCameraEC;
         [SerializeField] private InputReader inputReader;
         [SerializeField] private FloatReference movementSpeed;
         [SerializeField] private FloatReference zoomSpeed;
@@ -25,6 +27,7 @@ namespace DefaultNamespace.Camera {
         private void OnEnable()
         {
 	        // bind events
+					panCameraEC.OnEventRaised += PanCamera;
 	        inputReader.CameraMoveEvent += HandleCameraMoveEvent;
 	        inputReader.CameraRotateEvent += HandleCameraRotateEvent;
 	        inputReader.CameraZoomEvent += HandleCameraZoomEvent;
@@ -32,8 +35,9 @@ namespace DefaultNamespace.Camera {
         }
 
         private void OnDisable() {
-            // unbind events
-            inputReader.CameraMoveEvent -= HandleCameraMoveEvent;
+						// unbind events
+						panCameraEC.OnEventRaised -= PanCamera;
+						inputReader.CameraMoveEvent -= HandleCameraMoveEvent;
             inputReader.CameraRotateEvent -= HandleCameraRotateEvent;
             inputReader.CameraZoomEvent -= HandleCameraZoomEvent;
         }
@@ -121,5 +125,9 @@ namespace DefaultNamespace.Camera {
         private void HandleCameraZoomEvent(float zoom) {
             _zoomInput = zoom;
         }
+
+				private void PanCamera(Vector3 worldPos) {
+						transform.position = new Vector3(worldPos.x, transform.position.y, worldPos.z);
+				}
     }
 }

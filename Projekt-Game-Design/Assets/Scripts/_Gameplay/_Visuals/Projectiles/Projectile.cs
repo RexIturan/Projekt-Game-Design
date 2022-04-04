@@ -11,13 +11,14 @@ namespace Visual
 				[SerializeField] private SoundEventChannelSO playSoundEC;
 				[SerializeField] private SoundSO impactSound;
 
-				public float time;
-				public float timeEnd = 1;
+				private float time; // accumulated time that's been falling
+				public float timeEnd = 1; // time mark of the impact 
 				public Vector3 start;
 				public Vector3 end;
 				[SerializeField] private bool onlyFall;
 				[SerializeField] private float height;
-				[SerializeField] private Vector3 lastPos;
+				[SerializeField] private float lyingTime; // how long the model keeps lying around before disappearing
+				private Vector3 lastPos;
 
 				void Start()
 				{
@@ -36,7 +37,7 @@ namespace Visual
 						}
 						else { 
 								playSoundEC.RaiseEvent(impactSound);
-								Destroy(gameObject);
+								Destroy(gameObject, lyingTime);
 						}
 				}
 
