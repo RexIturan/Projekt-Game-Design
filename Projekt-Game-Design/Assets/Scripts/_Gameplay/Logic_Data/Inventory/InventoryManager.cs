@@ -41,10 +41,11 @@ public class InventoryManager : MonoBehaviour {
 		var item = itemTypeContainer.GetItemFromID(itemID);
 			
 		if(item is {})
-			inventory.AddItem(item);
-		
-		Debug.Log($"InventoryManager\nPick up Item: {item} with id {itemID}");
-	}
+			if(inventory.AddItem(item) )
+				Debug.Log($"InventoryManager\nPick up Item: {item} with id {itemID}");
+			else
+				Debug.Log($"InventoryManager\nInventory full. Dropping item again. ");
+		}
 
 	private void MoveItem(InventoryTarget fromTarget, int fromID, InventoryTarget ToTarget, int toID, int equipmentId) {
 		switch ( fromTarget, ToTarget ) {

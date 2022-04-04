@@ -1,5 +1,6 @@
 using Ability;
 using Audio;
+using GDP01.Loot.ScriptableObjects;
 using UnityEngine;
 
 namespace WorldObjects {
@@ -16,8 +17,7 @@ namespace WorldObjects {
 				public bool destructable;
 				public ArmorType armorType;
 				public int hitPoints;
-				//todo(vincent) refactor
-				// public LootTable drop;
+				public LootTableSO loot;
 
 				public Junk.JunkData ToComponentData() {
 					Junk.JunkData data = base.ToComponentData<Junk.JunkData>();

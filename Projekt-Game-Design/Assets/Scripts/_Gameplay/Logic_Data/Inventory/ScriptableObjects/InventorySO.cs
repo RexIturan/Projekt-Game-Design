@@ -10,8 +10,9 @@ using UnityEngine;
 /// </summary>
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventorySO : ScriptableObject, ISaveState<InventorySO.InventoryData> {
+	public static readonly int SIZE = 28;
+
 	public struct InventoryData {
-		public int size;
 		public ItemTypeSO.ItemTypeData[] inventory;
 	}
 
@@ -23,22 +24,21 @@ public class InventorySO : ScriptableObject, ISaveState<InventorySO.InventoryDat
 	
 	public InventoryData Save() {
 		return new InventoryData {
-			size = inventorySlots.Length,
 			inventory = inventorySlots.Select(item => item?.ToData()).ToArray(),
 		};
 	}
 
 	public void Load(InventoryData data) {
-		inventorySlots = new ItemTypeSO[data.size];
+		inventorySlots = new ItemTypeSO[SIZE];
 		if ( data.inventory != null ) {
-			for ( int i = 0; i < data.size; i++ ) {
+			for ( int i = 0; i < SIZE; i++ ) {
 				inventorySlots[i] = data.inventory[i]?.obj;
 			}
 		}
 	}
 
 	public void Claer(int size) {
-		inventorySlots = new ItemTypeSO[size];
+		inventorySlots = new ItemTypeSO[SIZE];
 	}
 
 	public void AddItemAt(int index, ItemTypeSO itemType) {

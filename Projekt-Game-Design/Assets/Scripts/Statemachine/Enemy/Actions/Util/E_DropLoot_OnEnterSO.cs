@@ -5,6 +5,7 @@ using Grid;
 using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
+using WorldObjects;
 using StateMachine = UOP1.StateMachine.StateMachine;
 
 [CreateAssetMenu(fileName = "e_DropLoot_OnEnter",
@@ -35,33 +36,6 @@ public class E_DropLoot_OnEnter : StateAction {
 	}
 
 	public override void OnStateEnter() {
-		DropLoot(_enemy.LootTable, _gridTransform.gridPosition);
-	}
-
-	// TODO move to Item Spawner
-	public static void DropLoot(LootTableSO lootTable,
-		Vector3Int gridPos) {
-		var worldObjectManager = GameplayProvider.Current.WorldObjectManager;
-
-		if ( !worldObjectManager )
-			Debug.LogWarning("Could not find worldObjectManager. ");
-		else {
-			ItemTypeSO itemType = null;
-			int dropID = -1;
-			var lootDrop = lootTable.GetLootDrop();
-
-			//todo drop multiple items 
-			if ( lootDrop.items.Count > 0 ) {
-				dropID = lootDrop.items[0].id;
-				itemType = lootDrop.items[0];
-			}
-
-			if ( dropID >= 0 && itemType is {} ) {
-				//todo move reference to grid controller to ItemSpawner or so and just invoke a event here 
-				Debug.Log("Dropping loot: " + dropID + " at " + gridPos.x + ", " + gridPos.z);
-				
-				worldObjectManager.AddItemAt(itemType, gridPos);
-			}
-		}
+		WorldObjectManager.DropLoot(_enemy.LootTable, _gridTransform.gridPosition);
 	}
 }

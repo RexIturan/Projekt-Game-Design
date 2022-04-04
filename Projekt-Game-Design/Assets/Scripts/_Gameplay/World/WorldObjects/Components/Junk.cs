@@ -127,9 +127,6 @@ namespace WorldObjects
 
 				private void JunkDestroyed() {
 						Broken = true;
-						//todo ??????
-						// TODO(vincent) refactor -> Drop.GetLoot -> LootSpawner.Spawn(Loot)
-						// E_DropLoot_OnEnter.DropLoot(redrawLevelEC, junkType.drop, gameObject.GetComponent<GridTransform>().gridPosition);
 
 						playSoundEC.RaiseEvent(Type.destructionSound);
 
@@ -137,6 +134,10 @@ namespace WorldObjects
 								worldObjectManager.RemoveJunkAt(transform.position);
 						else
 								Debug.LogError("No world object manager for junk set. Can't remove junk. ");
+
+						// loot
+						if ( Type.loot )
+								WorldObjectManager.DropLoot(Type.loot, _gridTransform.gridPosition);
 				}
 		}
 }
