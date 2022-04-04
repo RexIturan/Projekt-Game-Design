@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0060a96a91ff3fb41b85a129587606c5, type: 3}
-  m_Name: i_basicKey
+  m_Script: {fileID: 11500000, guid: 189f26a6be9797f408d0cbb35bfd9424, type: 3}
+  m_Name: (old)_w_sword
   m_EditorClassIdentifier: 
-  id: 10
+  id: 1
+  icon: {fileID: 21300000, guid: 298b0276164326f4895ca5d023bb6dfd, type: 3}
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
-  itemName: Key
-  description: 'It is a common key for a door. You just have to find it! '
-  icon: {fileID: 21300000, guid: a5e74a8f7d0d00f4e80331e5a1a93a5c, type: 3}
-  mesh: {fileID: 5076832188769910695, guid: b7f52afb97ae75b45b1ac0f48cd23d50, type: 3}
+  mesh: {fileID: 855286130926878122, guid: 67b310252bfacf24199dbb5edd4693f3, type: 3}
   material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
   goldValue: 0
   rarity: 0
-  type: 0
-  abilities: []
+  type: 4
+  abilities:
+  - {fileID: 11400000, guid: 6f286b61fd61f3a48b80ad5e8d79743a, type: 2}
+  - {fileID: 11400000, guid: 442d8065907058c4fa5dd6f8b7e47eeb, type: 2}

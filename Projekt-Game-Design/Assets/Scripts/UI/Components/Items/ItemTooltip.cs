@@ -18,7 +18,9 @@ namespace UI.Components.Tooltip
 						if(itemType is WeaponTypeSO)
 								Add(new ItemDetailPanel((WeaponTypeSO) itemType, true));
 						else if(itemType is ArmorTypeSO)
-								Add(new ItemDetailPanel((ArmorTypeSO) itemType, false));
+								Add(new ItemDetailPanel((ArmorTypeSO) itemType, true));
+						else if(itemType is PotionTypeSO )
+								Add(new ItemDetailPanel((PotionTypeSO)itemType, true));
 						else
 								Add(new ItemDetailPanel(itemType, false));
 				}

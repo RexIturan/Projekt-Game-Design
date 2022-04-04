@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 189f26a6be9797f408d0cbb35bfd9424, type: 3}
-  m_Name: w_GreaterHealingStaff
+  m_Name: w_Lightning_Gauntlet
   m_EditorClassIdentifier: 
-  id: 12
+  id: 20
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
-  icon: {fileID: 21300000, guid: 3bf59c2100f28204b8623c9800f9715f, type: 3}
-  mesh: {fileID: -5480048413833966923, guid: afac770ec625c0445a6776fe15546a41, type: 3}
-  material: {fileID: 2100000, guid: afcf74c9d28da724b9ed74097742bcd2, type: 2}
+  itemName: Lightning Gauntlet
+  description: 'Magical glove that releases powerful lightning upon use. '
+  icon: {fileID: 21300000, guid: 570d39989dfe87540a99d17f0ab6c596, type: 3}
+  mesh: {fileID: 0}
+  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
   goldValue: 0
   rarity: 0
   type: 4
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 9d89d102ed9fbda45949ccf828653273, type: 2}

@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 189f26a6be9797f408d0cbb35bfd9424, type: 3}
-  m_Name: w_hammer
+  m_Name: (old)_w_dagger
   m_EditorClassIdentifier: 
-  id: 2
-  icon: {fileID: 21300000, guid: 179952057ed878a42b0538e7b9cc30cd, type: 3}
+  id: 0
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
-  mesh: {fileID: 8193850524621578839, guid: 67b310252bfacf24199dbb5edd4693f3, type: 3}
+  itemName: Dagger
+  description: 'A sharp tool that can make the air around it slice like a sword. '
+  icon: {fileID: 21300000, guid: 47a60f71cf3cf0e41a6a1755c5fb32b1, type: 3}
+  mesh: {fileID: 5175954674425621859, guid: 67b310252bfacf24199dbb5edd4693f3, type: 3}
   material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
-  goldValue: 25
-  rarity: 2
+  goldValue: 20
+  rarity: 1
   type: 5
   abilities:
-  - {fileID: 11400000, guid: 5e99a923262791541b0efe9168853c8b, type: 2}
+  - {fileID: 11400000, guid: 442d8065907058c4fa5dd6f8b7e47eeb, type: 2}

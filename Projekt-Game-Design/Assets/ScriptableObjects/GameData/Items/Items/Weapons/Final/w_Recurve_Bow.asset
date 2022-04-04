@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 189f26a6be9797f408d0cbb35bfd9424, type: 3}
-  m_Name: w_dagger
+  m_Name: w_Recurve_Bow
   m_EditorClassIdentifier: 
-  id: 0
-  icon: {fileID: 21300000, guid: 47a60f71cf3cf0e41a6a1755c5fb32b1, type: 3}
+  id: 17
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
-  mesh: {fileID: 5175954674425621859, guid: 67b310252bfacf24199dbb5edd4693f3, type: 3}
-  material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
-  goldValue: 20
-  rarity: 1
-  type: 5
+  itemName: Recurve Bow
+  description: 'A finely-crafted weapon for skilled archers. '
+  icon: {fileID: 21300000, guid: a2344a76dd5d88843a001bd6b6fb967f, type: 3}
+  mesh: {fileID: 2735185013019004654, guid: 565ab4d6976091a449baf31fdded6b44, type: 3}
+  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
+  goldValue: 0
+  rarity: 0
+  type: 4
   abilities:
-  - {fileID: 11400000, guid: 442d8065907058c4fa5dd6f8b7e47eeb, type: 2}
+  - {fileID: 11400000, guid: fa7d4d64569ad11428ad49b44d186094, type: 2}

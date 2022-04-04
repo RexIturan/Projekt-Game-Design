@@ -49,14 +49,14 @@ namespace UI.Components.Item
 						}
 
 						TextElement headerName = new TextElement();
-						headerName.text = itemType.name;
+						headerName.text = itemType.itemName;
 						header.Add(headerName);
 
 						Add(header);
 
 						// description
 						TextElement description = new TextElement();
-						description.text = "item.description";
+						description.text = itemType.description;
 
 						Add(description);
 				}
@@ -122,6 +122,30 @@ namespace UI.Components.Item
 
 						StatBulletPoint defense = new StatBulletPoint(StatType.DEFENSE, armorType.armor);
 						stats.Add(defense);
+
+						Add(stats);
+				}
+
+				/// <summary>
+				/// Creates detail view of an potion. 
+				/// </summary>
+				/// <param name="potionType">potion which's properties are displayed in the detail view </param>
+				public ItemDetailPanel(PotionTypeSO potionType) : this(potionType, ICON_ON_DEFAULT) { }
+
+				/// <summary>
+				/// Creates detail view of an potion. 
+				/// </summary>
+				/// <param name="potionType">potion which's properties are displayed in the detail view </param>
+				/// <param name="iconOn">decides whether or not the detail view displays the item's icon </param>
+				public ItemDetailPanel(PotionTypeSO potionType, bool iconOn) : this((ItemTypeSO) potionType, iconOn)
+				{
+						// adding stats
+						VisualElement stats = new VisualElement();
+
+						StatBulletPoint healing = new StatBulletPoint(StatType.HEALING, potionType.healing);
+						stats.Add(healing);
+
+						Add(stats);
 				}
 
 				#region Doesn't belong here (it is Item properties). 
