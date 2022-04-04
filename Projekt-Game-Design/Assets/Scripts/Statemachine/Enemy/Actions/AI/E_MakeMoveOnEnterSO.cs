@@ -47,6 +47,11 @@ public class E_MakeMoveOnEnter : StateAction {
 		}
 
 		private void MakeMove() {
+				if ( _aiController.OutOfSight() ) { 
+						HandleSkip();
+						return;
+				}
+
 				_aiController.ClearFullCache();
 				_abilityController.RefreshAbilities();
 				_aiController.RefreshValidAbilities();

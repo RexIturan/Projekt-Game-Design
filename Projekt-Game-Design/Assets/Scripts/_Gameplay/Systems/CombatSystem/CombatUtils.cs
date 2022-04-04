@@ -6,6 +6,7 @@ using Characters;
 using Characters.Types;
 using GDP01.World.Components;
 using UnityEngine;
+using Util;
 
 namespace Combat
 {
@@ -158,12 +159,27 @@ namespace Combat
 				/// i.e. if flag is set, 30 points of damage against a character with 1 point of health will be count as 1 point of damage, 
 				/// and if the flag is not set, it will be count as 30 points of damage </param>
 				public static int GetCumulatedDamageOnFaction(Vector3Int targetPos, AbilitySO ability, Attacker attacker, Faction faction, bool actual) {
+						return GetCumulatedDamageOnFactionInArea(targetPos, ability, attacker, faction, actual, false, null);
+				}
+
+				/// <summary>
+				/// Calculates the total damage an ability would deal upon a given faction. 
+				/// </summary>
+				/// <param name="actual">Defines whether range of health should be considered, 
+				/// i.e. if flag is set, 30 points of damage against a character with 1 point of health will be count as 1 point of damage, 
+				/// and if the flag is not set, it will be count as 30 points of damage </param>
+				/// <param name="inArea">Is set to true if only targetables in a certain area are considered. </param>
+				/// <param name="area">Area in which targetables are considered. </param>
+				public static int GetCumulatedDamageOnFactionInArea(Vector3Int targetPos, AbilitySO ability, 
+						Attacker attacker, Faction faction, bool actual, bool inArea, List<PathNode> area) {
+
 						List<Tuple<Targetable, int>> targetDamagePairs = GetCumulatedDamage(targetPos, ability, attacker);
 						int totalDamage = 0;
 						foreach(Tuple<Targetable, int> targetDamagePair in targetDamagePairs) {
 								Statistics targetableStats = targetDamagePair.Item1.GetComponent<Statistics>();
 
-								if ( targetableStats && targetableStats.Faction.Equals(faction) ) { 
+								if ( targetableStats && targetableStats.Faction.Equals(faction) && 
+										(!inArea || area.Exists(node => node.pos.Equals(targetPos)))) { 
 										if(!actual)
 												totalDamage += targetDamagePair.Item2;
 										else {

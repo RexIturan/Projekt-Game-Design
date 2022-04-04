@@ -211,6 +211,25 @@ namespace Characters.EnemyCharacter
 						currentAbility = null;
 				}
 
+				/*
+				private bool IsPlayerVisible() {
+						return CombatUtils.FindAllTargets(PathNode.ConvertPathNodeListToVector3IntList(_attacker.visibleTiles), _attacker, TargetRelationship.Enemy).Count > 0;
+				}
+				*/
+
+				/// <summary>
+				/// Checks, whether a player is in viewing range. 
+				/// </summary>
+				/// <returns>True, if viewing range is greater or equal than the distance to a player </returns>
+				public bool OutOfSight() {
+						List <PlayerCharacterSC> players = GameplayProvider.Current.CharacterManager.GetPlayerCharacters();
+						bool playerInRange = players.Exists(player => ( player.transform.position - transform.position ).magnitude <= _statistics.StatusValues.ViewDistance.Value);
+						if ( !playerInRange )
+								Debug.Log("No player in range. ");
+						return !playerInRange;
+				}
+				
+
 				/// <summary>
 				/// Goes through all valid abilities, calculates the damage output for every 
 				/// possible target and if any has more damage than 0, chooses the ability. 
@@ -242,7 +261,7 @@ namespace Characters.EnemyCharacter
 								foreach(Vector3Int possibleTarget in abilityRangePair.Item2) {
 										AbilitySO ability = abilityRangePair.Item1;
 										Targetable target = Targetable.GetTargetsWithPosition(possibleTarget);
-
+										
 										if (ability.targets.HasFlag(TargetRelationship.Ground) ||
 												AbilityController.HasRightRelationshipForAbility(ability, _attacker, target) ) {
 
@@ -250,7 +269,7 @@ namespace Characters.EnemyCharacter
 												// if healing is supposed to be maximized, calculate *actual* healing
 												float scoring;
 												if (outputIsDamage)
-														scoring = CombatUtils.GetCumulatedDamageOnFaction(possibleTarget, ability, _attacker, Faction.Player);
+														scoring = CombatUtils.GetCumulatedDamageOnFactionInArea(possibleTarget, ability, _attacker, Faction.Player, false, true, _attacker.visibleTiles);
 												else
 														scoring = -CombatUtils.GetCumulatedDamageOnFaction(possibleTarget, ability, _attacker, Faction.Enemy, true);
 
@@ -297,6 +316,11 @@ namespace Characters.EnemyCharacter
 												List<Vector3Int> affectedTiles = effect.area.GetTargetedTiles(target, _attacker.GetRotationsToTarget(target));
 												List<Targetable> targetsInArea = offensive ? CombatUtils.FindAllTargets(affectedTiles, _attacker, TargetRelationship.Enemy) :
 																																		 CombatUtils.FindAllTargets(affectedTiles, _attacker, TargetRelationship.Ally);
+
+												// if offensive, ignore the ones that aren't in sight
+												if ( offensive )
+														targetsInArea.RemoveAll(targetAble => !_attacker.visibleTiles.Exists(node => node.pos.Equals(targetAble)));
+
 												int worthPerTarget = offensive ? tileEffect.worthAgainstPlayerPerTarget : tileEffect.worthForEnemyPerTarget;
 
 												// for each target in the area, add something to the score
