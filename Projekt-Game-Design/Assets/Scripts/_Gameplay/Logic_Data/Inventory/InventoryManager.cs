@@ -70,13 +70,22 @@ public class InventoryManager : MonoBehaviour {
 			
 			//Inventory -> Trash
 			case (Inventory, Trash) :
-				//TODO Implement Trash
+				DropItemFromInventory(fromID);
 				break;
 			
 			//Equipment -> Trash
 			case (Equipment, Trash) :
 				//TODO Implement Trash
 				break;
+		}
+	}
+
+	private void DropItemFromInventory(int fromID) {
+		if ( inventory.IsSlotIdValid(fromID) ) {
+			inventory.InventorySlots[fromID] = null;
+		}
+		else {
+			Debug.LogError($"DropItem failed with with inventoryID: from:{fromID}");
 		}
 	}
 

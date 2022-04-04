@@ -69,11 +69,18 @@ public class InventorySlot : VisualElement
         //Not the left mouse button OR noitem Or no slot
         if (inventoryItemID == -1 || slotId == -1 || evt.button != 0)
           return;
-        
-        //Clear the image
-        icon.image = null;
-        //Start the drag
-        InventoryUIController.StartDrag(evt.position, this);
+
+				// is item consumable? 
+				if ( itemType is PotionTypeSO ) {
+						InventoryUIController.SetDrinkPotion(this);
+				}
+				// else start dragging
+				else {
+						//Clear the image
+						icon.image = null;
+						//Start the drag
+						InventoryUIController.StartDrag(evt.position, this);
+				}
     }
 
     public enum InventorySlotType
