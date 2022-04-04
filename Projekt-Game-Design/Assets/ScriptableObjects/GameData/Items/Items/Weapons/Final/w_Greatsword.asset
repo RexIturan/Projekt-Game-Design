@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189f26a6be9797f408d0cbb35bfd9424, type: 3}
   m_Name: w_Greatsword
   m_EditorClassIdentifier: 
-  id: 17
+  id: 22
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
   itemName: Greatsword
   description: 'A noble weapon for noble warriors with massive power. '
   icon: {fileID: 21300000, guid: 298b0276164326f4895ca5d023bb6dfd, type: 3}
   mesh: {fileID: -4503633525895468283, guid: 68f96fcbdf6109d4aac8012958e8f2e6, type: 3}
-  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
+  material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
   goldValue: 0
   rarity: 0
   type: 4

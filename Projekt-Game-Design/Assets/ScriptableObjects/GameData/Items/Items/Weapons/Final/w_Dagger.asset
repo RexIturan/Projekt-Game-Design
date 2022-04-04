@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189f26a6be9797f408d0cbb35bfd9424, type: 3}
   m_Name: w_Dagger
   m_EditorClassIdentifier: 
-  id: 17
+  id: 18
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
   itemName: Throwing Knife
   description: 'A light but deadly knife to throw at your enemies. '
   icon: {fileID: 21300000, guid: df21be7e9aa69f34e963199ec2fdf7a0, type: 3}
   mesh: {fileID: 5175954674425621859, guid: 67b310252bfacf24199dbb5edd4693f3, type: 3}
-  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
+  material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
   goldValue: 0
   rarity: 0
   type: 4

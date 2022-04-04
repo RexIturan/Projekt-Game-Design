@@ -49,12 +49,14 @@ namespace WorldObjects {
 		public void AddItemAt(ItemTypeSO itemTypeSO, Vector3 worldPos) {
 			var item = CreateItem(itemTypeSO);
 			item.GridTransform.MoveTo(worldPos);
+			InitItemAppearance(item, itemTypeSO);
 			_itemComponents.Add(item);
 		}
 		
 		public void AddItemAt(ItemTypeSO itemTypeSO, Vector3Int gridPos) {
 			var item = CreateItem(itemTypeSO);
 			item.GridTransform.MoveTo(gridPos);
+			InitItemAppearance(item, itemTypeSO);
 			_itemComponents.Add(item);
 		}
 		
@@ -64,6 +66,11 @@ namespace WorldObjects {
 				_itemComponents.Remove(item);
 				Destroy(item.gameObject);
 			}
+		}
+
+		private void InitItemAppearance(ItemComponent item, ItemTypeSO type) {
+			item.GetComponentInChildren<MeshFilter>().mesh = type.mesh;
+			item.GetComponentInChildren<Renderer>().material = type.material;
 		}
 
 		private ItemComponent GetItemAt(Vector3 worldPos) {

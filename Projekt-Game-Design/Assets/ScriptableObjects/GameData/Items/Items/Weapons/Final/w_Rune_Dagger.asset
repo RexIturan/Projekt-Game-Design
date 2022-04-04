@@ -19,7 +19,7 @@ MonoBehaviour:
     to create static traps. '
   icon: {fileID: 21300000, guid: f9c5d49a3f0952945a89166edfbaf273, type: 3}
   mesh: {fileID: -934248834374475292, guid: 67b310252bfacf24199dbb5edd4693f3, type: 3}
-  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
+  material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
   goldValue: 0
   rarity: 0
   type: 4

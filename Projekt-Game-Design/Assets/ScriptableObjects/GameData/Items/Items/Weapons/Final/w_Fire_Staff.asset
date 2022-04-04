@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189f26a6be9797f408d0cbb35bfd9424, type: 3}
   m_Name: w_Fire_Staff
   m_EditorClassIdentifier: 
-  id: 17
+  id: 21
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
   itemName: Fire Staff
   description: 'Powerful artifact used by mages to controll fire itself. '
   icon: {fileID: 21300000, guid: 2b93fc7ed5f2d9447b8644e84ad31b5a, type: 3}
   mesh: {fileID: -5480048413833966923, guid: afac770ec625c0445a6776fe15546a41, type: 3}
-  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
+  material: {fileID: 2100000, guid: 63d5d82768249414eb5ab82bade3632f, type: 2}
   goldValue: 0
   rarity: 0
   type: 4

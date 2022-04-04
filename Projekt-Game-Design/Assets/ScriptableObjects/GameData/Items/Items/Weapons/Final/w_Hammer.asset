@@ -19,7 +19,7 @@ MonoBehaviour:
     vegetables. '
   icon: {fileID: 21300000, guid: 2e7a338eb99558d4fb02310b3a1e43aa, type: 3}
   mesh: {fileID: 8193850524621578839, guid: 67b310252bfacf24199dbb5edd4693f3, type: 3}
-  material: {fileID: 2100000, guid: 11b6d52843e9a804c9eb5165027ccc18, type: 2}
+  material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
   goldValue: 0
   rarity: 0
   type: 4
