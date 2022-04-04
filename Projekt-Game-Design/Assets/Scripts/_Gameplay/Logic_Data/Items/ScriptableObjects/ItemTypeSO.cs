@@ -15,9 +15,11 @@ public class ItemTypeSO : WorldObject.TypeSO {
 		public class ItemTypeData : ReferenceData {
 			public new ItemTypeSO obj;
 		}
-	
 
-    // art
+		// art
+		public string itemName;
+		public string description;
+
     public Sprite icon;
     public Mesh mesh;
     public Material material;

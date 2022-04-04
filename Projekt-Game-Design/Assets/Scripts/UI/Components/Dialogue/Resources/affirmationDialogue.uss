@@ -1,0 +1,26 @@
+﻿.affirmationDialogue {
+	width: 500px;
+	height: 300px;
+
+	justify-content: space-around;
+	
+	font-size: 25;
+	color: white;
+
+	background-color: black;
+	padding: 10px;
+	border-color: white;
+	border-width: 3px;
+}
+
+.affirmationDialogue .header {
+	font-size: 25;
+	-unity-font-style: bold;
+	-unity-text-align: middle-center;
+	padding-bottom: 3px;
+}
+
+.affirmationDialogue .buttonContainer {
+	flex-direction: row;
+	justify-content: space-around;
+}

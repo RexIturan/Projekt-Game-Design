@@ -11,7 +11,7 @@ namespace GDP01.Loot.Editor {
 			GUIContent label) {
 			
 			var typeProperty = property.FindPropertyRelative("type");
-			var itemProperty = property.FindPropertyRelative("item");
+			var itemProperty = property.FindPropertyRelative("itemType");
 			var weightProperty = property.FindPropertyRelative("weight");
 			var dropRateProperty = property.FindPropertyRelative("dropRate");
 			var dropAmountProperty = property.FindPropertyRelative("dropAmount");
@@ -32,6 +32,10 @@ namespace GDP01.Loot.Editor {
 				r.y += totalLineHeight;
 				EditorGUI.PropertyField(r, itemProperty);
 				SetDrawerHeight(property, totalLineHeight);
+
+				// Set range of items to be dropped to 1
+				// TODO: If and when enemies are supposed to drop multiple items at once, remove this and re-include dropAmount/propertyHeight
+				dropAmountProperty.vector4Value = new Vector4(1,1,1,1);
 			}
 			
 			r.y += totalLineHeight;
@@ -42,28 +46,27 @@ namespace GDP01.Loot.Editor {
 			EditorGUI.PropertyField(r, dropRateProperty);
 			SetDrawerHeight(property, totalLineHeight);
 
-			
-			r.y += totalLineHeight;
-			EditorGUI.PropertyField(r, dropAmountProperty);
-			SetDrawerHeight(property, totalLineHeight);
+			if( typeProperty.enumValueIndex != (int)LootType.Item && typeProperty.enumValueIndex != ( int )LootType.Nothing ) {
+				r.y += totalLineHeight;
+				EditorGUI.PropertyField(r, dropAmountProperty);
+				SetDrawerHeight(property, totalLineHeight);
 
+				// set limit and save it in the vec4
+				var value = dropAmountProperty.vector4Value;
+				r.y += totalLineHeight;
+				var limits = Vector2Int.FloorToInt(dropAmountProperty.vector4Value.ZWInt());
+				var newLimits = EditorGUI.Vector2IntField(r, "Limits", limits);
+				SetDrawerHeight(property, totalLineHeight);
 
-			// set limit and save it in the vec4
-			var value = dropAmountProperty.vector4Value;
-			r.y += totalLineHeight;
-			var limits = Vector2Int.FloorToInt(dropAmountProperty.vector4Value.ZWInt());
-			var newLimits = EditorGUI.Vector2IntField(r, "Limits", limits);
-			SetDrawerHeight(property, totalLineHeight);
-
-			if ( newLimits.y < newLimits.x ) {
-				newLimits.y = newLimits.x;
+				if ( newLimits.y < newLimits.x ) {
+					newLimits.y = newLimits.x;
+				}
+				if ( newLimits.x > newLimits.y ) {
+					newLimits.x = newLimits.y;
+				}
+				value.SetZW(newLimits);
+				dropAmountProperty.vector4Value = value;
 			}
-			if ( newLimits.x > newLimits.y ) {
-				newLimits.x = newLimits.y;
-			}
-			value.SetZW(newLimits);
-			dropAmountProperty.vector4Value = value;
-			
 
 			if ( property.serializedObject.ApplyModifiedProperties() ) {
 				EditorUtility.SetDirty(property.serializedObject.targetObject);

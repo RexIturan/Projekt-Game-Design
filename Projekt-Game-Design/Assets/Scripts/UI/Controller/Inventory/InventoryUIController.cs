@@ -32,10 +32,6 @@ public class InventoryUIController : MonoBehaviour {
 	[SerializeField] private BoolEventChannelSO setMenuVisibilityEC;
 	[SerializeField] private BoolEventChannelSO setInventoryVisibilityEC;
 
-	// Selected events
-	[SerializeField] private GameObjEventChannelSO playerDeselectedEC;
-	[SerializeField] private GameObjActionIntEventChannelSO playerSelectedEC;
-
 	// Inputchannel für das Inventar
 	[SerializeField] private VoidEventChannelSO enableInventoryInput;
 	[SerializeField] private InventoryTabEventChannelSO changeInventoryTab;
@@ -68,12 +64,18 @@ public class InventoryUIController : MonoBehaviour {
 	// for images of all players to switch between them
 	private VisualElement _playerContainer;
 
+	// For dialogues 
+	private VisualElement _dialogueComponentLayer;
+
 	// Fuer den PlayerView Container
-	private CharacterStatusValuePanel _characterStatusValuePanel;
+		private CharacterStatusValuePanel _characterStatusValuePanel;
 
 	// Für das Ghost Icon
 	private static VisualElement _ghostIcon;
 
+	// Zum Drinken von Potions
+	private static InventorySlot _potionSlot;
+	private InventorySlot _currentlyDrinking;
 
 	// Zum Draggen der Icons
 	private static bool _isDragging;
@@ -92,6 +94,10 @@ public class InventoryUIController : MonoBehaviour {
 			return _currentPlayerSelected ??= 
 				PlayerController.Current.Selected?.GetComponent<PlayerCharacterSC>() ?? 
 				CharacterManager.GetFirstPlayerCharacter();
+		}
+		set {
+			_selectedPlayerStatistics = value.GetComponent<Statistics>();
+			_currentPlayerSelected = value;
 		}
 	}
 
@@ -187,10 +193,9 @@ public class InventoryUIController : MonoBehaviour {
 				
 				//todo refactor this, it works but idont like it
 				icon.SetCallback(() => {
-					_currentPlayerSelected = player;
-					_selectedPlayerStatistics = stats;
+					SelectedPlayer = player;
 					UpdateEquipmentContainer();
-					RefreshStats(player.gameObject);
+					RefreshStats();
 				});
 
 				_playerContainer.Add(icon);
@@ -238,7 +243,8 @@ public class InventoryUIController : MonoBehaviour {
 	// Sets to selected player or first in container if none selected
 	// TODO: copied from OverlayUIController
 	//todo move to own class
-	private void RefreshStats(GameObject obj) {
+	private void RefreshStats() {
+		GameObject obj = SelectedPlayer.gameObject;
 		var charIcon = _characterStatusValuePanel.CharIcon;
 		
 		var healthBar = _characterStatusValuePanel.HealthBar;
@@ -287,6 +293,14 @@ public class InventoryUIController : MonoBehaviour {
 		visionField.UpdateComponents();
 	}
 
+	/// <summary>
+	/// Heals player character by given value. Note that this will not update the statusvalue bars. 
+	/// </summary>
+	/// <param name="playerStats">Player character statistics </param>
+	private void HealPlayer(Statistics playerStats, int value) {
+		playerStats.StatusValues.HitPoints.Value += value;
+	}
+
 	private void CleanAllItemSlots() {
 		foreach ( var itemSlot in inventoryItems ) {
 			if ( itemSlot != null && itemSlot.inventoryItemID != -1 ) {
@@ -301,6 +315,19 @@ public class InventoryUIController : MonoBehaviour {
 				itemSlot.DropItem();
 			}
 		}
+	}
+
+	public static void SetDrinkPotion(InventorySlot potionSlot) {
+		_potionSlot = potionSlot;
+	}
+
+	private void StartDrinkPotion() {
+		PotionTypeSO potion = (PotionTypeSO)_potionSlot.itemType;
+		_dialogueComponentLayer.Add(new PotionConsumptionDialogue(potion, HandleDrinkPotion, HandleConsumptionCancelled));
+		_dialogueComponentLayer.pickingMode = PickingMode.Position;
+		_dialogueComponentLayer.visible = true;
+		_currentlyDrinking = _potionSlot;
+		_potionSlot = null;
 	}
 	
 	//TODO Inventory Component
@@ -507,6 +534,18 @@ public class InventoryUIController : MonoBehaviour {
 		_inventoryContainer.style.display = value ? DisplayStyle.Flex : DisplayStyle.None;
 	}
 
+	private void ClearDialogue() {
+		// unbind dialogues 
+		foreach (VisualElement child in _dialogueComponentLayer.Children()) {
+			if(child is AffirmationDialogue)
+				((AffirmationDialogue)child).UnbindActions();
+		}
+
+		_dialogueComponentLayer.Clear();
+		_dialogueComponentLayer.pickingMode = PickingMode.Ignore;
+		_dialogueComponentLayer.visible = false;
+	}
+
 	private void BindElements() {
 		//Store the root from the UI Document component
 		// var root = GetComponent<UIDocument>().rootVisualElement;
@@ -515,6 +554,7 @@ public class InventoryUIController : MonoBehaviour {
 		_equipmentInventoryContainer = root.Q<VisualElement>("PlayerEquipmentInventory");
 		_ghostIcon = root.Query<VisualElement>("GhostIcon");
 		_playerContainer = root.Query<VisualElement>("PlayerContainer");
+		_dialogueComponentLayer = root.Query<VisualElement>("DialogueComponentLayer");
 		_characterStatusValuePanel = root.Q<CharacterStatusValuePanel>("CharacterStatusValuePanel");
 		_inventorySlotContainer = root.Q<VisualElement>("InventoryContent");
 		
@@ -543,22 +583,6 @@ public class InventoryUIController : MonoBehaviour {
 		_playerContainer = null;
 		_characterStatusValuePanel = null;
 		_inventorySlotContainer = null;
-	}
-
-	private void InitPlayerCharacterSelection() {
-		
-		// initially select first player
-		if ( CharacterManager.GetPlayerCharacters().Count > 0 ) {
-			_selectedPlayerStatistics = CharacterManager.GetPlayerCharacters()[0]?.GetComponent<Statistics>();
-		}
-		else {
-			_selectedPlayerStatistics = null;
-		}
-
-	}
-
-	private void CleanPlayerCharacterSelection() {
-		_selectedPlayerStatistics = null;
 	}
 	
 ///// Callbacks	////////////////////////////////////////////////////////////////////////////////////
@@ -605,18 +629,19 @@ public class InventoryUIController : MonoBehaviour {
 	private void HandleOtherScreensOpened(bool value) {
 		HandleInventoryOverlay(false, true);
 	}
-	
-	// refresh menu and select
-	private void HandlePlayerSelected(GameObject player, Action<int> callback) {
-		_selectedPlayerStatistics = player.GetComponent<Statistics>();
-		RefreshStats(player);
+
+	private void HandleDrinkPotion() {
+		Debug.Log("Drinking potion. ");
+		HealPlayer(_selectedPlayerStatistics, ((PotionTypeSO)_currentlyDrinking.itemType).healing);
+		RefreshStats();
+		_currentlyDrinking.DropItem();
+		moveItemEC.RaiseEvent(Inventory, _currentlyDrinking.slotId, Trash, 0, 0);
+		_currentlyDrinking = null;
+		ClearDialogue();
 	}
 
-	// refresh menu and select first in container
-	private void HandlePlayerDeselected(GameObject player) {
-		//todo ????
-		_selectedPlayerStatistics = player.GetComponent<Statistics>();
-		RefreshStats(player);
+	private void HandleConsumptionCancelled() {
+		ClearDialogue();
 	}
 
 ///// Public Functions	////////////////////////////////////////////////////////////////////////////
@@ -626,21 +651,23 @@ public class InventoryUIController : MonoBehaviour {
 	private void Update() {
 		//todo why??????
 		OnPointerMove();
+
+		if(_potionSlot != null) {
+			StartDrinkPotion();
+		}
 	}
 
 	private void OnEnable() {
 		BindElements();
-		InitPlayerCharacterSelection();
+		
+		ClearDialogue();
 
-		RefreshStats(SelectedPlayer.gameObject);
+		RefreshStats();
 		HandleInventoryOverlay(true, true);
 
 		// setInventoryVisibilityEC.OnEventRaised += HandleInventoryOverlay;
 		// setMenuVisibilityEC.OnEventRaised += HandleOtherScreensOpened;
 		// setGameOverlayVisibilityEC.OnEventRaised += HandleOtherScreensOpened;
-		
-		playerDeselectedEC.OnEventRaised += HandlePlayerDeselected;
-		playerSelectedEC.OnEventRaised += HandlePlayerSelected;
 		
 		enableInventoryInput.RaiseEvent();
 	}
@@ -649,13 +676,9 @@ public class InventoryUIController : MonoBehaviour {
 		HandleInventoryOverlay(false, true);
 		
 		UnbindElements();
-		CleanPlayerCharacterSelection();
 		
 		// setInventoryVisibilityEC.OnEventRaised -= HandleInventoryOverlay;
 		// setMenuVisibilityEC.OnEventRaised -= HandleOtherScreensOpened;
 		// setGameOverlayVisibilityEC.OnEventRaised -= HandleOtherScreensOpened;
-		
-		playerDeselectedEC.OnEventRaised -= HandlePlayerDeselected;
-		playerSelectedEC.OnEventRaised -= HandlePlayerSelected;
 	}
 }

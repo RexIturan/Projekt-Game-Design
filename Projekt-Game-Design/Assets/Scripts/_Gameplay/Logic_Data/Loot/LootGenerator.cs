@@ -76,7 +76,7 @@ namespace GDP01._Gameplay.Logic_Data.Loot {
 			KeyValuePair<float, LootObject> first = default;
 			if ( lootSpectrum.Count > 0 ) {
 				first = lootSpectrum.FirstOrDefault(pair => pair.Key > rand);
-				// Debug.Log($"rand: {rand} total{total}, {first.Key} {first.Value.type} {first.Value.item?.name}");	
+				// Debug.Log($"rand: {rand} total{total}, {first.Key} {first.Value.type} {first.Value.itemType?.name}");	
 			}
 			else {
 				Debug.Log("Nothing\nTable Was Empty or the Probability was 0 and smaller");
@@ -99,7 +99,7 @@ namespace GDP01._Gameplay.Logic_Data.Loot {
 				}
 			}
 
-			Debug.Log(attemptsList.AllToString());
+			// Debug.Log(attemptsList.AllToString());
 			
 			var itemsDropped =
 				from l in lootObjects
@@ -113,7 +113,7 @@ namespace GDP01._Gameplay.Logic_Data.Loot {
 
 			var sb = new StringBuilder();
 			foreach ( var x1 in itemsDropped ) {
-				sb.Append($"{x1.Type} {x1.Item} {x1.Count}\n");	
+				sb.Append($"Item dropped: {x1.Type} {x1.Item} {x1.Count}\n");	
 			}
 			Debug.Log(sb.ToString());
 			
