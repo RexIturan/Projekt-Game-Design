@@ -9,241 +9,240 @@
             "y": 0.0,
             "z": -63.0
         }
+    },"players": [
+  {
+    "id": 0,
+    "active": true,
+    "plyerTypeId": 0,
+    "pos": {
+      "x": 41,
+      "y": 1,
+      "z": 43
     },
-    "players": [
-        {
-            "id": 0,
-            "active": true,
-            "plyerTypeId": 0,
-            "pos": {
-                "x": 41,
-                "y": 1,
-                "z": 43
-            },
-            "hitpoints": 30,
-            "energy": 30
-        },
-        {
-            "id": 1,
-            "active": true,
-            "plyerTypeId": 0,
-            "pos": {
-                "x": 32,
-                "y": 1,
-                "z": 44
-            },
-            "hitpoints": 27,
-            "energy": 30
-        },
-        {
-            "id": 2,
-            "active": false,
-            "plyerTypeId": 0,
-            "pos": {
-                "x": 5,
-                "y": 1,
-                "z": 51
-            },
-            "hitpoints": 12,
-            "energy": 30
-        }
-    ],
-    "enemies": [
-        { 
-            "enemyTypeId": 4,
-            "pos": {
-                "x": 39,
-                "y": 1,
-                "z": 47
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 4,
-            "pos": {
-                "x": 27,
-                "y": 1,
-                "z": 51
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 4,
-            "pos": {
-                "x": 26,
-                "y": 1,
-                "z": 53
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 6,
-            "pos": {
-                "x": 25,
-                "y": 1,
-                "z": 58
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 5,
-            "pos": {
-                "x": 11,
-                "y": 1,
-                "z": 45
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 5,
-            "pos": {
-                "x": 10,
-                "y": 1,
-                "z": 42
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-      
-        {
-            "enemyTypeId": 10,
-            "pos": {
-                "x": 26,
-                "y": 1,
-                "z": 40
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 4,
-            "pos": {
-                "x": 21,
-                "y": 1,
-                "z": 40
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-      
-        {
-            "enemyTypeId": 4,
-            "pos": {
-                "x": 15,
-                "y": 1,
-                "z": 25
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 4,
-            "pos": {
-                "x": 13,
-                "y": 1,
-                "z": 24
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 8,
-            "pos": {
-                "x": 16,
-                "y": 1,
-                "z": 22
-            },
-            "hitpoints": 35,
-            "energy": 20
-        },
-      
-        {
-            "enemyTypeId": 8,
-            "pos": {
-                "x": 30,
-                "y": 1,
-                "z": 6
-            },
-            "hitpoints": 35,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 5,
-            "pos": {
-                "x": 34,
-                "y": 1,
-                "z": 7
-            },
-            "hitpoints": 35,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 5,
-            "pos": {
-                "x": 36,
-                "y": 1,
-                "z": 6
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 6,
-            "pos": {
-                "x": 34,
-                "y": 1,
-                "z": 11
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-      
-        {
-            "enemyTypeId": 4,
-            "pos": {
-                "x": 40,
-                "y": 1,
-                "z": 33
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 7,
-            "pos": {
-                "x": 49,
-                "y": 1,
-                "z": 31
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 5,
-            "pos": {
-                "x": 46,
-                "y": 1,
-                "z": 31
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 7,
-            "pos": {
-                "x": 43,
-                "y": 1,
-                "z": 32
-            },
-            "hitpoints": 30,
-            "energy": 20
-        }
-    ],
+    "hitpoints": 30,
+    "energy": 30
+  },
+  {
+    "id": 1,
+    "active": true,
+    "plyerTypeId": 0,
+    "pos": {
+      "x": 32,
+      "y": 1,
+      "z": 44
+    },
+    "hitpoints": 27,
+    "energy": 30
+  },
+  {
+    "id": 2,
+    "active": false,
+    "plyerTypeId": 0,
+    "pos": {
+      "x": 5,
+      "y": 1,
+      "z": 51
+    },
+    "hitpoints": 12,
+    "energy": 30
+  }
+],
+  "enemies": [
+    {
+      "enemyTypeId": 4,
+      "pos": {
+        "x": 39,
+        "y": 1,
+        "z": 47
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 4,
+      "pos": {
+        "x": 27,
+        "y": 1,
+        "z": 51
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 4,
+      "pos": {
+        "x": 26,
+        "y": 1,
+        "z": 53
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 6,
+      "pos": {
+        "x": 25,
+        "y": 1,
+        "z": 58
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 5,
+      "pos": {
+        "x": 11,
+        "y": 1,
+        "z": 45
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 5,
+      "pos": {
+        "x": 10,
+        "y": 1,
+        "z": 42
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+
+    {
+      "enemyTypeId": 10,
+      "pos": {
+        "x": 26,
+        "y": 1,
+        "z": 40
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 4,
+      "pos": {
+        "x": 21,
+        "y": 1,
+        "z": 40
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+
+    {
+      "enemyTypeId": 4,
+      "pos": {
+        "x": 15,
+        "y": 1,
+        "z": 25
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 4,
+      "pos": {
+        "x": 13,
+        "y": 1,
+        "z": 24
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 8,
+      "pos": {
+        "x": 16,
+        "y": 1,
+        "z": 22
+      },
+      "hitpoints": 35,
+      "energy": 20
+    },
+
+    {
+      "enemyTypeId": 8,
+      "pos": {
+        "x": 30,
+        "y": 1,
+        "z": 6
+      },
+      "hitpoints": 35,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 5,
+      "pos": {
+        "x": 34,
+        "y": 1,
+        "z": 7
+      },
+      "hitpoints": 35,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 5,
+      "pos": {
+        "x": 36,
+        "y": 1,
+        "z": 6
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 6,
+      "pos": {
+        "x": 34,
+        "y": 1,
+        "z": 11
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+
+    {
+      "enemyTypeId": 4,
+      "pos": {
+        "x": 40,
+        "y": 1,
+        "z": 33
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 7,
+      "pos": {
+        "x": 49,
+        "y": 1,
+        "z": 31
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 5,
+      "pos": {
+        "x": 46,
+        "y": 1,
+        "z": 31
+      },
+      "hitpoints": 30,
+      "energy": 20
+    },
+    {
+      "enemyTypeId": 7,
+      "pos": {
+        "x": 43,
+        "y": 1,
+        "z": 32
+      },
+      "hitpoints": 30,
+      "energy": 20
+    }
+  ],
     "doors": [
         {
             "doorTypeId": 1,
@@ -253,15 +252,19 @@
                 "z": 39
             },
             "orientation": {
-                "x": 1,
+                "x": 1.0,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [4],
+            "switchIds": [
+                4
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [4],
+            "remainingSwitchIds": [
+                4
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -279,9 +282,15 @@
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [4,5],
+            "switchIds": [
+                4,
+                5
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [4,5],
+            "remainingSwitchIds": [
+                4,
+                5
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -299,9 +308,15 @@
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [4,5],
+            "switchIds": [
+                4,
+                5
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [4,5],
+            "remainingSwitchIds": [
+                4,
+                5
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -313,15 +328,19 @@
                 "z": 48
             },
             "orientation": {
-                "x": 0,
+                "x": 0.0,
                 "y": 0.0,
-                "z": -1
+                "z": -1.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [3],
+            "switchIds": [
+                3
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [3],
+            "remainingSwitchIds": [
+                3
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -333,15 +352,19 @@
                 "z": 48
             },
             "orientation": {
-                "x": 0,
-                "y": 0,
-                "z": -1
+                "x": 0.0,
+                "y": 0.0,
+                "z": -1.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [3],
+            "switchIds": [
+                3
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [3],
+            "remainingSwitchIds": [
+                3
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -353,15 +376,21 @@
                 "z": 52
             },
             "orientation": {
-                "x": 1,
+                "x": 1.0,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [1,2],
+            "switchIds": [
+                1,
+                2
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [1,2],
+            "remainingSwitchIds": [
+                1,
+                2
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -373,15 +402,21 @@
                 "z": 53
             },
             "orientation": {
-                "x": 1,
+                "x": 1.0,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [1,2],
+            "switchIds": [
+                1,
+                2
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [1,2],
+            "remainingSwitchIds": [
+                1,
+                2
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -399,9 +434,13 @@
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [6],
+            "switchIds": [
+                6
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [6],
+            "remainingSwitchIds": [
+                6
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -419,9 +458,13 @@
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [0],
+            "switchIds": [
+                0
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [0],
+            "remainingSwitchIds": [
+                0
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -433,15 +476,19 @@
                 "z": 54
             },
             "orientation": {
-                "x": 1,
+                "x": 1.0,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": true,
             "keyIds": [],
-            "switchIds": [0],
+            "switchIds": [
+                0
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [0],
+            "remainingSwitchIds": [
+                0
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -453,15 +500,19 @@
                 "z": 51
             },
             "orientation": {
-                "x":1,
+                "x": 1.0,
                 "y": 0.0,
-                "z": 0
+                "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [0],
+            "switchIds": [
+                0
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [0],
+            "remainingSwitchIds": [
+                0
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -473,15 +524,19 @@
                 "z": 46
             },
             "orientation": {
-                "x":1,
+                "x": 1.0,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [0],
+            "switchIds": [
+                0
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [0],
+            "remainingSwitchIds": [
+                0
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -493,15 +548,19 @@
                 "z": 43
             },
             "orientation": {
-                "x": 1,
+                "x": 1.0,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": true,
             "keyIds": [],
-            "switchIds": [0],
+            "switchIds": [
+                0
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [0],
+            "remainingSwitchIds": [
+                0
+            ],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         },
@@ -513,15 +572,79 @@
                 "z": 38
             },
             "orientation": {
-                "x": 1,
+                "x": 1.0,
                 "y": 0.0,
                 "z": 0.0
             },
             "open": false,
             "keyIds": [],
-            "switchIds": [0],
+            "switchIds": [
+                0
+            ],
             "triggerIds": [],
-            "remainingSwitchIds": [0],
+            "remainingSwitchIds": [
+                0
+            ],
+            "remainingTriggerIds": [],
+            "currentHitPoints": 100
+        },
+        {
+            "doorTypeId": 0,
+            "gridPos": {
+                "x": 30,
+                "y": 1,
+                "z": 52
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "open": false,
+            "keyIds": [],
+            "switchIds": [],
+            "triggerIds": [],
+            "remainingSwitchIds": [],
+            "remainingTriggerIds": [],
+            "currentHitPoints": 100
+        },
+        {
+            "doorTypeId": 0,
+            "gridPos": {
+                "x": 30,
+                "y": 1,
+                "z": 53
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "open": false,
+            "keyIds": [],
+            "switchIds": [],
+            "triggerIds": [],
+            "remainingSwitchIds": [],
+            "remainingTriggerIds": [],
+            "currentHitPoints": 100
+        },
+        {
+            "doorTypeId": 0,
+            "gridPos": {
+                "x": 15,
+                "y": 1,
+                "z": 33
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "open": false,
+            "keyIds": [],
+            "switchIds": [],
+            "triggerIds": [],
+            "remainingSwitchIds": [],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
         }
@@ -637,7 +760,7 @@
     "tileEffects": [],
     "items": [],
     "inventory": {
-        "size": 0,
+        "size": 28,
         "itemIds": []
     },
     "equipmentInventory": [
@@ -3790,13 +3913,13 @@
                 },
                 {
                     "name": "Tile 23:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 23,
                     "z": 3
                 },
                 {
                     "name": "Tile 24:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 24,
                     "z": 3
                 },
@@ -4120,7 +4243,7 @@
                 },
                 {
                     "name": "Tile 23:4",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 23,
                     "z": 4
                 },
@@ -5440,7 +5563,7 @@
                 },
                 {
                     "name": "Tile 23:2",
-                    "tileTypeID": 1,
+                    "tileTypeID": 0,
                     "x": 23,
                     "z": 2
                 },
@@ -5770,7 +5893,7 @@
                 },
                 {
                     "name": "Tile 23:3",
-                    "tileTypeID": 1,
+                    "tileTypeID": 0,
                     "x": 23,
                     "z": 3
                 },
@@ -13420,7 +13543,7 @@
                 },
                 {
                     "name": "Tile 31:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 31,
                     "z": 0
                 },
@@ -13750,7 +13873,7 @@
                 },
                 {
                     "name": "Tile 31:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 31,
                     "z": 0
                 },
@@ -14080,7 +14203,7 @@
                 },
                 {
                     "name": "Tile 31:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 31,
                     "z": 0
                 },
@@ -14116,7 +14239,7 @@
                 },
                 {
                     "name": "Tile 37:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 37,
                     "z": 0
                 },
@@ -14398,7 +14521,7 @@
                 },
                 {
                     "name": "Tile 29:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 29,
                     "z": 0
                 },
@@ -14410,7 +14533,7 @@
                 },
                 {
                     "name": "Tile 31:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 31,
                     "z": 0
                 },
@@ -14422,7 +14545,7 @@
                 },
                 {
                     "name": "Tile 33:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 33,
                     "z": 0
                 },
@@ -14710,7 +14833,7 @@
                 },
                 {
                     "name": "Tile 3:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 3,
                     "z": 0
                 },
@@ -14722,7 +14845,7 @@
                 },
                 {
                     "name": "Tile 5:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 5,
                     "z": 0
                 },
@@ -14746,7 +14869,7 @@
                 },
                 {
                     "name": "Tile 9:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 9,
                     "z": 0
                 },
@@ -14758,7 +14881,7 @@
                 },
                 {
                     "name": "Tile 11:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 11,
                     "z": 0
                 },
@@ -14992,25 +15115,25 @@
                 },
                 {
                     "name": "Tile 0:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 1
                 },
                 {
                     "name": "Tile 0:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 1
                 },
                 {
                     "name": "Tile 0:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 1
                 },
                 {
                     "name": "Tile 0:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 1
                 },
@@ -15022,19 +15145,19 @@
                 },
                 {
                     "name": "Tile 0:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 0
                 },
                 {
                     "name": "Tile 1:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 1,
                     "z": 0
                 },
                 {
                     "name": "Tile 2:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 2,
                     "z": 0
                 },
@@ -15046,7 +15169,7 @@
                 },
                 {
                     "name": "Tile 4:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 4,
                     "z": 0
                 },
@@ -15088,13 +15211,13 @@
                 },
                 {
                     "name": "Tile 11:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 11,
                     "z": 0
                 },
                 {
                     "name": "Tile 12:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 12,
                     "z": 0
                 },
@@ -15346,7 +15469,7 @@
                 },
                 {
                     "name": "Tile 0:2",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 2
                 },
@@ -15670,13 +15793,13 @@
                 },
                 {
                     "name": "Tile 0:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 3
                 },
                 {
                     "name": "Tile 0:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 3
                 },
@@ -16000,7 +16123,7 @@
                 },
                 {
                     "name": "Tile 0:4",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 4
                 },
@@ -16012,7 +16135,7 @@
                 },
                 {
                     "name": "Tile 0:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 3
                 },
@@ -16330,7 +16453,7 @@
                 },
                 {
                     "name": "Tile 0:5",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 5
                 },
@@ -16348,7 +16471,7 @@
                 },
                 {
                     "name": "Tile 1:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 1,
                     "z": 0
                 },
@@ -20302,7 +20425,7 @@
                 },
                 {
                     "name": "Tile 0:7",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 7
                 },
@@ -28246,7 +28369,7 @@
                 },
                 {
                     "name": "Tile 27:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 27,
                     "z": 0
                 },
@@ -28276,13 +28399,13 @@
                 },
                 {
                     "name": "Tile 32:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 32,
                     "z": 0
                 },
                 {
                     "name": "Tile 33:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 33,
                     "z": 0
                 },
@@ -28300,7 +28423,7 @@
                 },
                 {
                     "name": "Tile 36:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 36,
                     "z": 0
                 },
@@ -28570,7 +28693,7 @@
                 },
                 {
                     "name": "Tile 26:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 26,
                     "z": 0
                 },
@@ -28636,7 +28759,7 @@
                 },
                 {
                     "name": "Tile 37:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 37,
                     "z": 0
                 },
@@ -29302,7 +29425,7 @@
                 },
                 {
                     "name": "Tile 38:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 38,
                     "z": 0
                 },
@@ -29554,7 +29677,7 @@
                 },
                 {
                     "name": "Tile 25:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 25,
                     "z": 0
                 },
@@ -29968,7 +30091,7 @@
                 },
                 {
                     "name": "Tile 39:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 39,
                     "z": 0
                 },
@@ -30856,19 +30979,19 @@
                 },
                 {
                     "name": "Tile 22:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 22,
                     "z": 3
                 },
                 {
                     "name": "Tile 23:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 23,
                     "z": 3
                 },
                 {
                     "name": "Tile 24:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 24,
                     "z": 3
                 },
@@ -30958,7 +31081,7 @@
                 },
                 {
                     "name": "Tile 39:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 39,
                     "z": 3
                 },
@@ -31180,7 +31303,7 @@
                 },
                 {
                     "name": "Tile 21:4",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 21,
                     "z": 4
                 },
@@ -31282,7 +31405,7 @@
                 },
                 {
                     "name": "Tile 38:4",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 38,
                     "z": 4
                 },
@@ -31504,7 +31627,7 @@
                 },
                 {
                     "name": "Tile 20:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 20,
                     "z": 0
                 },
@@ -31522,7 +31645,7 @@
                 },
                 {
                     "name": "Tile 23:0",
-                    "tileTypeID": 1,
+                    "tileTypeID": 0,
                     "x": 23,
                     "z": 0
                 },
@@ -31606,7 +31729,7 @@
                 },
                 {
                     "name": "Tile 37:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 37,
                     "z": 0
                 },
@@ -31852,7 +31975,7 @@
                 },
                 {
                     "name": "Tile 23:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 23,
                     "z": 0
                 },
@@ -31876,7 +31999,7 @@
                 },
                 {
                     "name": "Tile 27:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 27,
                     "z": 0
                 },
@@ -31924,7 +32047,7 @@
                 },
                 {
                     "name": "Tile 35:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 35,
                     "z": 0
                 },
@@ -32158,7 +32281,7 @@
                 },
                 {
                     "name": "Tile 19:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 19,
                     "z": 1
                 },
@@ -32176,13 +32299,13 @@
                 },
                 {
                     "name": "Tile 22:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 22,
                     "z": 1
                 },
                 {
                     "name": "Tile 23:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 23,
                     "z": 1
                 },
@@ -32200,7 +32323,7 @@
                 },
                 {
                     "name": "Tile 26:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 26,
                     "z": 1
                 },
@@ -32242,7 +32365,7 @@
                 },
                 {
                     "name": "Tile 33:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 33,
                     "z": 1
                 },
@@ -32482,7 +32605,7 @@
                 },
                 {
                     "name": "Tile 18:2",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 18,
                     "z": 2
                 },
@@ -32512,7 +32635,7 @@
                 },
                 {
                     "name": "Tile 23:2",
-                    "tileTypeID": 1,
+                    "tileTypeID": 0,
                     "x": 23,
                     "z": 2
                 },
@@ -32602,7 +32725,7 @@
                 },
                 {
                     "name": "Tile 38:2",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 38,
                     "z": 2
                 },
@@ -32848,7 +32971,7 @@
                 },
                 {
                     "name": "Tile 24:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 24,
                     "z": 3
                 },
@@ -32944,7 +33067,7 @@
                 },
                 {
                     "name": "Tile 40:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 40,
                     "z": 3
                 },
@@ -33154,7 +33277,7 @@
                 },
                 {
                     "name": "Tile 20:4",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 20,
                     "z": 4
                 },
@@ -33184,7 +33307,7 @@
                 },
                 {
                     "name": "Tile 25:4",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 25,
                     "z": 4
                 },
@@ -33460,7 +33583,7 @@
                 },
                 {
                     "name": "Tile 16:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 16,
                     "z": 0
                 },
@@ -33610,7 +33733,7 @@
                 },
                 {
                     "name": "Tile 41:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 41,
                     "z": 0
                 },
@@ -33784,7 +33907,7 @@
                 },
                 {
                     "name": "Tile 15:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 15,
                     "z": 0
                 },
@@ -33952,7 +34075,7 @@
                 },
                 {
                     "name": "Tile 43:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 43,
                     "z": 0
                 },
@@ -34102,7 +34225,7 @@
                 },
                 {
                     "name": "Tile 13:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 13,
                     "z": 0
                 },
@@ -34156,7 +34279,7 @@
                 },
                 {
                     "name": "Tile 22:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 22,
                     "z": 0
                 },
@@ -34174,7 +34297,7 @@
                 },
                 {
                     "name": "Tile 25:0",
-                    "tileTypeID": 1,
+                    "tileTypeID": 0,
                     "x": 25,
                     "z": 0
                 },
@@ -34288,7 +34411,7 @@
                 },
                 {
                     "name": "Tile 44:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 44,
                     "z": 0
                 },
@@ -34426,7 +34549,7 @@
                 },
                 {
                     "name": "Tile 12:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 12,
                     "z": 0
                 },
@@ -34480,7 +34603,7 @@
                 },
                 {
                     "name": "Tile 21:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 21,
                     "z": 0
                 },
@@ -34630,7 +34753,7 @@
                 },
                 {
                     "name": "Tile 46:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 46,
                     "z": 0
                 },
@@ -34744,7 +34867,7 @@
                 },
                 {
                     "name": "Tile 10:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 10,
                     "z": 0
                 },
@@ -34846,7 +34969,7 @@
                 },
                 {
                     "name": "Tile 27:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 27,
                     "z": 0
                 },
@@ -34966,7 +35089,7 @@
                 },
                 {
                     "name": "Tile 47:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 47,
                     "z": 0
                 },
@@ -35128,7 +35251,7 @@
                 },
                 {
                     "name": "Tile 19:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 19,
                     "z": 0
                 },
@@ -35194,7 +35317,7 @@
                 },
                 {
                     "name": "Tile 30:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 30,
                     "z": 0
                 },
@@ -35398,7 +35521,7 @@
                 },
                 {
                     "name": "Tile 9:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 9,
                     "z": 1
                 },
@@ -35458,7 +35581,7 @@
                 },
                 {
                     "name": "Tile 19:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 19,
                     "z": 1
                 },
@@ -35794,7 +35917,7 @@
                 },
                 {
                     "name": "Tile 20:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 20,
                     "z": 0
                 },
@@ -35962,7 +36085,7 @@
                 },
                 {
                     "name": "Tile 48:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 48,
                     "z": 0
                 },
@@ -36208,7 +36331,7 @@
                 },
                 {
                     "name": "Tile 34:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 34,
                     "z": 1
                 },
@@ -36298,7 +36421,7 @@
                 },
                 {
                     "name": "Tile 49:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 49,
                     "z": 1
                 },
@@ -36544,7 +36667,7 @@
                 },
                 {
                     "name": "Tile 35:2",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 35,
                     "z": 2
                 },
@@ -36718,7 +36841,7 @@
                 },
                 {
                     "name": "Tile 9:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 9,
                     "z": 3
                 },
@@ -37294,7 +37417,7 @@
                 },
                 {
                     "name": "Tile 50:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 50,
                     "z": 0
                 },
@@ -37444,7 +37567,7 @@
                 },
                 {
                     "name": "Tile 20:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 20,
                     "z": 0
                 },
@@ -37498,7 +37621,7 @@
                 },
                 {
                     "name": "Tile 29:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 29,
                     "z": 0
                 },
@@ -37714,7 +37837,7 @@
                 },
                 {
                     "name": "Tile 10:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 10,
                     "z": 0
                 },
@@ -37840,7 +37963,7 @@
                 },
                 {
                     "name": "Tile 31:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 31,
                     "z": 0
                 },
@@ -38050,7 +38173,7 @@
                 },
                 {
                     "name": "Tile 11:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 11,
                     "z": 1
                 },
@@ -38290,7 +38413,7 @@
                 },
                 {
                     "name": "Tile 51:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 51,
                     "z": 1
                 },
@@ -38716,7 +38839,7 @@
                 },
                 {
                     "name": "Tile 11:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 11,
                     "z": 0
                 },
@@ -39046,7 +39169,7 @@
                 },
                 {
                     "name": "Tile 11:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 11,
                     "z": 1
                 },
@@ -39370,13 +39493,13 @@
                 },
                 {
                     "name": "Tile 10:2",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 10,
                     "z": 2
                 },
                 {
                     "name": "Tile 11:2",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 11,
                     "z": 2
                 },
@@ -39700,7 +39823,7 @@
                 },
                 {
                     "name": "Tile 10:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 10,
                     "z": 3
                 },
@@ -39742,7 +39865,7 @@
                 },
                 {
                     "name": "Tile 17:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 17,
                     "z": 3
                 },
@@ -39820,7 +39943,7 @@
                 },
                 {
                     "name": "Tile 30:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 30,
                     "z": 3
                 },
@@ -39940,7 +40063,7 @@
                 },
                 {
                     "name": "Tile 50:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 50,
                     "z": 3
                 },
@@ -40258,7 +40381,7 @@
                 },
                 {
                     "name": "Tile 47:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 47,
                     "z": 0
                 },
@@ -40492,7 +40615,7 @@
                 },
                 {
                     "name": "Tile 31:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 31,
                     "z": 0
                 },
@@ -40570,7 +40693,7 @@
                 },
                 {
                     "name": "Tile 44:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 44,
                     "z": 0
                 },
@@ -40822,7 +40945,7 @@
                 },
                 {
                     "name": "Tile 31:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 31,
                     "z": 0
                 },
@@ -40888,7 +41011,7 @@
                 },
                 {
                     "name": "Tile 42:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 42,
                     "z": 0
                 },
@@ -41152,13 +41275,13 @@
                 },
                 {
                     "name": "Tile 31:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 31,
                     "z": 0
                 },
                 {
                     "name": "Tile 32:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 32,
                     "z": 0
                 },
@@ -41188,13 +41311,13 @@
                 },
                 {
                     "name": "Tile 37:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 37,
                     "z": 0
                 },
                 {
                     "name": "Tile 38:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 38,
                     "z": 0
                 },
@@ -41470,7 +41593,7 @@
                 },
                 {
                     "name": "Tile 29:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 29,
                     "z": 0
                 },
@@ -41482,13 +41605,13 @@
                 },
                 {
                     "name": "Tile 31:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 31,
                     "z": 0
                 },
                 {
                     "name": "Tile 32:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 32,
                     "z": 0
                 },
@@ -41512,7 +41635,7 @@
                 },
                 {
                     "name": "Tile 36:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 36,
                     "z": 0
                 },
@@ -41782,19 +41905,19 @@
                 },
                 {
                     "name": "Tile 3:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 3,
                     "z": 0
                 },
                 {
                     "name": "Tile 4:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 4,
                     "z": 0
                 },
                 {
                     "name": "Tile 5:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 5,
                     "z": 0
                 },
@@ -41818,25 +41941,25 @@
                 },
                 {
                     "name": "Tile 9:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 9,
                     "z": 0
                 },
                 {
                     "name": "Tile 10:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 10,
                     "z": 0
                 },
                 {
                     "name": "Tile 11:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 11,
                     "z": 0
                 },
                 {
                     "name": "Tile 12:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 12,
                     "z": 0
                 },
@@ -42022,7 +42145,7 @@
                 },
                 {
                     "name": "Tile 1:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 1,
                     "z": 1
                 },
@@ -42058,31 +42181,31 @@
                 },
                 {
                     "name": "Tile 1:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 1,
                     "z": 1
                 },
                 {
                     "name": "Tile 0:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 1
                 },
                 {
                     "name": "Tile 0:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 1
                 },
                 {
                     "name": "Tile 0:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 1
                 },
                 {
                     "name": "Tile 0:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 1
                 },
@@ -42094,31 +42217,31 @@
                 },
                 {
                     "name": "Tile 0:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 0
                 },
                 {
                     "name": "Tile 1:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 1,
                     "z": 0
                 },
                 {
                     "name": "Tile 2:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 2,
                     "z": 0
                 },
                 {
                     "name": "Tile 3:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 3,
                     "z": 0
                 },
                 {
                     "name": "Tile 4:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 4,
                     "z": 0
                 },
@@ -42160,7 +42283,7 @@
                 },
                 {
                     "name": "Tile 11:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 11,
                     "z": 0
                 },
@@ -42412,19 +42535,19 @@
                 },
                 {
                     "name": "Tile 0:2",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 2
                 },
                 {
                     "name": "Tile 0:2",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 2
                 },
                 {
                     "name": "Tile 0:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 1
                 },
@@ -42742,7 +42865,7 @@
                 },
                 {
                     "name": "Tile 0:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 3
                 },
@@ -42754,7 +42877,7 @@
                 },
                 {
                     "name": "Tile 0:2",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 2
                 },
@@ -43072,7 +43195,7 @@
                 },
                 {
                     "name": "Tile 0:4",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 4
                 },
@@ -43084,13 +43207,13 @@
                 },
                 {
                     "name": "Tile 0:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 3
                 },
                 {
                     "name": "Tile 1:3",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 1,
                     "z": 3
                 },
@@ -43402,7 +43525,7 @@
                 },
                 {
                     "name": "Tile 0:5",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 5
                 },
@@ -43420,7 +43543,7 @@
                 },
                 {
                     "name": "Tile 1:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 1,
                     "z": 0
                 },
@@ -43660,7 +43783,7 @@
                 },
                 {
                     "name": "Tile 0:6",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 6
                 },
@@ -43720,7 +43843,7 @@
                 },
                 {
                     "name": "Tile 0:6",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 6
                 },
@@ -43762,7 +43885,7 @@
                 },
                 {
                     "name": "Tile 3:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 3,
                     "z": 1
                 },
@@ -43936,7 +44059,7 @@
                 },
                 {
                     "name": "Tile 0:7",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 7
                 },
@@ -44044,7 +44167,7 @@
                 },
                 {
                     "name": "Tile 0:7",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 7
                 },
@@ -44098,7 +44221,7 @@
                 },
                 {
                     "name": "Tile 4:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 4,
                     "z": 0
                 },
@@ -46300,7 +46423,7 @@
                 },
                 {
                     "name": "Tile 0:14",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 14
                 },
@@ -46354,7 +46477,7 @@
                 },
                 {
                     "name": "Tile 0:14",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 14
                 },
@@ -46408,7 +46531,7 @@
                 },
                 {
                     "name": "Tile 3:0",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 3,
                     "z": 0
                 },
@@ -46582,12 +46705,6 @@
                 },
                 {
                     "name": "Tile 0:15",
-                    "tileTypeID": 0,
-                    "x": 0,
-                    "z": 15
-                },
-                {
-                    "name": "Tile 0:15",
                     "tileTypeID": 1,
                     "x": 0,
                     "z": 15
@@ -46618,7 +46735,13 @@
                 },
                 {
                     "name": "Tile 0:15",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
+                    "x": 0,
+                    "z": 15
+                },
+                {
+                    "name": "Tile 0:15",
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 15
                 },
@@ -46684,13 +46807,13 @@
                 },
                 {
                     "name": "Tile 0:15",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 15
                 },
                 {
                     "name": "Tile 0:15",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 15
                 },
@@ -46732,7 +46855,7 @@
                 },
                 {
                     "name": "Tile 2:1",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 2,
                     "z": 1
                 },
@@ -47050,7 +47173,7 @@
                 },
                 {
                     "name": "Tile 0:2",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 2
                 },
@@ -47374,7 +47497,7 @@
                 },
                 {
                     "name": "Tile 0:7",
-                    "tileTypeID": 0,
+                    "tileTypeID": 1,
                     "x": 0,
                     "z": 7
                 },
