@@ -19,7 +19,10 @@ namespace GDP01.TileEffects
     public class TileEffectController : MonoBehaviour, ISaveState<TileEffectController.Data> {
 
 			public int id;
-			
+
+				public string effectName;
+				public string description;
+
 				[SerializeField] private List<TileEffectSO> effects;
 				[SerializeField] private List<TileEffectSO> preActivationEffects;
 				[SerializeField] private List<TileEffectSO> startEffects;

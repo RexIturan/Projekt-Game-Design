@@ -1,4 +1,5 @@
 using Ability;
+using GDP01.TileEffects;
 using System.Collections;
 using System.Collections.Generic;
 using UI.Components.Stats;
@@ -18,6 +19,8 @@ namespace UI.Components.Ability
 				private static readonly string className = "abilityPanel";
 				private static readonly string headerClassName = "abilityPanelHeader";
 				private static readonly string patternClassName = "abilityPattern";
+				private static readonly string tileEffectClassName = "tileEffect";
+				private static readonly string tileEffectHeaderClassName = "tileEffectHeader";
 
 				public AbilityDetailPanel(AbilitySO ability) : this(ability, ICON_ON_DEFAULT) { }
 
@@ -89,6 +92,25 @@ namespace UI.Components.Ability
 												PatternElement pattern = new PatternElement(targetedEffect.area);
 												pattern.AddToClassList(patternClassName);
 												effect.Add(pattern);
+										}
+
+										// tile effect
+										if(targetedEffect.tileEffect) {
+												TileEffectController tileEffectController = targetedEffect.tileEffect.GetComponent<TileEffectController>();
+
+												VisualElement tileEffect = new VisualElement();
+												tileEffect.AddToClassList(tileEffectClassName);
+
+												TextElement tileEffectHeader = new TextElement();
+												tileEffectHeader.AddToClassList(tileEffectHeaderClassName);
+												tileEffectHeader.text = "Area effect: " + tileEffectController.effectName + ": ";
+												tileEffect.Add(tileEffectHeader);
+
+												TextElement tileEffectDescription = new TextElement();
+												tileEffectDescription.text = tileEffectController.description;
+												tileEffect.Add(tileEffectDescription);
+
+												effect.Add(tileEffect);
 										}
 
 										Add(effect);

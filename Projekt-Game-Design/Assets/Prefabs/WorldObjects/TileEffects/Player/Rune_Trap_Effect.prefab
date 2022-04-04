@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4968240534970928259}
   - component: {fileID: 7134298740225583253}
   m_Layer: 7
-  m_Name: DelayedMeteorStorm_Effect
+  m_Name: Rune_Trap_Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497861194024093764}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 0, z: -24.5}
+  m_LocalPosition: {x: -40.5, y: 0, z: -62.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -62,25 +62,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5d4612931217747945d10ce7d42380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
+  id: 1
+  effectName: Static Trap
+  description: 'Deals 15 points of damage to anyone or anything that enters the field
+    or stands in it. Lasts 5 turns. '
   effects:
-  - {fileID: 11400000, guid: ad174985899cac547928545e454786a5, type: 2}
-  preActivationEffects:
-  - {fileID: 11400000, guid: efe6b21ba39efb34d8da624668c0a492, type: 2}
-  startEffects:
-  - {fileID: 11400000, guid: efe6b21ba39efb34d8da624668c0a492, type: 2}
+  - {fileID: 11400000, guid: b7d071511f0d0f94b81ac5cd38130925, type: 2}
+  preActivationEffects: []
+  startEffects: []
   removeSchedule: []
   inactiveTile: {fileID: 11400000, guid: 5df0112f3270e7640928005d77d9db4e, type: 2}
   activeTile: {fileID: 11400000, guid: a207a9ddce05b9149be37688adec5bd3, type: 2}
-  timeUntilActivation: 1
-  timeToLive: 1
+  timeUntilActivation: 0
+  timeToLive: 5
   eternal: 0
-  active: 0
+  active: 1
   destroy: 0
-  updatedOnFaction: 2
+  updatedOnFaction: 1
   creationRequirementsTop: 8
   creationRequirementsGround: 17
-  worthAgainstPlayerPerTarget: 10
+  worthAgainstPlayerPerTarget: 0
   worthForEnemyPerTarget: 0
   onTileEnterEC: {fileID: 11400000, guid: 4e00fed1a0c174249b7a24571939cd4e, type: 2}
   onTileExitEC: {fileID: 11400000, guid: 68303ac6cb7350c4284a0482af01cd5d, type: 2}

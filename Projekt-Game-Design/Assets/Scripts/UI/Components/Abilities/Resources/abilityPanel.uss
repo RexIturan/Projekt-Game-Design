@@ -22,3 +22,10 @@
 	height: 20px;
 	width: 20px;
 }
+
+.abilityPattern .tileEffect {
+}
+
+.abilityPattern .tileEffectHeader {
+	-unity-font-style: bold;
+}

@@ -25,6 +25,10 @@ namespace GDP01
 						if ( !tileEffect.GetActive() && !tileEffect.GetDestroy() ) {
 								textMesh.text = tileEffect.GetTimeUntilActivation().ToString();
 						}
+						else if (tileEffect.GetTimeToLive() > 0) {
+								textMesh.text = tileEffect.GetTimeToLive().ToString();
+								textMesh.color = Color.red;
+						}
 						else
 								HidePreview();
 				}
