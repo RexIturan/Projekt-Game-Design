@@ -430,7 +430,7 @@ public class OverlayUIController : MonoBehaviour {
 
 		//TODO find something better
 		//reproduces the behaviour when a PC is selected -> if a pc is selected show the action bar
-		if ( PlayerController.Current.Selected is { } ) {
+		if ( PlayerController.Current?.Selected is { } ) {
 			var playerObj = PlayerController.Current.Selected.gameObject;
 			var abilityController = playerObj.GetComponent<AbilityController>();
 			HandlePlayerSelected(playerObj, abilityController.SelectAbility);

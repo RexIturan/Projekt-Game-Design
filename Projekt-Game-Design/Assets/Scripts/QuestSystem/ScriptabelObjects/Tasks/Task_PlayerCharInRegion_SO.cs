@@ -31,10 +31,10 @@ namespace QuestSystem.ScriptabelObjects {
 
 		private bool IsPlayerCharInRegion() {
 
-			var foundChars = CharacterManager.GetPlayerCharactersWhere(player =>
+			var foundChars = CharacterManager?.GetPlayerCharactersWhere(player =>
 				triggerPositions.Any(pos => pos.Equals(player.GridPosition))).ToList();
 
-			if ( foundChars.Count >= numOfChars ) {
+			if ( foundChars is {} && foundChars.Count >= numOfChars ) {
 				done = true;
 			} else if ( updateAfterDone && foundChars.Count < numOfChars ) {
 				done = false;
