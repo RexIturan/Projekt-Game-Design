@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23be07713658c184e89ad59d96a4e292, type: 3}
   m_Name: g_HandleTileEffects_OnEnter
   m_EditorClassIdentifier: 
-  onFactionsTurn: 1
   handleTileEffectsEC: {fileID: 11400000, guid: 657f587a56a85be4198e00209488b229, type: 2}

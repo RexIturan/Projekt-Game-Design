@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb7bb45019bd6a40823d52283c71b20, type: 3}
   m_Name: p_Rune_Trap
   m_EditorClassIdentifier: 
-  id: 27
+  id: 32
   icon: {fileID: 21300000, guid: 33634726b6d54464a926d9ab44f1b582, type: 3}
   abilityName: Rune Trap
   description: 'Creates a powerful electric field, annihilating anyone in it. '
   Animation: 10
-  activationSound: {fileID: 11400000, guid: 9b25387dcba2fb0429883d9e3b07b8ec, type: 2}
+  activationSound: {fileID: 11400000, guid: ca15e61e57aa9f043bb713fa82da1213, type: 2}
   projectilePrefab: {fileID: 0}
-  timeUntilDamage: 1
+  timeUntilDamage: 0.3
   repeated: 1
   damaging: 1
   targets: 28

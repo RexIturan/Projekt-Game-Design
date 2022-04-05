@@ -8,16 +8,14 @@ using UOP1.StateMachine.ScriptableObjects;
 [CreateAssetMenu(fileName = "g_HandleTileEffects_OnEnter", menuName = "State Machines/Actions/GameState/Handle Tile Effects On Enter")]
 public class G_HandleTileEffects_OnEnterSO : StateActionSO
 {
-		[SerializeField] private Faction onFactionsTurn;
 		[SerializeField] private FactionEventChannelSO handleTileEffectsEC;
 
-		public override StateAction CreateAction() => new G_HandleTileEffects_OnEnter(handleTileEffectsEC, onFactionsTurn);
+		public override StateAction CreateAction() => new G_HandleTileEffects_OnEnter(handleTileEffectsEC);
 }
 
 public class G_HandleTileEffects_OnEnter : StateAction
 {
 		private FactionEventChannelSO handleTileEffectsEC;
-		private Faction onFactionsTurn;
 
 		private GameSC _gameSC;
 
@@ -26,10 +24,9 @@ public class G_HandleTileEffects_OnEnter : StateAction
 				_gameSC = stateMachine.GetComponent<GameSC>();
 		}
 
-		public G_HandleTileEffects_OnEnter(FactionEventChannelSO handleTileEffectsEC, Faction onFactionsTurn)
+		public G_HandleTileEffects_OnEnter(FactionEventChannelSO handleTileEffectsEC)
 		{
 				this.handleTileEffectsEC = handleTileEffectsEC;
-				this.onFactionsTurn = onFactionsTurn;
 		}
 
 		public override void OnUpdate() { }

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 19
   icon: {fileID: 21300000, guid: dde01e2c40a62b0488b1de262fe77b8c, type: 3}
+  abilityName: 
   description: 
   Animation: 10
-  activationSound: {fileID: 0}
+  activationSound: {fileID: 11400000, guid: 745ab87cb80a0bc42bd5bd3a7eaafc8a, type: 2}
   projectilePrefab: {fileID: 0}
   timeUntilDamage: 0.3
   repeated: 0
