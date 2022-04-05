@@ -17,8 +17,10 @@ MonoBehaviour:
   itemName: Lightning Gauntlet
   description: 'Magical glove that releases powerful lightning upon use. '
   icon: {fileID: 21300000, guid: 570d39989dfe87540a99d17f0ab6c596, type: 3}
-  mesh: {fileID: 0}
-  material: {fileID: 2100000, guid: 49aa71aedba032043825cfc142fb0e14, type: 2}
+  mesh: {fileID: 5041393000917224873, guid: ae694fe460cd2214e83bfc004a680944, type: 3}
+  material: {fileID: 5561349426305759274, guid: ae694fe460cd2214e83bfc004a680944, type: 3}
+  scale: 0
+  rotation: {x: 0, y: 0, z: 0}
   goldValue: 0
   rarity: 0
   type: 4
