@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2e644c09756b1469da92a4988cd575, type: 3}
   m_Name: c_basicHealingPotion
   m_EditorClassIdentifier: 
-  id: 12
+  id: 15
   prefab: {fileID: 8238772793520087123, guid: a6905a7b3b331a541a23f1a337e72323, type: 3}
   itemName: Healing Potion
   description: 'Drink this to restore your hit points. Be careful though, potions
     can only be drank once. '
   icon: {fileID: 21300000, guid: c2ca9e4ee5436a645a0853cc038488ca, type: 3}
-  mesh: {fileID: 4068373912626513877, guid: 687cef2c4b7814544bd6cf3232cee117, type: 3}
-  material: {fileID: 0}
+  mesh: {fileID: 6689598755808581133, guid: 69cd17ed53fd92244b40f2967c65d325, type: 3}
+  material: {fileID: 8556262120643298411, guid: 69cd17ed53fd92244b40f2967c65d325, type: 3}
+  scale: 180
+  rotation: {x: -90, y: 0, z: 0}
   goldValue: 0
   rarity: 0
   type: 128

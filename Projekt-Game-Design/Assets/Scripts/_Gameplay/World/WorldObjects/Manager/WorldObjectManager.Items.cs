@@ -69,8 +69,12 @@ namespace WorldObjects {
 		}
 
 		private void InitItemAppearance(ItemComponent item, ItemTypeSO type) {
-			item.GetComponentInChildren<MeshFilter>().mesh = type.mesh;
-			item.GetComponentInChildren<Renderer>().material = type.material;
+			GameObject modelObj = item.GetComponentInChildren<MeshFilter>().gameObject;
+			modelObj.GetComponent<MeshFilter>().mesh = type.mesh;
+			modelObj.GetComponent<Renderer>().material = type.material;
+			modelObj.transform.localScale = (type.scale == 0 ? 1 : type.scale) * Vector3.one;
+			Vector3 rot = type.rotation;
+			modelObj.transform.eulerAngles = new Vector3(rot.x, rot.y, rot.z);
 		}
 
 		private ItemComponent GetItemAt(Vector3 worldPos) {

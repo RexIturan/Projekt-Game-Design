@@ -23,6 +23,8 @@ public class ItemTypeSO : WorldObject.TypeSO {
     public Sprite icon;
     public Mesh mesh;
     public Material material;
+		public float scale;
+		public Vector3 rotation;
 
     // data
     public int goldValue;
