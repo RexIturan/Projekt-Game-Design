@@ -633,12 +633,16 @@ public class InventoryUIController : MonoBehaviour {
 
 	private void HandleDrinkPotion() {
 		Debug.Log("Drinking potion. ");
-		playSoundEC.RaiseEvent(drinkSound);
-		HealPlayer(_selectedPlayerStatistics, ((PotionTypeSO)_currentlyDrinking.itemType).healing);
-		RefreshStats();
-		_currentlyDrinking.DropItem();
-		moveItemEC.RaiseEvent(Inventory, _currentlyDrinking.slotId, Trash, 0, 0);
-		_currentlyDrinking = null;
+		if ( _selectedPlayerStatistics ) {
+			playSoundEC.RaiseEvent(drinkSound);
+			HealPlayer(_selectedPlayerStatistics, ( ( PotionTypeSO )_currentlyDrinking.itemType ).healing);
+			RefreshStats();
+			_currentlyDrinking.DropItem();
+			moveItemEC.RaiseEvent(Inventory, _currentlyDrinking.slotId, Trash, 0, 0);
+			_currentlyDrinking = null;
+		}
+		else
+			Debug.LogError("No player selected! ");
 		ClearDialogue();
 	}
 
