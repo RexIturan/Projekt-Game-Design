@@ -406,6 +406,7 @@ MonoBehaviour:
   playSoundEC: {fileID: 11400000, guid: 334da6b366e267b41bf607620497b575, type: 2}
   openSound: {fileID: 11400000, guid: c1e692aacff1b8f45abea8e0662b9e46, type: 2}
   closeSound: {fileID: 11400000, guid: 609c8241d4e6e3642a3bacda1813bd74, type: 2}
+  drinkSound: {fileID: 11400000, guid: de9e7b28761974f469e9b1b9d91bdb7d, type: 2}
 --- !u!1 &3159855197138855706
 GameObject:
   m_ObjectHideFlags: 0
