@@ -47,11 +47,12 @@ public class InventoryUIController : MonoBehaviour {
 	[SerializeField] private SoundEventChannelSO playSoundEC;
 
 	// public ItemContainerSO itemContainer;
-
-///// Private Variables	////////////////////////////////////////////////////////////////////////////	
-
+	
 	[SerializeField] private SoundSO openSound;
 	[SerializeField] private SoundSO closeSound;
+	[SerializeField] private SoundSO drinkSound;
+
+///// Private Variables	////////////////////////////////////////////////////////////////////////////	
 
 	private VisualElement _inventorySlotContainer;
 
@@ -632,6 +633,7 @@ public class InventoryUIController : MonoBehaviour {
 
 	private void HandleDrinkPotion() {
 		Debug.Log("Drinking potion. ");
+		playSoundEC.RaiseEvent(drinkSound);
 		HealPlayer(_selectedPlayerStatistics, ((PotionTypeSO)_currentlyDrinking.itemType).healing);
 		RefreshStats();
 		_currentlyDrinking.DropItem();
