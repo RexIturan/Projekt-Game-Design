@@ -121,7 +121,7 @@ namespace WorldObjects
 						// }
 
 					
-						parent = GameObject.Find("WorldObjects/TileEffects").transform;
+						parent = GameObject.Find("TileEffects").transform;
 
 						tileEffects.Clear();
 

@@ -15,7 +15,7 @@ namespace SaveSystem {
 		private readonly GridDataSO _gridData;
 
 		// world objects
-		private WorldObjectList _worldObjectList;
+		// private WorldObjectList _worldObjectList;
 
 		// inventorys
 		private readonly InventorySO _inventory;
@@ -100,7 +100,22 @@ namespace SaveSystem {
 			return enemyChars;
 		}
 
-		private List<Door_Save> GetDoorsSaveData(WorldObjectList worldObjectList) {
+		private List<Item_Save> GetItemSaveData() {
+			List<Item_Save> itemSaves = new List<Item_Save>();
+
+			foreach ( var item in WorldObjectManager.GetItems() ) {
+				if ( item != null ) {
+					itemSaves.Add(new Item_Save {
+						id = item.Type.id,
+						gridPos = item.GridPosition
+					});
+				}
+			}
+
+			return itemSaves;
+		}
+		
+		private List<Door_Save> GetDoorsSaveData() {
 			List<Door_Save> doors = new List<Door_Save>();
 
 			foreach ( var door in WorldObjectManager.GetDoors() ) {
@@ -125,7 +140,7 @@ namespace SaveSystem {
 			return doors;
 		}
 
-		private List<Switch_Save> GetSwitchesSaveData(WorldObjectList worldObjectList) {
+		private List<Switch_Save> GetSwitchesSaveData() {
 			List<Switch_Save> switches = new List<Switch_Save>();
 
 			foreach ( var switchComponent in WorldObjectManager.GetSwitches() ) {
@@ -141,7 +156,7 @@ namespace SaveSystem {
 			return switches;
 		}
 
-		private List<Junk_Save> GetJunksSaveData(WorldObjectList worldObjectList) {
+		private List<Junk_Save> GetJunksSaveData() {
 			List<Junk_Save> junks = new List<Junk_Save>();
 
 			//TODO JUNK
@@ -243,8 +258,7 @@ namespace SaveSystem {
 			_questContainer = questContainer;
 		}
 
-		public void SetRuntimeReferences(WorldObjectList worldObjectList) {
-			_worldObjectList = worldObjectList;
+		public void SetRuntimeReferences() {
 		}
 
 		public Save WirteLevelToSave() {
@@ -255,10 +269,11 @@ namespace SaveSystem {
 				gridDataSave = GetGridDataSaveData(_gridData),
 				players = GetPlayerSaveData(GameplayProvider.Current.CharacterManager),
 				enemies = GetEnemySaveData(GameplayProvider.Current.CharacterManager),
-				doors = GetDoorsSaveData(_worldObjectList),
-				switches = GetSwitchesSaveData(_worldObjectList),
-				junks = GetJunksSaveData(_worldObjectList),
+				doors = GetDoorsSaveData(),
+				switches = GetSwitchesSaveData(),
+				junks = GetJunksSaveData(),
 				tileGrids = GetTileGridSaveData(_gridData),
+				items = GetItemSaveData(),
 				// itemGrids = GetItemGridSaveData(_gridContaier),
 				// characterGrids = GetCharacterGridSaveData(_gridContaier),
 				// objectGrids = GetObjectGridSaveData(_gridContaier)

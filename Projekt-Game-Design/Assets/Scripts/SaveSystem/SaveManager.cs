@@ -87,7 +87,7 @@ namespace SaveSystem {
 						
 			WorldObjectList worldObjectList = WorldObjectList.FindInstant();
 
-			_saveWriter.SetRuntimeReferences(worldObjectList);
+			_saveWriter.SetRuntimeReferences();
 			
 			_saveObject = _saveWriter.WirteLevelToSave();
 			return _saveObject;
@@ -169,10 +169,6 @@ namespace SaveSystem {
 				ActivateOnLoad = true,
 			};
 
-			SceneLoadingData unloadMenuLoadingData = new SceneLoadingData {
-				MainSceneData = mainMenuSceneData
-			};
-			
 			switch ( value ) {
 				case 0:
 					//load prototyp level
