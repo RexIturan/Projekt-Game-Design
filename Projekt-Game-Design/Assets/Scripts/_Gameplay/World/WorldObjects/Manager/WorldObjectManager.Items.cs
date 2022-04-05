@@ -1,4 +1,5 @@
-﻿using GDP01._Gameplay.Provider;
+﻿using System.Collections;
+using GDP01._Gameplay.Provider;
 using GDP01.Loot.ScriptableObjects;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,14 +51,12 @@ namespace WorldObjects {
 			var item = CreateItem(itemTypeSO);
 			item.GridTransform.MoveTo(worldPos);
 			InitItemAppearance(item, itemTypeSO);
-			_itemComponents.Add(item);
 		}
 		
 		public void AddItemAt(ItemTypeSO itemTypeSO, Vector3Int gridPos) {
 			var item = CreateItem(itemTypeSO);
 			item.GridTransform.MoveTo(gridPos);
 			InitItemAppearance(item, itemTypeSO);
-			_itemComponents.Add(item);
 		}
 		
 		public void RemoveItemAt(Vector3 worldPos) {
@@ -95,30 +94,34 @@ namespace WorldObjects {
 			Destroy(itemComponent.gameObject);
 		}
 				
-	public static void DropLoot(LootTableSO lootTable,
-		Vector3Int gridPos) {
-		var worldObjectManager = GameplayProvider.Current.WorldObjectManager;
+		public static void DropLoot(LootTableSO lootTable,
+			Vector3Int gridPos) {
+			var worldObjectManager = GameplayProvider.Current.WorldObjectManager;
 
-		if ( !worldObjectManager )
-			Debug.LogWarning("Could not find worldObjectManager. ");
-		else {
-			ItemTypeSO itemType = null;
-			int dropID = -1;
-			var lootDrop = lootTable.GetLootDrop();
+			if ( !worldObjectManager )
+				Debug.LogWarning("Could not find worldObjectManager. ");
+			else {
+				ItemTypeSO itemType = null;
+				int dropID = -1;
+				var lootDrop = lootTable.GetLootDrop();
 
-			//todo drop multiple items 
-			if ( lootDrop.items.Count > 0 ) {
-				dropID = lootDrop.items[0].id;
-				itemType = lootDrop.items[0];
-			}
+				//todo drop multiple items 
+				if ( lootDrop.items.Count > 0 ) {
+					dropID = lootDrop.items[0].id;
+					itemType = lootDrop.items[0];
+				}
 
-			if ( dropID >= 0 && itemType is {} ) {
-				//todo move reference to grid controller to ItemSpawner or so and just invoke a event here 
-				Debug.Log("Dropping loot: " + dropID + " at " + gridPos.x + ", " + gridPos.z);
-				
-				worldObjectManager.AddItemAt(itemType, gridPos);
+				if ( dropID >= 0 && itemType is {} ) {
+					//todo move reference to grid controller to ItemSpawner or so and just invoke a event here 
+					Debug.Log("Dropping loot: " + dropID + " at " + gridPos.x + ", " + gridPos.z);
+					
+					worldObjectManager.AddItemAt(itemType, gridPos);
+				}
 			}
 		}
-	}
+
+		public List<ItemComponent> GetItems() {
+			return _itemComponents;
+		}
 	}
 }

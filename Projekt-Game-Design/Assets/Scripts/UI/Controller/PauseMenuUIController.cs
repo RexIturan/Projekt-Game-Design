@@ -1,7 +1,9 @@
 using Events.ScriptableObjects;
+using GDP01.SceneManagement.EventChannels;
 using GDP01.UI;
 using SaveSystem;
 using SceneManagement.ScriptableObjects;
+using SceneManagement.Types;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -31,10 +33,16 @@ public class PauseMenuUIController : MonoBehaviour {
 
 	[SerializeField] private IntEventChannelSO saveGame;
 	[SerializeField] private IntEventChannelSO loadGame;
+	[SerializeField] private SceneLoadingInfoEventChannelSO loadSceneEC;
+	[SerializeField] private SceneLoadingInfoEventChannelSO unloadSceneEC;
+	
 	[SerializeField] private bool showLoadLevel;
 	[SerializeField] private bool showSaveLevel;
 	[SerializeField] private bool showOptionsLevel;
 
+	[SerializeField] private GameSceneSO mainMenuSceneData;
+	[SerializeField] private GameSceneSO gameplaySceneData;
+	
 	// screenmanager reference
 	[Header("Screen Handeling")] 
 	[SerializeField] private ScreenManager screenManager;
@@ -130,7 +138,16 @@ public class PauseMenuUIController : MonoBehaviour {
 
 	void HandleMainMenuButton() {
 		// load Scene
-		loadMenuEC.RaiseEvent(menuToLoad, true);
+		// loadMenuEC.RaiseEvent(menuToLoad, true);
+		
+		var loadingData = new SceneLoadingData {
+			MainSceneData = mainMenuSceneData,
+			ActivateOnLoad = true,
+			DontUnload = false
+		};
+			
+		loadSceneEC.RaiseEvent(loadingData);
+		unloadSceneEC.RaiseEvent(new SceneLoadingData{ MainSceneData = gameplaySceneData });
 		
 		//todo new scene loading
 	}

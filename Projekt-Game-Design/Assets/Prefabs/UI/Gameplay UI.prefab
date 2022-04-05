@@ -253,9 +253,13 @@ MonoBehaviour:
   menuClosedEvent: {fileID: 11400000, guid: bfeb86bbf66bf954392b85311cf8ef7c, type: 2}
   saveGame: {fileID: 11400000, guid: 8b9215eb7abdda1449c4fcad7e8131d2, type: 2}
   loadGame: {fileID: 11400000, guid: 308ce095a46f60544a15b1bce6f13ddf, type: 2}
+  loadSceneEC: {fileID: 11400000, guid: 5f3a6f188738cb44b866c9a8cb513f95, type: 2}
+  unloadSceneEC: {fileID: 11400000, guid: c8dbc4e17574ccf4d808afcc60ebd13e, type: 2}
   showLoadLevel: 0
   showSaveLevel: 0
   showOptionsLevel: 0
+  mainMenuSceneData: {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
+  gameplaySceneData: {fileID: 11400000, guid: e35cd8d4811081a4f80a80280bf4f60c, type: 2}
   screenManager: {fileID: 3159855197406282494}
 --- !u!1 &3159855196337437988
 GameObject:
@@ -394,8 +398,6 @@ MonoBehaviour:
   setGameOverlayVisibilityEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
   setMenuVisibilityEC: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}
   setInventoryVisibilityEC: {fileID: 11400000, guid: 5a852022183f67c4890d5f8df68558ae, type: 2}
-  playerDeselectedEC: {fileID: 11400000, guid: 51d79139383d5a44085856a9594d0e21, type: 2}
-  playerSelectedEC: {fileID: 11400000, guid: 26ae76c3116680d4cb58baff247ca27a, type: 2}
   enableInventoryInput: {fileID: 11400000, guid: 6f2cf282820633f41a7bde9dc75b3af9, type: 2}
   changeInventoryTab: {fileID: 11400000, guid: c0c391df13a8ed149a1fcb343bb20c4d, type: 2}
   EquipItemEC: {fileID: 11400000, guid: 4435f80e0be94c2449ac5f156d55fde9, type: 2}

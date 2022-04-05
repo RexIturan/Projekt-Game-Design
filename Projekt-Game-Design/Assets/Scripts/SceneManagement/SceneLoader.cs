@@ -452,16 +452,16 @@ public class SceneLoader : MonoBehaviour {
 		}
 		else {
 			// todo all scenes must be main, check if sctive scene is in dependencies
-			Scene currentActiveScene = SceneManager.GetActiveScene();
-			if ( currentActiveScene is {  } ) {
-				AsyncOperation unloadHandle = SceneManager.UnloadSceneAsync(currentActiveScene);
-				unloadHandle.completed += operation => {
-					LoadNewScene(loadingData);	
-				};
-			}
-			else {
-				
-			}
+			// Scene currentActiveScene = SceneManager.GetActiveScene();
+			// if ( currentActiveScene is {  } ) {
+			// 	AsyncOperation unloadHandle = SceneManager.UnloadSceneAsync(currentActiveScene);
+			// 	unloadHandle.completed += operation => {
+			// 		LoadNewScene(loadingData);	
+			// 	};
+			// }
+			// else {
+			// 	
+			// }
 			
 			LoadNewScene(loadingData);
 		}

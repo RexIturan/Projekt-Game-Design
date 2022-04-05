@@ -120,8 +120,8 @@ namespace WorldObjects
 						// 		worldObjects.junks.Add(junkObj);
 						// }
 
-					/*
-						parent = GameObject.Find("WorldObjects/TileEffects").transform;
+					
+						parent = GameObject.Find("TileEffects").transform;
 
 						tileEffects.Clear();
 
@@ -136,7 +136,6 @@ namespace WorldObjects
 
 							tileEffects.Add(tileEffectObj);
 						}
-						*/
 				}
 		}
 }
