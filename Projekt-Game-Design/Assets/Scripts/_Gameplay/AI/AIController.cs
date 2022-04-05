@@ -319,7 +319,7 @@ namespace Characters.EnemyCharacter
 
 												// if offensive, ignore the ones that aren't in sight
 												if ( offensive )
-														targetsInArea.RemoveAll(targetAble => !_attacker.visibleTiles.Exists(node => node.pos.Equals(targetAble)));
+														targetsInArea.RemoveAll(targetable => !_attacker.visibleTiles.Exists(node => node.pos.Equals(targetable.GetGridPosition())));
 
 												int worthPerTarget = offensive ? tileEffect.worthAgainstPlayerPerTarget : tileEffect.worthForEnemyPerTarget;
 

@@ -32,8 +32,8 @@ MonoBehaviour:
     _type: 4
   - name: View Distance
     _min: 0
-    _max: 10
-    _value: 10
+    _max: 15
+    _value: 15
     _type: 8
   movementPointsPerEnergy: 20
   movementCostPerTile: 1
