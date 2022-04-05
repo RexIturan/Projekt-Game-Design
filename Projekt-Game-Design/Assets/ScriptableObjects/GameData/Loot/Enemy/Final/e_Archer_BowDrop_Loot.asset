@@ -10,21 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1626e1cbbee749cebc55972c00774c94, type: 3}
-  m_Name: e_Healer_Elite_Loot
+  m_Name: e_Archer_BowDrop_Loot
   m_EditorClassIdentifier: 
   dropTables:
   - count: 1
     tabel:
     - type: 1
-      itemType: {fileID: 11400000, guid: a96669e1d6cb0af41b96b124d452ad88, type: 2}
-      weight: 1
-      dropRate: 1
-      dropAmount: {x: 1, y: 1, z: 1, w: 1}
-      propertyHeight: 70
-  - count: 1
-    tabel:
-    - type: 1
-      itemType: {fileID: 11400000, guid: 462384650cfa564419752202952bb655, type: 2}
+      itemType: {fileID: 11400000, guid: e24bd85c1cd6eb64e9ad1a17984bd5af, type: 2}
       weight: 1
       dropRate: 1
       dropAmount: {x: 1, y: 1, z: 1, w: 1}
