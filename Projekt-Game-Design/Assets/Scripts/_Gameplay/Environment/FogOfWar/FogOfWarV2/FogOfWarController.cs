@@ -170,6 +170,8 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 		}
 
 		private void OnEnable() {
+			Load(null);
+			
 			ToggleFogOfWarEC.OnEventRaised += HandleToggleFogOfWar;
 			updatePlayerViewEC.OnEventRaised += UpdatePlayerView;
 		}

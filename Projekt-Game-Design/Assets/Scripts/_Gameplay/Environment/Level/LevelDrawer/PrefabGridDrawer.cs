@@ -28,7 +28,7 @@ namespace Visual {
 	        if ( _tileObjects is { Length: > 0 } ) {
 		        foreach ( var obj in _tileObjects ) {
 			        if ( obj is { } ) {
-				        DestroyImmediate(obj);
+				        Destroy(obj);
 			        }
 		        }
 	        }
@@ -36,7 +36,7 @@ namespace Visual {
 	        if ( tileParent is { } ) {
 		        var childCount = tileParent.childCount;
 		        for ( int i = 0; i < childCount; i++ ) {
-			        DestroyImmediate(tileParent.GetChild(i));
+			        Destroy(tileParent.GetChild(i).gameObject);
 		        }
 	        }
         }
@@ -77,7 +77,13 @@ namespace Visual {
 
         private GameObject CreateNewTile(TileTypeSO tileType, Vector3 worldPos, List<TileTypeSO> neighbours) {
 	        // Instantiate(, worldPos, tileParent);
-	        var tileObj = tileType.tileVariance.CreateTile(worldPos, tileParent, tileType, neighbours);
+	        var tileObj = tileType.tileVariance
+		        .CreateTile(
+			        worldPos + new Vector3(0, gridData.GetCellCenter3D().y, 0), 
+			        tileParent, 
+			        tileType, 
+			        neighbours);
+	        
 	        return tileObj;
         }
         
