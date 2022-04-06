@@ -21,7 +21,7 @@ namespace GDP01.UI {
 		}
 		
 		public GameObject RootObject {
-			get => gameObject;
+			get => gameObject ? gameObject : null;
 		}
 
 		public ScreenType Type => screenType;

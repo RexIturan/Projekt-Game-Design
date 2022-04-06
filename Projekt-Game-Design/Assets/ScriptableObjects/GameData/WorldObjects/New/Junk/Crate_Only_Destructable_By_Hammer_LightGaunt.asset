@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e83dff73502bbe408be1fe8b27689b3, type: 3}
   m_Name: Crate_Only_Destructable_By_Hammer_LightGaunt
   m_EditorClassIdentifier: 
-  id: 4
+  id: 6
   prefab: {fileID: 5962490239412866605, guid: 60ace4b82b2b5d54c96634bb738e42bd, type: 3}
   model: {fileID: 1550799276982701426, guid: cceb05efa5fd4a142888bfa8bff01bf4, type: 3}
   junkName: Iron Crate

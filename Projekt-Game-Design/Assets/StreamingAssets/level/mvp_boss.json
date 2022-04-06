@@ -128,7 +128,53 @@
       }
     }
   ],
-  "junks": [],
+  "junks": [
+      {
+        "junkTypeId": 4,
+        "gridPos": {
+                "x": 20,
+                "y": 1,
+                "z": 11
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 4,
+        "gridPos": {
+                "x": 35,
+                "y": 1,
+                "z": 5
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      },
+      {
+        "junkTypeId": 5,
+        "gridPos": {
+                "x": 28,
+                "y": 1,
+                "z": 19
+            },
+        "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+        },
+        "broken": false,
+        "currentHitPoints": 20
+      }
+    ],
   "tileEffects": [],
   "items": [],
   "inventory": {
