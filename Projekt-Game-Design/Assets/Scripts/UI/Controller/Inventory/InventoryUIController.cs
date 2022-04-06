@@ -328,13 +328,15 @@ public class InventoryUIController : MonoBehaviour {
 	}
 
 	private void StartDrinkPotion() {
-		PotionTypeSO potion = (PotionTypeSO)_potionSlot.itemType;
-		_dialogueComponentLayer.Add(new PotionConsumptionDialogue(potion, HandleDrinkPotion, HandleConsumptionCancelled));
-		_dialogueComponentLayer.pickingMode = PickingMode.Position;
-		_dialogueComponentLayer.visible = true;
-		_dialogueComponentLayer.style.display = DisplayStyle.Flex;
-		_currentlyDrinking = _potionSlot;
-		_potionSlot = null;
+		if(_selectedPlayerStatistics && _selectedPlayerStatistics.StatusValues.HitPoints.Value > 0) { 
+			PotionTypeSO potion = (PotionTypeSO)_potionSlot.itemType;
+			_dialogueComponentLayer.Add(new PotionConsumptionDialogue(potion, HandleDrinkPotion, HandleConsumptionCancelled));
+			_dialogueComponentLayer.pickingMode = PickingMode.Position;
+			_dialogueComponentLayer.visible = true;
+			_dialogueComponentLayer.style.display = DisplayStyle.Flex;
+			_currentlyDrinking = _potionSlot;
+		}
+			_potionSlot = null;
 	}
 	
 	//TODO Inventory Component
@@ -572,6 +574,11 @@ public class InventoryUIController : MonoBehaviour {
 		_ghostIcon.RegisterCallback<PointerUpEvent>(OnPointerUp);
 		_closeButton.clicked += inputReader.SimulateOnCancelInventory;
 		
+		// if no player is selected, select one by property 
+		if(!_selectedPlayerStatistics) {
+			SelectedPlayer = SelectedPlayer;
+		}
+
 		InitializeInventory();
 		InitializeEquipmentInventory();
 		ClearDialogue();
