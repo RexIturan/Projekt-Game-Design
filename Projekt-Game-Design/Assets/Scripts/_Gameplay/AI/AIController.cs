@@ -91,7 +91,7 @@ namespace Characters.EnemyCharacter
 						foreach ( var player in playerCharacters ) {
 							Targetable playerTargetable = player.GetComponent<Targetable>();
 
-							float distanceBetweenPlayerAndTile = !playerTargetable
+							float distanceBetweenPlayerAndTile = (!playerTargetable || playerTargetable.IsDead)
 								? Int32.MaxValue
 								: ( pathNodes[i].pos - playerTargetable.GetGridPosition() ).magnitude;
 
@@ -114,7 +114,7 @@ namespace Characters.EnemyCharacter
 						foreach(var enemy in enemys) {
 								Vector3Int pos = enemy.GridPosition;
 
-								if(visibleTiles.Any(node => node.pos.Equals(pos))) {
+								if(!enemy.IsDead && visibleTiles.Any(node => node.pos.Equals(pos))) {
 										Statistics stats = enemy.GetComponent<Statistics>();
 										float health = stats.StatusValues.HitPoints.InPercent;
 										if (health < lowestHealth) {
