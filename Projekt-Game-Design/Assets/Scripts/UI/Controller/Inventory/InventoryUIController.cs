@@ -332,6 +332,7 @@ public class InventoryUIController : MonoBehaviour {
 		_dialogueComponentLayer.Add(new PotionConsumptionDialogue(potion, HandleDrinkPotion, HandleConsumptionCancelled));
 		_dialogueComponentLayer.pickingMode = PickingMode.Position;
 		_dialogueComponentLayer.visible = true;
+		_dialogueComponentLayer.style.display = DisplayStyle.Flex;
 		_currentlyDrinking = _potionSlot;
 		_potionSlot = null;
 	}
@@ -573,6 +574,7 @@ public class InventoryUIController : MonoBehaviour {
 		
 		InitializeInventory();
 		InitializeEquipmentInventory();
+		ClearDialogue();
 	}
 
 	private void UnbindElements() {

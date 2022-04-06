@@ -50,16 +50,19 @@ public class AffirmationDialogue : VisualElement
 				affirmationButton.text = affirmationText;
 				buttonContainer.Add(affirmationButton);
 
-				cancelButton = new Button();
-				cancelButton.clicked += callbackCancel;
-				cancelButton.text = cancelText;
-				buttonContainer.Add(cancelButton);
+				if ( callbackCancel != null ) {
+						cancelButton = new Button();
+						cancelButton.clicked += callbackCancel;
+						cancelButton.text = cancelText;
+						buttonContainer.Add(cancelButton);
+				}
 
 				Add(buttonContainer);
 		}
 
 		public void UnbindActions() {
 				affirmationButton.clicked -= callbackAffirmation;
-				cancelButton.clicked -= callbackCancel;
+				if(cancelButton != null)
+						cancelButton.clicked -= callbackCancel;
 		}
 }

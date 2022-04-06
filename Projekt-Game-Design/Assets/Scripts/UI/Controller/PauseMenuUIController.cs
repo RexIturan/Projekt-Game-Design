@@ -50,9 +50,11 @@ public class PauseMenuUIController : MonoBehaviour {
 	
 ///// Private Variables	////////////////////////////////////////////////////////////////////////////
 	private VisualElement _pauseMenuContainer;
+	private VisualElement _dialogueComponentLayer;
 	
 	private Button _saveButton;
 	private Button _optionsButton;
+	private Button _controllsButton;
 	private Button _loadButton;
 	private Button _backToMenuButton;
 	private Button _quitButton;
@@ -64,8 +66,10 @@ public class PauseMenuUIController : MonoBehaviour {
 		
 		// Holen des UXML Trees, zum getten der einzelnen Komponenten
 		_pauseMenuContainer = GetComponent<UIDocument>().rootVisualElement;
+		_dialogueComponentLayer = _pauseMenuContainer.Q<VisualElement>("DialogueLayer");
 		_saveButton = _pauseMenuContainer.Q<Button>("SaveButton");
 		_optionsButton = _pauseMenuContainer.Q<Button>("OptionsButton");
+		_controllsButton = _pauseMenuContainer.Q<Button>("ControllsButton");
 		_loadButton = _pauseMenuContainer.Q<Button>("LoadButton");
 		_backToMenuButton = _pauseMenuContainer.Q<Button>("MainMenuButton");
 		_resumeButton = _pauseMenuContainer.Q<Button>("ResumeButton");
@@ -73,6 +77,7 @@ public class PauseMenuUIController : MonoBehaviour {
 		
 		_saveButton.clicked += HandleSave;
 		_optionsButton.clicked += ShowOptionsScreen;
+		_controllsButton.clicked += HandleControllsButton;
 		_loadButton.clicked += HandleLoad;
 		_backToMenuButton.clicked += HandleMainMenuButton;
 		_resumeButton.clicked += HandleResumeButton;
@@ -84,22 +89,41 @@ public class PauseMenuUIController : MonoBehaviour {
 		//todo doesnt work for now!
 		SetElementVisibility(_loadButton, false);
 		// SetElementVisibility(_backToMenuButton, false);
+
+		ClearDialogue();
 	}
 
 	private void UnbindElements() {
+		ClearDialogue();
+
 		_saveButton.clicked -= HandleSave;
 		_optionsButton.clicked -= ShowOptionsScreen;
+		_controllsButton.clicked -= HandleControllsButton;
 		_loadButton.clicked -= HandleLoad;
 		_backToMenuButton.clicked -= HandleMainMenuButton;
 		_resumeButton.clicked -= HandleResumeButton;
 		_quitButton.clicked -= HandleQuitGame;
 		
+		_dialogueComponentLayer = null;
 		_saveButton = null;
 		_optionsButton = null;
+		_controllsButton = null;
 		_loadButton = null;
 		_backToMenuButton = null;
 		_resumeButton = null;
 		_quitButton = null;
+	}
+		
+	private void ClearDialogue() {
+		// unbind dialogues 
+		foreach (VisualElement child in _dialogueComponentLayer.Children()) {
+			if(child is AffirmationDialogue)
+				((AffirmationDialogue)child).UnbindActions();
+		}
+
+		_dialogueComponentLayer.Clear();
+		_dialogueComponentLayer.pickingMode = PickingMode.Ignore;
+		_dialogueComponentLayer.visible = false;
 	}
 
 	//todo refactor
@@ -208,6 +232,21 @@ public class PauseMenuUIController : MonoBehaviour {
 
 	private void ShowOptionsScreen() {
 		MenuScreenContentManager(MenuScreenContent.SettingsScreen);
+	}
+
+	private void HandleControllsButton() {
+		_dialogueComponentLayer.Add(new AffirmationDialogue(
+				"Controlls",
+				"Camera movement: WASD\n" +
+				"Camera rotation: Q/E\n" +
+				"Character selection: left click\n" +
+				"Cancel/Deselect: right click",
+				ClearDialogue, "Got it",
+				null, ""));
+
+		_dialogueComponentLayer.visible = true;
+		_dialogueComponentLayer.style.display = DisplayStyle.Flex;
+		_dialogueComponentLayer.pickingMode = PickingMode.Position;
 	}
 	
 	private void HandleLoad() {
