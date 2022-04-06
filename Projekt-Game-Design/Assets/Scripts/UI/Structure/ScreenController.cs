@@ -21,7 +21,7 @@ namespace GDP01.UI {
 		}
 		
 		public GameObject RootObject {
-			get => gameObject ? gameObject : null;
+			get => gameObject;
 		}
 
 		public ScreenType Type => screenType;
@@ -37,14 +37,14 @@ namespace GDP01.UI {
 		}
 
 		public void Enable() {
-			if ( !RootObject.activeInHierarchy ) {
+			if ( RootObject && !RootObject.activeInHierarchy ) {
 				RootObject.SetActive(true);
 				OnActivate.Invoke(this);	
 			}
 		}
 
 		public void Disable() {
-			if ( RootObject.activeInHierarchy ) {
+			if ( RootObject && RootObject.activeInHierarchy ) {
 				RootObject.SetActive(false);
 				OnDeactivate.Invoke(this);
 			}

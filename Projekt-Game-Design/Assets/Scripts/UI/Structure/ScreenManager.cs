@@ -49,7 +49,8 @@ namespace GDP01.UI {
 		public void SetScreenVisibility(ScreenController screen, bool visibile) {
 			if ( screens.Contains(screen) ) {
 				screen.Active = visibile;
-				screen.UpdateScreen();
+				if(screen != null)
+					screen.UpdateScreen();
 			}
 			HideAllTooltips();
 		}
