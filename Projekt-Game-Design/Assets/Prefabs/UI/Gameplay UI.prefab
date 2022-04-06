@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3159855195508995720}
   - component: {fileID: 3159855195508995719}
+  - component: {fileID: 8445788390494755030}
   m_Layer: 0
   m_Name: MenuBar
   m_TagString: Untagged
@@ -123,6 +124,19 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 9d6f9d8ae72e78e4f89cee82a74345f2, type: 3}
   m_SortingOrder: 0
+--- !u!114 &8445788390494755030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159855195508995721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a1eb758397eaef4593818a13ed88dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
 --- !u!1 &3159855195889738200
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,6 +412,7 @@ MonoBehaviour:
   equipmentInventoryItems: []
   inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
   equipmentContainer: {fileID: 11400000, guid: 06f235e350237cc41b1711487af77bbe, type: 2}
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
   inventoryItemQuantity: 28
   setGameOverlayVisibilityEC: {fileID: 11400000, guid: 898683a1c761cd84da1c23fab020cce2, type: 2}
   setMenuVisibilityEC: {fileID: 11400000, guid: dd8d2d473cd3e784882e072fb67911a7, type: 2}

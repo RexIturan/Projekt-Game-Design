@@ -24,8 +24,8 @@ namespace WorldObjects {
 			switchLeaver.DORotate(SwitchState ? -rotationDelta : rotationDelta, rotationCycleLength, RotateMode.WorldAxisAdd)
 				.SetEase(Ease.Linear)
 				.OnComplete(() => {
-					meshRenderer.material = SwitchState ? activeMaterial : inctiveMaterial;
 					SwitchState = !SwitchState;
+					meshRenderer.material = SwitchState ? activeMaterial : inctiveMaterial;
 				});
 		}
 	}

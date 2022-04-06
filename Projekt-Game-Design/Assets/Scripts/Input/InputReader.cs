@@ -193,12 +193,21 @@ namespace Input {
 			}
 		}
 
+		public void SimulateOnMenu() {
+			uiToggleMenuEC.RaiseEvent();
+		}
+
 		public void OnInventory(InputAction.CallbackContext context) {
 			if ( context.phase == InputActionPhase.Performed && currentPhase.Equals(GamePhase.PLAYER_TURN) ) {
 				uiToggleScreenEC.RaiseEvent(GameplayScreen.Inventory);
 				// SetMenuVisibilityEC.RaiseEvent(false);
 				// SetGameOverlayVisibilityEC.RaiseEvent(false);
 			}
+		}
+
+		public void SimulateOnInventory() {
+			if (currentPhase.Equals(GamePhase.PLAYER_TURN) )
+				uiToggleScreenEC.RaiseEvent(GameplayScreen.Inventory);
 		}
 
 		public void OnMouseClicked(InputAction.CallbackContext context) {
@@ -318,6 +327,10 @@ namespace Input {
 				// Debug.Log("onCancel");
 				uiToggleScreenEC.RaiseEvent(GameplayScreen.Inventory);
 			}
+		}
+
+		public void SimulateOnCancelInventory() {
+			uiToggleScreenEC.RaiseEvent(GameplayScreen.Inventory);
 		}
 
 		#endregion

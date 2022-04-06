@@ -10,6 +10,7 @@ using GDP01._Gameplay.Provider;
 using GDP01._Gameplay.World.Character;
 using GDP01.Characters.Component;
 using GDP01.Player.Player;
+using Input;
 using UI.Components.Character;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,6 +24,7 @@ public class InventoryUIController : MonoBehaviour {
 
 	[SerializeField] private InventorySO inventory;
 	[SerializeField] private EquipmentContainerSO equipmentContainer;
+	[SerializeField] private InputReader inputReader;
 	
 	//todo set inventory size in inventory manager or invetorySO
 	[SerializeField] private int inventoryItemQuantity = 28;
@@ -58,6 +60,9 @@ public class InventoryUIController : MonoBehaviour {
 
 	// Für das Inventar
 	private VisualElement _inventoryContainer;
+
+	// Close Button
+	private Button _closeButton;
 
 	// Für das EquipmentInventar
 	private VisualElement _equipmentInventoryContainer;
@@ -553,6 +558,7 @@ public class InventoryUIController : MonoBehaviour {
 		var root = GetComponent<UIDocument>().rootVisualElement;
 		_inventoryContainer = root;
 		_equipmentInventoryContainer = root.Q<VisualElement>("PlayerEquipmentInventory");
+		_closeButton = root.Q<Button>("CloseInventoryButton");
 		_ghostIcon = root.Query<VisualElement>("GhostIcon");
 		_playerContainer = root.Query<VisualElement>("PlayerContainer");
 		_dialogueComponentLayer = root.Query<VisualElement>("DialogueComponentLayer");
@@ -563,6 +569,7 @@ public class InventoryUIController : MonoBehaviour {
 		// Callbacks fürs draggen
 		// _ghostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
 		_ghostIcon.RegisterCallback<PointerUpEvent>(OnPointerUp);
+		_closeButton.clicked += inputReader.SimulateOnCancelInventory;
 		
 		InitializeInventory();
 		InitializeEquipmentInventory();
@@ -577,9 +584,11 @@ public class InventoryUIController : MonoBehaviour {
 		// Callbacks fürs draggen
 		// _ghostIcon.RegisterCallback<PointerMoveEvent>(OnPointerMove);
 		_ghostIcon.UnregisterCallback<PointerUpEvent>(OnPointerUp);
+		_closeButton.clicked -= inputReader.SimulateOnCancelInventory;
 		
 		_inventoryContainer = null;
 		_equipmentInventoryContainer = null;
+		_closeButton = null;
 		_ghostIcon = null;
 		_playerContainer = null;
 		_characterStatusValuePanel = null;
