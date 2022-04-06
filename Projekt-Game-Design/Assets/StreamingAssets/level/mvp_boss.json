@@ -16,7 +16,7 @@
             "active": true,
             "plyerTypeId": 0,
             "pos": {
-                "x": 3,
+                "x": 21,
                 "y": 1,
                 "z": 3
             },
@@ -28,7 +28,19 @@
             "active": false,
             "plyerTypeId": 0,
             "pos": {
-                "x": 10,
+                "x": 22,
+                "y": 1,
+                "z": 3
+            },
+            "hitpoints": 30,
+            "energy": 30
+        },
+        {
+            "id": 2,
+            "active": false,
+            "plyerTypeId": 0,
+            "pos": {
+                "x": 31,
                 "y": 1,
                 "z": 3
             },
@@ -38,84 +50,84 @@
     ],
     "enemies": [
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 5,
             "pos": {
-                "x": 5,
+                "x": 20,
                 "y": 1,
-                "z": 5
+                "z": 20
             },
-            "hitpoints": 30,
-            "energy": 20
+            "hitpoints": 100,
+            "energy": 100
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 8,
             "pos": {
-                "x": 8,
+                "x": 26,
                 "y": 1,
-                "z": 8
+                "z": 19
             },
-            "hitpoints": 30,
-            "energy": 20
+            "hitpoints": 100,
+            "energy": 100
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 10,
             "pos": {
                 "x": 22,
                 "y": 1,
                 "z": 24
             },
-            "hitpoints": 30,
-            "energy": 20
+            "hitpoints": 100,
+            "energy": 100
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 7,
             "pos": {
                 "x": 30,
                 "y": 1,
                 "z": 24
             },
-            "hitpoints": 30,
-            "energy": 20
+            "hitpoints": 100,
+            "energy": 100
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 11,
             "pos": {
                 "x": 26,
                 "y": 1,
                 "z": 26
             },
-            "hitpoints": 30,
-            "energy": 20
+            "hitpoints": 100,
+            "energy": 100
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 9,
             "pos": {
-                "x": 24,
+                "x": 23,
                 "y": 1,
-                "z": 31
+                "z": 27
             },
-            "hitpoints": 30,
-            "energy": 20
+            "hitpoints": 100,
+            "energy": 100
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 6,
             "pos": {
                 "x": 30,
                 "y": 1,
                 "z": 7
             },
-            "hitpoints": 30,
-            "energy": 20
+            "hitpoints": 100,
+            "energy": 100
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 4,
             "pos": {
                 "x": 22,
                 "y": 1,
                 "z": 7
             },
-            "hitpoints": 30,
-            "energy": 20
+            "hitpoints": 100,
+            "energy": 100
         }
     ],
     "doors": [],
@@ -140,11 +152,23 @@
     "tileEffects": [],
     "items": [],
     "inventory": {
-        "size": 3,
+        "size": 10,
         "itemIds": [
             {
                 "id": 0,
-                "itemID": 0
+                "itemID": 17
+            },
+            {
+                "id": 1,
+                "itemID": 18
+            },
+            {
+                "id": 2,
+                "itemID": 15
+            },
+            {
+                "id": 3,
+                "itemID": 16
             }
         ]
     },
@@ -154,7 +178,7 @@
             "itemIds": [
                 {
                     "id": 0,
-                    "itemID": 0
+                    "itemID": 22
                 }
             ]
         },
@@ -163,7 +187,16 @@
             "itemIds": [
                 {
                     "id": 0,
-                    "itemID": 0
+                    "itemID": 19
+                }
+            ]
+        },
+        {
+            "size": 5,
+            "itemIds": [
+                {
+                    "id": 0,
+                    "itemID": 21
                 }
             ]
         }
