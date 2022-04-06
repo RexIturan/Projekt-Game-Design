@@ -1,4 +1,6 @@
-﻿using Events.ScriptableObjects.FieldOfView;
+﻿using System.Collections.Generic;
+using _Gameplay.Environment.FogOfWar.FogOfWarV2.Types;
+using Events.ScriptableObjects.FieldOfView;
 using Grid;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
@@ -6,6 +8,27 @@ using UnityEngine.Experimental.Rendering;
 namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 	public class FogOfWarController : MonoBehaviour {
 
+		#region Monobehaviour Singelton
+
+		private static FogOfWarController instance;
+		public static FogOfWarController Current => instance; 
+			
+		private void Awake() {
+			if ( instance == null ) {
+				instance = this;
+			}
+			else {
+				Debug.LogWarning("There can only be one UpdateHelper!");
+				Destroy(gameObject);
+			}
+		}
+
+		private void OnDestroy() {
+			instance = null;
+		}
+
+		#endregion
+		
 		private const int Hidden = 0;
 		private const int Visible = 1;
 		private const int Shadow = 2;
@@ -21,6 +44,7 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 		[SerializeField] private GridDataSO gridDataSO;
 		[SerializeField] private Material fogOfWarMaterial; 
 		[SerializeField] private Material fogOfWarHideMaterial;
+		[SerializeField] private ViewCacheSO viewCacheSO;
 		
 		[Header("Sending Event On"), SerializeField]
 		private FOV_ViewEventChannelSO updatePlayerViewEC;
@@ -59,11 +83,16 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 ///// Callbacks ////////////////////////////////////////////////////////////////////////////////////		
 		
 		public void UpdatePlayerView(bool[,] newView) {
-			//convert all to shadow and all in new view to current
 
+			//the first update of the fog is to early, idont have time to fix that
+			if ( view is { } ) {
+				Load(null);
+			}
+			
 			var width = gridDataSO.Width;
 			var depth = gridDataSO.Depth;
 					
+			//convert all to shadow and all in new view to current
 			for ( int y = 0; y < depth; y++ ) {
 				for ( int x = 0; x < width; x++ ) {
 					if ( view[x, y] == Visible ) {
@@ -149,6 +178,47 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 			// Shader.SetGlobalVector(dimensionId, new Vector4(gridDataSO.Width , gridDataSO.Depth));
 		}
 
+		public void InitViewFromSave(List<string> viewSave) {
+			if ( viewSave is { Count: > 0 } ) {
+				var width = gridDataSO.Width;
+				var depth = gridDataSO.Depth;
+
+				bool[,] visible = new bool[width, depth];
+			
+				for (int y = 0; y < depth; y++) {
+					string str = viewSave[y];
+					for (int x = 0; x < width; x++) {
+						visible[x, y] = str[x].Equals('+'); 
+					}
+				}
+			
+				UpdatePlayerView(visible);
+			}
+		}
+		
+		public List<string> GetViewAsStringList() {
+			List<string> viewSave = new List<string>();
+			
+			// gen string
+			var width = gridDataSO.Width;
+			var depth = gridDataSO.Depth;
+
+			for (int y = 0; y < depth; y++) {
+				string str = "";
+				for (int x = 0; x < width; x++) {
+					if ( view[x, y] == Visible || view[x, y] == Shadow ) {
+						str += "+";
+					}
+					else {
+						str += "-";
+					}
+				}
+				viewSave.Add(str);
+			}
+
+			return viewSave;
+		}
+		
 ///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
 
 		private void HandleToggleFogOfWar() {
@@ -171,6 +241,9 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 
 		private void OnEnable() {
 			Load(null);
+			InitViewFromSave(viewCacheSO.view);
+			//reset view cache because im lazy
+			viewCacheSO.view = null;
 			
 			ToggleFogOfWarEC.OnEventRaised += HandleToggleFogOfWar;
 			updatePlayerViewEC.OnEventRaised += UpdatePlayerView;

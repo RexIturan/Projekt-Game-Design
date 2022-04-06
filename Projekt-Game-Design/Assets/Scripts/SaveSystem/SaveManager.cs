@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Gameplay.Environment.FogOfWar.FogOfWarV2.Types;
 using Characters;
 using Characters.Equipment.ScriptableObjects;
 using Events.ScriptableObjects;
@@ -39,6 +40,7 @@ namespace SaveSystem {
 		public WorldObjectInitialiser worldObjectInitialiser;
 		[SerializeField] private ItemTypeContainerSO itemTypeContainerSO;
 		[SerializeField] private EquipmentContainerSO equipmentContainer;
+		[SerializeField] private ViewCacheSO viewCacheSO;
 
 	//load level from textasset
 		[Header("Test Level Data")] 
@@ -53,6 +55,7 @@ namespace SaveSystem {
 		
 		[SerializeField] private LevelDataSO prototyLevel;
 		[SerializeField] private LevelDataSO prototyBoss;
+		[SerializeField] private GameSceneSO defaultLevel;
 		[SerializeField] private GameSceneSO gameplayScene;
 		[SerializeField] private GameSceneSO mainMenuSceneData;
 		
@@ -61,8 +64,8 @@ namespace SaveSystem {
 		[Header("Location Scene To Load")]
 		[SerializeField] private GameSceneSO[] locationsToLoad;
 		
-		[Header("Debug Settings")] [SerializeField]
-		private bool showDebugMessage;
+		[Header("Debug Settings")] 
+		[SerializeField] private bool showDebugMessage;
 		
 
 //////////////////////////////////////// Local Variables ///////////////////////////////////////////
@@ -75,7 +78,7 @@ namespace SaveSystem {
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
 
 		public SaveReader SaveReader => _saveReader ??= new SaveReader(
-			gridData, inventory, questContainer, itemTypeContainerSO, equipmentContainer);
+			gridData, inventory, questContainer, itemTypeContainerSO, equipmentContainer, viewCacheSO);
 		
 //////////////////////////////////////// Local Functions ///////////////////////////////////////////
 
@@ -118,7 +121,7 @@ namespace SaveSystem {
 			_saveWriter = new SaveWriter(gridData, inventory, equipmentContainer, questContainer);
 
 			// setup save Reader
-			_saveReader = new SaveReader(gridData, inventory, questContainer, itemTypeContainerSO, equipmentContainer);
+			_saveReader = new SaveReader(gridData, inventory, questContainer, itemTypeContainerSO, equipmentContainer, viewCacheSO);
 		}
 
 		#endregion
@@ -182,6 +185,15 @@ namespace SaveSystem {
 					loadingData.MainSceneData = prototyBoss.GameScene;
 					newSceneLoading = true;
 					break;
+				
+				case 2:
+					loadingData.MainSceneData = defaultLevel;
+					// loadingData.Dependencies = new List<SceneLoadingData.SceneDataDependencySettings> {
+					// 	new SceneLoadingData.SceneDataDependencySettings()
+					// };
+					newSceneLoading = true;
+					break;
+				
 				default:
 					// String checkpointFile = defaultGameFilename;
 					// checkpointFile += value > 0 ? "0" : "";
@@ -194,6 +206,15 @@ namespace SaveSystem {
 			
 				if ( loaded && newSceneLoading ) {
 
+					//read the json level id if loading from json
+					if ( value > 1 ) {
+						if ( _saveObject.levelId == 0 ) {
+							loadingData.MainSceneData = prototyLevel.GameScene;
+						} else if ( _saveObject.levelId == 1 ) {
+							loadingData.MainSceneData = prototyBoss.GameScene;
+						}	
+					}
+					
 					loadSceneEC.RaiseEvent(loadingData);
 					// unloadSceneEC.RaiseEvent(unloadMenuLoadingData);
 

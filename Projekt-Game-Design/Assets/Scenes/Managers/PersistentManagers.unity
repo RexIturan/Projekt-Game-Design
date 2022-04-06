@@ -338,6 +338,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: viewCacheSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 31154f55b314048448dca1e2f1b93503, type: 2}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: defaultLevel
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d50a02fd6efa7b48a3746dbf50de3b5, type: 2}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
       propertyPath: gameplayScene
       value: 
       objectReference: {fileID: 11400000, guid: e35cd8d4811081a4f80a80280bf4f60c, type: 2}
@@ -349,6 +357,10 @@ PrefabInstance:
       propertyPath: mainMenuSceneData
       value: 
       objectReference: {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
+    - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
+      propertyPath: defaultGameFilename
+      value: mvp_level
+      objectReference: {fileID: 0}
     - target: {fileID: 4474951415148567956, guid: dfa779a81b325204a8b42b465dbe5e2b, type: 3}
       propertyPath: defaultLevelFilename
       value: mvp_boss

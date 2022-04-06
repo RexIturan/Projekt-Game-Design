@@ -1,7 +1,9 @@
 ﻿using System;
 using GameManager.Provider;
 using GDP01._Gameplay.Provider;
+using GDP01.SceneManagement.EventChannels;
 using SceneManagement.ScriptableObjects;
+using SceneManagement.Types;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -27,6 +29,11 @@ namespace UI.Controller.GameEnd {
 		
 		//todo replace with new scene loading
 		[SerializeField] private LoadEventChannelSO loadMenuEC;
+		[SerializeField] private SceneLoadingInfoEventChannelSO loadSceneEC;
+		[SerializeField] private SceneLoadingInfoEventChannelSO unloadSceneEC;
+		
+		[SerializeField] private GameSceneSO mainMenuSceneData;
+		[SerializeField] private GameSceneSO gameplaySceneData;
 		[SerializeField] private GameSceneSO[] menuToLoad;
 		
 		private Label gameEndLabel;
@@ -76,12 +83,24 @@ namespace UI.Controller.GameEnd {
 ///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
 
 		private void HandleMainMenuButton() {
-			GameStateProvider.Current.GameSC.backToMainMenu = true;
+			// GameStateProvider.Current.GameSC.backToMainMenu = true;
 			
 			// load Scene
-			loadMenuEC.RaiseEvent(menuToLoad, true);
+			// loadMenuEC.RaiseEvent(menuToLoad, true);
 		
 			//todo new scene loading
+			
+			
+			GameStateProvider.Current.GameSC.backToMainMenu = true;
+		
+			var loadingData = new SceneLoadingData {
+				MainSceneData = mainMenuSceneData,
+				ActivateOnLoad = true,
+				DontUnload = false
+			};
+			
+			loadSceneEC.RaiseEvent(loadingData);
+			unloadSceneEC.RaiseEvent(new SceneLoadingData{ MainSceneData = gameplaySceneData });
 		}
 
 		private void HandleExitGame() {

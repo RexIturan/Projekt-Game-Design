@@ -39,5 +39,8 @@ namespace GDP01._Gameplay.Provider {
 
 		private GridController _gridController;
 		public GridController GridController => TryGetAndCacheComponentOfTypeInActiveScene(ref _gridController);
+
+		// private FogOfWarController _fogOfWarController;
+		// public FogOfWarController FogOfWarController => TryGetAndCacheObjectOfType(ref _fogOfWarController);
 	}
 }

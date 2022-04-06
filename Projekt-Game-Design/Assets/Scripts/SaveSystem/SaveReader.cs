@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
+using _Gameplay.Environment.FogOfWar.FogOfWarV2.Types;
 using Characters;
 using Characters.Equipment.ScriptableObjects;
 using GDP01._Gameplay.Provider;
@@ -27,6 +28,9 @@ namespace SaveSystem {
 
 		// dictionarys
 		private ItemTypeContainerSO _itemTypeContainerSO;
+		
+		// view
+		private ViewCacheSO _viewCache;
 		
 		// runtime ref
 		private CharacterInitialiser _characterInitializer;
@@ -121,6 +125,10 @@ namespace SaveSystem {
 			questContainer.Initialise(saveQuests);
 		}
 		
+		private void ReadViewSave(List<string> saveView, ViewCacheSO viewCacheSO) {
+			viewCacheSO.view = saveView ?? null;
+		}
+		
 		#endregion
 		
 /////////////////////////////////////// Public Functions ///////////////////////////////////////////
@@ -131,13 +139,15 @@ namespace SaveSystem {
 			InventorySO inventory,
 			QuestContainerSO questContainer,
 			ItemTypeContainerSO itemTypeContainerSO,
-			EquipmentContainerSO equipmentContainer) {
+			EquipmentContainerSO equipmentContainer,
+			ViewCacheSO viewCache) {
 			
 			_gridData = gridData;
 			_inventory = inventory;
 			_equipmentContainer = equipmentContainer;
 			_questContainer = questContainer;
 			_itemTypeContainerSO = itemTypeContainerSO;
+			_viewCache = viewCache;
 		}
 
 		public void SetRuntimeReferences(CharacterInitialiser characterInitialiser,
@@ -165,8 +175,9 @@ namespace SaveSystem {
 			ReadEquipmentInventory(save.equipmentInventory, _equipmentContainer);
 			
 			ReadQuests(save.quests, _questContainer);
-		}
 
+			ReadViewSave(save.view, _viewCache);
+		}
 
 		#endregion
 	}

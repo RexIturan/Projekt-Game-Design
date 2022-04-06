@@ -1,4 +1,5 @@
 using Events.ScriptableObjects;
+using GameManager.Provider;
 using GDP01.SceneManagement.EventChannels;
 using GDP01.UI;
 using SaveSystem;
@@ -139,6 +140,8 @@ public class PauseMenuUIController : MonoBehaviour {
 	void HandleMainMenuButton() {
 		// load Scene
 		// loadMenuEC.RaiseEvent(menuToLoad, true);
+		
+		GameStateProvider.Current.GameSC.backToMainMenu = true;
 		
 		var loadingData = new SceneLoadingData {
 			MainSceneData = mainMenuSceneData,

@@ -202,6 +202,8 @@ namespace UI.Gameplay {
 			GameEndScreenEC.OnEventRaised += HandleGameEndScreenToggle;
 			QuestScreenEC.OnEventRaised += HandleQuestScreenToggle;
 			startTurnEC.OnEventRaised += HandleStartTurn;
+
+			HandleStartTurn(GamePhase.PLAYER_TURN);
 		}
 
 		private void OnDisable() {

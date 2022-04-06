@@ -6,6 +6,7 @@ using UnityEngine;
 namespace SaveSystem {
 	public class Save {
 		//todo rename achtung savefiles will be incompatible
+		public int levelId;
 		public GridData_Save gridDataSave;
 		public List<PlayerCharacter_Save> players;
 		public List<Enemy_Save> enemies;
@@ -18,6 +19,7 @@ namespace SaveSystem {
 		public List<Inventory_Save> equipmentInventory;
 		public List<Quest_Save> quests;
 		public List<TileGrid> tileGrids;
+		public List<string> view;
 
 ///// Properties ////////////////////////////////////////////////////////////////////////////////
 
@@ -26,6 +28,7 @@ namespace SaveSystem {
 ///// Properties ////////////////////////////////////////////////////////////////////////////////
 		
 		public Save() {
+			levelId = 0;
 			inventory = new Inventory_Save(0);
 			equipmentInventory = new List<Inventory_Save>();
 			quests = new List<Quest_Save>();
@@ -38,6 +41,7 @@ namespace SaveSystem {
 			tileEffects = new List<TileEffect_Save>();
 			items = new List<Item_Save>();
 			tileGrids = new List<TileGrid>();
+			view = new List<string>();
 		}
 
 		public string ToJson() {

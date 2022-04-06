@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using _Gameplay.Environment.FogOfWar.FogOfWarV2;
+using _Gameplay.Environment.FogOfWar.FogOfWarV2.Types;
 using Characters;
 using Characters.Equipment.ScriptableObjects;
 using GDP01._Gameplay.Provider;
@@ -113,6 +115,10 @@ namespace SaveSystem {
 			}
 
 			return itemSaves;
+		}
+		
+		private List<string> GetViewSaveData() {
+			return FogOfWarController.Current.GetViewAsStringList();
 		}
 		
 		private List<Door_Save> GetDoorsSaveData() {
@@ -274,6 +280,7 @@ namespace SaveSystem {
 				junks = GetJunksSaveData(),
 				tileGrids = GetTileGridSaveData(_gridData),
 				items = GetItemSaveData(),
+				view = GetViewSaveData(),
 				// itemGrids = GetItemGridSaveData(_gridContaier),
 				// characterGrids = GetCharacterGridSaveData(_gridContaier),
 				// objectGrids = GetObjectGridSaveData(_gridContaier)

@@ -69,6 +69,10 @@ MonoBehaviour:
     exitGameButton: Exit
   ExitGameEC: {fileID: 11400000, guid: ee3583ef0c2a49f4fb8dcf23f05248d1, type: 2}
   loadMenuEC: {fileID: 11400000, guid: d4f619ca60109054faab02a134bbbf02, type: 2}
+  loadSceneEC: {fileID: 11400000, guid: 5f3a6f188738cb44b866c9a8cb513f95, type: 2}
+  unloadSceneEC: {fileID: 11400000, guid: c8dbc4e17574ccf4d808afcc60ebd13e, type: 2}
+  mainMenuSceneData: {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
+  gameplaySceneData: {fileID: 11400000, guid: e35cd8d4811081a4f80a80280bf4f60c, type: 2}
   menuToLoad:
   - {fileID: 11400000, guid: 35a65f67c1fbe394982dfaa17de57c90, type: 2}
 --- !u!1 &3159855195508995721
@@ -937,7 +941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4893767457994454093
 Transform:
   m_ObjectHideFlags: 0
@@ -966,7 +970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1974dc831c51420999de5b014b11e05f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   screenType: 0
 --- !u!1 &9122129535283166928
 GameObject:
