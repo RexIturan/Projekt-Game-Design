@@ -5,7 +5,7 @@
             <ui:Label text="Main Menu" display-tooltip-when-elided="true" name="MainMenu_Title" style="font-size: 31px; -unity-font-style: bold; color: rgb(255, 255, 255); position: absolute; top: 30px;" />
             <ui:Button text="Level 1" display-tooltip-when-elided="true" name="StartButton" class="Button_Layout" style="margin-top: 19px;" />
             <ui:Button text="Boss Level" display-tooltip-when-elided="true" name="LoadLevelButton" class="Button_Layout" />
-            <ui:Button text="Load Level From Json" display-tooltip-when-elided="true" name="LoadTestLevelButton" class="Button_Layout" />
+            <ui:Button text="Load Level From Json" display-tooltip-when-elided="true" name="LoadTestLevelButton" class="Button_Layout" style="display: none;" />
             <ui:Button text="Level Editor" display-tooltip-when-elided="true" name="LevelEditorButton" class="Button_Layout" />
             <ui:Button text="Settings" display-tooltip-when-elided="true" name="SettingsButton" class="Button_Layout" style="visibility: visible;" />
             <ui:Button text="Exit" display-tooltip-when-elided="true" name="ExitButton" class="Button_Layout" />
