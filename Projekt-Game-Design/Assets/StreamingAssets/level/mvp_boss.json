@@ -84,27 +84,7 @@
       "pos": {
         "x": 24,
         "y": 1,
-        "z": 27
-      },
-      "hitpoints": 100,
-      "energy": 100
-    },
-    {
-      "enemyTypeId": 9,
-      "pos": {
-        "x": 28,
-        "y": 1,
-        "z": 27
-      },
-      "hitpoints": 100,
-      "energy": 100
-    },
-    {
-      "enemyTypeId": 8,
-      "pos": {
-        "x": 24,
-        "y": 1,
-        "z": 23
+        "z": 31
       },
       "hitpoints": 100,
       "energy": 100
