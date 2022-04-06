@@ -14,7 +14,6 @@ using WorldObjects.Doors;
 
 namespace WorldObjects
 {
-	[RequireComponent(typeof(Targetable))]
 	[RequireComponent(typeof(Statistics))]
 		public partial class Door : WorldObject.Factory<Door, Door.DoorData> {
 				private const float OPENING_DISTANCE = 1.1f;
@@ -37,7 +36,6 @@ namespace WorldObjects
 				}
 
 				[SerializeField] private DoorData doorData;
-				[SerializeField] private Targetable _targetable;
 				[SerializeField] private Statistics _statistics;
 				
 				public bool Open { get => doorData.open; set => doorData.open = value; }
@@ -81,9 +79,6 @@ namespace WorldObjects
 
 					GridTransform.RotateTo(saveData.orientation);
 
-					_targetable = gameObject.AddComponent<Targetable>();
-					_targetable.Initialise();
-
 					GridTransform.MoveTo(saveData.gridPos);
 					
 					_statistics.StatusValues.InitValues(null);
@@ -108,9 +103,6 @@ namespace WorldObjects
 						doorData.broken = false;
 
 						GridTransform.RotateTo(Vector3.zero);
-
-						_targetable = gameObject.AddComponent<Targetable>();
-						_targetable.Initialise();
 
 						GridTransform.MoveTo(Vector3.zero);
 

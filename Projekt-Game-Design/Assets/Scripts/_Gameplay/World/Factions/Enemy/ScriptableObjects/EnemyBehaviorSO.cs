@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnemyBehaviorSO : ScriptableObject
 {
 		public List<AIAction> actionPriorities;
+		public bool skipIfOutOfRange;
 		public int rangeOfInterestMovement; // only characters this far away from the enemy character
 																				// are considered in enemy's decisions
 		public int keepDistance; // the characters won't come any closer to a player than this distance

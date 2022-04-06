@@ -191,7 +191,7 @@ public class MainMenuUIController : MonoBehaviour {
 			Debug.Log("Exit Button Pressed");	
 		}
 		
-		// QuitGame();
+		QuitGame();
 	}
 	
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////	

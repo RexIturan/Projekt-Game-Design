@@ -46,8 +46,11 @@ public class E_MakeMoveOnEnter : StateAction {
 				}
 		}
 
-		private void MakeMove() {
-				if ( _aiController.OutOfSight() ) { 
+		private void MakeMove()
+		{
+				EnemyBehaviorSO behavior = _aiController.GetBehavior();
+
+				if ( behavior.skipIfOutOfRange && _aiController.OutOfSight() ) { 
 						HandleSkip();
 						return;
 				}
@@ -55,9 +58,7 @@ public class E_MakeMoveOnEnter : StateAction {
 				_aiController.ClearFullCache();
 				_abilityController.RefreshAbilities();
 				_aiController.RefreshValidAbilities();
-
-				EnemyBehaviorSO behavior = _aiController.GetBehavior();
-
+				
 				bool actionTaken = false;
 
 				for(int i = 0; !actionTaken && i < behavior.actionPriorities.Count; i++) {
