@@ -16,49 +16,41 @@
             "active": true,
             "plyerTypeId": 0,
             "pos": {
-                "x": 3,
+                "x": 25,
                 "y": 1,
-                "z": 3
+                "z": 1
             },
             "hitpoints": 30,
             "energy": 30
         },
         {
             "id": 1,
-            "active": false,
+            "active": true,
             "plyerTypeId": 0,
             "pos": {
-                "x": 10,
+                "x": 26,
                 "y": 1,
-                "z": 3
+                "z": 1
             },
             "hitpoints": 30,
             "energy": 30
-        }
+        },
+      {
+        "id": 2,
+        "active": true,
+        "plyerTypeId": 0,
+        "pos": {
+          "x": 27,
+          "y": 1,
+          "z": 1
+        },
+        "hitpoints": 30,
+        "energy": 30
+      }
     ],
     "enemies": [
         {
-            "enemyTypeId": 0,
-            "pos": {
-                "x": 5,
-                "y": 1,
-                "z": 5
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 0,
-            "pos": {
-                "x": 8,
-                "y": 1,
-                "z": 8
-            },
-            "hitpoints": 30,
-            "energy": 20
-        },
-        {
-            "enemyTypeId": 0,
+            "enemyTypeId": 13,
             "pos": {
                 "x": 22,
                 "y": 1,
@@ -68,7 +60,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 7,
             "pos": {
                 "x": 30,
                 "y": 1,
@@ -78,7 +70,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 11,
             "pos": {
                 "x": 26,
                 "y": 1,
@@ -88,7 +80,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 9,
             "pos": {
                 "x": 24,
                 "y": 1,
@@ -98,7 +90,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 4,
             "pos": {
                 "x": 30,
                 "y": 1,
@@ -108,7 +100,7 @@
             "energy": 20
         },
         {
-            "enemyTypeId": 0,
+            "enemyTypeId": 4,
             "pos": {
                 "x": 22,
                 "y": 1,

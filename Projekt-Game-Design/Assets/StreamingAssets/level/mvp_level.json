@@ -647,7 +647,47 @@
             "remainingSwitchIds": [],
             "remainingTriggerIds": [],
             "currentHitPoints": 100
-        }
+        },
+      {
+        "doorTypeId": 0,
+        "gridPos": {
+          "x": 14,
+          "y": 1,
+          "z": 39
+        },
+        "orientation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "open": false,
+        "keyIds": [],
+        "switchIds": [],
+        "triggerIds": [],
+        "remainingSwitchIds": [],
+        "remainingTriggerIds": [],
+        "currentHitPoints": 100
+      },
+      {
+        "doorTypeId": 0,
+        "gridPos": {
+          "x": 14,
+          "y": 1,
+          "z": 40
+        },
+        "orientation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "open": false,
+        "keyIds": [],
+        "switchIds": [],
+        "triggerIds": [],
+        "remainingSwitchIds": [],
+        "remainingTriggerIds": [],
+        "currentHitPoints": 100
+      }
     ],
     "switches": [
         {
@@ -756,9 +796,223 @@
             }
         }
     ],
-    "junks": [],
-    "tileEffects": [],
-    "items": [],
+  "junks": [
+  {
+    "junkTypeId": 4,
+    "gridPos": {
+      "x": 34,
+      "y": 1,
+      "z": 51
+    },
+    "orientation": {
+      "x": 0,
+      "y": 0,
+      "z": 1
+    },
+    "broken": false,
+    "currentHitPoints": 20
+  },
+    {
+      "junkTypeId": 4,
+      "gridPos": {
+        "x": 33,
+        "y": 1,
+        "z": 50
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 4,
+      "gridPos": {
+        "x": 25,
+        "y": 1,
+        "z": 57
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 4,
+      "gridPos": {
+        "x": 6,
+        "y": 1,
+        "z": 44
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 4,
+      "gridPos": {
+        "x": 19,
+        "y": 1,
+        "z": 45
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 4,
+      "gridPos": {
+        "x": 17,
+        "y": 1,
+        "z": 45
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 5,
+      "gridPos": {
+        "x": 19,
+        "y": 1,
+        "z": 28
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 6,
+      "gridPos": {
+        "x": 36,
+        "y": 1,
+        "z": 3
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 4,
+      "gridPos": {
+        "x": 35,
+        "y": 1,
+        "z": 2
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 4,
+      "gridPos": {
+        "x": 32,
+        "y": 1,
+        "z": 2
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 5,
+      "gridPos": {
+        "x": 32,
+        "y": 1,
+        "z": 28
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 4,
+      "gridPos": {
+        "x": 44,
+        "y": 1,
+        "z": 38
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    },
+    {
+      "junkTypeId": 4,
+      "gridPos": {
+        "x": 42,
+        "y": 1,
+        "z": 38
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "broken": false,
+      "currentHitPoints": 20
+    }
+  ],
+
+  "tileEffects": [],
+    "items": [
+      {
+        "id": 23,
+        "gridPos": {
+          "x": 3,
+          "y": 1,
+          "z": 44
+        }
+      },
+      {
+        "id": 19,
+        "gridPos": {
+          "x": 16,
+          "y": 1,
+          "z": 46
+        }
+      }
+    ],
     "inventory": {
         "size": 28,
         "itemIds": []

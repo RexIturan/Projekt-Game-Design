@@ -16,7 +16,7 @@ MonoBehaviour:
   - count: 1
     tabel:
     - type: 1
-      itemType: {fileID: 11400000, guid: 1cd14abc482e4e040ba69f06554ddeae, type: 2}
+      itemType: {fileID: 11400000, guid: c72e30f2d30fb5241825184f71a4a78d, type: 2}
       weight: 1
       dropRate: 1
       dropAmount: {x: 1, y: 1, z: 1, w: 1}
