@@ -23,16 +23,23 @@ namespace Visual
 
 						Projectile projectile = newProjectile.GetComponent<Projectile>();
 
-						if ( projectile == null )
-						{
-								Debug.LogError("No projectile script in Projectile GameObject. ");
-								Destroy(newProjectile);
-						}
-						else
-						{
+						if ( projectile != null ) {
 								projectile.start = start;
 								projectile.end = end;
 								projectile.timeEnd = time;
+						}
+						else { 
+								BeamProjectile beamProjectile = newProjectile.GetComponent<BeamProjectile>();
+
+								if(beamProjectile) {
+										beamProjectile.start = start;
+										beamProjectile.end = end;
+										beamProjectile.timeEnd = time;
+								}
+								else {
+										Debug.LogError("No projectile script in Projectile GameObject. ");
+										Destroy(newProjectile);
+								}
 						}
 				}
 		}

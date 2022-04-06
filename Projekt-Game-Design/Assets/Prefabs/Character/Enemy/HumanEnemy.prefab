@@ -281,6 +281,7 @@ MonoBehaviour:
   singleTargetPos: {x: 0, y: 0, z: 0}
   damageInflicted: 0
   tileEffectsSpawned: 0
+  beamProjectileSpawned: 0
 --- !u!114 &2212653873986084085
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -60,6 +60,7 @@ namespace GDP01.Characters.Component {
 		
 		public bool damageInflicted;
 		public bool tileEffectsSpawned;
+		public bool beamProjectileSpawned;
 		
 		public int SelectedAbilityID {
 			get => abilityID;
