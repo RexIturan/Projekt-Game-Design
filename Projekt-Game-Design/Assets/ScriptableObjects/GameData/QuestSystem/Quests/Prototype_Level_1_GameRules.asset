@@ -1,0 +1,259 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7542520706911199073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 0_ReadText_Camera
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Camera
+    description: 'You can move the camera by using [W], [A], [S], [D] keys and rotate
+      it with [Q], [R]. '
+    instructions: 
+--- !u!114 &-7406046289885994526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 7_ReadText_Doors
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Doors
+    description: 'Some doors open up when switches are activated. But some doors
+      are not locked and open when a player walks next to it. '
+    instructions: 
+--- !u!114 &-5750028427474964147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 1_ReadText_Selection
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Player Selection
+    description: 'You can select your characters (blue) by clicking on them with
+      your left mouse button. By then pressing right click, you deselect them. '
+    instructions: 
+--- !u!114 &-3940680711668337862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 3_ReadText_Enemies
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Enemies
+    description: 'Enemies use abilities as well. Enemies can hurt players to lower
+      their hitpoints. When a player has 0 hitpoints, they die and can no longer
+      be used and when all players are dead, you lose. So watch out. '
+    instructions: 
+--- !u!114 &-2466939131241565453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 4_ReadText_Items
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Items
+    description: 'Some enemies and objects drop items. You can pick them up by walking
+      over them. You can view collected items in the inventory which you can open
+      by pressing [I] or clicking the button at the top right. '
+    instructions: 
+--- !u!114 &-557384954984636205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 8_ReadText_AOE
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Area Effects
+    description: 'Some abilities target whole areas. Some abilities even last over
+      multiple turns. When such an effect occurs, the area is marked. Most effects
+      hurt players and should be avoided. '
+    instructions: 
+--- !u!114 &-17803565182114390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 5_ReadText_Equipment
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Equipment
+    description: 'Weapons in the Inventory can be equipped by dragging them into
+      the hands of a character. Weapons grant new abilities to the wielding character
+      player. '
+    instructions: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecda0ff7e794b0d8929230fb03c1044, type: 3}
+  m_Name: Prototype_Level_1_GameRules
+  m_EditorClassIdentifier: 
+  questId: 0
+  description: 
+  overrideAvailable: 0
+  disabled: 0
+  available: 0
+  active: 1
+  finished: 0
+  repeatable: 1
+  prerequisits: []
+  overrideTaskIndex: 0
+  currentTaskIndex: 0
+  nextTaskIndex: 1
+  tasks:
+  - name: Camera
+    type: 1
+    task: {fileID: -7542520706911199073}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: Selection
+    type: 1
+    task: {fileID: -5750028427474964147}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: Ability
+    type: 1
+    task: {fileID: 7100956487745614450}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: Enemies
+    type: 1
+    task: {fileID: -3940680711668337862}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: Items
+    type: 1
+    task: {fileID: -2466939131241565453}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: Equipment
+    type: 1
+    task: {fileID: -17803565182114390}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: Switches
+    type: 1
+    task: {fileID: 3854219593948236708}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: Doors
+    type: 1
+    task: {fileID: -7406046289885994526}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: AOE
+    type: 1
+    task: {fileID: -557384954984636205}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+--- !u!114 &3854219593948236708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 6_ReadText_Switches
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Switches
+    description: 'You can find switches in the dungeon. Switches unlock doors on
+      activation. You can activate a switch by walking next to it. '
+    instructions: 
+--- !u!114 &7100956487745614450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 2_ReadText_Ability
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Ability
+    description: 'If you have selected a character, their abilities are displayed
+      in the bar at the bottom. By clicking an ability, you select it. Valid targets
+      for that ability then are displayed on the field. You can cast the ability
+      by left-clicking a highlighted target or deselect it by pressing right click.
+      Information about the ability are displayed when you hover its icon. '
+    instructions: 
