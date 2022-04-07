@@ -61,7 +61,8 @@ namespace GDP01.TileEffects
 				public void AddTileEffectAt(int id, Vector3Int gridPos) {
 					if ( !ExistsTileEffect(id, gridPos) ) {
 						var tileEffectObj = CreateTileEffectObject(id);
-						tileEffectObj.GetComponent<GridTransform>().MoveTo(gridPos);	
+						tileEffectObj.GetComponent<GridTransform>().MoveTo(gridPos);
+						Add(tileEffectObj);
 					}
 				}
 
@@ -246,9 +247,12 @@ namespace GDP01.TileEffects
 				}
 
 				public TileEffectManager.Data Save() {
+					var tileEffectsData = tileEffects
+						.Select(obj => obj.GetComponent<TileEffectController>().Save()).ToList();
+					tileEffectsData.AddRange(scheduledEffects.Select(obj => obj.GetComponent<TileEffectController>().Save()));
+					
 					return new Data {
-						TileEffectData = tileEffects
-							.Select(obj => obj.GetComponent<TileEffectController>().Save()).ToList()
+						TileEffectData = tileEffectsData
 					};
 				}
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6e6060dbd8c894dacdfa33bc774470, type: 3}
   m_Name: e_Melee_Grunt_HammerDrop
   m_EditorClassIdentifier: 
-  id: 0
+  id: 12
   active: 0
   icon: {fileID: 0}
   prefab: {fileID: 2212653873986083977, guid: 42107428269f5be4f89a9a916cc1675c, type: 3}
@@ -43,4 +43,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c851032df8ae2d34282a3170cc15fb85, type: 2}
   behaviour: {fileID: 11400000, guid: 1f2adb223990b1f458c58b0569d99fbf, type: 2}
   lootTable: {fileID: 11400000, guid: 5ff54e86ce935d84a8bcf935f3f1243c, type: 2}
-  weapon: {fileID: 11400000, guid: 4659d52d798315241a03658f7e537d8e, type: 2}
+  weapon: {fileID: 11400000, guid: 5e25448fcf169284892ea495682c5a81, type: 2}

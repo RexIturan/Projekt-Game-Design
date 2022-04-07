@@ -22,13 +22,13 @@ namespace WorldObjects
 				public void Initialise(List<Door_Save> door_Saves,
 						List<Switch_Save> switch_Saves,
 						List<Junk_Save> junk_Saves,
-						List<TileEffect_Save> tileEffects_Saves,
+						List<TileEffectController.Data> tileEffects_Saves,
 						List<Item_Save> itemSaves) {
 
 
 						Transform parent;
 						WorldObjectList worldObjects = WorldObjectList.FindInstant();
-						TileEffectManager tileEffects = FindObjectOfType<TileEffectManager>();
+						TileEffectManager tileEffects = GameplayProvider.Current.TileEffectManager;
 
 						WorldObjectManager?.ClearAllComponents();
 
@@ -125,14 +125,15 @@ namespace WorldObjects
 
 						tileEffects.Clear();
 
-						foreach ( TileEffect_Save tileEffectSave in tileEffects_Saves )
-						{
-							GameObject prefab = tileEffectContainer.tileEffects[tileEffectSave.prefabID];
+						foreach ( var tileEffectSave in tileEffects_Saves ) {
+							
+							GameObject prefab = tileEffectContainer.tileEffects[tileEffectSave.id];
 							GameObject tileEffectObj = Instantiate(prefab, parent, true);
 							TileEffectController tileEffect = tileEffectObj.GetComponent<TileEffectController>();
-							tileEffect.SetTimeUntilActivation(tileEffectSave.timeUntilActivation);
-							tileEffect.SetTimeToLive(tileEffectSave.timeToLive);
-							tileEffectObj.GetComponent<GridTransform>().MoveTo(tileEffectSave.position);
+							tileEffect.Load(tileEffectSave);
+							// tileEffect.SetTimeUntilActivation(tileEffectSave.timeUntilActivation);
+							// tileEffect.SetTimeToLive(tileEffectSave.timeToLive);
+							// tileEffectObj.GetComponent<GridTransform>().MoveTo(tileEffectSave.position);
 
 							tileEffects.Add(tileEffectObj);
 						}

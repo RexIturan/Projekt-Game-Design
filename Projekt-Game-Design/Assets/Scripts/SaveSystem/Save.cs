@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GDP01.TileEffects;
 using Grid;
 using SaveSystem.SaveFormats;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace SaveSystem {
 		public List<Door_Save> doors;
 		public List<Switch_Save> switches;
 		public List<Junk_Save> junks;
-		public List<TileEffect_Save> tileEffects;
+		public List<TileEffectController.Data> tileEffects;
 		public List<Item_Save> items;
 		public Inventory_Save inventory;
 		public List<Inventory_Save> equipmentInventory;
@@ -38,7 +39,7 @@ namespace SaveSystem {
 			doors = new List<Door_Save>();
 			switches = new List<Switch_Save>();
 			junks = new List<Junk_Save>();
-			tileEffects = new List<TileEffect_Save>();
+			tileEffects = new List<TileEffectController.Data>();
 			items = new List<Item_Save>();
 			tileGrids = new List<TileGrid>();
 			view = new List<string>();

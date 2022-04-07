@@ -1,3 +1,4 @@
+using System;
 using Characters;
 using Events.ScriptableObjects.GameState;
 using System.Collections;
@@ -232,6 +233,7 @@ namespace GDP01.TileEffects
 						destroy = false;
 				}
 
+				[Serializable]
 				public class Data {
 					public int id;
 					public bool active;

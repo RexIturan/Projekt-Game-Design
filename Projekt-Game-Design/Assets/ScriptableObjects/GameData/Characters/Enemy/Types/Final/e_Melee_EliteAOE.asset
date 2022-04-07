@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6e6060dbd8c894dacdfa33bc774470, type: 3}
   m_Name: e_Melee_EliteAOE
   m_EditorClassIdentifier: 
-  id: 0
+  id: 8
   active: 0
   icon: {fileID: 0}
   prefab: {fileID: 2212653873986083977, guid: 42107428269f5be4f89a9a916cc1675c, type: 3}

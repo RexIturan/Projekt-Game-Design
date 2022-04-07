@@ -5,6 +5,7 @@ using Characters;
 using Characters.Equipment.ScriptableObjects;
 using GDP01._Gameplay.Provider;
 using GDP01._Gameplay.World.Character;
+using GDP01.TileEffects;
 using Grid;
 using QuestSystem.ScriptabelObjects;
 using SaveSystem.SaveFormats;
@@ -247,6 +248,17 @@ namespace SaveSystem {
 			return quests;
 		}
 
+		private List<TileEffectController.Data> GetTileEffectSaveData() {
+			List<TileEffectController.Data> tileEffectData = new List<TileEffectController.Data>();
+
+			var tileEffectManager = GameplayProvider.Current.TileEffectManager;
+			if ( tileEffectManager is {} ) {
+				tileEffectData = tileEffectManager.Save().TileEffectData;
+			}
+			
+			return tileEffectData;
+		}
+		
 		#endregion
 
 /////////////////////////////////////// Public Functions ///////////////////////////////////////////
@@ -281,6 +293,7 @@ namespace SaveSystem {
 				tileGrids = GetTileGridSaveData(_gridData),
 				items = GetItemSaveData(),
 				view = GetViewSaveData(),
+				tileEffects = GetTileEffectSaveData(),
 				// itemGrids = GetItemGridSaveData(_gridContaier),
 				// characterGrids = GetCharacterGridSaveData(_gridContaier),
 				// objectGrids = GetObjectGridSaveData(_gridContaier)
@@ -288,6 +301,8 @@ namespace SaveSystem {
 
 			return save;
 		}
+
+		
 
 		#endregion
 	}

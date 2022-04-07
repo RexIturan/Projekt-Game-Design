@@ -255,17 +255,19 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 			var width = gridDataSO.Width;
 			var depth = gridDataSO.Depth;
 
-			for (int y = 0; y < depth; y++) {
-				string str = "";
-				for (int x = 0; x < width; x++) {
-					if ( view[x, y] == Visible || view[x, y] == Shadow ) {
-						str += "+";
+			if ( view is { } && view.GetLength(0) == width && view.GetLength(1) == depth ) {
+				for (int y = 0; y < depth; y++) {
+					string str = "";
+					for (int x = 0; x < width; x++) {
+						if ( view[x, y] == Visible || view[x, y] == Shadow ) {
+							str += "+";
+						}
+						else {
+							str += "-";
+						}
 					}
-					else {
-						str += "-";
-					}
-				}
-				viewSave.Add(str);
+					viewSave.Add(str);
+				}	
 			}
 
 			return viewSave;
