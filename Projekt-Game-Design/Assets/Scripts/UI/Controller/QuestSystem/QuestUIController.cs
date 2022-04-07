@@ -51,7 +51,7 @@ namespace UI.QuestSystem {
 
 		private void OnEnable() {
 			BindElements();
-			
+			Update();
 			//todo update quest EC
 		}
 

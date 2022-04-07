@@ -25,7 +25,7 @@ namespace UI.Components.Tooltip {
 
 		// these may change depending on the 
 		protected bool onTop = true;
-		protected float timeToWait = 1.5f;
+		protected float timeToWait = 0.5f;
 		protected float blendInTime = 0.15f;
 
 		protected bool isActive = true;

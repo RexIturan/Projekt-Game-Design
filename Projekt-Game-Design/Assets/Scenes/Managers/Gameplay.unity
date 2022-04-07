@@ -438,6 +438,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1112942784759588762, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
+      propertyPath: m_CellSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1112942784759588763, guid: 6210764b09e3202439202f7ae53e9f36, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.01
@@ -511,6 +515,10 @@ PrefabInstance:
     - target: {fileID: 2108877792466552910, guid: 35898a82316c6eb4f915f4a7f24db639, type: 3}
       propertyPath: m_Name
       value: FieldOfView_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511275861259726157, guid: 35898a82316c6eb4f915f4a7f24db639, type: 3}
+      propertyPath: m_CellSize.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35898a82316c6eb4f915f4a7f24db639, type: 3}
@@ -696,6 +704,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 77743129}
     m_Modifications:
+    - target: {fileID: 869716609829842226, guid: 5214aff233aff684aa966652b41a57c0, type: 3}
+      propertyPath: m_CellSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2235413646569886100, guid: 5214aff233aff684aa966652b41a57c0, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -739,6 +751,10 @@ PrefabInstance:
     - target: {fileID: 2235413646569886100, guid: 5214aff233aff684aa966652b41a57c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3317897879673098691, guid: 5214aff233aff684aa966652b41a57c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.01
       objectReference: {fileID: 0}
     - target: {fileID: 6196361718221082303, guid: 5214aff233aff684aa966652b41a57c0, type: 3}
       propertyPath: m_Name

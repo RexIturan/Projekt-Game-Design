@@ -47,7 +47,7 @@ namespace UI.Gameplay {
 			screenManager.SetScreenVisibility(overlayScreen, value);
 
 			if ( showQuestScreen ) {
-				screenManager.SetScreenVisibility(questScreen, value);
+				screenManager.SetScreenVisibility(questScreen, true);
 			}
 
 			if ( showGameEndScreen ) {
@@ -154,7 +154,7 @@ namespace UI.Gameplay {
 		
 		//todo(vincent) should work i would like something more general 
 		private void HandleQuestScreenToggle() {
-			showQuestScreen = !showQuestScreen;
+			// showQuestScreen = !showQuestScreen;
 			
 			if(menuScreen == MenuScreen.PauseMenu)
 				return;

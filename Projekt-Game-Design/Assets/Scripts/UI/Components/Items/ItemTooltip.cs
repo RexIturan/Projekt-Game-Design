@@ -9,7 +9,9 @@ namespace UI.Components.Tooltip
 		/// </summary>
 		public class ItemTooltip : TooltipElement
 		{
-				public ItemTooltip(VisualElement tooltipParent) : base(tooltipParent) {}
+			public ItemTooltip(VisualElement tooltipParent) : base(tooltipParent) {
+				timeToWait = 0.5f;
+			}
 
 				public void UpdateValues(ItemTypeSO itemType)
 				{
