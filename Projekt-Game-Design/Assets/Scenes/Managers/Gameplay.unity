@@ -1100,10 +1100,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FogOfWar Controller
       objectReference: {fileID: 0}
-    - target: {fileID: 7636806259829724962, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
-      propertyPath: viewCacheSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 31154f55b314048448dca1e2f1b93503, type: 2}
     - target: {fileID: 7636806259829724963, guid: b18b229c134d47740a59a82aafb866e3, type: 3}
       propertyPath: m_RootOrder
       value: 2

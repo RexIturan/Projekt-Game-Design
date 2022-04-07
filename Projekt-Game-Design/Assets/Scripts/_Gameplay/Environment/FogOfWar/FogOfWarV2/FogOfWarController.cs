@@ -2,6 +2,7 @@
 using _Gameplay.Environment.FogOfWar.FogOfWarV2.Types;
 using Events.ScriptableObjects.FieldOfView;
 using Grid;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
@@ -33,21 +34,22 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 		private const int Visible = 1;
 		private const int Shadow = 2;
 
-		private static readonly int viewTextureId = Shader.PropertyToID("_PlayerViewTexture"),
+		private static readonly int 
+			textureId = Shader.PropertyToID("_PlayerViewTexture"),
 			dimensionId = Shader.PropertyToID("_TileMapDimensions"),
 			offsetId = Shader.PropertyToID("_TileMapOffset");
 
 		[SerializeField] private VoidEventChannelSO ToggleFogOfWarEC;
 		[SerializeField] private Texture2D debugViewTexture2D;
 		[SerializeField] private Texture2D viewTexture2D;
-		[SerializeField] private GraphicsFormat textureFormat = GraphicsFormat.R8_SInt;
 		[SerializeField] private GridDataSO gridDataSO;
 		[SerializeField] private Material fogOfWarMaterial; 
 		[SerializeField] private Material fogOfWarHideMaterial;
 		[SerializeField] private ViewCacheSO viewCacheSO;
 		
-		[Header("Sending Event On"), SerializeField]
+		[Header("Recieving Event On"), SerializeField]
 		private FOV_ViewEventChannelSO updatePlayerViewEC;
+		[SerializeField] private VoidEventChannelSO onLevelLoadedEC;
 		
 		// cache curtrent view / visited
 		private int[,] view;
@@ -85,20 +87,28 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 		public void UpdatePlayerView(bool[,] newView) {
 
 			//the first update of the fog is to early, idont have time to fix that
-			if ( view is { } ) {
+			if ( view == null || view is {Length: 0} ) {
 				Load(null);
 			}
 			
 			var width = gridDataSO.Width;
 			var depth = gridDataSO.Depth;
-					
+
+			Debug.LogWarning($"----- UpdatePlayerView view: w:{view.GetLength(0)} h:{view.GetLength(1)} -----");
+
+			if ( view.GetLength(0) < width || view.GetLength(1) < depth ) {
+				Debug.LogError($"Width and depth were to big for the current view data\n" +
+				               $"width:{width}, depth:{depth}, view dims {view.GetLength(0)}, {view.GetLength(1)}");
+				Load(null);
+			}
+			
 			//convert all to shadow and all in new view to current
 			for ( int y = 0; y < depth; y++ ) {
 				for ( int x = 0; x < width; x++ ) {
 					if ( view[x, y] == Visible ) {
 						view[x, y] = Shadow;
 					}
-					
+				
 					if ( newView[x, y] ) {
 						view[x, y] = Visible;
 					}
@@ -110,20 +120,24 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 		}
 
 		private void SetViewTexture() {
-			fogOfWarMaterial.SetTexture(viewTextureId, viewTexture2D);
-			fogOfWarHideMaterial.SetTexture(viewTextureId, viewTexture2D);
+			
+			Shader.SetGlobalTexture(textureId, viewTexture2D);
+			
+			// fogOfWarMaterial.SetTexture(textureId, viewTexture2D);
+			// fogOfWarHideMaterial.SetTexture(textureId, viewTexture2D);
 		}
 
 		private void SetDebugViewTexture() {
-			fogOfWarMaterial.SetTexture(viewTextureId, debugViewTexture2D);
-			fogOfWarHideMaterial.SetTexture(viewTextureId, debugViewTexture2D);
+			Shader.SetGlobalTexture(textureId, debugViewTexture2D);
+			
+			// fogOfWarMaterial.SetTexture(textureId, debugViewTexture2D);
+			// fogOfWarHideMaterial.SetTexture(textureId, debugViewTexture2D);
 		}
 		
 ///// Public Functions /////////////////////////////////////////////////////////////////////////////
 		
 		// load view from save
 		public void Load(int[,] viewData) {
-
 			if ( viewData is { } ) {
 				view = ( int[,] )viewData.Clone();	
 			}
@@ -131,17 +145,42 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 				view = new int[gridDataSO.Width, gridDataSO.Depth];
 			}
 
+			// Debug.LogWarning($"----- load view: w:{view.GetLength(0)} h:{view.GetLength(1)} -----");
+			
 			//todo refactor
-			viewTexture2D = new Texture2D(view.GetLength(0), view.GetLength(1)) {
-				filterMode = FilterMode.Point,
-				wrapMode = TextureWrapMode.Clamp
-			};
+			if ( viewTexture2D == null ) {
+				viewTexture2D = new Texture2D(view.GetLength(0), view.GetLength(1)) {
+					filterMode = FilterMode.Point,
+					wrapMode = TextureWrapMode.Clamp
+				};	
+			}
+			else {
+				viewTexture2D.Reinitialize(view.GetLength(0), view.GetLength(1));
+			}
+			viewTexture2D.Apply();
 
-			debugViewTexture2D = new Texture2D(1, 1) {
-				filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Repeat
-			};
-			debugViewTexture2D.SetPixel(0,0, GetColor(Visible));
-
+			if ( debugViewTexture2D == null ) {
+				debugViewTexture2D = new Texture2D(1, 1) {
+					filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Repeat
+				};
+				debugViewTexture2D.SetPixel(0,0, GetColor(Visible));	
+			}
+			else {
+				debugViewTexture2D.Reinitialize(1, 1);
+				debugViewTexture2D.SetPixel(0,0, GetColor(Visible));
+			}
+			debugViewTexture2D.Apply();
+			
+			Debug.LogWarning($"----- load view: w:{view.GetLength(0)} h:{view.GetLength(1)} -----\n" +
+			                 $"----- view texturue {viewTexture2D}, debug texture {debugViewTexture2D}\n" +
+			                 $"----- view mat {fogOfWarMaterial}, debug mat {fogOfWarHideMaterial}\n" +
+			                 $"----- {textureId} {dimensionId} {offsetId}");
+			
+			#if UNITY_EDITOR
+				// AssetDatabase.CreateAsset(viewTexture2D, "Assets/viewTexture2D.asset");
+				// AssetDatabase.CreateAsset(debugViewTexture2D, "Assets/debugViewTexture2D.asset");
+			#endif
+			
 			// set material variables
 			// Shader.SetGlobalTexture(viewTextureId, viewTexture2D);
 			SetViewTexture();
@@ -153,6 +192,9 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 			var width = view.GetLength(0);
 			var height = view.GetLength(1);
 			
+			Debug.LogWarning($"----- update view: w:{view.GetLength(0)} h:{view.GetLength(1)} -----\n" +
+			                 $"----- view texturue {viewTexture2D}, debug texture {debugViewTexture2D}");
+			
 			for ( int y = 0; y < height; y++ ) {
 				for ( int x = 0; x < width; x++ ) {
 					//todo if slow use setPixels and cache view values as color array
@@ -161,21 +203,31 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 			}
 			
 			viewTexture2D.Apply();
+			
+			
+			Shader.SetGlobalVector(offsetId,
+				new Vector4(gridDataSO.OriginPosition.x *-1, gridDataSO.OriginPosition.z *-1));
+			Shader.SetGlobalVector(dimensionId, new Vector4(gridDataSO.Width , gridDataSO.Depth));
+			
+			
 			// fogOfWarMaterial.SetTexture(viewTextureId, viewTexture2D);
 			//todo just change when level changes
-			fogOfWarMaterial.SetVector(offsetId,
-				new Vector4(gridDataSO.OriginPosition.x *-1, gridDataSO.OriginPosition.z *-1));
-			fogOfWarMaterial.SetVector(dimensionId, new Vector4(gridDataSO.Width , gridDataSO.Depth));
-
-			fogOfWarHideMaterial.SetVector(offsetId,
-				new Vector4(gridDataSO.OriginPosition.x *-1, gridDataSO.OriginPosition.z *-1));
-			fogOfWarHideMaterial.SetVector(dimensionId, new Vector4(gridDataSO.Width , gridDataSO.Depth));
+			// fogOfWarMaterial.SetVector(offsetId,
+			// 	new Vector4(gridDataSO.OriginPosition.x *-1, gridDataSO.OriginPosition.z *-1));
+			// fogOfWarMaterial.SetVector(dimensionId, new Vector4(gridDataSO.Width , gridDataSO.Depth));
+			//
+			// fogOfWarHideMaterial.SetVector(offsetId,
+			// 	new Vector4(gridDataSO.OriginPosition.x *-1, gridDataSO.OriginPosition.z *-1));
+			// fogOfWarHideMaterial.SetVector(dimensionId, new Vector4(gridDataSO.Width , gridDataSO.Depth));
+			
+			Debug.LogWarning($"----- mat{fogOfWarMaterial}, matHide{fogOfWarHideMaterial} ");
 			
 			//todo why doesnt this work?
 			// Shader.SetGlobalTexture(viewTextureId, viewTexture2D);
 			// Shader.SetGlobalVector(offsetId,
 				// new Vector4(gridDataSO.OriginPosition.x *-1, gridDataSO.OriginPosition.z *-1));
 			// Shader.SetGlobalVector(dimensionId, new Vector4(gridDataSO.Width , gridDataSO.Depth));
+			UpdateTexture();
 		}
 
 		public void InitViewFromSave(List<string> viewSave) {
@@ -218,18 +270,33 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 
 			return viewSave;
 		}
-		
-///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
 
-		private void HandleToggleFogOfWar() {
-			fogActive = !fogActive;
-
+		private void UpdateTexture() {
+			Debug.LogWarning($"----- update fog active: {fogActive}");
+			
 			if ( fogActive ) {
 				SetViewTexture();
 			}
 			else {
 				SetDebugViewTexture();
 			}
+		}
+		
+///// Callbacks ////////////////////////////////////////////////////////////////////////////////////
+
+		private void HandleToggleFogOfWar() {
+			fogActive = !fogActive;
+
+			UpdateTexture();
+		}
+		
+		private void HandleLevelLoaded() {
+			Load(null);
+			UpdateViewTexture();
+			
+			InitViewFromSave(viewCacheSO.view);
+			viewCacheSO.view = null;
+			UpdateViewTexture();
 		}
 		
 ///// Unity Functions //////////////////////////////////////////////////////////////////////////////
@@ -241,15 +308,16 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 
 		private void OnEnable() {
 			Load(null);
-			InitViewFromSave(viewCacheSO.view);
-			//reset view cache because im lazy
-			viewCacheSO.view = null;
-			
+			UpdateViewTexture();
+			//todo Updateplayervisipon from fieldofview controller
+
+			onLevelLoadedEC.OnEventRaised += HandleLevelLoaded;
 			ToggleFogOfWarEC.OnEventRaised += HandleToggleFogOfWar;
 			updatePlayerViewEC.OnEventRaised += UpdatePlayerView;
 		}
 
 		private void OnDisable() {
+			onLevelLoadedEC.OnEventRaised -= HandleLevelLoaded;
 			ToggleFogOfWarEC.OnEventRaised -= HandleToggleFogOfWar;
 			updatePlayerViewEC.OnEventRaised -= UpdatePlayerView;
 		}

@@ -30,8 +30,8 @@ namespace FieldOfView {
 				
 				// fov algorithms
 				private FieldOfView_Adam _fieldOfViewAdam;
-				// private FieldOfView _fieldOfView;
-				[SerializeField] private WorldObjectManager _worldObjectManager;
+				
+				private WorldObjectManager _worldObjectManager;
 
 				[Header("AdamFOV Settings")]
         [SerializeField] private Vector2Int posAdam;
@@ -201,8 +201,9 @@ namespace FieldOfView {
                 blocksLight = flags.HasFlag(flag: blocker);
             }
 
-						if( !_worldObjectManager )
-								_worldObjectManager = FindObjectOfType<WorldObjectManager>();
+            
+            if ( !_worldObjectManager )
+	            _worldObjectManager = GameplayProvider.Current.WorldObjectManager;
 
 						// world objects
 						if ( !blocksLight && _worldObjectManager ) {

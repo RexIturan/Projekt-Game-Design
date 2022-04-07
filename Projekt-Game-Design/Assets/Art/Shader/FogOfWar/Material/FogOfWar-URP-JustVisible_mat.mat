@@ -64,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _PlayerViewTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2c299ebe39df15e49abd2e5d5b3a8c28, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_a7bbd30884394ade903e6e76e2d124a4_Texture_1:
@@ -133,8 +133,8 @@ Material:
     - _InputVisibleColor: {r: 1, g: 0, b: 0, a: 0}
     - _ShadowColor: {r: 0.11372543, g: 0.11372543, b: 0.11372543, a: 0.3137255}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _TileMapDimensions: {r: 45, g: 57, b: 0, a: 0}
-    - _TileMapOffset: {r: 8, g: 25, b: 0, a: 0}
+    - _TileMapDimensions: {r: 38, g: 43, b: 0, a: 0}
+    - _TileMapOffset: {r: 9, g: 8, b: 0, a: 0}
     - _VisibleColor: {r: 1, g: 1, b: 1, a: 0.49411765}
   m_BuildTextureStacks: []
 --- !u!114 &744088656538858326

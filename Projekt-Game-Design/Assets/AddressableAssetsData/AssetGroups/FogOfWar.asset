@@ -17,8 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 329163b6c05f63540919c46d78109382
   m_SerializeEntries:
-  - m_GUID: 02f9db482f7898043ad7b80096d90a67
-    m_Address: Assets/Scripts/FogOfWar
+  - m_GUID: 1e57f0aa8518e534caa6f1967f8c944d
+    m_Address: Assets/Art/Textures/FogOfWar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 17fa0768b6380c34dabd66a6f9fff573
+    m_Address: Assets/Art/Shader/FogOfWar
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
