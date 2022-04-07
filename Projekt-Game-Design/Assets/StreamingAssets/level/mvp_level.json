@@ -1040,7 +1040,32 @@
             "itemIds": []
         }
     ],
-    "quests": [],
+    "quests": [
+      {
+        "questId": 0,
+        "active": false,
+        "disabled": false,
+        "currentTaskIndex": 0
+      },
+      {
+        "questId": 1,
+        "active": false,
+        "disabled": false,
+        "currentTaskIndex": 0
+      },
+      {
+        "questId": 2,
+        "active": false,
+        "disabled": true,
+        "currentTaskIndex": 0
+      },
+      {
+        "questId": 3,
+        "active": false,
+        "disabled": true,
+        "currentTaskIndex": 0
+      }
+    ],
     "tileGrids": [
         {
             "width": 55,

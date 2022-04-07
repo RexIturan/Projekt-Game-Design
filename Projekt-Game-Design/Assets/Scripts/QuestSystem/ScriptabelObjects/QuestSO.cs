@@ -42,7 +42,11 @@ namespace QuestSystem.ScriptabelObjects {
 			}
 		}
 
-		public bool IsDisabled => disabled;
+		public bool Disabled {
+			get { return disabled; }
+			set { disabled = value; }
+		}
+
 		public bool IsAvailable => available;
 		public bool IsDone => finished;
 		public bool IsActive => active;
@@ -99,20 +103,20 @@ namespace QuestSystem.ScriptabelObjects {
 			}
 			
 			finished = true;
-			for ( int i = 0; i < tasks.Count; i++ ) {
-				if ( !tasks[i].task.IsDone() ) {
-					finished = false;
-				}
-			}
+			finished = tasks.All(taskWrapper => taskWrapper.task.IsDone());
+			if ( tasks[^1].type == TaskType.Read_Text )
+				finished = false;
 		}
 
 		public void UpdateAvailability() {
+			if ( repeatable && finished )
+				Reset();
+			
 			available = IsOverridden ||
 			            HasPrerequisitesSatisfied() &&
 			            !active && 
-			            !IsDisabled &&
-			            ( ( repeatable && finished ) || !finished );
-			
+			            !Disabled &&
+			            !finished;
 		}
 		
 		public bool HasPrerequisitesSatisfied() {
@@ -130,13 +134,17 @@ namespace QuestSystem.ScriptabelObjects {
 
 		public void Next() {
 			//todo test
+
+			if ( currentTaskIndex == tasks.Count - 1 && tasks[^1].type == TaskType.Read_Text ) {
+				Finish();
+			} 
 			
 			currentTaskIndex = nextTaskIndex;
 			
 			if ( currentTaskIndex < tasks.Count ) {
 				tasks[currentTaskIndex].task.StartTask();	
 			}
-
+			
 			if ( this.IsDone ) {
 				this.active = false;
 			}

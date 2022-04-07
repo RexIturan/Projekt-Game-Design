@@ -10,7 +10,7 @@ namespace SaveSystem.SaveFormats
 				public int questId;
 				
 				public bool active;
-
+				public bool disabled;
 				public int currentTaskIndex;
 		}
 }
