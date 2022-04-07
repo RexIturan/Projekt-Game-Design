@@ -17,17 +17,14 @@
 }
 
 .statBulletPoint .range {
-	color: rgb(255, 30, 255);
 }
 
 .statBulletPoint .costs {
-	color: blue;
+	/* color: blue; */
 }
 
 .statBulletPoint .defense {
-	color: orange;
 }
 
 .statBulletPoint .goldvalue {
-	color: yellow;
 }

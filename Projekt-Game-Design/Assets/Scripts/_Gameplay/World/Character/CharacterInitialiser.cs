@@ -102,8 +102,16 @@ namespace Characters {
 
 		private void InitAppearance(GameObject character, CharacterIdentificationAppearance appearance) {
 			Statistics stats = character.GetComponent<Statistics>();
+			ModelController modelController = character.GetComponent<ModelController>();
 			stats.DisplayName = appearance.CharacterName;
 			stats.DisplayImage = appearance.CharacterIcon;
+
+			if(modelController && appearance.HeadModel && appearance.BodyModel) {
+				modelController.SetStandardHead(appearance.HeadModel);
+				modelController.SetStandardBody(appearance.BodyModel);
+				modelController.SetMeshHead(appearance.HeadModel);
+				modelController.SetMeshBody(appearance.BodyModel);
+			}
 		}
 	}
 }

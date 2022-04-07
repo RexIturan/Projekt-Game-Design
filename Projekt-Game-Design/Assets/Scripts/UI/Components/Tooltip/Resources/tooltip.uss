@@ -3,12 +3,14 @@
 	position: absolute;
 	align-self: center;
 	width: 200px;
-
-	background-color: black;
+	
+    background-color: #464646;
 	color: white;
-	padding: 2px;
-	border-color: white;
-	border-width: 3px;
+
+    padding: 5px 20px;
+    
+    border-width: 3px;
+    border-radius: 5px;
 }
 
 .tooltipHeader {
