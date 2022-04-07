@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ecda0ff7e794b0d8929230fb03c1044, type: 3}
   m_Name: Prototype_Boss
   m_EditorClassIdentifier: 
-  questId: 0
+  questId: 2
   description: 
   overrideAvailable: 0
   disabled: 0
@@ -22,7 +22,7 @@ MonoBehaviour:
   repeatable: 0
   prerequisits: []
   overrideTaskIndex: 0
-  currentTaskIndex: 0
+  currentTaskIndex: 1
   nextTaskIndex: 1
   tasks:
   - name: Exposition
@@ -30,13 +30,13 @@ MonoBehaviour:
     task: {fileID: 229773603868971490}
     showProperty: 1
     button: '-'
-    drawerHeight: 219
+    drawerHeight: 77
   - name: Kill_Boss
     type: 7
     task: {fileID: 2492709542353148804}
     showProperty: 1
     button: '-'
-    drawerHeight: 255
+    drawerHeight: 113
 --- !u!114 &229773603868971490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec412340c6c43eaa15380deaa8521da, type: 3}
   m_Name: 1_EnemyKill_Kill_Boss
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   done: 0
   textTextBody:
     title: Kill The Rogue King
