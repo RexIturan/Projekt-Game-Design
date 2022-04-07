@@ -1,0 +1,371 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7434581349491343783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056743f4be01493596f254546d95b334, type: 3}
+  m_Name: 2_AbilitySelected_Select_Move
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Controls
+    description: 'Control John and make him move. '
+    instructions: 'Select John with a left click and select your moving ability. '
+  ability: {fileID: 11400000, guid: a301e8b2cec49204ba3f08edb913a9ef, type: 2}
+--- !u!114 &-6043719679150688484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fef674ff9f249c495b70cd21278df43, type: 3}
+  m_Name: 5_ItemEquipped_Equipment
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Equipment
+    description: Equip your hammer.
+    instructions: 'Open your inventory with the [I]-key or with the button on top
+      and then drag the hammer into Pierre''s or John''s hand. '
+  itemType: {fileID: 11400000, guid: 5e25448fcf169284892ea495682c5a81, type: 2}
+  equipmentContainer: {fileID: 11400000, guid: 06f235e350237cc41b1711487af77bbe, type: 2}
+--- !u!114 &-3303113582054546787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec412340c6c43eaa15380deaa8521da, type: 3}
+  m_Name: 3_EnemyKill_Kill_Grunt
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Equipped Enemy
+    description: 'The villain next to John wields a hammer... '
+    instructions: 'Kill the grunt and take his hammer. '
+  neededCount: 1
+  enemyType: {fileID: 11400000, guid: 74a693de245cb2b4e9c8c5898dff572f, type: 2}
+--- !u!114 &-2291990980935421660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 0_ReadText_Exposition
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: The Quest
+    description: 'The three brave heroes, John The Brave, Pierre and Gardar Grimsson
+      entered an old dungeon, to cleanse it from evil. Defeat all enemies! '
+    instructions: 
+--- !u!114 &-2105987440294561260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 12_ReadText_Final_Instruction
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: The Quest
+    description: 'You are doing sublime. Keep it up and defeat all enemies! '
+    instructions: 
+--- !u!114 &-625072154995753058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a2e36d57864b89b27a1ef5e357380a, type: 3}
+  m_Name: 8_CharInRegion_Free_Pierre
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Crates
+    description: 'Crates are heavy objects. They can only be destructed with blows
+      of ''blunt weapons''... '
+    instructions: 'Free Pierre. '
+  minPos: {x: 32, y: 1, z: 51}
+  maxPos: {x: 42, y: 1, z: 53}
+  numOfChars: 2
+  updateAfterDone: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecda0ff7e794b0d8929230fb03c1044, type: 3}
+  m_Name: Prototype_Level_1
+  m_EditorClassIdentifier: 
+  questId: 0
+  description: 
+  overrideAvailable: 0
+  disabled: 0
+  available: 0
+  active: 0
+  finished: 1
+  repeatable: 0
+  prerequisits: []
+  overrideTaskIndex: 0
+  currentTaskIndex: 12
+  nextTaskIndex: 12
+  tasks:
+  - name: Exposition
+    type: 1
+    task: {fileID: -2291990980935421660}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: Camera
+    type: 0
+    task: {fileID: 204943489747537055}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 309
+  - name: Select_Move
+    type: 2
+    task: {fileID: -7434581349491343783}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 237
+  - name: Kill_Grunt
+    type: 7
+    task: {fileID: -3303113582054546787}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 255
+  - name: Take_Hammer
+    type: 3
+    task: {fileID: 8543227737189828330}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 255
+  - name: Equipment
+    type: 4
+    task: {fileID: -6043719679150688484}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 255
+  - name: Item_Info
+    type: 1
+    task: {fileID: 2859681345569568711}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: Switch
+    type: 6
+    task: {fileID: 8390511918932307202}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 237
+  - name: Free_Pierre
+    type: 11
+    task: {fileID: -625072154995753058}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 291
+  - name: Non-Locked_Doors
+    type: 11
+    task: {fileID: 4786562377419341825}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 291
+  - name: Proceed
+    type: 11
+    task: {fileID: 6191620827960042416}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 291
+  - name: AOE
+    type: 1
+    task: {fileID: 6060927660285752676}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+  - name: Final_Instruction
+    type: 1
+    task: {fileID: -2105987440294561260}
+    showProperty: 1
+    button: '-'
+    drawerHeight: 219
+--- !u!114 &204943489747537055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d9c7afec5e459995abe5cb066a4361, type: 3}
+  m_Name: 1_KeyPress_Camera
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Camera
+    description: 'Look around! '
+    instructions: Press [W], [A], [S] OR [D] to move your camera. Rotate it with
+      [Q] and [E].
+  inputReader: {fileID: 11400000, guid: 4d3643d9384ea8a4db56006cbf094dc7, type: 2}
+  actionName: MoveCamera
+  mapName: Camera
+  compositeName: 
+  actionNames: []
+--- !u!114 &2859681345569568711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 6_ReadText_Item_Info
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 0
+  textTextBody:
+    title: Weapons
+    description: 'Equipped weapons grant you new abilities for the character that
+      wields them. '
+    instructions: 
+--- !u!114 &4786562377419341825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a2e36d57864b89b27a1ef5e357380a, type: 3}
+  m_Name: 9_CharInRegion_Non-Locked_Doors
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Non-Locked Doors
+    description: 'Some doors are not locked and open up when you approach them. '
+    instructions: 'Walk right next to the door to open it. '
+  minPos: {x: 31, y: 1, z: 52}
+  maxPos: {x: 31, y: 1, z: 53}
+  numOfChars: 1
+  updateAfterDone: 0
+--- !u!114 &6060927660285752676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb349b9ed2c4ba3a9d1446fca43f005, type: 3}
+  m_Name: 11_ReadText_AOE
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Environmental Abilities
+    description: 'Be careful! Some enemies can deal damage in large areas. Sometimes,
+      they cast a spell on the ground that activates their next turn. Better avoid
+      it. '
+    instructions: 
+--- !u!114 &6191620827960042416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a2e36d57864b89b27a1ef5e357380a, type: 3}
+  m_Name: 10_CharInRegion_Proceed
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: 'Proceed through the '
+    description: 'More enemies with unknown abilities are lurking. Be careful. '
+    instructions: 'Fight your way through the dungeon. '
+  minPos: {x: 13, y: 1, z: 39}
+  maxPos: {x: 13, y: 1, z: 40}
+  numOfChars: 1
+  updateAfterDone: 0
+--- !u!114 &8390511918932307202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: febf331e49584c09a7889b1afa49297a, type: 3}
+  m_Name: 7_SwitchActive_Switch
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Help out John
+    description: 'John is trapped, you need to open the door. '
+    instructions: 'Select Pierre and move next to the switch to activate the mechanism. '
+  switchId: 3
+--- !u!114 &8543227737189828330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573a10252b9e457d91b0719bb28e0568, type: 3}
+  m_Name: 4_ItemInInventory_Take_Hammer
+  m_EditorClassIdentifier: 
+  active: 0
+  done: 1
+  textTextBody:
+    title: Picking up Items
+    description: 'Obtain the dropped hammer. The grunt won''t need it anymore... '
+    instructions: 'Move onto the hammer with john to pick it up. '
+  itemType: {fileID: 11400000, guid: 5e25448fcf169284892ea495682c5a81, type: 2}
+  inventory: {fileID: 11400000, guid: 894b7bd3f223e6440a05684c434e7780, type: 2}
