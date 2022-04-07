@@ -475,7 +475,13 @@
             ]
         }
     ],
-    "quests": [],
+    "quests": [
+      {
+        "questId": "",
+        "active": "",
+        "currentTaskIndex": ""
+      }
+    ],
     "tileGrids": [
         {
             "width": 42,

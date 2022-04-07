@@ -23,6 +23,7 @@ namespace WorldObjects
 
 				[Header("Sending events on:")]
 				[SerializeField] private SoundEventChannelSO playSoundEC;
+				[SerializeField] private VoidEventChannelSO updateFOV_EC;
 
 				[Header("Receiving Events on:")]
 				[SerializeField] private VoidEventChannelSO updateWorldObjectsEvent;
@@ -256,6 +257,7 @@ namespace WorldObjects
 						Broken = true;
 
 						playSoundEC.RaiseEvent(Type.destructionSound);
+						updateFOV_EC.RaiseEvent();
 				}
 
 				private void OpenDoor()
@@ -264,6 +266,7 @@ namespace WorldObjects
 						Open = true;
 
 						playSoundEC.RaiseEvent(Type.openingSound);
+						updateFOV_EC.RaiseEvent();
 				}
 		}
 }

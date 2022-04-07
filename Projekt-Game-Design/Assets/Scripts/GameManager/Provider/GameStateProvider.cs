@@ -18,5 +18,9 @@ namespace GameManager.Provider {
 		//should work because gaemsc should be an singelton todo make gamesc a aingelton
 		private GameSC _gameSC;
 		public GameSC GameSC => TryGetAndCacheObjectOfType(ref _gameSC);
+
+		private GameEndConditionHolder _gameEndConditionHolder;
+		public GameEndConditionHolder GameEndConditionHolder =>
+			TryGetAndCacheComponentOfTypeInActiveScene(ref _gameEndConditionHolder);
 	}
 }

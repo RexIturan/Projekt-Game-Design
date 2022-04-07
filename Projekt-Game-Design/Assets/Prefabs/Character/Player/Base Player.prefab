@@ -204,6 +204,7 @@ MonoBehaviour:
   statistics: {fileID: 2212653873986084095}
   gridTransform: {fileID: 6601210392787000488}
   healthbarController: {fileID: 3041808292664612136}
+  updateFOV_EC: {fileID: 11400000, guid: 3417b7e24349eeb4c8f2afc77cdf9483, type: 2}
 --- !u!114 &2212653873986084080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  active: 0
   _type: {fileID: 11400000, guid: 5d339fb430d10f341bd2896617aec0a2, type: 2}
   _attacker: {fileID: 2212653873986084080}
   _statistics: {fileID: 2212653873986084095}

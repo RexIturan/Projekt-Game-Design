@@ -26,7 +26,8 @@ namespace GDP01.UI.Controller.Settings {
 ///// Private Variables ////////////////////////////////////////////////////////////////////////////
 
 		private Button _backButton;
-
+		private Toggle _invulnerableToggle;
+		
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////		
 
 ///// Private Functions ////////////////////////////////////////////////////////////////////////////
@@ -53,6 +54,12 @@ namespace GDP01.UI.Controller.Settings {
 		private void BindButtons() {
 			var root = GetComponent<UIDocument>().rootVisualElement;
 			BindButton(ref _backButton, root, buttonNames.back, HandleBackButton);
+
+			_invulnerableToggle = root.Q<Toggle>("InvulnerableToggle");
+			if ( _invulnerableToggle is { } ) {
+				int invul = PlayerPrefs.GetInt("invulnerable", 0);
+				_invulnerableToggle.value = invul > 0;
+			}
 		}
 
 		private void UnbindButtons() {
@@ -89,6 +96,10 @@ namespace GDP01.UI.Controller.Settings {
 		}
 		
 		private void OnDisable() {
+			if ( _invulnerableToggle is { } ) {
+				PlayerPrefs.SetInt("invulnerable", _invulnerableToggle.value ? 1 : 0);
+				PlayerPrefs.Save();
+			}
 			UnbindButtons();
 		}
 	}

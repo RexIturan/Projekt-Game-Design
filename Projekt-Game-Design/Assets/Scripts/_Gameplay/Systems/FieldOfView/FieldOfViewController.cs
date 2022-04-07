@@ -138,7 +138,7 @@ namespace FieldOfView {
 						
 						foreach ( var playerObj in playerList ) {
 							var target = playerObj.GetComponent<Targetable>();
-							if ( target is { IsAlive: true }) {
+							if ( target is { IsAlive: true } && playerObj.GetComponent<PlayerCharacterSC>().active) {
 								var gridTransform = playerObj.GetComponent<GridTransform>();
 								var statistics = playerObj.GetComponent<Statistics>();	
 								var pos = gridTransform.gridPosition;

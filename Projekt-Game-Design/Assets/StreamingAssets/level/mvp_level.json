@@ -9,7 +9,8 @@
             "y": 0.0,
             "z": -63.0
         }
-    },"players": [
+    },
+  "players": [
   {
     "id": 0,
     "active": true,
@@ -55,7 +56,7 @@
         "y": 1,
         "z": 47
       },
-      "hitpoints": 30,
+      "hitpoints": 15,
       "energy": 20
     },
     {

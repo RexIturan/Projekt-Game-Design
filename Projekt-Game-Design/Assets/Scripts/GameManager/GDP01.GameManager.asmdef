@@ -9,7 +9,8 @@
         "GDP01.SaveSystem",
         "GDP01.SceneManagement.Types",
         "GDP01.Gameplay",
-        "GDP01.Util.Singleton"
+        "GDP01.Util.Singleton",
+        "GDP01.Util"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

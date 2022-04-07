@@ -21,7 +21,7 @@ namespace GDP01._Gameplay.World.Character.Components {
 	[RequireComponent(typeof(Targetable))]
 	public abstract class Character<T, D> : SaveObjectFactory<T, D>, ISaveState<D> where D : CharacterData, new() where T : ISaveState<D> {
 		public int id;
-		protected bool active;
+		public bool active;
 
 		[SerializeField] protected CharacterTypeSO _type;
 		

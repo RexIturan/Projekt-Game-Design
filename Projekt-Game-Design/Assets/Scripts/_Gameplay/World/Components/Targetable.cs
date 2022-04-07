@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Characters;
+using Characters.Types;
 using UnityEngine;
 using Visual.Healthbar;
 
@@ -19,7 +20,8 @@ namespace Combat {
 
 		[SerializeField] private Statistics statistics;
 		[SerializeField] private GridTransform gridTransform;
-		[SerializeField] private HealthbarController healthbarController; 
+		[SerializeField] private HealthbarController healthbarController;
+		[SerializeField] private VoidEventChannelSO updateFOV_EC;
 		
 ///// Properties ///////////////////////////////////////////////////////////////////////////////////
  	
@@ -42,13 +44,24 @@ namespace Combat {
 		}
 		
 		public void ReceivesDamage(int damage) {
-			statistics.StatusValues.HitPoints.Decrease(damage);
+			bool invulnerable = false;
+			if ( statistics.Faction == Faction.Player ) {
+				invulnerable = PlayerPrefs.GetInt("invulnerable", 0) > 0;
+			}
+
+			if ( !invulnerable ) {
+				statistics.StatusValues.HitPoints.Decrease(damage);
+			}
 			
 			if ( IsDead ) {
 				var healthbar = GetComponentInChildren<HealthbarController>();
 				if( healthbar) { 
 					healthbar.UpdateVisuals(statistics.StatusValues.HitPoints);
 					healthbar.StartHideAfterDelay();
+				}
+
+				if ( statistics.Faction == Faction.Player ) {
+					updateFOV_EC.RaiseEvent();
 				}
 			}
 		}

@@ -11,6 +11,7 @@ namespace GameManager.ScriptableObjects.GameOverConditions {
 			//get char list
 
 			return GameplayProvider.Current.CharacterManager.GetPlayerCharacters()
+				.Where(player => player.active)
 				.All(player => player.IsDead);
 		}
 	}

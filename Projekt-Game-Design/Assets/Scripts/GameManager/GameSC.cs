@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Characters.Types;
 using Events.ScriptableObjects;
 using Events.ScriptableObjects.GameState;
+using GameManager.Provider;
 using GameManager.ScriptableObjects;
 using SaveSystem;
 using SaveSystem.ScriptableObjects;
@@ -149,20 +150,11 @@ namespace GameManager {
 		}
 		
 		public void CheckGameEndingConditions() {
-			//for each gameover condition -> check ->
-			// -> set gameOver = true
-			foreach ( var condition in gameOverConditions ) {
-				if ( condition.CheckCondition() ) {
-					gameOver = true;
-				}
-			}
-			
-			// for each victory condition -> check
-			// -> set victory = true
-			foreach ( var condition in victoryConditions ) {
-				if ( condition.CheckCondition() ) {
-					victory = true;
-				}
+			bool[] gameConditions = GameStateProvider.Current.GameEndConditionHolder?.CheckGameEndingConditions();
+
+			if ( gameConditions is { Length: > 1 } ) {
+				victory = gameConditions[0];
+				gameOver = gameConditions[1];	
 			}
 		}
 		

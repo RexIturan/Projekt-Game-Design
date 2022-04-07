@@ -293,11 +293,14 @@ namespace _Gameplay.Environment.FogOfWar.FogOfWarV2 {
 		}
 		
 		private void HandleLevelLoaded() {
+			fogActive = true;
+			
 			Load(null);
 			UpdateViewTexture();
 			
-			InitViewFromSave(viewCacheSO.view);
-			viewCacheSO.view = null;
+			// todo use when loading & saving
+			// InitViewFromSave(viewCacheSO.view);
+			// viewCacheSO.view = null;
 			UpdateViewTexture();
 		}
 		

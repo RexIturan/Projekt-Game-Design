@@ -1,3 +1,15 @@
-﻿fileFormatVersion: 2
+fileFormatVersion: 2
 guid: 8392edbd17a741e4b3aa49918501c3f2
-timeCreated: 1638144499
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - statistics: {instanceID: 0}
+  - gridTransform: {instanceID: 0}
+  - healthbarController: {instanceID: 0}
+  - updateFOV_EC: {fileID: 11400000, guid: 3417b7e24349eeb4c8f2afc77cdf9483, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
