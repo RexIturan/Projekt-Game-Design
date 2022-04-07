@@ -42,7 +42,7 @@ namespace UI.Components.Ability
 						}
 
 						TextElement headerName = new TextElement();
-						headerName.text = ability.name;
+						headerName.text = ability.abilityName;
 						header.Add(headerName);
 
 						Add(header);
