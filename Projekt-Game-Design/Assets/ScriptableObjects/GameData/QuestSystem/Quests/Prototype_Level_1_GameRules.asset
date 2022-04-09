@@ -17,7 +17,7 @@ MonoBehaviour:
   textTextBody:
     title: Camera
     description: 'You can move the camera by using [W], [A], [S], [D] keys and rotate
-      it with [Q], [R]. '
+      it with [Q], [E]. '
     instructions: 
 --- !u!114 &-7406046289885994526
 MonoBehaviour:
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 1_ReadText_Selection
   m_EditorClassIdentifier: 
   active: 0
-  done: 1
+  done: 0
   textTextBody:
     title: Player Selection
     description: 'You can select your characters (blue) by clicking on them with
@@ -158,58 +158,58 @@ MonoBehaviour:
   finished: 0
   repeatable: 1
   prerequisits: []
-  overrideTaskIndex: 1
-  currentTaskIndex: 1
-  nextTaskIndex: 2
+  overrideTaskIndex: 0
+  currentTaskIndex: 0
+  nextTaskIndex: 1
   tasks:
   - name: Camera
     type: 1
     task: {fileID: -7542520706911199073}
     showProperty: 1
     button: '-'
-    drawerHeight: 77
+    drawerHeight: 219
   - name: Selection
     type: 1
     task: {fileID: -5750028427474964147}
     showProperty: 1
     button: '-'
-    drawerHeight: 77
+    drawerHeight: 219
   - name: Ability
     type: 1
     task: {fileID: 7100956487745614450}
     showProperty: 1
     button: '-'
-    drawerHeight: 77
+    drawerHeight: 219
   - name: Enemies
     type: 1
     task: {fileID: -3940680711668337862}
     showProperty: 1
     button: '-'
-    drawerHeight: 77
+    drawerHeight: 219
   - name: Items
     type: 1
     task: {fileID: -2466939131241565453}
     showProperty: 1
     button: '-'
-    drawerHeight: 77
+    drawerHeight: 219
   - name: Equipment
     type: 1
     task: {fileID: -17803565182114390}
     showProperty: 1
     button: '-'
-    drawerHeight: 77
+    drawerHeight: 219
   - name: Switches
     type: 1
     task: {fileID: 3854219593948236708}
     showProperty: 1
     button: '-'
-    drawerHeight: 77
+    drawerHeight: 219
   - name: Doors
     type: 1
     task: {fileID: -7406046289885994526}
     showProperty: 1
     button: '-'
-    drawerHeight: 77
+    drawerHeight: 219
   - name: AOE
     type: 1
     task: {fileID: -557384954984636205}

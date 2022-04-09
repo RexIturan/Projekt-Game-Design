@@ -9,7 +9,7 @@
 }
 
 .statBulletPoint .damage {
-	color: red;
+	color: rgb(255, 100, 100);
 }
 
 .statBulletPoint .healing {

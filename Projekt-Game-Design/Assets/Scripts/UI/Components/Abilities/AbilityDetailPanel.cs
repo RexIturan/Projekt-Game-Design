@@ -54,14 +54,16 @@ namespace UI.Components.Ability
 						Add(description);
 
 						// stats
-						VisualElement stats = new VisualElement();
+						if ( !ability.moveToTarget ) {
+								VisualElement stats = new VisualElement();
 
-						StatBulletPoint costs = new StatBulletPoint(StatType.COSTS, ability.costs);
-						stats.Add(costs);
-						StatBulletPoint range = new StatBulletPoint(StatType.RANGE, ability.range);
-						stats.Add(range);
+								StatBulletPoint costs = new StatBulletPoint(StatType.COSTS, ability.costs);
+								stats.Add(costs);
+								StatBulletPoint range = new StatBulletPoint(StatType.RANGE, ability.range);
+								stats.Add(range);
 
-						Add(stats);
+								Add(stats);
+						}
 
 						// effects
 						if ( ability.targetedEffects.Length > 0 )

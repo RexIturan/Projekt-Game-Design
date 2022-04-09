@@ -203,7 +203,10 @@ public class InventoryUIController : MonoBehaviour {
 					UpdateEquipmentContainer();
 					RefreshStats();
 				});
-
+				
+				// set visibility for active players
+				icon.style.display = player.active ? DisplayStyle.Flex : DisplayStyle.None;
+				
 				_playerContainer.Add(icon);
 			}
 		}
