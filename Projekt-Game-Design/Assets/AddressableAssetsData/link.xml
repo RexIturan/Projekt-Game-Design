@@ -25,9 +25,12 @@
     <type fullname="_Gameplay.Environment.FogOfWar.FogOfWarV2.Types.ViewCacheSO" preserve="all" />
   </assembly>
   <assembly fullname="GDP01.GameManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="GameManager.GameEndConditionHolder" preserve="all" />
     <type fullname="GameManager.GameSC" preserve="all" />
     <type fullname="GameManager.ScriptableObjects.GameOverConditions.AllPlayerCharactersAreDeadSO" preserve="all" />
+    <type fullname="GameManager.ScriptableObjects.GameOverConditions.BossDeadSO" preserve="all" />
     <type fullname="GameManager.ScriptableObjects.VictoryConditions.AllEnemysAreDeadSO" preserve="all" />
+    <type fullname="GameManager.ScriptableObjects.VictoryConditions.CharInRangeSO" preserve="all" />
     <type fullname="TacticsGameDataSO" preserve="all" />
   </assembly>
   <assembly fullname="GDP01.Gameplay, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
@@ -106,8 +109,8 @@
     <type fullname="WorldObjects.WorldObjectList" preserve="all" />
     <type fullname="WorldObjects.WorldObjectManager" preserve="all" />
     <type fullname="WorldObjects.WorldObjectTypeContainerSO" preserve="all" />
-    <type fullname="WorldObjects.WorldObjectManager/Data" preserve="nothing" serialized="true" />
     <type fullname="Visual.TileMapDrawer/TileTypePair" preserve="nothing" serialized="true" />
+    <type fullname="WorldObjects.WorldObjectManager/Data" preserve="nothing" serialized="true" />
     <type fullname="GDP01.AIAction" preserve="nothing" serialized="true" />
     <type fullname="GDP01.Equipment.EquipmentSheet" preserve="nothing" serialized="true" />
     <type fullname="GDP01.Loot.Types.LootGroup" preserve="nothing" serialized="true" />
@@ -611,6 +614,7 @@
     <type fullname="UnityEngine.UIElements.StyleValueHandle" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.UIElements.TemplateAsset" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.UIElements.TextField/UxmlFactory" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UIElements.Toggle/UxmlFactory" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.UIElements.UxmlRootElementFactory" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.UIElements.VisualElement/UxmlFactory" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.UIElements.VisualElementAsset" preserve="nothing" serialized="true" />
