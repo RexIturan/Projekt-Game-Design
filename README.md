@@ -1,7 +1,7 @@
 # Projekt-Game-Design
 Game Design Projekt SS21 Gruppe 01
 
-Unity Version 2020.3.17f1 LTS
+Unity Version 2022.2.0b8
 
 
 ## Naming Conventions
